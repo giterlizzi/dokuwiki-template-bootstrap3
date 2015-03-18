@@ -1,0 +1,144 @@
+body {
+  font-size: small;
+}
+
+body.default {
+  background: #FCFCFC;
+}
+
+input, textarea, select {
+  font-weight: 400;
+}
+
+#dw__breadcrumbs hr {
+  margin: 5px 0;
+  padding: 0;
+}
+
+#dw__breadcrumbs {
+  margin-bottom: 20px;
+}
+
+#dw__toc li {
+  list-style-type: none;
+}
+
+#dw__toc, #dw__toc h3 {
+  font-size: .95em;
+}
+
+#dw__toc h3 {
+  margin: 0;
+  padding: 5px;
+}
+
+#dw__toc h3 span {
+  display: none;
+}
+
+#dw__toc h3 strong {
+  padding-right: 5px;
+}
+
+#dw__toc .panel-body {
+  padding-left: 0;
+  width: 16em;
+}
+
+#dw__toc {
+  margin-left: 20px;
+  background-color: #FFF;
+  width: auto;
+}
+
+#dw__toc ul.toc {
+  padding-left: 15px;
+}
+
+#dw__toc div {
+  padding-left: 15px;
+}
+
+#config__manager .label {
+  padding: 0 !important;
+}
+
+#config__manager label {
+  color: initial;
+  white-space: initial;
+  font-size: 1.2em;
+  font-weight: initial;
+}
+
+#config__manager fieldset {
+  background: initial !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+#config__manager .outkey {
+  margin: 0 !important;
+  padding: 0 !important;
+  font-size: 1.2em !important;
+  background: transparent !important;
+}
+
+#dw__breadcrumbs .breadcrumb {
+  background: transparent;
+  border: 0 none;
+}
+
+#dw__breadcrumbs, #dokuwiki__aside {
+  font-size: .9em;
+}
+
+#dokuwiki__aside .panel-heading {
+  cursor: pointer;
+}
+
+#dokuwiki__aside .page-header {
+  margin-top: 0;
+}
+
+.breadcrumb {
+ /*background: initial;*/
+  margin: 0;
+  padding: 0;
+}
+
+.curid {
+  font-weight: bold;
+}
+
+.page fieldset {
+  border: none;
+}
+
+.dokuwiki ul.idx {
+  padding-left: 15px;
+}
+
+.dokuwiki textarea.edit {
+  font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
+}
+
+
+/* FROM Dokuwiki content.css */
+/*____________ images ____________*/
+
+/* embedded images (styles are already partly set in lib/styles/all.css) */
+.dokuwiki img.media {
+  margin: .2em 0;
+}
+
+.dokuwiki img.medialeft {
+  margin: .2em 1em .2em 0;
+}
+
+.dokuwiki img.mediaright {
+  margin: .2em 0 .2em 1em;
+}
+
+.dokuwiki img.mediacenter {
+  margin: .2em auto;
+}
