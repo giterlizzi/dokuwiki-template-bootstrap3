@@ -1,1 +1,3 @@
-<li <?php echo ((wl() == wl($ID)) ? ' class="active"' : ''); ?>><?php tpl_link(wl(), '<i class="glyphicon glyphicon-home"></i> Home') ?></li>
+<li<?php echo ((wl($ID) == '/') ? ' class="active"' : ''); ?>>
+  <?php tpl_link(wl(), '<i class="glyphicon glyphicon-home"></i> Home') ?>
+</li>

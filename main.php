@@ -14,13 +14,28 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 $showTools         = !tpl_getConf('hideTools') || ( tpl_getConf('hideTools') && !empty($_SERVER['REMOTE_USER']) );
 $showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $showThemeSwitcher = tpl_getConf('showThemeSwitcher');
+$fixedTopNavbar    = tpl_getConf('fixedTopNavbar');
+$inverseNavbar     = tpl_getConf('inverseNavbar');
+$bootswatchTheme   = tpl_getConf('bootswatchTheme');
 
-$fixedTopNavbar     = tpl_getConf('fixedTopNavbar');
-$inverseNavbar      = tpl_getConf('inverseNavbar');
-$bootswatchTheme    = (isset($_GET['theme']) ? $_GET['theme'] : (tpl_getConf('bootswatchTheme') == '') ? 'default' : tpl_getConf('bootswatchTheme'));
-$bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme != null)
+if ($showThemeSwitcher) {
+
+  if (get_doku_pref('theme', null) !== null && get_doku_pref('theme', null) !== '') {
+    $bootswatchTheme = get_doku_pref('theme', null);
+  }
+
+  global $INPUT;
+  
+  if ($INPUT->str('theme')) {
+    $bootswatchTheme = $INPUT->str('theme');
+    set_doku_pref('theme', $bootswatchTheme);
+  }
+
+}
+
+$bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== null)
                        ? "https://bootswatch.com/$bootswatchTheme/bootstrap.css"
-                       : DOKU_TPL.'/assets/bootstrap/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="'.DOKU_TPL.'/assets/bootstrap/css/bootstrap-theme.min.css');
+                       : DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="'.DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css');
 
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
@@ -130,24 +145,24 @@ $bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme != nu
                   <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                      <li><a href="?theme=">Default</a></li>
+                      <li<?php ($bootswatchTheme == 'default') ? 'class="active"' : '' ?>><a href="?theme=default">Default</a></li>
                       <li class="divider"></li>
-                      <li><a href="?theme=cerulean">Cerulean</a></li>
-                      <li><a href="?theme=cosmo">Cosmo</a></li>
-                      <li><a href="?theme=cyborg">Cyborg</a></li>
-                      <li><a href="?theme=darkly">Darkly</a></li>
-                      <li><a href="?theme=flatly">Flatly</a></li>
-                      <li><a href="?theme=journal">Journal</a></li>
-                      <li><a href="?theme=lumen">Lumen</a></li>
-                      <li><a href="?theme=paper">Paper</a></li>
-                      <li><a href="?theme=readable">Readable</a></li>
-                      <li><a href="?theme=sandstone">Sandstone</a></li>
-                      <li><a href="?theme=simplex">Simplex</a></li>
-                      <li><a href="?theme=slate">Slate</a></li>
-                      <li><a href="?theme=spacelab">Spacelab</a></li>
-                      <li><a href="?theme=superhero">Superhero</a></li>
-                      <li><a href="?theme=united">United</a></li>
-                      <li><a href="?theme=yeti">Yeti</a></li>
+                      <li<?php echo ($bootswatchTheme == 'cerulean') ? ' class="active"' : '' ?>><a href="?theme=cerulean">Cerulean</a></li>
+                      <li<?php echo ($bootswatchTheme == 'cosmo') ? ' class="active"' : '' ?>><a href="?theme=cosmo">Cosmo</a></li>
+                      <li<?php echo ($bootswatchTheme == 'cyborg') ? ' class="active"' : '' ?>><a href="?theme=cyborg">Cyborg</a></li>
+                      <li<?php echo ($bootswatchTheme == 'darkly') ? ' class="active"' : '' ?>><a href="?theme=darkly">Darkly</a></li>
+                      <li<?php echo ($bootswatchTheme == 'flatly') ? ' class="active"' : '' ?>><a href="?theme=flatly">Flatly</a></li>
+                      <li<?php echo ($bootswatchTheme == 'journal') ? ' class="active"' : '' ?>><a href="?theme=journal">Journal</a></li>
+                      <li<?php echo ($bootswatchTheme == 'lumen') ? ' class="active"' : '' ?>><a href="?theme=lumen">Lumen</a></li>
+                      <li<?php echo ($bootswatchTheme == 'paper') ? ' class="active"' : '' ?>><a href="?theme=paper">Paper</a></li>
+                      <li<?php echo ($bootswatchTheme == 'readable') ? ' class="active"' : '' ?>><a href="?theme=readable">Readable</a></li>
+                      <li<?php echo ($bootswatchTheme == 'sandstone') ? 'class="active"' : '' ?>><a href="?theme=sandstone">Sandstone</a></li>
+                      <li<?php echo ($bootswatchTheme == 'simplex') ? ' class="active"' : '' ?>><a href="?theme=simplex">Simplex</a></li>
+                      <li<?php echo ($bootswatchTheme == 'slate') ? ' class="active"' : '' ?>><a href="?theme=slate">Slate</a></li>
+                      <li<?php echo ($bootswatchTheme == 'spacelab') ? ' class="active"' : '' ?>><a href="?theme=spacelab">Spacelab</a></li>
+                      <li<?php echo ($bootswatchTheme == 'superhero') ? ' class="active"' : '' ?>><a href="?theme=superhero">Superhero</a></li>
+                      <li<?php echo ($bootswatchTheme == 'united') ? ' class="active"' : '' ?>><a href="?theme=united">United</a></li>
+                      <li<?php echo ($bootswatchTheme == 'yeti') ? ' class="active"' : '' ?>><a href="?theme=yeti">Yeti</a></li>
                     </ul>
                   </li>
                 </ul>
@@ -203,7 +218,7 @@ $bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme != nu
       <?php endif; ?>
 
       <!-- ********** CONTENT ********** -->
-      <div id="dokuwiki__content" class="<?php echo (($showSidebar) ? 'col-sm-9 col-md-10' : '') ?>">
+      <div id="dokuwiki__content" class="<?php echo (($showSidebar) ? 'col-sm-9 col-md-10' : 'container') ?>">
           <div class="panel panel-default"> 
             <div class="page group panel-body">
               <div class="pageId text-right hide"><span><?php echo hsc($ID) ?></span></div>
