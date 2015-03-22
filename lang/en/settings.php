@@ -6,5 +6,7 @@
 
 $lang['inverseNavbar']     = 'Inverse navbar';
 $lang['fixedTopNavbar']    = 'Fix navbar to top';
-$lang['bootswatchTheme']   = 'Select a theme from Bootswatch or use the default Bootstrap 3 theme';
-$lang['showThemeSwitcher'] = 'Show theme switcher in navbar';
+$lang['bootstrapTheme']    = 'Select a theme (default Bootstrap theme, Bootstrap optional theme, Bootswatch.com themes or custom theme)';
+$lang['customTheme']       = 'Insert URL of custom theme';
+$lang['bootswatchTheme']   = 'Select a theme from Bootswatch.com';
+$lang['showThemeSwitcher'] = 'Show Bootswatch.com theme switcher in navbar';

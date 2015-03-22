@@ -16,26 +16,42 @@ $showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $showThemeSwitcher = tpl_getConf('showThemeSwitcher');
 $fixedTopNavbar    = tpl_getConf('fixedTopNavbar');
 $inverseNavbar     = tpl_getConf('inverseNavbar');
+$bootstrapTheme    = tpl_getConf('bootstrapTheme');
+$customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
+$bootstrapStyles   = array();
 
-if ($showThemeSwitcher) {
+if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 
-  if (get_doku_pref('theme', null) !== null && get_doku_pref('theme', null) !== '') {
-    $bootswatchTheme = get_doku_pref('theme', null);
+  if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
+    $bootswatchTheme = get_doku_pref('bootswatchTheme', null);
   }
 
   global $INPUT;
   
-  if ($INPUT->str('theme')) {
-    $bootswatchTheme = $INPUT->str('theme');
-    set_doku_pref('theme', $bootswatchTheme);
+  if ($INPUT->str('bootswatchTheme')) {
+    $bootswatchTheme = $INPUT->str('bootswatchTheme');
+    set_doku_pref('bootswatchTheme', $bootswatchTheme);
   }
 
 }
 
-$bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== null && $bootswatchTheme !== '')
-                       ? "https://bootswatch.com/$bootswatchTheme/bootstrap.css"
-                       : DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="'.DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css');
+switch ($bootstrapTheme){
+  case 'bootswatch':
+    $bootstrapStyles[] = "https://bootswatch.com/$bootswatchTheme/bootstrap.css";
+    break;
+  case 'custom':
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+    $bootstrapStyles[] = $customTheme;
+    break;
+  case 'default':
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+    break;
+  case 'default+optional':
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+    break;
+}
 
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
@@ -48,13 +64,20 @@ $bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== n
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
     <?php tpl_includeFile('meta.html') ?>
-    <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapThemeCSS; ?>" />
+    <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
+    <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+    <?php endforeach; ?>
     <?php tpl_metaheaders() ?>
     <script src="<?php echo DOKU_TPL ?>/assets/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
       body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
     </style>
-    <style type="text/css"></style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo $bootswatchTheme; ?>">
@@ -140,29 +163,14 @@ $bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== n
                   </li>
                 </ul>
 
-                <?php if ($showThemeSwitcher): ?>
+                <?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch'): ?>
                 <ul class="nav navbar-nav">
                   <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
                     <ul class="dropdown-menu" aria-labelledby="themes">
-                      <li<?php ($bootswatchTheme == 'default') ? 'class="active"' : '' ?>><a href="?theme=default">Default</a></li>
-                      <li class="divider"></li>
-                      <li<?php echo ($bootswatchTheme == 'cerulean') ? ' class="active"' : '' ?>><a href="?theme=cerulean">Cerulean</a></li>
-                      <li<?php echo ($bootswatchTheme == 'cosmo') ? ' class="active"' : '' ?>><a href="?theme=cosmo">Cosmo</a></li>
-                      <li<?php echo ($bootswatchTheme == 'cyborg') ? ' class="active"' : '' ?>><a href="?theme=cyborg">Cyborg</a></li>
-                      <li<?php echo ($bootswatchTheme == 'darkly') ? ' class="active"' : '' ?>><a href="?theme=darkly">Darkly</a></li>
-                      <li<?php echo ($bootswatchTheme == 'flatly') ? ' class="active"' : '' ?>><a href="?theme=flatly">Flatly</a></li>
-                      <li<?php echo ($bootswatchTheme == 'journal') ? ' class="active"' : '' ?>><a href="?theme=journal">Journal</a></li>
-                      <li<?php echo ($bootswatchTheme == 'lumen') ? ' class="active"' : '' ?>><a href="?theme=lumen">Lumen</a></li>
-                      <li<?php echo ($bootswatchTheme == 'paper') ? ' class="active"' : '' ?>><a href="?theme=paper">Paper</a></li>
-                      <li<?php echo ($bootswatchTheme == 'readable') ? ' class="active"' : '' ?>><a href="?theme=readable">Readable</a></li>
-                      <li<?php echo ($bootswatchTheme == 'sandstone') ? 'class="active"' : '' ?>><a href="?theme=sandstone">Sandstone</a></li>
-                      <li<?php echo ($bootswatchTheme == 'simplex') ? ' class="active"' : '' ?>><a href="?theme=simplex">Simplex</a></li>
-                      <li<?php echo ($bootswatchTheme == 'slate') ? ' class="active"' : '' ?>><a href="?theme=slate">Slate</a></li>
-                      <li<?php echo ($bootswatchTheme == 'spacelab') ? ' class="active"' : '' ?>><a href="?theme=spacelab">Spacelab</a></li>
-                      <li<?php echo ($bootswatchTheme == 'superhero') ? ' class="active"' : '' ?>><a href="?theme=superhero">Superhero</a></li>
-                      <li<?php echo ($bootswatchTheme == 'united') ? ' class="active"' : '' ?>><a href="?theme=united">United</a></li>
-                      <li<?php echo ($bootswatchTheme == 'yeti') ? ' class="active"' : '' ?>><a href="?theme=yeti">Yeti</a></li>
+                      <?php foreach (array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti') as $theme): ?>
+                      <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>><a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a></li>
+                      <?php endforeach; ?>
                     </ul>
                   </li>
                 </ul>

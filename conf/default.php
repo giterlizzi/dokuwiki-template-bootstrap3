@@ -6,5 +6,7 @@
 
 $conf['inverseNavbar']     = 0;
 $conf['fixedTopNavbar']    = 0;
-$conf['bootswatchTheme']   = '';
+$conf['bootstrapTheme']    = 'default';
+$conf['customTheme']       = '';
+$conf['bootswatchTheme']   = 'spacelab';
 $conf['showThemeSwitcher'] = 0;
