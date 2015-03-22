@@ -33,7 +33,7 @@ if ($showThemeSwitcher) {
 
 }
 
-$bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== null)
+$bootstrapThemeCSS  = (($bootswatchTheme !== 'default' && $bootswatchTheme !== null && $bootswatchTheme !== '')
                        ? "https://bootswatch.com/$bootswatchTheme/bootstrap.css"
                        : DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css" /><link type="text/css" rel="stylesheet" href="'.DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css');
 
