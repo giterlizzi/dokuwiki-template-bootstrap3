@@ -10,6 +10,38 @@ input, textarea, select {
   font-weight: 400;
 }
 
+#dokuwiki__aside .nav li a {
+  padding: 5px 10px;
+}
+
+#dokuwiki__aside h1,
+#dokuwiki__aside h2,
+#dokuwiki__aside h3,
+#dokuwiki__aside h4
+#dokuwiki__aside h5 {
+  margin: 10px 0 5px 0;
+}
+
+#dokuwiki__aside h1 {
+  font-size: 1.8em;
+}
+
+#dokuwiki__aside h2 {
+  font-size: 1.6em;
+}
+
+#dokuwiki__aside h3 {
+  font-size: 1.4em;
+}
+
+#dokuwiki__aside h4 {
+  font-size: 1.2em;
+}
+
+#dokuwiki__aside h5 {
+  font-size: 1em;
+}
+
 #dw__breadcrumbs hr {
   margin: 5px 0;
   padding: 0;
