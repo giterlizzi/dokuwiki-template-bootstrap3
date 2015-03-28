@@ -7,9 +7,9 @@
 class general_plugin_bootstrap3_test extends DokuWikiTest {
 
     /**
-     * Simple test to make sure the plugin.info.txt is in correct format
+     * Simple test to make sure the template.info.txt is in correct format
      */
-    public function test_plugininfo() {
+    public function test_templateinfo() {
         $file = __DIR__.'/../template.info.txt';
         $this->assertFileExists($file);
 
