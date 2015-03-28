@@ -10,7 +10,7 @@ class general_plugin_bootstrap3_test extends DokuWikiTest {
      * Simple test to make sure the plugin.info.txt is in correct format
      */
     public function test_plugininfo() {
-        $file = __DIR__.'/../plugin.info.txt';
+        $file = __DIR__.'/../template.info.txt';
         $this->assertFileExists($file);
 
         $info = confToHash($file);
@@ -23,7 +23,7 @@ class general_plugin_bootstrap3_test extends DokuWikiTest {
         $this->assertArrayHasKey('desc', $info);
         $this->assertArrayHasKey('url', $info);
 
-        $this->assertEquals('tpl', $info['base']);
+        $this->assertEquals('bootstrap3', $info['base']);
         $this->assertRegExp('/^https?:\/\//', $info['url']);
         $this->assertTrue(mail_isvalid($info['email']));
         $this->assertRegExp('/^\d\d\d\d-\d\d-\d\d$/', $info['date']);
