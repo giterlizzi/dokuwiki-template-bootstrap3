@@ -68,7 +68,7 @@ jQuery(document).ready(function() {
 
   // Tags plugin
   $tags.find('a').addClass('label label-default');
-  $tags.html($tags.html().replace(/,/, ""));
+  if ($tags.length) $tags.html($tags.html().replace(/,/g, ""));
 
 
   // Footnote

@@ -47,9 +47,11 @@ input, textarea, select {
   padding: 0;
 }
 
+/*
 #dw__breadcrumbs {
   margin-bottom: 20px;
 }
+*/
 
 #dw__toc li {
   list-style-type: none;
@@ -133,7 +135,7 @@ input, textarea, select {
 }
 
 #dokuwiki__content .page-header {
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .breadcrumb {

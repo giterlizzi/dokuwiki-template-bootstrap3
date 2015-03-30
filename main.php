@@ -194,6 +194,17 @@ switch ($bootstrapTheme){
         </nav>
       </div><!-- /header -->
 
+      <?php
+        if (tpl_getConf('showTranslation')) {
+          if ($translation = plugin_load('helper','translation')) {
+            echo '<div class="pull-right">';
+            echo $translation->showTranslations();
+            echo '</div>';
+            echo '<p class="clearfix"/>';
+          }
+        }
+      ?>
+
       <div id="dw__breadcrumbs">
         <hr/>
         <?php if($conf['youarehere']): ?>
@@ -205,18 +216,11 @@ switch ($bootstrapTheme){
         <hr/>
       </div>
 
-      <?php html_msgarea() ?>
+      <p class="pageId text-right">
+        <span class="label label-default"><?php echo hsc($ID) ?></span>
+      </p>
 
-      <?php
-        if (tpl_getConf('showTranslation')) {
-          if ($translation = plugin_load('helper','translation')) {
-            echo '<div class="pull-right">';
-            echo $translation->showTranslations();
-            echo '</div>';
-            echo '<p class="clearfix"/>';
-          }
-        }
-      ?>
+      <?php html_msgarea() ?>
 
       <div class="main row" role="main">
 
@@ -240,8 +244,6 @@ switch ($bootstrapTheme){
       <div id="dokuwiki__content" class="<?php echo (($showSidebar) ? 'col-sm-9 col-md-10' : 'container') ?>">
         <div class="panel panel-default"> 
           <div class="page group panel-body">
-
-            <p class="pageId text-right"><span class="label label-primary"><?php echo hsc($ID) ?></span></p>
 
             <?php tpl_flush() /* flush the output buffer */ ?>
             <?php tpl_includeFile('pageheader.html') ?>
