@@ -4,6 +4,7 @@
  *
  */
 
+$conf['showTranslation']   = 0;
 $conf['inverseNavbar']     = 0;
 $conf['fixedTopNavbar']    = 0;
 $conf['bootstrapTheme']    = 'default';

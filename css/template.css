@@ -132,6 +132,10 @@ input, textarea, select {
   margin-top: 0;
 }
 
+#dokuwiki__content .page-header {
+  margin-top: 20px;
+}
+
 .breadcrumb {
  /*background: initial;*/
   margin: 0;
@@ -152,6 +156,19 @@ input, textarea, select {
 
 .dokuwiki textarea.edit {
   font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
+}
+
+.dokuwiki div.plugin_translation ul li {
+  float: none;
+  padding: 0 0 0 4px;
+  margin: 0;
+  display: inline-block;
+}
+
+.dokuwiki div.plugin_translation ul li a.wikilink1:link,
+.dokuwiki div.plugin_translation ul li a.wikilink2:link {
+  background: transparent;
+  color: inherit !important;
 }
 
 

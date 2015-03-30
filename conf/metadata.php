@@ -4,6 +4,7 @@
  *
  */
 
+$meta['showTranslation']   = array('onoff');
 $meta['inverseNavbar']     = array('onoff');
 $meta['fixedTopNavbar']    = array('onoff');
 $meta['bootstrapTheme']    = array('multichoice', '_choices' => array('default', 'default+optional', 'bootswatch', 'custom'));

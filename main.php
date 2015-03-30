@@ -207,6 +207,17 @@ switch ($bootstrapTheme){
 
       <?php html_msgarea() ?>
 
+      <?php
+        if (tpl_getConf('showTranslation')) {
+          if ($translation = plugin_load('helper','translation')) {
+            echo '<div class="pull-right">';
+            echo $translation->showTranslations();
+            echo '</div>';
+            echo '<p class="clearfix"/>';
+          }
+        }
+      ?>
+
       <div class="main row" role="main">
 
       <?php if ($showSidebar): ?>
@@ -227,30 +238,30 @@ switch ($bootstrapTheme){
 
       <!-- ********** CONTENT ********** -->
       <div id="dokuwiki__content" class="<?php echo (($showSidebar) ? 'col-sm-9 col-md-10' : 'container') ?>">
-          <div class="panel panel-default"> 
-            <div class="page group panel-body">
-              <div class="pageId text-right hide"><span><?php echo hsc($ID) ?></span></div>
+        <div class="panel panel-default"> 
+          <div class="page group panel-body">
 
-              <?php tpl_flush() /* flush the output buffer */ ?>
-              <?php tpl_includeFile('pageheader.html') ?>
+            <p class="pageId text-right"><span class="label label-primary"><?php echo hsc($ID) ?></span></p>
 
-              <?php
-                  // render the content into buffer for later use
-                  ob_start();
-                  tpl_content(false);
-                  $content = ob_get_clean();
-              ?>
+            <?php tpl_flush() /* flush the output buffer */ ?>
+            <?php tpl_includeFile('pageheader.html') ?>
+            <?php
+              // render the content into buffer for later use
+              ob_start();
+              tpl_content(false);
+              $content = ob_get_clean();
+            ?>
 
-                <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right: 10px;">
-                  <?php tpl_toc()?>
-                </div>
-  
-                <!-- wikipage start -->
-                <?php echo $content; ?>
-                <!-- wikipage stop -->
-  
-              <?php tpl_flush() ?>
-              <?php tpl_includeFile('pagefooter.html') ?>
+            <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px;">
+              <?php tpl_toc()?>
+            </div>
+
+            <!-- wikipage start -->
+            <?php echo $content; ?>
+            <!-- wikipage stop -->
+
+            <?php tpl_flush() ?>
+            <?php tpl_includeFile('pagefooter.html') ?>
 
             </div>
           </div>
@@ -273,11 +284,9 @@ switch ($bootstrapTheme){
           ?>
           <p>
             <?php tpl_license('button', true, false, false); // license button, no wrapper ?>
-            <!--
             <a href="http://getbootstrap.com" title="Built with Bootstrap 3" <?php echo $target?>>
-              <img src="images/button-bootstrap3.png" width="80" height="15" alt="Built with Bootstrap 3" />
+              <img src="<?php echo tpl_basedir(); ?>images/button-bootstrap3.png" width="80" height="15" alt="Built with Bootstrap 3" />
             </a>
-            -->
             <a href="http://www.php.net" title="Powered by PHP" <?php echo $target?>>
               <img src="<?php echo dirname(tpl_basedir()); ?>/dokuwiki/images/button-php.gif" width="80" height="15" alt="Powered by PHP" />
             </a>

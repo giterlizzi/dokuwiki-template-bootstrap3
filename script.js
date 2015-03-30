@@ -36,6 +36,10 @@ jQuery(document).ready(function() {
   jQuery(jQuery('.mode_conflict      #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-alert text-warning"></i> ');
   jQuery(jQuery('.mode_subscribe     #dokuwiki__content h1, .mode_unsubscribe #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-bookmark text-muted"></i> ');
 
+  jQuery('div.plugin_translation select').addClass('input-sm');
+  jQuery('div.plugin_translation ul li div').addClass('label label-default');
+  jQuery('div.plugin_translation ul li .wikilink1').parent().addClass('label-primary');
+  jQuery('div.plugin_translation ul li .wikilink2').parent().addClass('label-default');
 
   jQuery(document).bind('DOMNodeInserted', function(){
     jQuery('#insitu__fn').addClass('panel panel-body panel-default');
