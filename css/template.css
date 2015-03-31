@@ -139,7 +139,6 @@ input, textarea, select {
 }
 
 .breadcrumb {
- /*background: initial;*/
   margin: 0;
   padding: 0;
 }
@@ -160,6 +159,11 @@ input, textarea, select {
   font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
 }
 
+/* Translation Plugin */
+.dokuwiki div.plugin_translation {
+  font-size: 100%;
+}
+
 .dokuwiki div.plugin_translation ul li {
   float: none;
   padding: 0 0 0 4px;
@@ -168,8 +172,14 @@ input, textarea, select {
 }
 
 .dokuwiki div.plugin_translation ul li a.wikilink1:link,
-.dokuwiki div.plugin_translation ul li a.wikilink2:link {
-  background: transparent;
+.dokuwiki div.plugin_translation ul li a.wikilink1:hover,
+.dokuwiki div.plugin_translation ul li a.wikilink1:active,
+.dokuwiki div.plugin_translation ul li a.wikilink1:visited,
+.dokuwiki div.plugin_translation ul li a.wikilink2:link,
+.dokuwiki div.plugin_translation ul li a.wikilink2:hover,
+.dokuwiki div.plugin_translation ul li a.wikilink2:active,
+.dokuwiki div.plugin_translation ul li a.wikilink2:visited {
+  background: transparent !important;
   color: inherit !important;
 }
 

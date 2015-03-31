@@ -62,8 +62,6 @@ jQuery(document).ready(function() {
   // Translation Plugin
   $translation.find('select').addClass('input-sm');
   $translation.find('ul li div').addClass('label label-default');
-  $translation.find('ul li .wikilink1').parent().addClass('label-primary');
-  $translation.find('ul li .wikilink2').parent().addClass('label-default');
 
 
   // Tags plugin
