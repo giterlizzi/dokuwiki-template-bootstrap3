@@ -228,7 +228,7 @@ switch ($bootstrapTheme){
         <!-- ********** ASIDE ********** -->
         <div id="dokuwiki__aside" class="col-sm-3 col-md-2">
           <div class="content">
-            <div class="toogle hidden-print hidden-lg hidden-md" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
+            <div class="toogle hidden-print panel-heading panel" data-toggle="collapse" data-target="#dokuwiki__aside .collapse">
               <i class="glyphicon glyphicon-th-list"></i> <?php echo $lang['sidebar'] ?>
             </div>
             <div class="collapse in">
