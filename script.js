@@ -63,8 +63,12 @@ jQuery(document).ready(function() {
 
 
   // Tags plugin
-  $tags.find('a').addClass('label label-default');
-  if ($tags.length) $tags.html($tags.html().replace(/,/g, ""));
+  if ($tags.length) {
+    $tags.hide();
+    $tags.find('a').addClass('label label-default')
+                   .prepend('<i class="glyphicon glyphicon-tag"></i> ')
+                   .prependTo('.pageId').css('marginLeft', '3px');
+  }
 
 
   // Footnote
