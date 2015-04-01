@@ -32,16 +32,15 @@ jQuery(document).ready(function() {
 
   function checkSize() {
 
-    if (   $screen_mode.find('.visible-xs').is(':visible')) {
+    if ($screen_mode.find('.visible-xs').is(':visible')) {
 
       $dw_aside.find('.content').addClass('panel panel-default');
-      $dw_aside.find('.toogle').removeClass('panel');
+      $dw_aside.find('.toogle').addClass('panel-heading');
       $dw_aside.find('.collapse').addClass('panel-body').removeClass('in');
 
     } else {
 
       $dw_aside.find('.content').removeClass('panel panel-default');
-      $dw_aside.find('.toogle').addClass('panel');
       $dw_aside.find('.collapse').removeClass('panel-body').addClass('in');
 
     }
