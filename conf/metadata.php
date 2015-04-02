@@ -4,6 +4,7 @@
  *
  */
 
+$meta['sidebarPosition']   = array('multichoice', '_choices' => array('left', 'right'));
 $meta['showTranslation']   = array('onoff');
 $meta['inverseNavbar']     = array('onoff');
 $meta['fixedTopNavbar']    = array('onoff');
