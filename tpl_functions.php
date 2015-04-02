@@ -118,3 +118,17 @@ if (!function_exists('tpl_classes')) {
         return join(' ', $classes);
     }
 }
+
+
+/**
+ * Include left or right sidebar
+ *
+ * @param  string  $sidebar_page
+ * @param  string  $sidebar_id
+ * @param  string  $sidebar_header
+ * @param  string  $sidebar_footer
+ */
+function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_header, $sidebar_footer) {
+  global $lang;
+  @require('tpl_sidebar.php');
+}

@@ -10,35 +10,35 @@ input, textarea, select {
   font-weight: 400;
 }
 
-#dokuwiki__aside .nav li a {
+.dw__sidebar .nav li a {
   padding: 5px 10px;
 }
 
-#dokuwiki__aside h1,
-#dokuwiki__aside h2,
-#dokuwiki__aside h3,
-#dokuwiki__aside h4
-#dokuwiki__aside h5 {
+.dw__sidebar h1,
+.dw__sidebar h2,
+.dw__sidebar h3,
+.dw__sidebar h4
+.dw__sidebar h5 {
   margin: 10px 0 5px 0;
 }
 
-#dokuwiki__aside h1 {
+.dw__sidebar h1 {
   font-size: 1.8em;
 }
 
-#dokuwiki__aside h2 {
+.dw__sidebar h2 {
   font-size: 1.6em;
 }
 
-#dokuwiki__aside h3 {
+.dw__sidebar h3 {
   font-size: 1.4em;
 }
 
-#dokuwiki__aside h4 {
+.dw__sidebar h4 {
   font-size: 1.2em;
 }
 
-#dokuwiki__aside h5 {
+.dw__sidebar h5 {
   font-size: 1em;
 }
 
@@ -122,15 +122,15 @@ input, textarea, select {
   border: 0 none;
 }
 
-#dw__breadcrumbs, #dokuwiki__aside {
+#dw__breadcrumbs, .dw__sidebar {
   font-size: .9em;
 }
 
-#dokuwiki__aside .panel-heading {
+.dw__sidebar .panel-heading {
   cursor: pointer;
 }
 
-#dokuwiki__aside .page-header {
+.dw__sidebar .page-header {
   margin-top: 0;
 }
 
@@ -157,6 +157,13 @@ input, textarea, select {
 
 .dokuwiki textarea.edit {
   font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  opacity: .8
 }
 
 /* Translation Plugin */

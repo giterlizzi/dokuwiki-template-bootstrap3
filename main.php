@@ -14,6 +14,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 $showTools         = !tpl_getConf('hideTools') || ( tpl_getConf('hideTools') && !empty($_SERVER['REMOTE_USER']) );
 $showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $sidebarPosition   = tpl_getConf('sidebarPosition');
+$showRightSidebar  = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
+$rightSidebar      = tpl_getConf('rightSidebar');
 $showThemeSwitcher = tpl_getConf('showThemeSwitcher');
 $fixedTopNavbar    = tpl_getConf('fixedTopNavbar');
 $inverseNavbar     = tpl_getConf('inverseNavbar');
@@ -21,6 +23,11 @@ $bootstrapTheme    = tpl_getConf('bootstrapTheme');
 $customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
 $bootstrapStyles   = array();
+$contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container');
+
+if ($showSidebar && $showRightSidebar) {
+  $contentClass = 'col-sm-6 col-md-8';
+}
 
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 
@@ -92,7 +99,8 @@ switch ($bootstrapTheme){
       <!-- header -->
       <div id="dokuwiki__header">
         <?php @require_once('tpl_navbar.php'); ?>
-      </div><!-- /header -->
+      </div>
+      <!-- /header -->
 
       <?php
         if (tpl_getConf('showTranslation')) {
@@ -124,10 +132,10 @@ switch ($bootstrapTheme){
 
       <div class="main row" role="main">
 
-        <?php if ($showSidebar && $sidebarPosition == 'left') @require_once('tpl_sidebar.php'); ?>
+        <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <div id="dokuwiki__content" class="<?php echo (($showSidebar) ? 'col-sm-9 col-md-10' : 'container') ?>">
+        <div id="dokuwiki__content" class="<?php echo $contentClass ?>">
           <div class="panel panel-default"> 
             <div class="page group panel-body">
   
@@ -140,7 +148,7 @@ switch ($bootstrapTheme){
                 $content = ob_get_clean();
               ?>
   
-              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px;">
+              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px;">
                 <?php tpl_toc()?>
               </div>
   
@@ -155,13 +163,22 @@ switch ($bootstrapTheme){
           </div>
         </div>
 
-        <?php if ($showSidebar && $sidebarPosition == 'right') @require_once('tpl_sidebar.php'); ?>
+        <?php
+          if ($showSidebar && $sidebarPosition == 'right') {
+            _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside',
+                         'sidebarheader.html', 'sidebarfooter.html');
+          }
+          if ($showSidebar && $showRightSidebar && $sidebarPosition == 'left') {
+            _tpl_sidebar($rightSidebar, 'dokuwiki__rightaside',
+                         'rightsidebarheader.html', 'rightsidebarfooter.html');
+          }
+        ?>
 
       </div>
 
       <footer id="dokuwiki__footer" class="small hidden-print">
 
-        <a style="position: fixed; bottom: 10px; right: 10px; opacity: .8" href="javascript:void(0)" class="hidden-print btn btn-default btn-sm" onclick="jQuery('html, body').animate({ scrollTop: 0 }, 600);" title="<?php echo $lang['skip_to_content'] ?>>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
 
         <div class="text-right">
           <p class="docInfo">

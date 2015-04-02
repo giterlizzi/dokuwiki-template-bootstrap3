@@ -2,7 +2,7 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-  var $dw_aside    = jQuery('#dokuwiki__aside'),       // Sidebar
+  var $dw_aside    = jQuery('.dw__sidebar'),           // Sidebar
       $dw_content  = jQuery('#dokuwiki__content'),     // Page Content
       $dw_toc      = jQuery('#dw__toc'),               // Table of Content
       $screen_mode = jQuery('#screen__mode'),          // Responsive Check
@@ -51,8 +51,14 @@ jQuery(document).ready(function() {
   jQuery(window).resize(checkSize);
 
 
+  // Back To Top
+  jQuery('.back-to-top').click(function() {
+    jQuery('html, body').animate({ scrollTop: 0 }, 600);
+  });
+
+
   // Icons for DokuWiki Actions
-  jQuery.each(icons, function(i){
+  jQuery.each(icons, function(i) {
     jQuery(jQuery(icons[i][0])[0]).prepend(icons[i][1]);
   });
 
@@ -81,18 +87,26 @@ jQuery(document).ready(function() {
   $dw_toc.find('.open strong').addClass('glyphicon glyphicon-chevron-up');
   $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
   $dw_toc.addClass('panel panel-default');
-  $dw_toc.find('h3').addClass('panel-heading');
+  $dw_toc.find('h3').addClass('panel-heading')
+                    .prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"></i> ');
   $dw_toc.find('h3 + div').addClass('panel-body');
 
   $dw_toc.find('h3').click(function() {
+
     if ($dw_toc.find('.closed').length) {
-      $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up');
-      $dw_toc.find('h3 strong').addClass('glyphicon-chevron-down');
+      $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
+                               .addClass('glyphicon-chevron-down');
+      jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"></span>');
     }
+
     if ($dw_toc.find('.open').length) {
-      $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up');
-      $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-down');
+      $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up')
+                               .removeClass('glyphicon-chevron-down');
+      $dw_toc.find('h3 .label').replaceWith(function() {
+        return jQuery(this).contents();
+      });
     }
+
   });
 
   $dw_toc.parent().on('affixed.bs.affix', function() {
