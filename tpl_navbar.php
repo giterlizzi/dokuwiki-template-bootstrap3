@@ -47,7 +47,7 @@
                 'admin' => tpl_action('admin', 1, 'li' . (($ACT == 'admin') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-cog"></i> '),
                 'profile' => tpl_action('profile', 1, 'li' . (($ACT == 'profile') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-refresh"></i> '),
                 'register' => tpl_action('register', 1, 'li' . (($ACT == 'register') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-edit"></i> '),
-                'login' => tpl_action('login', 1, 'li' . (($ACT == 'login') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-log-out"></i> '),
+                'login' => tpl_action('login', 1, 'li' . (($ACT == 'login') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in').'"></i> '),
               )); ?>
 
               <li class="divider"></li>
