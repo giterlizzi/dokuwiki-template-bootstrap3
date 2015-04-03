@@ -11,23 +11,24 @@ jQuery(document).ready(function() {
 
   // Icons for DokuWiki Actions
   var icons = [
-    ['.mode_denied        #dokuwiki__content h1', '<i class="glyphicon glyphicon-ban-circle text-danger"></i> '],
-    ['.mode_show.notFound #dokuwiki__content h1', '<i class="glyphicon glyphicon-alert text-warning"></i> '],
-    ['.mode_login         #dokuwiki__content h1', '<i class="glyphicon glyphicon-log-in text-muted"></i> '],
-    ['.mode_register      #dokuwiki__content h1', '<i class="glyphicon glyphicon-edit text-muted"></i> '],
-    ['.mode_search        #dokuwiki__content h1', '<i class="glyphicon glyphicon-search text-muted"></i> '],
-    ['.mode_index         #dokuwiki__content h1', '<i class="glyphicon glyphicon-list text-muted"></i> '],
-    ['.mode_recent        #dokuwiki__content h1', '<i class="glyphicon glyphicon-list-alt text-muted"></i> '],
-    ['.mode_media         #dokuwiki__content h1', '<i class="glyphicon glyphicon-download-alt text-muted"></i> '],
-    ['.mode_admin         #dokuwiki__content h1', '<i class="glyphicon glyphicon-cog text-muted"></i> '],
-    ['.mode_profile       #dokuwiki__content h1', '<i class="glyphicon glyphicon-user text-muted"></i> '],
-    ['.mode_revisions     #dokuwiki__content h1', '<i class="glyphicon glyphicon-time text-muted"></i> '],
-    ['.mode_backlink      #dokuwiki__content h1', '<i class="glyphicon glyphicon-link text-muted"></i> '],
-    ['.mode_diff          #dokuwiki__content h1', '<i class="glyphicon glyphicon-list-alt text-muted"></i> '],
-    ['.mode_preview       #dokuwiki__content h1', '<i class="glyphicon glyphicon-eye-open text-muted"></i> '],
-    ['.mode_conflict      #dokuwiki__content h1', '<i class="glyphicon glyphicon-alert text-warning"></i> '],
-    ['.mode_subscribe     #dokuwiki__content h1', '<i class="glyphicon glyphicon-bookmark text-muted"></i> '],
-    ['.mode_unsubscribe   #dokuwiki__content h1', '<i class="glyphicon glyphicon-bookmark text-muted"></i> '],
+    ['.mode_denied',        'glyphicon-ban-circle text-danger'],
+    ['.mode_show.notFound', 'glyphicon-alert text-warning'],
+    ['.mode_login',         'glyphicon-log-in text-muted'],
+    ['.mode_register',      'glyphicon-edit text-muted'],
+    ['.mode_search',        'glyphicon-search text-muted'],
+    ['.mode_index',         'glyphicon-list text-muted'],
+    ['.mode_recent',        'glyphicon-list-alt text-muted'],
+    ['.mode_media',         'glyphicon-download-alt text-muted'],
+    ['.mode_admin',         'glyphicon-cog text-muted'],
+    ['.mode_profile',       'glyphicon-user text-muted'],
+    ['.mode_revisions',     'glyphicon-time text-muted'],
+    ['.mode_backlink',      'glyphicon-link text-muted'],
+    ['.mode_diff',          'glyphicon-list-alt text-muted'],
+    ['.mode_preview',       'glyphicon-eye-open text-muted'],
+    ['.mode_conflict',      'glyphicon-alert text-warning'],
+    ['.mode_subscribe',     'glyphicon-bookmark text-muted'],
+    ['.mode_unsubscribe',   'glyphicon-bookmark text-muted'],
+    ['.mode_draft',         'glyphicon-edit text-muted'],
   ];
 
   function checkSize() {
@@ -59,7 +60,9 @@ jQuery(document).ready(function() {
 
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {
-    jQuery(jQuery(icons[i][0])[0]).prepend(icons[i][1]);
+    var selector = [icons[i][0], ' #dokuwiki__content h1'].join(''),
+        icon     = ['<i class="glyphicon ', icons[i][1], '"></i> '].join('');
+    jQuery(jQuery(selector)[0]).prepend(icon);
   });
 
 
