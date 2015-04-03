@@ -17,3 +17,4 @@ $lang['bootstrapTheme']    = 'Select a theme (default Bootstrap theme, Bootstrap
 $lang['customTheme']       = 'Insert URL of custom theme';
 $lang['bootswatchTheme']   = 'Select a theme from Bootswatch.com';
 $lang['showThemeSwitcher'] = 'Show Bootswatch.com theme switcher in navbar';
+$lang['showPageInfo']      = 'Show page info (e.g., date, author)';
