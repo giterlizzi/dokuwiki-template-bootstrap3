@@ -113,6 +113,7 @@ switch ($bootstrapTheme){
         }
       ?>
 
+      <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
       <div id="dw__breadcrumbs">
         <hr/>
         <?php if($conf['youarehere']): ?>
@@ -123,6 +124,7 @@ switch ($bootstrapTheme){
         <?php endif; ?>
         <hr/>
       </div>
+      <?php endif ?>
 
       <p class="pageId text-right">
         <span class="label label-default"><?php echo hsc($ID) ?></span>
