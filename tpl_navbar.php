@@ -77,6 +77,7 @@
             </ul>
           </li>
         </ul>
+        <?php endif ?>
 
         <?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch'): ?>
         <!-- theme-switcher -->
@@ -103,7 +104,6 @@
             <?php echo tpl_action('login', 1, '', 1, '<i class="glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in') .'"></i> ') ?>
           </li>
         </ul>
-        <?php endif ?>
 
       </div>
 
