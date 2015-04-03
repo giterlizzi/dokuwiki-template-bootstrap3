@@ -36,6 +36,7 @@
 
         <?php tpl_searchform() ?>
 
+        <?php if ($showTools): ?>
         <ul class="nav navbar-nav">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=""><i class="glyphicon glyphicon-wrench"></i> <?php echo $lang['tools']; ?> <span class="caret"></span></a>
@@ -102,6 +103,7 @@
             <?php echo tpl_action('login', 1, '', 1, '<i class="glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in') .'"></i> ') ?>
           </li>
         </ul>
+        <?php endif ?>
 
       </div>
 
