@@ -24,6 +24,7 @@ $customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
 $bootstrapStyles   = array();
 $contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container');
+$showPageInfo      = tpl_getConf('showPageInfo');
 
 if ($showSidebar && $showRightSidebar) {
   $contentClass = 'col-sm-6 col-md-8';
@@ -180,11 +181,13 @@ switch ($bootstrapTheme){
 
         <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
 
+        <?php if ($showPageInfo): ?>
         <div class="text-right">
           <p class="docInfo">
             <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
           </p>
         </div>
+        <?php endif ?>
         <div class="text-center">
           <?php 
             tpl_license('');

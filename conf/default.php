@@ -15,3 +15,4 @@ $conf['bootstrapTheme']    = 'default';
 $conf['customTheme']       = '';
 $conf['bootswatchTheme']   = 'spacelab';
 $conf['showThemeSwitcher'] = 0;
+$conf['showPageInfo']      = 1;
