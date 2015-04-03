@@ -6,6 +6,7 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+$conf['showTools']         = 'always';
 $conf['sidebarPosition']   = 'left';
 $conf['rightSidebar']      = 'rightsidebar';
 $conf['showTranslation']   = 0;

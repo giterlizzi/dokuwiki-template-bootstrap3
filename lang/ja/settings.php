@@ -5,6 +5,10 @@
 * @author Hideaki SAWADA <chuno@live.jp>
 */
 
+$lang['showTools']     = 'navbar にツールを表示する';
+$lang['showTools_o_never'] = '表示しない';
+$lang['showTools_o_logged'] = 'ログインしたときに表示する';
+$lang['showTools_o_always'] = '常に表示する';
 $lang['inverseNavbar'] = 'navbar の色を反転する';
 $lang['fixedTopNavbar'] = 'navbar を上部に固定する';
 $lang['bootstrapTheme'] = 'テーマの選択（default Bootstrap テーマ・Bootstrap optional テーマ・Bootswatch.com テーマ・ custom テーマ）';

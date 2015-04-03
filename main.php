@@ -11,7 +11,8 @@ if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 @require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
 header('X-UA-Compatible: IE=edge,chrome=1');
 
-$showTools         = !tpl_getConf('hideTools') || ( tpl_getConf('hideTools') && !empty($_SERVER['REMOTE_USER']) );
+$showTools         = tpl_getConf('showTools') != 'never' &&
+                     ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
 $showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $sidebarPosition   = tpl_getConf('sidebarPosition');
 $showRightSidebar  = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
