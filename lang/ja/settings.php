@@ -11,3 +11,4 @@ $lang['bootstrapTheme'] = 'テーマの選択（default Bootstrap テーマ・Bo
 $lang['customTheme'] = 'custom テーマの URL';
 $lang['bootswatchTheme'] = 'Bootswatch.com テーマの選択';
 $lang['showThemeSwitcher'] = 'navbar 内に Bootswatch.com テーマ切替を表示する';
+$lang['showPageInfo']      = 'ページのメタデータを表示する（日付、編集者など）';
