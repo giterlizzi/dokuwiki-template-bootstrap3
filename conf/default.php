@@ -7,6 +7,7 @@
  */
 
 $conf['showTools']         = 'always';
+$conf['hideLoginLink']     = 0;
 $conf['sidebarPosition']   = 'left';
 $conf['rightSidebar']      = 'rightsidebar';
 $conf['showTranslation']   = 0;
