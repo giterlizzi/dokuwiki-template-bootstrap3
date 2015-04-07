@@ -29,6 +29,7 @@ jQuery(document).ready(function() {
     ['.mode_subscribe',     'glyphicon-bookmark text-muted'],
     ['.mode_unsubscribe',   'glyphicon-bookmark text-muted'],
     ['.mode_draft',         'glyphicon-edit text-muted'],
+    ['.mode_showtag',       'glyphicon-tags text-muted'],
   ];
 
   function checkSize() {
