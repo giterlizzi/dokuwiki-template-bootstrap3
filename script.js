@@ -135,6 +135,10 @@ jQuery(document).ready(function() {
   jQuery('#qsearch__out').addClass('panel panel-default');
 
 
+  // Home icon in breadcrumbs
+  jQuery('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"></i> ');
+
+
   // Common styles
   $dw_content.find('.page h1').addClass('page-header');
   $dw_content.find('input[type=submit]').addClass('btn-primary');
