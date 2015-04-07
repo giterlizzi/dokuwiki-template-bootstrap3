@@ -90,7 +90,7 @@ switch ($bootstrapTheme){
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo $bootswatchTheme; ?>">
+<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : str_replace('+', '-', $bootstrapTheme)); ?>">
   <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
 
   <div id="dokuwiki__site" class="container">

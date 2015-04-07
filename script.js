@@ -61,7 +61,7 @@ jQuery(document).ready(function() {
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {
     var selector = [icons[i][0], ' #dokuwiki__content h1'].join(''),
-        icon     = ['<i class="glyphicon ', icons[i][1], '"></i> '].join('');
+        icon     = ['<i class="glyphicon ', icons[i][1], '"/> '].join('');
     jQuery(jQuery(selector)[0]).prepend(icon);
   });
 
@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
   if ($tags.length) {
     $tags.hide();
     $tags.find('a').addClass('label label-default')
-                   .prepend('<i class="glyphicon glyphicon-tag"></i> ')
+                   .prepend('<i class="glyphicon glyphicon-tag"/> ')
                    .prependTo('.pageId').css('marginLeft', '3px');
   }
 
@@ -91,7 +91,7 @@ jQuery(document).ready(function() {
   $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
   $dw_toc.addClass('panel panel-default');
   $dw_toc.find('h3').addClass('panel-heading')
-                    .prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"></i> ');
+                    .prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"/> ');
   $dw_toc.find('h3 + div').addClass('panel-body');
 
   $dw_toc.find('h3').click(function() {
@@ -99,7 +99,7 @@ jQuery(document).ready(function() {
     if ($dw_toc.find('.closed').length) {
       $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
                                .addClass('glyphicon-chevron-down');
-      jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"></span>');
+      jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
     }
 
     if ($dw_toc.find('.open').length) {
@@ -136,7 +136,17 @@ jQuery(document).ready(function() {
 
 
   // Home icon in breadcrumbs
-  jQuery('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"></i> ');
+  jQuery('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+
+
+  // Interwiki User page icon
+  jQuery('.iw_user').prepend('<i class="glyphicon glyphicon-user"/> ');
+
+
+  // Personal Home-Page icon
+  if (NS == 'user' && jQuery('.mode_show').length) {
+    jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="glyphicon glyphicon-user"/> ');
+  }
 
 
   // Common styles

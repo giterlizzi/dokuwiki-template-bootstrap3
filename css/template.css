@@ -2,44 +2,13 @@ body {
   font-size: small;
 }
 
-body.default {
-  background: #FCFCFC;
+body.default,
+body.default-optional,{
+  background: #FDFDFD;
 }
 
 input, textarea, select {
   font-weight: 400;
-}
-
-.dw__sidebar .nav li a {
-  padding: 5px 10px;
-}
-
-.dw__sidebar h1,
-.dw__sidebar h2,
-.dw__sidebar h3,
-.dw__sidebar h4
-.dw__sidebar h5 {
-  margin: 10px 0 5px 0;
-}
-
-.dw__sidebar h1 {
-  font-size: 1.8em;
-}
-
-.dw__sidebar h2 {
-  font-size: 1.6em;
-}
-
-.dw__sidebar h3 {
-  font-size: 1.4em;
-}
-
-.dw__sidebar h4 {
-  font-size: 1.2em;
-}
-
-.dw__sidebar h5 {
-  font-size: 1em;
 }
 
 #dw__breadcrumbs hr {
@@ -126,16 +95,49 @@ input, textarea, select {
   font-size: .9em;
 }
 
+#dokuwiki__content .page-header {
+  margin-top: 10px;
+}
+
+
+.dw__sidebar .nav li a {
+  padding: 5px 10px;
+}
+
+.dw__sidebar h1,
+.dw__sidebar h2,
+.dw__sidebar h3,
+.dw__sidebar h4
+.dw__sidebar h5 {
+  margin: 10px 0 5px 0;
+}
+
+.dw__sidebar h1 {
+  font-size: 1.8em;
+}
+
+.dw__sidebar h2 {
+  font-size: 1.6em;
+}
+
+.dw__sidebar h3 {
+  font-size: 1.4em;
+}
+
+.dw__sidebar h4 {
+  font-size: 1.2em;
+}
+
+.dw__sidebar h5 {
+  font-size: 1em;
+}
+
 .dw__sidebar .panel-heading {
   cursor: pointer;
 }
 
 .dw__sidebar .page-header {
   margin-top: 0;
-}
-
-#dokuwiki__content .page-header {
-  margin-top: 10px;
 }
 
 .breadcrumb {
@@ -164,6 +166,12 @@ input, textarea, select {
   bottom: 10px;
   right: 10px;
   opacity: .8
+}
+
+/* Interwiki User Page Icon */
+a.iw_user {
+  background-image: none;
+  padding: 0 !important;
 }
 
 /* Translation Plugin */
