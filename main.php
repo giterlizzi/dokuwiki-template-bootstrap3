@@ -110,7 +110,7 @@ switch ($bootstrapTheme){
             echo '<div class="pull-right">';
             echo $translation->showTranslations();
             echo '</div>';
-            echo '<p class="clearfix"/>';
+            echo '<p class="clearfix">&nbsp;</p>';
           }
         }
       ?>
@@ -134,12 +134,12 @@ switch ($bootstrapTheme){
 
       <?php html_msgarea() ?>
 
-      <div class="main row" role="main">
+      <main class="main row" role="main">
 
         <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <div id="dokuwiki__content" class="<?php echo $contentClass ?>">
+        <article id="dokuwiki__content" class="<?php echo $contentClass ?>">
           <div class="panel panel-default"> 
             <div class="page group panel-body">
   
@@ -165,7 +165,7 @@ switch ($bootstrapTheme){
 
             </div>
           </div>
-        </div>
+        </article>
 
         <?php
           if ($showSidebar && $sidebarPosition == 'right') {
@@ -178,7 +178,7 @@ switch ($bootstrapTheme){
           }
         ?>
 
-      </div>
+      </main>
 
       <footer id="dokuwiki__footer" class="small hidden-print">
 
