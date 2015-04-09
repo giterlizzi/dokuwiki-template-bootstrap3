@@ -168,6 +168,11 @@ input, textarea, select {
   opacity: .8
 }
 
+.alert {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 /* Interwiki User Page Icon */
 a.iw_user {
   background-image: none;

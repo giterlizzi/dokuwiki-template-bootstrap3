@@ -120,6 +120,28 @@ jQuery(document).ready(function() {
   });
 
 
+  // Alerts
+  jQuery('.info')
+    .removeClass('info')
+    .addClass('alert alert-info')
+    .prepend('<i class="glyphicon glyphicon-info-sign"/> ');
+
+  jQuery('.error')
+    .removeClass('error')
+    .addClass('alert alert-danger')
+    .prepend('<i class="glyphicon glyphicon-remove"/> ');
+
+  jQuery('.success')
+    .removeClass('success')
+    .addClass('alert alert-success')
+    .prepend('<i class="glyphicon glyphicon-ok"/> ');
+
+  jQuery('.notify')
+    .removeClass('notify')
+    .addClass('alert alert-warning')
+    .prepend('<i class="glyphicon glyphicon-bell"/> ');
+
+
   // Sidebar
   $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
   $dw_aside.find('.curid').parent().parent().addClass('active');
