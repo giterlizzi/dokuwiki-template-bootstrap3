@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
       $dw_content  = jQuery('#dokuwiki__content'),     // Page Content
       $dw_toc      = jQuery('#dw__toc'),               // Table of Content
       $screen_mode = jQuery('#screen__mode'),          // Responsive Check
-      $tags        = jQuery('.tags'),                  // Tags Plugin
+      $tags        = jQuery('.mode_show .tags'),       // Tags Plugin
       $translation = jQuery('div.plugin_translation'); // Translation Plugin
 
   // Icons for DokuWiki Actions
@@ -121,22 +121,22 @@ jQuery(document).ready(function() {
 
 
   // Alerts
-  jQuery('.info')
+  jQuery('div.info')
     .removeClass('info')
     .addClass('alert alert-info')
     .prepend('<i class="glyphicon glyphicon-info-sign"/> ');
 
-  jQuery('.error')
+  jQuery('div.error')
     .removeClass('error')
     .addClass('alert alert-danger')
     .prepend('<i class="glyphicon glyphicon-remove"/> ');
 
-  jQuery('.success')
+  jQuery('div.success')
     .removeClass('success')
     .addClass('alert alert-success')
     .prepend('<i class="glyphicon glyphicon-ok"/> ');
 
-  jQuery('.notify')
+  jQuery('div.notify')
     .removeClass('notify')
     .addClass('alert alert-warning')
     .prepend('<i class="glyphicon glyphicon-bell"/> ');
