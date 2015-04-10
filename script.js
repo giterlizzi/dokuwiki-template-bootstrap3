@@ -12,8 +12,8 @@ jQuery(document).ready(function() {
       $discussion  = jQuery('.comment_wrapper');        // Discussion Plugin
 
 
-  // Replace ALL input[type=submit|reset|button] to button[type=submit|reset|button] for CSS styling
-  jQuery('input[type=submit], input[type=button], input[type=reset]').replaceWith(function () {
+  // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
+  jQuery('input[type=submit], input[type=button], input[type=reset]').each(function () {
 
     var attrs = {},
         label = '';
@@ -26,7 +26,12 @@ jQuery(document).ready(function() {
       }
     });
 
-    return jQuery('<button/>', attrs).html(label);
+    // FIXME
+    if (typeof jQuery(this).data('events') === 'undefined') {
+      jQuery(this).replaceWith(function(){
+        return jQuery('<button/>', attrs).html(label);
+      });
+    }
 
   });
 
