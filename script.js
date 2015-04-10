@@ -2,35 +2,82 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-  var $dw_aside    = jQuery('.dw__sidebar'),           // Sidebar
-      $dw_content  = jQuery('#dokuwiki__content'),     // Page Content
-      $dw_toc      = jQuery('#dw__toc'),               // Table of Content
-      $screen_mode = jQuery('#screen__mode'),          // Responsive Check
-      $tags        = jQuery('.mode_show .tags'),       // Tags Plugin
-      $translation = jQuery('div.plugin_translation'); // Translation Plugin
+  var $dw_aside    = jQuery('.dw__sidebar'),            // Sidebar
+      $dw_content  = jQuery('#dokuwiki__content'),      // Page Content
+      $dw_toc      = jQuery('#dw__toc'),                // Table of Content
+      $dw_search   = jQuery('#dw__search'),             // Search form
+      $screen_mode = jQuery('#screen__mode'),           // Responsive Check
+      $tags        = jQuery('.mode_show .tags'),        // Tags Plugin
+      $translation = jQuery('div.plugin_translation');  // Translation Plugin
+      $discussion  = jQuery('.comment_wrapper');        // Discussion Plugin
+
+
+  // Replace ALL input[type=submit|reset|button] to button[type=submit|reset|button] for CSS styling
+  jQuery('input[type=submit], input[type=button], input[type=reset]').replaceWith(function () {
+
+    var attrs = {},
+        label = '';
+
+    jQuery(this.attributes).each(function(index, attribute) {
+      if (attribute.name == 'value') {
+        label = attribute.value;
+      } else {
+        attrs[attribute.name] = attribute.value;
+      }
+    });
+
+    return jQuery('<button/>', attrs).html(label);
+
+  });
+
+
+  // Common styles
+  $dw_content.find('.page h1').addClass('page-header');
+  //$dw_content.find('input[type=submit], button[type=submit]').not('.btn_secedit [type=submit], .editButtons [type=submit]').addClass('btn-primary');
+  jQuery('table').parent().addClass('table-responsive');
+  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
+  jQuery('input, select').not('[type=hidden], [type=image]').addClass('form-control');
+  jQuery('label').addClass('control-label');
+  jQuery('form').addClass('form-inline');
+  jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
+  jQuery('#tool__bar').addClass('btn-group');
+  jQuery('#dw__search').addClass('nav navbar-nav navbar-form');
+  jQuery('.page table').addClass('table table-striped table-condensed');
+  jQuery('.tabs').addClass('nav nav-tabs');
+  jQuery('.toolbutton').addClass('btn-xs');
+  jQuery('.search_hit').addClass('mark');
+  jQuery('.no').addClass('hidden-print');
+  jQuery('.button').removeClass('button');
+
+  jQuery('bdi').replaceWith(function() {
+    return jQuery(this).contents();
+  });
+
 
   // Icons for DokuWiki Actions
   var icons = [
-    ['.mode_denied',        'glyphicon-ban-circle text-danger'],
-    ['.mode_show.notFound', 'glyphicon-alert text-warning'],
-    ['.mode_login',         'glyphicon-log-in text-muted'],
-    ['.mode_register',      'glyphicon-edit text-muted'],
-    ['.mode_search',        'glyphicon-search text-muted'],
-    ['.mode_index',         'glyphicon-list text-muted'],
-    ['.mode_recent',        'glyphicon-list-alt text-muted'],
-    ['.mode_media',         'glyphicon-download-alt text-muted'],
-    ['.mode_admin',         'glyphicon-cog text-muted'],
-    ['.mode_profile',       'glyphicon-user text-muted'],
-    ['.mode_revisions',     'glyphicon-time text-muted'],
-    ['.mode_backlink',      'glyphicon-link text-muted'],
-    ['.mode_diff',          'glyphicon-list-alt text-muted'],
-    ['.mode_preview',       'glyphicon-eye-open text-muted'],
-    ['.mode_conflict',      'glyphicon-alert text-warning'],
-    ['.mode_subscribe',     'glyphicon-bookmark text-muted'],
-    ['.mode_unsubscribe',   'glyphicon-bookmark text-muted'],
-    ['.mode_draft',         'glyphicon-edit text-muted'],
-    ['.mode_showtag',       'glyphicon-tags text-muted'],
+    ['.mode_denied',        'h1', 'glyphicon-ban-circle text-danger'],
+    ['.mode_show.notFound', 'h1', 'glyphicon-alert text-warning'],
+    ['.mode_login',         'h1', 'glyphicon-log-in text-muted'],
+    ['.mode_register',      'h1', 'glyphicon-edit text-muted'],
+    ['.mode_search',        'h1', 'glyphicon-search text-muted'],
+    ['.mode_index',         'h1', 'glyphicon-list text-muted'],
+    ['.mode_recent',        'h1', 'glyphicon-list-alt text-muted'],
+    ['.mode_media',         'h1', 'glyphicon-download-alt text-muted'],
+    ['.mode_admin',         'h1', 'glyphicon-cog text-muted'],
+    ['.mode_admin',         'h2', 'glyphicon-plus text-success'],
+    ['.mode_profile',       'h1', 'glyphicon-user text-muted'],
+    ['.mode_revisions',     'h1', 'glyphicon-time text-muted'],
+    ['.mode_backlink',      'h1', 'glyphicon-link text-muted'],
+    ['.mode_diff',          'h1', 'glyphicon-list-alt text-muted'],
+    ['.mode_preview',       'h1', 'glyphicon-eye-open text-muted'],
+    ['.mode_conflict',      'h1', 'glyphicon-alert text-warning'],
+    ['.mode_subscribe',     'h1', 'glyphicon-bookmark text-muted'],
+    ['.mode_unsubscribe',   'h1', 'glyphicon-bookmark text-muted'],
+    ['.mode_draft',         'h1', 'glyphicon-edit text-muted'],
+    ['.mode_showtag',       'h1', 'glyphicon-tags text-muted'],
   ];
+
 
   function checkSize() {
 
@@ -53,6 +100,12 @@ jQuery(document).ready(function() {
   jQuery(window).resize(checkSize);
 
 
+  // Section Button edit
+  jQuery('.btn_secedit .btn')
+    .addClass('btn-xs')
+    .prepend('<i class="glyphicon glyphicon-pencil"/> ');
+
+
   // Back To Top
   jQuery('.back-to-top').click(function() {
     jQuery('html, body').animate({ scrollTop: 0 }, 600);
@@ -61,8 +114,8 @@ jQuery(document).ready(function() {
 
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {
-    var selector = [icons[i][0], ' #dokuwiki__content h1'].join(''),
-        icon     = ['<i class="glyphicon ', icons[i][1], '"/> '].join('');
+    var selector = [icons[i][0], '#dokuwiki__content', icons[i][1]].join(' '),
+        icon     = ['<i class="glyphicon ', icons[i][2], '"/> '].join('');
     jQuery(jQuery(selector)[0]).prepend(icon);
   });
 
@@ -78,6 +131,37 @@ jQuery(document).ready(function() {
     $tags.find('a').addClass('label label-default')
                    .prepend('<i class="glyphicon glyphicon-tag"/> ')
                    .prependTo('.pageId').css('marginLeft', '3px');
+  }
+
+
+  // Discussion plugin
+  if ($discussion.length) {
+
+    $discussion.find('h2').addClass('page-header');
+    $discussion.find('.comment_buttons').addClass('text-right');
+    $discussion.find('#discussion__section').prepend('<i class="glyphicon glyphicon-comment"/> ');
+
+    $discussion.find('.hentry').addClass('panel panel-default');
+    $discussion.find('.hentry .comment_head').addClass('panel-heading');
+    $discussion.find('.hentry .comment_body').addClass('panel-body');
+    $discussion.find('.toolbar').addClass('btn-group');
+
+    $discussion.find('.comment_buttons .discussion__edit button')
+      .html('').addClass('btn-xs')
+      .prepend('<i class="glyphicon glyphicon-pencil"/>');
+
+    $discussion.find('.comment_buttons .discussion__toogle button')
+      .html('').addClass('btn-xs')
+      .prepend('<i class="glyphicon glyphicon-eye-close"/>');
+
+    $discussion.find('.discussion__reply button')
+      .html('').addClass('btn-xs')
+      .prepend('<i class="glyphicon glyphicon-share-alt"/>');
+
+    $discussion.find('.comment_buttons .discussion__delete button')
+      .html('').addClass('btn-xs')
+      .prepend('<i class="glyphicon glyphicon-trash"/>').addClass('btn-danger');
+
   }
 
 
@@ -155,7 +239,12 @@ jQuery(document).ready(function() {
 
 
   // Quick Search
-  jQuery('#qsearch__out').addClass('panel panel-default');
+  $dw_search.find('#qsearch__out').addClass('panel panel-default');
+
+
+  // Search Form
+  $dw_search.find('button[type=submit]').html('').append('<i class="glyphicon glyphicon-search"/>');
+  $dw_search.find('input[type=text]').attr('placeholder', jQuery('#dw__search button[type=submit]').attr('title'));
 
 
   // Home icon in breadcrumbs
@@ -171,25 +260,5 @@ jQuery(document).ready(function() {
     jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="glyphicon glyphicon-user"/> ');
   }
 
-
-  // Common styles
-  $dw_content.find('.page h1').addClass('page-header');
-  $dw_content.find('input[type=submit]').addClass('btn-primary');
-  jQuery('table').parent().addClass('table-responsive');
-  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
-  jQuery('input, select').not('[type=hidden], [type=image]').addClass('form-control');
-  jQuery('label').addClass('control-label');
-  jQuery('form').addClass('form-inline');
-  jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
-  jQuery('#tool__bar').addClass('btn-group');
-  jQuery('#dw__search').addClass('nav navbar-nav navbar-form');
-  jQuery('.page table').addClass('table table-striped table-condensed');
-  jQuery('.tabs').addClass('nav nav-tabs');
-  jQuery('.toolbutton').addClass('btn-xs');
-  jQuery('.search_hit').addClass('mark');
-
-  jQuery('bdi').replaceWith(function() {
-    return jQuery(this).contents();
-  });
 
 });
