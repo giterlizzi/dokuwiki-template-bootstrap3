@@ -215,17 +215,17 @@ div.dokuwiki #discussion__section {
   text-decoration: none;
 }
 
-div.dokuwiki div.panel-heading {
+div.dokuwiki div.comment_wrapper div.panel-heading {
   margin-top: 0;
   padding: 5px;
   clear: none;
 }
 
-div.dokuwiki div.comment_body {
+div.dokuwiki div.comment_wrapper div.comment_body {
   border: 0 hidden; 
 }
 
-div.dokuwiki div.comment_buttons {
+div.dokuwiki div.comment_wrapper div.comment_buttons {
   float: none;
   margin-top: initial;
   padding: 5px; 
