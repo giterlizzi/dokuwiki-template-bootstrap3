@@ -9,9 +9,7 @@ $lang['showTools_o_never']      = '表示しない';
 $lang['showTools_o_logged']     = 'ログインしたときに表示する';
 $lang['showTools_o_always']     = '常に表示する';
 $lang['sidebarPosition']        = 'DokuWiki サイドバーの配置（<code>left</code> 又は <code>right</code>）';
-$lang['rightSidebar']           = '<strong>EXPERIMENTAL</strong> 右サイドバーのページ名。空欄で右サイドバー無効。デフォルトの DokuWiki <a href="#config___sidebar">サイドバー</a>が有効で <code>left</code> に配置している場合（<a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a> 設定を参照）のみ右サイドバーを表示します。DokuWiki サイドバーを右側に配置したい場合、<a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a> 設定を <code>right</code> にしてください。';
+$lang['rightSidebar']           = '<strong>EXPERIMENTAL</strong> 右サイドバーのページ名。空欄で右サイドバー無効。デフォルトの DokuWiki <a href="#config___sidebar">サイドバー</a>が有効で <code>left</code> に配置している場合（<a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> 設定を参照）のみ右サイドバーを表示します。DokuWiki サイドバーを右側に配置したい場合、<a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> 設定を <code>right</code> にしてください。';
 $lang['showTranslation']        = '翻訳ツールバーを表示する（<em>Translation プラグイン</em>が必要）';
 $lang['inverseNavbar']          = 'navbar の色を反転する';
 $lang['fixedTopNavbar']         = 'navbar を上部に固定する';
