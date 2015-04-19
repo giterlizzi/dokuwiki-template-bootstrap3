@@ -132,10 +132,21 @@ jQuery(document).ready(function() {
 
   // Tags plugin
   if ($tags.length) {
-    $tags.hide();
-    $tags.find('a').addClass('label label-default')
-                   .prepend('<i class="glyphicon glyphicon-tag"/> ')
-                   .prependTo('.pageId').css('marginLeft', '3px');
+
+    $tags.each(function() {
+
+      var $tag = jQuery(this);
+      $tag.html($tag.html().replace(/,/g, ''));
+
+      if ($tag.prop('tagName').toLowerCase() == 'div') {
+        $tag.hide();
+        $tag.find('a').addClass('label label-default')
+                      .prepend('<i class="glyphicon glyphicon-tag"/> ')
+                      .prependTo('.pageId').css('marginLeft', '3px');
+      }
+
+    });
+
   }
 
 
