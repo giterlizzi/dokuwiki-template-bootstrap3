@@ -11,6 +11,10 @@ input, textarea, select {
   font-weight: 400;
 }
 
+#dw__badges {
+  margin-top: 50px;
+}
+
 #dw__breadcrumbs hr {
   margin: 5px 0;
   padding: 0;
@@ -101,6 +105,11 @@ input, textarea, select {
 
 .dw__sidebar .nav li a {
   padding: 5px 10px;
+}
+
+.dw__sidebar .nav li a.urlextern {
+  padding-left: 28px;
+  background-position: 8px center;
 }
 
 .dw__sidebar h1,
