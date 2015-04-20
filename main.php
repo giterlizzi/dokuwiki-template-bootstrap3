@@ -27,6 +27,7 @@ $bootstrapStyles   = array();
 $fluidContainer    = tpl_getConf('fluidContainer');
 $contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
 $showPageInfo      = tpl_getConf('showPageInfo');
+$showBadges        = tpl_getConf('showBadges');
 
 if ($showSidebar && $showRightSidebar) {
   $contentClass = 'col-sm-6 col-md-8';
@@ -192,12 +193,15 @@ switch ($bootstrapTheme){
           </p>
         </div>
         <?php endif ?>
-        <div id="dw__badges" class="text-center">
-          <?php 
-            tpl_license('');
-            $target = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
-          ?>
-          <p>
+        <div class="text-center">
+          <p id="dw__license">
+            <?php 
+              tpl_license('');
+              $target = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
+            ?>
+          </p>
+          <?php if($showBadges): ?>
+          <p id="dw__badges">
             <?php tpl_license('button', true, false, false); // license button, no wrapper ?>
             <a href="http://getbootstrap.com" title="Built with Bootstrap 3" <?php echo $target?>>
               <img src="<?php echo tpl_basedir(); ?>images/button-bootstrap3.png" width="80" height="15" alt="Built with Bootstrap 3" />
@@ -215,6 +219,7 @@ switch ($bootstrapTheme){
               <img src="<?php echo dirname(tpl_basedir()); ?>/dokuwiki/images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" />
             </a>
           </p>
+          <?php endif ?>
         </div>
       </footer>
 

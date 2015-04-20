@@ -18,3 +18,4 @@ $conf['customTheme']       = '';
 $conf['bootswatchTheme']   = 'spacelab';
 $conf['showThemeSwitcher'] = 0;
 $conf['showPageInfo']      = 1;
+$conf['showBadges']        = 1;
