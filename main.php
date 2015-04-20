@@ -192,7 +192,7 @@ switch ($bootstrapTheme){
           </p>
         </div>
         <?php endif ?>
-        <div class="text-center">
+        <div id="dw__badges" class="text-center">
           <?php 
             tpl_license('');
             $target = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';

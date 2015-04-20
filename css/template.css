@@ -103,6 +103,21 @@ input, textarea, select {
   margin-top: 10px;
 }
 
+#dw__logo {
+  margin-right: 10px;
+}
+
+#dw__title {
+  display: inline-block;
+}
+
+#dw__tagline {
+  font-size: .6em;
+  display: block;
+  line-height: 1em;
+  white-space: nowrap;
+}
+
 .dw__sidebar .nav li a {
   padding: 5px 10px;
 }

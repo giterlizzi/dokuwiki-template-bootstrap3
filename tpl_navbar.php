@@ -8,25 +8,28 @@
         <span class="icon-bar"></span>
       </button>
       <?php
+
         // get logo either out of the template images folder or data/media folder
-        $logoSize = array();
-        $logo = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
+        $logoSize  = array();
+        $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
+        $title     = $conf['title'];
+        $tagline   = ($conf['tagline']) ? '<span id="dw__tagline">'.$conf['tagline'].'</span>' : '';
+        $logo_size = 'width="20" height="20"';
+
+        if ($tagline) {
+          $logo_size = 'width="32" height="32" style="margin-top:-5px"';
+        }
 
         // display logo and wiki title in a link to the home page
-        // '.$logoSize[3].'
         tpl_link(
             wl(),
-            '<img src="'.$logo.'" alt="'.$conf['title'].'" width="20" height="20" class="pull-left" style="margin-right:10px" /> <span>'.$conf['title'].'</span>',
+            '<img src="'.$logo.'" alt="'.$title.'" class="pull-left" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
             'accesskey="h" title="[H]" class="navbar-brand"'
         );
       ?>
     </div>
 
     <div class="collapse navbar-collapse">
-
-      <?php if ($conf['tagline']): ?>
-      <p class="navbar-text"><?php  $conf['tagline'] ?></p>
-      <?php endif ?>
 
       <ul class="nav navbar-nav">
       <?php tpl_includeFile('navbar.html') ?>
