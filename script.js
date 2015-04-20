@@ -138,11 +138,12 @@ jQuery(document).ready(function() {
       var $tag = jQuery(this);
       $tag.html($tag.html().replace(/,/g, ''));
 
+      var $tagLabel = $tag.find('a').addClass('label label-default')
+                                    .prepend('<i class="glyphicon glyphicon-tag"/> ');
+
       if ($tag.prop('tagName').toLowerCase() == 'div') {
         $tag.hide();
-        $tag.find('a').addClass('label label-default')
-                      .prepend('<i class="glyphicon glyphicon-tag"/> ')
-                      .prependTo('.pageId').css('marginLeft', '3px');
+        $tagLabel.prependTo('.pageId').css('marginLeft', '3px');
       }
 
     });

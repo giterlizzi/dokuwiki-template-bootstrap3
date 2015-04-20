@@ -3,7 +3,7 @@ body {
 }
 
 body.default,
-body.default-optional,{
+body.default-optional, {
   background: #FDFDFD;
 }
 
@@ -99,7 +99,6 @@ input, textarea, select {
   margin-top: 10px;
 }
 
-
 .dw__sidebar .nav li a {
   padding: 5px 10px;
 }
@@ -179,6 +178,13 @@ a.iw_user {
   padding: 0 !important;
 }
 
+
+/* Tag Plugin */
+td.tags a.label {
+  font-size: 85%;
+}
+
+
 /* Translation Plugin */
 .dokuwiki div.plugin_translation {
   font-size: 100%;
@@ -222,13 +228,13 @@ div.dokuwiki div.comment_wrapper div.panel-heading {
 }
 
 div.dokuwiki div.comment_wrapper div.comment_body {
-  border: 0 hidden; 
+  border: 0 hidden;
 }
 
 div.dokuwiki div.comment_wrapper div.comment_buttons {
   float: none;
   margin-top: initial;
-  padding: 5px; 
+  padding: 5px;
 }
 
 
