@@ -24,7 +24,8 @@ $bootstrapTheme    = tpl_getConf('bootstrapTheme');
 $customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
 $bootstrapStyles   = array();
-$contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container');
+$fluidContainer    = tpl_getConf('fluidContainer');
+$contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
 $showPageInfo      = tpl_getConf('showPageInfo');
 
 if ($showSidebar && $showRightSidebar) {
@@ -93,7 +94,7 @@ switch ($bootstrapTheme){
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : str_replace('+', '-', $bootstrapTheme)); ?>">
   <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
 
-  <div id="dokuwiki__site" class="container">
+  <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
     <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
 
       <?php tpl_includeFile('header.html') ?>

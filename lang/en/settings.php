@@ -17,6 +17,7 @@ tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value
 $lang['showTranslation']   = 'Display translation toolbar (require <em>Translation Plugin</em>)';
 $lang['inverseNavbar']     = 'Inverse navbar';
 $lang['fixedTopNavbar']    = 'Fix navbar to top';
+$lang['fluidContainer']    = 'Enable the fluid container (full-width of page)';
 $lang['bootstrapTheme']    = 'Select a theme (default Bootstrap theme, Bootstrap optional theme, Bootswatch.com themes or custom theme)';
 $lang['customTheme']       = 'Insert URL of custom theme';
 $lang['bootswatchTheme']   = 'Select a theme from Bootswatch.com';
