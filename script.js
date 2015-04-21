@@ -51,7 +51,6 @@ jQuery(document).ready(function() {
   jQuery('.tabs').addClass('nav nav-tabs');
   jQuery('.toolbutton').addClass('btn-xs');
   jQuery('.search_hit').addClass('mark');
-  jQuery('.no').addClass('hidden-print');
   jQuery('.button').removeClass('button');
 
   jQuery('bdi').replaceWith(function() {
