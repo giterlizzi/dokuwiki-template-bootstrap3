@@ -98,13 +98,15 @@ switch ($bootstrapTheme){
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
     <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
 
-      <?php tpl_includeFile('header.html') ?>
+      <?php tpl_includeFile('topheader.html') ?>
 
       <!-- header -->
       <div id="dokuwiki__header">
         <?php @require_once('tpl_navbar.php'); ?>
       </div>
       <!-- /header -->
+
+      <?php tpl_includeFile('header.html') ?>
 
       <?php
         if (tpl_getConf('showTranslation')) {
