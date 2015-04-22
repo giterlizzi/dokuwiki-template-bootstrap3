@@ -80,7 +80,7 @@ switch ($bootstrapTheme){
     <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
     <?php endforeach; ?>
     <?php tpl_metaheaders() ?>
-    <script src="<?php echo DOKU_TPL ?>/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
       body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
     </style>
