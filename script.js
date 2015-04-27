@@ -8,7 +8,7 @@ jQuery(document).ready(function() {
       $dw_search   = jQuery('#dw__search'),             // Search form
       $screen_mode = jQuery('#screen__mode'),           // Responsive Check
       $tags        = jQuery('.mode_show .tags'),        // Tags Plugin
-      $translation = jQuery('div.plugin_translation');  // Translation Plugin
+      $translation = jQuery('div.plugin_translation'),  // Translation Plugin
       $discussion  = jQuery('.comment_wrapper');        // Discussion Plugin
 
 
@@ -41,17 +41,22 @@ jQuery(document).ready(function() {
   //$dw_content.find('input[type=submit], button[type=submit]').not('.btn_secedit [type=submit], .editButtons [type=submit]').addClass('btn-primary');
   jQuery('table').parent().addClass('table-responsive');
   jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
-  jQuery('input, select').not('[type=hidden], [type=image]').addClass('form-control');
+  jQuery('input, select, textarea').not('[type=hidden], [type=image], [type=checkbox], [type=radio]').addClass('form-control');
   jQuery('label').addClass('control-label');
   jQuery('form').addClass('form-inline');
   jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
   jQuery('#tool__bar').addClass('btn-group');
   jQuery('#dw__search').addClass('nav navbar-nav navbar-form');
+  jQuery('#dw__login, #dw__register, #subscribe__form').find('[type=submit]').addClass('btn-success');
+  jQuery('#dw__profiledelete').find('[type=submit]').addClass('btn-danger');
+  jQuery('#edbtn__save').addClass('btn-success');
   jQuery('.page table').addClass('table table-striped table-condensed');
   jQuery('.tabs').addClass('nav nav-tabs');
   jQuery('.toolbutton').addClass('btn-xs');
   jQuery('.search_hit').addClass('mark');
   jQuery('.button').removeClass('button');
+  jQuery('input[type=checkbox]').addClass('checkbox-inline');
+  jQuery('input[type=radio]').addClass('radio-inline');
 
   jQuery('bdi').replaceWith(function() {
     return jQuery(this).contents();
@@ -125,8 +130,10 @@ jQuery(document).ready(function() {
 
 
   // Translation Plugin
-  $translation.find('select').addClass('input-sm');
-  $translation.find('ul li div').addClass('label label-default');
+  if ($translation.length) {
+    $translation.find('select').addClass('input-sm');
+    $translation.find('ul li div').addClass('label label-default');
+  }
 
 
   // Tags plugin
@@ -188,36 +195,40 @@ jQuery(document).ready(function() {
 
 
   // Table of Contents
-  $dw_toc.find('.open strong').addClass('glyphicon glyphicon-chevron-up');
-  $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
-  $dw_toc.addClass('panel panel-default');
-  $dw_toc.find('h3').addClass('panel-heading')
-                    .prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"/> ');
-  $dw_toc.find('h3 + div').addClass('panel-body');
+  if ($dw_toc.length) {
 
-  $dw_toc.find('h3').click(function() {
+    $dw_toc.find('.open strong').addClass('glyphicon glyphicon-chevron-up');
+    $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
+    $dw_toc.addClass('panel panel-default');
+    $dw_toc.find('h3').addClass('panel-heading')
+                      .prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"/> ');
+    $dw_toc.find('h3 + div').addClass('panel-body');
 
-    if ($dw_toc.find('.closed').length) {
-      $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
-                               .addClass('glyphicon-chevron-down');
-      jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
-    }
+    $dw_toc.find('h3').click(function() {
 
-    if ($dw_toc.find('.open').length) {
-      $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up')
-                               .removeClass('glyphicon-chevron-down');
-      $dw_toc.find('h3 .label').replaceWith(function() {
-        return jQuery(this).contents();
-      });
-    }
+      if ($dw_toc.find('.closed').length) {
+        $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
+                                 .addClass('glyphicon-chevron-down');
+        jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
+      }
 
-  });
+      if ($dw_toc.find('.open').length) {
+        $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up')
+                                 .removeClass('glyphicon-chevron-down');
+        $dw_toc.find('h3 .label').replaceWith(function() {
+          return jQuery(this).contents();
+        });
+      }
 
-  $dw_toc.parent().on('affixed.bs.affix', function() {
-    if ($dw_toc.find('.open').length) {
-      $dw_toc.find('h3').trigger('click');
-    }
-  });
+    });
+
+    $dw_toc.parent().on('affixed.bs.affix', function() {
+      if ($dw_toc.find('.open').length) {
+        $dw_toc.find('h3').trigger('click');
+      }
+    });
+
+  }
 
 
   // Alerts
@@ -243,11 +254,15 @@ jQuery(document).ready(function() {
 
 
   // Sidebar
-  $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
-  $dw_aside.find('.curid').parent().parent().addClass('active');
-  $dw_aside.find('ul div, ul span').replaceWith(function() {
-    return jQuery(this).contents();
-  });
+  if ($dw_aside.length) {
+
+    $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
+    $dw_aside.find('.curid').parent().parent().addClass('active');
+    $dw_aside.find('ul div, ul span').replaceWith(function() {
+      return jQuery(this).contents();
+    });
+
+  }
 
 
   // Non-existent DokwWiki Page   
@@ -275,6 +290,14 @@ jQuery(document).ready(function() {
   if (NS == 'user' && jQuery('.mode_show').length) {
     jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="glyphicon glyphicon-user"/> ');
   }
+
+
+  // Media Manager
+  if (jQuery('#media__content').length) {
+    jQuery('.qq-upload-button').addClass('btn btn-default');
+    jQuery('#mediamanager__upload_button').addClass('btn-success');
+  }
+  
 
 
 });

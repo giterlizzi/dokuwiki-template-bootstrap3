@@ -71,9 +71,10 @@ switch ($bootstrapTheme){
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     <style type="text/css">
+        #media_content label, #media__opts label { display: inline !important; }
         #media__tree li { margin: 0; }
-        #media__content input[type=checkbox], #media__content label,
-        #media__opts input[type=checkbox], #media__opts label { margin:5px; width: auto; display:inline; height: 0; }
+        #media__content input, #media__content label { margin: 0; }
+        #media__content [type=submit] { vertical-align: bottom; }
     </style>
     <?php tpl_includeFile('meta.html') ?>
 </head>

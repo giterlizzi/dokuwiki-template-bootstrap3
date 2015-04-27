@@ -10,7 +10,7 @@ $lang['showTools_o_never']  = 'Nunca';
 $lang['showTools_o_logged'] = 'Cuando está identificado';
 $lang['showTools_o_always'] = 'Siempre';
 $lang['sidebarPosition']    = 'Posición de la barra lateral DokuWiki (<code>left</code> o <code>right</code>)';
-$lang['rightSidebar']       = '<strong>EXPERIMENTAL</strong> El nombre de la página en la Barra Lateral a la Derecha, el campo vacío deshabilita la barra lateral derecha. La Barra Lateral Derecha sólo es mustrada cuando la <a href="#config___sidebar">barra lateral</a> predeterminada está habilitada y está sobre la posición <code>izquierda</code> (ver la configuración <a href="#config___tpl____bootstrap3____sidebarPosition">
+$lang['rightSidebar']       = 'El nombre de la página en la Barra Lateral a la Derecha, el campo vacío deshabilita la barra lateral derecha. La Barra Lateral Derecha sólo es mustrada cuando la <a href="#config___sidebar">barra lateral</a> predeterminada está habilitada y está sobre la posición <code>izquierda</code> (ver la configuración <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a>). Si sólo quieres la barra lateral de DokuWiki en la posición derecha, establece configuración <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a> con el valor <code>right</code> (derecha)';
 $lang['showTranslation']    = 'Mostrar barra de traducción (requiere <em>Translation Plugin</em>)';
