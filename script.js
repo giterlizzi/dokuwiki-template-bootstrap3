@@ -12,57 +12,6 @@ jQuery(document).ready(function() {
       $discussion  = jQuery('.comment_wrapper');        // Discussion Plugin
 
 
-  // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
-  jQuery('input[type=submit], input[type=button], input[type=reset]').each(function () {
-
-    var attrs = {},
-        label = '';
-
-    jQuery(this.attributes).each(function(index, attribute) {
-      if (attribute.name == 'value') {
-        label = attribute.value;
-      } else {
-        attrs[attribute.name] = attribute.value;
-      }
-    });
-
-    // FIXME
-    if (typeof jQuery(this).data('events') === 'undefined') {
-      jQuery(this).replaceWith(function(){
-        return jQuery('<button/>', attrs).html(label);
-      });
-    }
-
-  });
-
-
-  // Common styles
-  $dw_content.find('.page h1').addClass('page-header');
-  //$dw_content.find('input[type=submit], button[type=submit]').not('.btn_secedit [type=submit], .editButtons [type=submit]').addClass('btn-primary');
-  jQuery('table').parent().addClass('table-responsive');
-  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
-  jQuery('input, select, textarea').not('[type=hidden], [type=image], [type=checkbox], [type=radio]').addClass('form-control');
-  jQuery('label').addClass('control-label');
-  jQuery('form').addClass('form-inline');
-  jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
-  jQuery('#tool__bar').addClass('btn-group');
-  jQuery('#dw__search').addClass('nav navbar-nav navbar-form');
-  jQuery('#dw__login, #dw__register, #subscribe__form').find('[type=submit]').addClass('btn-success');
-  jQuery('#dw__profiledelete').find('[type=submit]').addClass('btn-danger');
-  jQuery('#edbtn__save').addClass('btn-success');
-  jQuery('.page table').addClass('table table-striped table-condensed');
-  jQuery('.tabs').addClass('nav nav-tabs');
-  jQuery('.toolbutton').addClass('btn-xs');
-  jQuery('.search_hit').addClass('mark');
-  jQuery('.button').removeClass('button');
-  jQuery('input[type=checkbox]').addClass('checkbox-inline');
-  jQuery('input[type=radio]').addClass('radio-inline');
-
-  jQuery('bdi').replaceWith(function() {
-    return jQuery(this).contents();
-  });
-
-
   // Icons for DokuWiki Actions
   var icons = [
     ['.mode_denied',        'h1', 'glyphicon-ban-circle text-danger'],
@@ -109,10 +58,58 @@ jQuery(document).ready(function() {
   jQuery(window).resize(checkSize);
 
 
+  // Page heading
+  $dw_content.find('.page h1').addClass('page-header');
+
+
+  // Tables
+  jQuery('table').parent().addClass('table-responsive');
+  jQuery('.page table').addClass('table table-striped table-condensed');
+
+
+  // Form and controls
+  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
+  jQuery('input, select, textarea')
+    .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
+    .addClass('form-control');
+  jQuery('input[type=checkbox]').addClass('checkbox-inline');
+  jQuery('input[type=radio]').addClass('radio-inline');
+  jQuery('label').addClass('control-label');
+  jQuery('form').addClass('form-inline');
+
+
+  // Images
+  jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
+
+
+  // Tabs
+  jQuery('.tabs').addClass('nav nav-tabs');
+
+
+  // Search Hits
+  jQuery('.search_hit').addClass('mark');
+
+
+  // Remove <bdi/> tag
+  jQuery('bdi').replaceWith(function() {
+    return jQuery(this).contents();
+  });
+
+
+  // Toolbar
+  jQuery('#tool__bar').addClass('btn-group')
+    .find('.toolbutton').addClass('btn-xs');
+
+
+  // Buttons
+  jQuery('.button').removeClass('button');
+  jQuery('#dw__login, #dw__register, #subscribe__form').find('[type=submit]').addClass('btn-success');
+  jQuery('#dw__profiledelete').find('[type=submit]').addClass('btn-danger');
+  jQuery('#edbtn__save').addClass('btn-success');
+
+
   // Section Button edit
-  jQuery('.btn_secedit .btn')
-    .addClass('btn-xs')
-    .prepend('<i class="glyphicon glyphicon-pencil"/> ');
+  jQuery('.btn_secedit .btn').addClass('btn-xs');
 
 
   // Back To Top
@@ -168,22 +165,10 @@ jQuery(document).ready(function() {
     $discussion.find('.hentry .comment_head').addClass('panel-heading');
     $discussion.find('.hentry .comment_body').addClass('panel-body');
     $discussion.find('.toolbar').addClass('btn-group');
-
-    $discussion.find('.comment_buttons .discussion__edit button')
-      .html('').addClass('btn-xs')
-      .prepend('<i class="glyphicon glyphicon-pencil"/>');
-
-    $discussion.find('.comment_buttons .discussion__toogle button')
-      .html('').addClass('btn-xs')
-      .prepend('<i class="glyphicon glyphicon-eye-close"/>');
-
-    $discussion.find('.discussion__reply button')
-      .html('').addClass('btn-xs')
-      .prepend('<i class="glyphicon glyphicon-share-alt"/>');
-
-    $discussion.find('.comment_buttons .discussion__delete button')
-      .html('').addClass('btn-xs')
-      .prepend('<i class="glyphicon glyphicon-trash"/>').addClass('btn-danger');
+    $discussion.find('.comment_buttons [type=submit]').addClass('btn-xs');
+    $discussion.find('.comment_buttons .discussion__delete .btn').addClass('btn-danger');
+    $discussion.find('.comment_buttons .discussion__reply .btn').addClass('btn-success');
+    $discussion.find('#discussion__btn_submit').addClass('btn-success');
 
   }
 
@@ -274,8 +259,7 @@ jQuery(document).ready(function() {
 
 
   // Search Form
-  $dw_search.find('button[type=submit]').html('').append('<i class="glyphicon glyphicon-search"/>');
-  $dw_search.find('input[type=text]').attr('placeholder', jQuery('#dw__search button[type=submit]').attr('title'));
+  $dw_search.addClass('nav navbar-nav navbar-form');
 
 
   // Home icon in breadcrumbs
@@ -297,7 +281,6 @@ jQuery(document).ready(function() {
     jQuery('.qq-upload-button').addClass('btn btn-default');
     jQuery('#mediamanager__upload_button').addClass('btn-success');
   }
-  
 
 
 });
