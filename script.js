@@ -62,9 +62,9 @@ jQuery(document).ready(function() {
   $dw_content.find('.page h1').addClass('page-header');
 
 
-  // Tables
-  jQuery('table').parent().addClass('table-responsive');
-  jQuery('.page table').addClass('table table-striped table-condensed');
+  // Tables (no for Rack and Diagram Plugins)
+  jQuery('table').not('.rack, .diagram').parent().addClass('table-responsive');
+  jQuery('.page table').not('.rack, .diagram').addClass('table table-striped table-condensed');
 
 
   // Form and controls
