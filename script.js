@@ -254,12 +254,11 @@ jQuery(document).ready(function() {
   $dw_content.find('.wikilink2').addClass('text-danger');
 
 
-  // Quick Search
-  $dw_search.find('#qsearch__out').addClass('panel panel-default');
-
-
-  // Search Form
+  // Quick Search & Search Form
   $dw_search.addClass('nav navbar-nav navbar-form');
+  $dw_search.find('#qsearch__in').attr('placeholder', $dw_search.find('[type=submit]').attr('title'));
+  $dw_search.find('#qsearch__out').addClass('panel panel-default');
+  $dw_search.find('[type=submit]').addClass('hidden-lg hidden-md hidden-sm');
 
 
   // Home icon in breadcrumbs
