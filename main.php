@@ -23,6 +23,7 @@ $inverseNavbar     = tpl_getConf('inverseNavbar');
 $bootstrapTheme    = tpl_getConf('bootstrapTheme');
 $customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
+$pageOnPanel       = tpl_getConf('pageOnPanel');
 $bootstrapStyles   = array();
 $fluidContainer    = tpl_getConf('fluidContainer');
 $contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
@@ -80,19 +81,19 @@ switch ($bootstrapTheme){
     <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
     <?php endforeach; ?>
     <?php tpl_metaheaders() ?>
-    <script src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
       body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
     </style>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : str_replace('+', '-', $bootstrapTheme)); ?>">
+<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : str_replace('+', '-', $bootstrapTheme)) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
   <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
 
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
@@ -144,8 +145,8 @@ switch ($bootstrapTheme){
 
         <!-- ********** CONTENT ********** -->
         <article id="dokuwiki__content" class="<?php echo $contentClass ?>">
-          <div class="panel panel-default"> 
-            <div class="page group panel-body">
+          <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : '') ?>"> 
+            <div class="page group <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
   
               <?php tpl_flush() /* flush the output buffer */ ?>
               <?php tpl_includeFile('pageheader.html') ?>

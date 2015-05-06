@@ -13,6 +13,7 @@ $conf['showTranslation']   = 0;
 $conf['inverseNavbar']     = 0;
 $conf['fixedTopNavbar']    = 0;
 $conf['fluidContainer']    = 0;
+$conf['pageOnPanel']       = 1;
 $conf['bootstrapTheme']    = 'default';
 $conf['customTheme']       = '';
 $conf['bootswatchTheme']   = 'spacelab';

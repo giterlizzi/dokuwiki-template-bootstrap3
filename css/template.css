@@ -2,8 +2,8 @@ body {
   font-size: small;
 }
 
-body.default,
-body.default-optional, {
+body.default.page-on-panel,
+body.default-optional.page-on-panel, {
   background: #FDFDFD;
 }
 
