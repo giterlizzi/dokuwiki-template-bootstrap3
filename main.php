@@ -30,6 +30,10 @@ $contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($f
 $showPageInfo      = tpl_getConf('showPageInfo');
 $showBadges        = tpl_getConf('showBadges');
 
+$tplConfigJSON     = array(
+  'tableFullWidth' => tpl_getConf('tableFullWidth'),
+);
+
 if ($showSidebar && $showRightSidebar) {
   $contentClass = 'col-sm-6 col-md-8';
 }
@@ -61,6 +65,7 @@ switch ($bootstrapTheme){
     $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
     break;
   case 'default+optional':
+  case 'default-optional':
     $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
     $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
     break;
@@ -80,6 +85,9 @@ switch ($bootstrapTheme){
     <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
     <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
     <?php endforeach; ?>
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
+    /*!]]>*/</script>
     <?php tpl_metaheaders() ?>
     <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <style type="text/css">
@@ -93,7 +101,7 @@ switch ($bootstrapTheme){
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : str_replace('+', '-', $bootstrapTheme)) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
+<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
   <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
 
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">

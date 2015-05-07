@@ -63,8 +63,12 @@ jQuery(document).ready(function() {
 
 
   // Tables (no for Rack and Diagram Plugins)
-  jQuery('table').not('.rack, .diagram').parent().addClass('table-responsive');
-  jQuery('.page table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+  $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
+  $dw_content.find('table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+
+  if (! TPL_CONFIG.tableFullWidth) {
+    $dw_content.find('.table').css('width', 'auto');
+  }
 
 
   // Form and controls
@@ -256,7 +260,10 @@ jQuery(document).ready(function() {
 
   // Quick Search & Search Form
   $dw_search.addClass('nav navbar-nav navbar-form');
-  $dw_search.find('#qsearch__in').attr('placeholder', $dw_search.find('[type=submit]').attr('title'));
+  $dw_search.find('#qsearch__in').attr({
+    'type'        : 'search',
+    'placeholder' : $dw_search.find('[type=submit]').attr('title'),
+  });
   $dw_search.find('#qsearch__out').addClass('panel panel-default');
   $dw_search.find('[type=submit]').addClass('hidden-lg hidden-md hidden-sm');
 
