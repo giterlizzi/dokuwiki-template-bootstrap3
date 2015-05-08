@@ -48,10 +48,10 @@
               <!-- dokuwiki__usertools -->
               <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> <?php echo $lang['user_tools'] ?></li>
               <?php _tpl_toolsevent('usertools', array(
-                'admin' => tpl_action('admin', 1, 'li' . (($ACT == 'admin') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-cog"></i> '),
-                'profile' => tpl_action('profile', 1, 'li' . (($ACT == 'profile') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-refresh"></i> '),
-                'register' => tpl_action('register', 1, 'li' . (($ACT == 'register') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-edit"></i> '),
-                'login' => tpl_action('login', 1, 'li' . (($ACT == 'login') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in').'"></i> '),
+                'admin'    => _tpl_action_item('admin', 'glyphicon glyphicon-cog'),
+                'profile'  => _tpl_action_item('profile', 'glyphicon glyphicon-refresh'),
+                'register' => _tpl_action_item('register', 'glyphicon glyphicon-edit'),
+                'login'    => _tpl_action_item('login', 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
               )); ?>
 
               <li class="divider"></li>
@@ -59,9 +59,9 @@
               <!-- dokuwiki__sitetools -->
               <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> <?php echo $lang['site_tools'] ?></li>
               <?php _tpl_toolsevent('sitetools', array(
-                'recent' => tpl_action('recent', 1, 'li' . (($ACT == 'recent') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-list-alt"></i> '),
-                'media' => tpl_action('media', 1, 'li' . (($ACT == 'media') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-download-alt"></i> '),
-                'index' => tpl_action('index', 1, 'li' . (($ACT == 'index') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-list"></i> '),
+                'recent' => _tpl_action_item('recent', 'glyphicon glyphicon-list-alt'),
+                'media'  => _tpl_action_item('media', 'glyphicon glyphicon-download-alt'),
+                'index'  => _tpl_action_item('index', 'glyphicon glyphicon-list'),
               )); ?>
 
               <li class="divider"></li>
@@ -69,12 +69,13 @@
               <!-- dokuwiki__pagetools -->
               <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> <?php echo $lang['page_tools'] ?></li>
               <?php _tpl_toolsevent('pagetools', array(
-                'edit' => tpl_action('edit', 1, 'li' . (($ACT == 'edit') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-edit"></i> '),
-                'revert' => tpl_action('revert', 1, 'li' . (($ACT == 'revert') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-repeat"></i> '),
-                'revisions' => tpl_action('revisions', 1, 'li' . (($ACT == 'revisions') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-time"></i> '),
-                'backlink' => tpl_action('backlink', 1, 'li' . (($ACT == 'backlink') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-link"></i> '),
-                'subscribe' => tpl_action('subscribe', 1, 'li' . (($ACT == 'subscribe') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-bookmark"></i> '),
-                'top' => tpl_action('top', 1, 'li' . (($ACT == 'top') ? ' class="active"' : ''), 1, '<i class="glyphicon glyphicon-chevron-up"></i> '),
+                'edit'       => _tpl_action_item('edit', 'glyphicon glyphicon-edit'),
+                'discussion' => _tpl_action_item('discussion', 'glyphicon glyphicon-comment'),
+                'revert'     => _tpl_action_item('revert', 'glyphicon glyphicon-repeat'),
+                'revisions'  => _tpl_action_item('revisions', 'glyphicon glyphicon-time'),
+                'backlink'   => _tpl_action_item('backlink', 'glyphicon glyphicon-link'),
+                'subscribe'  => _tpl_action_item('subscribe', 'glyphicon glyphicon-bookmark'),
+                'top'        => _tpl_action_item('top', 'glyphicon glyphicon-chevron-up'),
               )); ?>
 
             </ul>
@@ -103,10 +104,8 @@
               tpl_link(wl('user:'.$_SERVER['REMOTE_USER']), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */
             } ?>
           </li>
-          <li>
-            <?php echo tpl_action('login', 1, '', 1, '<i class="glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in') .'"></i> ') ?>
-          </li>
-        </ul>
+          <?php echo _tpl_action_item('login', 'glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')) ?>
+         </ul>
 
       </div>
 

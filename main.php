@@ -29,6 +29,8 @@ $fluidContainer    = tpl_getConf('fluidContainer');
 $contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
 $showPageInfo      = tpl_getConf('showPageInfo');
 $showBadges        = tpl_getConf('showBadges');
+$semantic          = tpl_getConf('semantic');
+$schemaOrgType     = tpl_getConf('schemaOrgType');
 
 $tplConfigJSON     = array(
   'tableFullWidth' => tpl_getConf('tableFullWidth'),
@@ -152,8 +154,9 @@ switch ($bootstrapTheme){
         <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentClass ?>">
-          <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : '') ?>"> 
+        <article id="dokuwiki__content" class="<?php echo $contentClass ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
+
+          <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page group <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
   
               <?php tpl_flush() /* flush the output buffer */ ?>
@@ -178,6 +181,7 @@ switch ($bootstrapTheme){
 
             </div>
           </div>
+
         </article>
 
         <?php

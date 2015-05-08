@@ -123,6 +123,8 @@ if (!function_exists('tpl_classes')) {
 /**
  * Include left or right sidebar
  *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
  * @param  string  $sidebar_page
  * @param  string  $sidebar_id
  * @param  string  $sidebar_header
@@ -132,3 +134,29 @@ function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_header, $sidebar_foot
   global $lang;
   @require('tpl_sidebar.php');
 }
+
+
+/**
+ * Include action link with font-icon
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * 
+ * @param   string  $action
+ * @param   string  $icon class
+ * @return  string
+ */
+function _tpl_action_item($action, $icon) {
+
+  global $ACT;
+
+  if ($action == 'discussion') {
+    ob_start();
+    _tpl_action('discussion', 1, 'li', $icon);
+    $out = ob_get_clean();
+    $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
+    return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
+  }
+
+  return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ') . '</li>';
+}
+

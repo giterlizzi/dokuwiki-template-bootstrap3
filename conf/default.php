@@ -6,6 +6,7 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+$conf['discussionPage']    = 'discussion:@ID@';
 $conf['showTools']         = 'always';
 $conf['sidebarPosition']   = 'left';
 $conf['rightSidebar']      = 'rightsidebar';
@@ -15,6 +16,8 @@ $conf['fixedTopNavbar']    = 0;
 $conf['fluidContainer']    = 0;
 $conf['pageOnPanel']       = 1;
 $conf['tableFullWidth']    = 1;
+$conf['semantic']          = 0;
+$conf['schemaOrgType']     = 'Article';
 $conf['bootstrapTheme']    = 'default';
 $conf['customTheme']       = '';
 $conf['bootswatchTheme']   = 'spacelab';
