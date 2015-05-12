@@ -226,6 +226,10 @@ jQuery(document).ready(function() {
     $discussion.find('.comment_buttons .discussion__reply .btn').addClass('btn-success');
     $discussion.find('#discussion__btn_submit').addClass('btn-success');
 
+    jQuery(document).bind('DOMNodeInserted', function(){
+      $discussion.find('.toolbutton').addClass('btn btn-xs');
+    });
+
   }
 
 

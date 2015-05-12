@@ -248,22 +248,28 @@ div.dokuwiki div.comment_wrapper div.comment_buttons {
 }
 
 
-/* FROM Dokuwiki content.css */
-/*____________ images ____________*/
+/** Override Bootstrap3 style */
 
-/* embedded images (styles are already partly set in lib/styles/all.css) */
+/** Set ".img-responsive" to "inline" */
+.img-responsive {
+  display: inline;
+}
+
 .dokuwiki img.media {
   margin: .2em 0;
 }
 
 .dokuwiki img.medialeft {
+  float: left;
   margin: .2em 1em .2em 0;
 }
 
 .dokuwiki img.mediaright {
+  float: right;
   margin: .2em 0 .2em 1em;
 }
 
 .dokuwiki img.mediacenter {
+  display: block;
   margin: .2em auto;
 }
