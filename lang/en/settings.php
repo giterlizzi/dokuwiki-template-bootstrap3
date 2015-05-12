@@ -6,17 +6,19 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+$lang['discussionPage']     = 'Discussion page name (default is <code>discussion:@ID@</code>, where <code>@ID@</code> placeholder replace the current page name), empty field disable the link';
+$lang['showDiscussion']     = 'Display discussion link in tools menu';
 $lang['showTools']          = 'Display Tools in navbar';
 $lang['showTools_o_never']  = 'Never';
 $lang['showTools_o_logged'] = 'When logged in';
 $lang['showTools_o_always'] = 'Always';
 $lang['sidebarPosition']    = 'DokuWiki Sidebar position (<code>left</code> or <code>right</code>)';
-$lang['rightSidebar']       = 'The Right Sidebar page name, empty field disables the right sidebar. The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">
+$lang['rightSidebar']       = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value';
-$lang['tableFullWidth']     = 'Enable 100% full table width';
+$lang['tableFullWidth']     = 'Enable 100% full table width (Bootstrap default)';
 $lang['semantic']           = 'Enable semantic data';
-$lang['schemaOrgType']      = 'Schema.org type';
+$lang['schemaOrgType']      = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
 $lang['showTranslation']    = 'Display translation toolbar (require <em>Translation Plugin</em>)';
 $lang['inverseNavbar']      = 'Inverse navbar';
 $lang['fixedTopNavbar']     = 'Fix navbar to top';

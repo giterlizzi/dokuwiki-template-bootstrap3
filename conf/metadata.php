@@ -4,7 +4,7 @@
  *
  */
 
-$meta['discussionPage']    = array('string');
+
 $meta['showTools']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['sidebarPosition']   = array('multichoice', '_choices' => array('left', 'right'));
 $meta['rightSidebar']      = array('string');
@@ -22,3 +22,5 @@ $meta['bootswatchTheme']   = array('multichoice', '_choices' => array('cerulean'
 $meta['showThemeSwitcher'] = array('onoff');
 $meta['showPageInfo']      = array('onoff');
 $meta['showBadges']        = array('onoff');
+$meta['showDiscussion']    = array('onoff');
+$meta['discussionPage']    = array('string');

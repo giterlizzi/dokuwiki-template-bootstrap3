@@ -2,38 +2,43 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-  var $dw_aside    = jQuery('.dw__sidebar'),            // Sidebar
-      $dw_content  = jQuery('#dokuwiki__content'),      // Page Content
-      $dw_toc      = jQuery('#dw__toc'),                // Table of Content
-      $dw_search   = jQuery('#dw__search'),             // Search form
-      $screen_mode = jQuery('#screen__mode'),           // Responsive Check
-      $tags        = jQuery('.mode_show .tags'),        // Tags Plugin
-      $translation = jQuery('div.plugin_translation'),  // Translation Plugin
-      $discussion  = jQuery('.comment_wrapper');        // Discussion Plugin
+  var $dw_aside       = jQuery('.dw__sidebar'),       // Sidebar
+      $dw_content     = jQuery('#dokuwiki__content'), // Page Content
+      $dw_toc         = jQuery('#dw__toc'),           // Table of Content
+      $dw_search      = jQuery('#dw__search'),        // Search form
+      $dw_breadcrumbs = jQuery('#dw__breadcrumbs'),   // Breadcrumbs
+
+      $media_manager  = jQuery('#media__content'),    // Media Manager
+      $mode_admin     = jQuery('.mode_admin'),        // Admin mode
+      $screen_mode    = jQuery('#screen__mode'),      // Responsive Check
+
+      $tags           = jQuery('.mode_show .tags'),   // Tags Plugin
+      $translation    = jQuery('#dw__translation'),   // Translation Plugin
+      $discussion     = jQuery('.comment_wrapper');   // Discussion Plugin
 
 
   // Icons for DokuWiki Actions
   var icons = [
-    ['.mode_denied',        'h1', 'glyphicon-ban-circle text-danger'],
-    ['.mode_show.notFound', 'h1', 'glyphicon-alert text-warning'],
-    ['.mode_login',         'h1', 'glyphicon-log-in text-muted'],
-    ['.mode_register',      'h1', 'glyphicon-edit text-muted'],
-    ['.mode_search',        'h1', 'glyphicon-search text-muted'],
-    ['.mode_index',         'h1', 'glyphicon-list text-muted'],
-    ['.mode_recent',        'h1', 'glyphicon-list-alt text-muted'],
-    ['.mode_media',         'h1', 'glyphicon-download-alt text-muted'],
-    ['.mode_admin',         'h1', 'glyphicon-cog text-muted'],
-    ['.mode_admin',         'h2', 'glyphicon-plus text-success'],
-    ['.mode_profile',       'h1', 'glyphicon-user text-muted'],
-    ['.mode_revisions',     'h1', 'glyphicon-time text-muted'],
-    ['.mode_backlink',      'h1', 'glyphicon-link text-muted'],
-    ['.mode_diff',          'h1', 'glyphicon-list-alt text-muted'],
-    ['.mode_preview',       'h1', 'glyphicon-eye-open text-muted'],
-    ['.mode_conflict',      'h1', 'glyphicon-alert text-warning'],
-    ['.mode_subscribe',     'h1', 'glyphicon-bookmark text-muted'],
-    ['.mode_unsubscribe',   'h1', 'glyphicon-bookmark text-muted'],
-    ['.mode_draft',         'h1', 'glyphicon-edit text-muted'],
-    ['.mode_showtag',       'h1', 'glyphicon-tags text-muted'],
+    // Mode           Selector  Icon
+    ['denied',        'h1',     'glyphicon-ban-circle text-danger'],
+    ['show.notFound', 'h1',     'glyphicon-alert text-warning'],
+    ['login',         'h1',     'glyphicon-log-in text-muted'],
+    ['register',      'h1',     'glyphicon-edit text-muted'],
+    ['search',        'h1',     'glyphicon-search text-muted'],
+    ['index',         'h1',     'glyphicon-list text-muted'],
+    ['recent',        'h1',     'glyphicon-list-alt text-muted'],
+    ['media',         'h1',     'glyphicon-download-alt text-muted'],
+    ['admin',         'h1',     'glyphicon-cog text-muted'],
+    ['profile',       'h1',     'glyphicon-user text-muted'],
+    ['revisions',     'h1',     'glyphicon-time text-muted'],
+    ['backlink',      'h1',     'glyphicon-link text-muted'],
+    ['diff',          'h1',     'glyphicon-list-alt text-muted'],
+    ['preview',       'h1',     'glyphicon-eye-open text-muted'],
+    ['conflict',      'h1',     'glyphicon-alert text-warning'],
+    ['subscribe',     'h1',     'glyphicon-bookmark text-muted'],
+    ['unsubscribe',   'h1',     'glyphicon-bookmark text-muted'],
+    ['draft',         'h1',     'glyphicon-edit text-muted'],
+    ['showtag',       'h1',     'glyphicon-tags text-muted'],
   ];
 
 
@@ -58,8 +63,34 @@ jQuery(document).ready(function() {
   jQuery(window).resize(checkSize);
 
 
+  // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
+  jQuery('#dokuwiki__site').find('input[type=submit], input[type=button], input[type=reset]').each(function() {
+
+    var attrs = {},
+        label = '',
+        node  = jQuery(this);
+
+    // FIXME
+    if (typeof node.data('events') === 'undefined') {
+
+      jQuery(this.attributes).each(function(index, attribute) {
+        if (attribute.name == 'value') {
+          label = attribute.value;
+        } else {
+          attrs[attribute.name] = attribute.value;
+        }
+      });
+
+      node.replaceWith(function() {
+        return jQuery('<button/>', attrs).html(label);
+      });
+    }
+
+  });
+
+
   // Page heading
-  $dw_content.find('.page h1').addClass('page-header');
+  $dw_content.find('h1').addClass('page-header');
 
 
   // Tables (no for Rack and Diagram Plugins)
@@ -113,7 +144,7 @@ jQuery(document).ready(function() {
 
 
   // Section Button edit
-  jQuery('.btn_secedit .btn').addClass('btn-xs');
+  jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="glyphicon glyphicon-edit"/> ');
 
 
   // Back To Top
@@ -124,16 +155,37 @@ jQuery(document).ready(function() {
 
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {
-    var selector = [icons[i][0], '#dokuwiki__content', icons[i][1]].join(' '),
-        icon     = ['<i class="glyphicon ', icons[i][2], '"/> '].join('');
-    jQuery(jQuery(selector)[0]).prepend(icon);
+
+    var mode     = ['.mode_', icons[i][0]].join(''),
+        selector = icons[i][1],
+        icon     = icons[i][2];
+
+    var icon_selector = [mode, '#dokuwiki__content', selector].join(' '),
+        icon_tag      = ['<i class="glyphicon ', icon, '"/> '].join('');
+
+    jQuery(jQuery(icon_selector)[0]).prepend(icon_tag);
+
   });
 
 
   // Translation Plugin
   if ($translation.length) {
-    $translation.find('select').addClass('input-sm');
-    $translation.find('ul li div').addClass('label label-default');
+
+    var $current = $translation.find('.cur'),
+        $lang    = $current.text(),
+        $iso     = $lang.match(/\(([a-z]*)\)/),
+        $flag    = $current.find('img');
+
+    $current.parent().addClass('active');
+
+    if ($flag.length) {
+      $translation.find('.dropdown-toggle i').hide();
+      $translation.find('.dropdown-toggle').prepend(
+        jQuery('<img/>').attr({
+          'src'   : $flag.attr('src'),
+          'title' : $flag.attr('title') }));
+    }
+
   }
 
 
@@ -254,7 +306,7 @@ jQuery(document).ready(function() {
   }
 
 
-  // Non-existent DokwWiki Page   
+  // Non-existent DokwWiki Page
   $dw_content.find('.wikilink2').addClass('text-danger');
 
 
@@ -265,11 +317,13 @@ jQuery(document).ready(function() {
     'placeholder' : $dw_search.find('[type=submit]').attr('title'),
   });
   $dw_search.find('#qsearch__out').addClass('panel panel-default');
-  $dw_search.find('[type=submit]').addClass('hidden-lg hidden-md hidden-sm');
+  $dw_search.find('button[type=submit]').html('').append('<i class="glyphicon glyphicon-search"/>');
 
 
   // Home icon in breadcrumbs
-  jQuery('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+  if ($dw_breadcrumbs.length) {
+    $dw_breadcrumbs.find('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+  }
 
 
   // Interwiki User page icon
@@ -283,9 +337,26 @@ jQuery(document).ready(function() {
 
 
   // Media Manager
-  if (jQuery('#media__content').length) {
+  if ($media_manager.length) {
     jQuery('.qq-upload-button').addClass('btn btn-default');
     jQuery('#mediamanager__upload_button').addClass('btn-success');
+  }
+
+
+  // Administration
+  if ($mode_admin.length) {
+
+    // Extension page
+    var $ext_actions = $mode_admin.find('.actions');
+    $ext_actions.addClass('btn-group');
+    $ext_actions.find('.permerror').addClass('pull-left');
+    $ext_actions.find('.btn').addClass('btn-xs');
+    $ext_actions.find('.uninstall').addClass('btn-danger');
+    $ext_actions.find('.enable').addClass('btn-success');
+    $ext_actions.find('.disable').addClass('btn-warning');
+
+    $mode_admin.find('#dokuwiki__content [name=submit]').addClass('btn-success');
+
   }
 
 

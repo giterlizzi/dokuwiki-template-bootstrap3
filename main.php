@@ -47,7 +47,7 @@ if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
   }
 
   global $INPUT;
-  
+
   if ($INPUT->str('bootswatchTheme')) {
     $bootswatchTheme = $INPUT->str('bootswatchTheme');
     set_doku_pref('bootswatchTheme', $bootswatchTheme);
@@ -118,17 +118,6 @@ switch ($bootstrapTheme){
       <!-- /header -->
 
       <?php tpl_includeFile('header.html') ?>
-
-      <?php
-        if (tpl_getConf('showTranslation')) {
-          if ($translation = plugin_load('helper','translation')) {
-            echo '<div class="pull-right">';
-            echo $translation->showTranslations();
-            echo '</div>';
-            echo '<p class="clearfix">&nbsp;</p>';
-          }
-        }
-      ?>
 
       <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
       <div id="dw__breadcrumbs">

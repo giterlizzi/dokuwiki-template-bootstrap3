@@ -150,11 +150,14 @@ function _tpl_action_item($action, $icon) {
   global $ACT;
 
   if ($action == 'discussion') {
-    ob_start();
-    _tpl_action('discussion', 1, 'li', $icon);
-    $out = ob_get_clean();
-    $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
-    return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
+    if (tpl_getConf('showDiscussion')) {
+      ob_start();
+      _tpl_action('discussion', 1, 'li', $icon);
+      $out = ob_get_clean();
+      $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
+      return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
+    }
+    return '';
   }
 
   return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ') . '</li>';

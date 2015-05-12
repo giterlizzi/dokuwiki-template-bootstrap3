@@ -23,7 +23,7 @@ if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
   }
 
   global $INPUT;
-  
+
   if ($INPUT->str('bootswatchTheme')) {
     $bootswatchTheme = $INPUT->str('bootswatchTheme');
     set_doku_pref('bootswatchTheme', $bootswatchTheme);
@@ -62,6 +62,9 @@ switch ($bootstrapTheme){
     <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
     <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
     <?php endforeach; ?>
+    <script type="text/javascript">/*<![CDATA[*/
+    var TPL_CONFIG = {};
+    /*!]]>*/</script>
     <?php tpl_metaheaders() ?>
     <script src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

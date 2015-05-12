@@ -213,29 +213,11 @@ td.tags a.label {
 }
 
 
-/* Translation Plugin */
-.dokuwiki div.plugin_translation {
-  font-size: 100%;
+/* Plugin Translation */
+#dw__translation .flag img {
+  padding-right: 5px;
 }
 
-.dokuwiki div.plugin_translation ul li {
-  float: none;
-  padding: 0 0 0 4px;
-  margin: 0;
-  display: inline-block;
-}
-
-.dokuwiki div.plugin_translation ul li a.wikilink1:link,
-.dokuwiki div.plugin_translation ul li a.wikilink1:hover,
-.dokuwiki div.plugin_translation ul li a.wikilink1:active,
-.dokuwiki div.plugin_translation ul li a.wikilink1:visited,
-.dokuwiki div.plugin_translation ul li a.wikilink2:link,
-.dokuwiki div.plugin_translation ul li a.wikilink2:hover,
-.dokuwiki div.plugin_translation ul li a.wikilink2:active,
-.dokuwiki div.plugin_translation ul li a.wikilink2:visited {
-  background: transparent !important;
-  color: inherit !important;
-}
 
 /* Plugin Discussion */
 div.dokuwiki div.comment_wrapper {

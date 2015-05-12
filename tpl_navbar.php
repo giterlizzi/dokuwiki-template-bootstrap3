@@ -42,7 +42,7 @@
         <?php if ($showTools): ?>
         <ul class="nav navbar-nav">
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=""><i class="glyphicon glyphicon-wrench"></i> <?php echo $lang['tools']; ?> <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $lang['tools']; ?>"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['tools']; ?></span> <span class="caret"></span></a>
             <ul class="dropdown-menu tools" role="menu">
 
               <!-- dokuwiki__usertools -->
@@ -97,6 +97,41 @@
         </ul>
         <!-- /theme-switcher -->
         <?php endif; ?>
+
+        <?php
+          if (tpl_getConf('showTranslation')) {
+            if ($translation = plugin_load('helper','translation')) {
+              if($translation->istranslatable($INFO['id'])) {
+
+                $translation->checkage();
+
+                list($lc, $idpart) = $translation->getTransParts($INFO['id']);
+
+                $trans_items = '';
+                $trans_label = $translation->getLang('translations');
+
+                foreach ($translation->translations as $trans) {
+                  $trans_items .= str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($trans, $idpart));
+                }
+
+                echo  '<ul class="nav navbar-nav" id="dw__translation">'.
+                        '<li class="dropdown">'.
+                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="'.$trans_label.'">'.
+                            '<i class="glyphicon glyphicon-flag"></i> '.
+                            '<span class="hidden-lg hidden-md hidden-sm">'.
+                              $trans_label.
+                            '</span>'.
+                            ' <span class="caret"></span>'.
+                          '</a>'.
+                        '<ul class="dropdown-menu" role="menu">'.
+                          '<li class="dropdown-header"><i class="glyphicon glyphicon-flag"></i> '.$trans_label.'</li>'.
+                          $trans_items.
+                        '</ul>'.
+                      '</ul>';
+              }
+            }
+          }
+        ?>
 
         <ul class="nav navbar-nav">
           <li>
