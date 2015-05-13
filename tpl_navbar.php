@@ -31,7 +31,7 @@
 
     <div class="collapse navbar-collapse">
 
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav" id="dw__navbar">
       <?php tpl_includeFile('navbar.html') ?>
       </ul>
 
@@ -40,7 +40,7 @@
         <?php tpl_searchform() ?>
 
         <?php if ($showTools): ?>
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" id="dw__tools">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $lang['tools']; ?>"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['tools']; ?></span> <span class="caret"></span></a>
             <ul class="dropdown-menu tools" role="menu">
@@ -85,10 +85,11 @@
 
         <?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch'): ?>
         <!-- theme-switcher -->
-        <ul class="nav navbar-nav">
+        <ul class="nav navbar-nav" id="dw__themes">
           <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#" id="themes">Themes <span class="caret"></span></a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
             <ul class="dropdown-menu" aria-labelledby="themes">
+              <li class="dropdown-header"><i class="glyphicon glyphicon-tint"></i> Bootswatch Themes</li>
               <?php foreach (array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti') as $theme): ?>
               <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>><a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a></li>
               <?php endforeach; ?>

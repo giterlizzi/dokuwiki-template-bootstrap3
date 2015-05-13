@@ -9,3 +9,4 @@
 $lang['discussion']        = 'Discussione';
 $lang['back_to_article']   = 'Ritorna all\'articolo';
 $lang['userpage']          = 'Pagina Utente';
+$lang['themes']            = 'Temi';
