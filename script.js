@@ -177,6 +177,7 @@ jQuery(document).ready(function() {
         $flag    = $current.find('img');
 
     $current.parent().addClass('active');
+    $translation.find('.wikilink2').removeClass('wikilink2').css('opacity', '0.5');
 
     if ($flag.length) {
       $translation.find('.dropdown-toggle i').hide();
