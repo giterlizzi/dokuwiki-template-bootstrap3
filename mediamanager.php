@@ -32,19 +32,19 @@ if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 }
 
 switch ($bootstrapTheme){
+  case 'optional':
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+    break;
+  case 'custom':
+    $bootstrapStyles[] = $customTheme;
+    break;
   case 'bootswatch':
     $bootstrapStyles[] = "https://bootswatch.com/$bootswatchTheme/bootstrap.css";
     break;
-  case 'custom':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = $customTheme;
-    break;
   case 'default':
+  default:
     $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    break;
-  case 'default+optional':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
     break;
 }
 
@@ -104,4 +104,3 @@ switch ($bootstrapTheme){
     <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
 </body>
 </html>
-

@@ -56,20 +56,19 @@ if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 }
 
 switch ($bootstrapTheme){
+  case 'optional':
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+    break;
+  case 'custom':
+    $bootstrapStyles[] = $customTheme;
+    break;
   case 'bootswatch':
     $bootstrapStyles[] = "https://bootswatch.com/$bootswatchTheme/bootstrap.css";
     break;
-  case 'custom':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = $customTheme;
-    break;
   case 'default':
+  default:
     $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    break;
-  case 'default+optional':
-  case 'default-optional':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
     break;
 }
 
@@ -147,7 +146,7 @@ switch ($bootstrapTheme){
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page group <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
-  
+
               <?php tpl_flush() /* flush the output buffer */ ?>
               <?php tpl_includeFile('pageheader.html') ?>
               <?php
@@ -156,15 +155,15 @@ switch ($bootstrapTheme){
                 tpl_content(false);
                 $content = ob_get_clean();
               ?>
-  
+
               <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px;">
                 <?php tpl_toc()?>
               </div>
-  
+
               <!-- wikipage start -->
               <?php echo $content; ?>
               <!-- wikipage stop -->
-  
+
               <?php tpl_flush() ?>
               <?php tpl_includeFile('pagefooter.html') ?>
 
