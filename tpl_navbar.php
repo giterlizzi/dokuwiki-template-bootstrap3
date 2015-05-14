@@ -1,12 +1,25 @@
+<?php
+/**
+ * DokuWiki Bootstrap3 Template: Navbar
+ *
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+?>
 <nav class="navbar <?php echo (($fixedTopNavbar) ? 'navbar-fixed-top' : '') ?> <?php echo (($inverseNavbar) ? 'navbar-inverse' : 'navbar-default') ?>" role="navigation">
 
   <div class="container<?php echo ($fluidContainer || ($fluidContainer && ! $fixedTopNavbar) || (! $fluidContainer && ! $fixedTopNavbar)) ? '-fluid' : '' ?>">
+
     <div class="navbar-header">
+
       <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
+
       <?php
 
         // get logo either out of the template images folder or data/media folder
@@ -26,112 +39,25 @@
             '<img src="'.$logo.'" alt="'.$title.'" class="pull-left" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
             'accesskey="h" title="[H]" class="navbar-brand"'
         );
+
       ?>
+
     </div>
 
     <div class="collapse navbar-collapse">
 
       <ul class="nav navbar-nav" id="dw__navbar">
-      <?php tpl_includeFile('navbar.html') ?>
+        <?php tpl_includeFile('navbar.html') ?>
       </ul>
 
       <div class="navbar-right">
 
         <?php tpl_searchform() ?>
 
-        <?php if ($showTools): ?>
-        <ul class="nav navbar-nav" id="dw__tools">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $lang['tools']; ?>"><i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['tools']; ?></span> <span class="caret"></span></a>
-            <ul class="dropdown-menu tools" role="menu">
-
-              <!-- dokuwiki__usertools -->
-              <li class="dropdown-header"><i class="glyphicon glyphicon-user"></i> <?php echo $lang['user_tools'] ?></li>
-              <?php _tpl_toolsevent('usertools', array(
-                'admin'    => _tpl_action_item('admin', 'glyphicon glyphicon-cog'),
-                'profile'  => _tpl_action_item('profile', 'glyphicon glyphicon-refresh'),
-                'register' => _tpl_action_item('register', 'glyphicon glyphicon-edit'),
-                'login'    => _tpl_action_item('login', 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
-              )); ?>
-
-              <li class="divider"></li>
-
-              <!-- dokuwiki__sitetools -->
-              <li class="dropdown-header"><i class="glyphicon glyphicon-cog"></i> <?php echo $lang['site_tools'] ?></li>
-              <?php _tpl_toolsevent('sitetools', array(
-                'recent' => _tpl_action_item('recent', 'glyphicon glyphicon-list-alt'),
-                'media'  => _tpl_action_item('media', 'glyphicon glyphicon-download-alt'),
-                'index'  => _tpl_action_item('index', 'glyphicon glyphicon-list'),
-              )); ?>
-
-              <li class="divider"></li>
-
-              <!-- dokuwiki__pagetools -->
-              <li class="dropdown-header"><i class="glyphicon glyphicon-file"></i> <?php echo $lang['page_tools'] ?></li>
-              <?php _tpl_toolsevent('pagetools', array(
-                'edit'       => _tpl_action_item('edit', 'glyphicon glyphicon-edit'),
-                'discussion' => _tpl_action_item('discussion', 'glyphicon glyphicon-comment'),
-                'revert'     => _tpl_action_item('revert', 'glyphicon glyphicon-repeat'),
-                'revisions'  => _tpl_action_item('revisions', 'glyphicon glyphicon-time'),
-                'backlink'   => _tpl_action_item('backlink', 'glyphicon glyphicon-link'),
-                'subscribe'  => _tpl_action_item('subscribe', 'glyphicon glyphicon-bookmark'),
-                'top'        => _tpl_action_item('top', 'glyphicon glyphicon-chevron-up'),
-              )); ?>
-
-            </ul>
-          </li>
-        </ul>
-        <?php endif ?>
-
-        <?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch'): ?>
-        <!-- theme-switcher -->
-        <ul class="nav navbar-nav" id="dw__themes">
-          <li class="dropdown">
-            <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
-            <ul class="dropdown-menu" aria-labelledby="themes">
-              <li class="dropdown-header"><i class="glyphicon glyphicon-tint"></i> Bootswatch Themes</li>
-              <?php foreach (array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti') as $theme): ?>
-              <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>><a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a></li>
-              <?php endforeach; ?>
-            </ul>
-          </li>
-        </ul>
-        <!-- /theme-switcher -->
-        <?php endif; ?>
-
         <?php
-          if (tpl_getConf('showTranslation')) {
-            if ($translation = plugin_load('helper','translation')) {
-              if($translation->istranslatable($INFO['id'])) {
-
-                $translation->checkage();
-
-                list($lc, $idpart) = $translation->getTransParts($INFO['id']);
-
-                $trans_items = '';
-                $trans_label = $translation->getLang('translations');
-
-                foreach ($translation->translations as $trans) {
-                  $trans_items .= str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($trans, $idpart));
-                }
-
-                echo  '<ul class="nav navbar-nav" id="dw__translation">'.
-                        '<li class="dropdown">'.
-                          '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="'.$trans_label.'">'.
-                            '<i class="glyphicon glyphicon-flag"></i> '.
-                            '<span class="hidden-lg hidden-md hidden-sm">'.
-                              $trans_label.
-                            '</span>'.
-                            ' <span class="caret"></span>'.
-                          '</a>'.
-                        '<ul class="dropdown-menu" role="menu">'.
-                          '<li class="dropdown-header"><i class="glyphicon glyphicon-flag"></i> '.$trans_label.'</li>'.
-                          $trans_items.
-                        '</ul>'.
-                      '</ul>';
-              }
-            }
-          }
+          include_once(dirname(__FILE__).'/tpl_tools_menu.php');
+          include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
+          include_once(dirname(__FILE__).'/tpl_translation.php');
         ?>
 
         <ul class="nav navbar-nav">
@@ -141,7 +67,7 @@
             } ?>
           </li>
           <?php echo _tpl_action_item('login', 'glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')) ?>
-         </ul>
+        </ul>
 
       </div>
 

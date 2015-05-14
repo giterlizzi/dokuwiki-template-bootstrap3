@@ -11,95 +11,36 @@ if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 @require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
 header('X-UA-Compatible: IE=edge,chrome=1');
 
-$showTools         = tpl_getConf('showTools') != 'never' &&
-                     ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
-$showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
-$sidebarPosition   = tpl_getConf('sidebarPosition');
-$showRightSidebar  = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
-$rightSidebar      = tpl_getConf('rightSidebar');
-$showThemeSwitcher = tpl_getConf('showThemeSwitcher');
-$fixedTopNavbar    = tpl_getConf('fixedTopNavbar');
-$inverseNavbar     = tpl_getConf('inverseNavbar');
-$bootstrapTheme    = tpl_getConf('bootstrapTheme');
-$customTheme       = tpl_getConf('customTheme');
-$bootswatchTheme   = tpl_getConf('bootswatchTheme');
-$pageOnPanel       = tpl_getConf('pageOnPanel');
-$bootstrapStyles   = array();
-$fluidContainer    = tpl_getConf('fluidContainer');
-$contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
-$showPageInfo      = tpl_getConf('showPageInfo');
-$showBadges        = tpl_getConf('showBadges');
-$semantic          = tpl_getConf('semantic');
-$schemaOrgType     = tpl_getConf('schemaOrgType');
-
-$tplConfigJSON     = array(
-  'tableFullWidth' => tpl_getConf('tableFullWidth'),
-);
-
-if ($showSidebar && $showRightSidebar) {
-  $contentClass = 'col-sm-6 col-md-8';
-}
-
-if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
-
-  if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
-    $bootswatchTheme = get_doku_pref('bootswatchTheme', null);
-  }
-
-  global $INPUT;
-
-  if ($INPUT->str('bootswatchTheme')) {
-    $bootswatchTheme = $INPUT->str('bootswatchTheme');
-    set_doku_pref('bootswatchTheme', $bootswatchTheme);
-  }
-
-}
-
-switch ($bootstrapTheme){
-  case 'optional':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
-    break;
-  case 'custom':
-    $bootstrapStyles[] = $customTheme;
-    break;
-  case 'bootswatch':
-    $bootstrapStyles[] = "https://bootswatch.com/$bootswatchTheme/bootstrap.css";
-    break;
-  case 'default':
-  default:
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    break;
-}
+include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
 
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
-    <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-    <?php tpl_includeFile('meta.html') ?>
-    <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
-    <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
-    <?php endforeach; ?>
-    <script type="text/javascript">/*<![CDATA[*/
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
+  <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
+  <?php tpl_includeFile('meta.html') ?>
+  <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+  <?php endforeach; ?>
+  <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
-    /*!]]>*/</script>
-    <?php tpl_metaheaders() ?>
-    <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
-    <style type="text/css">
-      body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
-    </style>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+  /*!]]>*/</script>
+  <?php tpl_metaheaders() ?>
+  <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
+  <style type="text/css">
+    body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
+  </style>
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+  <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">

@@ -1,20 +1,28 @@
+/*!
+ * DokuWiki Bootstrap3 Template
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
 jQuery(document).ready(function() {
 
   //'use strict';
 
-  var $dw_aside       = jQuery('.dw__sidebar'),       // Sidebar
-      $dw_content     = jQuery('#dokuwiki__content'), // Page Content
-      $dw_toc         = jQuery('#dw__toc'),           // Table of Content
-      $dw_search      = jQuery('#dw__search'),        // Search form
-      $dw_breadcrumbs = jQuery('#dw__breadcrumbs'),   // Breadcrumbs
-
-      $media_manager  = jQuery('#media__content'),    // Media Manager
-      $mode_admin     = jQuery('.mode_admin'),        // Admin mode
-      $screen_mode    = jQuery('#screen__mode'),      // Responsive Check
-
-      $tags           = jQuery('.mode_show .tags'),   // Tags Plugin
-      $translation    = jQuery('#dw__translation'),   // Translation Plugin
-      $discussion     = jQuery('.comment_wrapper');   // Discussion Plugin
+  var $dw_aside       = jQuery('.dw__sidebar'),        // Sidebar
+      $dw_content     = jQuery('#dokuwiki__content'),  // Page Content
+      $dw_toc         = jQuery('#dw__toc'),            // Table of Content
+      $dw_search      = jQuery('#dw__search'),         // Search form
+      $dw_breadcrumbs = jQuery('#dw__breadcrumbs'),    // Breadcrumbs
+      $media_popup    = jQuery('#media__content'),     // Media Manager (pop-up)
+      $media_manager  = jQuery('#mediamanager__page'), // Media Manager (page)
+      $detail_page    = jQuery('#dokuwiki__detail'),   // Detail Page
+      $mode_admin     = jQuery('.mode_admin'),         // Admin mode
+      $screen_mode    = jQuery('#screen__mode'),       // Responsive Check
+      $tags           = jQuery('.mode_show .tags'),    // Tags Plugin
+      $translation    = jQuery('#dw__translation'),    // Translation Plugin
+      $discussion     = jQuery('.comment_wrapper');    // Discussion Plugin
 
 
   // Icons for DokuWiki Actions
@@ -27,7 +35,7 @@ jQuery(document).ready(function() {
     ['search',        'h1',     'glyphicon-search text-muted'],
     ['index',         'h1',     'glyphicon-list text-muted'],
     ['recent',        'h1',     'glyphicon-list-alt text-muted'],
-    ['media',         'h1',     'glyphicon-download-alt text-muted'],
+    ['media',         'h1',     'glyphicon-picture text-muted'],
     ['admin',         'h1',     'glyphicon-cog text-muted'],
     ['profile',       'h1',     'glyphicon-user text-muted'],
     ['revisions',     'h1',     'glyphicon-time text-muted'],
@@ -71,6 +79,7 @@ jQuery(document).ready(function() {
         node  = jQuery(this);
 
     // FIXME
+        console.debug(node.data('events'), node);
     if (typeof node.data('events') === 'undefined') {
 
       jQuery(this.attributes).each(function(index, attribute) {
@@ -341,12 +350,26 @@ jQuery(document).ready(function() {
   }
 
 
-  // Media Manager
-  if ($media_manager.length) {
+  // Media Manager (pop-up)
+  if ($media_popup.length) {
     jQuery('.qq-upload-button').addClass('btn btn-default');
     jQuery('#mediamanager__upload_button').addClass('btn-success');
   }
 
+
+  // Media Manager (page)
+  if ($media_manager.length) {
+    $media_manager.find('.file dl').addClass('dl-horizontal');
+    $media_manager.find('.panel').removeClass('panel').addClass('pull-left');
+  }
+
+
+  // Detail page
+  if ($detail_page.length) {
+    $detail_page.find('dl').addClass('dl-horizontal');
+    $detail_page.find('.img_backto').addClass('btn btn-success').prepend('<i class="glyphicon glyphicon-arrow-left"/> ');
+    $detail_page.find('.mediaManager').addClass('btn btn-default').prepend('<i class="glyphicon glyphicon-picture"/> ');
+  }
 
   // Administration
   if ($mode_admin.length) {
