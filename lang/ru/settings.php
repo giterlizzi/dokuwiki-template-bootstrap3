@@ -18,7 +18,7 @@ $lang['rightSidebar']                          = 'Имя страницы пра
 $lang['tableFullWidth']                        = 'Разрешить таблицы в 100% ширину';
 $lang['semantic']                              = 'Включить семантические данные Schema.org. Для полной поддержи требуется установка <a href="https://www.dokuwiki.org/plugin:semantic">плагина</a>';
 $lang['schemaOrgType']                         = 'Тип Schema.org данных';
-$lang['showTranslation']                       = 'Отображать языковую панель (требует установки <a href="https://www.dokuwiki.org/plugin:Translation">плагина</a>';
+$lang['showTranslation']                       = 'Отображать языковую панель (требует установки <a href="https://www.dokuwiki.org/plugin:Translation">плагина</a>)';
 $lang['inverseNavbar']                         = 'Перевернуть панель навигации';
 $lang['fixedTopNavbar']                        = 'Зафиксировать панель навигации сверху';
 $lang['fluidContainer']                        = 'Разрешить плавающий контейнер(страница во весь экран)';
