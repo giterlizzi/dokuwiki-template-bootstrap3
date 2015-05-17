@@ -20,8 +20,8 @@
       <?php _tpl_toolsevent('usertools', array(
         'admin'    => _tpl_action_item('admin', 'glyphicon glyphicon-cog'),
         'profile'  => _tpl_action_item('profile', 'glyphicon glyphicon-refresh'),
-        'register' => _tpl_action_item('register', 'glyphicon glyphicon-edit'),
-        'login'    => _tpl_action_item('login', 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+#        'register' => _tpl_action_item('register', 'glyphicon glyphicon-edit'),
+#        'login'    => _tpl_action_item('login', 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
       )); ?>
 
       <li class="divider"></li>
