@@ -67,6 +67,7 @@
             } ?>
           </li>
           <?php echo _tpl_action_item('login', 'glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')) ?>
+		  <?php echo _tpl_action_item('register', 'glyphicon glyphicon-edit') ?>
         </ul>
 
       </div>
