@@ -28,7 +28,7 @@ $showBadges        = tpl_getConf('showBadges');
 $semantic          = tpl_getConf('semantic');
 $schemaOrgType     = tpl_getConf('schemaOrgType');
 $tplConfigJSON     = array(
-  'tableFullWidth' => tpl_getConf('tableFullWidth'),
+  'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),
 );
 
 if ($showSidebar && $showRightSidebar) {
