@@ -160,6 +160,10 @@ function _tpl_action_item($action, $icon) {
     return '';
   }
 
-  return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ') . '</li>';
+  if ($link = tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ')) {
+    return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>';
+  }
+
+  return '';
 }
 

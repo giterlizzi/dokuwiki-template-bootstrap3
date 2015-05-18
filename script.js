@@ -79,7 +79,6 @@ jQuery(document).ready(function() {
         node  = jQuery(this);
 
     // FIXME
-        console.debug(node.data('events'), node);
     if (typeof node.data('events') === 'undefined') {
 
       jQuery(this.attributes).each(function(index, attribute) {
