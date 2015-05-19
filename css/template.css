@@ -209,6 +209,14 @@ a.iw_user {
 }
 
 
+/* Print styles */
+@media print {
+  #dokuwiki__content {
+    width: 100%;
+  }
+}
+
+
 /** Override Bootstrap3 style */
 
 /** Set ".img-responsive" to "inline" */

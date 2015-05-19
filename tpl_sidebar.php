@@ -1,7 +1,7 @@
 <!-- ********** ASIDE ********** -->
-<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar col-sm-3 col-md-2">
+<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar col-sm-3 col-md-2 hidden-print">
   <div class="content">
-    <div class="toogle hidden-print hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .collapse">
+    <div class="toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .collapse">
       <i class="glyphicon glyphicon-th-list"></i> <?php echo $lang['sidebar'] ?>
     </div>
     <div class="collapse in">
