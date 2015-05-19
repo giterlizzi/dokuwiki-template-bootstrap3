@@ -15,6 +15,7 @@ jQuery(document).ready(function() {
       $dw_toc         = jQuery('#dw__toc'),            // Table of Content
       $dw_search      = jQuery('#dw__search'),         // Search form
       $dw_breadcrumbs = jQuery('#dw__breadcrumbs'),    // Breadcrumbs
+      $dw_msgarea     = jQuery('#dw__msgarea'),        // Message Area
       $media_popup    = jQuery('#media__content'),     // Media Manager (pop-up)
       $media_manager  = jQuery('#mediamanager__page'), // Media Manager (page)
       $detail_page    = jQuery('#dokuwiki__detail'),   // Detail Page
@@ -22,7 +23,8 @@ jQuery(document).ready(function() {
       $screen_mode    = jQuery('#screen__mode'),       // Responsive Check
       $tags           = jQuery('.mode_show .tags'),    // Tags Plugin
       $translation    = jQuery('#dw__translation'),    // Translation Plugin
-      $discussion     = jQuery('.comment_wrapper');    // Discussion Plugin
+      $discussion     = jQuery('.comment_wrapper'),    // Discussion Plugin
+      $publish        = jQuery('.approval');           // Publish Plugin
 
 
   // Icons for DokuWiki Actions
@@ -242,6 +244,30 @@ jQuery(document).ready(function() {
   }
 
 
+  // Publish plugin
+  if ($publish.length) {
+
+    $publish.removeClass('approval').addClass('alert');
+
+    jQuery('.apr_table').removeClass('table-striped');
+
+    if ($publish.hasClass('approved_no')) {
+      $publish.removeClass('approved_no')
+        .addClass('alert-warning')
+        .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
+    }
+    if ($publish.hasClass('approved_yes')) {
+      $publish.removeClass('approved_yes')
+        .addClass('alert-success')
+        .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
+    }
+
+    $publish.prependTo('.page');
+
+  }
+
+
+
   // Footnote
   jQuery(document).bind('DOMNodeInserted', function(){
     jQuery('#insitu__fn').addClass('panel panel-body panel-default');
@@ -294,17 +320,17 @@ jQuery(document).ready(function() {
   jQuery('div.error')
     .removeClass('error')
     .addClass('alert alert-danger')
-    .prepend('<i class="glyphicon glyphicon-remove"/> ');
+    .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
 
   jQuery('div.success')
     .removeClass('success')
     .addClass('alert alert-success')
-    .prepend('<i class="glyphicon glyphicon-ok"/> ');
+    .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
 
   jQuery('div.notify')
     .removeClass('notify')
     .addClass('alert alert-warning')
-    .prepend('<i class="glyphicon glyphicon-bell"/> ');
+    .prepend('<i class="glyphicon glyphicon-warning-sign"/> ');
 
 
   // Sidebar

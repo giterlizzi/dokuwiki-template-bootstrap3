@@ -51,7 +51,9 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
 
-        <div class="container"><?php html_msgarea() ?></div>
+        <div id="dw__msgarea">
+          <?php html_msgarea() ?>
+        </div>
         <div id="mediamgr__aside" class="col-xs-4">
             <h1><?php echo hsc($lang['mediaselect'])?></h1>
 
