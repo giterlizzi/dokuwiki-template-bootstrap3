@@ -60,7 +60,8 @@ switch ($bootstrapTheme) {
     $bootstrapStyles[] = $customTheme;
     break;
   case 'bootswatch':
-    $bootstrapStyles[] = "https://bootswatch.com/$bootswatchTheme/bootstrap.css";
+    $bootstrapStyles[] = "//bootswatch.com/$bootswatchTheme/bootstrap.min.css";
+    //$bootstrapStyles[] = "//netdna.bootstrapcdn.com/bootswatch/latest/$bootswatchTheme/bootstrap-min.css";
     break;
   case 'default':
   default:
