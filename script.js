@@ -70,26 +70,33 @@ jQuery(document).ready(function() {
 
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
-  jQuery('#dokuwiki__site').find('input[type=submit], input[type=button], input[type=reset]').each(function() {
+  jQuery.fn.extend({
+    
+    input2button: function() {
 
-    var attrs = {},
-        label = '',
-        node  = jQuery(this);
+      return this.each(function() {
 
-    // FIXME
-    if (typeof node.data('events') === 'undefined') {
+        var attrs = { 'type' : 'button' },
+            label = '',
+            node  = jQuery(this);
+    
+        if (typeof node.data('events') === 'undefined' && node.prop('tagName') == 'INPUT') {
+    
+          jQuery(node[0].attributes).each(function(index, attribute) {
+            if (attribute.name == 'value') {
+              label = attribute.value;
+            } else {
+              attrs[attribute.name] = attribute.value;
+            }
+          });
+  
+          var newNode = jQuery('<button/>', attrs).html(label);
+          node.replaceWith(newNode);
 
-      jQuery(this.attributes).each(function(index, attribute) {
-        if (attribute.name == 'value') {
-          label = attribute.value;
-        } else {
-          attrs[attribute.name] = attribute.value;
         }
+
       });
 
-      node.replaceWith(function() {
-        return jQuery('<button/>', attrs).html(label);
-      });
     }
 
   });
@@ -109,7 +116,7 @@ jQuery(document).ready(function() {
 
 
   // Form and controls
-  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
+  jQuery(':submit, :button, :reset').addClass('btn btn-default');
   jQuery('input, select, textarea')
     .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
     .addClass('form-control');
@@ -144,12 +151,13 @@ jQuery(document).ready(function() {
 
   // Buttons
   jQuery('.button').removeClass('button');
-  jQuery('#dw__login, #dw__register, #subscribe__form').find('[type=submit]').addClass('btn-success');
-  jQuery('#dw__profiledelete').find('[type=submit]').addClass('btn-danger');
+  jQuery('#dw__login, #dw__register, #subscribe__form').find(':submit').addClass('btn-success');
+  jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
   jQuery('#edbtn__save').addClass('btn-success');
 
 
   // Section Button edit
+  jQuery('.btn_secedit .btn').input2button();
   jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="glyphicon glyphicon-edit"/> ');
 
 
@@ -259,10 +267,11 @@ jQuery(document).ready(function() {
   $dw_search.addClass('nav navbar-nav navbar-form');
   $dw_search.find('#qsearch__in').attr({
     'type'        : 'search',
-    'placeholder' : $dw_search.find('[type=submit]').attr('title'),
+    'placeholder' : $dw_search.find(':submit').attr('title'),
   });
   $dw_search.find('#qsearch__out').addClass('panel panel-default');
-  $dw_search.find('button[type=submit]').html('').append('<i class="glyphicon glyphicon-search"/>');
+  $dw_search.find(':submit').input2button();
+  $dw_search.find(':submit').html('').append('<i class="glyphicon glyphicon-search"/>');
 
 
   // Home icon in breadcrumbs
@@ -322,7 +331,8 @@ jQuery(document).ready(function() {
       .addClass('pull-left');
 
     $ext_actions.find('.btn')
-      .addClass('btn-xs');
+      .addClass('btn-xs')
+      .input2button();
 
     $ext_actions.find('.uninstall')
       .addClass('btn-danger')
@@ -336,12 +346,13 @@ jQuery(document).ready(function() {
       .addClass('btn-success')
       .prepend('<i class="glyphicon glyphicon-ok"/> ');
 
-    $ext_actions.find('.disable')
-      .addClass('btn-warning')
+    $ext_actions.find('.disable').addClass('btn-warning')
       .prepend('<i class="glyphicon glyphicon-ban-circle"/> ');
 
-    $mode_admin.find('#dokuwiki__content [name=submit]')
+    $mode_admin.find('#dokuwiki__content :submit')
       .addClass('btn-success');
+
+    $ext_manager.find('form.search :submit, form.install :submit').input2button();
 
     $ext_manager.find('form.search button')
       .prepend('<i class="glyphicon glyphicon-search"/> ');
