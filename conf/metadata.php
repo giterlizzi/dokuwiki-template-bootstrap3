@@ -8,6 +8,8 @@
 $meta['showTools']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['sidebarPosition']   = array('multichoice', '_choices' => array('left', 'right'));
 $meta['rightSidebar']      = array('string');
+$meta['leftSidebarGrid']   = array('string');
+$meta['rightSidebarGrid']  = array('string');
 $meta['showTranslation']   = array('onoff');
 $meta['inverseNavbar']     = array('onoff');
 $meta['fixedTopNavbar']    = array('onoff');

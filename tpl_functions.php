@@ -130,7 +130,7 @@ if (!function_exists('tpl_classes')) {
  * @param  string  $sidebar_header
  * @param  string  $sidebar_footer
  */
-function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_header, $sidebar_footer) {
+function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
   global $lang;
   @require('tpl_sidebar.php');
 }
@@ -167,3 +167,45 @@ function _tpl_action_item($action, $icon) {
   return '';
 }
 
+/**
+ * Calculate automatically the grid size for main container
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function _tpl_get_container_grid() {
+
+  global $ACT;
+  global $conf;
+
+  $grids  = array();
+  $result = '';
+
+  $showRightSidebar = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
+  $showLeftSidebar  = page_findnearest($conf['sidebar']) && ($ACT=='show');
+  $fluidContainer   = tpl_getConf('fluidContainer');
+
+  if (! $showLeftSidebar) {
+    return 'container' . (($fluidContainer) ? '-fluid' : '');
+  }
+
+  foreach (split(' ', tpl_getConf('leftSidebarGrid')) as $grid) {
+    list($col, $media, $size) = split('-', $grid);
+    $grids[$media]['left'] = (int) $size;
+  }
+  
+  foreach (split(' ', tpl_getConf('rightSidebarGrid')) as $grid) {
+    list($col, $media, $size) = split('-', $grid);
+    $grids[$media]['right'] = (int) $size;
+  }
+  
+  foreach ($grids as $media => $item) {
+    $left    = $item['left'];
+    $right   = $item['right'];
+    $result .= sprintf('col-%s-%s ', $media, (12 - $left - ($showRightSidebar ? $right : 0)));
+  }
+
+  return $result;
+
+}

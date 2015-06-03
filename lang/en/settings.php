@@ -16,21 +16,23 @@ $lang['sidebarPosition']    = 'DokuWiki Sidebar position (<code>left</code> or <
 $lang['rightSidebar']       = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a href="#config___tpl____bootstrap3____sidebarPosition">
 tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value';
-$lang['tableFullWidth']     = 'Enable 100% full table width (Bootstrap default)';
-$lang['semantic']           = 'Enable semantic data';
-$lang['schemaOrgType']      = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
-$lang['showTranslation']    = 'Display translation toolbar (require <em>Translation Plugin</em>)';
-$lang['inverseNavbar']      = 'Inverse navbar';
-$lang['fixedTopNavbar']     = 'Fix navbar to top';
-$lang['fluidContainer']     = 'Enable the fluid container (full-width of page)';
-$lang['pageOnPanel']        = 'Enable the panel around the page';
-$lang['bootstrapTheme']     = 'Bootstrap theme';
+$lang['tableFullWidth']    = 'Enable 100% full table width (Bootstrap default)';
+$lang['semantic']          = 'Enable semantic data';
+$lang['schemaOrgType']     = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
+$lang['showTranslation']   = 'Display translation toolbar (require <em>Translation Plugin</em>)';
+$lang['inverseNavbar']     = 'Inverse navbar';
+$lang['fixedTopNavbar']    = 'Fix navbar to top';
+$lang['fluidContainer']    = 'Enable the fluid container (full-width of page)';
+$lang['pageOnPanel']       = 'Enable the panel around the page';
+$lang['bootstrapTheme']    = 'Bootstrap theme';
 $lang['bootstrapTheme_o_default']    = 'Vanilla Bootstrap theme';
 $lang['bootstrapTheme_o_optional']   = 'Optional Bootstrap theme';
 $lang['bootstrapTheme_o_custom']     = 'Customized Bootstrap theme';
 $lang['bootstrapTheme_o_bootswatch'] = 'Bootswatch.com theme';
-$lang['customTheme']        = 'Insert URL of custom theme';
-$lang['bootswatchTheme']    = 'Select a theme from Bootswatch.com';
-$lang['showThemeSwitcher']  = 'Show Bootswatch.com theme switcher in navbar';
-$lang['showPageInfo']       = 'Show page info (e.g., date, author)';
-$lang['showBadges']         = 'Show badge buttons (DokuWiki, Donate, etc)';
+$lang['customTheme']       = 'Insert URL of custom theme';
+$lang['bootswatchTheme']   = 'Select a theme from Bootswatch.com';
+$lang['showThemeSwitcher'] = 'Show Bootswatch.com theme switcher in navbar';
+$lang['showPageInfo']      = 'Show page info (e.g., date, author)';
+$lang['showBadges']        = 'Show badge buttons (DokuWiki, Donate, etc)';
+$lang['leftSidebarGrid']   = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
+$lang['rightSidebarGrid']  = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';

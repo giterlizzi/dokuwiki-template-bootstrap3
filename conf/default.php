@@ -9,6 +9,8 @@
 $conf['showTools']         = 'always';
 $conf['sidebarPosition']   = 'left';
 $conf['rightSidebar']      = 'rightsidebar';
+$conf['leftSidebarGrid']   = 'col-sm-3 col-md-2';
+$conf['rightSidebarGrid']  = 'col-sm-3 col-md-2';
 $conf['showTranslation']   = 0;
 $conf['inverseNavbar']     = 0;
 $conf['fixedTopNavbar']    = 0;

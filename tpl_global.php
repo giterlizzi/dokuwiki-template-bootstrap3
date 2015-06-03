@@ -20,20 +20,18 @@ $bootstrapTheme    = tpl_getConf('bootstrapTheme');
 $customTheme       = tpl_getConf('customTheme');
 $bootswatchTheme   = tpl_getConf('bootswatchTheme');
 $pageOnPanel       = tpl_getConf('pageOnPanel');
-$bootstrapStyles   = array();
 $fluidContainer    = tpl_getConf('fluidContainer');
-$contentClass      = (($showSidebar) ? 'col-sm-9 col-md-10' : 'container' . (($fluidContainer) ? '-fluid' : ''));
 $showPageInfo      = tpl_getConf('showPageInfo');
 $showBadges        = tpl_getConf('showBadges');
 $semantic          = tpl_getConf('semantic');
 $schemaOrgType     = tpl_getConf('schemaOrgType');
+$leftSidebarGrid   = tpl_getConf('leftSidebarGrid');
+$rightSidebarGrid  = tpl_getConf('rightSidebarGrid');
+$contentGrid       = _tpl_get_container_grid();
+$bootstrapStyles   = array();
 $tplConfigJSON     = array(
   'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),
 );
-
-if ($showSidebar && $showRightSidebar) {
-  $contentClass = 'col-sm-6 col-md-8';
-}
 
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 

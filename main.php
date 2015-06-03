@@ -82,10 +82,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       <main class="main row" role="main">
 
-        <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', 'sidebarheader.html', 'sidebarfooter.html'); ?>
+        <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentClass ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
+        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page group <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
@@ -117,11 +117,11 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
         <?php
           if ($showSidebar && $sidebarPosition == 'right') {
-            _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside',
+            _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
                          'sidebarheader.html', 'sidebarfooter.html');
           }
           if ($showSidebar && $showRightSidebar && $sidebarPosition == 'left') {
-            _tpl_sidebar($rightSidebar, 'dokuwiki__rightaside',
+            _tpl_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
                          'rightsidebarheader.html', 'rightsidebarfooter.html');
           }
         ?>
