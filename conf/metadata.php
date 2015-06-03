@@ -6,6 +6,7 @@
 
 
 $meta['showTools']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['showUserHomeLink']  = array('onoff');
 $meta['sidebarPosition']   = array('multichoice', '_choices' => array('left', 'right'));
 $meta['rightSidebar']      = array('string');
 $meta['leftSidebarGrid']   = array('string');

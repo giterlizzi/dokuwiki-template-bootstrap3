@@ -9,6 +9,7 @@
 $lang['discussionPage']     = 'Discussion page name (default is <code>discussion:@ID@</code>, where <code>@ID@</code> placeholder replace the current page name), empty field disable the link';
 $lang['showDiscussion']     = 'Display discussion link in tools menu';
 $lang['showTools']          = 'Display Tools in navbar';
+$lang['showUserHomeLink']   = 'Display User Home-Page link in navbar';
 $lang['showTools_o_never']  = 'Never';
 $lang['showTools_o_logged'] = 'When logged in';
 $lang['showTools_o_always'] = 'Always';

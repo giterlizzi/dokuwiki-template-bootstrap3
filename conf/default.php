@@ -7,6 +7,7 @@
  */
 
 $conf['showTools']         = 'always';
+$conf['showUserHomeLink']  = 1;
 $conf['sidebarPosition']   = 'left';
 $conf['rightSidebar']      = 'rightsidebar';
 $conf['leftSidebarGrid']   = 'col-sm-3 col-md-2';

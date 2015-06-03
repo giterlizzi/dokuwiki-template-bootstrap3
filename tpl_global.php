@@ -9,6 +9,7 @@
 
 $showTools         = tpl_getConf('showTools') != 'never' &&
                      ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
+$showUserHomeLink  = tpl_getConf('showUserHomeLink');
 $showSidebar       = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $sidebarPosition   = tpl_getConf('sidebarPosition');
 $showRightSidebar  = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
