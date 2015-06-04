@@ -8,7 +8,7 @@
 
 $conf['showTools']           = 'always';
 $conf['showUserHomeLink']    = 1;
-$conf['showCookieLawBanner'] = 1;
+$conf['showCookieLawBanner'] = 0;
 $conf['cookieLawBannerPage'] = 'cookie:banner';
 $conf['cookieLawPolicyPage'] = 'cookie:policy';
 $conf['sidebarPosition']     = 'left';
