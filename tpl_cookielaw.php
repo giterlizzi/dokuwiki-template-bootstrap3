@@ -13,7 +13,7 @@
   <div class="container">
     <?php tpl_include_page($cookieLawBannerPage) ?>
     <div class="navbar-right">
-      <button class="btn btn-primary btn-xs navbar-btn" id="cookieDismiss">OK</button>
+      <button class="btn btn-primary btn-xs navbar-btn" id="cookieNoticeAccepted">OK</button>
       <?php tpl_link(wl($cookieLawPolicyPage), 'Policy', 'class="btn btn-default btn-xs navbar-btn" id="cookiePolicy"')?>
     </div>
   </div>
