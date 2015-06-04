@@ -13,12 +13,12 @@
   <div class="container">
     <?php tpl_include_page($cookieLawBannerPage) ?>
     <div class="navbar-right">
-      <button class="btn btn-primary btn-xs navbar-btn" id="cookieNoticeAccepted">OK</button>
+      <button class="btn btn-primary btn-xs navbar-btn" id="cookieDismiss">OK</button>
       <?php tpl_link(wl($cookieLawPolicyPage), 'Policy', 'class="btn btn-default btn-xs navbar-btn" id="cookiePolicy"')?>
     </div>
   </div>
 </div>
-<script>
+<script type="text/javascript">
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
     DokuCookie.setValue('cookieNoticeAccepted', true);
