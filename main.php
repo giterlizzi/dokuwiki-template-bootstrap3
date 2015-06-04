@@ -169,7 +169,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
         </div>
       </footer>
 
-      <?php tpl_includeFile('footer.html') ?>
+      <?php
+        tpl_includeFile('footer.html');
+        @require_once('tpl_cookielaw.php');
+      ?>
 
     </div><!-- /site -->
 
