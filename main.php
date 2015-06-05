@@ -58,6 +58,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       <!-- /header -->
 
       <?php tpl_includeFile('header.html') ?>
+      <?php tpl_includeFile('social.html') ?>
 
       <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
       <div id="dw__breadcrumbs">
