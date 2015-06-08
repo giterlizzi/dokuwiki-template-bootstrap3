@@ -103,7 +103,7 @@ jQuery(document).ready(function() {
 
 
   // Page heading
-  $dw_content.find('h1').addClass('page-header');
+  $dw_content.find('h1').first().addClass('page-header');
 
 
   // Tables (no for Rack and Diagram Plugins)
