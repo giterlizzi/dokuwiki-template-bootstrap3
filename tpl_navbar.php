@@ -52,7 +52,9 @@
 
       <div class="navbar-right">
 
-        <?php tpl_searchform() ?>
+        <div class="nav navbar-nav navbar-form">
+          <?php tpl_searchform() ?>
+        </div>
 
         <?php
           include_once(dirname(__FILE__).'/tpl_tools_menu.php');

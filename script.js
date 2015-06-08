@@ -264,7 +264,6 @@ jQuery(document).ready(function() {
 
 
   // Quick Search & Search Form
-  $dw_search.addClass('nav navbar-nav navbar-form');
   $dw_search.find('#qsearch__in').attr({
     'type'        : 'search',
     'placeholder' : $dw_search.find(':submit').attr('title'),
