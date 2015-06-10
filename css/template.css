@@ -165,7 +165,7 @@ input, textarea, select {
   margin-top: 0;
 }
 
-nav .dw__actions {
+nav.navbar-fixed-top .dw__actions {
   margin: 0 15px 0 5px;
 }
 

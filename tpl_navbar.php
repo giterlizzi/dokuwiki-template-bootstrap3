@@ -72,8 +72,8 @@
           <li>
             <span class="dw__actions">
               <?php
-                echo _tpl_action_item('login', 'glyphicon glyphicon-log-in', true);
                 echo _tpl_action_item('register', 'glyphicon glyphicon-edit', true);
+                echo _tpl_action_item('login', 'glyphicon glyphicon-log-in', true);
               ?>
             </span>
           </li>
