@@ -52,7 +52,7 @@
 
       <div class="navbar-right">
 
-        <div class="nav navbar-nav navbar-form">
+        <div class="navbar-left navbar-form">
           <?php tpl_searchform() ?>
         </div>
 
@@ -61,16 +61,26 @@
           include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
           include_once(dirname(__FILE__).'/tpl_translation.php');
         ?>
-
+  
         <ul class="nav navbar-nav">
           <?php if (! empty($_SERVER['REMOTE_USER']) && $showUserHomeLink): ?>
           <li>
             <?php tpl_link(wl('user:'.$_SERVER['REMOTE_USER']), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
           </li>
           <?php endif; ?>
+          <?php if (empty($_SERVER['REMOTE_USER'])): ?>
+          <li>
+            <span class="dw__actions">
+              <?php
+                echo _tpl_action_item('login', 'glyphicon glyphicon-log-in', true);
+                echo _tpl_action_item('register', 'glyphicon glyphicon-edit', true);
+              ?>
+            </span>
+          </li>
           <?php
-            echo _tpl_action_item('register', 'glyphicon glyphicon-edit');
-            echo _tpl_action_item('login', 'glyphicon glyphicon-log-'. (!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in'));
+            else:
+            echo _tpl_action_item('login', 'glyphicon glyphicon-log-out');
+            endif;
           ?>
         </ul>
 

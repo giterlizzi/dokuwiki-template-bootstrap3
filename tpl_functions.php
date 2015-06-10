@@ -141,11 +141,12 @@ function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_heade
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * 
- * @param   string  $action
- * @param   string  $icon class
+ * @param   string   $action
+ * @param   string   $icon class
+ * @param   boolean  $linkonly
  * @return  string
  */
-function _tpl_action_item($action, $icon) {
+function _tpl_action_item($action, $icon, $linkonly = false) {
 
   global $ACT;
 
@@ -161,6 +162,7 @@ function _tpl_action_item($action, $icon) {
   }
 
   if ($link = tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ')) {
+    if ($linkonly) return $link;
     return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>';
   }
 

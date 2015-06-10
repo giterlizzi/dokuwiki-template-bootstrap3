@@ -123,7 +123,7 @@ jQuery(document).ready(function() {
   jQuery('input[type=checkbox]').addClass('checkbox-inline');
   jQuery('input[type=radio]').addClass('radio-inline');
   jQuery('label').addClass('control-label');
-  jQuery('form').addClass('form-inline');
+  $dw_content.addClass('form-inline');
 
 
   // Images
@@ -154,6 +154,8 @@ jQuery(document).ready(function() {
   jQuery('#dw__login, #dw__register, #subscribe__form').find(':submit').addClass('btn-success');
   jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
   jQuery('#edbtn__save').addClass('btn-success');
+  jQuery('nav li span .action.register').addClass('btn btn-success navbar-btn');
+  jQuery('nav li span .action.login, nav li span nav .action.logout').addClass('btn btn-default navbar-btn');
 
 
   // Section Button edit

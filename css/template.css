@@ -165,6 +165,14 @@ input, textarea, select {
   margin-top: 0;
 }
 
+nav .dw__actions {
+  margin: 0 15px 0 5px;
+}
+
+nav .dw__actions .btn {
+  margin-left: 5px;
+}
+
 .breadcrumb {
   margin: 0;
   padding: 0;
