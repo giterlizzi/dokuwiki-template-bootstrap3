@@ -168,6 +168,14 @@ jQuery(document).ready(function() {
     jQuery('html, body').animate({ scrollTop: 0 }, 600);
   });
 
+  jQuery(window).scroll(function() {
+    if (jQuery(this).scrollTop()) {
+      jQuery('.back-to-top').fadeIn();
+    } else {
+      jQuery('.back-to-top').fadeOut();
+    }
+  });
+
 
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {

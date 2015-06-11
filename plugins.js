@@ -8,10 +8,11 @@
 
 jQuery(document).ready(function() {
 
-  var $tags           = jQuery('.mode_show .tags'),  // Tags Plugin
-      $translation    = jQuery('#dw__translation'),  // Translation Plugin
-      $discussion     = jQuery('.comment_wrapper'),  // Discussion Plugin
-      $publish        = jQuery('.approval');         // Publish Plugin
+  var $tags           = jQuery('.mode_show .tags'),      // Tags Plugin
+      $translation    = jQuery('#dw__translation'),      // Translation Plugin
+      $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
+      $publish        = jQuery('.approval'),             // Publish Plugin
+      $tagging_edit   = jQuery('.plugin_tagging_edit');  // Tagging Plugin
 
 
   // Publish plugin
@@ -100,6 +101,14 @@ jQuery(document).ready(function() {
 
     });
 
+  }
+
+
+  // Tagging plugin
+  if ($tagging_edit.length) {
+    $tagging_edit.find(':submit').addClass('btn-xs');
+    $tagging_edit.find('[type=text]').addClass('input-sm');
+    $tagging_edit.find('#tagging__edit_save').addClass('btn-success');
   }
 
 });
