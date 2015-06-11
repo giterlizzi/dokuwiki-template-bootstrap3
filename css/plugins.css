@@ -57,3 +57,8 @@ span.approval_approved a {
   color:inherit;
   text-decoration:underline;
 }
+
+/* Tagging Plugin */
+ul.tagging_cloud li {
+  display: inline-block;
+}
