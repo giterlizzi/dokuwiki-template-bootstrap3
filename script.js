@@ -65,13 +65,12 @@ jQuery(document).ready(function() {
 
   }
 
-  function resizeToc() {
+  function resizeToc(init) {
     jQuery('#dw__toc .panel-body').css({
       'height'    : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
       'overflow-y': 'scroll'
     });
   }
-
 
   checkSize();
   jQuery(window).resize(checkSize);
@@ -240,8 +239,10 @@ jQuery(document).ready(function() {
       }
     });
 
-    resizeToc();
-    jQuery(window).resize(resizeToc);
+    if ((jQuery(window).height() < jQuery('#dw__toc').height())) {
+      resizeToc();  
+      jQuery(window).resize(resizeToc);
+    }
 
   }
 
