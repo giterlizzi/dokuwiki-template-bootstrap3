@@ -203,6 +203,9 @@ jQuery(document).ready(function() {
   jQuery(document).bind('DOMNodeInserted', function(){
     jQuery('#insitu__fn').addClass('panel panel-body panel-default');
   });
+  if (jQuery('.footnotes').length) {
+    jQuery('.footnotes').prepend(jQuery('<hr/>'));
+  }
 
 
   // Table of Contents
