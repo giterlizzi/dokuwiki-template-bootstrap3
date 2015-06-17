@@ -6,6 +6,21 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+@media print {
+
+  a[href]:after {
+    content: "" !important;
+  }
+
+  /* display href after link */
+  a.urlextern:after,
+  a.interwiki:after,
+  a.mail:after {
+    content: " (" attr(href) ")" !important;
+  }
+
+}
+
 body {
   font-size: small;
 }
