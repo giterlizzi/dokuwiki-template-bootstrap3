@@ -28,6 +28,12 @@ input, textarea, select {
   padding: 0;
 }
 
+
+#dw__toc {
+  margin-left: 20px;
+  width: auto;
+}
+
 #dw__toc li {
   list-style-type: none;
 }
@@ -50,23 +56,14 @@ input, textarea, select {
 }
 
 #dw__toc .panel-body {
-  padding-left: 0;
+  padding: 0.5em;
   width: 16em;
-}
-
-#dw__toc {
-  margin-left: 20px;
-  background-color: #FFF;
-  width: auto;
 }
 
 #dw__toc ul.toc {
   padding-left: 15px;
 }
 
-#dw__toc div {
-  padding-left: 15px;
-}
 
 #config__manager .label {
   padding: 0 !important;
