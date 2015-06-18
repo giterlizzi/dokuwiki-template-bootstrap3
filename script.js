@@ -247,6 +247,10 @@ jQuery(document).ready(function() {
       jQuery(window).resize(resizeToc);
     }
 
+    $dw_toc.find('ul').addClass('nav');
+    $dw_toc.find('a').unwrap();
+    jQuery('body').scrollspy({ target: '#dw__toc' });
+
   }
 
 

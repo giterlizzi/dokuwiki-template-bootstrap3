@@ -26,6 +26,7 @@
 
 body {
   font-size: small;
+  position: relative;
 }
 
 body.default.page-on-panel,
@@ -50,6 +51,14 @@ input, textarea, select {
 #dw__toc {
   margin-left: 20px;
   width: auto;
+}
+
+#dw__toc .nav > .active > a {
+  font-weight: bold;
+}
+
+#dw__toc .nav li a {
+  padding: .2em;
 }
 
 #dw__toc li {
