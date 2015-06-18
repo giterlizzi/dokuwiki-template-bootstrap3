@@ -248,7 +248,7 @@ jQuery(document).ready(function() {
     }
 
     $dw_toc.find('ul').addClass('nav');
-    $dw_toc.find('a').unwrap();
+    $dw_toc.find('ul.nav li a').unwrap();
     jQuery('body').scrollspy({ target: '#dw__toc' });
 
   }
@@ -281,9 +281,8 @@ jQuery(document).ready(function() {
 
     $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
     $dw_aside.find('.curid').parent().parent().addClass('active');
-    $dw_aside.find('ul div, ul span').replaceWith(function() {
-      return jQuery(this).contents();
-    });
+    $dw_aside.find('ul.nav li span').unwrap();
+    $dw_aside.find('ul.nav li a').unwrap();
 
   }
 

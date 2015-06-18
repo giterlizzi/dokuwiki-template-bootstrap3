@@ -61,6 +61,14 @@ input, textarea, select {
   padding: .2em;
 }
 
+#dw__toc .nav .nav .nav {
+  display: none;
+}
+
+#dw__toc .nav .nav .active .nav {
+  display: block;
+}
+
 #dw__toc li {
   list-style-type: none;
 }
