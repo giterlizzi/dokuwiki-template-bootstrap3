@@ -18,9 +18,6 @@
   a.mail:after {
     content: " (" attr(href) ")" !important;
   }
-  a.wikilink1:after {
-    content: " (" attr(title) ")" !important;
-  }
 
 }
 
