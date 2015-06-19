@@ -65,7 +65,7 @@ jQuery(document).ready(function() {
 
   }
 
-  function resizeToc(init) {
+  function resizeToc() {
     jQuery('#dw__toc .panel-body').css({
       'height'    : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
       'overflow-y': 'scroll'
@@ -281,8 +281,7 @@ jQuery(document).ready(function() {
 
     $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
     $dw_aside.find('.curid').parent().parent().addClass('active');
-    $dw_aside.find('ul.nav li span').unwrap();
-    $dw_aside.find('ul.nav li a').unwrap();
+    $dw_aside.find('ul.nav li span, ul.nav li a').unwrap();
 
   }
 

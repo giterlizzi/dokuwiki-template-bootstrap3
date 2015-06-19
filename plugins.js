@@ -111,4 +111,12 @@ jQuery(document).ready(function() {
     $tagging_edit.find('#tagging__edit_save').addClass('btn-success');
   }
 
+
+  if (jQuery('.mode_media').length) {
+    jQuery(document).ajaxSuccess(function() {
+      // Gallery Plugin (Media Manager)
+      jQuery('.meta .row').removeClass('row');
+    });
+  }
+
 });
