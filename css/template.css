@@ -6,20 +6,6 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-@media print {
-
-  a[href]:after {
-    content: "" !important;
-  }
-
-  /* display href after link */
-  a.urlextern:after,
-  a.interwiki:after,
-  a.mail:after {
-    content: " (" attr(href) ")" !important;
-  }
-
-}
 
 body {
   font-size: small;
@@ -228,7 +214,7 @@ nav .dw__actions .btn {
   position: fixed;
   bottom: 10px;
   right: 10px;
-  opacity: .8
+  opacity: .8;
 }
 
 .alert {
@@ -244,14 +230,6 @@ nav .dw__actions .btn {
 a.iw_user {
   background-image: none;
   padding: 0 !important;
-}
-
-
-/* Print styles */
-@media print {
-  #dokuwiki__content {
-    width: 100%;
-  }
 }
 
 
