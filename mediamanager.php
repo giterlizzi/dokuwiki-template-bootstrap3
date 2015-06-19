@@ -44,6 +44,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     #media__tree li { margin: 0; }
     #media__content input, #media__content label { margin: 0; }
     #media__content [type=submit] { vertical-align: bottom; }
+    #mediamgr__aside, #mediamgr__content { height: auto; }
+    #mediamgr__aside { top: 0; position: fixed; }
   </style>
 </head>
 
