@@ -281,7 +281,7 @@ jQuery(document).ready(function() {
 
     $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
     $dw_aside.find('.curid').parent().parent().addClass('active');
-    $dw_aside.find('ul.nav li span, ul.nav li a').unwrap();
+    $dw_aside.find('ul.nav div.li *').unwrap(); // Unwrap nav item from "li > div.li > span > a" (or "li > div.li > a") to "li > a"
 
   }
 
@@ -333,6 +333,8 @@ jQuery(document).ready(function() {
   // Detail page
   if ($detail_page.length) {
 
+    $detail_page.find('img.img_detail')
+      .addClass('thumbnail img-responsive');
     $detail_page.find('dl')
       .addClass('dl-horizontal');
     $detail_page.find('.img_backto')

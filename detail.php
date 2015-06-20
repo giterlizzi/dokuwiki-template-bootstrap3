@@ -52,38 +52,39 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <?php else: ?>
 
       <h1 class="page-header">
-        <i class="glyphicon glyphicon-picture"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+        <i class="glyphicon glyphicon-picture text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
       </h1>
 
-      <div class="content">
+      <div class="row">
 
-        <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+        <div class="col-md-8">
+          <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+        </div>
 
-        <div class="img_detail">
+        <div class="col-md-4">
 
           <div class="panel panel-default">
             <div class="panel-heading">
               <h2 class="panel-title"><i class="glyphicon glyphicon-info-sign text-info"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?></h2>
             </div>
             <div class="panel-body">
-              <?php tpl_img_meta(); ?>
-              <?php //Comment in for Debug// dbg(tpl_img_getTag('Simple.Raw')); ?>
+              <?php
+                tpl_img_meta();
+                 //Comment in for Debug
+                 // dbg(tpl_img_getTag('Simple.Raw'));
+              ?>
             </div>
           </div>
 
         </div>
-      </div><!-- /.content -->
+      </div>
 
-      <p class="back">
+      <hr/>
 
-        <hr/>
-
-        <div class="btn-group">
-          <?php tpl_action('img_backto', 1) ?>
-          <?php tpl_action('mediaManager', 1) ?>
-        </div>
-
-      </p>
+      <div class="btn-group">
+        <?php tpl_action('img_backto', 1) ?>
+        <?php tpl_action('mediaManager', 1) ?>
+      </div>
 
     <?php endif; ?>
   </div>
