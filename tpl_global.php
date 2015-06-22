@@ -32,6 +32,7 @@ $schemaOrgType       = tpl_getConf('schemaOrgType');
 $leftSidebarGrid     = tpl_getConf('leftSidebarGrid');
 $rightSidebarGrid    = tpl_getConf('rightSidebarGrid');
 $contentGrid         = _tpl_get_container_grid();
+$hideInThemeSwitcher = explode(',', tpl_getConf('hideInThemeSwitcher'));
 $bootstrapStyles     = array();
 $tplConfigJSON       = array(
   'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),

@@ -36,6 +36,7 @@ $lang['bootstrapTheme_o_bootswatch'] = 'Bootswatch.com theme';
 $lang['customTheme']         = 'Insert URL of custom theme';
 $lang['bootswatchTheme']     = 'Select a theme from Bootswatch.com';
 $lang['showThemeSwitcher']   = 'Show Bootswatch.com theme switcher in navbar';
+$lang['hideInThemeSwitcher'] = 'Hide themes in theme switcher';
 $lang['showPageInfo']        = 'Show page info (e.g., date, author)';
 $lang['showBadges']          = 'Show badge buttons (DokuWiki, Donate, etc)';
 $lang['leftSidebarGrid']     = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';

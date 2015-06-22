@@ -25,6 +25,7 @@ $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article
 $meta['bootstrapTheme']      = array('multichoice', '_choices' => array('default', 'optional', 'custom', 'bootswatch'));
 $meta['customTheme']         = array('string');
 $meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti'));
+$meta['hideInThemeSwitcher'] = array('multicheckbox', '_choices' => array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti'));
 $meta['showThemeSwitcher']   = array('onoff');
 $meta['showPageInfo']        = array('onoff');
 $meta['showBadges']          = array('onoff');

@@ -20,9 +20,11 @@ $themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'l
     <ul class="dropdown-menu" aria-labelledby="themes">
       <li class="dropdown-header"><i class="glyphicon glyphicon-tint"></i> Bootswatch Themes</li>
       <?php foreach ($themes as $theme): ?>
+      <?php if(! in_array($theme, $hideInThemeSwitcher)): ?>
       <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>>
         <a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a>
       </li>
+      <?php endif; ?>
       <?php endforeach; ?>
     </ul>
 

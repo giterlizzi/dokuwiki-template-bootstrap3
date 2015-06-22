@@ -27,6 +27,7 @@ $conf['bootstrapTheme']      = 'default';
 $conf['customTheme']         = '';
 $conf['bootswatchTheme']     = 'spacelab';
 $conf['showThemeSwitcher']   = 0;
+$conf['hideInThemeSwitcher'] = '';
 $conf['showPageInfo']        = 1;
 $conf['showBadges']          = 1;
 $conf['showDiscussion']      = 0;
