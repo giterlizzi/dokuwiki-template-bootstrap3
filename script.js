@@ -300,9 +300,21 @@ jQuery(document).ready(function() {
   $dw_search.find(':submit').html('').append('<i class="glyphicon glyphicon-search"/>');
 
 
-  // Home icon in breadcrumbs
+  // You are here and breadcrumbs
   if ($dw_breadcrumbs.length) {
-    $dw_breadcrumbs.find('.breadcrumb .home a').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+
+    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+    $dw_breadcrumbs.find('span.curid').find('a').addClass('curid');
+    $dw_breadcrumbs.find('span.bchead').addClass('pull-left');
+
+    jQuery.each(['.dw__youarehere', '.dw__breadcrumbs'], function(idx, item){
+      $dw_breadcrumbs.find(item + ' a').wrap('<li/>');
+      $dw_breadcrumbs.find(item + ' a.curid').parent().addClass('active');
+      $dw_breadcrumbs.find(item + ' li').wrapAll('<ul class="breadcrumb"/>');
+    });
+
+    $dw_breadcrumbs.find('span.home, span.bcsep, span.curid').replaceWith(function() { return jQuery(this).contents() });
+
   }
 
 

@@ -64,10 +64,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       <div id="dw__breadcrumbs">
         <hr/>
         <?php if($conf['youarehere']): ?>
-        <div class="breadcrumb"><?php tpl_youarehere() ?></div>
+        <div class="dw__youarehere"><?php tpl_youarehere(' ') ?></div>
         <?php endif; ?>
         <?php if($conf['breadcrumbs']): ?>
-        <div class="breadcrumb hidden-print"><?php tpl_breadcrumbs() ?></div>
+        <div class="dw__breadcrumbs hidden-print"><?php tpl_breadcrumbs(' ') ?></div>
         <?php endif; ?>
         <hr/>
       </div>

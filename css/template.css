@@ -113,6 +113,10 @@ input, textarea, select {
   border: 0 none;
 }
 
+#dw__breadcrumbs .bchead {
+  margin-right: 5px;
+}
+
 #dw__breadcrumbs, .dw__sidebar {
   font-size: .9em;
 }
