@@ -248,7 +248,7 @@ jQuery(document).ready(function() {
     }
 
     var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
-console.debug(bodyOffset);
+
     $dw_toc.find('ul').addClass('nav');
     $dw_toc.find('ul.nav li a').unwrap();
     jQuery('body').scrollspy({
