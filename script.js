@@ -247,9 +247,24 @@ jQuery(document).ready(function() {
       jQuery(window).resize(resizeToc);
     }
 
+    var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
+console.debug(bodyOffset);
     $dw_toc.find('ul').addClass('nav');
     $dw_toc.find('ul.nav li a').unwrap();
-    jQuery('body').scrollspy({ target: '#dw__toc' });
+    jQuery('body').scrollspy({
+      target: '#dw__toc',
+      offset: bodyOffset + 10
+    });
+
+
+    // Scrolling animation
+    $dw_toc.find('a').click(function() {
+      var sectionPosition = (jQuery(jQuery.attr(this, 'href')).offset().top - bodyOffset);
+      jQuery('html, body').animate({
+        scrollTop: sectionPosition
+      }, 600);
+      return false;
+    });
 
   }
 
