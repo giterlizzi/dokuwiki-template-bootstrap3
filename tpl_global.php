@@ -17,6 +17,9 @@ $rightSidebar        = tpl_getConf('rightSidebar');
 $showCookieLawBanner = tpl_getConf('showCookieLawBanner');// && page_findnearest(tpl_getConf('cookieLawBannerPage'));
 $cookieLawBannerPage = tpl_getConf('cookieLawBannerPage');
 $cookieLawPolicyPage = tpl_getConf('cookieLawPolicyPage');
+$browserTitle        = str_replace(array('@WIKI@', '@TITLE@'),
+                                   array(strip_tags($conf['title']), tpl_pagetitle(null, true)),
+                                   tpl_getConf('browserTitle'));
 $showThemeSwitcher   = tpl_getConf('showThemeSwitcher');
 $fixedTopNavbar      = tpl_getConf('fixedTopNavbar');
 $inverseNavbar       = tpl_getConf('inverseNavbar');

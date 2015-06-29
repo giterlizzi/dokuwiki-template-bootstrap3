@@ -13,6 +13,7 @@ $conf['cookieLawBannerPage'] = 'cookie:banner';
 $conf['cookieLawPolicyPage'] = 'cookie:policy';
 $conf['sidebarPosition']     = 'left';
 $conf['rightSidebar']        = 'rightsidebar';
+$conf['browserTitle']        = '@TITLE@ [@WIKI@]';
 $conf['leftSidebarGrid']     = 'col-sm-3 col-md-2';
 $conf['rightSidebarGrid']    = 'col-sm-3 col-md-2';
 $conf['showTranslation']     = 0;

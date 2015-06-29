@@ -1,9 +1,10 @@
 <?php
 /*
  * configuration metadata
- *
+ * 
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
-
 
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showUserHomeLink']    = array('onoff');
@@ -11,6 +12,7 @@ $meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 
 $meta['rightSidebar']        = array('string');
 $meta['leftSidebarGrid']     = array('string');
 $meta['rightSidebarGrid']    = array('string');
+$meta['browserTitle']        = array('string');
 $meta['showCookieLawBanner'] = array('onoff');
 $meta['cookieLawBannerPage'] = array('string');
 $meta['cookieLawPolicyPage'] = array('string');

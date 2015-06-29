@@ -19,7 +19,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title><?php tpl_pagetitle() ?> [<?php echo strip_tags($conf['title']) ?>]</title>
+  <title><?php echo $browserTitle ?></title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
