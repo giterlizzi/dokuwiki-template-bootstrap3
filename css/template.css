@@ -21,6 +21,11 @@ input, textarea, select {
   font-weight: 400;
 }
 
+#dw__msgarea .alert {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
 #dw__badges {
   margin-top: 50px;
 }
@@ -29,7 +34,6 @@ input, textarea, select {
   margin: 5px 0;
   padding: 0;
 }
-
 
 #dw__toc {
   margin-left: 20px;
@@ -82,7 +86,6 @@ input, textarea, select {
 #dw__toc ul.toc {
   padding-left: 15px;
 }
-
 
 #config__manager .label {
   padding: 0 !important;
@@ -219,11 +222,6 @@ nav .dw__actions .btn {
   bottom: 10px;
   right: 10px;
   opacity: .8;
-}
-
-.alert {
-  padding: 5px;
-  margin-bottom: 10px;
 }
 
 .dokuwiki .diffnav select {
