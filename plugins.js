@@ -12,7 +12,8 @@ jQuery(document).ready(function() {
       $translation    = jQuery('#dw__translation'),      // Translation Plugin
       $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
       $publish        = jQuery('.approval'),             // Publish Plugin
-      $tagging_edit   = jQuery('.plugin_tagging_edit');  // Tagging Plugin
+      $tagging_edit   = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
+      $explain        = jQuery('.explain');              // Explain Plugin
 
 
   // Publish plugin
@@ -115,8 +116,31 @@ jQuery(document).ready(function() {
   if (jQuery('.mode_media').length) {
     jQuery(document).ajaxSuccess(function() {
       // Gallery Plugin (Media Manager)
-      jQuery('.meta .row').removeClass('row');
+      jQuery('.mode_media .meta .row').removeClass('row');
     });
+  }
+
+
+  // Explain Plugin
+  if ($explain.length) {
+
+    $explain.each(function(){
+
+      var $self    = jQuery(this),
+          $tooltip = $self.find('.tooltip');
+  
+      $self.attr({
+        'data-toggle'    : 'tooltip',
+        'data-placement' : 'bottom',
+        'title'          : $tooltip.html(),
+      }).addClass('wikilink1').removeClass('explain');
+  
+      $tooltip.remove();
+
+    });
+
+    jQuery('[data-toggle="tooltip"]').tooltip();
+
   }
 
 });
