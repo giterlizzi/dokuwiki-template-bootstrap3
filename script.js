@@ -158,6 +158,7 @@ jQuery(document).ready(function() {
 
   // Buttons
   jQuery('.button').removeClass('button');
+  jQuery('.alert button').removeClass('btn btn-default');
   jQuery('#dw__login, #dw__register, #subscribe__form').find(':submit').addClass('btn-success');
   jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
   jQuery('#edbtn__save').addClass('btn-success');
