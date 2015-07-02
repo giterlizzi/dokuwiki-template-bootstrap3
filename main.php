@@ -131,15 +131,23 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       <footer id="dokuwiki__footer" class="small hidden-print">
 
-        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
 
-        <?php if ($showPageInfo): ?>
         <div class="text-right">
-          <p class="docInfo">
+
+          <?php if ($showPageInfo): ?>       
+          <span class="docInfo">
             <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
-          </p>
+          </span>
+          <?php endif ?>
+
+          <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
+          <span class="loginLink">
+            <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
+          </span>
+          <?php endif; ?>
+
         </div>
-        <?php endif ?>
 
         <?php if ($showBadges): ?>
         <div class="text-center">
@@ -151,12 +159,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
           </p>
           <?php @require_once('tpl_badges.php'); ?>
         </div>
-        <?php endif; ?>
-
-        <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
-        <p class="pull-right">
-          <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
-        </p>
         <?php endif; ?>
 
       </footer>
