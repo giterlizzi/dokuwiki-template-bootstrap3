@@ -140,6 +140,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
           </p>
         </div>
         <?php endif ?>
+
+        <?php if ($showBadges): ?>
         <div class="text-center">
           <p id="dw__license">
             <?php 
@@ -149,6 +151,14 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
           </p>
           <?php @require_once('tpl_badges.php'); ?>
         </div>
+        <?php endif; ?>
+
+        <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
+        <p class="pull-right">
+          <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
+        </p>
+        <?php endif; ?>
+
       </footer>
 
       <?php

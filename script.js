@@ -185,6 +185,12 @@ jQuery(document).ready(function() {
   });
 
 
+  // Login/Logout buttons on footer
+  jQuery('footer .action').contents().filter(function(){
+      return (this.nodeType == 3);
+  }).remove();
+
+
   // Icons for DokuWiki Actions
   jQuery.each(icons, function(i) {
 

@@ -8,6 +8,8 @@
 
 $conf['showTools']           = 'always';
 $conf['showUserHomeLink']    = 1;
+$conf['showLoginOnFooter']   = 0;
+$conf['hideLoginLink']       = 1;
 $conf['showCookieLawBanner'] = 0;
 $conf['cookieLawBannerPage'] = 'cookie:banner';
 $conf['cookieLawPolicyPage'] = 'cookie:policy';

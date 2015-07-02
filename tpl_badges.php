@@ -1,4 +1,3 @@
-<?php if($showBadges): ?>
 <p id="dw__badges">
   <?php tpl_license('button', true, false, false); // license button, no wrapper ?>
   <a href="http://getbootstrap.com" title="Built with Bootstrap 3" <?php echo $target?>>
@@ -17,4 +16,3 @@
     <img src="<?php echo dirname(tpl_basedir()); ?>/dokuwiki/images/button-dw.png" width="80" height="15" alt="Driven by DokuWiki" />
   </a>
 </p>
-<?php endif ?>

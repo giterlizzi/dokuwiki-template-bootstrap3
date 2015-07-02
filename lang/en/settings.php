@@ -8,6 +8,8 @@
 
 $lang['discussionPage']      = 'Discussion page name (default is <code>discussion:@ID@</code>, where <code>@ID@</code> placeholder replace the current page name), empty field disable the link';
 $lang['showDiscussion']      = 'Display discussion link in tools menu';
+$lang['showLoginOnFooter']   = 'Display a "little" login link on footer. This option is useful when <code>hideLoginLink</code> is on';
+$lang['hideLoginLink']       = 'Hide the login button in navbar. This option is useful in "read-only" DokuWiki installations (eg. blog, personal website)';
 $lang['showUserHomeLink']    = 'Display User Home-Page link in navbar';
 $lang['showCookieLawBanner'] = 'Display the Cookie Law banner on footer';
 $lang['cookieLawBannerPage'] = 'Cookie Law banner page name';

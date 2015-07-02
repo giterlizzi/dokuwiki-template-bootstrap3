@@ -10,11 +10,13 @@
 $showTools           = tpl_getConf('showTools') != 'never' &&
                        ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
 $showUserHomeLink    = tpl_getConf('showUserHomeLink');
+$showLoginOnFooter   = tpl_getConf('showLoginOnFooter');
+$showLoginLink       = ! tpl_getConf('hideLoginLink') || ! empty($_SERVER['REMOTE_USER']);
 $showSidebar         = page_findnearest($conf['sidebar']) && ($ACT=='show');
 $sidebarPosition     = tpl_getConf('sidebarPosition');
 $showRightSidebar    = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
 $rightSidebar        = tpl_getConf('rightSidebar');
-$showCookieLawBanner = tpl_getConf('showCookieLawBanner');// && page_findnearest(tpl_getConf('cookieLawBannerPage'));
+$showCookieLawBanner = tpl_getConf('showCookieLawBanner');
 $cookieLawBannerPage = tpl_getConf('cookieLawBannerPage');
 $cookieLawPolicyPage = tpl_getConf('cookieLawPolicyPage');
 $browserTitle        = str_replace(array('@WIKI@', '@TITLE@'),
