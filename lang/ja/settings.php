@@ -31,7 +31,7 @@ $lang['bootstrapTheme_o_bootswatch'] = 'Bootswatch.com テーマ';
 $lang['customTheme']       = 'custom テーマの URL';
 $lang['bootswatchTheme']   = 'Bootswatch.com テーマの選択';
 $lang['showThemeSwitcher'] = 'Bootswatch.com テーマ選択を navbar に表示';
-lang['hideInThemeSwitcher'] = 'テーマ選択で表示しないテーマ';
+$lang['hideInThemeSwitcher'] = 'テーマ選択で表示しないテーマ';
 $lang['showPageInfo']      = 'ページのメタデータを表示する（日付、編集者など）';
 $lang['showBadges']        = 'Show badge buttons (DokuWiki, Donate, etc)';
 $lang['leftSidebarGrid']   = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
