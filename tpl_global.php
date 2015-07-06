@@ -69,7 +69,7 @@ switch ($bootstrapTheme) {
     break;
   case 'bootswatch':
     //$bootstrapStyles[] = "//bootswatch.com/$bootswatchTheme/bootstrap.min.css";
-    $bootstrapStyles[] = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/$bootswatchTheme/bootstrap.min.css";
+    $bootstrapStyles[] = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/$bootswatchTheme/bootstrap.min.css";
     break;
   case 'default':
   default:
