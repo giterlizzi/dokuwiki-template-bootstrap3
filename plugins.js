@@ -6,7 +6,7 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-jQuery(document).ready(function() {
+jQuery(document).on('bootstrap3:plugins', function(e) {
 
   var $tags           = jQuery('.mode_show .tags'),      // Tags Plugin
       $translation    = jQuery('#dw__translation'),      // Translation Plugin
@@ -113,7 +113,7 @@ jQuery(document).ready(function() {
   }
 
 
-  if (jQuery('.mode_media').length) {
+  if (dw_mode('media')) {
     jQuery(document).ajaxSuccess(function() {
       // Gallery Plugin (Media Manager)
       jQuery('.mode_media .meta .row').removeClass('row');

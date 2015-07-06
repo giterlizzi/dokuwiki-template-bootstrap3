@@ -114,6 +114,8 @@ input, textarea, select {
 #dw__breadcrumbs .breadcrumb {
   background: transparent;
   border: 0 none;
+  margin: 0;
+  padding: 2px;
 }
 
 #dw__breadcrumbs .bchead {
@@ -143,8 +145,16 @@ input, textarea, select {
   white-space: nowrap;
 }
 
+#insitu__fn {
+  max-width: 20em;
+}
+
 .dw__sidebar .nav li a {
   padding: 5px 10px;
+}
+
+.dw__sidebar .nav ul {
+  padding-left: 10px;
 }
 
 .dw__sidebar .nav li a.urlextern {
@@ -196,11 +206,6 @@ nav .dw__actions .btn {
   margin-left: 5px;
 }
 
-.breadcrumb {
-  margin: 0;
-  padding: 0;
-}
-
 .curid {
   font-weight: bold;
 }
@@ -232,6 +237,11 @@ nav .dw__actions .btn {
 a.iw_user {
   background-image: none;
   padding: 0 !important;
+}
+
+
+.mode_search li {
+  list-style-type: none;
 }
 
 
