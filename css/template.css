@@ -218,6 +218,23 @@ nav .dw__actions .btn {
   padding-left: 15px;
 }
 
+.dokuwiki ul.idx a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.dokuwiki ul.idx i {
+  padding-right: 5px;
+}
+
+.dokuwiki ul.idx strong {
+  font-weight: normal;
+}
+
+.dokuwiki ul.idx li {
+  list-style-type: none;
+}
+
 .dokuwiki textarea.edit {
   font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
 }

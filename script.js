@@ -466,7 +466,7 @@ jQuery(document).ready(function() {
 
     if (! dw_mode('search')) return false;
 
-    jQuery('ul.search_quickhits li').prepend('<i class="glyphicon glyphicon-chevron-right"/> ');
+    jQuery('ul.search_quickhits li a').prepend('<i class="glyphicon glyphicon-file text-muted"/> ');
 
     jQuery('.search_results dt')
       .contents()
@@ -536,9 +536,54 @@ jQuery(document).ready(function() {
   });
 
 
+  // Index Page
+  jQuery(document).on('bootstrap3:mode-index', function(e) {
+
+    if (! dw_mode('index')) return false;
+
+    var $directories = jQuery('a.idx_dir'),
+        $pages       = jQuery('a.wikilink1');
+
+    jQuery.each($directories, function() {
+
+      var $directory = jQuery(this),
+          $closed    = $directory.parents('.closed'),
+          $open      = $directory.parents('.open');
+
+      if (! $directory.find('.glyphicon').length) {
+        $directory.prepend('<i class="glyphicon text-primary"/> ');
+      }
+
+      if ($open.length) {
+        $directory.find('i')
+          .removeClass('glyphicon-folder-close')
+          .addClass('glyphicon-folder-open');
+      }
+
+      if ($closed.length) {
+        $directory.find('i')
+          .removeClass('glyphicon-folder-open')
+          .addClass('glyphicon-folder-close');
+      }
+
+    });
+
+    jQuery.each($pages, function() {
+
+      var $page = jQuery(this);
+
+      if (! $page.find('i').length) {
+        $page.prepend('<i class="glyphicon glyphicon-file text-muted"/> ');
+      }
+
+    });
+
+  });
+
+
   jQuery(document).on('bootstrap3:components', function(e) {
 
-    var events = [ 'nav', 'sidebar', 'breadcrumbs', 'tabs', 'buttons', 'back-to-top', 'icons', 'footnotes', 'toc', 'alerts', 'mode-admin', 'mode-search', 'media-manager', 'detail', 'search' ];
+    var events = [ 'mode-index', 'nav', 'sidebar', 'breadcrumbs', 'tabs', 'buttons', 'back-to-top', 'icons', 'footnotes', 'toc', 'alerts', 'mode-admin', 'mode-search', 'media-manager', 'detail', 'search' ];
 
     for (i in events.sort()) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
@@ -565,6 +610,19 @@ jQuery(document).ready(function() {
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:init');
       jQuery(document).trigger('bootstrap3:tabs');
+    });
+
+  }
+
+  // Index tree
+  if (dw_mode('index')) {
+
+    jQuery(document).ajaxSuccess(function() {
+      jQuery(document).trigger('bootstrap3:mode-index');
+    });
+
+    jQuery('#index__tree').click(function(e) {
+      jQuery(document).trigger('bootstrap3:mode-index');
     });
 
   }
