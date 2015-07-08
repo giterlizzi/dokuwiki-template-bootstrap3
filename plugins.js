@@ -13,7 +13,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
       $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
       $publish        = jQuery('.approval'),             // Publish Plugin
       $tagging_edit   = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
-      $explain        = jQuery('.explain'),              // Explain Plugin
+      $explain        = jQuery('.explain')               // Explain Plugin
       $wrap           = jQuery('.plugin_wrap');          // Wrap Plugin
 
 
