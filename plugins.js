@@ -20,10 +20,12 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
   // Publish plugin
   if ($publish.length) {
 
+    $publish.prependTo('.page');
+
     $publish.removeClass('approval').addClass('alert');
-
+    
     jQuery('.apr_table').removeClass('table-striped');
-
+    
     if ($publish.hasClass('approved_no')) {
       $publish.removeClass('approved_no')
         .addClass('alert-warning')
@@ -34,8 +36,6 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         .addClass('alert-success')
         .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
     }
-
-    $publish.prependTo('.page');
 
   }
 
