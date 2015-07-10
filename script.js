@@ -157,6 +157,11 @@ jQuery(document).ready(function() {
     jQuery('#tool__bar').addClass('btn-group')
       .find('.toolbutton').addClass('btn-xs');
 
+    // Picker
+    if (dw_mode('edit')) {
+      jQuery('.picker').addClass('btn-group');
+    }
+
   });
 
 
