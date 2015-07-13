@@ -133,7 +133,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       </main>
 
-      <footer id="dokuwiki__footer" class="small hidden-print">
+      <footer id="dokuwiki__footer" class="small">
 
         <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
 
@@ -146,7 +146,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
           <?php endif ?>
 
           <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
-          <span class="loginLink">
+          <span class="loginLink hidden-print">
             <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
           </span>
           <?php endif; ?>
@@ -154,7 +154,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
         </div>
 
         <?php if ($showBadges): ?>
-        <div class="text-center">
+        <div class="text-center hidden-print">
           <p id="dw__license">
             <?php 
               tpl_license('');
