@@ -78,7 +78,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       <?php endif ?>
 
       <p class="pageId text-right">
-        <span class="label label-default"><?php echo hsc($ID) ?></span>
+        <span class="label label-primary"><?php echo hsc($ID) ?></span>
       </p>
 
       <div id="dw__msgarea">

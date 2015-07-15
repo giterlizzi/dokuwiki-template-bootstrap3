@@ -115,7 +115,7 @@ input, textarea, select {
   background: transparent;
   border: 0 none;
   margin: 0;
-  padding: 2px;
+  padding: 0;
 }
 
 #dw__breadcrumbs .bchead {

@@ -75,7 +75,7 @@ jQuery(document).ready(function() {
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
-    
+
     input2button: function() {
 
       return this.each(function() {
@@ -83,9 +83,9 @@ jQuery(document).ready(function() {
         var attrs = { 'type' : 'button' },
             label = '',
             node  = jQuery(this);
-    
+
         if (typeof node.data('events') === 'undefined' && node.prop('tagName') == 'INPUT') {
-    
+
           jQuery(node[0].attributes).each(function(index, attribute) {
             if (attribute.name == 'value') {
               label = attribute.value;
@@ -93,7 +93,7 @@ jQuery(document).ready(function() {
               attrs[attribute.name] = attribute.value;
             }
           });
-  
+
           var newNode = jQuery('<button/>', attrs).html(label);
           node.replaceWith(newNode);
 
@@ -167,7 +167,7 @@ jQuery(document).ready(function() {
 
   // Nav
   jQuery(document).on('bootstrap3:nav', function(e) {
-    
+
     // Unwrap unnecessary tags inside list items for Bootstrap nav component
     jQuery('.nav div.li *').unwrap();
 
@@ -231,12 +231,12 @@ jQuery(document).ready(function() {
       var mode     = ['.mode_', icons[i][0]].join(''),
           selector = icons[i][1],
           icon     = icons[i][2];
-  
+
       var icon_selector = [mode, '#dokuwiki__content', selector].join(' '),
           icon_tag      = ['<i class="glyphicon ', icon, '"/> '].join('');
-  
+
       jQuery(jQuery(icon_selector)[0]).prepend(icon_tag);
-  
+
     });
 
     // Interwiki User page icon
@@ -343,19 +343,19 @@ jQuery(document).ready(function() {
       .removeClass('info')
       .addClass('alert alert-info')
       .prepend('<i class="glyphicon glyphicon-info-sign"/> ');
-  
+
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
       .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
-  
+
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
       .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
-  
+
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
@@ -369,12 +369,12 @@ jQuery(document).ready(function() {
   jQuery(document).on('bootstrap3:sidebar', function(e) {
 
     var $dw_aside = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
-  
+
     if (! $dw_aside.length) return false;
-  
+
     // Add nav style to all lists
     $dw_aside.find('ul').addClass('nav nav-pills nav-stacked');
-    
+
     // Activate the current page
     $dw_aside.find('ul.nav .curid')
       .removeClass('curid')

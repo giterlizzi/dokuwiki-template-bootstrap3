@@ -9,6 +9,12 @@
 /* Tag Plugin */
 td.tags a.label {
   font-size: 85%;
+  display: inline-block;
+  margin-bottom: 3px;
+}
+
+.pageId a.label {
+  margin-left: 3px;
 }
 
 

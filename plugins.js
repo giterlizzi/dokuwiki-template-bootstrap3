@@ -8,7 +8,7 @@
 
 jQuery(document).on('bootstrap3:plugins', function(e) {
 
-  var $tags           = jQuery('.mode_show .tags'),      // Tags Plugin
+  var $tags           = jQuery('.tags'),                 // Tags Plugin
       $translation    = jQuery('#dw__translation'),      // Translation Plugin
       $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
       $publish        = jQuery('.approval'),             // Publish Plugin
@@ -97,8 +97,8 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
                                     .prepend('<i class="glyphicon glyphicon-tag"/> ');
 
       if ($tag.prop('tagName').toLowerCase() == 'div') {
-        $tag.hide();
-        $tagLabel.prependTo('.pageId').css('marginLeft', '3px');
+        $tag.remove();
+        $tagLabel.prependTo('.pageId');
       }
 
     });
