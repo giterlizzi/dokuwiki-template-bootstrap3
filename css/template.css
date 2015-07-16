@@ -244,6 +244,7 @@ nav .dw__actions .btn {
   bottom: 10px;
   right: 10px;
   opacity: .8;
+  display: none;
 }
 
 .dokuwiki .diffnav select {
