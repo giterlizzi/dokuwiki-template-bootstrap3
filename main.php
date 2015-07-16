@@ -35,6 +35,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <style type="text/css">
     body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
+    .toc-affix { z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -105,7 +106,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
                 $content = ob_get_clean();
               ?>
 
-              <div class="pull-right hidden-print" data-spy="affix" data-offset-top="150" style="z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px;">
+              <div class="toc-affix pull-right hidden-print" data-spy="affix" data-offset-top="150">
                 <?php tpl_toc()?>
               </div>
 
@@ -140,7 +141,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
         <div class="text-right">
 
-          <?php if ($showPageInfo): ?>       
+          <?php if ($showPageInfo): ?>
           <span class="docInfo">
             <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
           </span>
