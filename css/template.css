@@ -40,12 +40,8 @@ input, textarea, select {
   width: auto;
 }
 
-#dw__toc .nav > .active > a {
-  font-weight: bold;
-}
-
 #dw__toc .nav li a {
-  padding: .2em;
+  padding: 2px 4px;
 }
 
 #dw__toc .nav .nav .nav {
@@ -83,8 +79,8 @@ input, textarea, select {
   width: 16em;
 }
 
-#dw__toc ul.toc {
-  padding-left: 15px;
+#dw__toc ul.toc ul {
+  padding: 2px 0 2px 10px;
 }
 
 #config__manager .label {

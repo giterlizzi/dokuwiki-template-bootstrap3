@@ -30,7 +30,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
   jQuery('.search_hit').addClass('mark');
 
   // Page heading
-  $dw_content.find('h1').first().addClass('page-header');
+  $dw_content.find('h1').addClass('page-header');
 
   // Tables (no for Rack and Diagram Plugins)
   $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
@@ -48,7 +48,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
   jQuery('input[type=checkbox]').addClass('checkbox-inline');
   jQuery('input[type=radio]').addClass('radio-inline');
   jQuery('label').addClass('control-label');
-  $dw_content.find('form').addClass('form-inline');
+  jQuery('form').addClass('form-inline');
 
   // Images
   jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
@@ -213,7 +213,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
   var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
 
-  $dw_toc.find('ul').addClass('nav');
+  $dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
+
   jQuery('body').scrollspy({
     target: '#dw__toc',
     offset: bodyOffset + 10
