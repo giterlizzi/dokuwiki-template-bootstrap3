@@ -177,7 +177,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     </div><!-- /site -->
 
     <div class="no"><?php tpl_indexerWebBug() ?></div>
-    <div id="screen__mode" class="hidden">
+    <div id="screen__mode" class="no">
       <span class="visible-xs"></span>
       <span class="visible-sm"></span>
       <span class="visible-md"></span>
