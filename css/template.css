@@ -214,21 +214,22 @@ nav .dw__actions .btn {
   padding-left: 15px;
 }
 
-.dokuwiki ul.idx a {
+.mode_index ul.idx a {
   color: inherit;
   text-decoration: none;
 }
 
-.dokuwiki ul.idx i {
+.mode_index ul.idx i {
   padding-right: 5px;
 }
 
-.dokuwiki ul.idx strong {
+.mode_index ul.idx strong {
   font-weight: normal;
 }
 
-.dokuwiki ul.idx li {
+.mode_index ul.idx li {
   list-style-type: none;
+  list-style-image: none !important;
 }
 
 .dokuwiki textarea.edit {
