@@ -196,12 +196,12 @@ function _tpl_get_container_grid() {
     list($col, $media, $size) = split('-', $grid);
     $grids[$media]['left'] = (int) $size;
   }
-  
+
   foreach (split(' ', tpl_getConf('rightSidebarGrid')) as $grid) {
     list($col, $media, $size) = split('-', $grid);
     $grids[$media]['right'] = (int) $size;
   }
-  
+
   foreach ($grids as $media => $item) {
     $left    = $item['left'];
     $right   = $item['right'];
@@ -209,5 +209,24 @@ function _tpl_get_container_grid() {
   }
 
   return $result;
+
+}
+
+/**
+ * Return the user home-page link
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function _tpl_user_homepage_link() {
+
+  $xhtml_renderer = p_get_renderer('xhtml');
+  $xhtml_renderer->interwiki = getInterwiki();
+
+  $interwiki = $xhtml_renderer->interwiki['user'];
+  $url       = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki);
+
+  return wl(cleanID($url));
 
 }
