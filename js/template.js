@@ -183,17 +183,23 @@ jQuery(document).on('bootstrap3:toc', function(e) {
   $dw_toc.find('h3').click(function() {
 
     if ($dw_toc.find('.closed').length) {
+
       $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
                                 .addClass('glyphicon-chevron-down');
+
       jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
+
     }
 
     if ($dw_toc.find('.open').length) {
+
       $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up')
                                 .removeClass('glyphicon-chevron-down');
+
       $dw_toc.find('h3 .label').replaceWith(function() {
         return jQuery(this).contents();
       });
+
     }
 
   });
@@ -207,7 +213,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
   });
 
   if ((jQuery(window).height() < jQuery('#dw__toc').height())) {
-    resizeToc();  
+    resizeToc();
     jQuery(window).resize(resizeToc);
   }
 

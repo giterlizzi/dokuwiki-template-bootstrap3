@@ -221,12 +221,9 @@ function _tpl_get_container_grid() {
  */
 function _tpl_user_homepage_link() {
 
-  $xhtml_renderer = p_get_renderer('xhtml');
-  $xhtml_renderer->interwiki = getInterwiki();
+  $interwiki = getInterwiki();
+  $user_url  = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
 
-  $interwiki = $xhtml_renderer->interwiki['user'];
-  $url       = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki);
-
-  return wl(cleanID($url));
+  return wl(cleanID($user_url));
 
 }
