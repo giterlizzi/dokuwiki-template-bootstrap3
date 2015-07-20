@@ -16,7 +16,7 @@
   <li class="dropdown">
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php $lang['tools'] ?>">
-      <i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php $lang['tools'] ?></span> <span class="caret"></span>
+      <i class="glyphicon glyphicon-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu tools" role="menu">
