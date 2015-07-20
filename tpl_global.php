@@ -43,6 +43,45 @@ $tplConfigJSON       = array(
   'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),
 );
 
+
+// Tools Menu
+$tools = array(
+
+  'user' => array(
+    'icon'  => 'glyphicon glyphicon-user',
+    'items' => array(
+      'admin'    => _tpl_action_item('admin',    'glyphicon glyphicon-cog'),
+      'profile'  => _tpl_action_item('profile',  'glyphicon glyphicon-refresh'),
+      #'register' => _tpl_action_item('register', 'glyphicon glyphicon-edit'),
+      #'login'    => _tpl_action_item('login',    'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+    )
+  ),
+
+  'site' => array(
+    'icon'  => 'glyphicon glyphicon-cog',
+    'items' => array(
+      'recent' => _tpl_action_item('recent', 'glyphicon glyphicon-list-alt'),
+      'media'  => _tpl_action_item('media',  'glyphicon glyphicon-picture'),
+      'index'  => _tpl_action_item('index',  'glyphicon glyphicon-list'),
+    )
+  ),
+
+  'page' => array(
+    'icon'  => 'glyphicon glyphicon-file',
+    'items' => array(
+      'edit'       => _tpl_action_item('edit',       'glyphicon glyphicon-edit'),
+      'discussion' => _tpl_action_item('discussion', 'glyphicon glyphicon-comment'),
+      'revert'     => _tpl_action_item('revert',     'glyphicon glyphicon-repeat'),
+      'revisions'  => _tpl_action_item('revisions',  'glyphicon glyphicon-time'),
+      'backlink'   => _tpl_action_item('backlink',   'glyphicon glyphicon-link'),
+      'subscribe'  => _tpl_action_item('subscribe',  'glyphicon glyphicon-bookmark'),
+      'top'        => _tpl_action_item('top',        'glyphicon glyphicon-chevron-up'),
+    )
+  ),
+
+);
+
+
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 
   if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
