@@ -107,7 +107,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               ?>
 
               <div class="toc-affix pull-right hidden-print" data-spy="affix" data-offset-top="150">
-                <?php tpl_toc()?>
+                <?php #tpl_toc() ?>
+                <?php bootstrap_toc(tpl_toc(true)) ?>
               </div>
 
               <!-- wikipage start -->

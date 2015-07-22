@@ -227,3 +227,145 @@ function _tpl_user_homepage_link() {
   return wl(cleanID($user_url));
 
 }
+
+
+/**
+ * Manipulate DokuWiki TOC to add Bootstrap3 styling
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $toc from tpl_toc()
+ * @return  string
+ */
+function bootstrap_toc($toc) {
+
+  if (! $toc) return false;
+
+  $dom = new DOMDocument('1.0');
+  $dom->loadHTML($toc);
+
+  if ($panel = $dom->getElementsByTagName('div')->item(0)) {
+
+    $panel->setAttribute('class', 'panel panel-default'); 
+
+    $panel_title = $dom->getElementsByTagName('h3')->item(0);
+    $panel_title->setAttribute('class', $panel_title->getAttribute('class') . ' panel-heading');
+  
+    $panel_body = $dom->getElementsByTagName('div')->item(1);
+    $panel_body->setAttribute('class', 'panel-body');
+  
+    foreach ($dom->getElementsByTagName('ul') as $ul) {
+  
+      $ul->setAttribute('class', $ul->getAttribute('class') . ' nav nav-pills nav-stacked');
+  
+      foreach ($ul->getElementsByTagName('li') as $li) {
+  
+        if ($div = $li->getElementsByTagName('div')->item(0)) {
+          $a = $li->getElementsByTagName('a')->item(0);
+          $div->parentNode->replaceChild($a, $div);
+        }
+  
+      }
+  
+    }
+
+  }
+
+  $html = strip_doctype($dom->saveHTML());
+
+  echo $html;
+  return $html;
+
+}
+
+
+/**
+ * Manipulate Sidebar page to add Bootstrap3 styling
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $sidebar
+ * @return  string
+ */
+function bootstrap_sidebar($sidebar) {
+
+  if (! $sidebar) return false;
+
+  $dom = new DOMDocument('1.0');
+  $dom->loadHTML($sidebar);
+
+  foreach ($dom->getElementsByTagName('ul') as $ul) {
+
+    $ul->setAttribute('class', 'nav nav-pills nav-stacked');
+
+    foreach ($ul->getElementsByTagName('li') as $li) {
+
+      if ($curid = $li->getElementsByTagNAme('span')->item(0)) {
+        $li->setAttribute('class', $li->getAttribute('class') . ' active');
+      }
+
+      if ($div = $li->getElementsByTagName('div')->item(0)) {
+        $a = $li->getElementsByTagName('a')->item(0);
+        $div->parentNode->replaceChild($a, $div);
+      }
+
+
+    }
+
+  }
+
+  $html = ($dom->saveXML());
+
+  echo $html;
+  return $html;
+
+}
+
+
+/**
+ * Print the search form in Bootstrap Style
+ *
+ * If the first parameter is given a div with the ID 'qsearch_out' will
+ * be added which instructs the ajax pagequicksearch to kick in and place
+ * its output into this div. The second parameter controls the propritary
+ * attribute autocomplete. If set to false this attribute will be set with an
+ * value of "off" to instruct the browser to disable it's own built in
+ * autocompletion feature (MSIE and Firefox)
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @param bool $ajax
+ * @param bool $autocomplete
+ * @return bool
+ */
+function bootstrap_searchform($ajax = true, $autocomplete = true) {
+
+    global $lang;
+    global $ACT;
+    global $QUERY;
+
+    // don't print the search form if search action has been disabled
+    if (!actionOK('search')) return false;
+
+    print '<form action="'.wl().'" accept-charset="utf-8" class="form-inline search" id="dw__search" method="get" role="search"><div class="no">';
+
+    print '<input type="hidden" name="do" value="search" />';
+
+    print '<input type="text" ';
+    if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
+    if (!$autocomplete) print 'autocomplete="off" ';
+    print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="edit form-control" title="[F]" />';
+
+    print '<button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="glyphicon glyphicon-search"></i></button>';
+
+    if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
+    print '</div></form>';
+
+    return true;
+}
+
+
+function strip_doctype($html) {
+  return trim(preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $html));
+}
+

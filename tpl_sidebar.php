@@ -6,7 +6,7 @@
     </div>
     <div class="collapse in">
       <?php tpl_includeFile($sidebar_header) ?>
-      <?php tpl_include_page($sidebar_page, 1, 1) /* includes the nearest sidebar page */ ?>
+      <?php bootstrap_sidebar(tpl_include_page($sidebar_page, 0, 1)) /* includes the nearest sidebar page */ ?>
       <?php tpl_includeFile($sidebar_footer) ?>
     </div>
   </div>

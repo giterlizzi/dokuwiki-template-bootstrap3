@@ -53,7 +53,7 @@
       <div class="navbar-right">
 
         <div class="navbar-left navbar-form">
-          <?php tpl_searchform() ?>
+          <?php bootstrap_searchform() ?>
         </div>
 
         <?php
