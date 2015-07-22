@@ -7,6 +7,7 @@
  */
 
 $conf['showTools']           = 'always';
+$conf['individualTools']     = 0;
 $conf['showUserHomeLink']    = 1;
 $conf['showLoginOnFooter']   = 0;
 $conf['hideLoginLink']       = 0;

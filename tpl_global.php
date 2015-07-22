@@ -9,6 +9,7 @@
 
 $showTools           = tpl_getConf('showTools') != 'never' &&
                        ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
+$individualTools     = tpl_getConf('individualTools');
 $showUserHomeLink    = tpl_getConf('showUserHomeLink');
 $showLoginOnFooter   = tpl_getConf('showLoginOnFooter');
 $showLoginLink       = ! tpl_getConf('hideLoginLink') || ! empty($_SERVER['REMOTE_USER']);

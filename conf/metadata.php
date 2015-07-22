@@ -7,6 +7,7 @@
  */
 
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['individualTools']     = array('onoff');
 $meta['showUserHomeLink']    = array('onoff');
 $meta['showLoginOnFooter']   = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
