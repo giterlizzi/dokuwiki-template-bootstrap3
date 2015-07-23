@@ -241,8 +241,8 @@ function bootstrap_toc($toc) {
 
   if (! $toc) return false;
 
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML($toc);
+  $dom = new DOMDocument('1.0', 'utf-8');
+  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $toc);
 
   if ($panel = $dom->getElementsByTagName('div')->item(0)) {
 
@@ -250,23 +250,23 @@ function bootstrap_toc($toc) {
 
     $panel_title = $dom->getElementsByTagName('h3')->item(0);
     $panel_title->setAttribute('class', $panel_title->getAttribute('class') . ' panel-heading');
-  
+
     $panel_body = $dom->getElementsByTagName('div')->item(1);
     $panel_body->setAttribute('class', 'panel-body');
-  
+
     foreach ($dom->getElementsByTagName('ul') as $ul) {
-  
+
       $ul->setAttribute('class', $ul->getAttribute('class') . ' nav nav-pills nav-stacked');
-  
+
       foreach ($ul->getElementsByTagName('li') as $li) {
-  
+
         if ($div = $li->getElementsByTagName('div')->item(0)) {
           $a = $li->getElementsByTagName('a')->item(0);
           $div->parentNode->replaceChild($a, $div);
         }
-  
+
       }
-  
+
     }
 
   }
@@ -291,8 +291,8 @@ function bootstrap_sidebar($sidebar) {
 
   if (! $sidebar) return false;
 
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML($sidebar);
+  $dom = new DOMDocument('1.0', 'utf-8');
+  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $sidebar);
 
   foreach ($dom->getElementsByTagName('ul') as $ul) {
 
