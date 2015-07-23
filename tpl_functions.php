@@ -241,8 +241,8 @@ function bootstrap_toc($toc) {
 
   if (! $toc) return false;
 
-  $dom = new DOMDocument('1.0', 'utf-8');
-  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $toc);
+  $dom = new DOMDocument('1.0');
+  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $toc);
 
   if ($panel = $dom->getElementsByTagName('div')->item(0)) {
 
@@ -271,7 +271,11 @@ function bootstrap_toc($toc) {
 
   }
 
-  $html = strip_doctype($dom->saveHTML());
+  $html = '';
+
+  foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
+    $html .= $dom->saveXML($node);
+  }
 
   echo $html;
   return $html;
@@ -291,8 +295,8 @@ function bootstrap_sidebar($sidebar) {
 
   if (! $sidebar) return false;
 
-  $dom = new DOMDocument('1.0', 'utf-8');
-  $dom->loadHTML('<?xml encoding="utf-8" ?>' . $sidebar);
+  $dom = new DOMDocument('1.0');
+  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $sidebar);
 
   foreach ($dom->getElementsByTagName('ul') as $ul) {
 
@@ -309,12 +313,15 @@ function bootstrap_sidebar($sidebar) {
         $div->parentNode->replaceChild($a, $div);
       }
 
-
     }
 
   }
 
-  $html = ($dom->saveXML());
+  $html = '';
+
+  foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
+    $html .= $dom->saveXML($node);
+  }
 
   echo $html;
   return $html;
@@ -362,10 +369,5 @@ function bootstrap_searchform($ajax = true, $autocomplete = true) {
     print '</div></form>';
 
     return true;
-}
-
-
-function strip_doctype($html) {
-  return trim(preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $html));
 }
 
