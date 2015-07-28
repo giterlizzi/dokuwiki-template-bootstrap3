@@ -64,7 +64,19 @@ span.approval_approved a {
   text-decoration:underline;
 }
 
+
 /* Tagging Plugin */
 ul.tagging_cloud li {
   display: inline-block;
+}
+
+
+/* DataTables Plugin */
+.dt-wrapper .form-control {
+  width: auto;
+  display: initial;
+}
+
+.dt-wrapper .dataTables_paginate a:hover {
+  cursor: pointer;
 }
