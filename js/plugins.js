@@ -28,26 +28,30 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
       jQuery(document).on('bootstrap3:plugin-datatables', function() {
 
-        var $pagination = jQuery('.dataTables_paginate');
+        jQuery('.dataTables_paginate').each(function() {
 
-        $pagination.find('> span').wrapInner('<ul/>');
-        $pagination.find('ul').contents().wrap('<li/>');
-        $pagination.find('ul').addClass('pagination');
-        $pagination.find('.paginate_button').removeClass('paginate_button');
-        $pagination.find('.current').parent().addClass('active');
-        $pagination.find('.ellipsis').wrap('<a href="#"/>').removeClass('ellipsis');
+          var $pagination = jQuery(this);
 
-        var $previous = $pagination.find('.previous'),
-            $next     = $pagination.find('.next');
+          $pagination.find('> span').wrapInner('<ul/>');
+          $pagination.find('ul').contents().wrap('<li/>');
+          $pagination.find('ul').addClass('pagination');
+          $pagination.find('.paginate_button').removeClass('paginate_button');
+          $pagination.find('.current').parent().addClass('active');
+          $pagination.find('.ellipsis').wrap('<a href="#"/>').removeClass('ellipsis');
+  
+          var $previous = $pagination.find('.previous'),
+              $next     = $pagination.find('.next');
+  
+          $previous.wrap('<li/>');
+          $previous.parent().prependTo($pagination.find('ul'));
+  
+          $next.wrap('<li/>');
+          $next.parent().appendTo($pagination.find('ul'));
+  
+          $pagination.find('a:not(.disabled)').on('click', function() {
+            jQuery(document).trigger('bootstrap3:plugin-datatables');
+          });
 
-        $previous.wrap('<li/>');
-        $previous.parent().prependTo($pagination.find('ul'));
-
-        $next.wrap('<li/>');
-        $next.parent().appendTo($pagination.find('ul'));
-
-        $pagination.find('a').on('click', function() {
-          jQuery(document).trigger('bootstrap3:plugin-datatables');
         });
 
       });
