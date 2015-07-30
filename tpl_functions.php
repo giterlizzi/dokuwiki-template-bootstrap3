@@ -261,8 +261,9 @@ function bootstrap_toc($toc) {
       foreach ($ul->getElementsByTagName('li') as $li) {
 
         if ($div = $li->getElementsByTagName('div')->item(0)) {
-          $a = $li->getElementsByTagName('a')->item(0);
-          $div->parentNode->replaceChild($a, $div);
+          if ($a = $li->getElementsByTagName('a')->item(0)) {
+            $div->parentNode->replaceChild($a, $div);
+          }
         }
 
       }
@@ -300,8 +301,6 @@ function bootstrap_sidebar($sidebar) {
 
   foreach ($dom->getElementsByTagName('ul') as $ul) {
 
-    $ul->setAttribute('class', 'nav nav-pills nav-stacked');
-
     foreach ($ul->getElementsByTagName('li') as $li) {
 
       if ($curid = $li->getElementsByTagNAme('span')->item(0)) {
@@ -309,8 +308,10 @@ function bootstrap_sidebar($sidebar) {
       }
 
       if ($div = $li->getElementsByTagName('div')->item(0)) {
-        $a = $li->getElementsByTagName('a')->item(0);
-        $div->parentNode->replaceChild($a, $div);
+        if ($a = $li->getElementsByTagName('a')->item(0)) {
+          $div->parentNode->replaceChild($a, $div);
+          $ul->setAttribute('class', 'nav nav-pills nav-stacked');
+        }
       }
 
     }
