@@ -10,14 +10,20 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
   setTimeout(function() {
 
-    var $tags           = jQuery('.tags'),                 // Tags Plugin
-        $translation    = jQuery('#dw__translation'),      // Translation Plugin
-        $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
-        $publish        = jQuery('.approval'),             // Publish Plugin
-        $tagging_edit   = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
-        $explain        = jQuery('.explain'),              // Explain Plugin
-        $wrap           = jQuery('.plugin_wrap'),          // Wrap Plugin
-        $datatables     = jQuery('.dt-wrapper');           // DataTables Plugin
+    var $tags             = jQuery('.tags'),                 // Tags Plugin
+        $translation      = jQuery('#dw__translation'),      // Translation Plugin
+        $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
+        $publish          = jQuery('.approval'),             // Publish Plugin
+        $tagging_edit     = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
+        $explain          = jQuery('.explain'),              // Explain Plugin
+        $wrap             = jQuery('.plugin_wrap'),          // Wrap Plugin
+        $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
+        $dataplugin_entry = jQuery('.dataplugin_entry');     // Data Plugin: Entry
+
+
+    if ($dataplugin_entry.length) {
+      $dataplugin_entry.find('dl').addClass('panel panel-default');
+    }
 
 
     // DataTables Plugin
