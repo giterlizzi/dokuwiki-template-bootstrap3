@@ -28,8 +28,8 @@ jQuery(document).ready(function() {
     ['diff',          'h1',     'glyphicon-list-alt text-muted'],
     ['preview',       'h1',     'glyphicon-eye-open text-muted'],
     ['conflict',      'h1',     'glyphicon-alert text-warning'],
-    ['subscribe',     'h1',     'glyphicon-bookmark text-muted'],
-    ['unsubscribe',   'h1',     'glyphicon-bookmark text-muted'],
+    ['subscribe',     'h1',     'glyphicon-envelope text-warning'],
+    ['unsubscribe',   'h1',     'glyphicon-envelope text-warning'],
     ['draft',         'h1',     'glyphicon-edit text-muted'],
     ['showtag',       'h1',     'glyphicon-tags text-muted']
   ];
