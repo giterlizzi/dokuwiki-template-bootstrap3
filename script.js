@@ -1,104 +1,148 @@
+/*!
+ * DokuWiki Bootstrap3 Template: Hacks!
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
 jQuery(document).ready(function() {
 
   //'use strict';
 
+  // Icons for DokuWiki Actions
+  var icons = [
+    // Mode           Selector  Icon
+    ['denied',        'h1',     'glyphicon-ban-circle text-danger'],
+    ['show.notFound', 'h1',     'glyphicon-alert text-warning'],
+    ['login',         'h1',     'glyphicon-log-in text-muted'],
+    ['register',      'h1',     'glyphicon-edit text-muted'],
+    ['search',        'h1',     'glyphicon-search text-muted'],
+    ['index',         'h1',     'glyphicon-list text-muted'],
+    ['recent',        'h1',     'glyphicon-list-alt text-muted'],
+    ['media',         'h1',     'glyphicon-picture text-muted'],
+    ['admin',         'h1',     'glyphicon-cog text-muted'],
+    ['profile',       'h1',     'glyphicon-user text-muted'],
+    ['revisions',     'h1',     'glyphicon-time text-muted'],
+    ['backlink',      'h1',     'glyphicon-link text-muted'],
+    ['diff',          'h1',     'glyphicon-list-alt text-muted'],
+    ['preview',       'h1',     'glyphicon-eye-open text-muted'],
+    ['conflict',      'h1',     'glyphicon-alert text-warning'],
+    ['subscribe',     'h1',     'glyphicon-envelope text-warning'],
+    ['unsubscribe',   'h1',     'glyphicon-envelope text-warning'],
+    ['draft',         'h1',     'glyphicon-edit text-muted'],
+    ['showtag',       'h1',     'glyphicon-tags text-muted']
+  ];
+
+
+  function dw_mode(id) {
+    return ((jQuery('.mode_' + id).length) ? true : false);
+  }
+
+
   function checkSize() {
-    if (   jQuery('#screen__mode .visible-xs').is(':visible')
-        || jQuery('#screen__mode .visible-sm').is(':visible')
-        || jQuery('#screen__mode .visible-md').is(':visible')) {
-      jQuery('#dokuwiki__aside .content').addClass('panel panel-default');
-      jQuery('#dokuwiki__aside .toogle').addClass('panel-heading');
-      jQuery('#dokuwiki__aside .collapse').addClass('panel-body').removeClass('in');
+
+    var $screen_mode = jQuery('#screen__mode'), // Responsive Check
+        $dw_aside    = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
+
+    if ($screen_mode.find('.visible-xs').is(':visible')) {
+
+      $dw_aside.find('.content').addClass('panel panel-default');
+      $dw_aside.find('.toogle').addClass('panel-heading');
+      $dw_aside.find('.collapse').addClass('panel-body').removeClass('in');
+
     } else {
-      jQuery('#dokuwiki__aside .content').removeClass('panel panel-default');
-      jQuery('#dokuwiki__aside .collapse').removeClass('panel-body').addClass('in');
+
+      $dw_aside.find('.content').removeClass('panel panel-default');
+      $dw_aside.find('.collapse').removeClass('panel-body').addClass('in');
+
     }
+
+  }
+
+  function resizeToc() {
+
+    jQuery('#dw__toc .panel-body').css({
+      'height'    : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
+      'overflow-y': 'scroll'
+    });
 
   }
 
   checkSize();
   jQuery(window).resize(checkSize);
 
-  jQuery(jQuery('.mode_denied        #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-ban-circle text-danger"></i> ');
-  jQuery(jQuery('.mode_show.notFound #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-alert text-warning"></i> ');
-  jQuery(jQuery('.mode_login         #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-log-in text-muted"></i> ');
-  jQuery(jQuery('.mode_register      #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-edit text-muted"></i> ');
-  jQuery(jQuery('.mode_search        #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-search text-muted"></i> ');
-  jQuery(jQuery('.mode_index         #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-list text-muted"></i> ');
-  jQuery(jQuery('.mode_recent        #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-list-alt text-muted"></i> ');
-  jQuery(jQuery('.mode_media         #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-download-alt text-muted"></i> ');
-  jQuery(jQuery('.mode_admin         #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-cog text-muted"></i> ');
-  jQuery(jQuery('.mode_profile       #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-user text-muted"></i> ');
-  jQuery(jQuery('.mode_revisions     #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-time text-muted"></i> ');
-  jQuery(jQuery('.mode_backlink      #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-link text-muted"></i> ');
-  jQuery(jQuery('.mode_diff          #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-list-alt text-muted"></i> ');
-  jQuery(jQuery('.mode_preview       #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-eye-open text-muted"></i> ');
-  jQuery(jQuery('.mode_conflict      #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-alert text-warning"></i> ');
-  jQuery(jQuery('.mode_subscribe     #dokuwiki__content h1, .mode_unsubscribe #dokuwiki__content h1')[0]).prepend('<i class="glyphicon glyphicon-bookmark text-muted"></i> ');
 
+  // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
+  jQuery.fn.extend({
 
-  jQuery(document).bind('DOMNodeInserted', function(){
-    jQuery('#insitu__fn').addClass('panel panel-body panel-default');
-  });
+    input2button: function() {
 
-  jQuery('#dw__toc .open strong').addClass('glyphicon glyphicon-chevron-up');
+      return this.each(function() {
 
-  jQuery('#dw__toc h3').click(function() {
-    if (jQuery('#dw__toc .closed').length) {
-      jQuery('#dw__toc h3 strong').removeClass('glyphicon-chevron-up');
-      jQuery('#dw__toc h3 strong').addClass('glyphicon-chevron-down');
+        var attrs = { 'type' : 'button' },
+            label = '',
+            node  = jQuery(this);
+
+        if (typeof node.data('events') === 'undefined' && node.prop('tagName') == 'INPUT') {
+
+          jQuery(node[0].attributes).each(function(index, attribute) {
+            if (attribute.name == 'value') {
+              label = attribute.value;
+            } else {
+              attrs[attribute.name] = attribute.value;
+            }
+          });
+
+          var newNode = jQuery('<button/>', attrs).html(label);
+          node.replaceWith(newNode);
+
+        }
+
+      });
+
     }
-    if (jQuery('#dw__toc .open').length) {
-      jQuery('#dw__toc h3 strong').addClass('glyphicon-chevron-up');
-      jQuery('#dw__toc h3 strong').removeClass('glyphicon-chevron-down');
-    }
+
   });
 
-  jQuery('#dw__toc').parent().on('affixed.bs.affix', function() {
-    if (jQuery('#dw__toc .open').length) {
-      jQuery('#dw__toc h3').trigger('click');
-    }
-  });
 
-  jQuery('#dw__toc').css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
+  /* DOKUWIKI:include js/template.js */
 
-  jQuery('#dw__toc').addClass('panel panel-default');
-  jQuery('#dw__toc h3').addClass('panel-heading');
-  jQuery('#dw__toc h3 + div').addClass('panel-body');
 
-  
-  jQuery('#dokuwiki__content .wikilink2').addClass('text-danger');
+  // Init template
+  jQuery(document).trigger('bootstrap3:init');
 
-  jQuery('#qsearch__out').addClass('panel panel-default');
+  // Init other components
+  jQuery(document).trigger('bootstrap3:components');
 
-  jQuery('table').parent().addClass('table-responsive');
-  jQuery('#dokuwiki__content .page h1').addClass('page-header');
-  jQuery('input[type=submit], input[type=reset], input[type=button], button').addClass('btn btn-default');
-  jQuery('#dokuwiki__content input[type=submit]').addClass('btn-primary');
-  jQuery('input, select').not('[type=hidden], [type=image]').addClass('form-control');
-  jQuery('label').addClass('control-label');
-  jQuery('form').addClass('form-inline');
+  /* DOKUWIKI:include js/plugins.js */
 
-  jQuery('.page table').addClass('table table-striped table-condensed');
-  jQuery('.tabs').addClass('nav nav-tabs');
+  // Init plugins
+  jQuery(document).trigger('bootstrap3:plugins');
 
-  jQuery('#tool__bar').addClass('btn-group');
-  jQuery('.toolbutton').addClass('btn-xs');
 
-  jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
+  // Re-initialize some components in media-manager
+  if (dw_mode('media') || jQuery('#media__manager')) {
 
-  jQuery('bdi').replaceWith(function() {
-    return jQuery(this).contents();
-  });
+    jQuery(document).ajaxSuccess(function() {
+      jQuery(document).trigger('bootstrap3:init');
+      jQuery(document).trigger('bootstrap3:tabs');
+    });
 
-  jQuery('.search_hit').addClass('mark');
-  jQuery('#dw__search').addClass('nav navbar-nav navbar-form');
+  }
 
-  //jQuery('#dokuwiki__aside h5').addClass('page-header');
-  jQuery('#dokuwiki__aside ul').addClass('nav nav-pills nav-stacked');
-  jQuery('#dokuwiki__aside .curid').parent().parent().addClass('active');
-  jQuery('#dokuwiki__aside ul div, #dokuwiki__aside ul span').replaceWith(function() {
-    return jQuery(this).contents();
-  });
+  // Index tree
+  if (dw_mode('index')) {
+
+    jQuery(document).ajaxSuccess(function() {
+      jQuery(document).trigger('bootstrap3:mode-index');
+    });
+
+    jQuery('#index__tree').click(function(e) {
+      jQuery(document).trigger('bootstrap3:mode-index');
+    });
+
+  }
+
 
 });
