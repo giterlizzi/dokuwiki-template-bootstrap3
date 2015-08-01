@@ -363,20 +363,24 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
     // don't print the search form if search action has been disabled
     if (!actionOK('search')) return false;
 
-    print '<form action="'.wl().'" accept-charset="utf-8" class="form-inline search" id="dw__search" method="get" role="search"><div class="no">';
+    print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
+    
+    print '<div class="form-group">';
 
     print '<input type="hidden" name="do" value="search" />';
 
-    print '<input type="text" ';
+    print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
     if (!$autocomplete) print 'autocomplete="off" ';
     print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="edit form-control" title="[F]" />';
 
-    print '<button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="glyphicon glyphicon-search"></i></button>';
+    print '</div>';
+
+    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="glyphicon glyphicon-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
-
+    
     return true;
 }
 

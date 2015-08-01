@@ -53,9 +53,7 @@
       <div class="navbar-right">
 
         <?php if ($showSearchForm): ?>
-        <div class="navbar-left navbar-form">
           <?php bootstrap3_searchform() ?>
-        </div>
         <?php endif; ?>
 
         <?php

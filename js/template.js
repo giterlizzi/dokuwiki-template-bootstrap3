@@ -45,7 +45,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('input[type=checkbox]').addClass('checkbox-inline');
     jQuery('input[type=radio]').addClass('radio-inline');
     jQuery('label').addClass('control-label');
-    jQuery('form').addClass('form-inline');
+    jQuery('main form').addClass('form-inline');
 
     // Images
     jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
