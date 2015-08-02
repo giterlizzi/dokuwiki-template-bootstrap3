@@ -311,6 +311,8 @@ function bootstrap3_sidebar($sidebar) {
 
     foreach ($ul->getElementsByTagName('li') as $li) {
 
+      $ul->setAttribute('class', 'nav nav-pills nav-stacked');
+
       if ($curid = $li->getElementsByTagNAme('span')->item(0)) {
         $li->setAttribute('class', $li->getAttribute('class') . ' active');
       }
@@ -318,7 +320,6 @@ function bootstrap3_sidebar($sidebar) {
       if ($div = $li->getElementsByTagName('div')->item(0)) {
         if ($a = $li->getElementsByTagName('a')->item(0)) {
           $div->parentNode->replaceChild($a, $div);
-          $ul->setAttribute('class', 'nav nav-pills nav-stacked');
         }
       }
 
