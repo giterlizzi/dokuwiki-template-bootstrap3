@@ -282,8 +282,11 @@ function bootstrap3_toc($toc) {
 
   $html = '';
 
-  foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
-    $html .= $dom->saveXML($node);
+  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
+    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+  } else {
+    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
+    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
   }
 
   echo $html;
@@ -329,8 +332,11 @@ function bootstrap3_sidebar($sidebar) {
 
   $html = '';
 
-  foreach ($dom->getElementsByTagName('body')->item(0)->childNodes as $node) {
-    $html .= $dom->saveXML($node);
+  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
+    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
+  } else {
+    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
+    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
   }
 
   echo $html;
