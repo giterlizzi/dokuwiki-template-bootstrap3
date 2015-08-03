@@ -28,7 +28,7 @@ if (tpl_getConf('showTranslation') && $translation = plugin_load('helper','trans
       <i class="glyphicon glyphicon-flag"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $trans_label ?></span><span class="caret"></span>
     </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header"><i class="glyphicon glyphicon-flag"></i> <?php echo $trans_label ?></li>
+    <li class="dropdown-header hidden-xs hidden-sm"><i class="glyphicon glyphicon-flag"></i> <?php echo $trans_label ?></li>
     <?php echo $trans_items ?>
   </ul>
 </ul>
