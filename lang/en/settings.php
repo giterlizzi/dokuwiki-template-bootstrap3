@@ -15,6 +15,7 @@ $lang['showCookieLawBanner'] = 'Display the Cookie Law banner on footer';
 $lang['cookieLawBannerPage'] = 'Cookie Law banner page name';
 $lang['cookieLawPolicyPage'] = 'Cookie Law policy page name';
 $lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name - see <a href="#config___title">title</a> config';
+$lang['showIndividualTool']  = 'Enable/Disable individual tool in navbar';
 $lang['showTools']           = 'Display Tools in navbar';
 $lang['individualTools']     = 'Split the Tools in individual menu in navbar';
 $lang['showTools_o_never']   = 'Never';

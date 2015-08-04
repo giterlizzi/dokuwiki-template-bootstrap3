@@ -403,7 +403,8 @@ function _tpl_tools() {
 
   global $ACT;
 
-  return array(
+  $result = array();
+  $tools  = array(
   
     'user' => array(
       'icon'  => 'glyphicon glyphicon-user',
@@ -438,6 +439,12 @@ function _tpl_tools() {
     ),
   
   );
+
+  foreach (explode(',', tpl_getConf('showIndividualTool')) as $tool) {
+    $result[$tool] = $tools[$tool];
+  }
+
+  return $result;
 
 }
 

@@ -9,6 +9,7 @@
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['individualTools']     = array('onoff');
+$meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showUserHomeLink']    = array('onoff');
 $meta['showLoginOnFooter']   = array('onoff');
 $meta['hideLoginLink']       = array('onoff');

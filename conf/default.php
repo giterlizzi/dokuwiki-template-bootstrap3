@@ -9,6 +9,7 @@
 $conf['showTools']           = 'always';
 $conf['showSearchForm']      = 'always';
 $conf['individualTools']     = 0;
+$conf['showIndividualTool']  = 'user,site,page';
 $conf['showUserHomeLink']    = 1;
 $conf['showLoginOnFooter']   = 0;
 $conf['hideLoginLink']       = 0;
