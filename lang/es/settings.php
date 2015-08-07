@@ -15,15 +15,18 @@ $lang['showCookieLawBanner'] = 'Mostrar el banner Cookie Law en el pie de págin
 $lang['cookieLawBannerPage'] = 'Nombre de página del banner Cookie Law';
 $lang['cookieLawPolicyPage'] = 'Nombre de página de política de Cookie Law';
 $lang['browserTitle']        = 'Título del explorador para DokuWiki (por defecto es <code>@TITLE@ [@WIKI@]</code>, en donde el marcador de posición <code>@TITLE@</code> reemplaza el título de la página actual y <code>@WIKI@</code> reemplaza en nombre de la DokuWiki - ver configuración <a href="#config___title">title</a>';
+$lang['showIndividualTool']  = 'Habilitar/Deshabilitar herramientas individuales de la barra de navegación';
 $lang['showTools']           = 'Mostrar Herramientas en la barra de navegación';
 $lang['individualTools']     = 'Dividir las Herramientas en un menú individual en la barra de navegación';
 $lang['showTools_o_never']   = 'Nunca';
 $lang['showTools_o_logged']  = 'Cuando está identificado (logged in)';
 $lang['showTools_o_always']  = 'Siempre';
+$lang['showSearchForm']      = 'Mostrar formulario de búsqueda en la barra de navegación';
+$lang['showSearchForm_o_never']  = 'Nunca';
+$lang['showSearchForm_o_logged'] = 'Cuando está identificado (logged in)';
+$lang['showSearchForm_o_always'] = 'Siempre';
 $lang['sidebarPosition']     = 'Posición de la barra lateral DokuWiki (<code>left</code> o <code>right</code>)';
-$lang['rightSidebar']        = 'El nombre de la página en la Barra Lateral a la Derecha, el campo vacío deshabilita la barra lateral derecha. La Barra Lateral Derecha sólo es mustrada cuando la <a href="#config___sidebar">barra lateral</a> predeterminada está habilitada y está sobre la posición <code>izquierda</code> (ver la configuración <a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a>). Si sólo quieres la barra lateral de DokuWiki en la posición derecha, establece configuración <a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a> con el valor <code>right</code> (derecha)';
+$lang['rightSidebar']        = 'El nombre de la página de la Barra Lateral Derecha. El campo deshabilita la barra lateral derecha.<br/>La Barra Lateral Derecha sólo se muestra cuando la <a href="#config___sidebar">barra lateral</a> predeterminada de DokuWiki está habilitada y está en la posición <code>left</code> (ver la configuración de <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a>). Si sólo quieres la barra lateral en la posición derecha, establece la configuración de <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> con el valor <code>right</code>';
 $lang['tableFullWidth']      = 'Habilitar el ancho de tabla a 100% (predeterminado en Bootstrap)';
 $lang['semantic']            = 'Habilitar datos semánticos';
 $lang['schemaOrgType']       = 'Tipo de Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';

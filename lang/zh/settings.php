@@ -15,15 +15,18 @@ $lang['showCookieLawBanner'] = '在页脚中显示 Cookie 法横幅';
 $lang['cookieLawBannerPage'] = 'Cookie 法横幅页名称';
 $lang['cookieLawPolicyPage'] = 'Cookie 法律政策页名称';
 $lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name - see <a href="#config___title">title</a> config';
+$lang['showIndividualTool']  = 'Enable/Disable individual tool in navbar';
 $lang['showTools']           = '在导航栏中显示工具';
 $lang['individualTools']     = 'Split the Tools in individual menu in navbar';
 $lang['showTools_o_never']   = '从不';
 $lang['showTools_o_logged']  = '当登录时';
 $lang['showTools_o_always']  = '始终';
+$lang['showSearchForm']      = 'Display Search form in navbar';
+$lang['showSearchForm_o_never']  = 'Never';
+$lang['showSearchForm_o_logged'] = 'When logged in';
+$lang['showSearchForm_o_always'] = 'Always';
 $lang['sidebarPosition']     = 'DokuWiki 侧边栏位置（左侧 <code>left</code> 或右侧 <code>right</code>）';
-$lang['rightSidebar']        = '右侧边栏页名称，本字段留空则禁用右侧边栏。<br/>仅当默认的 DokuWiki <a href="#config___sidebar">侧边栏</a>已启用且处于左侧 <code>left</code> 位置（见 <a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a> 配置）时右侧边栏才会显示。如果您想只让 DokuWiki 侧边栏在右侧位置上，请设置 <a href="#config___tpl____bootstrap3____sidebarPosition">
-tpl»bootstrap3»sidebarPosition</a> 配置的值为右侧 <code>right</code>';
+$lang['rightSidebar']        = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value';
 $lang['tableFullWidth']      = '启用 100% 全表格宽度（Bootstrap 默认）';
 $lang['semantic']            = '启用语义数据';
 $lang['schemaOrgType']       = 'Schema.org 类型（文章 <code>Article</code>，新闻文章 <code>NewsArticle</code>，技术文章 <code>TechArticle</code>，博客文章 <code>BlogPosting</code>）';
