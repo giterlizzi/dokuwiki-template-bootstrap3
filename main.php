@@ -46,7 +46,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
-  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+  <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
     <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
 
@@ -184,6 +184,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       <span class="visible-lg"></span>
     </div>
   </div>
-  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+  <!--[if lte IE 8 ]></div><![endif]-->
 </body>
 </html>
