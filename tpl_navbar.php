@@ -67,9 +67,6 @@
           <li>
             <?php tpl_link(_tpl_user_homepage_link(), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
           </li>
-          <li>
-
-          </li>
           <?php endif; ?>
           <?php if (empty($_SERVER['REMOTE_USER'])): ?>
           <li>
