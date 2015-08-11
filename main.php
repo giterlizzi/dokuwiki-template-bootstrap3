@@ -83,7 +83,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       </p>
 
       <div id="dw__msgarea">
-        <?php html_msgarea() ?>
+        <?php bootstrap3_html_msgarea() ?>
       </div>
 
       <main class="main row" role="main">

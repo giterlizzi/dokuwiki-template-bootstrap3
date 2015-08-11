@@ -371,7 +371,7 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
     if (!actionOK('search')) return false;
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
-    
+
     print '<div class="form-group">';
 
     print '<input type="hidden" name="do" value="search" />';
@@ -387,8 +387,65 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
-    
+
     return true;
+}
+
+
+/**
+ * Prints the global message array in Bootstrap style
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ */
+function bootstrap3_html_msgarea() {
+
+    global $MSG, $MSG_shown;
+    /** @var array $MSG */
+    // store if the global $MSG has already been shown and thus HTML output has been started
+    $MSG_shown = true;
+
+    if(!isset($MSG)) return;
+
+    $shown = array();
+
+    foreach($MSG as $msg){
+
+        $hash = md5($msg['msg']);
+        if(isset($shown[$hash])) continue; // skip double messages
+
+        if(info_msg_allowed($msg)){
+
+            switch ($msg['lvl']) {
+              case 'info':
+                $level = 'info';
+                $icon  = 'glyphicon glyphicon-info-sign';
+                break;
+              case 'error':
+                $level = 'danger';
+                $icon  = 'glyphicon glyphicon-exclamation-sign';
+                break;
+              case 'notify':
+                $level = 'warning';
+                $icon  = 'glyphicon glyphicon-warning-sign';
+                break;
+              case 'success':
+                $level = 'success';
+                $icon  = 'glyphicon glyphicon-ok-sign';
+                break;
+            }
+            print '<div class="alert alert-'.$level.'">';
+            print '<i class="'.$icon.'"></i> ';
+            print $msg['msg'];
+            print '</div>';
+
+        }
+
+        $shown[$hash] = 1;
+    }
+
+    unset($GLOBALS['MSG']);
+
 }
 
 
@@ -405,7 +462,7 @@ function _tpl_tools() {
 
   $result = array();
   $tools  = array(
-  
+
     'user' => array(
       'icon'  => 'glyphicon glyphicon-user',
       'items' => array(
@@ -415,7 +472,7 @@ function _tpl_tools() {
         #'login'    => array('icon' => 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
       )
     ),
-  
+
     'site' => array(
       'icon'  => 'glyphicon glyphicon-cog',
       'items' => array(
@@ -424,7 +481,7 @@ function _tpl_tools() {
         'index'  => array('icon' => 'glyphicon glyphicon-list'),
       )
     ),
-  
+
     'page' => array(
       'icon'  => 'glyphicon glyphicon-file',
       'items' => array(
@@ -437,7 +494,7 @@ function _tpl_tools() {
         'top'        => array('icon' => 'glyphicon glyphicon-chevron-up'),
       )
     ),
-  
+
   );
 
   foreach (explode(',', tpl_getConf('showIndividualTool')) as $tool) {
@@ -450,7 +507,7 @@ function _tpl_tools() {
 
 
 function bootstrap3_tools_menu() {
-  
+
   $tools = _tpl_tools();
 
   foreach ($tools as $id => $menu) {
