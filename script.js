@@ -31,7 +31,8 @@ jQuery(document).ready(function() {
     ['subscribe',     'h1',     'glyphicon-envelope text-warning'],
     ['unsubscribe',   'h1',     'glyphicon-envelope text-warning'],
     ['draft',         'h1',     'glyphicon-edit text-muted'],
-    ['showtag',       'h1',     'glyphicon-tags text-muted']
+    ['showtag',       'h1',     'glyphicon-tags text-muted'],
+    ['locked',        'h1',     'glyphicon-lock text-warning']
   ];
 
 
