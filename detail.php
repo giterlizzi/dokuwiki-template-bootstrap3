@@ -65,7 +65,9 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h4 class="panel-title"><i class="glyphicon glyphicon-info-sign text-info"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?></h4>
+              <h4 class="panel-title">
+                <i class="glyphicon glyphicon-picture"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+              </h4>
             </div>
             <div class="panel-body">
 
@@ -74,6 +76,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
                  //Comment in for Debug
                  // dbg(tpl_img_getTag('Simple.Raw'));
               ?>
+
+              <hr/>
 
               <dl class="dl-horizontal">
                 <?php
