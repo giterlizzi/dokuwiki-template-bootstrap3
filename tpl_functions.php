@@ -16,30 +16,38 @@ if (!defined('DOKU_INC')) die();
  *
  * @author Anika Henke <anika@selfthinker.org>
  */
-function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=0) {
+function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=0, $return=0) {
     global $ID;
-
+    $output = '';
     $discussPage    = str_replace('@ID@', $ID, $discussionPage);
     $discussPageRaw = str_replace('@ID@', '', $discussionPage);
     $isDiscussPage  = strpos($ID, $discussPageRaw) !== false;
     $backID         = ':'.str_replace($discussPageRaw, '', $ID);
-
-    if ($wrapper) echo "<$wrapper>";
-
+    if ($wrapper) $output .= "<$wrapper>";
     if ($isDiscussPage) {
-        if ($link)
+        if ($link) {
+            ob_start();
             tpl_pagelink($backID, $backTitle);
-        else
-            echo html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
+            $output .= ob_get_contents();
+            ob_end_clean();
+        } else {
+            $output .= html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
+        }
     } else {
-        if ($link)
+        if ($link) {
+            ob_start();
             tpl_pagelink($discussPage, $title);
-        else
-            echo html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
+            $output .= ob_get_contents();
+            ob_end_clean();
+        } else {
+            $output .= html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
+        }
     }
-
-    if ($wrapper) echo "</$wrapper>";
+    if ($wrapper) $output .= "</$wrapper>";
+    if ($return) return $output;
+    echo $output;
 }
+
 
 /**
  * Create link/button to user page
@@ -62,21 +70,26 @@ function _tpl_userpage($userPage, $title, $link=0, $wrapper=0) {
     if ($wrapper) echo "</$wrapper>";
 }
 
+
 /**
  * Wrapper around custom template actions
  *
  * @author Anika Henke <anika@selfthinker.org>
  */
-function _tpl_action($type, $link=0, $wrapper=0) {
+function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
     switch ($type) {
         case 'discussion':
             if (tpl_getConf('discussionPage')) {
-                _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper);
+                $output = _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper, 1);
+                if ($return) return $output;
+                echo $output;
             }
             break;
         case 'userpage':
             if (tpl_getConf('userPage')) {
-                _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper);
+                $output = _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper, 1);
+                if ($return) return $output;
+                echo $output;
             }
             break;
     }
@@ -144,27 +157,28 @@ function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_heade
  * 
  * @param   string   $action
  * @param   string   $icon class
- * @param   boolean  $linkonly
+ * @param   boolean  $return
  * @return  string
  */
-function _tpl_action_item($action, $icon, $linkonly = false) {
+function _tpl_action_item($action, $icon, $return = false) {
 
   global $ACT;
 
   if ($action == 'discussion') {
+
     if (tpl_getConf('showDiscussion')) {
-      ob_start();
-      _tpl_action('discussion', 1, 'li', $icon);
-      $out = ob_get_clean();
+      $out = _tpl_action('discussion', 1, 'li', 1);
       $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
       return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
     }
+
     return '';
+
   }
 
   if ($link = tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ')) {
 
-    if ($linkonly) {
+    if ($return) {
       if ($ACT == $action) {
         $link = str_replace('class="action ', 'class="action active ', $link);
       }
