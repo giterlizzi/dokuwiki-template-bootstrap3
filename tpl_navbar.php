@@ -63,11 +63,19 @@
         ?>
 
         <ul class="nav navbar-nav">
+
           <?php if (! empty($_SERVER['REMOTE_USER']) && $showUserHomeLink): ?>
           <li>
             <?php tpl_link(_tpl_user_homepage_link(), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
           </li>
           <?php endif; ?>
+
+          <?php if ($fluidContainerBtn): ?>
+          <li<?php echo (_tpl_fluid_container_button() ? ' class="active"' : '')?>>
+            <a href="#" class="fluid-container"><i class="glyphicon glyphicon-fullscreen"></i></a>
+          </li>
+          <?php endif; ?>
+
           <?php if (empty($_SERVER['REMOTE_USER'])): ?>
           <li>
             <span class="dw__actions">
@@ -87,6 +95,7 @@
             echo _tpl_action_item('login', 'glyphicon glyphicon-log-out');
             endif;
           ?>
+
         </ul>
 
       </div>

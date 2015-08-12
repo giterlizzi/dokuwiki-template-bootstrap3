@@ -34,6 +34,7 @@ $lang['showTranslation']     = 'Display translation toolbar (require <em>Transla
 $lang['inverseNavbar']       = 'Inverse navbar';
 $lang['fixedTopNavbar']      = 'Fix navbar to top';
 $lang['fluidContainer']      = 'Enable the fluid container (full-width of page)';
+$lang['fluidContainerBtn']   = 'Display a button in navbar to expand container';
 $lang['pageOnPanel']         = 'Enable the panel around the page';
 $lang['bootstrapTheme']      = 'Bootstrap theme';
 $lang['bootstrapTheme_o_default']    = 'Vanilla Bootstrap theme';

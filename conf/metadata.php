@@ -25,6 +25,7 @@ $meta['showTranslation']     = array('onoff');
 $meta['inverseNavbar']       = array('onoff');
 $meta['fixedTopNavbar']      = array('onoff');
 $meta['fluidContainer']      = array('onoff');
+$meta['fluidContainerBtn']   = array('onoff');
 $meta['pageOnPanel']         = array('onoff');
 $meta['tableFullWidth']      = array('onoff');
 $meta['semantic']            = array('onoff');

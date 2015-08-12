@@ -34,6 +34,7 @@ $customTheme         = tpl_getConf('customTheme');
 $bootswatchTheme     = tpl_getConf('bootswatchTheme');
 $pageOnPanel         = tpl_getConf('pageOnPanel');
 $fluidContainer      = tpl_getConf('fluidContainer');
+$fluidContainerBtn   = tpl_getConf('fluidContainerBtn');
 $showPageInfo        = tpl_getConf('showPageInfo');
 $showBadges          = tpl_getConf('showBadges');
 $semantic            = tpl_getConf('semantic');
@@ -47,6 +48,9 @@ $tplConfigJSON       = array(
   'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),
 );
 
+if($fluidContainerBtn) {
+  $fluidContainer = _tpl_fluid_container_button();
+}
 
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 

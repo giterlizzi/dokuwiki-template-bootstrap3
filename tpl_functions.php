@@ -196,6 +196,11 @@ function _tpl_get_container_grid() {
   $showLeftSidebar  = page_findnearest($conf['sidebar']) && ($ACT=='show');
   $fluidContainer   = tpl_getConf('fluidContainer');
 
+  if(tpl_getConf('fluidContainerBtn')) {
+    $fluidContainer = _tpl_fluid_container_button();
+  }
+
+
   if (! $showLeftSidebar) {
     return 'container' . (($fluidContainer) ? '-fluid' : '');
   }
@@ -233,6 +238,21 @@ function _tpl_user_homepage_link() {
   $user_url  = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
 
   return wl(cleanID($user_url));
+
+}
+
+
+function _tpl_fluid_container_button() {
+
+  if (! tpl_getConf('fluidContainerBtn')) return false;
+
+  if (   get_doku_pref('fluidContainer', null) !== null
+      && get_doku_pref('fluidContainer', null) !== ''
+      && get_doku_pref('fluidContainer', null) !== '0') {
+    return true;
+  }
+
+  return false;
 
 }
 

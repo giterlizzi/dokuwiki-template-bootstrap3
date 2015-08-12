@@ -107,6 +107,31 @@ jQuery(document).ready(function() {
   });
 
 
+  jQuery('.fluid-container').on('click', function() {
+
+    var $self = jQuery(this);
+
+    if (jQuery('#dokuwiki__site').hasClass('container')) {
+
+      jQuery('#dokuwiki__site, nav > div, article').removeClass('container').addClass('container-fluid');
+      $self.parent().addClass('active');
+      $self.find('i').removeClass('glyphicon-resize-full').addClass('glyphicon-resize-small');
+
+      DokuCookie.setValue('fluidContainer', 1);
+
+    } else {
+
+      jQuery('#dokuwiki__site, nav > div, article').removeClass('container-fluid').addClass('container');
+      $self.parent().removeClass('active');
+      $self.find('i').removeClass('glyphicon-resize-small').addClass('glyphicon-resize-full');
+
+      DokuCookie.setValue('fluidContainer', 0);
+
+    }
+
+  });
+
+
   /* DOKUWIKI:include js/template.js */
 
 
@@ -144,6 +169,5 @@ jQuery(document).ready(function() {
     });
 
   }
-
 
 });
