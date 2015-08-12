@@ -26,6 +26,7 @@ Bootstrap3 template for DokuWiki
   * Explain Plugin
   * Wrap Plugin - Tabs
   * DataTables
+  * Bootstrap Wrapper Plugin
   * ... and more!
   
 ## Localizations
