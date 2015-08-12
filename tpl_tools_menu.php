@@ -26,7 +26,7 @@
       <li class="dropdown-header hidden-xs hidden-sm">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php _tpl_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
 
     </ul>
   </li>
@@ -45,7 +45,7 @@
       <li class="dropdown-header">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php _tpl_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
 
       <?php if ($max > $i): ?>
       <li class="divider"></li>
