@@ -71,8 +71,8 @@
           <?php endif; ?>
 
           <?php if ($fluidContainerBtn): ?>
-          <li<?php echo (_tpl_fluid_container_button() ? ' class="active"' : '')?>>
-            <a href="#" class="fluid-container"><i class="glyphicon glyphicon-fullscreen"></i></a>
+          <li class="hidden-xs<?php echo (_tpl_fluid_container_button() ? ' active' : '')?>">
+            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="glyphicon glyphicon-fullscreen"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
 
