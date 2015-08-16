@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * Template Functions
  *
@@ -278,9 +278,35 @@ function _tpl_fluid_container_button() {
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string   $toc from tpl_toc()
+ * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_toc($toc) {
+function bootstrap3_toc($toc, $return = false) {
+
+  $out = bootstrap3_toc_replace($toc);
+
+  if ($return) return $out;
+  echo $out;
+
+}
+
+
+function bootstrap3_toc_replace($toc) {
+
+  if (! $toc) return false;
+
+  $toc = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
+  $toc = str_replace('<div>', '<div class="panel-body">', $toc);
+  $toc = str_replace('<h3 class="', '<h3 class="panel-heading ', $toc);
+  $toc = str_replace('<ul class="toc">', '<ul class="toc nav nav-pills nav-stacked">', $toc);
+  $toc = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $toc);
+
+  return $toc;
+
+}
+
+
+function bootstrap3_toc_dom($toc) {
 
   if (! $toc) return false;
 
@@ -324,10 +350,10 @@ function bootstrap3_toc($toc) {
     $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
   }
 
-  echo $html;
   return $html;
 
 }
+
 
 
 /**
@@ -336,12 +362,33 @@ function bootstrap3_toc($toc) {
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string   $sidebar
+ * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_sidebar($sidebar) {
+function bootstrap3_sidebar($sidebar, $return = false) {
+
+  $out = bootstrap3_sidebar_replace($sidebar);
+
+  if ($return) return $out;
+  echo $out;
+
+}
+
+
+function bootstrap3_sidebar_replace($sidebar) {
+
+  $sidebar = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
+  $sidebar = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $sidebar);
+
+  return $sidebar;
+
+}
+
+
+function bootstrap3_sidebar_dom($sidebar) {
 
   if (! $sidebar) return false;
-
+  $start = microtime(true);
   $dom = new DOMDocument('1.0');
   $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $sidebar);
 
@@ -374,7 +421,6 @@ function bootstrap3_sidebar($sidebar) {
     $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
   }
 
-  echo $html;
   return $html;
 
 }
