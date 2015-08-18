@@ -1,5 +1,4 @@
 <?php
-
 /**
  * DokuWiki Bootstrap3 Template: Tools Menu
  *

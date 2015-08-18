@@ -1,3 +1,13 @@
+<?php
+/**
+ * DokuWiki Bootstrap3 Template: Sidebar
+ *
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+?>
 <!-- ********** ASIDE ********** -->
 <aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">
   <div class="content">
