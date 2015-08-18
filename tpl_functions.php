@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Template Functions
  *
@@ -283,77 +283,16 @@ function _tpl_fluid_container_button() {
  */
 function bootstrap3_toc($toc, $return = false) {
 
-  $out = bootstrap3_toc_replace($toc);
+  $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
+  $out = str_replace('<div>', '<div class="panel-body">', $out);
+  $out = str_replace('<h3 class="', '<h3 class="panel-heading ', $out);
+  $out = str_replace('<ul class="toc">', '<ul class="toc nav nav-pills nav-stacked">', $out);
+  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
 
   if ($return) return $out;
   echo $out;
 
 }
-
-
-function bootstrap3_toc_replace($toc) {
-
-  if (! $toc) return false;
-
-  $toc = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
-  $toc = str_replace('<div>', '<div class="panel-body">', $toc);
-  $toc = str_replace('<h3 class="', '<h3 class="panel-heading ', $toc);
-  $toc = str_replace('<ul class="toc">', '<ul class="toc nav nav-pills nav-stacked">', $toc);
-  $toc = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $toc);
-
-  return $toc;
-
-}
-
-
-function bootstrap3_toc_dom($toc) {
-
-  if (! $toc) return false;
-
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $toc);
-
-  if ($panel = $dom->getElementsByTagName('div')->item(0)) {
-
-    $panel->setAttribute('class', 'panel panel-default'); 
-
-    $panel_title = $dom->getElementsByTagName('h3')->item(0);
-    $panel_title->setAttribute('class', $panel_title->getAttribute('class') . ' panel-heading');
-
-    $panel_body = $dom->getElementsByTagName('div')->item(1);
-    $panel_body->setAttribute('class', 'panel-body');
-
-    foreach ($dom->getElementsByTagName('ul') as $ul) {
-
-      $ul->setAttribute('class', $ul->getAttribute('class') . ' nav nav-pills nav-stacked');
-
-      foreach ($ul->getElementsByTagName('li') as $li) {
-
-        if ($div = $li->getElementsByTagName('div')->item(0)) {
-          if ($a = $li->getElementsByTagName('a')->item(0)) {
-            $div->parentNode->replaceChild($a, $div);
-          }
-        }
-
-      }
-
-    }
-
-  }
-
-  $html = '';
-
-  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
-    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-  } else {
-    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
-    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
-  }
-
-  return $html;
-
-}
-
 
 
 /**
@@ -367,61 +306,11 @@ function bootstrap3_toc_dom($toc) {
  */
 function bootstrap3_sidebar($sidebar, $return = false) {
 
-  $out = bootstrap3_sidebar_replace($sidebar);
+  $out = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
+  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
 
   if ($return) return $out;
   echo $out;
-
-}
-
-
-function bootstrap3_sidebar_replace($sidebar) {
-
-  $sidebar = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
-  $sidebar = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $sidebar);
-
-  return $sidebar;
-
-}
-
-
-function bootstrap3_sidebar_dom($sidebar) {
-
-  if (! $sidebar) return false;
-  $start = microtime(true);
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $sidebar);
-
-  foreach ($dom->getElementsByTagName('ul') as $ul) {
-
-    foreach ($ul->getElementsByTagName('li') as $li) {
-
-      $ul->setAttribute('class', 'nav nav-pills nav-stacked');
-
-      if ($curid = $li->getElementsByTagNAme('span')->item(0)) {
-        $li->setAttribute('class', $li->getAttribute('class') . ' active');
-      }
-
-      if ($div = $li->getElementsByTagName('div')->item(0)) {
-        if ($a = $li->getElementsByTagName('a')->item(0)) {
-          $div->parentNode->replaceChild($a, $div);
-        }
-      }
-
-    }
-
-  }
-
-  $html = '';
-
-  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
-    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-  } else {
-    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
-    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
-  }
-
-  return $html;
 
 }
 
