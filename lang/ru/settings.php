@@ -34,6 +34,7 @@ $lang['showTranslation']     = 'Отображать языковую панел
 $lang['inverseNavbar']       = 'Перевернуть панель навигации';
 $lang['fixedTopNavbar']      = 'Зафиксировать панель навигации сверху';
 $lang['fluidContainer']      = 'Разрешить плавающий контейнер(страница во весь экран)';
+$lang['fluidContainerBtn']   = 'Display a button in navbar to expand container';
 $lang['pageOnPanel']         = 'Включить рамку вокруг страницы';
 $lang['bootstrapTheme']      = 'Выберите графическую тему (Bootstrap оригинальная, Bootstrap дополнительная, темы Bootswatch.com или графическая тема по выбору)';
 $lang['bootstrapTheme_o_default']    = 'Bootstrap оригинальная';

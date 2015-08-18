@@ -6,7 +6,8 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussion']        = 'Discussione';
-$lang['back_to_article']   = 'Ritorna all\'articolo';
-$lang['userpage']          = 'Pagina Utente';
-$lang['themes']            = 'Temi';
+$lang['discussion']       = 'Discussione';
+$lang['back_to_article']  = 'Ritorna all\'articolo';
+$lang['userpage']         = 'Pagina Utente';
+$lang['themes']           = 'Temi';
+$lang['expand_container'] = 'Expand/Reduce';

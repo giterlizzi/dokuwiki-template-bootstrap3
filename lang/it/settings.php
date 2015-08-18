@@ -34,6 +34,7 @@ $lang['showTranslation']     = 'Mostra la barra delle traduzioni (richiede <em>T
 $lang['inverseNavbar']       = 'Barra di naginazione (navbar) invertita';
 $lang['fixedTopNavbar']      = 'Blocca la barra di navigazione in alto';
 $lang['fluidContainer']      = 'Abilita il "fluid container" (grandezza massima della pagina)';
+$lang['fluidContainerBtn']   = 'Display a button in navbar to expand container';
 $lang['pageOnPanel']         = 'Abilita il pannello intorno alla pagina';
 $lang['bootstrapTheme']      = 'Tema Bootstrap';
 $lang['bootstrapTheme_o_default']    = 'Tema base di Bootstrap';

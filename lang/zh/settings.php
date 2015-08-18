@@ -34,6 +34,7 @@ $lang['showTranslation']     = '显示翻译工具栏（需要<em>翻译插件</
 $lang['inverseNavbar']       = '逆向导航栏';
 $lang['fixedTopNavbar']      = '固定导航栏至顶部';
 $lang['fluidContainer']      = '启用流体容器（全宽页面）';
+$lang['fluidContainerBtn']   = 'Display a button in navbar to expand container';
 $lang['pageOnPanel']         = '使面板绕在页面上';
 $lang['bootstrapTheme']      = 'Bootstrap 主题';
 $lang['bootstrapTheme_o_default']    = '香草（Vanilla）Bootstrap 主题';

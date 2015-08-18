@@ -34,6 +34,7 @@ $lang['showTranslation']     = '翻訳ツールバーを表示する（<em>Trans
 $lang['inverseNavbar']       = 'navbar の色を反転する';
 $lang['fixedTopNavbar']      = 'navbar を上部に固定する';
 $lang['fluidContainer']      = 'Enable the fluid container (full-width of page)';
+$lang['fluidContainerBtn']   = 'Display a button in navbar to expand container';
 $lang['pageOnPanel']         = 'Enable the panel around the page';
 $lang['bootstrapTheme']      = 'Bootstrap テーマ';
 $lang['bootstrapTheme_o_default']    = 'Vanilla Bootstrap テーマ';
