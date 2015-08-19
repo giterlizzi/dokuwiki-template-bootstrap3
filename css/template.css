@@ -289,3 +289,21 @@ a.iw_user {
 ul.btn-group {
   padding: 0;
 }
+
+
+/** Custom DropDown menu with multiple columns */
+.dropdown-row {
+  min-width: 480px;
+}
+
+.dropdown-row > ul {
+  position: initial;
+  border: 0px;
+  box-shadow: initial;
+}
+
+.dropdown-row > ul li a {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
+}

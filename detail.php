@@ -28,6 +28,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php tpl_includeFile('meta.html') ?>
   <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php endforeach; ?>
   <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
@@ -52,7 +53,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <?php else: ?>
 
       <h1 class="page-header">
-        <i class="glyphicon glyphicon-picture text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+        <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
       </h1>
 
       <div class="row">
@@ -66,7 +67,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
           <div class="panel panel-default">
             <div class="panel-heading">
               <h4 class="panel-title">
-                <i class="glyphicon glyphicon-picture"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+                <i class="fa fa-picture-o"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
               </h4>
             </div>
             <div class="panel-body">
@@ -97,7 +98,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               // This message is available from release 2015-08-10 "Detritus"
               if(isset($lang['media_acl_warning'])): ?>
               <div class="alert alert-warning">
-                <i class="glyphicon glyphicon-warning-sign"></i> <?php echo $lang['media_acl_warning']; ?>
+                <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
               </div>
               <?php endif; ?>
 

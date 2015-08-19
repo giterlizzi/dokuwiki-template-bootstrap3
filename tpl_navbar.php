@@ -57,6 +57,7 @@
         <?php endif; ?>
 
         <?php
+          include_once(dirname(__FILE__).'/tpl_admin.php');
           include_once(dirname(__FILE__).'/tpl_tools_menu.php');
           include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
           include_once(dirname(__FILE__).'/tpl_translation.php');
@@ -66,13 +67,13 @@
 
           <?php if (! empty($_SERVER['REMOTE_USER']) && $showUserHomeLink): ?>
           <li>
-            <?php tpl_link(_tpl_user_homepage_link(), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
+            <?php tpl_link(_tpl_user_homepage_link(), '<i class="fa fa-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
           </li>
           <?php endif; ?>
 
           <?php if ($fluidContainerBtn): ?>
           <li class="hidden-xs<?php echo (_tpl_fluid_container_button() ? ' active' : '')?>">
-            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="glyphicon glyphicon-fullscreen"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
+            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
 
@@ -81,10 +82,10 @@
             <span class="dw__actions">
               <?php
 
-                echo _tpl_action_item('register', 'glyphicon glyphicon-edit', true);
+                echo _tpl_action_item('register', 'fa fa-user-plus', true);
 
                 if ($showLoginLink) {
-                  echo _tpl_action_item('login', 'glyphicon glyphicon-log-in', true);
+                  echo _tpl_action_item('login', 'fa fa-sign-in', true);
                 }
 
               ?>
@@ -92,7 +93,7 @@
           </li>
           <?php
             else:
-            echo _tpl_action_item('login', 'glyphicon glyphicon-log-out');
+            echo _tpl_action_item('login', 'fa fa-sign-out');
             endif;
           ?>
 

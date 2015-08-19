@@ -81,12 +81,12 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
       if ($publish.hasClass('approved_no')) {
         $publish.removeClass('approved_no')
           .addClass('alert-warning')
-          .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
+          .prepend('<i class="fa fa-info-circle"/> ');
       }
       if ($publish.hasClass('approved_yes')) {
         $publish.removeClass('approved_yes')
           .addClass('alert-success')
-          .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
+          .prepend('<i class="fa fa-check-circle"/> ');
       }
 
     }
@@ -97,7 +97,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
       $discussion.find('h2').addClass('page-header');
       $discussion.find('.comment_buttons').addClass('text-right');
-      $discussion.find('#discussion__section').prepend('<i class="glyphicon glyphicon-comment"/> ');
+      $discussion.find('#discussion__section').prepend('<i class="fa fa-comments"/> ');
 
       $discussion.find('.hentry').addClass('panel panel-default');
       $discussion.find('.hentry .comment_head').addClass('panel-heading');
@@ -146,7 +146,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $tag.html($tag.html().replace(/,/g, ''));
 
         var $tagLabel = $tag.find('a').addClass('label label-default')
-                                      .prepend('<i class="glyphicon glyphicon-tag"/> ');
+                                      .prepend('<i class="fa fa-tag"/> ');
 
         if ($tag.prop('tagName').toLowerCase() == 'div') {
           $tag.remove();

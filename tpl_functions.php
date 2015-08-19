@@ -353,7 +353,7 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '</div>';
 
-    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="glyphicon glyphicon-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
@@ -389,19 +389,19 @@ function bootstrap3_html_msgarea() {
             switch ($msg['lvl']) {
               case 'info':
                 $level = 'info';
-                $icon  = 'glyphicon glyphicon-info-sign';
+                $icon  = 'fa fa-info-circle';
                 break;
               case 'error':
                 $level = 'danger';
-                $icon  = 'glyphicon glyphicon-exclamation-sign';
+                $icon  = 'fa fa-times-circle';
                 break;
               case 'notify':
                 $level = 'warning';
-                $icon  = 'glyphicon glyphicon-warning-sign';
+                $icon  = 'fa fa-warning';
                 break;
               case 'success':
                 $level = 'success';
-                $icon  = 'glyphicon glyphicon-ok-sign';
+                $icon  = 'fa fa-check-circle';
                 break;
             }
             print '<div class="alert alert-'.$level.'">';
@@ -434,34 +434,34 @@ function _tpl_tools() {
   $tools  = array(
 
     'user' => array(
-      'icon'  => 'glyphicon glyphicon-user',
+      'icon'  => 'fa fa-user',
       'items' => array(
-        'admin'    => array('icon' => 'glyphicon glyphicon-cog'),
-        'profile'  => array('icon' => 'glyphicon glyphicon-refresh'),
-        #'register' => array('icon' => 'glyphicon glyphicon-edit'),
-        #'login'    => array('icon' => 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+        'admin'    => array('icon' => 'fa fa-cogs'),
+        'profile'  => array('icon' => 'fa fa-refresh'),
+        #'register' => array('icon' => 'fa fa-user-plus'),
+        #'login'    => array('icon' => 'fa fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
       )
     ),
 
     'site' => array(
-      'icon'  => 'glyphicon glyphicon-cog',
+      'icon'  => 'fa fa-wrench',
       'items' => array(
-        'recent' => array('icon' => 'glyphicon glyphicon-list-alt'),
-        'media'  => array('icon' => 'glyphicon glyphicon-picture'),
-        'index'  => array('icon' => 'glyphicon glyphicon-list'),
+        'recent' => array('icon' => 'fa fa-list-alt'),
+        'media'  => array('icon' => 'fa fa-picture-o'),
+        'index'  => array('icon' => 'fa fa-sitemap'),
       )
     ),
 
     'page' => array(
-      'icon'  => 'glyphicon glyphicon-file',
+      'icon'  => 'fa fa-file',
       'items' => array(
-        'edit'       => array('icon' => 'glyphicon glyphicon-' . (($ACT == 'edit') ? 'file' : 'edit')),
-        'discussion' => array('icon' => 'glyphicon glyphicon-comment'),
-        'revert'     => array('icon' => 'glyphicon glyphicon-repeat'),
-        'revisions'  => array('icon' => 'glyphicon glyphicon-time'),
-        'backlink'   => array('icon' => 'glyphicon glyphicon-link'),
-        'subscribe'  => array('icon' => 'glyphicon glyphicon-envelope'),
-        'top'        => array('icon' => 'glyphicon glyphicon-chevron-up'),
+        'edit'       => array('icon' => 'fa fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+        'discussion' => array('icon' => 'fa fa-comments'),
+        'revert'     => array('icon' => 'fa fa-repeat'),
+        'revisions'  => array('icon' => 'fa fa-clock-o'),
+        'backlink'   => array('icon' => 'fa fa-link'),
+        'subscribe'  => array('icon' => 'fa fa-envelope-o'),
+        'top'        => array('icon' => 'fa fa-chevron-up'),
       )
     ),
 

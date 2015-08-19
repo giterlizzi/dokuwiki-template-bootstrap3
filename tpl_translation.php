@@ -25,10 +25,10 @@ if (tpl_getConf('showTranslation') && $translation = plugin_load('helper','trans
 <ul class="nav navbar-nav" id="dw__translation">
   <li class="dropdown">
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $trans_label ?>">
-      <i class="glyphicon glyphicon-flag"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $trans_label ?></span><span class="caret"></span>
+      <i class="fa fa-flag"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $trans_label ?></span><span class="caret"></span>
     </a>
   <ul class="dropdown-menu" role="menu">
-    <li class="dropdown-header hidden-xs hidden-sm"><i class="glyphicon glyphicon-flag"></i> <?php echo $trans_label ?></li>
+    <li class="dropdown-header hidden-xs hidden-sm"><i class="fa fa-flag"></i> <?php echo $trans_label ?></li>
     <?php echo $trans_items ?>
   </ul>
 </ul>
