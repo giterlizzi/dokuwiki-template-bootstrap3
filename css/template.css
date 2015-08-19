@@ -259,6 +259,16 @@ a.iw_user {
   list-style-type: none;
 }
 
+/* Extension Manager */
+#extension__manager .panelHeader,
+#extension__manager ul.tabs li.active a {
+  background-color: initial;
+}
+
+#extension__manager ul.tabs li.active a {
+  border-bottom-color: white; /* FIXME */
+}
+
 
 /** Override Bootstrap3 style */
 
