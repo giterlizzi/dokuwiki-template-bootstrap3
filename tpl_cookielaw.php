@@ -24,7 +24,7 @@
     DokuCookie.setValue('cookieNoticeAccepted', true);
   });
   jQuery(document).ready(function(){
-    jQuery('#cookieNotice p').addClass('navbar-text').prepend('<i class="glyphicon glyphicon-info-sign text-primary"/>');
+    jQuery('#cookieNotice p').addClass('navbar-text').prepend('<i class="fa fa-info-circle text-primary"/>');
   });
 </script>
 <?php endif; ?>

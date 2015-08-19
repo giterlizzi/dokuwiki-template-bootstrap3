@@ -15,10 +15,10 @@ $themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'l
 <ul class="nav navbar-nav" id="dw__themes">
   <li class="dropdown">
 
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="glyphicon glyphicon-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
+    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
 
     <ul class="dropdown-menu" aria-labelledby="themes">
-      <li class="dropdown-header"><i class="glyphicon glyphicon-tint"></i> Bootswatch Themes</li>
+      <li class="dropdown-header"><i class="fa fa-tint"></i> Bootswatch Themes</li>
       <?php foreach ($themes as $theme): ?>
       <?php if(! in_array($theme, $hideInThemeSwitcher)): ?>
       <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>>

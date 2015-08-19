@@ -137,7 +137,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       <footer id="dokuwiki__footer" class="small">
 
-        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
         <div class="text-right">
 
@@ -149,7 +149,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
           <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
           <span class="loginLink hidden-print">
-            <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
+            <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
           </span>
           <?php endif; ?>
 

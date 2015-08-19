@@ -278,54 +278,19 @@ function _tpl_fluid_container_button() {
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string   $toc from tpl_toc()
+ * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_toc($toc) {
+function bootstrap3_toc($toc, $return = false) {
 
-  if (! $toc) return false;
+  $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
+  $out = str_replace('<div>', '<div class="panel-body">', $out);
+  $out = str_replace('<h3 class="', '<h3 class="panel-heading ', $out);
+  $out = str_replace('<ul class="toc">', '<ul class="toc nav nav-pills nav-stacked">', $out);
+  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
 
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $toc);
-
-  if ($panel = $dom->getElementsByTagName('div')->item(0)) {
-
-    $panel->setAttribute('class', 'panel panel-default'); 
-
-    $panel_title = $dom->getElementsByTagName('h3')->item(0);
-    $panel_title->setAttribute('class', $panel_title->getAttribute('class') . ' panel-heading');
-
-    $panel_body = $dom->getElementsByTagName('div')->item(1);
-    $panel_body->setAttribute('class', 'panel-body');
-
-    foreach ($dom->getElementsByTagName('ul') as $ul) {
-
-      $ul->setAttribute('class', $ul->getAttribute('class') . ' nav nav-pills nav-stacked');
-
-      foreach ($ul->getElementsByTagName('li') as $li) {
-
-        if ($div = $li->getElementsByTagName('div')->item(0)) {
-          if ($a = $li->getElementsByTagName('a')->item(0)) {
-            $div->parentNode->replaceChild($a, $div);
-          }
-        }
-
-      }
-
-    }
-
-  }
-
-  $html = '';
-
-  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
-    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-  } else {
-    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
-    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
-  }
-
-  echo $html;
-  return $html;
+  if ($return) return $out;
+  echo $out;
 
 }
 
@@ -336,46 +301,16 @@ function bootstrap3_toc($toc) {
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string   $sidebar
+ * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_sidebar($sidebar) {
+function bootstrap3_sidebar($sidebar, $return = false) {
 
-  if (! $sidebar) return false;
+  $out = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
+  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
 
-  $dom = new DOMDocument('1.0');
-  $dom->loadHTML('<?xml version="1.0" encoding="UTF-8"?>' . $sidebar);
-
-  foreach ($dom->getElementsByTagName('ul') as $ul) {
-
-    foreach ($ul->getElementsByTagName('li') as $li) {
-
-      $ul->setAttribute('class', 'nav nav-pills nav-stacked');
-
-      if ($curid = $li->getElementsByTagNAme('span')->item(0)) {
-        $li->setAttribute('class', $li->getAttribute('class') . ' active');
-      }
-
-      if ($div = $li->getElementsByTagName('div')->item(0)) {
-        if ($a = $li->getElementsByTagName('a')->item(0)) {
-          $div->parentNode->replaceChild($a, $div);
-        }
-      }
-
-    }
-
-  }
-
-  $html = '';
-
-  if (version_compare(PHP_VERSION, '5.3.6', '>=')) {
-    $html = $dom->saveHTML($dom->getElementsByTagName('body')->item(0));
-  } else {
-    $html = preg_replace('~<(?:!DOCTYPE|/?(?:html|body))[^>]*>\s*~i', '', $dom->saveHTML());
-    $html = preg_replace('~<\?xml(.*)\?>~', '', $html);
-  }
-
-  echo $html;
-  return $html;
+  if ($return) return $out;
+  echo $out;
 
 }
 
@@ -418,7 +353,7 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '</div>';
 
-    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="glyphicon glyphicon-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
@@ -454,19 +389,19 @@ function bootstrap3_html_msgarea() {
             switch ($msg['lvl']) {
               case 'info':
                 $level = 'info';
-                $icon  = 'glyphicon glyphicon-info-sign';
+                $icon  = 'fa fa-info-circle';
                 break;
               case 'error':
                 $level = 'danger';
-                $icon  = 'glyphicon glyphicon-exclamation-sign';
+                $icon  = 'fa fa-times-circle';
                 break;
               case 'notify':
                 $level = 'warning';
-                $icon  = 'glyphicon glyphicon-warning-sign';
+                $icon  = 'fa fa-warning';
                 break;
               case 'success':
                 $level = 'success';
-                $icon  = 'glyphicon glyphicon-ok-sign';
+                $icon  = 'fa fa-check-circle';
                 break;
             }
             print '<div class="alert alert-'.$level.'">';
@@ -499,34 +434,34 @@ function _tpl_tools() {
   $tools  = array(
 
     'user' => array(
-      'icon'  => 'glyphicon glyphicon-user',
+      'icon'  => 'fa fa-user',
       'items' => array(
-        'admin'    => array('icon' => 'glyphicon glyphicon-cog'),
-        'profile'  => array('icon' => 'glyphicon glyphicon-refresh'),
-        #'register' => array('icon' => 'glyphicon glyphicon-edit'),
-        #'login'    => array('icon' => 'glyphicon glyphicon-log-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+        'admin'    => array('icon' => 'fa fa-cogs'),
+        'profile'  => array('icon' => 'fa fa-refresh'),
+        #'register' => array('icon' => 'fa fa-user-plus'),
+        #'login'    => array('icon' => 'fa fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
       )
     ),
 
     'site' => array(
-      'icon'  => 'glyphicon glyphicon-cog',
+      'icon'  => 'fa fa-wrench',
       'items' => array(
-        'recent' => array('icon' => 'glyphicon glyphicon-list-alt'),
-        'media'  => array('icon' => 'glyphicon glyphicon-picture'),
-        'index'  => array('icon' => 'glyphicon glyphicon-list'),
+        'recent' => array('icon' => 'fa fa-list-alt'),
+        'media'  => array('icon' => 'fa fa-picture-o'),
+        'index'  => array('icon' => 'fa fa-sitemap'),
       )
     ),
 
     'page' => array(
-      'icon'  => 'glyphicon glyphicon-file',
+      'icon'  => 'fa fa-file',
       'items' => array(
-        'edit'       => array('icon' => 'glyphicon glyphicon-' . (($ACT == 'edit') ? 'file' : 'edit')),
-        'discussion' => array('icon' => 'glyphicon glyphicon-comment'),
-        'revert'     => array('icon' => 'glyphicon glyphicon-repeat'),
-        'revisions'  => array('icon' => 'glyphicon glyphicon-time'),
-        'backlink'   => array('icon' => 'glyphicon glyphicon-link'),
-        'subscribe'  => array('icon' => 'glyphicon glyphicon-envelope'),
-        'top'        => array('icon' => 'glyphicon glyphicon-chevron-up'),
+        'edit'       => array('icon' => 'fa fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+        'discussion' => array('icon' => 'fa fa-comments'),
+        'revert'     => array('icon' => 'fa fa-repeat'),
+        'revisions'  => array('icon' => 'fa fa-clock-o'),
+        'backlink'   => array('icon' => 'fa fa-link'),
+        'subscribe'  => array('icon' => 'fa fa-envelope-o'),
+        'top'        => array('icon' => 'fa fa-chevron-up'),
       )
     ),
 

@@ -22,6 +22,7 @@ $meta['showCookieLawBanner'] = array('onoff');
 $meta['cookieLawBannerPage'] = array('string');
 $meta['cookieLawPolicyPage'] = array('string');
 $meta['showTranslation']     = array('onoff');
+$meta['showAdminMenu']       = array('onoff');
 $meta['inverseNavbar']       = array('onoff');
 $meta['fixedTopNavbar']      = array('onoff');
 $meta['fluidContainer']      = array('onoff');
