@@ -65,7 +65,10 @@
 
         <ul class="nav navbar-nav">
 
-          <?php if (! empty($_SERVER['REMOTE_USER']) && $showUserHomeLink): ?>
+          <?php if (   ! empty($_SERVER['REMOTE_USER'])
+                    && $showUserHomeLink
+                    && (   ! $showTools
+                        || ! in_array('user', explode(',', tpl_getConf('showIndividualTool'))))): ?>
           <li>
             <?php tpl_link(_tpl_user_homepage_link(), '<i class="fa fa-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
           </li>
@@ -93,7 +96,7 @@
           </li>
           <?php
             else:
-            echo _tpl_action_item('login', 'fa fa-sign-out');
+            echo _tpl_action_item('login', 'fa fa-power-off');
             endif;
           ?>
 

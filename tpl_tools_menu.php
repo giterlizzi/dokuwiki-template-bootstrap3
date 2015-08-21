@@ -25,6 +25,14 @@
       <li class="dropdown-header hidden-xs hidden-sm">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
+
+      <?php if ($id == 'user' && $showUserHomeLink && ! empty($_SERVER['REMOTE_USER'])): ?>
+      <li>
+        <a href="<?php echo _tpl_user_homepage_link() ?>">
+          <i class="fa fa-home"></i> <?php echo userlink(null, true) ?> Home Page
+        </a>
+      </li>
+      <?php endif; ?>
       <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
 
     </ul>
@@ -44,6 +52,13 @@
       <li class="dropdown-header">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
+      <?php if ($id == 'user' && $showUserHomeLink && ! empty($_SERVER['REMOTE_USER'])): ?>
+      <li>
+        <a href="<?php echo _tpl_user_homepage_link() ?>">
+          <i class="fa fa-home"></i> <?php echo userlink(null, true) ?> Home Page
+        </a>
+      </li>
+      <?php endif; ?>
       <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
 
       <?php if ($max > $i): ?>
