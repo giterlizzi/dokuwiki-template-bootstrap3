@@ -31,6 +31,7 @@ $lang['tableFullWidth']      = '启用 100% 全表格宽度（Bootstrap 默认�
 $lang['semantic']            = '启用语义数据';
 $lang['schemaOrgType']       = 'Schema.org 类型（文章 <code>Article</code>，新闻文章 <code>NewsArticle</code>，技术文章 <code>TechArticle</code>，博客文章 <code>BlogPosting</code>）';
 $lang['showTranslation']     = '显示翻译工具栏（需要<em>翻译插件</em>）';
+$lang['showAdminMenu']       = 'Display Administration menu';
 $lang['inverseNavbar']       = '逆向导航栏';
 $lang['fixedTopNavbar']      = '固定导航栏至顶部';
 $lang['fluidContainer']      = '启用流体容器（全宽页面）';

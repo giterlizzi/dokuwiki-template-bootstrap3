@@ -31,6 +31,7 @@ $lang['tableFullWidth']      = '100% のテーブル幅を有効にする（Boot
 $lang['semantic']            = 'semantic データを有効にする';
 $lang['schemaOrgType']       = 'Schema.org の型（<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>）';
 $lang['showTranslation']     = '翻訳ツールバーを表示する（<em>Translation プラグイン</em>が必要）';
+$lang['showAdminMenu']       = 'Display Administration menu';
 $lang['inverseNavbar']       = 'navbar の色を反転する';
 $lang['fixedTopNavbar']      = 'navbar を上部に固定する';
 $lang['fluidContainer']      = 'Enable the fluid container (full-width of page)';

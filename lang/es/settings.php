@@ -31,6 +31,7 @@ $lang['tableFullWidth']      = 'Habilitar el ancho de tabla a 100% (predetermina
 $lang['semantic']            = 'Habilitar datos semánticos';
 $lang['schemaOrgType']       = 'Tipo de Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
 $lang['showTranslation']     = 'Mostrar barra de traducción (requiere <em>Translation Plugin</em>)';
+$lang['showAdminMenu']       = 'Mostrar menú de Administración';
 $lang['inverseNavbar']       = 'Barra de navegación (navbar) invertida';
 $lang['fixedTopNavbar']      = 'Fijar la barra de navegación (navbar) a la parte de arriba';
 $lang['fluidContainer']      = 'Habilitar el contenedor fluído (todo el ancho de la página)';

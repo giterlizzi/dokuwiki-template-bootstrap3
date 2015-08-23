@@ -31,6 +31,7 @@ $lang['tableFullWidth']      = 'Enable 100% full table width (Bootstrap default)
 $lang['semantic']            = 'Abilita i dati semantici';
 $lang['schemaOrgType']       = 'Tipo di dato Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
 $lang['showTranslation']     = 'Mostra la barra delle traduzioni (richiede <em>Translation Plugin</em>)';
+$lang['showAdminMenu']       = 'Display Administration menu';
 $lang['inverseNavbar']       = 'Barra di naginazione (navbar) invertita';
 $lang['fixedTopNavbar']      = 'Blocca la barra di navigazione in alto';
 $lang['fluidContainer']      = 'Abilita il "fluid container" (grandezza massima della pagina)';
