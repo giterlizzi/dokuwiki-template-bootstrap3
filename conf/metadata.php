@@ -40,3 +40,4 @@ $meta['showPageInfo']        = array('onoff');
 $meta['showBadges']          = array('onoff');
 $meta['showDiscussion']      = array('onoff');
 $meta['discussionPage']      = array('string');
+$meta['useGravatar']         = array('onoff');

@@ -145,6 +145,17 @@ input, textarea, select {
   max-width: 20em;
 }
 
+#dw__user_menu .page-header {
+  margin: 20px 0 10px;
+}
+
+#dw__user_menu .nav > li > a {
+  padding: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
+}
+
 .dw__sidebar .nav li a {
   padding: 5px 10px;
 }

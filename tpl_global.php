@@ -42,6 +42,7 @@ $semantic            = tpl_getConf('semantic');
 $schemaOrgType       = tpl_getConf('schemaOrgType');
 $leftSidebarGrid     = tpl_getConf('leftSidebarGrid');
 $rightSidebarGrid    = tpl_getConf('rightSidebarGrid');
+$useGravatar         = tpl_getConf('useGravatar');
 $contentGrid         = _tpl_get_container_grid();
 $hideInThemeSwitcher = explode(',', tpl_getConf('hideInThemeSwitcher'));
 $bootstrapStyles     = array();

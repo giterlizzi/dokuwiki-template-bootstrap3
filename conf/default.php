@@ -40,3 +40,4 @@ $conf['showPageInfo']        = 1;
 $conf['showBadges']          = 1;
 $conf['showDiscussion']      = 0;
 $conf['discussionPage']      = 'discussion:@ID@';
+$conf['useGravatar']         = 0;
