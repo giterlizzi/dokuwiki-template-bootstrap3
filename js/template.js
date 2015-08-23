@@ -70,7 +70,8 @@ jQuery(document).on('bootstrap3:nav', function(e) {
   setTimeout(function() {
 
     // Unwrap unnecessary tags inside list items for Bootstrap nav component
-    jQuery('.nav div.li').contents().unwrap();
+    jQuery('.nav div.li')
+      .contents().unwrap();
 
   }, 0);
 
@@ -111,7 +112,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
     // Section Button edit
     jQuery('.btn_secedit .btn').input2button();
-    jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="fa fa-pencil"/> ');
+    jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="fa fa-fw fa-pencil"/> ');
 
   }, 0);
 
@@ -164,11 +165,11 @@ jQuery(document).on('bootstrap3:icons', function(e) {
     };
 
     // Interwiki User page icon
-    jQuery('.iw_user').prepend('<i class="fa fa-user"/> ');
+    jQuery('.iw_user').prepend('<i class="fa fa-fw fa-user"/> ');
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show')) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-user"/> ');
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
   }, 0);
@@ -205,9 +206,9 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
-    $dw_toc.find('.open strong').addClass('fa fa-chevron-up');
+    $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
-    $dw_toc.find('h3').prepend('<i class="fa fa-list" style="padding-right: 5px"/> ');
+    $dw_toc.find('h3').prepend('<i class="fa fa-fw fa-list" style="padding-right: 5px"/> ');
 
     $dw_toc.find('h3').click(function() {
 
@@ -283,25 +284,25 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
     jQuery('div.info')
       .removeClass('info')
       .addClass('alert alert-info')
-      .prepend('<i class="fa fa-info-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
 
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="fa fa-info-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
 
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
-      .prepend('<i class="fa fa-check-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-check-circle"/> ');
 
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
       .addClass('alert alert-warning')
-      .prepend('<i class="fa fa-warning"/> ');
+      .prepend('<i class="fa fa-fw fa-warning"/> ');
 
   }, 0);
 
@@ -318,7 +319,7 @@ jQuery(document).on('bootstrap3:breadcrumbs', function(e) {
 
     if (! $dw_breadcrumbs.length) return false; 
 
-    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="fa fa-home"/>');
+    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="fa fa-fw fa-home"/>');
     //$dw_breadcrumbs.find('span.curid').find('a').addClass('curid');
     $dw_breadcrumbs.find('span.bchead').addClass('pull-left');
 
@@ -377,10 +378,10 @@ jQuery(document).on('bootstrap3:detail', function(e) {
       .addClass('dl-horizontal');
     $detail_page.find('.img_backto')
       .addClass('btn btn-success')
-      .prepend('<i class="fa fa-arrow-left"/> ');
+      .prepend('<i class="fa fa-fw fa-arrow-left"/> ');
     $detail_page.find('.mediaManager')
       .addClass('btn btn-default')
-      .prepend('<i class="fa fa-picture-o"/> ');
+      .prepend('<i class="fa fa-fw fa-picture-o"/> ');
 
   }, 0);
 
@@ -394,7 +395,7 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
     if (! dw_mode('search')) return false;
 
-    jQuery('ul.search_quickhits li a').prepend('<i class="fa fa-file text-muted"/> ');
+    jQuery('ul.search_quickhits li a').prepend('<i class="fa fa-fw fa-file text-muted"/> ');
 
     jQuery('.search_results dt')
       .contents()
@@ -441,18 +442,18 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     $ext_actions.find('.uninstall')
       .addClass('btn-danger')
-      .prepend('<i class="fa fa-trash"/> ');
+      .prepend('<i class="fa fa-fw fa-trash"/> ');
 
     $ext_actions.find('.install, .update, .reinstall')
       .addClass('btn-primary')
-      .prepend('<i class="fa fa-download"/> ');
+      .prepend('<i class="fa fa-fw fa-download"/> ');
 
     $ext_actions.find('.enable')
       .addClass('btn-success')
-      .prepend('<i class="fa fa-check"/> ');
+      .prepend('<i class="fa fa-fw fa-check"/> ');
 
     $ext_actions.find('.disable').addClass('btn-warning')
-      .prepend('<i class="fa fa-ban"/> ');
+      .prepend('<i class="fa fa-fw fa-ban"/> ');
 
     $mode_admin.find('#dokuwiki__content :submit')
       .addClass('btn-success');
@@ -460,10 +461,10 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     $ext_manager.find('form.search :submit, form.install :submit').input2button();
 
     $ext_manager.find('form.search button')
-      .prepend('<i class="fa fa-search"/> ');
+      .prepend('<i class="fa fa-fw fa-search"/> ');
 
     $ext_manager.find('form.install button')
-      .prepend('<i class="fa fa-download"/> ');
+      .prepend('<i class="fa fa-fw fa-download"/> ');
 
   }, 0);
 
@@ -509,7 +510,7 @@ jQuery(document).on('bootstrap3:mode-index', function(e) {
       var $page = jQuery(this);
 
       if (! $page.find('i').length) {
-        $page.prepend('<i class="fa fa-file-text-o text-muted"/> ');
+        $page.prepend('<i class="fa fa-fw fa-file-text-o text-muted"/> ');
       }
 
     });

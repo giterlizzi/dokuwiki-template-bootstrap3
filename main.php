@@ -106,7 +106,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               ?>
 
               <div class="toc-affix pull-right hidden-print" data-spy="affix" data-offset-top="150">
-                <?php #tpl_toc() ?>
                 <?php bootstrap3_toc(tpl_toc(true)) ?>
               </div>
 
@@ -176,14 +175,17 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     </div><!-- /site -->
 
-    <div class="no"><?php tpl_indexerWebBug() ?></div>
-    <div id="screen__mode" class="no">
+    <?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?>
+
+    <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
       <span class="visible-xs"></span>
       <span class="visible-sm"></span>
       <span class="visible-md"></span>
       <span class="visible-lg"></span>
     </div>
+
   </div>
   <!--[if lte IE 8 ]></div><![endif]-->
+
 </body>
 </html>

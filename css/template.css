@@ -280,6 +280,12 @@ a.iw_user {
   border-bottom-color: white; /* FIXME */
 }
 
+.profile-image {
+  position: relative;
+  top: -5px;
+  float: left;
+  left: -5px;
+}
 
 /** Override Bootstrap3 style */
 

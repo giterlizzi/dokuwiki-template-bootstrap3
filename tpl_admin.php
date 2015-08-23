@@ -23,7 +23,7 @@ $plugins = array(
   <li class="dropdown">
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Administration">
-      <i class="fa fa-cogs"></i>  <span class="hidden-lg hidden-md hidden-sm">Administration</span> <span class="caret"></span>
+      <i class="fa fa-fw fa-cogs"></i>  <span class="hidden-lg hidden-md hidden-sm">Administration</span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu" role="menu">
@@ -33,7 +33,7 @@ $plugins = array(
       <ul class="col-sm-6 dropdown-menu">
 
         <li class="dropdown-header">
-          <i class="fa fa-cog"></i> <?php echo ucfirst($name) ?>
+          <i class="fa fa-fw fa-cog"></i> <?php echo ucfirst($name) ?>
         </li>
 
         <?php
@@ -65,7 +65,7 @@ $plugins = array(
               default:            $icon = 'puzzle-piece';
             }
 
-            echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
+            echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
 
           }
         ?>

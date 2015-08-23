@@ -356,7 +356,7 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '</div>';
 
-    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
@@ -392,19 +392,19 @@ function bootstrap3_html_msgarea() {
             switch ($msg['lvl']) {
               case 'info':
                 $level = 'info';
-                $icon  = 'fa fa-info-circle';
+                $icon  = 'fa fa-fw fa-info-circle';
                 break;
               case 'error':
                 $level = 'danger';
-                $icon  = 'fa fa-times-circle';
+                $icon  = 'fa fa-fw fa-times-circle';
                 break;
               case 'notify':
                 $level = 'warning';
-                $icon  = 'fa fa-warning';
+                $icon  = 'fa fa-fw fa-warning';
                 break;
               case 'success':
                 $level = 'success';
-                $icon  = 'fa fa-check-circle';
+                $icon  = 'fa fa-fw fa-check-circle';
                 break;
             }
             print '<div class="alert alert-'.$level.'">';
@@ -437,34 +437,34 @@ function _tpl_tools() {
   $tools  = array(
 
     'user' => array(
-      'icon'  => 'fa fa-user',
+      'icon'  => 'fa fa-fw fa-user',
       'items' => array(
-        'admin'    => array('icon' => 'fa fa-cogs'),
-        'profile'  => array('icon' => 'fa fa-refresh'),
-        #'register' => array('icon' => 'fa fa-user-plus'),
-        #'login'    => array('icon' => 'fa fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+        'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
+        'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
+        #'register' => array('icon' => 'fa fa-fw fa-user-plus'),
+        #'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
       )
     ),
 
     'site' => array(
-      'icon'  => 'fa fa-wrench',
+      'icon'  => 'fa fa-fw fa-wrench',
       'items' => array(
-        'recent' => array('icon' => 'fa fa-list-alt'),
-        'media'  => array('icon' => 'fa fa-picture-o'),
-        'index'  => array('icon' => 'fa fa-sitemap'),
+        'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
+        'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
+        'index'  => array('icon' => 'fa fa-fw fa-sitemap'),
       )
     ),
 
     'page' => array(
-      'icon'  => 'fa fa-file',
+      'icon'  => 'fa fa-fw fa-file',
       'items' => array(
-        'edit'       => array('icon' => 'fa fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
-        'discussion' => array('icon' => 'fa fa-comments'),
-        'revert'     => array('icon' => 'fa fa-repeat'),
-        'revisions'  => array('icon' => 'fa fa-clock-o'),
-        'backlink'   => array('icon' => 'fa fa-link'),
-        'subscribe'  => array('icon' => 'fa fa-envelope-o'),
-        'top'        => array('icon' => 'fa fa-chevron-up'),
+        'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+        'discussion' => array('icon' => 'fa fa-fw fa-comments'),
+        'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
+        'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
+        'backlink'   => array('icon' => 'fa fa-fw fa-link'),
+        'subscribe'  => array('icon' => 'fa fa-fw fa-envelope-o'),
+        'top'        => array('icon' => 'fa fa-fw fa-chevron-up'),
       )
     ),
 

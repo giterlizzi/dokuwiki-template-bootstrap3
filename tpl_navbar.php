@@ -67,7 +67,7 @@
 
           <?php if ($fluidContainerBtn): ?>
           <li class="hidden-xs<?php echo (_tpl_fluid_container_button() ? ' active' : '')?>">
-            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
+            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
 
@@ -76,10 +76,10 @@
             <span class="dw__actions">
               <?php
 
-                echo _tpl_action_item('register', 'fa fa-user-plus', true);
+                echo _tpl_action_item('register', 'fa fa-fw fa-user-plus', true);
 
                 if ($showLoginLink) {
-                  echo _tpl_action_item('login', 'fa fa-sign-in', true);
+                  echo _tpl_action_item('login', 'fa fa-fw fa-sign-in', true);
                 }
 
               ?>

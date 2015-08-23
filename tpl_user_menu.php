@@ -13,7 +13,7 @@ if ($useGravatar) {
 
   $HTTP = new DokuHTTPClient();
 
-  $gravatar_img_small = get_gravatar($INFO['userinfo']['mail'], 20);
+  $gravatar_img_small = get_gravatar($INFO['userinfo']['mail'], 30);
   $gravatar_img       = get_gravatar($INFO['userinfo']['mail'], 64);
   $gravatar_check     = $HTTP->get($gravatar_img . '&d=404');
 
@@ -26,9 +26,9 @@ if ($useGravatar) {
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">
       <?php if ($gravatar_check): ?>
-        <img src="<?php echo $gravatar_img_small ?>" class="img-circle" />
+        <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" />
       <?php else: ?>
-        <i class="fa fa-user"></i>
+        <i class="fa fa-fw fa-user"></i>
       <?php endif; ?> <span class="caret"></span>
     </a>
 
@@ -45,7 +45,7 @@ if ($useGravatar) {
             <?php if ($gravatar_check): ?>
               <img src="<?php echo $gravatar_img ?>" class="img-circle" />
             <?php else: ?>
-              <i class="fa fa-user fa-fw fa-5x"></i>
+              <i class="fa fa-fw fa-user fa-5x"></i>
             <?php endif; ?>
           </li>
         </ul>
@@ -68,7 +68,7 @@ if ($useGravatar) {
       </li>
 
       <li class="divider" role="separator"></li>
-      <?php echo _tpl_action_item('login', 'fa fa-power-off text-danger'); ?>
+      <?php echo _tpl_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
 
     </ul>
 
