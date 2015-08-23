@@ -28,6 +28,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
   <?php endforeach; ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
   /*!]]>*/</script>
@@ -50,7 +51,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 </head>
 
 <body>
-    <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+    <!--[if IE 8 ]><div id="IE8"><![endif]-->
     <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
 
         <div id="dw__msgarea">
@@ -70,6 +71,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
         </div>
 
     </div>
-    <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+    <!--[if IE 8 ]></div"><![endif]-->
 </body>
 </html>

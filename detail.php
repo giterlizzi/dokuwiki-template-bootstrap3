@@ -28,8 +28,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php tpl_includeFile('meta.html') ?>
   <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
-  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php endforeach; ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
   /*!]]>*/</script>
