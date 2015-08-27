@@ -29,9 +29,11 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Page heading
     $dw_content.find('h1').addClass('page-header');
 
-    // Tables (no for Rack and Diagram Plugins)
-    $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
-    $dw_content.find('table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+    // Tables (no for Rack, Diagram and Edittable Plugins)
+    if (! jQuery('#edittable__editor').length) {
+      $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
+      $dw_content.find('table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+    }
 
     if (! TPL_CONFIG.tableFullWidth) {
       $dw_content.find('.table').css('width', 'auto');
