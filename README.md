@@ -18,15 +18,18 @@ Bootstrap3 template for DokuWiki
 
 ## Plugin Integration
 
-  * Translation Plugin
-  * Discussion Plugin
-  * Tags Plugin
-  * Tagging Plugin
-  * Publish Plugin
-  * Explain Plugin
-  * Wrap Plugin - Tabs
+  * Translation
+  * Discussion
+  * Tags
+  * Tagging
+  * Publish
+  * Explain
+  * Wrap - Tabs
   * DataTables
-  * Bootstrap Wrapper Plugin
+  * Rack
+  * Diagram
+  * Edittable
+  * Bootstrap Wrapper
   * ... and more!
   
 ## Localizations
