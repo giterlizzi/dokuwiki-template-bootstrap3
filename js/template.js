@@ -75,6 +75,17 @@ jQuery(document).on('bootstrap3:nav', function(e) {
     jQuery('.nav div.li')
       .contents().unwrap();
 
+    // Move the font-icons inside a link
+    var $links = jQuery('.nav li i + a');
+    if ($links.length) {
+      jQuery.each($links, function() {
+        var $link = jQuery(this),
+            $icon = $link.prev();
+        $icon.prependTo($link);
+        $icon.after(' ');
+      });
+    }
+
   }, 0);
 
 });
@@ -252,7 +263,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
 
     // TODO remove
-    $dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
+    //$dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
 
     jQuery('body').scrollspy({
       target: '#dw__toc',

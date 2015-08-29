@@ -307,10 +307,15 @@ function bootstrap3_toc($toc, $return = false) {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
-  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
-  $out = preg_replace('/<li class="level([0-9]) node"> <span class="curid">/', '<li class="level$1 node active"> <span class="curid">', $out);
-  $out = preg_replace('/<li class="level([0-9])"> <span class="curid">/', '<li class="level$1 active"> <span class="curid">', $out);
-  $out = preg_replace('/<span class=\"curid\">(.*?)<\/span>/', '$1', $out);
+  $out = str_replace('<span class="curid"><a ', '<span class="curid"><a data-curid="true" ', $out);  
+
+  $out = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $out);
+  $out = preg_replace('/<span class="curid">(.*?)<\/span>/', '$1', $out);
+  $out = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $out);
+  $out = preg_replace('/<li class="level([0-9])"> <a data-curid="true" /', '<li class="level$1 active"> <a ', $out);
+  $out = preg_replace('/<li class="level([0-9]) node"> <a data-curid="true" /', '<li class="level$1 node active"> <a ', $out);
+
+  $out = str_replace(' data-curid="true"', '', $out);
 
   if ($return) return $out;
   echo $out;
