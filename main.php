@@ -35,7 +35,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <style type="text/css">
     body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
-    .toc-affix { z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
+    .toc-affix { z-index:9999; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
