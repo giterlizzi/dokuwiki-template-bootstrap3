@@ -18,6 +18,7 @@ $lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@
 $lang['showIndividualTool']  = 'Enable/Disable individual tool in navbar';
 $lang['showTools']           = 'Display Tools in navbar';
 $lang['individualTools']     = 'Split the Tools in individual menu in navbar';
+$lang['editOnNavbar']        = 'Display Edit this page on navbar';
 $lang['showTools_o_never']   = 'Never';
 $lang['showTools_o_logged']  = 'When logged in';
 $lang['showTools_o_always']  = 'Always';

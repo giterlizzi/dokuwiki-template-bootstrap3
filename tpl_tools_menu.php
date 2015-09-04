@@ -12,6 +12,10 @@
 
 <ul class="nav navbar-nav" id="dw__tools">
 
+<?php if ($editOnNavbar && isset($tools['page']) && $tools['page']['items']['edit']) {
+echo _tpl_action_item('edit', 'glyphicon glyphicon-edit');
+} ?>
+
 <?php if ($individualTools): foreach($tools as $id => $menu): ?>
 
   <li class="dropdown">
