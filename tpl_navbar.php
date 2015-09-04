@@ -52,48 +52,48 @@
 
       <div class="navbar-right">
 
-        <div class="navbar-left navbar-form">
-          <?php bootstrap_searchform() ?>
-        </div>
+        <?php if ($showSearchForm): ?>
+          <?php bootstrap3_searchform() ?>
+        <?php endif; ?>
 
         <?php
+          include_once(dirname(__FILE__).'/tpl_admin.php');
           include_once(dirname(__FILE__).'/tpl_tools_menu.php');
           include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
           include_once(dirname(__FILE__).'/tpl_translation.php');
         ?>
 
         <ul class="nav navbar-nav">
-          <?php if (! empty($_SERVER['REMOTE_USER']) && $showUserHomeLink): ?>
-          <li>
-            <?php tpl_link(_tpl_user_homepage_link(), '<i class="glyphicon glyphicon-user"></i><span class="hidden-lg hidden-md hidden-sm"> '. userlink(null, true) . '</span>', 'title="'.userlink(null, true).'"'); /* 'Logged in as ...' */ ?>
-          </li>
-          <li>
 
+          <?php if ($fluidContainerBtn): ?>
+          <li class="hidden-xs<?php echo (_tpl_fluid_container_button() ? ' active' : '')?>">
+            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
+
           <?php if (empty($_SERVER['REMOTE_USER'])): ?>
           <li>
             <span class="dw__actions">
               <?php
 
-                echo _tpl_action_item('register', 'glyphicon glyphicon-edit', true);
+                echo _tpl_action_item('register', 'fa fa-fw fa-user-plus', true);
 
                 if ($showLoginLink) {
-                  echo _tpl_action_item('login', 'glyphicon glyphicon-log-in', true);
+                  echo _tpl_action_item('login', 'fa fa-fw fa-sign-in', true);
                 }
 
               ?>
             </span>
           </li>
-          <?php
-            else:
-            echo _tpl_action_item('login', 'glyphicon glyphicon-log-out');
-            endif;
-          ?>
+          <?php endif; ?>
+
         </ul>
+
+        <?php include_once(dirname(__FILE__).'/tpl_user_menu.php'); ?>
 
       </div>
 
     </div>
   </div>
 </nav>
+

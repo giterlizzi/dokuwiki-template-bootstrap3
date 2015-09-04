@@ -110,8 +110,8 @@ input, textarea, select {
 #dw__breadcrumbs .breadcrumb {
   background: transparent;
   border: 0 none;
-  margin: 0;
-  padding: 0;
+  padding-left: 0;
+  display: inline;
 }
 
 #dw__breadcrumbs .bchead {
@@ -122,9 +122,9 @@ input, textarea, select {
   font-size: .9em;
 }
 
-#dokuwiki__content .page-header {
+/*#dokuwiki__content .page-header {
   margin-top: 10px;
-}
+}*/
 
 #dw__logo {
   margin-right: 10px;
@@ -143,6 +143,17 @@ input, textarea, select {
 
 #insitu__fn {
   max-width: 20em;
+}
+
+#dw__user_menu .page-header {
+  margin: 20px 0 10px;
+}
+
+#dw__user_menu .nav > li > a {
+  padding: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
 }
 
 .dw__sidebar .nav li a {
@@ -259,6 +270,22 @@ a.iw_user {
   list-style-type: none;
 }
 
+/* Extension Manager */
+#extension__manager .panelHeader,
+#extension__manager ul.tabs li.active a {
+  background-color: initial;
+}
+
+#extension__manager ul.tabs li.active a {
+  border-bottom-color: white; /* FIXME */
+}
+
+.profile-image {
+  position: relative;
+  top: -5px;
+  float: left;
+  left: -5px;
+}
 
 /** Override Bootstrap3 style */
 
@@ -284,4 +311,26 @@ a.iw_user {
 .dokuwiki img.mediacenter {
   display: block;
   margin: .2em auto;
+}
+
+ul.btn-group {
+  padding: 0;
+}
+
+
+/** Custom DropDown menu with multiple columns */
+.dropdown-row {
+  min-width: 480px;
+}
+
+.dropdown-row > ul {
+  position: initial;
+  border: 0px;
+  box-shadow: initial;
+}
+
+.dropdown-row > ul li a {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden !important;
 }

@@ -29,9 +29,11 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Page heading
     $dw_content.find('h1').addClass('page-header');
 
-    // Tables (no for Rack and Diagram Plugins)
-    $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
-    $dw_content.find('table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+    // Tables (no for Rack, Diagram and Edittable Plugins)
+    if (! jQuery('#edittable__editor').length) {
+      $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
+      $dw_content.find('table').not('.rack, .diagram').addClass('table table-striped table-condensed');
+    }
 
     if (! TPL_CONFIG.tableFullWidth) {
       $dw_content.find('.table').css('width', 'auto');
@@ -45,7 +47,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('input[type=checkbox]').addClass('checkbox-inline');
     jQuery('input[type=radio]').addClass('radio-inline');
     jQuery('label').addClass('control-label');
-    jQuery('form').addClass('form-inline');
+    jQuery('main form').addClass('form-inline');
 
     // Images
     jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
@@ -70,7 +72,19 @@ jQuery(document).on('bootstrap3:nav', function(e) {
   setTimeout(function() {
 
     // Unwrap unnecessary tags inside list items for Bootstrap nav component
-    jQuery('.nav div.li').contents().unwrap();
+    jQuery('.nav div.li')
+      .contents().unwrap();
+
+    // Move the font-icons inside a link
+    var $links = jQuery('.nav li i + a');
+    if ($links.length) {
+      jQuery.each($links, function() {
+        var $link = jQuery(this),
+            $icon = $link.prev();
+        $icon.prependTo($link);
+        $icon.after(' ');
+      });
+    }
 
   }, 0);
 
@@ -111,7 +125,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
     // Section Button edit
     jQuery('.btn_secedit .btn').input2button();
-    jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="glyphicon glyphicon-edit"/> ');
+    jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="fa fa-fw fa-pencil"/> ');
 
   }, 0);
 
@@ -153,7 +167,7 @@ jQuery(document).on('bootstrap3:icons', function(e) {
           icon     = icons[i][2];
 
       var icon_selector = [mode, '#dokuwiki__content', selector].join(' '),
-          icon_tag      = ['<i class="glyphicon ', icon, '"/> '].join('');
+          icon_tag      = ['<i class="', icon, '"/> '].join('');
 
       var $target = jQuery(jQuery(icon_selector)[0]);
 
@@ -164,11 +178,11 @@ jQuery(document).on('bootstrap3:icons', function(e) {
     };
 
     // Interwiki User page icon
-    jQuery('.iw_user').prepend('<i class="glyphicon glyphicon-user"/> ');
+    jQuery('.iw_user').prepend('<i class="fa fa-fw fa-user"/> ');
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show')) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="glyphicon glyphicon-user"/> ');
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
   }, 0);
@@ -205,16 +219,16 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
-    $dw_toc.find('.open strong').addClass('glyphicon glyphicon-chevron-up');
+    $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
-    $dw_toc.find('h3').prepend('<i class="glyphicon glyphicon-list" style="padding-right: 5px"/> ');
+    $dw_toc.find('h3').prepend('<i class="fa fa-fw fa-list" style="padding-right: 5px"/> ');
 
     $dw_toc.find('h3').click(function() {
 
       if ($dw_toc.find('.closed').length) {
 
-        $dw_toc.find('h3 strong').removeClass('glyphicon-chevron-up')
-                                  .addClass('glyphicon-chevron-down');
+        $dw_toc.find('h3 strong').removeClass('fa-chevron-up')
+                                  .addClass('fa-chevron-down');
 
         jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
 
@@ -222,8 +236,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
       if ($dw_toc.find('.open').length) {
 
-        $dw_toc.find('h3 strong').addClass('glyphicon-chevron-up')
-                                  .removeClass('glyphicon-chevron-down');
+        $dw_toc.find('h3 strong').addClass('fa-chevron-up')
+                                  .removeClass('fa-chevron-down');
 
         $dw_toc.find('h3 .label').replaceWith(function() {
           return jQuery(this).contents();
@@ -248,7 +262,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
 
-    $dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
+    // TODO remove
+    //$dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
 
     jQuery('body').scrollspy({
       target: '#dw__toc',
@@ -282,25 +297,25 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
     jQuery('div.info')
       .removeClass('info')
       .addClass('alert alert-info')
-      .prepend('<i class="glyphicon glyphicon-info-sign"/> ');
+      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
 
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
+      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
 
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
-      .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
+      .prepend('<i class="fa fa-fw fa-check-circle"/> ');
 
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
       .addClass('alert alert-warning')
-      .prepend('<i class="glyphicon glyphicon-warning-sign"/> ');
+      .prepend('<i class="fa fa-fw fa-warning"/> ');
 
   }, 0);
 
@@ -317,7 +332,7 @@ jQuery(document).on('bootstrap3:breadcrumbs', function(e) {
 
     if (! $dw_breadcrumbs.length) return false; 
 
-    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="glyphicon glyphicon-home"/>');
+    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="fa fa-fw fa-home"/>');
     //$dw_breadcrumbs.find('span.curid').find('a').addClass('curid');
     $dw_breadcrumbs.find('span.bchead').addClass('pull-left');
 
@@ -376,10 +391,10 @@ jQuery(document).on('bootstrap3:detail', function(e) {
       .addClass('dl-horizontal');
     $detail_page.find('.img_backto')
       .addClass('btn btn-success')
-      .prepend('<i class="glyphicon glyphicon-arrow-left"/> ');
+      .prepend('<i class="fa fa-fw fa-arrow-left"/> ');
     $detail_page.find('.mediaManager')
       .addClass('btn btn-default')
-      .prepend('<i class="glyphicon glyphicon-picture"/> ');
+      .prepend('<i class="fa fa-fw fa-picture-o"/> ');
 
   }, 0);
 
@@ -393,7 +408,7 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
     if (! dw_mode('search')) return false;
 
-    jQuery('ul.search_quickhits li a').prepend('<i class="glyphicon glyphicon-file text-muted"/> ');
+    jQuery('ul.search_quickhits li a').prepend('<i class="fa fa-fw fa-file text-muted"/> ');
 
     jQuery('.search_results dt')
       .contents()
@@ -440,18 +455,18 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     $ext_actions.find('.uninstall')
       .addClass('btn-danger')
-      .prepend('<i class="glyphicon glyphicon-trash"/> ');
+      .prepend('<i class="fa fa-fw fa-trash"/> ');
 
     $ext_actions.find('.install, .update, .reinstall')
       .addClass('btn-primary')
-      .prepend('<i class="glyphicon glyphicon-download-alt"/> ');
+      .prepend('<i class="fa fa-fw fa-download"/> ');
 
     $ext_actions.find('.enable')
       .addClass('btn-success')
-      .prepend('<i class="glyphicon glyphicon-ok"/> ');
+      .prepend('<i class="fa fa-fw fa-check"/> ');
 
     $ext_actions.find('.disable').addClass('btn-warning')
-      .prepend('<i class="glyphicon glyphicon-ban-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-ban"/> ');
 
     $mode_admin.find('#dokuwiki__content :submit')
       .addClass('btn-success');
@@ -459,10 +474,10 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     $ext_manager.find('form.search :submit, form.install :submit').input2button();
 
     $ext_manager.find('form.search button')
-      .prepend('<i class="glyphicon glyphicon-search"/> ');
+      .prepend('<i class="fa fa-fw fa-search"/> ');
 
     $ext_manager.find('form.install button')
-      .prepend('<i class="glyphicon glyphicon-download-alt"/> ');
+      .prepend('<i class="fa fa-fw fa-download"/> ');
 
   }, 0);
 
@@ -485,20 +500,20 @@ jQuery(document).on('bootstrap3:mode-index', function(e) {
           $closed    = $directory.parents('.closed'),
           $open      = $directory.parents('.open');
 
-      if (! $directory.find('.glyphicon').length) {
-        $directory.prepend('<i class="glyphicon text-primary"/> ');
+      if (! $directory.find('.fa').length) {
+        $directory.prepend('<i class="fa text-primary"/> ');
       }
 
       if ($open.length) {
         $directory.find('i')
-          .removeClass('glyphicon-folder-close')
-          .addClass('glyphicon-folder-open');
+          .removeClass('fa-folder')
+          .addClass('fa-folder-open');
       }
 
       if ($closed.length) {
         $directory.find('i')
-          .removeClass('glyphicon-folder-open')
-          .addClass('glyphicon-folder-close');
+          .removeClass('fa-folder-open')
+          .addClass('fa-folder');
       }
 
     });
@@ -508,7 +523,7 @@ jQuery(document).on('bootstrap3:mode-index', function(e) {
       var $page = jQuery(this);
 
       if (! $page.find('i').length) {
-        $page.prepend('<i class="glyphicon glyphicon-file text-muted"/> ');
+        $page.prepend('<i class="fa fa-fw fa-file-text-o text-muted"/> ');
       }
 
     });

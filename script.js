@@ -13,25 +13,26 @@ jQuery(document).ready(function() {
   // Icons for DokuWiki Actions
   var icons = [
     // Mode           Selector  Icon
-    ['denied',        'h1',     'glyphicon-ban-circle text-danger'],
-    ['show.notFound', 'h1',     'glyphicon-alert text-warning'],
-    ['login',         'h1',     'glyphicon-log-in text-muted'],
-    ['register',      'h1',     'glyphicon-edit text-muted'],
-    ['search',        'h1',     'glyphicon-search text-muted'],
-    ['index',         'h1',     'glyphicon-list text-muted'],
-    ['recent',        'h1',     'glyphicon-list-alt text-muted'],
-    ['media',         'h1',     'glyphicon-picture text-muted'],
-    ['admin',         'h1',     'glyphicon-cog text-muted'],
-    ['profile',       'h1',     'glyphicon-user text-muted'],
-    ['revisions',     'h1',     'glyphicon-time text-muted'],
-    ['backlink',      'h1',     'glyphicon-link text-muted'],
-    ['diff',          'h1',     'glyphicon-list-alt text-muted'],
-    ['preview',       'h1',     'glyphicon-eye-open text-muted'],
-    ['conflict',      'h1',     'glyphicon-alert text-warning'],
-    ['subscribe',     'h1',     'glyphicon-bookmark text-muted'],
-    ['unsubscribe',   'h1',     'glyphicon-bookmark text-muted'],
-    ['draft',         'h1',     'glyphicon-edit text-muted'],
-    ['showtag',       'h1',     'glyphicon-tags text-muted']
+    ['denied',        'h1',     'fa fa-fw fa-ban text-danger'],
+    ['show.notFound', 'h1',     'fa fa-fw fa-warning text-warning'],
+    ['login',         'h1',     'fa fa-fw fa-sign-in text-muted'],
+    ['register',      'h1',     'fa fa-fw fa-user-plus text-muted'],
+    ['search',        'h1',     'fa fa-fw fa-search text-muted'],
+    ['index',         'h1',     'fa fa-fw fa-sitemap text-muted'],
+    ['recent',        'h1',     'fa fa-fw fa-list-alt text-muted'],
+    ['media',         'h1',     'fa fa-fw fa-picture-o text-muted'],
+    ['admin',         'h1',     'fa fa-fw fa-cogs text-muted'],
+    ['profile',       'h1',     'fa fa-fw fa-user text-muted'],
+    ['revisions',     'h1',     'fa fa-fw fa-clock-o text-muted'],
+    ['backlink',      'h1',     'fa fa-fw fa-link text-muted'],
+    ['diff',          'h1',     'fa fa-fw fa-list-alt text-muted'],
+    ['preview',       'h1',     'fa fa-fw fa-eye text-muted'],
+    ['conflict',      'h1',     'fa fa-fw fa-warning text-warning'],
+    ['subscribe',     'h1',     'fa fa-fw fa-envelope text-warning'],
+    ['unsubscribe',   'h1',     'fa fa-fw fa-envelope text-warning'],
+    ['draft',         'h1',     'fa fa-fw fa-pencil-square-o text-muted'],
+    ['showtag',       'h1',     'fa fa-fw fa-tags text-muted'],
+    ['locked',        'h1',     'fa fa-fw fa-lock text-warning']
   ];
 
 
@@ -106,6 +107,29 @@ jQuery(document).ready(function() {
   });
 
 
+  jQuery('.fluid-container').on('click', function() {
+
+    var $self = jQuery(this);
+
+    if (jQuery('#dokuwiki__site').hasClass('container')) {
+
+      jQuery('#dokuwiki__site, nav > div, article').removeClass('container').addClass('container-fluid');
+      $self.parent().addClass('active');
+
+      DokuCookie.setValue('fluidContainer', 1);
+
+    } else {
+
+      jQuery('#dokuwiki__site, nav > div, article').removeClass('container-fluid').addClass('container');
+      $self.parent().removeClass('active');
+
+      DokuCookie.setValue('fluidContainer', 0);
+
+    }
+
+  });
+
+
   /* DOKUWIKI:include js/template.js */
 
 
@@ -143,6 +167,5 @@ jQuery(document).ready(function() {
     });
 
   }
-
 
 });

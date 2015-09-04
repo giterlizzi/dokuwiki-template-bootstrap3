@@ -10,13 +10,63 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
   setTimeout(function() {
 
-    var $tags           = jQuery('.tags'),                 // Tags Plugin
-        $translation    = jQuery('#dw__translation'),      // Translation Plugin
-        $discussion     = jQuery('.comment_wrapper'),      // Discussion Plugin
-        $publish        = jQuery('.approval'),             // Publish Plugin
-        $tagging_edit   = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
-        $explain        = jQuery('.explain'),              // Explain Plugin
-        $wrap           = jQuery('.plugin_wrap');          // Wrap Plugin
+    var $tags             = jQuery('.tags'),                 // Tags Plugin
+        $translation      = jQuery('#dw__translation'),      // Translation Plugin
+        $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
+        $publish          = jQuery('.approval'),             // Publish Plugin
+        $tagging_edit     = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
+        $explain          = jQuery('.explain'),              // Explain Plugin
+        $wrap             = jQuery('.plugin_wrap'),          // Wrap Plugin
+        $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
+        $dataplugin_entry = jQuery('.dataplugin_entry');     // Data Plugin: Entry
+
+
+    if ($dataplugin_entry.length) {
+      $dataplugin_entry.find('dl').addClass('panel panel-default');
+    }
+
+
+    // DataTables Plugin
+    if ($datatables.length) {
+
+      $datatables.find('.table-responsive').removeClass('table-responsive');
+      $datatables.find('.form-control').addClass('input-sm');
+
+      jQuery(document).on('bootstrap3:plugin-datatables', function(e, $wrapper) {
+
+        var $pagination = jQuery($wrapper).find('.dataTables_paginate');
+
+        $pagination.find('> span').wrapInner('<ul/>');
+        $pagination.find('ul').contents().wrap('<li/>');
+        $pagination.find('ul').addClass('pagination');
+        $pagination.find('.paginate_button').removeClass('paginate_button');
+        $pagination.find('.current').parent().addClass('active');
+        $pagination.find('.ellipsis').wrap('<a href="#"/>').removeClass('ellipsis');
+
+        var $previous = $pagination.find('.previous'),
+            $next     = $pagination.find('.next');
+
+        $previous.wrap('<li/>');
+        $previous.parent().prependTo($pagination.find('ul'));
+
+        $next.wrap('<li/>');
+        $next.parent().appendTo($pagination.find('ul'));
+
+        $pagination.find('a:not(.disabled)').on('click', function() {
+          jQuery(document).trigger('bootstrap3:plugin-datatables', $wrapper);
+        });
+
+      });
+
+      jQuery('.dataTables_wrapper').each(function() {
+        jQuery(document).trigger('bootstrap3:plugin-datatables', jQuery(this));
+      });
+
+      $datatables.find('th').on('click', function() {
+        jQuery(document).trigger('bootstrap3:plugin-datatables');
+      });
+
+    }
 
 
     // Publish plugin
@@ -31,12 +81,12 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
       if ($publish.hasClass('approved_no')) {
         $publish.removeClass('approved_no')
           .addClass('alert-warning')
-          .prepend('<i class="glyphicon glyphicon-exclamation-sign"/> ');
+          .prepend('<i class="fa fa-fw fa-info-circle"/> ');
       }
       if ($publish.hasClass('approved_yes')) {
         $publish.removeClass('approved_yes')
           .addClass('alert-success')
-          .prepend('<i class="glyphicon glyphicon-ok-sign"/> ');
+          .prepend('<i class="fa fa-fw fa-check-circle"/> ');
       }
 
     }
@@ -47,7 +97,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
       $discussion.find('h2').addClass('page-header');
       $discussion.find('.comment_buttons').addClass('text-right');
-      $discussion.find('#discussion__section').prepend('<i class="glyphicon glyphicon-comment"/> ');
+      $discussion.find('#discussion__section').prepend('<i class="fa fa-fw fa-comments"/> ');
 
       $discussion.find('.hentry').addClass('panel panel-default');
       $discussion.find('.hentry .comment_head').addClass('panel-heading');
@@ -96,7 +146,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $tag.html($tag.html().replace(/,/g, ''));
 
         var $tagLabel = $tag.find('a').addClass('label label-default')
-                                      .prepend('<i class="glyphicon glyphicon-tag"/> ');
+                                      .prepend('<i class="fa fa-fw fa-tag"/> ');
 
         if ($tag.prop('tagName').toLowerCase() == 'div') {
           $tag.remove();
@@ -152,7 +202,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
       if ($wrap.hasClass('tabs')) {
         var $tabs = jQuery('.plugin_wrap.tabs');
-        $tabs.find('div.li *').unwrap();
+        $tabs.find('div.li').contents().unwrap();
         $tabs.find('.curid').parent().addClass('active');
         $tabs.find('ul').addClass('nav nav-tabs');
       }

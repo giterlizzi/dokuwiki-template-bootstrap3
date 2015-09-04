@@ -5,29 +5,34 @@ Bootstrap3 template for DokuWiki
 
   * HTML5
   * Bootstrap 3.x based template
-  * Glyphicons icons
+  * Glyphicons and FontAwesome icons
   * High customizable via the configuration manager
   * Many html hooks
   * Responsive
   * Sidebar support (**left** or **right** position)
   * Right Sidebar support
+  * Left and Right sidebar size change
   * Many themes made from [Bootswatch](https://bootswatch.com)
   * Theme switcher for Bootswatch.com themes
-  * Left and Right sidebar size
   * Cookie Law Banner Notice
 
 ## Plugin Integration
 
-  * Translation Plugin
-  * Discussion Plugin
-  * Tags Plugin
-  * Tagging Plugin
-  * Publish Plugin
-  * Explain Plugin
-  * Wrap Plugin - Tabs
+  * Translation
+  * Discussion
+  * Tags
+  * Tagging
+  * Publish
+  * Explain
+  * Wrap - Tabs
+  * DataTables
+  * Rack
+  * Diagram
+  * Edittable
+  * Bootstrap Wrapper
   * ... and more!
   
-## Localization
+## Localizations
 
   * English
   * Italian
@@ -63,5 +68,5 @@ but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
-See the COPYING file in your DokuWiki folder for details
+See the LICENSE file in your DokuWiki folder for details
 

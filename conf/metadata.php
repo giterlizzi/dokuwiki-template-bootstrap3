@@ -7,8 +7,10 @@
  */
 
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['individualTools']     = array('onoff');
 $meta['editOnNavbar']        = array('onoff');
+$meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showUserHomeLink']    = array('onoff');
 $meta['showLoginOnFooter']   = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
@@ -21,9 +23,11 @@ $meta['showCookieLawBanner'] = array('onoff');
 $meta['cookieLawBannerPage'] = array('string');
 $meta['cookieLawPolicyPage'] = array('string');
 $meta['showTranslation']     = array('onoff');
+$meta['showAdminMenu']       = array('onoff');
 $meta['inverseNavbar']       = array('onoff');
 $meta['fixedTopNavbar']      = array('onoff');
 $meta['fluidContainer']      = array('onoff');
+$meta['fluidContainerBtn']   = array('onoff');
 $meta['pageOnPanel']         = array('onoff');
 $meta['tableFullWidth']      = array('onoff');
 $meta['semantic']            = array('onoff');
@@ -37,3 +41,4 @@ $meta['showPageInfo']        = array('onoff');
 $meta['showBadges']          = array('onoff');
 $meta['showDiscussion']      = array('onoff');
 $meta['discussionPage']      = array('string');
+$meta['useGravatar']         = array('onoff');

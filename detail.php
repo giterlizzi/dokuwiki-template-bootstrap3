@@ -29,6 +29,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
   <?php endforeach; ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
   /*!]]>*/</script>
@@ -43,7 +44,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 </head>
 
 <body class="container">
-  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
+  <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dokuwiki__detail" class="<?php echo tpl_classes(); ?>">
 
     <?php html_msgarea() ?>
@@ -52,7 +53,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <?php else: ?>
 
       <h1 class="page-header">
-        <i class="glyphicon glyphicon-picture text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+        <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
       </h1>
 
       <div class="row">
@@ -65,14 +66,42 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
           <div class="panel panel-default">
             <div class="panel-heading">
-              <h2 class="panel-title"><i class="glyphicon glyphicon-info-sign text-info"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?></h2>
+              <h4 class="panel-title">
+                <i class="fa fa-picture-o"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+              </h4>
             </div>
             <div class="panel-body">
+
               <?php
                 tpl_img_meta();
                  //Comment in for Debug
                  // dbg(tpl_img_getTag('Simple.Raw'));
               ?>
+
+              <hr/>
+
+              <dl class="dl-horizontal">
+                <?php
+                echo '<dt>'.$lang['reference'].':</dt>';
+                $media_usage = ft_mediause($IMG,true);
+                if(count($media_usage) > 0){
+                    foreach($media_usage as $path){
+                        echo '<dd>'.html_wikilink($path).'</dd>';
+                    }
+                }else{
+                    echo '<dd>'.$lang['nothingfound'].'</dd>';
+                }
+                ?>
+              </dl>
+
+              <?php
+              // This message is available from release 2015-08-10 "Detritus"
+              if(isset($lang['media_acl_warning'])): ?>
+              <div class="alert alert-warning">
+                <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
+              </div>
+              <?php endif; ?>
+
             </div>
           </div>
 
@@ -88,6 +117,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     <?php endif; ?>
   </div>
-  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+  <!--[if IE 8 ]></div><![endif]-->
 </body>
 </html>

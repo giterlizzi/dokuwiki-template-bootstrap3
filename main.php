@@ -26,8 +26,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php tpl_includeFile('meta.html') ?>
   <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
-  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php endforeach; ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <script type="text/javascript">/*<![CDATA[*/
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
   /*!]]>*/</script>
@@ -35,7 +35,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <style type="text/css">
     body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
-    .toc-affix { z-index:1024; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
+    .toc-affix { z-index:9999; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -46,8 +46,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
-  <!--[if lte IE 7 ]><div id="IE7"><![endif]--><!--[if IE 8 ]><div id="IE8"><![endif]-->
-
+  <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
     <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
 
@@ -84,7 +83,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       </p>
 
       <div id="dw__msgarea">
-        <?php html_msgarea() ?>
+        <?php bootstrap3_html_msgarea() ?>
       </div>
 
       <main class="main row" role="main">
@@ -107,8 +106,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               ?>
 
               <div class="toc-affix pull-right hidden-print" data-spy="affix" data-offset-top="150">
-                <?php #tpl_toc() ?>
-                <?php bootstrap_toc(tpl_toc(true)) ?>
+                <?php bootstrap3_toc(tpl_toc(true)) ?>
               </div>
 
               <!-- wikipage start -->
@@ -138,7 +136,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       <footer id="dokuwiki__footer" class="small">
 
-        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="glyphicon glyphicon-chevron-up"></i></a>
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
         <div class="text-right">
 
@@ -150,7 +148,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
           <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
           <span class="loginLink hidden-print">
-            <?php echo tpl_action('login', 1, 0, 1, '<i class="glyphicon glyphicon-log-in"></i> '); ?>
+            <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
           </span>
           <?php endif; ?>
 
@@ -177,14 +175,17 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     </div><!-- /site -->
 
-    <div class="no"><?php tpl_indexerWebBug() ?></div>
-    <div id="screen__mode" class="no">
+    <?php tpl_indexerWebBug() /* provide DokuWiki housekeeping, required in all templates */ ?>
+
+    <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
       <span class="visible-xs"></span>
       <span class="visible-sm"></span>
       <span class="visible-md"></span>
       <span class="visible-lg"></span>
     </div>
+
   </div>
-  <!--[if ( lte IE 7 | IE 8 ) ]></div><![endif]-->
+  <!--[if lte IE 8 ]></div><![endif]-->
+
 </body>
 </html>

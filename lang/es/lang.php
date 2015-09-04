@@ -1,11 +1,13 @@
 <?php
 /**
- * Spanish language file for template
+ * Language file for template
  *
- * @author   Nelson Martell <nelson6e65-dev@yahoo.es>
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
-$lang['discussion']        = 'Discusión';
-$lang['back_to_article']   = 'Volver al artículo';
-$lang['userpage']          = 'Página de Usuario';
-$lang['themes']            = 'Temas';
+
+$lang['discussion']       = 'Discusión';
+$lang['back_to_article']  = 'Volver al artículo';
+$lang['userpage']         = 'Página de Usuario';
+$lang['themes']           = 'Temas';
+$lang['expand_container'] = 'Expandir/Reducir';

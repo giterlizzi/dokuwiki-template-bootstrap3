@@ -7,8 +7,10 @@
  */
 
 $conf['showTools']           = 'always';
+$conf['showSearchForm']      = 'always';
 $conf['individualTools']     = 0;
 $conf['editOnNavbar']        = 0;
+$conf['showIndividualTool']  = 'user,site,page';
 $conf['showUserHomeLink']    = 1;
 $conf['showLoginOnFooter']   = 0;
 $conf['hideLoginLink']       = 0;
@@ -21,9 +23,11 @@ $conf['browserTitle']        = '@TITLE@ [@WIKI@]';
 $conf['leftSidebarGrid']     = 'col-sm-3 col-md-2';
 $conf['rightSidebarGrid']    = 'col-sm-3 col-md-2';
 $conf['showTranslation']     = 0;
+$conf['showAdminMenu']       = 0;
 $conf['inverseNavbar']       = 0;
 $conf['fixedTopNavbar']      = 0;
 $conf['fluidContainer']      = 0;
+$conf['fluidContainerBtn']   = 0;
 $conf['pageOnPanel']         = 1;
 $conf['tableFullWidth']      = 1;
 $conf['semantic']            = 0;
@@ -37,3 +41,4 @@ $conf['showPageInfo']        = 1;
 $conf['showBadges']          = 1;
 $conf['showDiscussion']      = 0;
 $conf['discussionPage']      = 'discussion:@ID@';
+$conf['useGravatar']         = 0;

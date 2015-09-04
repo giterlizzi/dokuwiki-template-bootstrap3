@@ -1,0 +1,13 @@
+[main]
+host = https://www.transifex.com
+type = PHP_ALT_ARRAY
+
+[dokuwiki-template-bootstrap3.lang]
+source = en/lang.php
+file_filter = <lang>/lang.php
+source_lang = en
+
+[dokuwiki-template-bootstrap3.settings-1]
+source = en/settings.php
+file_filter = <lang>/settings.php
+source_lang = en

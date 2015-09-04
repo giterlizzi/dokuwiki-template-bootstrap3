@@ -1,12 +1,13 @@
 <?php
 /**
- * Simplified Chinese language file for template
+ * Language file for template
  *
- * @author   OpenBDH <dev@openbdh.com>
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussion']        = '讨论';
-$lang['back_to_article']   = '回到文章';
-$lang['userpage']          = '用户页';
-$lang['themes']            = '主题';
+$lang['discussion']       = '讨论';
+$lang['back_to_article']  = '回到文章';
+$lang['userpage']         = '用户页';
+$lang['themes']           = '主题';
+$lang['expand_container'] = 'Expand/Reduce';
