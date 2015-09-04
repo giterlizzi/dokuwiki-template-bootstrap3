@@ -168,4 +168,30 @@ jQuery(document).ready(function() {
 
   }
 
+
+  if (dw_mode('admin')) {
+
+    var tpl_sections = {
+      // Section     Insert before           Icon
+      'Themes'     : ['bootstrapTheme',      'fa-tint'],
+      'Sidebar'    : ['sidebarPosition',     'fa-columns'],
+      'Navbar'     : ['inverseNavbar',       'fa-navicon'],
+      'Semantic'   : ['semantic',            'fa-share-alt'],
+      'Layout'     : ['fluidContainer',      'fa-desktop'],
+      'Discussion' : ['showDiscussion',      'fa-comments'],
+      'Cookie Law' : ['showCookieLawBanner', 'fa-legal'],
+      'Others'     : ['showPageInfo',        'fa-gears'],
+    }
+  
+    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
+      var $node = jQuery(this);
+      jQuery.each(tpl_sections, function(section, item){
+        if( $node.attr('for').match([item[0], '$'].join('')) ) {
+          $node.parents('tr').before(jQuery(['<tr><td><h4><i class="fa ', item[1], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+        }
+      });
+    });
+  
+  }
+
 });

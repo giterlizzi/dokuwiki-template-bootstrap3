@@ -84,7 +84,8 @@ input, textarea, select {
 }
 
 #config__manager .label {
-  padding: 0 !important;
+  display: block;
+  font-weight: normal;
 }
 
 #config__manager label {
@@ -94,10 +95,15 @@ input, textarea, select {
   font-weight: initial;
 }
 
+#config__manager td {
+  padding: 5px;
+}
+
 #config__manager fieldset {
   background: initial !important;
   margin: 0 !important;
   padding: 0 !important;
+  text-align: left;
 }
 
 #config__manager .outkey {
