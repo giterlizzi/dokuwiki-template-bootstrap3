@@ -169,6 +169,7 @@ jQuery(document).ready(function() {
   }
 
 
+  // Configuration manager
   if (dw_mode('admin')) {
 
     var tpl_sections = {
@@ -180,8 +181,8 @@ jQuery(document).ready(function() {
       'Layout'     : ['fluidContainer',      'fa-desktop'],
       'Discussion' : ['showDiscussion',      'fa-comments'],
       'Cookie Law' : ['showCookieLawBanner', 'fa-legal'],
-      'Others'     : ['showPageInfo',        'fa-gears'],
-    }
+      'Others'     : ['showPageInfo',        'fa-gears']
+    };
   
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
       var $node = jQuery(this);
