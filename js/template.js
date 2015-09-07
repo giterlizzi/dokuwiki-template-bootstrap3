@@ -127,6 +127,9 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
     jQuery('.btn_secedit .btn').input2button();
     jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="fa fa-fw fa-pencil"/> ');
 
+    // Edittable Button
+    jQuery('.editbutton_table .btn i').removeClass('fa-pencil').addClass('fa-table');
+
   }, 0);
 
 });
