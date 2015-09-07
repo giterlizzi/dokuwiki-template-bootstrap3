@@ -50,3 +50,4 @@ $lang['showPageInfo']        = 'Отображать информацию о с�
 $lang['showBadges']          = 'Отображать значки внизу страницы (DokuWiki, Donate, и т.д.)';
 $lang['leftSidebarGrid']     = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['rightSidebarGrid']    = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
+$lang['useGravatar']         = 'Load Gravatar image';

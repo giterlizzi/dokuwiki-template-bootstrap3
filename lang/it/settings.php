@@ -50,3 +50,4 @@ $lang['showPageInfo']        = 'Mostra le informazioni sulla pagina (es. data, a
 $lang['showBadges']          = 'Mostra i "badge" (DokuWiki, donazione, etc)';
 $lang['leftSidebarGrid']     = 'Classi per la grandezza della griglia per la barra laterale "sinistra" <code>col-{xs,sm,md,lg}-x</code> (vedi la documentazione <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['rightSidebarGrid']    = 'Classi per la grandezza della griglia per la barra laterale "destra" <code>col-{xs,sm,md,lg}-x</code> (vedi la documentazione <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
+$lang['useGravatar']         = 'Load Gravatar image';

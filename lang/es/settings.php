@@ -50,3 +50,4 @@ $lang['showPageInfo']        = 'Mostrar información de la página (por ejemplo:
 $lang['showBadges']          = 'Mostrar botones insignia (DokuWiki, Donar, etc)';
 $lang['leftSidebarGrid']     = 'Clases grid para barra lateral izquierda <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['rightSidebarGrid']    = 'Clases grid para barra lateral derecha <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
+$lang['useGravatar']         = 'Cargar imagen Gravatar';

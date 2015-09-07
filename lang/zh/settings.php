@@ -50,3 +50,4 @@ $lang['showPageInfo']        = '显示页面信息（例如日期，作者）';
 $lang['showBadges']          = '显示标志按钮（DokuWiki，捐赠等）';
 $lang['leftSidebarGrid']     = '左侧边栏网格类 <code>col-{xs,sm,md,lg}-x</code>（请参阅 <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap 网格</a>文档）';
 $lang['rightSidebarGrid']    = '右侧边栏网格类 <code>col-{xs,sm,md,lg}-x</code>（请参阅 <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap 网格</a>文档）';
+$lang['useGravatar']         = 'Load Gravatar image';

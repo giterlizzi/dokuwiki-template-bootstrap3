@@ -50,3 +50,4 @@ $lang['showPageInfo']        = 'ページのメタデータを表示する（日
 $lang['showBadges']          = 'Show badge buttons (DokuWiki, Donate, etc)';
 $lang['leftSidebarGrid']     = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
 $lang['rightSidebarGrid']    = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
+$lang['useGravatar']         = 'Load Gravatar image';
