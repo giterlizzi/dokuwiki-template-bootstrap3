@@ -202,6 +202,7 @@ function _tpl_action_item($action, $icon, $return = false) {
 function _tpl_get_container_grid() {
 
   global $ACT;
+  global $ID;
   global $conf;
 
   $grids  = array();
@@ -215,6 +216,10 @@ function _tpl_get_container_grid() {
     $fluidContainer = _tpl_fluid_container_button();
   }
 
+  if (   tpl_getConf('showLandingPage')
+      && (bool) preg_match_all(sprintf('/%s/', tpl_getConf('landingPages')), $ID) ) {
+    $showLeftSidebar = false;
+  }
 
   if (! $showLeftSidebar) {
     return 'container' . (($fluidContainer) ? '-fluid' : '');

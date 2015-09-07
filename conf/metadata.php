@@ -40,6 +40,8 @@ $meta['fluidContainerBtn']   = array('onoff');
 $meta['pageOnPanel']         = array('onoff');
 $meta['tableFullWidth']      = array('onoff');
 $meta['browserTitle']        = array('string');
+$meta['showLandingPage']     = array('onoff');
+$meta['landingPages']        = array('regex');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');

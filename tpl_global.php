@@ -6,6 +6,8 @@
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
+
+global $ID;
  
 $showTools           = tpl_getConf('showTools') != 'never' &&
                        ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
@@ -43,6 +45,7 @@ $schemaOrgType       = tpl_getConf('schemaOrgType');
 $leftSidebarGrid     = tpl_getConf('leftSidebarGrid');
 $rightSidebarGrid    = tpl_getConf('rightSidebarGrid');
 $useGravatar         = tpl_getConf('useGravatar');
+$showLandingPage     = tpl_getConf('showLandingPage');
 $contentGrid         = _tpl_get_container_grid();
 $hideInThemeSwitcher = explode(',', tpl_getConf('hideInThemeSwitcher'));
 $bootstrapStyles     = array();
@@ -52,6 +55,12 @@ $tplConfigJSON       = array(
 
 if($fluidContainerBtn) {
   $fluidContainer = _tpl_fluid_container_button();
+}
+
+// Display a landing page (set the pageOnPanel and showSidebar config to "off")
+if ($showLandingPage && (bool) preg_match_all(sprintf('/%s/', tpl_getConf('landingPages')), $ID)) {
+  $showSidebar = false;
+  $pageOnPanel = false;
 }
 
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {

@@ -41,3 +41,5 @@ $conf['showBadges']          = 1;
 $conf['showDiscussion']      = 0;
 $conf['discussionPage']      = 'discussion:@ID@';
 $conf['useGravatar']         = 0;
+$conf['showLandingPage']     = 0;
+$conf['landingPages']        = '(intro)';
