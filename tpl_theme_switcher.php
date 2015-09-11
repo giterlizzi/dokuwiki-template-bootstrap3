@@ -7,10 +7,10 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
-
+$all_themes       = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
+$available_themes = array_diff($all_themes, $hideInThemeSwitcher);
 ?>
-<?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch'): ?>
+<?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch' && count($available_themes) > 0): ?>
 <!-- theme-switcher -->
 <ul class="nav navbar-nav" id="dw__themes">
   <li class="dropdown">
@@ -19,12 +19,10 @@ $themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'l
 
     <ul class="dropdown-menu" aria-labelledby="themes">
       <li class="dropdown-header"><i class="fa fa-fw fa-tint"></i> Bootswatch Themes</li>
-      <?php foreach ($themes as $theme): ?>
-      <?php if(! in_array($theme, $hideInThemeSwitcher)): ?>
+      <?php foreach ($available_themes as $theme): ?>
       <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>>
         <a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a>
       </li>
-      <?php endif; ?>
       <?php endforeach; ?>
     </ul>
 

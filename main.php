@@ -13,6 +13,55 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
 include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
 
+$navbar_padding = 20;
+
+if ($fixedTopNavbar) {
+
+  if ($bootstrapTheme == 'bootswatch') {
+
+    // Set the navbar height for all Bootswatch Themes (values from bootswatch/*/_variables.scss)
+    switch ($bootswatchTheme) {
+      case 'simplex':
+      case 'superhero':
+        $navbar_height = 40;
+        break;
+      case 'yeti':
+        $navbar_height = 45;
+        break;
+      case 'cerulean':
+      case 'cosmo':
+      case 'custom':
+      case 'cyborg':
+      case 'lumen':
+      case 'slate':
+      case 'spacelab':
+      case 'united':
+        $navbar_height = 50;
+        break;
+      case 'darkly':
+      case 'flatly':
+      case 'journal':
+      case 'sandstone':
+        $navbar_height = 60;
+        break;
+      case 'paper':
+        $navbar_height = 64;
+        break;
+      case 'readable':
+        $navbar_height = 65;
+        break;
+      default:
+        $navbar_height = 50;
+    }
+
+  } else {
+    $navbar_height = 50;
+  }
+
+  $navbar_padding += $navbar_height;
+
+}
+
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
@@ -34,8 +83,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php tpl_metaheaders() ?>
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <style type="text/css">
-    body { padding-top: <?php echo (($fixedTopNavbar) ? '70' : '20'); ?>px; }
-    .toc-affix { z-index:9999; top:<?php echo (($fixedTopNavbar) ? '60' : '10'); ?>px; right:10px; }
+    body { padding-top: <?php echo $navbar_padding ?>px; }
+    .toc-affix { z-index:9999; top:<?php echo ($navbar_padding -10) ?>px; right:10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -94,7 +143,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
         <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
-            <div class="page group <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
+            <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
 
               <?php tpl_flush() /* flush the output buffer */ ?>
               <?php tpl_includeFile('pageheader.html') ?>
@@ -105,8 +154,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
                 $content = ob_get_clean();
               ?>
 
-              <div class="toc-affix pull-right hidden-print" data-spy="affix" data-offset-top="150">
-                <?php bootstrap3_toc(tpl_toc(true)) ?>
+              <div class="pull-right hidden-print">
+                <div class="toc-affix" data-spy="affix" data-offset-top="150">
+                  <?php bootstrap3_toc(tpl_toc(true)) ?>
+                </div>
               </div>
 
               <!-- wikipage start -->
@@ -136,7 +187,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
       <footer id="dokuwiki__footer" class="small">
 
-        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top"><i class="fa fa-chevron-up"></i></a>
+        <a href="javascript:void(0)" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" id="back-to-top" accesskey="t"><i class="fa fa-chevron-up"></i></a>
 
         <div class="text-right">
 
