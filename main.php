@@ -135,17 +135,15 @@ if ($fixedTopNavbar) {
         <?php bootstrap3_html_msgarea() ?>
       </div>
 
-      <main class="main row" role="main">
+      <main class="main row" role="main" style="position:relative">
 
         <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?> style="position:relative">
+        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
-
-              <?php @require_once('tpl_page_tools.php') ?>
 
               <?php tpl_flush() /* flush the output buffer */ ?>
               <?php tpl_includeFile('pageheader.html') ?>
@@ -184,6 +182,8 @@ if ($fixedTopNavbar) {
                          'rightsidebarheader.html', 'rightsidebarfooter.html');
           }
         ?>
+
+        <?php @require_once('tpl_page_tools.php') ?>
 
       </main>
 
