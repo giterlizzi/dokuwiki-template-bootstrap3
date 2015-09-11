@@ -536,11 +536,32 @@ jQuery(document).on('bootstrap3:mode-index', function(e) {
 });
 
 
+jQuery(document).on('bootstrap3:page-tools', function() {
+
+  setTimeout(function() {
+
+    var $page_tools_items = jQuery('#dokuwiki__pagetools ul li a');
+
+    $page_tools_items.on('mouseenter', function () {
+      var $icon = jQuery(this);
+      $icon.find('i').addClass('fa-2x', 200);
+    });
+
+    $page_tools_items.on('mouseleave', function () {
+      var $icon = jQuery(this);
+      $icon.find('i').removeClass('fa-2x', 200);
+    });
+
+  }, 0);
+
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'breadcrumbs', 'tabs', 'buttons', 'back-to-top', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail' ];
+    var events = [ 'toc', 'nav', 'breadcrumbs', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

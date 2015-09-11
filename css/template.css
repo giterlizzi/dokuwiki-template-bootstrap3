@@ -162,6 +162,21 @@ input, textarea, select {
   overflow: hidden !important;
 }
 
+#dokuwiki__pagetools ul li a {
+  padding: 5px;
+}
+
+#dokuwiki__pagetools {
+  position: absolute;
+  top: 2em;
+  right: -40px;
+  width: 40px;
+}
+
+#dokuwiki__pagetools .tools {
+  position: fixed;
+}
+
 .dw__sidebar .nav li a {
   padding: 5px 10px;
 }
@@ -271,7 +286,6 @@ a.iw_user {
   padding: 0 !important;
 }
 
-
 .mode_search li {
   list-style-type: none;
 }
@@ -283,7 +297,8 @@ a.iw_user {
 }
 
 #extension__manager ul.tabs li.active a {
-  border-bottom-color: white; /* FIXME */
+  border-bottom-color: white;
+ /* FIXME */
 }
 
 .profile-image {

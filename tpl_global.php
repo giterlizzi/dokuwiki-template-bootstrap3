@@ -13,6 +13,8 @@ $showTools           = tpl_getConf('showTools') != 'never' &&
                        ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
 $showSearchForm      = tpl_getConf('showSearchForm') != 'never' &&
                        ( tpl_getConf('showSearchForm') == 'always' || !empty($_SERVER['REMOTE_USER']) );
+$showPageTools       = tpl_getConf('showPageTools') != 'never' &&
+                       ( tpl_getConf('showPageTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
 $individualTools     = tpl_getConf('individualTools');
 $showIndividualTool  = tpl_getConf('showIndividualTool');
 $showAdminMenu       = tpl_getConf('showAdminMenu') && $INFO['isadmin'];

@@ -84,7 +84,7 @@ if ($fixedTopNavbar) {
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <style type="text/css">
     body { padding-top: <?php echo $navbar_padding ?>px; }
-    .toc-affix { z-index:9999; top:<?php echo ($navbar_padding -10) ?>px; right:10px; }
+    .toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; right: 10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -140,10 +140,12 @@ if ($fixedTopNavbar) {
         <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
+        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?> style="position:relative">
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
+
+              <?php @require_once('tpl_page_tools.php') ?>
 
               <?php tpl_flush() /* flush the output buffer */ ?>
               <?php tpl_includeFile('pageheader.html') ?>

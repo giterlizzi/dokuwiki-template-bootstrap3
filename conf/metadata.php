@@ -42,6 +42,7 @@ $meta['tableFullWidth']      = array('onoff');
 $meta['browserTitle']        = array('string');
 $meta['showLandingPage']     = array('onoff');
 $meta['landingPages']        = array('regex');
+$meta['showPageTools']       = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
