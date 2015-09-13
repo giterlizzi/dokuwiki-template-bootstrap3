@@ -17,6 +17,7 @@ $plugins = array(
   'Administrative Tasks' => $administrative_tasks,
   'Additional Plugins'   => $additional_plugins
 );
+
 ?>
 <?php if($showAdminMenu): ?>
 <ul class="nav navbar-nav">
@@ -28,51 +29,66 @@ $plugins = array(
 
     <ul class="dropdown-menu" role="menu">
 
+      <?php if(count($additional_plugins)): ?>
       <li class="open dropdown-row">
-      <?php foreach ($plugins as $name => $items): if (count($additional_plugins) == 0) continue; ?>
-      <ul class="col-sm-6 dropdown-menu">
+      <?php endif; ?>
 
-        <li class="dropdown-header">
-          <i class="fa fa-fw fa-cog"></i> <?php echo ucfirst($name) ?>
-        </li>
+        <?php foreach ($plugins as $name => $items): if (! count($items)) continue ?>
 
-        <?php
-          foreach($items as $item) {
+        <?php if(count($additional_plugins)): ?>
+        <ul class="col-sm-6 dropdown-menu">
+        <?php endif; ?>
+  
+          <li class="dropdown-header">
+            <i class="fa fa-fw fa-cog"></i> <?php echo ucfirst($name) ?>
+          </li>
+  
+          <?php
 
-            if(($plugin = plugin_load('admin', $item)) === null) continue;
-            if($plugin->forAdminOnly() && !$INFO['isadmin']) continue;
-            if($item == 'usermanager' && ! ($auth && $auth->canDo('getUsers'))) continue;
-
-            $label = $plugin->getMenuText($conf['lang']);
-
-            if (! $label) continue;
-
-            switch ($item) {
-              case 'usermanager': $icon = 'users'; break;
-              case 'acl':         $icon = 'key'; break;
-              case 'extension':   $icon = 'plus'; break;
-              case 'config':      $icon = 'cogs'; break;
-              case 'styling':     $icon = 'paint-brush'; break;
-              case 'revert':      $icon = 'refresh'; break;
-              case 'popularity':  $icon = 'envelope'; break;
-
-              case 'sqlite':      $icon = 'database'; break;
-              case 'tagging':     $icon = 'tags'; break;
-              case 'upgrade':     $icon = 'cloud-download'; break;
-              case 'smtp':        $icon = 'envelope-o'; break;
-              case 'searchindex': $icon = 'sitemap'; break;
-              case 'discussion':  $icon = 'comments'; break;
-              default:            $icon = 'puzzle-piece';
+            foreach($items as $item) {
+  
+              if (($plugin = plugin_load('admin', $item)) === null) continue;
+              if ($plugin->forAdminOnly() && !$INFO['isadmin']) continue;
+              if ($item == 'usermanager' && ! ($auth && $auth->canDo('getUsers'))) continue;
+  
+              $label = $plugin->getMenuText($conf['lang']);
+  
+              if (! $label) continue;
+  
+              switch ($item) {
+                case 'usermanager': $icon = 'users'; break;
+                case 'acl':         $icon = 'key'; break;
+                case 'extension':   $icon = 'plus'; break;
+                case 'config':      $icon = 'cogs'; break;
+                case 'styling':     $icon = 'paint-brush'; break;
+                case 'revert':      $icon = 'refresh'; break;
+                case 'popularity':  $icon = 'envelope'; break;
+  
+                case 'sqlite':      $icon = 'database'; break;
+                case 'tagging':     $icon = 'tags'; break;
+                case 'upgrade':     $icon = 'cloud-download'; break;
+                case 'smtp':        $icon = 'envelope-o'; break;
+                case 'searchindex': $icon = 'sitemap'; break;
+                case 'discussion':  $icon = 'comments'; break;
+                default:            $icon = 'puzzle-piece';
+              }
+  
+              echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
+  
             }
 
-            echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
+          ?>
 
-          }
-        ?>
-      </ul>
-      <?php endforeach; ?>
+        <?php if(count($additional_plugins)): ?>
+        </ul>
+        <?php endif; ?>
 
+        <?php endforeach; ?>
+
+      <?php if(count($additional_plugins)): ?>
       </li>
+      <?php endif; ?>
+
     </ul>
 
   </li>
