@@ -8,7 +8,16 @@
  */
 
 ?>
-<?php if ($showTools): $tools = bootstrap3_tools_menu(); ?>
+<?php if ($showTools): ?>
+<?php
+
+$all_tools = bootstrap3_tools_menu();
+
+foreach ($showIndividualTool as $tool) {
+  $tools[$tool] = $all_tools[$tool];
+}
+
+?>
 
 <ul class="nav navbar-nav" id="dw__tools">
 
@@ -25,7 +34,7 @@
       <li class="dropdown-header hidden-xs hidden-sm">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php bootstrap3_toolsevent($id.'tools', $menu['menu']) ?>
 
     </ul>
   </li>
@@ -44,7 +53,7 @@
       <li class="dropdown-header">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php tpl_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php bootstrap3_toolsevent($id.'tools', $menu['menu']) ?>
 
       <?php if ($max > $i): ?>
       <li class="divider" role="separator"></li>

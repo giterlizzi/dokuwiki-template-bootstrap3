@@ -29,7 +29,7 @@ $plugins = array(
     <ul class="dropdown-menu" role="menu">
 
       <li class="open dropdown-row">
-      <?php foreach ($plugins as $name => $items): ?>
+      <?php foreach ($plugins as $name => $items): if (count($additional_plugins) == 0) continue; ?>
       <ul class="col-sm-6 dropdown-menu">
 
         <li class="dropdown-header">

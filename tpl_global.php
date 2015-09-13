@@ -16,7 +16,7 @@ $showSearchForm      = tpl_getConf('showSearchForm') != 'never' &&
 $showPageTools       = tpl_getConf('showPageTools') != 'never' &&
                        ( tpl_getConf('showPageTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
 $individualTools     = tpl_getConf('individualTools');
-$showIndividualTool  = tpl_getConf('showIndividualTool');
+$showIndividualTool  = explode(',', tpl_getConf('showIndividualTool'));
 $showAdminMenu       = tpl_getConf('showAdminMenu') && $INFO['isadmin'];
 $showUserHomeLink    = tpl_getConf('showUserHomeLink');
 $showLoginOnFooter   = tpl_getConf('showLoginOnFooter');

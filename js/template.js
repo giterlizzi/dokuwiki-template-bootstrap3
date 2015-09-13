@@ -540,7 +540,7 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
   setTimeout(function() {
 
-    var $page_tools_items = jQuery('#dokuwiki__pagetools ul li a');
+    var $page_tools_items = jQuery('#dw__pagetools ul li a');
 
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);

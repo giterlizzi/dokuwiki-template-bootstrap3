@@ -62,13 +62,13 @@ if ($useGravatar) {
               <i class="fa fa-fw fa-envelope"></i> <?php echo $INFO['userinfo']['mail'] ?>
             </a>
           </li>
-          <?php echo _tpl_action_item('profile', 'fa fa-fw fa-refresh') ?>
+          <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
         </ul>
 
       </li>
 
       <li class="divider" role="separator"></li>
-      <?php echo _tpl_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
+      <?php echo bootstrap3_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
 
     </ul>
 

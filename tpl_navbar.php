@@ -76,10 +76,10 @@
             <span class="dw__actions">
               <?php
 
-                echo _tpl_action_item('register', 'fa fa-fw fa-user-plus', true);
+                echo bootstrap3_action_item('register', 'fa fa-fw fa-user-plus', true);
 
                 if ($showLoginLink) {
-                  echo _tpl_action_item('login', 'fa fa-fw fa-sign-in', true);
+                  echo bootstrap3_action_item('login', 'fa fa-fw fa-sign-in', true);
                 }
 
               ?>

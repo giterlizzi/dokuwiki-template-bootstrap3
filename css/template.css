@@ -162,18 +162,18 @@ input, textarea, select {
   overflow: hidden !important;
 }
 
-#dokuwiki__pagetools ul li a {
+#dw__pagetools ul li a {
   padding: 5px;
 }
 
-#dokuwiki__pagetools {
+#dw__pagetools {
   position: absolute;
   top: 2em;
   right: -40px;
   width: 40px;
 }
 
-#dokuwiki__pagetools .tools {
+#dw__pagetools .tools {
   position: fixed;
 }
 

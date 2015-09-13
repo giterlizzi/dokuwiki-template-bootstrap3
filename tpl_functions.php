@@ -96,6 +96,32 @@ function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
 }
 
 
+function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false) {
+
+  $output = '';
+
+  $data = array(
+      'view'  => $view,
+      'items' => $items
+  );
+  $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
+  $evt = new Doku_Event($hook, $data);
+  if($evt->advise_before()){
+      foreach($evt->data['items'] as $k => $html) $output .= $html;
+  }
+  $evt->advise_after();
+
+  $search  = array('<span>');
+  $replace = array('<i class="fa fa-puzzle-piece fa-fw"></i> <span>');
+
+  $output = str_replace($search, $replace, $output);
+
+  if ($return) return $output;
+  echo $output;
+
+}
+
+
 /**
  * copied to core (available since Detritus)
  */
@@ -160,7 +186,7 @@ function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_heade
  * @param   boolean  $return
  * @return  string
  */
-function _tpl_action_item($action, $icon, $return = false) {
+function bootstrap3_action_item($action, $icon, $return = false) {
 
   global $ACT;
 
@@ -439,7 +465,7 @@ function bootstrap3_html_msgarea() {
  *
  * @return  array
  */
-function _tpl_tools() {
+function bootstrap3_tools() {
 
   global $ACT;
 
@@ -480,22 +506,18 @@ function _tpl_tools() {
 
   );
 
-  foreach (explode(',', tpl_getConf('showIndividualTool')) as $tool) {
-    $result[$tool] = $tools[$tool];
-  }
-
-  return $result;
+  return $tools;
 
 }
 
 
 function bootstrap3_tools_menu() {
 
-  $tools = _tpl_tools();
+  $tools = bootstrap3_tools();
 
   foreach ($tools as $id => $menu) {
     foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = _tpl_action_item($action, $item['icon']);
+      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
     }
   }
 
@@ -510,7 +532,7 @@ function bootstrap3_toolbar() {
 
   foreach ($tools as $id => $menu) {
     foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = str_replace('class="action ', 'class="action btn btn-default ', _tpl_action_item($action, $item['icon'], 1));
+      $tools[$id]['menu'][$action] = str_replace('class="action ', 'class="action btn btn-default ', bootstrap3_action_item($action, $item['icon'], 1));
     }
   }
 

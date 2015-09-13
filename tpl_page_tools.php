@@ -11,16 +11,16 @@
 
 ?>
 <?php if ($showPageTools): ?>
-<div id="dokuwiki__pagetools" class="hidden-print">
+<div id="dw__pagetools" class="hidden-print">
   <div class="tools">
     <ul class="nav nav-stacked nav-pills">
       <?php 
         $tools = bootstrap3_tools_menu();
         unset($tools['page']['menu']['top']);
-        ob_start();
-        tpl_toolsevent('pagetools', $tools['page']['menu']);
-        $tools_menu = ob_get_clean();
-        $tools_menu = str_replace(array('class="action', '</i>', '</a>'), array('class="action text-muted', '</i><span class="sr-only">', '</span></a>'), $tools_menu);
+        $tools_menu = bootstrap3_toolsevent('pagetools', $tools['page']['menu'], 'main', true);
+        $tools_menu = str_replace(array('class="action', '</i>', '</a>', '<span>'),
+                                  array('class="action text-muted', '</i><span class="sr-only">', '</span></a>', '<span class="sr-only">'),
+                                  $tools_menu);
         echo $tools_menu;
       ?>
     </ul>
