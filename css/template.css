@@ -334,3 +334,7 @@ ul.btn-group {
   white-space: nowrap;
   overflow: hidden !important;
 }
+
+.dokuwiki h1.page-header {
+	margin-top: 0px;
+}
