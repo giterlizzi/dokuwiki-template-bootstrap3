@@ -66,7 +66,7 @@
         <ul class="nav navbar-nav">
 
           <?php if ($fluidContainerBtn): ?>
-          <li class="hidden-xs<?php echo (_tpl_fluid_container_button() ? ' active' : '')?>">
+          <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">
             <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>

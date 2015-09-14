@@ -170,7 +170,7 @@ if (!function_exists('tpl_classes')) {
  * @param  string  $sidebar_header
  * @param  string  $sidebar_footer
  */
-function _tpl_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
+function bootstrap3_include_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
   global $lang;
   @require('tpl_sidebar.php');
 }
@@ -225,7 +225,7 @@ function bootstrap3_action_item($action, $icon, $return = false) {
  *
  * @return  string
  */
-function _tpl_get_container_grid() {
+function bootstrap3_container_grid() {
 
   global $ACT;
   global $ID;
@@ -239,7 +239,7 @@ function _tpl_get_container_grid() {
   $fluidContainer   = tpl_getConf('fluidContainer');
 
   if(tpl_getConf('fluidContainerBtn')) {
-    $fluidContainer = _tpl_fluid_container_button();
+    $fluidContainer = bootstrap3_fluid_container_button();
   }
 
   if (   tpl_getConf('showLandingPage')
@@ -278,7 +278,7 @@ function _tpl_get_container_grid() {
  *
  * @return  string
  */
-function _tpl_user_homepage_link() {
+function bootstrap3_user_homepage_link() {
 
   $interwiki = getInterwiki();
   $user_url  = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
@@ -288,7 +288,7 @@ function _tpl_user_homepage_link() {
 }
 
 
-function _tpl_fluid_container_button() {
+function bootstrap3_fluid_container_button() {
 
   if (! tpl_getConf('fluidContainerBtn')) return false;
 

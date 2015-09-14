@@ -52,7 +52,7 @@ if ($useGravatar) {
         <ul class="nav navbar-nav col-sm-8">
           <?php if($showUserHomeLink): ?>
           <li>
-            <a href="<?php echo _tpl_user_homepage_link() ?>">
+            <a href="<?php echo bootstrap3_user_homepage_link() ?>">
               <i class="fa fa-fw fa-home"></i> Personal Home-Page
             </a>
           </li>

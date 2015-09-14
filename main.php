@@ -92,6 +92,17 @@ if ($fixedTopNavbar) {
   <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  <?php if ($fixedTopNavbar): ?>
+  <script type="text/javascript">/*<![CDATA[*/
+    jQuery(document).ready(function() {
+      if (location.hash) {
+        setTimeout(function() {
+          scrollBy(0, -<?php echo $navbar_padding ?>);
+        }, 1);
+      }
+    });
+  /*!]]>*/</script>
+  <?php endif; ?>
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
@@ -137,7 +148,7 @@ if ($fixedTopNavbar) {
 
       <main class="main row" role="main" style="position:relative">
 
-        <?php if ($showSidebar && $sidebarPosition == 'left') _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
+        <?php if ($showSidebar && $sidebarPosition == 'left') bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
 
         <!-- ********** CONTENT ********** -->
         <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
@@ -145,12 +156,13 @@ if ($fixedTopNavbar) {
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
 
-              <?php tpl_flush() /* flush the output buffer */ ?>
-              <?php tpl_includeFile('pageheader.html') ?>
               <?php
+                tpl_flush(); /* flush the output buffer */
+                tpl_includeFile('pageheader.html');
                 // render the content into buffer for later use
                 ob_start();
                 tpl_content(false);
+
                 $content = ob_get_clean();
               ?>
 
@@ -164,8 +176,10 @@ if ($fixedTopNavbar) {
               <?php echo $content; ?>
               <!-- wikipage stop -->
 
-              <?php tpl_flush() ?>
-              <?php tpl_includeFile('pagefooter.html') ?>
+              <?php
+                tpl_flush();
+                tpl_includeFile('pagefooter.html');
+              ?>
 
             </div>
           </div>
@@ -174,11 +188,11 @@ if ($fixedTopNavbar) {
 
         <?php
           if ($showSidebar && $sidebarPosition == 'right') {
-            _tpl_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
+            bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
                          'sidebarheader.html', 'sidebarfooter.html');
           }
           if ($showSidebar && $showRightSidebar && $sidebarPosition == 'left') {
-            _tpl_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
+            bootstrap3_include_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
                          'rightsidebarheader.html', 'rightsidebarfooter.html');
           }
         ?>
@@ -207,17 +221,7 @@ if ($fixedTopNavbar) {
 
         </div>
 
-        <?php if ($showBadges): ?>
-        <div class="text-center hidden-print">
-          <p id="dw__license">
-            <?php 
-              tpl_license('');
-              $target = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
-            ?>
-          </p>
-          <?php @require_once('tpl_badges.php'); ?>
-        </div>
-        <?php endif; ?>
+        <?php @require_once('tpl_badges.php'); ?>
 
       </footer>
 

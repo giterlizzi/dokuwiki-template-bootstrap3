@@ -48,7 +48,7 @@ $leftSidebarGrid     = tpl_getConf('leftSidebarGrid');
 $rightSidebarGrid    = tpl_getConf('rightSidebarGrid');
 $useGravatar         = tpl_getConf('useGravatar');
 $showLandingPage     = tpl_getConf('showLandingPage');
-$contentGrid         = _tpl_get_container_grid();
+$contentGrid         = bootstrap3_container_grid();
 $hideInThemeSwitcher = explode(',', tpl_getConf('hideInThemeSwitcher'));
 $bootstrapStyles     = array();
 $tplConfigJSON       = array(
@@ -56,7 +56,7 @@ $tplConfigJSON       = array(
 );
 
 if($fluidContainerBtn) {
-  $fluidContainer = _tpl_fluid_container_button();
+  $fluidContainer = bootstrap3_fluid_container_button();
 }
 
 // Display a landing page (set the pageOnPanel and showSidebar config to "off")
