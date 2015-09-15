@@ -18,9 +18,18 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $explain          = jQuery('.explain'),              // Explain Plugin
         $wrap             = jQuery('.plugin_wrap'),          // Wrap Plugin
         $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
-        $dataplugin_entry = jQuery('.dataplugin_entry');     // Data Plugin: Entry
+        $dataplugin_entry = jQuery('.dataplugin_entry'),     // Data Plugin: Entry
+        $jorg_chart       = jQuery('.jOrgChart');            // jOrgChart
 
 
+    // jOrgChart
+    if ($jorg_chart.length) {
+      $jorg_chart.removeClass('table-responsive');
+      $jorg_chart.find('.table').removeClass('table table-striped table-condensed');
+    }
+
+
+    // Data Plugin: Entry
     if ($dataplugin_entry.length) {
       $dataplugin_entry.find('dl').addClass('panel panel-default');
     }

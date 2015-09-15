@@ -30,6 +30,7 @@ Bootstrap3 template for DokuWiki
   * Diagram
   * Edittable
   * Bootstrap Wrapper
+  * jOrg Chart
   * ... and more!
   
 ## Localizations
