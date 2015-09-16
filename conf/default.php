@@ -44,3 +44,4 @@ $conf['useGravatar']         = 0;
 $conf['showLandingPage']     = 0;
 $conf['landingPages']        = '(intro)';
 $conf['showPageTools']       = 'always';
+$conf['useLocalBootswatch']  = 0;
