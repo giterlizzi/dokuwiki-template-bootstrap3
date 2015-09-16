@@ -96,31 +96,6 @@ function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
 }
 
 
-function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false) {
-
-  $output = '';
-
-  $data = array(
-      'view'  => $view,
-      'items' => $items
-  );
-  $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
-  $evt = new Doku_Event($hook, $data);
-  if($evt->advise_before()){
-      foreach($evt->data['items'] as $k => $html) $output .= $html;
-  }
-  $evt->advise_after();
-
-  $search  = array('<span>');
-  $replace = array('<i class="fa fa-puzzle-piece fa-fw"></i> <span>');
-
-  $output = str_replace($search, $replace, $output);
-
-  if ($return) return $output;
-  echo $output;
-
-}
-
 
 /**
  * copied to core (available since Detritus)
@@ -161,6 +136,44 @@ if (!function_exists('tpl_classes')) {
 
 
 /**
+ * Create event for tools menues
+ *
+ * @author  Anika Henke <anika@selfthinker.org>
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $toolsname name of menu
+ * @param   array    $items
+ * @param   string   $view e.g. 'main', 'detail', ...
+ * @param   boolean  $return
+ * @return  string
+ */
+function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false) {
+
+  $output = '';
+
+  $data = array(
+      'view'  => $view,
+      'items' => $items
+  );
+  $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
+  $evt = new Doku_Event($hook, $data);
+  if($evt->advise_before()){
+      foreach($evt->data['items'] as $k => $html) $output .= $html;
+  }
+  $evt->advise_after();
+
+  $search  = array('<span>');
+  $replace = array('<i class="fa fa-puzzle-piece fa-fw"></i> <span>');
+
+  $output = str_replace($search, $replace, $output);
+
+  if ($return) return $output;
+  echo $output;
+
+}
+
+
+/**
  * Include left or right sidebar
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -192,7 +205,7 @@ function bootstrap3_action_item($action, $icon, $return = false) {
 
   if ($action == 'discussion') {
 
-    if (tpl_getConf('showDiscussion')) {
+    if (bootstrap3_conf('showDiscussion')) {
       $out = _tpl_action('discussion', 1, 'li', 1);
       $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
       return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
@@ -218,6 +231,7 @@ function bootstrap3_action_item($action, $icon, $return = false) {
 
 }
 
+
 /**
  * Calculate automatically the grid size for main container
  *
@@ -234,16 +248,16 @@ function bootstrap3_container_grid() {
   $grids  = array();
   $result = '';
 
-  $showRightSidebar = page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
-  $showLeftSidebar  = page_findnearest($conf['sidebar']) && ($ACT=='show');
-  $fluidContainer   = tpl_getConf('fluidContainer');
+  $showRightSidebar = bootstrap3_conf('showRightSidebar');
+  $showLeftSidebar  = bootstrap3_conf('showSidebar');
+  $fluidContainer   = bootstrap3_conf('fluidContainer');
 
-  if(tpl_getConf('fluidContainerBtn')) {
+  if(bootstrap3_conf('fluidContainerBtn')) {
     $fluidContainer = bootstrap3_fluid_container_button();
   }
 
-  if (   tpl_getConf('showLandingPage')
-      && (bool) preg_match_all(sprintf('/%s/', tpl_getConf('landingPages')), $ID) ) {
+  if (   bootstrap3_conf('showLandingPage')
+      && (bool) preg_match_all(sprintf('/%s/', bootstrap3_conf('landingPages')), $ID) ) {
     $showLeftSidebar = false;
   }
 
@@ -251,12 +265,12 @@ function bootstrap3_container_grid() {
     return 'container' . (($fluidContainer) ? '-fluid' : '');
   }
 
-  foreach (explode(' ', tpl_getConf('leftSidebarGrid')) as $grid) {
+  foreach (explode(' ', bootstrap3_conf('leftSidebarGrid')) as $grid) {
     list($col, $media, $size) = explode('-', $grid);
     $grids[$media]['left'] = (int) $size;
   }
 
-  foreach (explode(' ', tpl_getConf('rightSidebarGrid')) as $grid) {
+  foreach (explode(' ', bootstrap3_conf('rightSidebarGrid')) as $grid) {
     list($col, $media, $size) = explode('-', $grid);
     $grids[$media]['right'] = (int) $size;
   }
@@ -270,6 +284,7 @@ function bootstrap3_container_grid() {
   return $result;
 
 }
+
 
 /**
  * Return the user home-page link
@@ -288,9 +303,16 @@ function bootstrap3_user_homepage_link() {
 }
 
 
+/**
+ * Check if the fluid container button is enabled (from the user cookie)
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  boolean
+ */
 function bootstrap3_fluid_container_button() {
 
-  if (! tpl_getConf('fluidContainerBtn')) return false;
+  if (! bootstrap3_conf('fluidContainerBtn')) return false;
 
   if (   get_doku_pref('fluidContainer', null) !== null
       && get_doku_pref('fluidContainer', null) !== ''
@@ -351,6 +373,51 @@ function bootstrap3_sidebar($sidebar, $return = false) {
   if ($return) return $out;
   echo $out;
 
+}
+
+
+/**
+ * Normalize DokuWiki list items
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $html
+ * @return  string
+ */
+function bootstrap3_lists($html) {
+  $output = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $html);
+  return $output;
+}
+
+
+
+/**
+ * Make a Bootstrap3 Nav
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $html
+ * @param   boolean  $staked
+ * @param   string   $type (= pills, tabs)
+ * @return  string
+ **/
+function bootstrap3_nav($html, $stacked = false, $type = '') {
+
+  $class = 'nav ';
+
+  if ($stacked) $class .= 'nav-stacked ';
+  if ($type)    $class .= "nav-$type ";
+
+  $class = trim($class);
+
+  $output = str_replace(array('<ul class="', '<ul>'),
+                        array("<ul class=\"$class", "<ul class=\"$class\">"),
+                        $html);
+
+  $output = bootstrap3_lists($output);
+
+  return $output;
+  
 }
 
 
@@ -511,6 +578,13 @@ function bootstrap3_tools() {
 }
 
 
+/**
+ * Return an array for a tools menu
+ * 
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * 
+ * @return  array of tools
+ */
 function bootstrap3_tools_menu() {
 
   $tools = bootstrap3_tools();
@@ -526,6 +600,13 @@ function bootstrap3_tools_menu() {
 }
 
 
+/**
+ * Return an array for a toolbar
+ * 
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * 
+ * @return  array of tools
+ */
 function bootstrap3_toolbar() {
 
   $tools = _tpl_tools();
@@ -544,14 +625,14 @@ function bootstrap3_toolbar() {
 /**
  * Get either a Gravatar URL or complete image tag for a specified email address.
  *
- * @param string $email The email address
- * @param string $s Size in pixels, defaults to 80px [ 1 - 2048 ]
- * @param string $d Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
- * @param string $r Maximum rating (inclusive) [ g | pg | r | x ]
- * @param boolean $img True to return a complete IMG tag False for just the URL
- * @param array $atts Optional, additional key/value attributes to include in the IMG tag
- * @return String containing either just a URL or a complete image tag
- * @source http://gravatar.com/site/implement/images/php/
+ * @param   string  $email  The email address
+ * @param   string  $s      Size in pixels, defaults to 80px [ 1 - 2048 ]
+ * @param   string  $d      Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param   string  $r      Maximum rating (inclusive) [ g | pg | r | x ]
+ * @param   boolean $img    True to return a complete IMG tag False for just the URL
+ * @param   array   $atts   Optional, additional key/value attributes to include in the IMG tag
+ * @return  String containing either just a URL or a complete image tag
+ * @source  http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
   $url = 'http://www.gravatar.com/avatar/';
@@ -564,4 +645,105 @@ function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts
       $url .= ' />';
   }
   return $url;
+}
+
+
+/**
+ * Get the template metadata
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string $key
+ * @return  array
+ */
+function bootstrap3_metadata($key = null) {
+
+  $meta = array();
+  $file = tpl_incdir() . 'conf/metadata.php';
+  include $file;
+
+  if ($key) return $meta[$key];
+
+  return $meta;
+
+}
+
+
+/**
+ * A simple wrapper for tpl_getConf
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $key
+ * @param   mixed   $default value
+ * @return  mixed
+ */
+function bootstrap3_conf($key, $default = false) {
+
+  global $ACT, $INFO, $ID, $conf;
+
+  $value = tpl_getConf($key, $default);
+
+  switch ($key) {
+
+    case 'showTools':
+      return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
+
+    case 'showSearchForm':
+      return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
+
+    case 'showPageTools':
+      return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
+
+    case 'showIndividualTool':
+      return explode(',', $value);
+
+    case 'showAdminMenu':
+      return $value && $INFO['isadmin'];
+
+    case 'hideLoginLink':
+      return ! $value || ! empty($_SERVER['REMOTE_USER']);
+
+    case 'hideInThemeSwitcher':
+      return explode(',', $value);
+
+    case 'browserTitle':
+      return str_replace(array('@WIKI@', '@TITLE@'),
+                         array(strip_tags($conf['title']), tpl_pagetitle(null, true)),
+                         $value);
+
+    case 'showSidebar':
+      return page_findnearest($conf['sidebar']) && ($ACT=='show');
+
+    case 'showRightSidebar':
+      return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
+
+    case 'landingPages':
+      return sprintf('/%s/', $value); 
+
+  }
+
+  //$type = bootstrap3_metadata($key);
+
+  //if ($type[0] == 'regex') {   
+  //  return sprintf('/%s/', $value);
+  //}
+
+  return $value;
+
+}
+
+
+/**
+ * Return the Bootswatch.com theme lists defined in metadata.php
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  array
+ */
+function bootstrap3_bootswatch_theme_list() {
+
+  $bootswatch_themes = bootstrap3_metadata('bootswatchTheme');
+  return $bootswatch_themes['_choices'];
+
 }

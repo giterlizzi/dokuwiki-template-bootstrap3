@@ -7,10 +7,13 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$all_themes       = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
-$available_themes = array_diff($all_themes, $hideInThemeSwitcher);
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
 ?>
-<?php if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch' && count($available_themes) > 0): ?>
+<?php if (   bootstrap3_conf('showThemeSwitcher')
+          && bootstrap3_conf('bootstrapTheme') == 'bootswatch'
+          && $available_themes = array_diff(bootstrap3_bootswatch_theme_list(), bootstrap3_conf('hideInThemeSwitcher'))): ?>
 <!-- theme-switcher -->
 <ul class="nav navbar-nav" id="dw__themes">
   <li class="dropdown">

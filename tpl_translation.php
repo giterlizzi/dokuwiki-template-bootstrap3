@@ -7,7 +7,10 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-if (tpl_getConf('showTranslation') && $translation = plugin_load('helper','translation')) {
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
+if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
 
     if ($translation->istranslatable($INFO['id'])) {
 

@@ -7,7 +7,8 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// class="panel panel-default" data-spy="affix" data-offset-top="60" data-offset-bottom="200"
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
 
 ?>
 <?php if ($showPageTools): ?>
@@ -18,8 +19,8 @@
         $tools = bootstrap3_tools_menu();
         unset($tools['page']['menu']['top']);
         $tools_menu = bootstrap3_toolsevent('pagetools', $tools['page']['menu'], 'main', true);
-        $tools_menu = str_replace(array('class="action', '</i>', '</a>', '<span>'),
-                                  array('class="action text-muted', '</i><span class="sr-only">', '</span></a>', '<span class="sr-only">'),
+        $tools_menu = str_replace(array('class="action', '</i>', '</a>'),
+                                  array('class="action text-muted', '</i><span class="sr-only">', '</span></a>'),
                                   $tools_menu);
         echo $tools_menu;
       ?>

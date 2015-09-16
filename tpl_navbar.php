@@ -7,6 +7,9 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
 ?>
 <nav class="navbar <?php echo (($fixedTopNavbar) ? 'navbar-fixed-top' : '') ?> <?php echo (($inverseNavbar) ? 'navbar-inverse' : 'navbar-default') ?>" role="navigation">
 

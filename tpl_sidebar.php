@@ -7,6 +7,9 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
 ?>
 <!-- ********** ASIDE ********** -->
 <aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">

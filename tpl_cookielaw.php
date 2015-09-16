@@ -7,6 +7,9 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
 ?>
 <?php if ( $showCookieLawBanner && ! (get_doku_pref('cookieNoticeAccepted', null) || get_doku_pref('cookieNoticeAccepted', '')) ): ?>
 <div id="cookieNotice" class="navbar <?php echo (($inverseNavbar) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
