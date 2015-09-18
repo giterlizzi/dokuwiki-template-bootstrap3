@@ -13,6 +13,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
 include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
 
+if (isset($_GET['do']) && $_GET['do'] == 'check') msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+
 $navbar_padding = 20;
 
 if ($fixedTopNavbar) {
@@ -146,7 +148,7 @@ if ($fixedTopNavbar) {
         <?php bootstrap3_html_msgarea() ?>
       </div>
 
-      <main class="main row" role="main" style="position:relative">
+      <main class="main row" role="main">
 
         <?php if ($showSidebar && $sidebarPosition == 'left') bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
 

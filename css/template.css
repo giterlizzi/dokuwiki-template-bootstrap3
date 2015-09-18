@@ -21,6 +21,10 @@ input, textarea, select {
   font-weight: 400;
 }
 
+main {
+  position: relative;
+}
+
 #dw__msgarea .alert {
   padding: 5px;
   margin-bottom: 10px;
