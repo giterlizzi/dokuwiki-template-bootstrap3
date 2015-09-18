@@ -257,7 +257,7 @@ function bootstrap3_container_grid() {
   }
 
   if (   bootstrap3_conf('showLandingPage')
-      && (bool) preg_match_all(sprintf('/%s/', bootstrap3_conf('landingPages')), $ID) ) {
+      && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID) ) {
     $showLeftSidebar = false;
   }
 
@@ -687,15 +687,13 @@ function bootstrap3_conf($key, $default = false) {
   switch ($key) {
 
     case 'showTools':
-      return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
-
     case 'showSearchForm':
-      return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
-
     case 'showPageTools':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showIndividualTool':
+    case 'hideInThemeSwitcher':
+    case 'tableStyle':
       return explode(',', $value);
 
     case 'showAdminMenu':
@@ -703,9 +701,6 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'hideLoginLink':
       return ! $value || ! empty($_SERVER['REMOTE_USER']);
-
-    case 'hideInThemeSwitcher':
-      return explode(',', $value);
 
     case 'browserTitle':
       return str_replace(array('@WIKI@', '@TITLE@'),
@@ -747,3 +742,61 @@ function bootstrap3_bootswatch_theme_list() {
   return $bootswatch_themes['_choices'];
 
 }
+
+
+function bootstrap3_icon($pack, $name, $classes = '', $size = -1) {
+
+  if ($size > 0 && ! preg_match('/(em|px)$/', "$size")) {
+    $size = $size.'px';
+  }
+
+  $style   = ($size !== -1) ? sprintf(' style="font-size:%s"', $size) : '';
+
+  $class[] = $pack;
+  $class[] = "$pack-$name";
+  $class[] = $classes;
+
+  $output  = sprintf('<i class="%s"%s></i>', trim(implode(' ', $class)), $style);
+  return $output;
+
+}
+
+
+function bootstrap3_fa($name, $options = '', $classes = '', $size = -1) {
+
+  if (! is_array($options)) {
+    $options = explode(' ', $options);
+  }
+
+  foreach ($options as $option) {
+    $classes .= " fa-$option ";
+  }
+
+  return bootstrap3_icon('fa', $name, trim($classes), $size);
+}
+
+
+function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
+
+  $icon2 = str_replace('class="', 'class="fa-stack-1x ', $icon2);
+  $icon1 = str_replace('class="', 'class="fa-stack-2x ', $icon1);
+
+  if ($switch) {
+
+    $tmp1  = $icon1;
+    $tmp2  = $icon2;
+
+    $icon1 = $tmp2;
+    $icon2 = $tmp1;
+
+  }
+
+  return sprintf('<span class="fa-stack fa-lg">%s %s</span>', $icon1, $icon2);
+
+}
+
+
+function bootstrap_glyphicon($name, $classes = '', $size = -1) {
+  return bootstrap3_icon('glyphicon', $name, $classes, $size);
+}
+
