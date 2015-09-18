@@ -58,3 +58,4 @@ $lang['showPageTools_o_never']   = 'Never';
 $lang['showPageTools_o_logged']  = 'When logged in';
 $lang['showPageTools_o_always']  = 'Always';
 $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
+$lang['tableStyle']          = 'Table style';

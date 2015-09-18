@@ -41,6 +41,7 @@ $meta['fluidContainer']      = array('onoff');
 $meta['fluidContainerBtn']   = array('onoff');
 $meta['pageOnPanel']         = array('onoff');
 $meta['tableFullWidth']      = array('onoff');
+$meta['tableStyle']          = array('multicheckbox', '_choices' => array('striped', 'condensed', 'responsive'));
 $meta['browserTitle']        = array('string');
 $meta['showLandingPage']     = array('onoff');
 $meta['landingPages']        = array('regex');
