@@ -38,8 +38,10 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
       var table_class = ['table'];
 
-      if (TPL_CONFIG.tableStyle.indexOf('striped') !== -1) table_class.push('table-striped');
+      if (TPL_CONFIG.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
       if (TPL_CONFIG.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
+      if (TPL_CONFIG.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
+      if (TPL_CONFIG.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
 
       $dw_content.find('table').not('.rack, .diagram').addClass(table_class.join(' '));
 
@@ -275,12 +277,12 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
 
-    // TODO remove
-    //$dw_toc.find('ul').addClass('nav nav-pills nav-stacked');
-
     jQuery('body').scrollspy({
       target: '#dw__toc',
       offset: bodyOffset + 10
+    });
+    jQuery(window).on('load', function () {
+      jQuery('body').scrollspy('refresh');
     });
 
     // Scrolling animation
@@ -329,35 +331,6 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
       .removeClass('notify')
       .addClass('alert alert-warning')
       .prepend('<i class="fa fa-fw fa-warning"/> ');
-
-  }, 0);
-
-});
-
-
-// You are here and breadcrumbs
-jQuery(document).on('bootstrap3:breadcrumbs', function(e) {
-
-  setTimeout(function() {
-
-    var $dw_breadcrumbs = jQuery('#dw__breadcrumbs'),  // Breadcrumbs node
-        breadcrumbs     = ['.dw__youarehere', '.dw__breadcrumbs'];
-
-    if (! $dw_breadcrumbs.length) return false; 
-
-    $dw_breadcrumbs.find('span.home a').addClass('home').text('').prepend('<i class="fa fa-fw fa-home"/>');
-    //$dw_breadcrumbs.find('span.curid').find('a').addClass('curid');
-    $dw_breadcrumbs.find('span.bchead').addClass('pull-left');
-
-    for (i in breadcrumbs) {
-      $dw_breadcrumbs.find(breadcrumbs[i] + ' a').wrap('<li/>');
-      $dw_breadcrumbs.find(breadcrumbs[i] + ' a.curid').parent().addClass('active');
-      $dw_breadcrumbs.find(breadcrumbs[i] + ' li').wrapAll('<ul class="breadcrumb"/>');
-    }
-
-    $dw_breadcrumbs.find('span.home, span.bcsep, span.curid').replaceWith(function() {
-      return jQuery(this).contents();
-    });
 
   }, 0);
 
@@ -571,7 +544,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'breadcrumbs', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail' ];
+    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

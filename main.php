@@ -13,7 +13,13 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
 include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
 
-if (isset($_GET['do']) && $_GET['do'] == 'check') msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+// Get the template info (useful for debug)
+if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
+
+  $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
+  msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+
+}
 
 $navbar_padding = 20;
 
@@ -128,12 +134,12 @@ if ($fixedTopNavbar) {
         <hr/>
         <?php if($conf['youarehere']): ?>
         <div class="dw__youarehere">
-          <?php tpl_youarehere(' ') ?>
+          <?php bootstrap3_youarehere()?>
         </div>
         <?php endif; ?>
         <?php if($conf['breadcrumbs']): ?>
         <div class="dw__breadcrumbs hidden-print">
-          <?php tpl_breadcrumbs(' ') ?>
+          <?php bootstrap3_breadcrumbs() ?>
         </div>
         <?php endif; ?>
         <hr/>
@@ -161,6 +167,7 @@ if ($fixedTopNavbar) {
               <?php
                 tpl_flush(); /* flush the output buffer */
                 tpl_includeFile('pageheader.html');
+
                 // render the content into buffer for later use
                 ob_start();
                 tpl_content(false);
