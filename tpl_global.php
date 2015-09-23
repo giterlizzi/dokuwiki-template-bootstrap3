@@ -12,9 +12,6 @@ if (!defined('DOKU_INC')) die();
 
 global $ID;
 
-// Get the template info (useful for debug)
-$template_info = confToHash(dirname(__FILE__).'/template.info.txt');
- 
 $showTools           = bootstrap3_conf('showTools');
 $showSearchForm      = bootstrap3_conf('showSearchForm');
 $showPageTools       = bootstrap3_conf('showPageTools');
