@@ -51,3 +51,11 @@ $lang['showBadges']          = 'Mostrar botones insignia (DokuWiki, Donar, etc)'
 $lang['leftSidebarGrid']     = 'Clases grid para barra lateral izquierda <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['rightSidebarGrid']    = 'Clases grid para barra lateral derecha <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['useGravatar']         = 'Cargar imagen Gravatar';
+$lang['showLandingPage']     = 'Habilitar la página de llegada (sin barra lateral y con el panel alrededor de la página)';
+$lang['landingPages']        = 'Páginas de llegada (inserte una expresión regular)';
+$lang['showPageTools']    = 'Enable the DokuWiki-style Page Tools';
+$lang['showPageTools_o_never']   = 'Nunca';
+$lang['showPageTools_o_logged']  = 'Cuando está identificado (logged in)';
+$lang['showPageTools_o_always']  = 'Siempre';
+$lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
+$lang['tableStyle']          = 'Table style';

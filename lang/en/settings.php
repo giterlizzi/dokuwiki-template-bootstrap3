@@ -52,7 +52,7 @@ $lang['leftSidebarGrid']     = 'Left sidebar grid classes <code>col-{xs,sm,md,lg
 $lang['rightSidebarGrid']    = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['useGravatar']         = 'Load Gravatar image';
 $lang['showLandingPage']     = 'Enable the landing page (without a sidebar and the panel around the page)';
-$lang['landingPages']        = 'Landing pages (insert a regex)';
+$lang['landingPages']        = 'Landing page name (insert a regex)';
 $lang['showPageTools']    = 'Enable the DokuWiki-style Page Tools';
 $lang['showPageTools_o_never']   = 'Never';
 $lang['showPageTools_o_logged']  = 'When logged in';
