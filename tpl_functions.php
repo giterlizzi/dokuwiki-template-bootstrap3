@@ -135,6 +135,8 @@ if (!function_exists('tpl_classes')) {
 }
 
 
+
+
 /**
  * Create event for tools menues
  *
@@ -152,14 +154,17 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
   $output = '';
 
   $data = array(
-      'view'  => $view,
-      'items' => $items
+    'view'  => $view,
+    'items' => $items
   );
+
   $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
   $evt = new Doku_Event($hook, $data);
+
   if($evt->advise_before()){
-      foreach($evt->data['items'] as $k => $html) $output .= $html;
+    foreach($evt->data['items'] as $k => $html) $output .= $html;
   }
+
   $evt->advise_after();
 
   $search  = array('<span>');
@@ -193,7 +198,7 @@ function bootstrap3_include_sidebar($sidebar_page, $sidebar_id, $sidebar_class, 
  * Include action link with font-icon
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * 
+ *
  * @param   string   $action
  * @param   string   $icon class
  * @param   boolean  $return
@@ -339,8 +344,8 @@ function bootstrap3_toc($toc, $return = false) {
   $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
   $out = str_replace('<div>', '<div class="panel-body">', $out);
   $out = str_replace('<h3 class="', '<h3 class="panel-heading ', $out);
-  $out = str_replace('<ul class="toc">', '<ul class="toc nav nav-pills nav-stacked">', $out);
-  $out = preg_replace('/<div class=\"li\">(.*?)<\/div>/', '$1', $out);
+
+  $out = bootstrap3_nav($out, 'pills', true);
 
   if ($return) return $out;
   echo $out;
@@ -359,16 +364,7 @@ function bootstrap3_toc($toc, $return = false) {
  */
 function bootstrap3_sidebar($sidebar, $return = false) {
 
-  $out = str_replace('<ul>', '<ul class="nav nav-pills nav-stacked">', $sidebar);
-  $out = str_replace('<span class="curid"><a ', '<span class="curid"><a data-curid="true" ', $out);  
-
-  $out = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $out);
-  $out = preg_replace('/<span class="curid">(.*?)<\/span>/', '$1', $out);
-  $out = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $out);
-  $out = preg_replace('/<li class="level([0-9])"> <a data-curid="true" /', '<li class="level$1 active"> <a ', $out);
-  $out = preg_replace('/<li class="level([0-9]) node"> <a data-curid="true" /', '<li class="level$1 node active"> <a ', $out);
-
-  $out = str_replace(' data-curid="true"', '', $out);
+  $out = bootstrap3_nav($sidebar, 'pills', true);
 
   if ($return) return $out;
   echo $out;
@@ -377,7 +373,7 @@ function bootstrap3_sidebar($sidebar, $return = false) {
 
 
 /**
- * Normalize DokuWiki list items
+ * Normalize the DokuWiki list items
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
@@ -385,8 +381,27 @@ function bootstrap3_sidebar($sidebar, $return = false) {
  * @return  string
  */
 function bootstrap3_lists($html) {
-  $output = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $html);
+
+  $output = $html;
+
+  // Save the "curid" inside the anchor with HTML5 data "data-curid"
+  $output = str_replace('<span class="curid"><a ', '<span class="curid"><a data-curid="true" ', $output);
+
+  // Remove all <div class="li"/> tags
+  $output = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $output);
+
+  // Remove all <span class="curid"/> tags
+  $output = preg_replace('/<span class="curid">(.*?)<\/span>/', '$1', $output);
+
+  // Move the Font-Icon inside the anchor
+  $output = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $output);
+
+  // Add the "active" class for the list-item <li/> and remove the HTML5 data "data-curid"
+  $output = preg_replace('/<li class="level([0-9])"> <a data-curid="true" /', '<li class="level$1 active"> <a ', $output);
+  $output = preg_replace('/<li class="level([0-9]) node"> <a data-curid="true" /', '<li class="level$1 node active"> <a ', $output);
+
   return $output;
+
 }
 
 
@@ -397,27 +412,80 @@ function bootstrap3_lists($html) {
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string   $html
+ * @param   string   $type (= pills, tabs, navbar)
  * @param   boolean  $staked
- * @param   string   $type (= pills, tabs)
+ * @param   string   $optional_class
  * @return  string
  **/
-function bootstrap3_nav($html, $stacked = false, $type = '') {
+function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '') {
 
   $class = 'nav ';
 
+  $class .= "$optional_class ";
+
+  switch ($type) {
+    case 'navbar':
+    case 'navbar-nav':
+      $class .= 'navbar-nav ';
+      break;
+    case 'pills':
+    case 'tabs':
+      $class .= "nav-$type ";
+  }
+
   if ($stacked) $class .= 'nav-stacked ';
-  if ($type)    $class .= "nav-$type ";
 
   $class = trim($class);
 
   $output = str_replace(array('<ul class="', '<ul>'),
-                        array("<ul class=\"$class", "<ul class=\"$class\">"),
+                        array("<ul class=\"$class ", "<ul class=\"$class\">"),
                         $html);
 
   $output = bootstrap3_lists($output);
 
   return $output;
-  
+
+}
+
+
+/**
+ * Return a Bootstrap NavBar
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function bootstrap3_navbar() {
+  $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
+  return $navbar;
+}
+
+
+/**
+ * Return a drop-down page
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $page name
+ * @return  string
+ */
+function bootstrap3_dropdown_page($page) {
+
+  if (! page_exists($page)) return;
+
+  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1), 'pills', true);
+  $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
+              '<li class="dropdown dropdown-large">' .
+              '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
+              p_get_first_heading($page) .
+              ' <span class="caret"></span></a>' .
+              '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
+              '<li><div class="container">'.
+              $output .
+              '</div></li></ul></li></ul>';
+
+  return $dropdown;
+
 }
 
 
@@ -580,9 +648,9 @@ function bootstrap3_tools() {
 
 /**
  * Return an array for a tools menu
- * 
+ *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * 
+ *
  * @return  array of tools
  */
 function bootstrap3_tools_menu() {
@@ -602,9 +670,9 @@ function bootstrap3_tools_menu() {
 
 /**
  * Return an array for a toolbar
- * 
+ *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * 
+ *
  * @return  array of tools
  */
 function bootstrap3_toolbar() {
@@ -635,16 +703,20 @@ function bootstrap3_toolbar() {
  * @source  http://gravatar.com/site/implement/images/php/
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+
   $url = 'http://www.gravatar.com/avatar/';
   $url .= md5( strtolower( trim( $email ) ) );
   $url .= "?s=$s&d=$d&r=$r";
+
   if ( $img ) {
-      $url = '<img src="' . $url . '"';
-      foreach ( $atts as $key => $val )
-          $url .= ' ' . $key . '="' . $val . '"';
-      $url .= ' />';
+    $url = '<img src="' . $url . '"';
+    foreach ( $atts as $key => $val )
+      $url .= ' ' . $key . '="' . $val . '"';
+    $url .= ' />';
   }
+
   return $url;
+
 }
 
 
@@ -670,7 +742,7 @@ function bootstrap3_metadata($key = null) {
 
 
 /**
- * A simple wrapper for tpl_getConf
+ * Simple wrapper for tpl_getConf
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
@@ -714,13 +786,13 @@ function bootstrap3_conf($key, $default = false) {
       return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
 
     case 'landingPages':
-      return sprintf('/%s/', $value); 
+      return sprintf('/%s/', $value);
 
   }
 
   //$type = bootstrap3_metadata($key);
 
-  //if ($type[0] == 'regex') {   
+  //if ($type[0] == 'regex') {
   //  return sprintf('/%s/', $value);
   //}
 
@@ -744,6 +816,17 @@ function bootstrap3_bootswatch_theme_list() {
 }
 
 
+/**
+ * Add a font icon
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $pack
+ * @param   string   $name of icon
+ * @param   string   $classes
+ * @param   integer  $size
+ * @return  string
+ */
 function bootstrap3_icon($pack, $name, $classes = '', $size = -1) {
 
   if ($size > 0 && ! preg_match('/(em|px)$/', "$size")) {
@@ -762,6 +845,17 @@ function bootstrap3_icon($pack, $name, $classes = '', $size = -1) {
 }
 
 
+/**
+ * Add a Font-Awesome icon
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string        $name of icon
+ * @param   string|array  $options
+ * @param   string        $classes
+ * @param   integer       $size
+ * @return  string
+ */
 function bootstrap3_fa($name, $options = '', $classes = '', $size = -1) {
 
   if (! is_array($options)) {
@@ -776,6 +870,16 @@ function bootstrap3_fa($name, $options = '', $classes = '', $size = -1) {
 }
 
 
+/**
+ * Add a Font-Awesome stack icon
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string   $icon1
+ * @param   string   $icon2
+ * @param   boolead  $switch the position of icon1 and icon2
+ * @return  string
+ */
 function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
 
   $icon2 = str_replace('class="', 'class="fa-stack-1x ', $icon2);
@@ -796,7 +900,142 @@ function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
 }
 
 
+/**
+ * Add a Glyophicon icon
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $name of icon
+ * @param   string  $classes
+ * @param   integer $size
+ * @return  string
+ */
 function bootstrap_glyphicon($name, $classes = '', $size = -1) {
   return bootstrap3_icon('glyphicon', $name, $classes, $size);
 }
 
+
+/**
+ * Print the breadcrumbs trace with Bootstrap style
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return bool
+ */
+function bootstrap3_breadcrumbs() {
+
+  global $lang;
+  global $conf;
+
+  //check if enabled
+  if(!$conf['breadcrumbs']) return false;
+
+  $crumbs = breadcrumbs(); //setup crumb trace
+
+  //render crumbs, highlight the last one
+  print '<ol class="breadcrumb">';
+  print '<li>'.$lang['breadcrumb'].'</li>';
+
+  $last = count($crumbs);
+  $i    = 0;
+
+  foreach($crumbs as $id => $name) {
+
+    $i++;
+
+    if ($i == $last) {
+      print '<li class="active">';
+      print hsc($name);
+      print '</li>';
+    } else {
+      print '<li>';
+      tpl_link(wl($id), hsc($name), 'title="'.$id.'"');
+      print '</li>';
+    }
+
+    if($i == $last) print '</ol>';
+
+  }
+
+  return true;
+
+}
+
+
+/**
+ * Hierarchical breadcrumbs with Bootstrap style
+ *
+ * This code was suggested as replacement for the usual breadcrumbs.
+ * It only makes sense with a deep site structure.
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Nigel McNie <oracle.shinoda@gmail.com>
+ * @author Sean Coates <sean@caedmon.net>
+ * @author <fredrik@averpil.com>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo   May behave strangely in RTL languages
+ *
+ * @return bool
+ */
+function bootstrap3_youarehere() {
+
+    global $conf;
+    global $ID;
+    global $lang;
+
+    // check if enabled
+    if(!$conf['youarehere']) return false;
+
+    $parts = explode(':', $ID);
+    $count = count($parts);
+
+    echo '<ol class="breadcrumb">';
+    echo '<li>'.$lang['youarehere'].'</li>';
+
+    // always print the startpage
+    echo '<li>';
+    tpl_link(wl($conf['start']), '<i class="fa fa-fw fa-home"></i>', 'title="'. $conf['start'] .'"');
+    echo '</li>';
+
+    // print intermediate namespace links
+    $part = '';
+
+    for($i = 0; $i < $count - 1; $i++) {
+
+        $part .= $parts[$i].':';
+        $page = $part;
+
+        if($page == $conf['start']) continue; // Skip startpage
+
+        // output
+        echo '<li>';
+        echo html_wikilink($page);
+        echo '</li>';
+
+    }
+
+    // print current page, skipping start page, skipping for namespace index
+    resolve_pageid('', $page, $exists);
+
+    if (isset($page) && $page == $part.$parts[$i]) {
+      echo '</ol>';
+      return true;
+    }
+
+    $page = $part.$parts[$i];
+
+    if($page == $conf['start']) {
+      echo '</ol>';
+      return true;
+    }
+
+    echo '<li class="active">';
+    tpl_pagetitle($page);
+    echo '</li>';
+
+    echo '</ol>';
+
+    return true;
+
+}
