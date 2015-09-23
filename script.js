@@ -64,7 +64,7 @@ jQuery(document).ready(function() {
   function resizeToc() {
 
     jQuery('#dw__toc .panel-body').css({
-      'height'    : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
+      'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
       'overflow-y': 'scroll'
     });
 
