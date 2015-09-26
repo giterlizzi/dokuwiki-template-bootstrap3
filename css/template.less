@@ -1,0 +1,450 @@
+/*!
+ * DokuWiki Bootstrap3 Template: Template
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+@small_nav_padding: 5px 10px;
+
+
+body {
+
+  font-size: small;
+  position: relative;
+
+  .default.page-on-panel,
+  .optional.page-on-panel, {
+    background: #FDFDFD;
+  }
+
+}
+
+input,
+textarea,
+select {
+  font-weight: 400;
+}
+
+main {
+  position: relative;
+}
+
+nav {
+  &.navbar-fixed-top .dw__actions {
+    margin: 0 15px 0 5px;
+  }
+  .dw__actions .btn {
+    margin-left: 5px;
+  }
+}
+
+ul.btn-group {
+  padding: 0;
+}
+
+#dw__msgarea .alert {
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+#dw__badges {
+  margin-top: 50px;
+}
+
+#dw__toc {
+
+  margin-left: 20px;
+  width: auto;
+  font-size: .95em;
+
+  li {
+    list-style-type: none;
+  }
+
+  h3 {
+
+    margin: 0;
+    padding: 5px;
+    font-weight: bold;
+    font-size: .95em;
+
+    span {
+      display: none;
+    }
+
+    strong {
+      padding-right: 5px;
+    }
+
+  }
+
+  ul.toc ul {
+    padding: 2px 0 2px 10px;
+  }
+
+  .nav {
+
+    li a {
+      padding: 2px 4px;
+    }
+
+    .nav .nav {
+
+      display: none;
+
+      .active .nav {
+        display: block;
+      }
+
+    }
+
+  }
+
+  .panel-body {
+    padding: 0.5em;
+    width: 16em;
+  }
+
+}
+
+#config__manager {
+
+  label {
+    color: initial;
+    white-space: initial;
+    font-size: 1.2em;
+    font-weight: initial;
+  }
+
+  td {
+    padding: 5px;
+  }
+
+  fieldset {
+    background: initial !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    text-align: left;
+  }
+
+  .label {
+    display: block;
+    font-weight: normal;
+  }
+
+  .outkey {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.2em !important;
+    background: transparent !important;
+  }
+
+}
+
+#dw__breadcrumbs {
+
+  hr {
+    margin: 5px 0;
+    padding: 0;
+  }
+
+  .breadcrumb {
+    background: transparent;
+    border: 0 none;
+    padding-left: 0;
+    display: inline;
+  }
+
+}
+
+#dw__breadcrumbs,
+.dw__sidebar {
+  font-size: .9em;
+}
+
+/*#dokuwiki__content .page-header {
+  margin-top: 10px;
+}*/
+
+#dw__logo {
+  margin-right: 10px;
+}
+
+#dw__title {
+  display: inline-block;
+}
+
+#dw__tagline {
+  font-size: .6em;
+  display: block;
+  line-height: 1em;
+  white-space: nowrap;
+}
+
+#insitu__fn {
+  max-width: 20em;
+}
+
+#dw__user_menu {
+
+  .page-header {
+    margin: 20px 0 10px;
+  }
+
+  .nav > li > a {
+    padding: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden !important;
+  }
+
+}
+
+#dw__pagetools {
+
+  position: absolute;
+  top: 2em;
+  right: -40px;
+  width: 40px;
+
+  ul li a {
+    padding: 5px;
+  }
+
+  .tools {
+    position: fixed;
+  }
+
+}
+
+/* Extension Manager */
+#extension__manager {
+
+  ul.tabs li.active a,
+  .panelHeader {
+    background-color: initial;
+  }
+
+  ul.tabs li.active a {
+    /* FIXME */
+    border-bottom-color: white;
+  }
+
+}
+
+.dw__sidebar {
+
+  .panel-heading {
+    cursor: pointer;
+  }
+
+  .nav {
+
+    li a {
+      padding: @small_nav_padding;
+    }
+
+    ul {
+      padding-left: 10px;
+    }
+
+    li a.urlextern {
+      padding-left: 28px;
+      background-position: 8px center;
+    }
+
+  }
+
+}
+
+.dw__sidebar,
+.dw__dropdown_page {
+
+  h1, h2, h3, h4 h5 {
+    margin: 10px 0 5px 0;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  h2 {
+    font-size: 1.6em;
+  }
+
+  h3 {
+    font-size: 1.4em;
+  }
+
+  h4 {
+    font-size: 1.2em;
+  }
+
+  h5 {
+    font-size: 1em;
+  }
+
+  .page-header {
+    margin-top: 0;
+  }
+
+}
+
+.curid {
+  font-weight: bold;
+}
+
+.page fieldset {
+  border: none;
+}
+
+.mode_search li {
+  list-style-type: none;
+}
+
+.mode_index {
+
+  ul.idx {
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    i {
+      padding-right: 5px;
+    }
+
+    strong {
+      font-weight: normal;
+    }
+
+    li {
+      list-style-type: none;
+      list-style-image: none !important;
+    }
+
+  }
+
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  opacity: .8;
+  display: none;
+}
+
+/* Interwiki User Page Icon */
+a.iw_user {
+  background-image: none;
+  padding: 0 !important;
+}
+
+.navbar-nav a.urlextern {
+  padding: 15px 0 15px 18px;
+}
+
+.profile-image {
+  position: relative;
+  top: -5px;
+  float: left;
+  left: -5px;
+}
+
+/** Override Bootstrap3 style */
+
+/** Set ".img-responsive" to "inline" */
+.img-responsive {
+  display: inline;
+}
+
+.dokuwiki {
+
+  img.media {
+    margin: .2em 0;
+  }
+
+  img.medialeft {
+    float: left;
+    margin: .2em 1em .2em 0;
+  }
+
+  img.mediaright {
+    float: right;
+    margin: .2em 0 .2em 1em;
+  }
+
+  img.mediacenter {
+    display: block;
+    margin: .2em auto;
+  }
+
+  textarea.edit {
+    font-family: Consolas,"Andale Mono WT","Andale Mono","Bitstream Vera Sans Mono","Nimbus Mono L",Monaco,"Courier New",monospace;
+  }
+
+  ul.idx {
+    padding-left: 15px;
+  }
+
+  .diffnav select {
+    height: auto;
+  }
+
+}
+
+/** Custom DropDown menu with multiple columns */
+.dropdown-row {
+
+  min-width: 480px;
+
+  > ul {
+    position: initial;
+    border: 0px;
+    box-shadow: initial;
+  }
+
+  > li a {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden !important;
+  }
+
+}
+
+
+/** Custom DropDoown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
+.dropdown-large {
+  position: static !important;
+}
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+}
+
+
+/** Dropdown menu page */
+.dw__dropdown_page {
+
+  .dropdown-menu-large {
+    font-size: .9em;
+    background: #FFF;
+  }
+
+  .nav li a {
+    padding: @small_nav_padding;
+  }
+
+}
