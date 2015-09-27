@@ -49,9 +49,14 @@ if (!defined('DOKU_INC')) die();
 
     <div class="collapse navbar-collapse">
 
-      <ul class="nav navbar-nav" id="dw__navbar">
+      <?php echo bootstrap3_navbar() // Include the navbar for different namespaces ?>
+      <?php echo bootstrap3_dropdown_page('dropdownpage') ?>
+
+      <?php if(file_exists(dirname(__FILE__) . '/navbar.html')): ?>
+      <ul class="nav navbar-nav">
         <?php tpl_includeFile('navbar.html') ?>
       </ul>
+      <?php endif; ?>
 
       <div class="navbar-right">
 
@@ -60,9 +65,16 @@ if (!defined('DOKU_INC')) die();
         <?php endif; ?>
 
         <?php
+          // Admin Menu
           include_once(dirname(__FILE__).'/tpl_admin.php');
+
+          // Tools Menu
           include_once(dirname(__FILE__).'/tpl_tools_menu.php');
+
+          // Theme Switcher Menu
           include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
+
+          // Translation Menu
           include_once(dirname(__FILE__).'/tpl_translation.php');
         ?>
 

@@ -477,7 +477,7 @@ function bootstrap3_dropdown_page($page) {
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-              p_get_first_heading($page) .
+              p_get_first_heading(page_findnearest($page)) .
               ' <span class="caret"></span></a>' .
               '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
               '<li><div class="container">'.
