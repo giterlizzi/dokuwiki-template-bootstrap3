@@ -10,14 +10,15 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-?>
-<?php if ($showTools): ?>
-<?php
+if ($showTools):
 
 $all_tools = bootstrap3_tools_menu();
 
 foreach ($showIndividualTool as $tool) {
-  $tools[$tool] = $all_tools[$tool];
+  if ($dropdown = bootstrap3_toolsevent($tool.'tools', $all_tools[$tool]['menu'], 'main', true)) {
+    $tools[$tool] = $all_tools[$tool];
+    $tools[$tool]['dropdown'] = $dropdown;
+  }
 }
 
 ?>
@@ -37,7 +38,7 @@ foreach ($showIndividualTool as $tool) {
       <li class="dropdown-header hidden-xs hidden-sm">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php bootstrap3_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php echo $menu['dropdown'] ?>
 
     </ul>
   </li>
@@ -56,7 +57,7 @@ foreach ($showIndividualTool as $tool) {
       <li class="dropdown-header">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php bootstrap3_toolsevent($id.'tools', $menu['menu']) ?>
+      <?php echo $menu['dropdown'] ?>
 
       <?php if ($max > $i): ?>
       <li class="divider" role="separator"></li>
