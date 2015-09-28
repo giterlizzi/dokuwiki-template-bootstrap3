@@ -30,10 +30,10 @@ if (!defined('DOKU_INC')) die();
         $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
         $title     = $conf['title'];
         $tagline   = ($conf['tagline']) ? '<span id="dw__tagline">'.$conf['tagline'].'</span>' : '';
-        $logo_size = 'width="20" height="20"';
+        $logo_size = 'height="20"';
 
         if ($tagline) {
-          $logo_size = 'width="32" height="32" style="margin-top:-5px"';
+          $logo_size = 'height="32" style="margin-top:-5px"';
         }
 
         // display logo and wiki title in a link to the home page
