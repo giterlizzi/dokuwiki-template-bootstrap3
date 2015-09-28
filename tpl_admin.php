@@ -12,6 +12,8 @@ if (!defined('DOKU_INC')) die();
 
 global $ID, $auth;
 
+if (bootstrap3_conf('showAdminMenu')):
+
 $admin_plugins        = plugin_list('admin');
 $administrative_tasks = array('usermanager', 'acl', 'extension', 'config', 'styling', 'revert', 'popularity');
 $additional_plugins   = array_diff($admin_plugins, $administrative_tasks);
@@ -22,25 +24,19 @@ $plugins = array(
 );
 
 ?>
-<?php if($showAdminMenu): ?>
 <ul class="nav navbar-nav">
-  <li class="dropdown">
+  <li class="dropdown dropdown-large">
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Administration">
       <i class="fa fa-fw fa-cogs"></i>  <span class="hidden-lg hidden-md hidden-sm">Administration</span> <span class="caret"></span>
     </a>
 
-    <ul class="dropdown-menu" role="menu">
-
-      <?php if(count($additional_plugins)): ?>
+    <ul class="dropdown-menu dropdown-menu-large" role="menu">
       <li class="open dropdown-row">
-      <?php endif; ?>
 
         <?php foreach ($plugins as $name => $items): if (! count($items)) continue ?>
-
-        <?php if(count($additional_plugins)): ?>
-        <ul class="col-sm-6 dropdown-menu">
-        <?php endif; ?>
+        
+        <ul class="dropdown-menu col-sm-<?php echo (count($additional_plugins) > 0) ? '6' : '12' ?>">
   
           <li class="dropdown-header">
             <i class="fa fa-fw fa-cog"></i> <?php echo ucfirst($name) ?>
@@ -76,24 +72,17 @@ $plugins = array(
                 default:            $icon = 'puzzle-piece';
               }
   
-              echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
+              echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>',
+                           wl($ID, array('do' => 'admin', 'page' => $item)), $label, $icon, $label);
   
             }
 
           ?>
 
-        <?php if(count($additional_plugins)): ?>
         </ul>
-        <?php endif; ?>
-
         <?php endforeach; ?>
-
-      <?php if(count($additional_plugins)): ?>
       </li>
-      <?php endif; ?>
-
     </ul>
-
   </li>
 </ul>
 <?php endif; ?>
