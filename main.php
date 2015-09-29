@@ -15,10 +15,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
 // Get the template info (useful for debug)
 if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
-
   $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
   msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
-
 }
 
 $navbar_padding = 20;
@@ -116,35 +114,20 @@ if ($fixedTopNavbar) {
 <body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
-    <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo ($showSidebar) ? 'hasSidebar' : ''; ?>">
+    <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo (bootstrap3_conf('showSidebar')) ? 'hasSidebar' : ''; ?>">
 
       <?php tpl_includeFile('topheader.html') ?>
 
       <!-- header -->
       <div id="dokuwiki__header">
-        <?php @require_once('tpl_navbar.php'); ?>
+        <?php require_once('tpl_navbar.php'); ?>
       </div>
       <!-- /header -->
 
       <?php tpl_includeFile('header.html') ?>
       <?php tpl_includeFile('social.html') ?>
 
-      <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
-      <div id="dw__breadcrumbs">
-        <hr/>
-        <?php if($conf['youarehere']): ?>
-        <div class="dw__youarehere">
-          <?php bootstrap3_youarehere()?>
-        </div>
-        <?php endif; ?>
-        <?php if($conf['breadcrumbs']): ?>
-        <div class="dw__breadcrumbs hidden-print">
-          <?php bootstrap3_breadcrumbs() ?>
-        </div>
-        <?php endif; ?>
-        <hr/>
-      </div>
-      <?php endif ?>
+      <?php require_once('tpl_breadcrumbs.php'); ?>
 
       <p class="pageId text-right">
         <span class="label label-primary"><?php echo hsc($ID) ?></span>
@@ -156,38 +139,47 @@ if ($fixedTopNavbar) {
 
       <main class="main row" role="main">
 
-        <?php if ($showSidebar && $sidebarPosition == 'left') bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid, 'sidebarheader.html', 'sidebarfooter.html'); ?>
+        <?php
+          if (   bootstrap3_conf('showSidebar')
+              && bootstrap3_conf('sidebarPosition') == 'left') {
+            bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
+                                       'sidebarheader.html', 'sidebarfooter.html');
+          }
+        ?>
 
         <!-- ********** CONTENT ********** -->
         <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
 
-          <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>> 
+          <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>>
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
 
               <?php
                 tpl_flush(); /* flush the output buffer */
+
+                // Page-Header DokuWiki page
                 tpl_includeFile('pageheader.html');
+
+                // Page-Header DokuWiki page
+                tpl_include_page('pageheader', 1, 1);
 
                 // render the content into buffer for later use
                 ob_start();
                 tpl_content(false);
 
                 $content = ob_get_clean();
-              ?>
 
-              <div class="pull-right hidden-print">
-                <div class="toc-affix" data-spy="affix" data-offset-top="150">
-                  <?php bootstrap3_toc(tpl_toc(true)) ?>
-                </div>
-              </div>
+                // Include the TOC
+                require_once('tpl_toc.php');
 
-              <!-- wikipage start -->
-              <?php echo $content; ?>
-              <!-- wikipage stop -->
+                echo $content;
 
-              <?php
                 tpl_flush();
+
+                // Page-Footer hook
                 tpl_includeFile('pagefooter.html');
+
+                // Page-Footer DokuWiki page
+                tpl_include_page('pagefooter', 1, 1);
               ?>
 
             </div>
@@ -196,17 +188,23 @@ if ($fixedTopNavbar) {
         </article>
 
         <?php
-          if ($showSidebar && $sidebarPosition == 'right') {
-            bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
-                         'sidebarheader.html', 'sidebarfooter.html');
-          }
-          if ($showSidebar && $showRightSidebar && $sidebarPosition == 'left') {
-            bootstrap3_include_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
-                         'rightsidebarheader.html', 'rightsidebarfooter.html');
+          if (bootstrap3_conf('showSidebar')) {
+
+            if (bootstrap3_conf('sidebarPosition') == 'right') {
+              bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
+                                        'sidebarheader.html', 'sidebarfooter.html');
+            }
+
+            if (   bootstrap3_conf('showRightSidebar')
+                && bootstrap3_conf('sidebarPosition') == 'left') {
+              bootstrap3_include_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
+                                        'rightsidebarheader.html', 'rightsidebarfooter.html');
+            }
+
           }
         ?>
 
-        <?php @require_once('tpl_page_tools.php') ?>
+        <?php require_once('tpl_page_tools.php') ?>
 
       </main>
 
@@ -222,7 +220,7 @@ if ($fixedTopNavbar) {
           </span>
           <?php endif ?>
 
-          <?php if ($showLoginOnFooter && ! $_SERVER['REMOTE_USER']): ?>
+          <?php if (bootstrap3_conf('showLoginOnFooter') && ! $_SERVER['REMOTE_USER']): ?>
           <span class="loginLink hidden-print">
             <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
           </span>
@@ -230,13 +228,22 @@ if ($fixedTopNavbar) {
 
         </div>
 
-        <?php @require_once('tpl_badges.php'); ?>
+        <?php
+          // DokuWiki badges
+          require_once('tpl_badges.php');
+
+          // Footer hook
+          tpl_includeFile('footer.html');
+
+          // Footer DokuWiki page
+          tpl_include_page('footer', 1, 1);
+        ?>
 
       </footer>
 
       <?php
-        tpl_includeFile('footer.html');
-        @require_once('tpl_cookielaw.php');
+        // Cookie-Law banner
+        require_once('tpl_cookielaw.php');
       ?>
 
     </div><!-- /site -->
