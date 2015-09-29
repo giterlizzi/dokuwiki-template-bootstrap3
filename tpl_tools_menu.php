@@ -10,11 +10,11 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if ($showTools):
+if (bootstrap3_conf('showTools')):
 
 $all_tools = bootstrap3_tools_menu();
 
-foreach ($showIndividualTool as $tool) {
+foreach (bootstrap3_conf('showIndividualTool') as $tool) {
   if ($dropdown = bootstrap3_toolsevent($tool.'tools', $all_tools[$tool]['menu'], 'main', true)) {
     $tools[$tool] = $all_tools[$tool];
     $tools[$tool]['dropdown'] = $dropdown;
@@ -25,7 +25,7 @@ foreach ($showIndividualTool as $tool) {
 
 <ul class="nav navbar-nav" id="dw__tools">
 
-<?php if ($individualTools): foreach($tools as $id => $menu): ?>
+<?php if (bootstrap3_conf('individualTools')): foreach($tools as $id => $menu): ?>
 
   <li class="dropdown">
 
