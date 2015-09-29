@@ -40,10 +40,6 @@ nav {
   }
 }
 
-ul, ol {
-  overflow: hidden;
-}
-
 ul.btn-group {
   padding: 0;
 }
@@ -61,7 +57,6 @@ ul.btn-group {
 
   margin-left: 20px;
   width: auto;
-  font-size: .95em;
 
   li {
     list-style-type: none;
@@ -72,7 +67,7 @@ ul.btn-group {
     margin: 0;
     padding: 5px;
     font-weight: bold;
-    font-size: .95em;
+    font-size: .9em;
 
     span {
       display: none;
@@ -92,16 +87,15 @@ ul.btn-group {
 
     li a {
       padding: 2px 4px;
+      font-size: .9em;
     }
 
     .nav .nav {
-
       display: none;
+    }
 
-      .active .nav {
-        display: block;
-      }
-
+    .nav .active .nav {
+      display: block;
     }
 
   }
@@ -342,6 +336,10 @@ ul.btn-group {
   display: none;
 }
 
+.fix-media-list-overlap {
+  overflow: hidden;
+}
+
 /* Interwiki User Page Icon */
 a.iw_user {
   background-image: none;
@@ -403,8 +401,6 @@ a.iw_user {
 
 /** Custom DropDown menu with multiple columns */
 .dropdown-row {
-
-  min-width: 480px;
 
   > ul {
     position: initial;
