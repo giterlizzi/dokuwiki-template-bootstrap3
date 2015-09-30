@@ -132,6 +132,11 @@ main {
   font-size: .9em;
 }
 
+#dokuwiki__top {
+	margin-right: 16px;
+	margin-left: 16px;
+}
+	
 /*#dokuwiki__content .page-header {
   margin-top: 10px;
 }*/
@@ -173,7 +178,7 @@ main {
 #dw__pagetools {
   position: absolute;
   top: 2em;
-  right: -40px;
+  right: -32px;
   width: 40px;
 }
 
