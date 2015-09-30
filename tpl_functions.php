@@ -1039,3 +1039,27 @@ function bootstrap3_youarehere() {
     return true;
 
 }
+
+
+/**
+ * Include (or override) a TPL file
+ * 
+ * @see require_once()
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string $file
+ * @return  boolean
+ */
+function bootstrap3_include($file) {
+
+  $override = dirname(__FILE__) . "/override/$file";
+
+  if (file_exists($override)) {
+    require_once($override);
+    return true;
+  }
+
+  require_once($file);
+  return true;
+
+}
