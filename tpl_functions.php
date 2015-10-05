@@ -262,7 +262,7 @@ function bootstrap3_container_grid() {
   }
 
   if (   bootstrap3_conf('showLandingPage')
-      && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID) ) {
+      && (bool) preg_match(bootstrap3_conf('landingPages'), $ID) ) {
     $showLeftSidebar = false;
   }
 
@@ -1043,7 +1043,7 @@ function bootstrap3_youarehere() {
 
 /**
  * Include (or override) a TPL file
- * 
+ *
  * @see require_once()
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
