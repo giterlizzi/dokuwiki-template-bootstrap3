@@ -240,17 +240,22 @@ ul.btn-group {
 
   .nav {
 
-    li a {
-      padding: @small_nav_padding;
-    }
-
     ul {
       padding-left: 10px;
     }
 
-    li a.urlextern {
-      padding-left: 28px;
-      background-position: 8px center;
+    li {
+
+      a {
+        padding: @small_nav_padding;
+      }
+
+      a.urlextern,
+      a.mediafile {
+        padding-left: 28px;
+        background-position: 8px center;
+      }
+
     }
 
   }
