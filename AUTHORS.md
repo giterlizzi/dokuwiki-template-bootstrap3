@@ -13,6 +13,8 @@ Bootstrap3 template for DokuWiki
   * Andrey Shpak ([insspb](https://github.com/insspb))
   * Matt ([mdjordan](https://github.com/mdjordan))
   * Clément OUDOT ([coudot](https://github.com/coudot))
+  * Malte Dik ([mdik](https://github.com/mdik))
+  * Michael Wegener ([MWsatwareAG](https://github.com/MWsatwareAG))
 
 *For a list of people who have contributed to the template, see [GitHub's list of contributors](https://github.com/LotarProject/dokuwiki-template-bootstrap3/contributors).*
 
@@ -24,3 +26,5 @@ Bootstrap3 template for DokuWiki
   * French, Maxime Buquet ([Ppjet6](https://github.com/Ppjet6))
   * Italian, Giuseppe Di Terlizzi ([LotarProject](https://github.com/LotarProject))
   * Chinese <dev@openbdh.com>
+
+*Join on [Transifex platform](https://www.transifex.com/lotar-project/dokuwiki-template-bootstrap3/) to translate this template in your favourite language.*
