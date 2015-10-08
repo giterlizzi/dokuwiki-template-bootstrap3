@@ -12,7 +12,7 @@ if (!defined('DOKU_INC')) die();
 
 $gravatar_check = false;
 
-if ($useGravatar) {
+if (bootstrap3_conf('useGravatar')) {
 
   $HTTP = new DokuHTTPClient();
 
@@ -27,7 +27,7 @@ if ($useGravatar) {
 <ul class="nav navbar-nav" id="dw__user_menu">
   <li class="dropdown">
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <?php if ($gravatar_check): ?>
         <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" />
       <?php else: ?>
@@ -53,7 +53,7 @@ if ($useGravatar) {
           </li>
         </ul>
         <ul class="nav navbar-nav col-sm-8">
-          <?php if($showUserHomeLink): ?>
+          <?php if (bootstrap3_conf('showUserHomeLink')): ?>
           <li>
             <a href="<?php echo bootstrap3_user_homepage_link() ?>">
               <i class="fa fa-fw fa-home"></i> Personal Home-Page
