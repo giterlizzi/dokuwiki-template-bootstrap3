@@ -419,23 +419,23 @@ function bootstrap3_lists($html) {
  **/
 function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '') {
 
-  $class = 'nav ';
-
-  $class .= "$optional_class ";
+  $classes[] = 'nav';
+  $classes[] = $optional_class;
 
   switch ($type) {
     case 'navbar':
     case 'navbar-nav':
-      $class .= 'navbar-nav ';
+      $classes[] = 'navbar-nav';
       break;
     case 'pills':
     case 'tabs':
-      $class .= "nav-$type ";
+      $classes[] = "nav-$type";
+      break;
   }
 
-  if ($stacked) $class .= 'nav-stacked ';
+  if ($stacked) $classes[] = 'nav-stacked';
 
-  $class = trim($class);
+  $class = implode(' ', $classes);
 
   $output = str_replace(array('<ul class="', '<ul>'),
                         array("<ul class=\"$class ", "<ul class=\"$class\">"),
@@ -449,15 +449,23 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
 
 
 /**
- * Return a Bootstrap NavBar
+ * Return a Bootstrap NavBar and or drop-down menu
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @return  string
  */
 function bootstrap3_navbar() {
+
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
+
+  $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
+                         '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+  $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
+                         '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
+
   return $navbar;
+
 }
 
 
