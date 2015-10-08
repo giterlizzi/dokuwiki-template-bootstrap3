@@ -10,6 +10,8 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+if (! empty($_SERVER['REMOTE_USER'])):
+
 $gravatar_check = false;
 
 if (bootstrap3_conf('useGravatar')) {
@@ -23,7 +25,6 @@ if (bootstrap3_conf('useGravatar')) {
 }
 
 ?>
-<?php if (! empty($_SERVER['REMOTE_USER'])): ?>
 <ul class="nav navbar-nav" id="dw__user_menu">
   <li class="dropdown">
 
