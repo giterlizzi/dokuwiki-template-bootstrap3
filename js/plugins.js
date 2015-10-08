@@ -19,6 +19,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $wrap             = jQuery('.plugin_wrap'),          // Wrap Plugin
         $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
         $dataplugin_entry = jQuery('.dataplugin_entry'),     // Data Plugin: Entry
+        $dataplugin_table = jQuery('.dataplugin_table'),     // Data Plugin: Table
         $jorg_chart       = jQuery('.jOrgChart');            // jOrgChart
 
 
@@ -32,6 +33,11 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
     // Data Plugin: Entry
     if ($dataplugin_entry.length) {
       $dataplugin_entry.find('dl').addClass('panel panel-default');
+    }
+
+    // Data Plugin: Table
+    if ($dataplugin_table.lenght) {
+      $dataplugin_table.find('input[type=text]').addClass('input-sm');
     }
 
 
