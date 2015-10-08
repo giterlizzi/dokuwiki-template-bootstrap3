@@ -73,6 +73,9 @@ jQuery(document).on('bootstrap3:init', function(e) {
       jQuery('.picker').addClass('btn-group');
     }
 
+    // Fix list overlap in media images
+    jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
+
   }, 0);
 
 });
@@ -540,11 +543,35 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 });
 
 
+jQuery(document).on('bootstrap3:dropdown-page', function() {
+
+  jQuery('.dw__dropdown_page .dropdown').hover(function() {
+    if (! jQuery('#screen_mode').find('.visible-xs').is(':visible')) {
+      jQuery(this).addClass('open');
+    }
+  },
+  function() {
+    if (! jQuery('#screen_mode').find('.visible-xs').is(':visible')) {
+      jQuery(this).removeClass('open');
+    }
+  });
+
+});
+
+
+jQuery(document).on('bootstrap3:cookie-law', function() {
+  jQuery('#cookieDismiss').click(function(){
+    jQuery('#cookieNotice').hide();
+    DokuCookie.setValue('cookieNoticeAccepted', true);
+  });
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail' ];
+    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
