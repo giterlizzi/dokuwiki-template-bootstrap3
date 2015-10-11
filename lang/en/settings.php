@@ -60,3 +60,4 @@ $lang['showPageTools_o_always']  = 'Always';
 $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
 $lang['tableStyle']          = 'Table style';
 $lang['tagsOnTop']           = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
+$lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';

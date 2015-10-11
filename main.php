@@ -130,7 +130,7 @@ if ($fixedTopNavbar) {
       <?php require_once('tpl_breadcrumbs.php'); ?>
 
       <p class="pageId text-right">
-        <span class="label label-primary"><?php echo hsc($ID) ?></span>
+        <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
       </p>
 
       <div id="dw__msgarea">
