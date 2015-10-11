@@ -46,6 +46,7 @@ $bootstrapStyles     = array();
 $tplConfigJSON       = array(
   'tableFullWidth' => (int) bootstrap3_conf('tableFullWidth'),
   'tableStyle'     => bootstrap3_conf('tableStyle'),
+  'tagsOnTop'      => (int) bootstrap3_conf('tagsOnTop'),
 );
 
 if($fluidContainerBtn) {

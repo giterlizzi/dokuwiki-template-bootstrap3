@@ -1,7 +1,7 @@
 <?php
 /*
  * configuration metadata
- * 
+ *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
@@ -62,3 +62,4 @@ $meta['showTranslation']     = array('onoff');
 $meta['showBadges']          = array('onoff');
 $meta['showLoginOnFooter']   = array('onoff');
 $meta['useGravatar']         = array('onoff');
+$meta['tagsOnTop']           = array('onoff');

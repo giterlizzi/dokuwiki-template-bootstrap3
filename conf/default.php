@@ -46,3 +46,4 @@ $conf['landingPages']        = '(intro)';
 $conf['showPageTools']       = 'always';
 $conf['useLocalBootswatch']  = 1;
 $conf['tableStyle']          = 'striped,condensed,responsive';
+$conf['tagsOnTop']           = 1;
