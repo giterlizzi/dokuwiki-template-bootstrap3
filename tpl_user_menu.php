@@ -26,7 +26,7 @@ if (bootstrap3_conf('useGravatar')) {
 
 ?>
 <ul class="nav navbar-nav" id="dw__user_menu">
-  <li class="dropdown">
+  <li class="dropdown dropdown-large">
 
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <?php if ($gravatar_check): ?>
@@ -36,24 +36,25 @@ if (bootstrap3_conf('useGravatar')) {
       <?php endif; ?> <span class="caret"></span>
     </a>
 
-    <ul class="dropdown-menu" role="menu" style="width: 350px">
+    <ul class="dropdown-menu dropdown-menu-large" role="menu">
 
       <li class="dropdown-header">
         <h4 class="page-header"><?php echo $INFO['userinfo']['name'] ?> <small><?php echo $_SERVER['REMOTE_USER'] ?></small></h4>
       </li>
 
-      <li class="row">
+      <li class="open dropdown-row">
 
-        <ul class="list-unstyled col-sm-4">
+        <ul class="dropdown-menu" style="min-width:64px">
           <li class="dropdown-header">
             <?php if ($gravatar_check): ?>
               <img src="<?php echo $gravatar_img ?>" class="img-circle" />
             <?php else: ?>
-              <i class="fa fa-fw fa-user fa-5x"></i>
+              <i class="fa fa-fw fa-user fa-4x">&nbsp;</i>
             <?php endif; ?>
           </li>
         </ul>
-        <ul class="nav navbar-nav col-sm-8">
+
+        <ul class="dropdown-menu">
           <?php if (bootstrap3_conf('showUserHomeLink')): ?>
           <li>
             <a href="<?php echo bootstrap3_user_homepage_link() ?>">
@@ -70,13 +71,8 @@ if (bootstrap3_conf('useGravatar')) {
         </ul>
 
       </li>
-
-      <li class="divider" role="separator"></li>
       <?php echo bootstrap3_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
-
     </ul>
-
   </li>
-
 </ul>
 <?php endif; ?>
