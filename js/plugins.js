@@ -163,7 +163,8 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         var $tagLabel = $tag.find('a').addClass('label label-default')
                                       .prepend('<i class="fa fa-fw fa-tag"/> ');
 
-        if ($tag.prop('tagName').toLowerCase() == 'div') {
+
+        if (TPL_CONFIG.tagsOnTop && $tag.prop('tagName').toLowerCase() == 'div') {
           $tag.remove();
           $tagLabel.prependTo('.pageId');
         }
