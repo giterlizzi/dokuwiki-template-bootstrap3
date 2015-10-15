@@ -41,36 +41,41 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style type="text/css">
-    #media_content label, #media__opts label { display: inline !important; }
+    #media_content label,
+    #media__opts label { display: inline !important; }
+
+    #media__tree { height: 300px; overflow: auto; }
     #media__tree li { margin: 0; }
-    #media__content input, #media__content label { margin: 0; }
+
+    #media__content input,
+    #media__content label { margin: 0; }
     #media__content [type=submit] { vertical-align: bottom; }
+
     #mediamgr__aside, #mediamgr__content { height: auto; }
     #mediamgr__aside { top: 0; position: fixed; }
   </style>
 </head>
 
-<body>
-    <!--[if IE 8 ]><div id="IE8"><![endif]-->
-    <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
+<body class="container">
+  <!--[if IE 8 ]><div id="IE8"><![endif]-->
+  <div id="dw__msgarea">
+    <?php bootstrap3_html_msgarea() ?>
+  </div>
+  <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
 
-        <div id="dw__msgarea">
-          <?php html_msgarea() ?>
-        </div>
-        <div id="mediamgr__aside" class="col-xs-4">
-            <h1><?php echo hsc($lang['mediaselect'])?></h1>
+    <div id="mediamgr__aside" class="col-xs-4">
+      <h1><?php echo hsc($lang['mediaselect'])?></h1>
 
-            <?php /* keep the id! additional elements are inserted via JS here */?>
-            <div id="media__opts"></div>
+      <?php /* keep the id! additional elements are inserted via JS here */?>
+      <div id="media__opts"></div>
+        <?php tpl_mediaTree() ?>
+      </div>
 
-            <?php tpl_mediaTree() ?>
-        </div>
+      <div id="mediamgr__content" class="col-xs-8">
+        <?php tpl_mediaContent() ?>
+      </div>
 
-        <div id="mediamgr__content" class="col-xs-8">
-            <?php tpl_mediaContent() ?>
-        </div>
-
-    </div>
-    <!--[if IE 8 ]></div"><![endif]-->
+  </div>
+  <!--[if IE 8 ]></div"><![endif]-->
 </body>
 </html>
