@@ -32,7 +32,23 @@ jQuery(document).ready(function() {
     ['unsubscribe',   'h1',     'fa fa-fw fa-envelope text-warning'],
     ['draft',         'h1',     'fa fa-fw fa-pencil-square-o text-muted'],
     ['showtag',       'h1',     'fa fa-fw fa-tags text-muted'],
-    ['locked',        'h1',     'fa fa-fw fa-lock text-warning']
+    ['locked',        'h1',     'fa fa-fw fa-lock text-warning'],
+
+    // Admin   Section                     Icon
+    ['admin',  '#plugin_settings',         'fa fa-fw fa-puzzle-piece'],
+    ['admin',  '#template_settings',       'fa fa-fw fa-paint-brush'],
+    ['admin',  '#_basic legend',           'fa fa-fw fa-cogs'],
+    ['admin',  '#_display legend',         'fa fa-fw fa-laptop'],
+    ['admin',  '#_authentication legend',  'fa fa-fw fa-lock'],
+    ['admin',  '#_anti_spam legend',       'fa fa-fw fa-ban'],
+    ['admin',  '#_editing legend',         'fa fa-fw fa-edit'],
+    ['admin',  '#_links legend',           'fa fa-fw fa-link'],
+    ['admin',  '#_media legend',           'fa fa-fw fa-image'],
+    ['admin',  '#_notifications legend',   'fa fa-fw fa-envelope'],
+    ['admin',  '#_syndication legend',     'fa fa-fw fa-rss'],
+    ['admin',  '#_advanced legend',        'fa fa-fw fa-sliders'],
+    ['admin',  '#_network legend',         'fa fa-fw fa-share-alt'],
+
   ];
 
 
