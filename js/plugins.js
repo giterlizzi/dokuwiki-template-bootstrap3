@@ -36,8 +36,24 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
     }
 
     // Data Plugin: Table
-    if ($dataplugin_table.lenght) {
-      $dataplugin_table.find('input[type=text]').addClass('input-sm');
+    if ($dataplugin_table.length) {
+
+      $dataplugin_table.find('input').addClass('input-sm');
+
+      var $header = $dataplugin_table.find('th[style]'),
+          $inputs = $dataplugin_table.find('th input'),
+          header_width = [],
+          i = 0;
+
+      $header.each(function() {
+        header_width.push(this.style.width);
+      });
+
+      $inputs.each(function() {
+        this.style.width = header_width[i];
+        i++;
+      });
+
     }
 
 
