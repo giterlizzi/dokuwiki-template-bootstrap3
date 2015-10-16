@@ -161,16 +161,34 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
   $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
   $evt = new Doku_Event($hook, $data);
 
-  if($evt->advise_before()){
-    foreach($evt->data['items'] as $k => $html) $output .= $html;
+  $search  = array('<span>', '</span>');
+
+  if ($evt->advise_before()) {
+
+    foreach($evt->data['items'] as $k => $html) {
+
+      switch ($k) {
+        case 'export_odt':
+          $icon = 'file-text';
+          break;
+        case 'export_pdf':
+          $icon = 'file-pdf-o';
+          break;
+        case 'plugin_move':
+          $icon = 'i-cursor text-muted';
+          break;
+        default:
+          $icon = 'puzzle-piece'; // Unknown
+      }
+
+      $replace = array('<i class="fa fa-fw fa-'. $icon .'"></i> ', '');
+      $html    = str_replace($search, $replace, $html);
+      $output .= $html;
+
+    }
   }
 
   $evt->advise_after();
-
-  $search  = array('<span>');
-  $replace = array('<i class="fa fa-puzzle-piece fa-fw"></i> <span>');
-
-  $output = str_replace($search, $replace, $output);
 
   if ($return) return $output;
   echo $output;
