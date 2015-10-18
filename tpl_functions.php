@@ -176,6 +176,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
           break;
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
+          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="" title="$1"><span>$1</span></a>', $html);
           break;
         default:
           $icon = 'puzzle-piece'; // Unknown
