@@ -64,14 +64,15 @@ jQuery(document).ready(function() {
 
     if ($screen_mode.find('.visible-xs').is(':visible')) {
 
-      $dw_aside.find('.content').addClass('panel panel-default');
-      $dw_aside.find('.toogle').addClass('panel-heading');
-      $dw_aside.find('.collapse').addClass('panel-body').removeClass('in');
+      $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
+      $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
+      $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
 
     } else {
 
-      $dw_aside.find('.content').removeClass('panel panel-default');
-      $dw_aside.find('.collapse').removeClass('panel-body').addClass('in');
+      $dw_aside.find('.dw-sidebar-content').removeClass('panel panel-default');
+      $dw_aside.find('.dw-sidebar-title').removeClass('panel-heading');
+      $dw_aside.find('.dw-sidebar-body').removeClass('panel-body').addClass('in');
 
     }
 
@@ -199,7 +200,7 @@ jQuery(document).ready(function() {
       'Cookie Law' : ['showCookieLawBanner', 'fa-legal'],
       'Others'     : ['showPageInfo',        'fa-gears']
     };
-  
+
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
       var $node = jQuery(this);
       jQuery.each(tpl_sections, function(section, item){
@@ -208,7 +209,7 @@ jQuery(document).ready(function() {
         }
       });
     });
-  
+
   }
 
 });
