@@ -40,19 +40,27 @@ nav {
   }
 }
 
-ul.btn-group {
-  padding: 0;
+
+/* Message area (alerts, warnings, errors, etc.) */
+#dw__msgarea {
+  .alert {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+  .bs-callout {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
 }
 
-#dw__msgarea .alert {
-  padding: 5px;
-  margin-bottom: 10px;
-}
 
+/* Badges */
 #dw__badges {
   margin-top: 50px;
 }
 
+
+/* Table of contents */
 #dw__toc {
 
   margin-left: 20px;
@@ -107,6 +115,8 @@ ul.btn-group {
 
 }
 
+
+/* Configuration Manager */
 #config__manager {
 
   label {
@@ -142,6 +152,8 @@ ul.btn-group {
 
 }
 
+
+/* Breadcrumbs */
 #dw__breadcrumbs {
 
   hr {
@@ -163,10 +175,6 @@ ul.btn-group {
   font-size: .9em;
 }
 
-/*#dokuwiki__content .page-header {
-  margin-top: 10px;
-}*/
-
 #dw__logo {
   margin-right: 10px;
 }
@@ -182,6 +190,8 @@ ul.btn-group {
   white-space: nowrap;
 }
 
+
+/* Footnotes */
 #insitu__fn {
   max-width: 20em;
 }
@@ -201,6 +211,8 @@ ul.btn-group {
 
 }
 
+
+/* Page tools */
 #dw__pagetools {
 
   position: absolute;
@@ -296,13 +308,6 @@ ul.btn-group {
 
 }
 
-.curid {
-  font-weight: bold;
-}
-
-.page fieldset {
-  border: none;
-}
 
 .mode_search li {
   list-style-type: none;
@@ -334,6 +339,8 @@ ul.btn-group {
 
 }
 
+
+/* Back to top button */
 .back-to-top {
   position: fixed;
   bottom: 10px;
@@ -342,20 +349,20 @@ ul.btn-group {
   display: none;
 }
 
+
+/* Fix for media list overlap */
 .fix-media-list-overlap {
   overflow: hidden;
 }
 
-/* Interwiki User Page Icon */
-a.iw_user {
-  background-image: none;
-  padding: 0 !important;
-}
 
+/* External URL (navbar) */
 .navbar-nav a.urlextern {
   padding: 15px 0 15px 18px;
 }
 
+
+/* User profile image */
 .profile-image {
   position: relative;
   top: -5px;
@@ -363,14 +370,25 @@ a.iw_user {
   left: -5px;
 }
 
-/** Override Bootstrap3 style */
 
-/** Set ".img-responsive" to "inline" */
+/* Override Bootstrap3 style */
+
+/* Set ".img-responsive" to "inline" */
 .img-responsive {
   display: inline;
 }
 
+ul.btn-group {
+  padding: 0;
+}
+
+
+/* Commond DokuWiki styles */
 .dokuwiki {
+
+  fieldset {
+    border: none;
+  }
 
   img.media {
     margin: .2em 0;
@@ -399,13 +417,23 @@ a.iw_user {
     padding-left: 15px;
   }
 
+  /* Interwiki User Page Icon */
+  a.iw_user {
+    background-image: none;
+    padding: 0 !important;
+  }
+
   .diffnav select {
     height: auto;
   }
 
+  .curid {
+    font-weight: bold;
+  }
+
 }
 
-/** Custom DropDown menu with multiple columns */
+/* Custom DropDown menu with multiple columns */
 .dropdown-row {
 
   > ul {
@@ -423,10 +451,11 @@ a.iw_user {
 }
 
 
-/** Custom DropDoown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
+/* Custom DropDoown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
 .dropdown-large {
   position: static !important;
 }
+
 .dropdown-menu-large {
   margin-left: 16px;
   margin-right: 16px;
@@ -441,7 +470,7 @@ a.iw_user {
 }
 
 
-/** Dropdown menu page */
+/* Dropdown menu page */
 .dw__dropdown_page {
 
   .dropdown-menu-large {
@@ -451,6 +480,26 @@ a.iw_user {
 
   .nav li a {
     padding: @small_nav_padding;
+  }
+
+}
+
+
+/* Styles for XS and S devices */
+@media screen and (max-width: 767px) {
+
+  .dokuwiki {
+
+    fieldset,
+    label.block select,
+    label.block input.edit {
+      width: 100%;
+    }
+
+    label.block {
+      text-align: initial;
+    }
+
   }
 
 }
