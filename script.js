@@ -10,47 +10,6 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-  // Icons for DokuWiki Actions
-  var icons = [
-    // Mode           Selector  Icon
-    ['denied',        'h1',     'fa fa-fw fa-ban text-danger'],
-    ['show.notFound', 'h1',     'fa fa-fw fa-warning text-warning'],
-    ['login',         'h1',     'fa fa-fw fa-sign-in text-muted'],
-    ['register',      'h1',     'fa fa-fw fa-user-plus text-muted'],
-    ['search',        'h1',     'fa fa-fw fa-search text-muted'],
-    ['index',         'h1',     'fa fa-fw fa-sitemap text-muted'],
-    ['recent',        'h1',     'fa fa-fw fa-list-alt text-muted'],
-    ['media',         'h1',     'fa fa-fw fa-picture-o text-muted'],
-    ['admin',         'h1',     'fa fa-fw fa-cogs text-muted'],
-    ['profile',       'h1',     'fa fa-fw fa-user text-muted'],
-    ['revisions',     'h1',     'fa fa-fw fa-clock-o text-muted'],
-    ['backlink',      'h1',     'fa fa-fw fa-link text-muted'],
-    ['diff',          'h1',     'fa fa-fw fa-list-alt text-muted'],
-    ['preview',       'h1',     'fa fa-fw fa-eye text-muted'],
-    ['conflict',      'h1',     'fa fa-fw fa-warning text-warning'],
-    ['subscribe',     'h1',     'fa fa-fw fa-envelope text-warning'],
-    ['unsubscribe',   'h1',     'fa fa-fw fa-envelope text-warning'],
-    ['draft',         'h1',     'fa fa-fw fa-pencil-square-o text-muted'],
-    ['showtag',       'h1',     'fa fa-fw fa-tags text-muted'],
-    ['locked',        'h1',     'fa fa-fw fa-lock text-warning'],
-
-    // Admin   Section                     Icon
-    ['admin',  '#plugin_settings',         'fa fa-fw fa-puzzle-piece'],
-    ['admin',  '#template_settings',       'fa fa-fw fa-paint-brush'],
-    ['admin',  '#_basic legend',           'fa fa-fw fa-cogs'],
-    ['admin',  '#_display legend',         'fa fa-fw fa-laptop'],
-    ['admin',  '#_authentication legend',  'fa fa-fw fa-lock'],
-    ['admin',  '#_anti_spam legend',       'fa fa-fw fa-ban'],
-    ['admin',  '#_editing legend',         'fa fa-fw fa-edit'],
-    ['admin',  '#_links legend',           'fa fa-fw fa-link'],
-    ['admin',  '#_media legend',           'fa fa-fw fa-image'],
-    ['admin',  '#_notifications legend',   'fa fa-fw fa-envelope'],
-    ['admin',  '#_syndication legend',     'fa fa-fw fa-rss'],
-    ['admin',  '#_advanced legend',        'fa fa-fw fa-sliders'],
-    ['admin',  '#_network legend',         'fa fa-fw fa-share-alt'],
-
-  ];
-
 
   function dw_mode(id) {
     return ((jQuery('.mode_' + id).length) ? true : false);
@@ -78,6 +37,7 @@ jQuery(document).ready(function() {
 
   }
 
+
   function resizeToc() {
 
     jQuery('#dw__toc .panel-body').css({
@@ -86,6 +46,7 @@ jQuery(document).ready(function() {
     });
 
   }
+
 
   checkSize();
   jQuery(window).resize(checkSize);
