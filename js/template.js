@@ -20,9 +20,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Unwrap several tags
     jQuery('bdi, span.curid').contents().unwrap();
 
-    // Non-existent DokwWiki Page
-    $dw_content.find('.wikilink2').addClass('text-danger');
-
     // Search Hits
     jQuery('.search_hit').addClass('mark');
 
@@ -75,6 +72,11 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
     // Fix list overlap in media images
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
+
+    // Personal Home-Page icon
+    if (NS == 'user' && dw_mode('show')) {
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
+    }
 
   }, 0);
 
@@ -140,10 +142,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
     // Section Button edit
     jQuery('.btn_secedit .btn').input2button();
-    jQuery('.btn_secedit .btn').addClass('btn-xs').prepend('<i class="fa fa-fw fa-pencil"/> ');
-
-    // Edittable Button
-    jQuery('.editbutton_table .btn i').removeClass('fa-pencil').addClass('fa-table');
+    jQuery('.btn_secedit .btn').addClass('btn-xs');
 
   }, 0);
 
@@ -167,41 +166,6 @@ jQuery(document).on('bootstrap3:back-to-top', function(e) {
         jQuery('.back-to-top').fadeOut();
       }
     });
-
-  }, 0);
-
-});
-
-
-// Icons for DokuWiki Actions
-jQuery(document).on('bootstrap3:icons', function(e) {
-
-  setTimeout(function() {
-
-    for (i in icons) {
-
-      var mode     = ['.mode_', icons[i][0]].join(''),
-          selector = icons[i][1],
-          icon     = icons[i][2];
-
-      var icon_selector = [mode, '#dokuwiki__content', selector].join(' '),
-          icon_tag      = ['<i class="', icon, '"/> '].join('');
-
-      var $target = jQuery(jQuery(icon_selector)[0]);
-
-      if ($target.length) {
-        $target.prepend(icon_tag);
-      }
-
-    };
-
-    // Interwiki User page icon
-    jQuery('.iw_user').prepend('<i class="fa fa-fw fa-user"/> ');
-
-    // Personal Home-Page icon
-    if (NS == 'user' && dw_mode('show')) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
-    }
 
   }, 0);
 
@@ -397,8 +361,6 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
     if (! dw_mode('search')) return false;
 
-    jQuery('ul.search_quickhits li a').prepend('<i class="fa fa-fw fa-file text-muted"/> ');
-
     jQuery('.search_results dt')
       .contents()
       .filter(function() {
@@ -571,7 +533,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
+    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'x-icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
