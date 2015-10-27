@@ -31,8 +31,9 @@ Bootstrap3 template for DokuWiki
   * Edittable
   * Bootstrap Wrapper
   * jOrg Chart
+  * Move
   * ... and more!
-  
+
 ## Localizations
 
   * English
@@ -70,4 +71,3 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 See the LICENSE file in your DokuWiki folder for details
-
