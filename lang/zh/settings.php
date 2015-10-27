@@ -52,10 +52,12 @@ $lang['leftSidebarGrid']     = '左侧边栏网格类 <code>col-{xs,sm,md,lg}-x<
 $lang['rightSidebarGrid']    = '右侧边栏网格类 <code>col-{xs,sm,md,lg}-x</code>（请参阅 <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap 网格</a>文档）';
 $lang['useGravatar']         = 'Load Gravatar image';
 $lang['showLandingPage']     = 'Enable the landing page (without a sidebar and the panel around the page)';
-$lang['landingPages']        = 'Landing pages (insert a regex)';
+$lang['landingPages']        = 'Landing page name (insert a regex)';
 $lang['showPageTools']    = 'Enable the DokuWiki-style Page Tools';
 $lang['showPageTools_o_never']   = 'Never';
 $lang['showPageTools_o_logged']  = 'When logged in';
 $lang['showPageTools_o_always']  = 'Always';
 $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
 $lang['tableStyle']          = 'Table style';
+$lang['tagsOnTop']           = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
+$lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';

@@ -52,10 +52,12 @@ $lang['leftSidebarGrid']     = 'Clases grid para barra lateral izquierda <code>c
 $lang['rightSidebarGrid']    = 'Clases grid para barra lateral derecha <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['useGravatar']         = 'Cargar imagen Gravatar';
 $lang['showLandingPage']     = 'Habilitar la página de llegada (sin barra lateral y con el panel alrededor de la página)';
-$lang['landingPages']        = 'Páginas de llegada (inserte una expresión regular)';
-$lang['showPageTools']    = 'Enable the DokuWiki-style Page Tools';
+$lang['landingPages']        = 'Nombre de la página de llegada (inserte una expresión regular)';
+$lang['showPageTools']    = 'Habilitar la Página de Herramientas al estilo DokuWiki';
 $lang['showPageTools_o_never']   = 'Nunca';
 $lang['showPageTools_o_logged']  = 'Cuando está identificado (logged in)';
 $lang['showPageTools_o_always']  = 'Siempre';
-$lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
-$lang['tableStyle']          = 'Table style';
+$lang['useLocalBootswatch']  = 'Usar el directorio Bootswatch local. Esta opción es útil en instalaciones locales de ';
+$lang['tableStyle']          = 'Estilo de tabla';
+$lang['tagsOnTop']           = 'Mover todas la Etiquetas, de la parte de arriba de la página, al lado del id de la página (requiere el <em>Tag Plugin</em>)';
+$lang['showPageId']          = 'Mostrar el nombre de la página DokuWiki (pageId) en la parte de arriba';

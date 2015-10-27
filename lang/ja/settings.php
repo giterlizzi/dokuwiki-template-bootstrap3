@@ -6,11 +6,11 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussionPage']      = 'Ã£ÂÂ³Ã£ÂÂ¡Ã£ÂÂ³Ã£ÂÂÃ£ÂÂÃ£ÂÂ¼Ã£ÂÂ¸Ã¥ÂÂÃ¯Â¼Â<code>discussion:@ID@</code> Ã£ÂÂÃ£ÂÂÃ£ÂÂÃ£ÂÂ©Ã£ÂÂ«Ã£ÂÂÃ£ÂÂ<code>@ID@</code> Ã£ÂÂ¯Ã§ÂÂ¾Ã¥ÂÂ¨Ã£ÂÂÃ£ÂÂ¼Ã£ÂÂ¸Ã¥ÂÂÃ£ÂÂ«Ã§Â½Â®Ã£ÂÂÃ¦ÂÂÃ£ÂÂÃ£ÂÂÃ£ÂÂÃ£ÂÂ¬Ã£ÂÂ¼Ã£ÂÂ¹Ã£ÂÂÃ£ÂÂ«Ã£ÂÂÃ£ÂÂ¼Ã¯Â¼ÂÃ£ÂÂÃ£ÂÂªÃ£ÂÂ³Ã£ÂÂ¯Ã£ÂÂÃ£ÂÂªÃ£ÂÂÃ¥Â Â´Ã¥ÂÂÃ£ÂÂ¯Ã§Â©ÂºÃ£ÂÂ«Ã£ÂÂÃ£ÂÂÃ£ÂÂ';
-$lang['showDiscussion']      = 'Ã£ÂÂÃ£ÂÂ¼Ã£ÂÂ«Ã£ÂÂ¡Ã£ÂÂÃ£ÂÂ¥Ã£ÂÂ¼Ã£ÂÂ«Ã£ÂÂ³Ã£ÂÂ¡Ã£ÂÂ³Ã£ÂÂÃ£ÂÂªÃ£ÂÂ³Ã£ÂÂ¯Ã£ÂÂÃ¨Â¡Â¨Ã§Â¤ÂºÃ£ÂÂÃ£ÂÂ';
-$lang['showLoginOnFooter']   = 'Ã£ÂÂÃ£ÂÂÃ£ÂÂ¿Ã£ÂÂ¼Ã£ÂÂ«Ã£ÂÂÃ¥Â°ÂÃ£ÂÂÃ£ÂÂªÃ£ÂÂÃ£ÂÂ­Ã£ÂÂ°Ã£ÂÂ¤Ã£ÂÂ³Ã£ÂÂªÃ£ÂÂ³Ã£ÂÂ¯Ã£ÂÂÃ¨Â¡Â¨Ã§Â¤ÂºÃ£ÂÂÃ£ÂÂÃ£ÂÂ<code>hideLoginLink</code> Ã£ÂÂÃ¦ÂÂÃ¥ÂÂ¹Ã£ÂÂ«Ã£ÂÂÃ£ÂÂÃ¥Â Â´Ã¥ÂÂÃ£ÂÂÃ¤Â¾Â¿Ã¥ÂÂ©Ã£ÂÂ§Ã£ÂÂÃ£ÂÂ';
-$lang['hideLoginLink']       = 'navbar Ã¤Â¸ÂÃ£ÂÂ®Ã£ÂÂ­Ã£ÂÂ°Ã£ÂÂ¤Ã£ÂÂ³Ã£ÂÂÃ£ÂÂ¿Ã£ÂÂ³Ã£ÂÂÃ©ÂÂÃ¨Â¡Â¨Ã§Â¤ÂºÃ£ÂÂ«Ã£ÂÂÃ£ÂÂÃ£ÂÂÃ£ÂÂÃ¨ÂªÂ­Ã¥ÂÂÃ£ÂÂÃ¥Â°ÂÃ§ÂÂ¨Ã£ÂÂÃ£ÂÂ® DokuWiki Ã£ÂÂµÃ£ÂÂ¤Ã£ÂÂÃ¯Â¼ÂÃ¤Â¾ÂÃ¯Â¼ÂÃ£ÂÂÃ£ÂÂ­Ã£ÂÂ°Ã£ÂÂ»Ã¥ÂÂÃ¤ÂºÂºÃ§ÂÂÃ£ÂÂª Web Ã£ÂÂµÃ£ÂÂ¤Ã£ÂÂÃ¯Â¼ÂÃ£ÂÂ«Ã£ÂÂ¯Ã¤Â¾Â¿Ã¥ÂÂ©Ã£ÂÂ§Ã£ÂÂÃ£ÂÂ';
-$lang['showUserHomeLink']    = 'navbar Ã£ÂÂ«Ã£ÂÂ¦Ã£ÂÂ¼Ã£ÂÂ¶Ã£ÂÂ¼Ã£ÂÂ®Ã£ÂÂÃ£ÂÂ¼Ã£ÂÂ Ã£ÂÂÃ£ÂÂ¼Ã£ÂÂ¸Ã£ÂÂªÃ£ÂÂ³Ã£ÂÂ¯Ã£ÂÂÃ¨Â¡Â¨Ã§Â¤ÂºÃ£ÂÂÃ£ÂÂ';
+$lang['discussionPage']      = 'コメントページ名（<code>discussion:@ID@</code> がデフォルト。<code>@ID@</code> は現在ページ名に置き換えるプレースホルダー）。リンクしない場合は空にする。';
+$lang['showDiscussion']      = 'ツールメニューにコメントリンクを表示する';
+$lang['showLoginOnFooter']   = 'フッターに「小さな」ログインリンクを表示する。<code>hideLoginLink</code> を有効にした場合、便利です。';
+$lang['hideLoginLink']       = 'navbar 上のログインボタンを非表示にする。「読取り専用」の DokuWiki サイト（例：ブログ・個人的な Web サイト）には便利です。';
+$lang['showUserHomeLink']    = 'navbar にユーザーのホームページリンクを表示する';
 $lang['showCookieLawBanner'] = 'Display the Cookie Law banner on footer';
 $lang['cookieLawBannerPage'] = 'Cookie Law banner page name';
 $lang['cookieLawPolicyPage'] = 'Cookie Law policy page name';
@@ -52,10 +52,12 @@ $lang['leftSidebarGrid']     = '左サイドバーの grid クラス <code>col-{
 $lang['rightSidebarGrid']    = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
 $lang['useGravatar']         = 'Load Gravatar image';
 $lang['showLandingPage']     = 'Enable the landing page (without a sidebar and the panel around the page)';
-$lang['landingPages']        = 'Landing pages (insert a regex)';
+$lang['landingPages']        = 'Landing page name (insert a regex)';
 $lang['showPageTools']    = 'Enable the DokuWiki-style Page Tools';
 $lang['showPageTools_o_never']   = 'Never';
 $lang['showPageTools_o_logged']  = 'When logged in';
 $lang['showPageTools_o_always']  = 'Always';
 $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
 $lang['tableStyle']          = 'Table style';
+$lang['tagsOnTop']           = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
+$lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';
