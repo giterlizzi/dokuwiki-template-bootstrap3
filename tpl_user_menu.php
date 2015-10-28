@@ -56,12 +56,22 @@ if (bootstrap3_conf('useGravatar')) {
 
         <ul class="dropdown-menu">
           <?php if (bootstrap3_conf('showUserHomeLink')): ?>
-          <li>
-            <a href="<?php echo bootstrap3_user_homepage_link() ?>">
-              <i class="fa fa-fw fa-home"></i> Personal Home-Page
-            </a>
-          </li>
-          <?php endif; ?>
+          <?php
+            if ($userhomepageHelper = plugin_load('helper','userhomepage')):
+                echo '<li class="dropdown-header">Home-Page</li>' .
+                     '<li>' .
+                     $userhomepageHelper->getPublicLink('<i class="fa fa-fw fa-home"></i> Public') .
+                     $userhomepageHelper->getPrivateLink('<i class="fa fa-fw fa-user-secret"></i> Private') .
+                     '</li>' .
+                     '<li><hr/></li>';
+            else:
+            ?>
+            <li>
+              <a href="<?php echo bootstrap3_user_homepage_link() ?>" title="Home-Page" rel="nofollow">
+                <i class="fa fa-fw fa-home"></i> Home-Page
+              </a>
+            </li>
+            <?php endif; endif; ?>
           <li>
             <a href="mailto:<?php echo $INFO['userinfo']['mail'] ?>" title="<?php echo $INFO['userinfo']['mail'] ?>">
               <i class="fa fa-fw fa-envelope"></i> <?php echo $INFO['userinfo']['mail'] ?>
