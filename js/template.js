@@ -23,6 +23,9 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Search Hits
     jQuery('.search_hit').addClass('mark');
 
+    // a11y
+    jQuery('.a11y').addClass('sr-only');
+
     // Page heading
     $dw_content.find('h1').addClass('page-header');
 
@@ -49,7 +52,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     }
 
     // Form and controls
-    jQuery(':submit, :button, :reset').addClass('btn btn-default');
+    $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
     jQuery('input, select, textarea')
       .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
       .addClass('form-control');
@@ -533,7 +536,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'x-icons', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
+    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
