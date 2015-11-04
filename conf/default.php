@@ -48,3 +48,4 @@ $conf['useLocalBootswatch']  = 1;
 $conf['tableStyle']          = 'striped,condensed,responsive';
 $conf['tagsOnTop']           = 1;
 $conf['showPageId']          = 1;
+$conf['useAnchorJS']         = 1;

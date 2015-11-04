@@ -532,11 +532,18 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 });
 
 
+jQuery(document).on('bootstrap3:anchorjs', function() {
+  if (TPL_CONFIG.useAnchorJS) {
+    anchors.add('article h1, article h2, article h3, article h4, article h5');
+  }
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law' ];
+    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law', 'anchorjs' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

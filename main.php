@@ -88,6 +88,9 @@ if ($fixedTopNavbar) {
   /*!]]>*/</script>
   <?php tpl_metaheaders() ?>
   <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
+  <?php if (bootstrap3_conf('useAnchorJS')): ?>
+  <script type="text/javascript" src="<?php echo DOKU_TPL ?>assets/anchorjs/anchor.min.js"></script>
+  <?php endif; ?>
   <style type="text/css">
     body { padding-top: <?php echo $navbar_padding ?>px; }
     .toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; right: 10px; }
