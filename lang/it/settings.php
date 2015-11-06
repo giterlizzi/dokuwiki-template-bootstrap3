@@ -27,7 +27,7 @@ $lang['showSearchForm_o_logged'] = 'Quando si è "loggati"';
 $lang['showSearchForm_o_always'] = 'Sempre';
 $lang['sidebarPosition']     = 'Posizione della barra laterale di DokuWiki (<code>left</code> o <code>right</code>)';
 $lang['rightSidebar']        = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value';
-$lang['tableFullWidth']      = 'Enable 100% full table width (Bootstrap default)';
+$lang['tableFullWidth']      = 'Abilita la larghezza massima (100%) delle tabelle (comportamento di default di Bootstrap)';
 $lang['semantic']            = 'Abilita i dati semantici';
 $lang['schemaOrgType']       = 'Tipo di dato Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
 $lang['showTranslation']     = 'Mostra la barra delle traduzioni (richiede <em>Translation Plugin</em>)';
@@ -61,3 +61,4 @@ $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option 
 $lang['tableStyle']          = 'Table style';
 $lang['tagsOnTop']           = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
 $lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';
+$lang['useAnchorJS']         = 'Use AnchorJS';
