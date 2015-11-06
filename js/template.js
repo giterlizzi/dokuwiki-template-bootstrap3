@@ -24,7 +24,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('.search_hit').addClass('mark');
 
     // a11y
-    jQuery('.a11y').addClass('sr-only');
+    jQuery('.a11y').not('.picker').addClass('sr-only');
 
     // Page heading
     $dw_content.find('h1').addClass('page-header');
@@ -487,6 +487,7 @@ jQuery(document).on('bootstrap3:mode-index', function(e) {
 });
 
 
+// Page Tools
 jQuery(document).on('bootstrap3:page-tools', function() {
 
   setTimeout(function() {
@@ -508,6 +509,7 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 });
 
 
+// Dropdown-Page
 jQuery(document).on('bootstrap3:dropdown-page', function() {
 
   jQuery('.dw__dropdown_page .dropdown').hover(function() {
@@ -524,6 +526,7 @@ jQuery(document).on('bootstrap3:dropdown-page', function() {
 });
 
 
+// Cookie-Law
 jQuery(document).on('bootstrap3:cookie-law', function() {
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
@@ -532,6 +535,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 });
 
 
+// AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
   if (TPL_CONFIG.useAnchorJS) {
     anchors.add('article h1, article h2, article h3, article h4, article h5');
