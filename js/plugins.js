@@ -20,7 +20,16 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
         $dataplugin_entry = jQuery('.dataplugin_entry'),     // Data Plugin: Entry
         $dataplugin_table = jQuery('.dataplugin_table'),     // Data Plugin: Table
-        $jorg_chart       = jQuery('.jOrgChart');            // jOrgChart
+        $jorg_chart       = jQuery('.jOrgChart'),            // jOrgChart
+        $toc              = jQuery('#dw__toc'),              // DokuWiki TOC
+        $toc2             = jQuery('div.inlinetoc2');        // InlineTOC Plugin
+
+
+    // InlineTOC Plugin
+    if ($toc2.length && $toc.length) {
+      $toc.css('display', 'none');
+      $toc2.addClass('panel panel-default');
+    }
 
 
     // jOrgChart
