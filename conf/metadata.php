@@ -34,7 +34,7 @@ $meta['showAdminMenu']       = array('onoff');
 
 // Semantic
 $meta['semantic']            = array('onoff');
-$meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting'));
+$meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
 
 // Layout
 $meta['fluidContainer']      = array('onoff');
