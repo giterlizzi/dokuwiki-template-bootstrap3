@@ -29,26 +29,22 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Page heading
     $dw_content.find('h1').addClass('page-header');
 
-    // Tables (no for Rack, Diagram and Edittable Plugins)
-    if (! jQuery('#edittable__editor').length) {
-
-      if (TPL_CONFIG.tableStyle.indexOf('responsive') !== -1) {
-        $dw_content.find('table').not('.rack, .diagram').parent().addClass('table-responsive');
-      }
-
-      var table_class = ['table'];
-
-      if (TPL_CONFIG.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
-      if (TPL_CONFIG.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
-      if (TPL_CONFIG.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
-      if (TPL_CONFIG.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
-
-      $dw_content.find('table').not('.rack, .diagram').addClass(table_class.join(' '));
-
+    // Tables
+    if (TPL_CONFIG.tableStyle.indexOf('responsive') !== -1) {
+      $dw_content.find('div.table').addClass('table-responsive');
     }
 
+    var table_class = ['table'];
+
+    if (TPL_CONFIG.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
+    if (TPL_CONFIG.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
+    if (TPL_CONFIG.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
+    if (TPL_CONFIG.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
+
+    $dw_content.find('div.table table.inline').addClass(table_class.join(' '));
+
     if (! TPL_CONFIG.tableFullWidth) {
-      $dw_content.find('.table').css('width', 'auto');
+      $dw_content.find('div.table table.inline').css('width', 'auto');
     }
 
     // Form and controls
@@ -547,7 +543,11 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'buttons', 'back-to-top', 'page-tools', 'dropdown-page', 'footnotes', 'alerts', 'mode-admin', 'mode-index', 'mode-search', 'media-manager', 'detail', 'cookie-law', 'anchorjs' ];
+    var events = [ 'toc', 'nav', 'tabs', 'anchorjs',
+                   'buttons', 'back-to-top', 'page-tools',
+                   'dropdown-page', 'footnotes', 'alerts',
+                   'mode-admin', 'mode-index', 'mode-search',
+                   'media-manager', 'detail', 'cookie-law' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

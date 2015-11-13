@@ -20,9 +20,15 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
         $dataplugin_entry = jQuery('.dataplugin_entry'),     // Data Plugin: Entry
         $dataplugin_table = jQuery('.dataplugin_table'),     // Data Plugin: Table
-        $jorg_chart       = jQuery('.jOrgChart'),            // jOrgChart
         $toc              = jQuery('#dw__toc'),              // DokuWiki TOC
-        $toc2             = jQuery('div.inlinetoc2');        // InlineTOC Plugin
+        $toc2             = jQuery('div.inlinetoc2'),        // InlineTOC Plugin
+        $davcal           = jQuery('#fullCalendar');         // DAVCal Plugin
+
+
+    // DAVCal Plugin
+    if ($davcal.length) {
+      $davcal.find('.fc-button-group').addClass('btn-group');
+    }
 
 
     // InlineTOC Plugin
@@ -32,17 +38,11 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
     }
 
 
-    // jOrgChart
-    if ($jorg_chart.length) {
-      $jorg_chart.removeClass('table-responsive');
-      $jorg_chart.find('.table').removeClass('table table-striped table-condensed');
-    }
-
-
     // Data Plugin: Entry
     if ($dataplugin_entry.length) {
       $dataplugin_entry.find('dl').addClass('panel panel-default');
     }
+
 
     // Data Plugin: Table
     if ($dataplugin_table.length) {
