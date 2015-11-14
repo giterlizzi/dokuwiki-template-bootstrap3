@@ -30,20 +30,20 @@ jQuery(document).on('bootstrap3:init', function(e) {
     $dw_content.find('h1').addClass('page-header');
 
     // Tables
-    if (TPL_CONFIG.tableStyle.indexOf('responsive') !== -1) {
+    if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
       $dw_content.find('div.table').addClass('table-responsive');
     }
 
     var table_class = ['table'];
 
-    if (TPL_CONFIG.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
-    if (TPL_CONFIG.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
-    if (TPL_CONFIG.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
-    if (TPL_CONFIG.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
+    if (JSINFO.bootstrap3.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
+    if (JSINFO.bootstrap3.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
+    if (JSINFO.bootstrap3.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
+    if (JSINFO.bootstrap3.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
 
     $dw_content.find('div.table table.inline').addClass(table_class.join(' '));
 
-    if (! TPL_CONFIG.tableFullWidth) {
+    if (! JSINFO.bootstrap3.tableFullWidth) {
       $dw_content.find('div.table table.inline').css('width', 'auto');
     }
 
@@ -533,7 +533,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
-  if (TPL_CONFIG.useAnchorJS) {
+  if (JSINFO.bootstrap3.useAnchorJS) {
     anchors.add('article h1, article h2, article h3, article h4, article h5');
   }
 });

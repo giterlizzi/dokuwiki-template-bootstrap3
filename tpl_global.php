@@ -11,6 +11,7 @@
 if (!defined('DOKU_INC')) die();
 
 global $ID;
+global $JSINFO;
 
 $showTools           = bootstrap3_conf('showTools');
 $showSearchForm      = bootstrap3_conf('showSearchForm');
@@ -49,6 +50,8 @@ $tplConfigJSON       = array(
   'tagsOnTop'      => (int) bootstrap3_conf('tagsOnTop'),
   'useAnchorJS'    => (int) bootstrap3_conf('useAnchorJS'),
 );
+
+$JSINFO['bootstrap3'] = $tplConfigJSON;
 
 if($fluidContainerBtn) {
   $fluidContainer = bootstrap3_fluid_container_button();

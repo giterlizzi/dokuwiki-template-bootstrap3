@@ -30,9 +30,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
-  <script type="text/javascript">/*<![CDATA[*/
-    var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
-  /*!]]>*/</script>
   <?php tpl_metaheaders()?>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->

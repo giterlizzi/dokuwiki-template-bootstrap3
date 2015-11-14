@@ -83,9 +83,6 @@ if ($fixedTopNavbar) {
   <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
-  <script type="text/javascript">/*<![CDATA[*/
-    var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
-  /*!]]>*/</script>
   <?php tpl_metaheaders() ?>
   <style type="text/css">
     body { padding-top: <?php echo $navbar_padding ?>px; }
