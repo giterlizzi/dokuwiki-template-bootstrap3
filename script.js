@@ -1,3 +1,6 @@
+/* DOKUWIKI:include_once assets/bootstrap/js/bootstrap.min.js */
+/* DOKUWIKI:include_once assets/anchorjs/anchor.min.js */
+
 /*!
  * DokuWiki Bootstrap3 Template: Hacks!
  *

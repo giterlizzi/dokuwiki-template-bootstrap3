@@ -33,7 +33,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     var TPL_CONFIG = <?php echo json_encode($tplConfigJSON); ?>;
   /*!]]>*/</script>
   <?php tpl_metaheaders() ?>
-  <script src="<?php echo DOKU_TPL ?>assets/bootstrap/js/bootstrap.min.js"></script>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
