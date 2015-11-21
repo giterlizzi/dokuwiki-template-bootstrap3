@@ -10,12 +10,16 @@
 
 body {
 
-  font-size: small;
+  &.default,
+  &.optional {
+    font-size: small;
+  }
+
   position: relative;
 
-  .default.page-on-panel,
-  .optional.page-on-panel, {
-    background: #FDFDFD;
+  &.default.page-on-panel,
+  &.optional.page-on-panel, {
+    background: #FEFEFE;
   }
 
 }
@@ -519,4 +523,6 @@ ul.btn-group {
 
 
 /* AnchorJS */
-a.anchorjs-link:hover { text-decoration: none; }
+a.anchorjs-link:hover {
+  text-decoration: none;
+}
