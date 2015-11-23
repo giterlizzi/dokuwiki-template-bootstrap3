@@ -60,12 +60,6 @@ if (!defined('DOKU_INC')) die();
       <?php echo bootstrap3_navbar() // Include the navbar for different namespaces ?>
       <?php echo bootstrap3_dropdown_page('dropdownpage') ?>
 
-      <?php if(file_exists(dirname(__FILE__) . '/navbar.html')): ?>
-      <ul class="nav navbar-nav">
-        <?php tpl_includeFile('navbar.html') ?>
-      </ul>
-      <?php endif; ?>
-
       <div class="navbar-right">
 
         <?php if ($showSearchForm): ?>
