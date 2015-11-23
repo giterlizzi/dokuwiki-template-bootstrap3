@@ -25,6 +25,7 @@ $meta['rightSidebarGrid']    = array('string');
 $meta['inverseNavbar']       = array('onoff');
 $meta['fixedTopNavbar']      = array('onoff');
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['showHomePageLink']    = array('onoff');
 $meta['showUserHomeLink']    = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
 $meta['individualTools']     = array('onoff');

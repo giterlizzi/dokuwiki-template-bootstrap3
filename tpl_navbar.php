@@ -49,6 +49,14 @@ if (!defined('DOKU_INC')) die();
 
     <div class="collapse navbar-collapse">
 
+      <?php if (bootstrap3_conf('showHomePageLink')) :?>
+      <ul class="nav navbar-nav">
+        <li<?php echo ((wl($ID) == wl()) ? ' class="active"' : ''); ?>>
+          <?php tpl_link(wl(), '<i class="fa fa-fw fa-home"></i> Home') ?>
+        </li>
+      </ul>
+      <?php endif; ?>
+
       <?php echo bootstrap3_navbar() // Include the navbar for different namespaces ?>
       <?php echo bootstrap3_dropdown_page('dropdownpage') ?>
 
