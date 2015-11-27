@@ -88,7 +88,7 @@ switch ($bootstrapTheme) {
     $bootstrapStyles[] = $customTheme;
     break;
   case 'bootswatch':
-    $url = ($useLocalBootswatch) ? DOKU_TPL.'assets/bootswatch' : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.5';
+    $url = ($useLocalBootswatch) ? DOKU_TPL.'assets/bootswatch' : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
     $bootstrapStyles[] = "$url/$bootswatchTheme/bootstrap.min.css";
     break;
   case 'default':
