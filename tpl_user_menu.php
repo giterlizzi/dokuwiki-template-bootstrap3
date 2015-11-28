@@ -39,7 +39,7 @@ if (bootstrap3_conf('useGravatar')) {
     <ul class="dropdown-menu dropdown-menu-large" role="menu">
 
       <li class="dropdown-header">
-        <h4 class="page-header"><?php echo hsc($INFO['userinfo']['name']) ?> <small><?php echo $_SERVER['REMOTE_USER'] ?></small></h4>
+        <h4 class="page-header"><?php echo hsc($INFO['userinfo']['name']) ?> <small><?php echo hsc($_SERVER['REMOTE_USER']) ?></small></h4>
       </li>
 
       <li class="open dropdown-row">
