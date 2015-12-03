@@ -50,3 +50,4 @@ $conf['tagsOnTop']           = 1;
 $conf['showPageId']          = 1;
 $conf['useAnchorJS']         = 1;
 $conf['showHomePageLink']    = 0;
+$conf['useLegacyNavbar']     = 0;

@@ -66,3 +66,4 @@ $meta['showLoginOnFooter']   = array('onoff');
 $meta['useGravatar']         = array('onoff');
 $meta['tagsOnTop']           = array('onoff');
 $meta['useAnchorJS']         = array('onoff');
+$meta['useLegacyNavbar']     = array('onoff');
