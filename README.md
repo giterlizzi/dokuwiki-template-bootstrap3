@@ -6,6 +6,7 @@ Bootstrap3 template for DokuWiki
   * HTML5
   * Bootstrap 3.x based template
   * Glyphicons and FontAwesome icons
+  * AnchorJS support
   * High customizable via the configuration manager
   * Many html hooks
   * Responsive
@@ -32,6 +33,7 @@ Bootstrap3 template for DokuWiki
   * Bootstrap Wrapper
   * jOrg Chart
   * Move
+  * InlineTOC
   * ... and more!
 
 ## Localizations
