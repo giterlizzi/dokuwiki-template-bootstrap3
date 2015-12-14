@@ -236,6 +236,14 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     });
 
+    $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
+
+      if ($dw_toc.find('.closed').length) {
+        $dw_toc.find('h3').trigger('click');
+      }
+
+    });
+
     if ((jQuery(window).height() < jQuery('#dw__toc').height())) {
       resizeToc();
       jQuery(window).resize(resizeToc);
