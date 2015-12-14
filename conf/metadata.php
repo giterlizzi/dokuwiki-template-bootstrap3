@@ -38,15 +38,16 @@ $meta['semantic']            = array('onoff');
 $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
 
 // Layout
-$meta['fluidContainer']      = array('onoff');
-$meta['fluidContainerBtn']   = array('onoff');
-$meta['pageOnPanel']         = array('onoff');
-$meta['tableFullWidth']      = array('onoff');
-$meta['tableStyle']          = array('multicheckbox', '_choices' => array('striped', 'bordered', 'hover', 'condensed', 'responsive'));
-$meta['showLandingPage']     = array('onoff');
-$meta['landingPages']        = array('regex');
-$meta['showPageTools']       = array('multichoice', '_choices' => array('never', 'logged', 'always'));
-$meta['showPageId']          = array('onoff');
+$meta['fluidContainer']         = array('onoff');
+$meta['fluidContainerBtn']      = array('onoff');
+$meta['pageOnPanel']            = array('onoff');
+$meta['tableFullWidth']         = array('onoff');
+$meta['tableStyle']             = array('multicheckbox', '_choices' => array('striped', 'bordered', 'hover', 'condensed', 'responsive'));
+$meta['showLandingPage']        = array('onoff');
+$meta['landingPages']           = array('regex');
+$meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['showPageId']             = array('onoff');
+$meta['tocCollapseSubSections'] = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');

@@ -67,3 +67,5 @@ $lang['useLegacyNavbar']     = 'Use legacy and deprecated "navbar.html" hook (co
 $lang['browserTitleCharSepNS'] = 'Character separator for every namespaces on browser title';
 $lang['browserTitleShowNS']    = 'Display the previous start page name of current page on the browser title (only if <a class="interwiki iw_doku" href="#config___start">start page</a> exists)';
 $lang['browserTitleOrderNS']   = 'Set the order of namespaces';
+$lang['tocCollapseSubSections'] = 'Collapse all sub-sections in TOC to save space';
+

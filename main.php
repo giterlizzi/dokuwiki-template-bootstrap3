@@ -86,6 +86,9 @@ if ($fixedTopNavbar) {
   <?php tpl_metaheaders() ?>
   <style type="text/css">
     body { padding-top: <?php echo $navbar_padding ?>px; }
+    <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>
+    #dw__toc .nav .nav .nav { display: none; }
+    <?php endif; ?>
     .toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; right: 10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->

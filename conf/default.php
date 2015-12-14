@@ -55,4 +55,5 @@ $conf['browserTitleCharSepNS'] = '-';
 $conf['browserTitleShowNS']    = 0;
 $conf['browserTitleOrderNS']   = 'normal';
 $conf['browserTitleMaxNS']     = 'all';
+$conf['tocCollapseSubSections'] = 1;
 
