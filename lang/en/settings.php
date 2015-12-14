@@ -64,3 +64,6 @@ $lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';
 $lang['useAnchorJS']         = 'Use AnchorJS';
 $lang['showHomePageLink']    = 'Display Home-Page link in navbar';
 $lang['useLegacyNavbar']     = 'Use legacy and deprecated "navbar.html" hook (consider in the future to use the ":navbar" hook)';
+$lang['browserTitleCharSepNS'] = 'Character separator for every namespaces on browser title';
+$lang['browserTitleShowNS']    = 'Display the previous start page name of current page on the browser title (only if <a class="interwiki iw_doku" href="#config___start">start page</a> exists)';
+$lang['browserTitleOrderNS']   = 'Set the order of namespaces';

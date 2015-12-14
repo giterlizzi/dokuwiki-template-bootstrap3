@@ -51,3 +51,8 @@ $conf['showPageId']          = 1;
 $conf['useAnchorJS']         = 1;
 $conf['showHomePageLink']    = 0;
 $conf['useLegacyNavbar']     = 0;
+$conf['browserTitleCharSepNS'] = '-';
+$conf['browserTitleShowNS']    = 0;
+$conf['browserTitleOrderNS']   = 'normal';
+$conf['browserTitleMaxNS']     = 'all';
+

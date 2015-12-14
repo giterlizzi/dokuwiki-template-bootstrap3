@@ -9,7 +9,7 @@
 
 // Themes
 $meta['bootstrapTheme']      = array('multichoice', '_choices' => array('default', 'optional', 'custom', 'bootswatch'));
-$meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean','cosmo','cyborg','darkly','flatly','journal','lumen','paper','readable','sandstone','simplex','slate','spacelab','superhero','united','yeti'));
+$meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'));
 $meta['customTheme']         = array('string');
 $meta['showThemeSwitcher']   = array('onoff');
 $meta['hideInThemeSwitcher'] = array('multicheckbox', '_choices' => $meta['bootswatchTheme']['_choices']);
@@ -43,7 +43,6 @@ $meta['fluidContainerBtn']   = array('onoff');
 $meta['pageOnPanel']         = array('onoff');
 $meta['tableFullWidth']      = array('onoff');
 $meta['tableStyle']          = array('multicheckbox', '_choices' => array('striped', 'bordered', 'hover', 'condensed', 'responsive'));
-$meta['browserTitle']        = array('string');
 $meta['showLandingPage']     = array('onoff');
 $meta['landingPages']        = array('regex');
 $meta['showPageTools']       = array('multichoice', '_choices' => array('never', 'logged', 'always'));
@@ -57,6 +56,12 @@ $meta['discussionPage']      = array('string');
 $meta['showCookieLawBanner'] = array('onoff');
 $meta['cookieLawBannerPage'] = array('string');
 $meta['cookieLawPolicyPage'] = array('string');
+
+// Browser Title
+$meta['browserTitle']          = array('string');
+$meta['browserTitleShowNS']    = array('onoff');
+$meta['browserTitleCharSepNS'] = array('multichoice', '_choices' => array('-', '|', ',', '/', '>'));
+$meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse', 'current-page-first'));
 
 // Others
 $meta['showPageInfo']        = array('onoff');

@@ -605,6 +605,7 @@ function bootstrap3_html_msgarea() {
                 $icon  = 'fa fa-fw fa-check-circle';
                 break;
             }
+
             print '<div class="alert alert-'.$level.'">';
             print '<i class="'.$icon.'"></i> ';
             print $msg['msg'];
@@ -802,8 +803,44 @@ function bootstrap3_conf($key, $default = false) {
       return ! $value || ! empty($_SERVER['REMOTE_USER']);
 
     case 'browserTitle':
+
+      $ns_pages     = array();
+      $ns_titles    = array();
+      $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
+
+      if (   bootstrap3_conf('browserTitleShowNS')
+          && useHeading('navigation')) {
+
+        $ns_parts  = explode(':', $ID);
+
+        foreach ($ns_parts as $ns_part) {
+          $ns_page .= ":$ns_part";
+          $ns_pages[] = $ns_page. ':' .$conf['start'];
+        }
+
+        $ns_pages = array_unique($ns_pages);
+
+        foreach ($ns_pages as $ns_page) {
+  
+          if (page_exists($ns_page)) {
+            $ns_page_title = hsc(p_get_first_heading($ns_page));
+            $ns_titles[] = $ns_page_title;
+          }
+  
+        }
+
+      }
+
+      $ns_titles[] = tpl_pagetitle($ID, true);
+      $ns_titles   = array_unique($ns_titles);
+
+      if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
+        $ns_titles = array_reverse(array_unique($ns_titles));
+      }
+
       return str_replace(array('@WIKI@', '@TITLE@'),
-                         array(strip_tags($conf['title']), tpl_pagetitle(null, true)),
+                         array(strip_tags($conf['title']),
+                               implode($ns_separator, $ns_titles)),
                          $value);
 
     case 'showSidebar':
