@@ -1068,7 +1068,7 @@ function bootstrap3_youarehere() {
 
         // output
         echo '<li>';
-        echo html_wikilink($page);
+        echo str_replace('curid', '', html_wikilink($page));
         echo '</li>';
 
     }
