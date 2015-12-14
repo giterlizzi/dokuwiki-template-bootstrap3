@@ -1008,15 +1008,9 @@ function bootstrap3_breadcrumbs() {
 
     $i++;
 
-    if ($i == $last) {
-      print '<li class="active">';
-      print hsc($name);
-      print '</li>';
-    } else {
-      print '<li>';
-      tpl_link(wl($id), hsc($name), 'title="'.$id.'"');
-      print '</li>';
-    }
+    print ($i == $last) ? '<li class="active">' : '<li>';
+    tpl_link(wl($id), hsc($name), 'title="'.$id.'"');
+    print '</li>';
 
     if($i == $last) print '</ol>';
 
@@ -1095,7 +1089,7 @@ function bootstrap3_youarehere() {
     }
 
     echo '<li class="active">';
-    tpl_pagetitle($page);
+    echo str_replace('curid', '', html_wikilink($page));
     echo '</li>';
 
     echo '</ol>';
