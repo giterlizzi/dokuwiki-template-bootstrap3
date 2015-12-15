@@ -999,7 +999,7 @@ function bootstrap3_breadcrumbs() {
 
   //render crumbs, highlight the last one
   print '<ol class="breadcrumb">';
-  print '<li>'.$lang['breadcrumb'].'</li>';
+  print '<li>' . rtrim($lang['breadcrumb'], ':') . '</li>';
 
   $last = count($crumbs);
   $i    = 0;
@@ -1049,7 +1049,7 @@ function bootstrap3_youarehere() {
     $count = count($parts);
 
     echo '<ol class="breadcrumb">';
-    echo '<li>'.$lang['youarehere'].'</li>';
+    echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
     // always print the startpage
     echo '<li>';
