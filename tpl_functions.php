@@ -804,43 +804,53 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'browserTitle':
 
-      $ns_pages     = array();
-      $ns_titles    = array();
-      $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
+      if (bootstrap3_conf('browserTitleShowNS')) {
 
-      if (   bootstrap3_conf('browserTitleShowNS')
-          && useHeading('navigation')) {
+        $ns_parts         = explode(':', $ID);
+        $ns_pages         = array();
+        $ns_titles        = array();
+        $ns_separator     = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
 
-        $ns_parts  = explode(':', $ID);
+        if (useHeading('navigation')) {
 
-        foreach ($ns_parts as $ns_part) {
-          $ns_page .= ":$ns_part";
-          $ns_pages[] = $ns_page. ':' .$conf['start'];
-        }
-
-        $ns_pages = array_unique($ns_pages);
-
-        foreach ($ns_pages as $ns_page) {
-  
-          if (page_exists($ns_page)) {
-            $ns_page_title = hsc(p_get_first_heading($ns_page));
-            $ns_titles[] = $ns_page_title;
+          foreach ($ns_parts as $ns_part) {
+            $ns_page .= "$ns_part:";
+            $ns_pages[] = $ns_page;
           }
-  
+
+          $ns_pages = array_unique($ns_pages);
+
+          foreach ($ns_pages as $ns_page) {
+
+            resolve_pageid(getNS($ns_page), $ns_page, $exists);
+
+            $ns_page_title_heading = p_get_first_heading($ns_page);
+            $ns_page_title_page    = noNSorNS($ns_page);
+            $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
+
+            $ns_titles[] = $ns_page_title;
+
+          }
+
+          $ns_titles[] = tpl_pagetitle($ID, true);
+          $ns_titles = array_unique($ns_titles);
+
+        } else {
+          $ns_titles = $ns_parts;
         }
 
-      }
+        if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
+          $ns_titles = array_reverse($ns_titles);
+        }
 
-      $ns_titles[] = tpl_pagetitle($ID, true);
-      $ns_titles   = array_unique($ns_titles);
+        $browser_title = implode($ns_separator, $ns_titles);
 
-      if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
-        $ns_titles = array_reverse(array_unique($ns_titles));
+      } else {
+        $browser_title = tpl_pagetitle($ID, true);
       }
 
       return str_replace(array('@WIKI@', '@TITLE@'),
-                         array(strip_tags($conf['title']),
-                               implode($ns_separator, $ns_titles)),
+                         array(strip_tags($conf['title']), $browser_title),
                          $value);
 
     case 'showSidebar':
