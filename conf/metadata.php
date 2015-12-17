@@ -62,7 +62,7 @@ $meta['cookieLawPolicyPage'] = array('string');
 $meta['browserTitle']          = array('string');
 $meta['browserTitleShowNS']    = array('onoff');
 $meta['browserTitleCharSepNS'] = array('multichoice', '_choices' => array('-', '|', ',', '/', '>'));
-$meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse', 'current-page-first'));
+$meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse'));
 
 // Others
 $meta['showPageInfo']        = array('onoff');
