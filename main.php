@@ -89,6 +89,9 @@ if ($fixedTopNavbar) {
     <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>
     #dw__toc .nav .nav .nav { display: none; }
     <?php endif; ?>
+    <?php if (bootstrap3_conf('showPageTools')): ?>
+    .page { padding-right: 40px; }
+    <?php endif; ?>
     .toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; right: 10px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -170,6 +173,9 @@ if ($fixedTopNavbar) {
                 // Include the TOC
                 require_once('tpl_toc.php');
 
+                // Include Page Tools
+                require_once('tpl_page_tools.php');
+
                 echo $content;
 
                 tpl_flush();
@@ -203,8 +209,6 @@ if ($fixedTopNavbar) {
 
           }
         ?>
-
-        <?php require_once('tpl_page_tools.php') ?>
 
       </main>
 

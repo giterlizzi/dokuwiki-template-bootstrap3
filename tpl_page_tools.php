@@ -12,10 +12,10 @@ if (!defined('DOKU_INC')) die();
 
 ?>
 <?php if ($showPageTools): ?>
-<div id="dw__pagetools" class="hidden-print">
+<div id="dw__pagetools" class="hidden-print pull-right">
   <div class="tools">
     <ul class="nav nav-stacked nav-pills">
-      <?php 
+      <?php
         $tools = bootstrap3_tools_menu();
         unset($tools['page']['menu']['top']);
         $tools_menu = bootstrap3_toolsevent('pagetools', $tools['page']['menu'], 'main', true);
@@ -28,3 +28,4 @@ if (!defined('DOKU_INC')) die();
   </div>
 </div>
 <?php endif; ?>
+
