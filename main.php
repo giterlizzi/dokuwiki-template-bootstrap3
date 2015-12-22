@@ -240,7 +240,7 @@ if ($fixedTopNavbar) {
           tpl_includeFile('footer.html');
 
           // Footer DokuWiki page
-          tpl_include_page('footer', 1, 1);
+          require_once('tpl_footer.php');
         ?>
 
       </footer>
