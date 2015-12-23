@@ -824,7 +824,7 @@ function bootstrap3_conf($key, $default = false) {
 
             resolve_pageid(getNS($ns_page), $ns_page, $exists);
 
-            $ns_page_title_heading = p_get_first_heading($ns_page);
+            $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
             $ns_page_title_page    = noNSorNS($ns_page);
             $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
 
