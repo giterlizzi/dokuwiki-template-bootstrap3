@@ -14,7 +14,7 @@ $lang['showUserHomeLink']    = 'Mostrar enlace a Página de Inicio de Usuario en
 $lang['showCookieLawBanner'] = 'Mostrar el banner Cookie Law en el pie de página';
 $lang['cookieLawBannerPage'] = 'Nombre de página del banner Cookie Law';
 $lang['cookieLawPolicyPage'] = 'Nombre de página de política de Cookie Law';
-$lang['browserTitle']        = 'Título del explorador para DokuWiki (por defecto es <code>@TITLE@ [@WIKI@]</code>, en donde el marcador de posición <code>@TITLE@</code> reemplaza el título de la página actual y <code>@WIKI@</code> reemplaza en nombre de la DokuWiki - ver configuración <a href="#config___title">title</a>';
+$lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name) - see <a class="interwiki iw_doku" href="#config___title">title</a> config';
 $lang['showIndividualTool']  = 'Habilitar/Deshabilitar herramientas individuales de la barra de navegación';
 $lang['showTools']           = 'Mostrar Herramientas en la barra de navegación';
 $lang['individualTools']     = 'Dividir las Herramientas en un menú individual en la barra de navegación';
@@ -26,7 +26,7 @@ $lang['showSearchForm_o_never']  = 'Nunca';
 $lang['showSearchForm_o_logged'] = 'Cuando está identificado (logged in)';
 $lang['showSearchForm_o_always'] = 'Siempre';
 $lang['sidebarPosition']     = 'Posición de la barra lateral DokuWiki (<code>left</code> o <code>right</code>)';
-$lang['rightSidebar']        = 'El nombre de la página de la Barra Lateral Derecha. El campo vacío deshabilita la barra lateral derecha.<br/>La Barra Lateral Derecha sólo se muestra cuando la <a href="#config___sidebar">barra lateral</a> predeterminada de DokuWiki está habilitada y está en la posición <code>left</code> (ver la configuración de <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a>). Si sólo quieres la barra lateral en la posición derecha, establece la configuración de <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> con el valor <code>right</code>';
+$lang['rightSidebar']        = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
 $lang['tableFullWidth']      = 'Habilitar el ancho de tabla a 100% (predeterminado en Bootstrap)';
 $lang['semantic']            = 'Habilitar datos semánticos';
 $lang['schemaOrgType']       = 'Tipo de Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>)';
@@ -61,3 +61,10 @@ $lang['useLocalBootswatch']  = 'Usar el directorio Bootswatch local. Esta opció
 $lang['tableStyle']          = 'Estilo de tabla';
 $lang['tagsOnTop']           = 'Mover todas la Etiquetas, de la parte de arriba de la página, al lado del id de la página (requiere el <em>Tag Plugin</em>)';
 $lang['showPageId']          = 'Mostrar el nombre de la página DokuWiki (pageId) en la parte de arriba';
+$lang['useAnchorJS']         = 'Usar AnchorJS';
+$lang['showHomePageLink']    = 'Display Home-Page link in navbar';
+$lang['useLegacyNavbar']     = 'Use legacy and deprecated "navbar.html" hook (consider in the future to use the ":navbar" hook)';
+$lang['browserTitleCharSepNS'] = 'Character separator for every namespaces on browser title';
+$lang['browserTitleShowNS']    = 'Display the previous page name of current page on the browser title';
+$lang['browserTitleOrderNS']   = 'Set the order of namespaces';
+$lang['tocCollapseSubSections'] = 'Collapse all sub-sections in TOC to save space';
