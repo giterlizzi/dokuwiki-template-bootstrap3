@@ -17,7 +17,7 @@ resolve_pageid('', $footer_page, $footer_page_exists);
 if ($footer_page_exists):
 ?>
 <div id="dw__footer" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
-  <div class="container">
+  <div class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
     <div class="navbar-text">
       <?php tpl_include_page($footer_page, 1, 1); ?>
     </div>

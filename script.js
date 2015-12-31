@@ -94,14 +94,18 @@ jQuery(document).ready(function() {
 
     if (jQuery('#dokuwiki__site').hasClass('container')) {
 
-      jQuery('#dokuwiki__site, nav > div, article').removeClass('container').addClass('container-fluid');
+      jQuery('#dokuwiki__site, nav > div, article, #dw__footer > div')
+        .removeClass('container')
+        .addClass('container-fluid');
       $self.parent().addClass('active');
 
       DokuCookie.setValue('fluidContainer', 1);
 
     } else {
 
-      jQuery('#dokuwiki__site, nav > div, article').removeClass('container-fluid').addClass('container');
+      jQuery('#dokuwiki__site, nav > div, article, #dw__footer > div')
+        .removeClass('container-fluid')
+        .addClass('container');
       $self.parent().removeClass('active');
 
       DokuCookie.setValue('fluidContainer', 0);
