@@ -198,7 +198,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
 
 
 /**
- * Include left or right sidebar
+ * Wrapper for left or right sidebar
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
@@ -207,9 +207,60 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
  * @param  string  $sidebar_header
  * @param  string  $sidebar_footer
  */
-function bootstrap3_include_sidebar($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
+function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
   global $lang;
   @require('tpl_sidebar.php');
+}
+
+
+/**
+ * Include left or right sidebar
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $type left or right sidebar
+ * @return  boolean
+ */
+function bootstrap3_sidebar_include($type) {
+
+  if (! bootstrap3_conf('showSidebar')) return false;
+
+  global $conf;
+
+  $left_sidebar       = $conf['sidebar'];
+  $right_sidebar      = bootstrap3_conf('rightSidebar');
+  $left_sidebar_grid  = bootstrap3_conf('leftSidebarGrid');
+  $right_sidebar_grid = bootstrap3_conf('rightSidebarGrid');
+
+  switch ($type) {
+
+    case 'left':
+
+      if (bootstrap3_conf('sidebarPosition') == 'left') {
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+                                  'sidebarheader.html', 'sidebarfooter.html');
+      }
+
+      return true;
+
+    case 'right':
+
+      if (bootstrap3_conf('sidebarPosition') == 'right') {
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+                                  'sidebarheader.html', 'sidebarfooter.html');
+      }
+
+      if (   bootstrap3_conf('showRightSidebar')
+          && bootstrap3_conf('sidebarPosition') == 'left') {
+        bootstrap3_sidebar_wrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid,
+                                  'rightsidebarheader.html', 'rightsidebarfooter.html');
+      }
+
+      return true;
+  }
+
+  return false;
+
 }
 
 

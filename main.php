@@ -141,13 +141,7 @@ if ($fixedTopNavbar) {
 
       <main class="main row" role="main">
 
-        <?php
-          if (   bootstrap3_conf('showSidebar')
-              && bootstrap3_conf('sidebarPosition') == 'left') {
-            bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
-                                       'sidebarheader.html', 'sidebarfooter.html');
-          }
-        ?>
+        <?php bootstrap3_sidebar_include('left') ?>
 
         <!-- ********** CONTENT ********** -->
         <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
@@ -170,11 +164,11 @@ if ($fixedTopNavbar) {
 
                 $content = ob_get_clean();
 
-                // Include the TOC
-                require_once('tpl_toc.php');
-
                 // Include Page Tools
                 require_once('tpl_page_tools.php');
+
+                // Include the TOC
+                require_once('tpl_toc.php');
 
                 echo $content;
 
@@ -193,22 +187,7 @@ if ($fixedTopNavbar) {
 
         </article>
 
-        <?php
-          if (bootstrap3_conf('showSidebar')) {
-
-            if (bootstrap3_conf('sidebarPosition') == 'right') {
-              bootstrap3_include_sidebar($conf['sidebar'], 'dokuwiki__aside', $leftSidebarGrid,
-                                        'sidebarheader.html', 'sidebarfooter.html');
-            }
-
-            if (   bootstrap3_conf('showRightSidebar')
-                && bootstrap3_conf('sidebarPosition') == 'left') {
-              bootstrap3_include_sidebar($rightSidebar, 'dokuwiki__rightaside', $rightSidebarGrid,
-                                        'rightsidebarheader.html', 'rightsidebarfooter.html');
-            }
-
-          }
-        ?>
+        <?php bootstrap3_sidebar_include('right') ?>
 
       </main>
 
