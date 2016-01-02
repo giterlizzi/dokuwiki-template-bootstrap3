@@ -166,7 +166,7 @@ if ($fixedTopNavbar) {
                 $content = '<div class="dw-content">' . $content . '</div>';
 
                 // Include Page Tools
-                //require_once('tpl_page_tools.php');
+                require_once('tpl_page_tools.php');
 
                 // Include the TOC layout
                 if ($toc) {
