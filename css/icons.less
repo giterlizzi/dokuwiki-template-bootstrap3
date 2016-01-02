@@ -23,6 +23,8 @@
 
 .dokuwiki {
 
+  #dw__toc h3::before { .icon(@fa-th-list); }
+
   &.mode_denied    article h1:first-of-type::before { .icon(@fa-ban, @color_danger); }
   &.mode_login     article h1:first-of-type::before { .icon(@fa-sign-in); }
   &.mode_register  article h1:first-of-type::before { .icon(@fa-user-plus); }
