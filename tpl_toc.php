@@ -1,6 +1,6 @@
 <?php
 /**
- * DokuWiki Bootstrap3 Template: TOC
+ * DokuWiki Bootstrap3 Template: TOC Layout
  *
  * @link     http://dokuwiki.org/template:bootstrap3
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -11,8 +11,14 @@
 if (!defined('DOKU_INC')) die();
 
 ?>
-<div class="pull-right hidden-print">
-  <div class="toc-affix" data-spy="affix" data-offset-top="150">
-    <?php bootstrap3_toc(tpl_toc(true)) ?>
+<div class="row">
+  <div class="col-md-9">
+    <?php echo $content ?>
+  </div>
+  <div class="col-md-3 hidden-xs hidden-sm">
+    <div class="hidden-print dw-toc-affix" data-spy="affix" data-offset-top="150">
+      <?php echo $toc ?>
+    </div>
   </div>
 </div>
+

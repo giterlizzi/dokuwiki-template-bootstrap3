@@ -89,10 +89,7 @@ if ($fixedTopNavbar) {
     <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>
     #dw__toc .nav .nav .nav { display: none; }
     <?php endif; ?>
-    <?php if (bootstrap3_conf('showPageTools')): ?>
-    .page { padding-right: 40px; }
-    <?php endif; ?>
-    .toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; right: 10px; }
+    .dw-toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -144,12 +141,13 @@ if ($fixedTopNavbar) {
         <?php bootstrap3_sidebar_include('left') ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo (($semantic) ? 'itemscope itemtype="http://schema.org/'.$schemaOrgType.'"' : '') ?>>
+        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>>
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
 
               <?php
+
                 tpl_flush(); /* flush the output buffer */
 
                 // Page-Header DokuWiki page
@@ -163,14 +161,19 @@ if ($fixedTopNavbar) {
                 tpl_content(false);
 
                 $content = ob_get_clean();
+                $toc     = bootstrap3_toc(tpl_toc(true), true);
+
+                $content = '<div class="dw-content">' . $content . '</div>';
 
                 // Include Page Tools
-                require_once('tpl_page_tools.php');
+                //require_once('tpl_page_tools.php');
 
-                // Include the TOC
-                require_once('tpl_toc.php');
-
-                echo $content;
+                // Include the TOC layout
+                if ($toc) {
+                  require_once('tpl_toc.php');
+                } else {
+                  echo $content;
+                }
 
                 tpl_flush();
 

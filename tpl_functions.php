@@ -413,7 +413,8 @@ function bootstrap3_toc($toc, $return = false) {
 
   $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
   $out = str_replace('<div>', '<div class="panel-body">', $out);
-  $out = str_replace('<h3 class="', '<h3 class="panel-heading ', $out);
+  $out = str_replace('<h3 class="toggle">', '<h3 class="toggle panel-heading"><span>', $out);
+  $out = str_replace('</h3>', '</span></h3>', $out);
 
   $out = bootstrap3_nav($out, 'pills', true);
 

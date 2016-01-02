@@ -12,6 +12,7 @@ if (!defined('DOKU_INC')) die();
 
 global $ID;
 global $JSINFO;
+global $INPUT;
 
 $showTools           = bootstrap3_conf('showTools');
 $showSearchForm      = bootstrap3_conf('showSearchForm');
@@ -19,10 +20,6 @@ $showPageTools       = bootstrap3_conf('showPageTools');
 $showUserHomeLink    = bootstrap3_conf('showUserHomeLink');
 $showLoginOnFooter   = bootstrap3_conf('showLoginOnFooter');
 $showLoginLink       = bootstrap3_conf('hideLoginLink');
-$showSidebar         = bootstrap3_conf('showSidebar');
-$sidebarPosition     = bootstrap3_conf('sidebarPosition');
-$showRightSidebar    = bootstrap3_conf('showRightSidebar');
-$rightSidebar        = bootstrap3_conf('rightSidebar');
 $browserTitle        = bootstrap3_conf('browserTitle');
 $showThemeSwitcher   = bootstrap3_conf('showThemeSwitcher');
 $fixedTopNavbar      = bootstrap3_conf('fixedTopNavbar');
@@ -35,23 +32,19 @@ $fluidContainer      = bootstrap3_conf('fluidContainer');
 $fluidContainerBtn   = bootstrap3_conf('fluidContainerBtn');
 $showPageInfo        = bootstrap3_conf('showPageInfo');
 $showBadges          = bootstrap3_conf('showBadges');
-$semantic            = bootstrap3_conf('semantic');
-$schemaOrgType       = bootstrap3_conf('schemaOrgType');
-$leftSidebarGrid     = bootstrap3_conf('leftSidebarGrid');
-$rightSidebarGrid    = bootstrap3_conf('rightSidebarGrid');
 $showLandingPage     = bootstrap3_conf('showLandingPage');
 $hideInThemeSwitcher = bootstrap3_conf('hideInThemeSwitcher');
 $useLocalBootswatch  = bootstrap3_conf('useLocalBootswatch');
 $contentGrid         = bootstrap3_container_grid();
+
 $bootstrapStyles     = array();
-$tplConfigJSON       = array(
+
+$JSINFO['bootstrap3'] = array(
   'tableFullWidth' => (int) bootstrap3_conf('tableFullWidth'),
   'tableStyle'     => bootstrap3_conf('tableStyle'),
   'tagsOnTop'      => (int) bootstrap3_conf('tagsOnTop'),
   'useAnchorJS'    => (int) bootstrap3_conf('useAnchorJS'),
 );
-
-$JSINFO['bootstrap3'] = $tplConfigJSON;
 
 if($fluidContainerBtn) {
   $fluidContainer = bootstrap3_fluid_container_button();
@@ -68,8 +61,6 @@ if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
   if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
     $bootswatchTheme = get_doku_pref('bootswatchTheme', null);
   }
-
-  global $INPUT;
 
   if ($INPUT->str('bootswatchTheme')) {
     $bootswatchTheme = $INPUT->str('bootswatchTheme');

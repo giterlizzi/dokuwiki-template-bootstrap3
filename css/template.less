@@ -66,7 +66,6 @@ nav {
 /* Table of contents */
 #dw__toc {
 
-  margin-left: 20px;
   width: auto;
 
   li {
@@ -80,7 +79,7 @@ nav {
     font-weight: bold;
     font-size: .9em;
 
-    span {
+    strong span {
       display: none;
     }
 
@@ -88,6 +87,10 @@ nav {
       padding-right: 5px;
     }
 
+  }
+
+  h3.closed > span {
+    display: none;
   }
 
   ul.toc ul {
@@ -218,6 +221,7 @@ nav {
   top: 15px;
   width: 0;
   right: 45px;
+  z-index: 9999;
 
   ul li a {
     padding: 2px;
