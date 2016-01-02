@@ -216,11 +216,12 @@ nav {
 /* Page tools */
 #dw__pagetools {
 
-  position: absolute;
-  top: 15px;
-  width: 0;
-  right: 45px;
+  position: fixed;
+  right: -5px;
+  padding-right: 3px;
   z-index: 9999;
+  text-align: right;
+  margin-top: -15px;
 
   ul li a {
     padding: 2px;
@@ -228,10 +229,6 @@ nav {
     &:hover {
       background: transparent;
     }
-  }
-
-  .tools {
-    position: fixed;
   }
 
 }

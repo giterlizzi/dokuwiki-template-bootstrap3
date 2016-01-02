@@ -498,12 +498,12 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);
-      $icon.find('i').addClass('fa-2x', 200);
+      $icon.find('i').addClass('fa-2x', 250);
     });
 
     $page_tools_items.on('mouseleave', function () {
       var $icon = jQuery(this);
-      $icon.find('i').removeClass('fa-2x', 200);
+      $icon.find('i').removeClass('fa-2x', 250);
     });
 
   }, 0);
