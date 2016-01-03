@@ -856,12 +856,12 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'browserTitle':
 
-      if (bootstrap3_conf('browserTitleShowNS')) {
+      if (bootstrap3_conf('browserTitleShowNS') && in_array($ACT, array('edit', 'show', 'revisions', 'backlink', 'subscribe'))) {
 
-        $ns_parts         = explode(':', $ID);
-        $ns_pages         = array();
-        $ns_titles        = array();
-        $ns_separator     = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
+        $ns_parts     = explode(':', $ID);
+        $ns_pages     = array();
+        $ns_titles    = array();
+        $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
 
         if (useHeading('navigation')) {
 
