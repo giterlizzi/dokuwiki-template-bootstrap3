@@ -857,7 +857,7 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'browserTitle':
 
-      if (bootstrap3_conf('browserTitleShowNS') && in_array($ACT, array('edit', 'show', 'revisions', 'backlink', 'subscribe'))) {
+      if (bootstrap3_conf('browserTitleShowNS') && $ACT == 'show') {
 
         $ns_parts     = explode(':', $ID);
         $ns_pages     = array();
@@ -866,22 +866,26 @@ function bootstrap3_conf($key, $default = false) {
 
         if (useHeading('navigation')) {
 
-          foreach ($ns_parts as $ns_part) {
-            $ns_page .= "$ns_part:";
-            $ns_pages[] = $ns_page;
-          }
+          if (count($ns_parts) > 1) {
 
-          $ns_pages = array_unique($ns_pages);
+            foreach ($ns_parts as $ns_part) {
+              $ns_page .= "$ns_part:";
+              $ns_pages[] = $ns_page;
+            }
 
-          foreach ($ns_pages as $ns_page) {
+            $ns_pages = array_unique($ns_pages);
 
-            resolve_pageid(getNS($ns_page), $ns_page, $exists);
+            foreach ($ns_pages as $ns_page) {
 
-            $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
-            $ns_page_title_page    = noNSorNS($ns_page);
-            $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
+              resolve_pageid(getNS($ns_page), $ns_page, $exists);
 
-            $ns_titles[] = $ns_page_title;
+              $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
+              $ns_page_title_page    = noNSorNS($ns_page);
+              $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
+
+              $ns_titles[] = $ns_page_title;
+
+            }
 
           }
 
