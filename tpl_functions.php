@@ -436,6 +436,7 @@ function bootstrap3_toc($toc, $return = false) {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = bootstrap3_nav($sidebar, 'pills', true);
+  $out = preg_replace('/<h([1-6])/', '<h$1 class="page-header"', $out);
 
   if ($return) return $out;
   echo $out;
