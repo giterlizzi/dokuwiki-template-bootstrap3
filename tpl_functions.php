@@ -802,14 +802,14 @@ function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts
 
 
 /**
- * Get the template metadata
+ * Get the template configuration metadata
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string $key
  * @return  array
  */
-function bootstrap3_metadata($key = null) {
+function bootstrap3_conf_metadata($key = null) {
 
   $meta = array();
   $file = tpl_incdir() . 'conf/metadata.php';
@@ -921,7 +921,7 @@ function bootstrap3_conf($key, $default = false) {
 
   }
 
-  //$type = bootstrap3_metadata($key);
+  //$type = bootstrap3_conf_metadata($key);
 
   //if ($type[0] == 'regex') {
   //  return sprintf('/%s/', $value);
@@ -941,7 +941,7 @@ function bootstrap3_conf($key, $default = false) {
  */
 function bootstrap3_bootswatch_theme_list() {
 
-  $bootswatch_themes = bootstrap3_metadata('bootswatchTheme');
+  $bootswatch_themes = bootstrap3_conf_metadata('bootswatchTheme');
   return $bootswatch_themes['_choices'];
 
 }
