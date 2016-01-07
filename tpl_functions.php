@@ -911,6 +911,7 @@ function bootstrap3_conf($key, $default = false) {
                          $value);
 
     case 'showSidebar':
+      if (bootstrap3_conf('showLandingPage')) return false;
       return page_findnearest($conf['sidebar']) && ($ACT=='show');
 
     case 'showRightSidebar':
@@ -918,6 +919,13 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'landingPages':
       return sprintf('/%s/', $value);
+
+    case 'showLandingPage':
+      return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID)) ? true : false;
+
+    case 'pageOnPanel':
+      if (bootstrap3_conf('showLandingPage')) return false;
+      return $value;
 
   }
 

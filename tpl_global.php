@@ -50,12 +50,6 @@ if($fluidContainerBtn) {
   $fluidContainer = bootstrap3_fluid_container_button();
 }
 
-// Display a landing page (set the pageOnPanel and showSidebar config to "off")
-if ($showLandingPage && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID)) {
-  $showSidebar = false;
-  $pageOnPanel = false;
-}
-
 if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
 
   if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
