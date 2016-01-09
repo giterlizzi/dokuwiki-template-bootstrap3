@@ -855,60 +855,8 @@ function bootstrap3_conf($key, $default = false) {
     case 'hideLoginLink':
       return ! $value || ! empty($_SERVER['REMOTE_USER']);
 
-    case 'browserTitle':
-
-      if (bootstrap3_conf('browserTitleShowNS') && $ACT == 'show') {
-
-        $ns_parts     = explode(':', $ID);
-        $ns_pages     = array();
-        $ns_titles    = array();
-        $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
-
-        if (useHeading('navigation')) {
-
-          if (count($ns_parts) > 1) {
-
-            foreach ($ns_parts as $ns_part) {
-              $ns_page .= "$ns_part:";
-              $ns_pages[] = $ns_page;
-            }
-
-            $ns_pages = array_unique($ns_pages);
-
-            foreach ($ns_pages as $ns_page) {
-
-              resolve_pageid(getNS($ns_page), $ns_page, $exists);
-
-              $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
-              $ns_page_title_page    = noNSorNS($ns_page);
-              $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
-
-              $ns_titles[] = $ns_page_title;
-
-            }
-
-          }
-
-          $ns_titles[] = tpl_pagetitle($ID, true);
-          $ns_titles = array_unique($ns_titles);
-
-        } else {
-          $ns_titles = $ns_parts;
-        }
-
-        if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
-          $ns_titles = array_reverse($ns_titles);
-        }
-
-        $browser_title = implode($ns_separator, $ns_titles);
-
-      } else {
-        $browser_title = tpl_pagetitle($ID, true);
-      }
-
-      return str_replace(array('@WIKI@', '@TITLE@'),
-                         array(strip_tags($conf['title']), $browser_title),
-                         $value);
+    case 'showLoginOnFooter':
+      return ($value && ! $_SERVER['REMOTE_USER']);
 
     case 'showSidebar':
       if (bootstrap3_conf('showLandingPage')) return false;
@@ -921,11 +869,14 @@ function bootstrap3_conf($key, $default = false) {
       return sprintf('/%s/', $value);
 
     case 'showLandingPage':
-      return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID)) ? true : false;
+      return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
 
     case 'pageOnPanel':
       if (bootstrap3_conf('showLandingPage')) return false;
       return $value;
+
+    case 'showThemeSwitcher':
+      return $value && (bootstrap3_conf('bootstrapTheme') == 'bootswatch');
 
   }
 
@@ -952,6 +903,18 @@ function bootstrap3_bootswatch_theme_list() {
   $bootswatch_themes = bootstrap3_conf_metadata('bootswatchTheme');
   return $bootswatch_themes['_choices'];
 
+}
+
+
+/**
+ * Return only the available Bootswatch.com themes
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  array
+ */
+function bootstrap3_bootswatch_themes_available() {
+  return array_diff(bootstrap3_bootswatch_theme_list(), bootstrap3_conf('hideInThemeSwitcher'));
 }
 
 
@@ -1194,5 +1157,88 @@ function bootstrap3_include($file) {
 
   require_once($file);
   return true;
+
+}
+
+
+function bootstrap3_page_browser_title() {
+
+  global $conf, $ACT, $ID;
+
+  if (bootstrap3_conf('browserTitleShowNS') && $ACT == 'show') {
+
+    $ns_parts     = explode(':', $ID);
+    $ns_pages     = array();
+    $ns_titles    = array();
+    $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
+
+    if (useHeading('navigation')) {
+
+      if (count($ns_parts) > 1) {
+
+        foreach ($ns_parts as $ns_part) {
+          $ns_page .= "$ns_part:";
+          $ns_pages[] = $ns_page;
+        }
+
+        $ns_pages = array_unique($ns_pages);
+
+        foreach ($ns_pages as $ns_page) {
+
+          resolve_pageid(getNS($ns_page), $ns_page, $exists);
+
+          $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
+          $ns_page_title_page    = noNSorNS($ns_page);
+          $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
+
+          $ns_titles[] = $ns_page_title;
+
+        }
+
+      }
+
+      $ns_titles[] = tpl_pagetitle($ID, true);
+      $ns_titles = array_unique($ns_titles);
+
+    } else {
+      $ns_titles = $ns_parts;
+    }
+
+    if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
+      $ns_titles = array_reverse($ns_titles);
+    }
+
+    $browser_title = implode($ns_separator, $ns_titles);
+
+  } else {
+    $browser_title = tpl_pagetitle($ID, true);
+  }
+
+  return str_replace(array('@WIKI@', '@TITLE@'),
+                      array(strip_tags($conf['title']), $browser_title),
+                      bootstrap3_conf('browserTitle'));
+
+}
+
+
+function bootstrap3_is_fluid_container() {
+
+  $fluid_container     = bootstrap3_conf('fluidContainer');
+  $fluid_container_btn = bootstrap3_fluid_container_button();
+
+  if ($fluid_container_btn) {
+    $fluid_container = true;
+  }
+
+  return $fluid_container;
+
+}
+
+function bootstrap3_is_fluid_navbar() {
+
+  $fluid_container  = bootstrap3_is_fluid_container();
+  $fixed_top_nabvar = bootstrap3_conf('fixedTopNavbar');
+
+  return ($fluid_container || ($fluid_container && ! $fixed_top_nabvar) || (! $fluid_container && ! $fixed_top_nabvar));
 
 }
