@@ -12,10 +12,10 @@ if (!defined('DOKU_INC')) die();
 
 ?>
 <div class="row">
-  <div class="col-md-9">
+  <div class="col-md-9 content-col">
     <?php echo $content ?>
   </div>
-  <div class="col-md-3 hidden-xs hidden-sm">
+  <div class="col-md-3 hidden-xs hidden-sm toc-col">
     <div class="hidden-print dw-toc-affix" data-spy="affix" data-offset-top="150">
       <?php echo $toc ?>
     </div>
