@@ -135,6 +135,7 @@ jQuery(document).ready(function() {
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:init');
+      jQuery(document).trigger('bootstrap3:buttons');
       jQuery(document).trigger('bootstrap3:tabs');
     });
 
