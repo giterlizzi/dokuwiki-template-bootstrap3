@@ -200,7 +200,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
-    var $page_grid = jQuery('article .page > .row');
+    var $page_grid = jQuery('article .page > .row'),
+        $toc_col   = jQuery('.toc-col');
 
     $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
@@ -215,6 +216,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
         $page_grid.find('.col-md-9').removeClass('col-md-9').addClass('col-md-11');
         $page_grid.find('.col-md-3').removeClass('col-md-3').addClass('col-md-1');
 
+        $dw_toc.width('');
+
       }
 
       if ($dw_toc.find('.open').length) {
@@ -225,8 +228,18 @@ jQuery(document).on('bootstrap3:toc', function(e) {
         $page_grid.find('.col-md-11').removeClass('col-md-11').addClass('col-md-9');
         $page_grid.find('.col-md-1').removeClass('col-md-1').addClass('col-md-3');
 
+        $dw_toc.width($toc_col.width());
+
       }
 
+    });
+
+    $dw_toc.parent().on('affixed.bs.affix', function(e) {
+      $dw_toc.width($toc_col.width());
+    });
+
+    $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
+      $dw_toc.width('');
     });
 
     if ((jQuery(window).height() < jQuery('#dw__toc').height())) {
