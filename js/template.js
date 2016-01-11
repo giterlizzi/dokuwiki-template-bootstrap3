@@ -12,7 +12,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
   setTimeout(function() {
 
-    var $dw_content = jQuery('#dokuwiki__content');  // Page Content node
+    var $dw_content = jQuery('#dokuwiki__content, #media__manager');  // Page Content node
 
     // Move/Save .curid to anchor child
     jQuery('.curid').find('a').addClass('curid');
@@ -133,7 +133,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
     jQuery('.button').removeClass('button');
     jQuery('.alert button').removeClass('btn btn-default');
-    jQuery('#dw__login, #dw__register, #subscribe__form').find(':submit').addClass('btn-success');
+    jQuery('#dw__login, #dw__register, #subscribe__form, #media__manager').find(':submit').addClass('btn-success');
     jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
     jQuery('#edbtn__save').addClass('btn-success');
     jQuery('nav li span .action.register').addClass('btn btn-success navbar-btn');
@@ -511,12 +511,12 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);
-      $icon.find('i').addClass('fa-2x', 200);
+      $icon.find('i').addClass('fa-2x', 250);
     });
 
     $page_tools_items.on('mouseleave', function () {
       var $icon = jQuery(this);
-      $icon.find('i').removeClass('fa-2x', 200);
+      $icon.find('i').removeClass('fa-2x', 250);
     });
 
   }, 0);

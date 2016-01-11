@@ -216,11 +216,12 @@ nav {
 /* Page tools */
 #dw__pagetools {
 
-  position: absolute;
-  top: 15px;
-  width: 0;
-  right: 45px;
+  position: fixed;
+  right: -5px;
+  padding-right: 3px;
   z-index: 9999;
+  text-align: right;
+  margin-top: -15px;
 
   ul li a {
     padding: 2px;
@@ -228,10 +229,6 @@ nav {
     &:hover {
       background: transparent;
     }
-  }
-
-  .tools {
-    position: fixed;
   }
 
 }
@@ -265,7 +262,53 @@ nav {
 
 }
 
+/* Media Manager */
+#media__tree {
+
+  height: 300px;
+  overflow: auto;
+
+  li.media {
+    margin-top: 0;
+  }
+
+}
+
+#media__content {
+
+  height: auto;
+
+  input, label {
+    margin: 0;
+  }
+
+  label {
+    display: inline !important;
+  }
+
+  [type=submit] {
+    vertical-align: bottom;
+  }
+
+
+}
+
+#mediamgr__aside {
+  height: auto;
+  top: 0;
+  position: fixed;
+}
+
+#media__opts label {
+  display: inline !important;
+}
+
+
 .dw__sidebar {
+
+  .page-header {
+    margin: 10px 0;
+  }
 
   .panel-heading {
     cursor: pointer;
@@ -320,10 +363,6 @@ nav {
 
   h5 {
     font-size: 1em;
-  }
-
-  .page-header {
-    margin-top: 0;
   }
 
 }

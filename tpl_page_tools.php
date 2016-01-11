@@ -11,8 +11,8 @@
 if (!defined('DOKU_INC')) die();
 
 ?>
-<?php if ($showPageTools): ?>
-<div id="dw__pagetools" class="hidden-print pull-right">
+<?php if (bootstrap3_conf('showPageTools')): ?>
+<div id="dw__pagetools" class="hidden-print panel panel-default">
   <div class="tools">
     <ul class="nav nav-stacked nav-pills">
       <?php

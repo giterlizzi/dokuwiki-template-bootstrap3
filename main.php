@@ -19,68 +19,19 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
   msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
 }
 
-$navbar_padding = 20;
-
-if ($fixedTopNavbar) {
-
-  if ($bootstrapTheme == 'bootswatch') {
-
-    // Set the navbar height for all Bootswatch Themes (values from bootswatch/*/_variables.scss)
-    switch ($bootswatchTheme) {
-      case 'simplex':
-      case 'superhero':
-        $navbar_height = 40;
-        break;
-      case 'yeti':
-        $navbar_height = 45;
-        break;
-      case 'cerulean':
-      case 'cosmo':
-      case 'custom':
-      case 'cyborg':
-      case 'lumen':
-      case 'slate':
-      case 'spacelab':
-      case 'united':
-        $navbar_height = 50;
-        break;
-      case 'darkly':
-      case 'flatly':
-      case 'journal':
-      case 'sandstone':
-        $navbar_height = 60;
-        break;
-      case 'paper':
-        $navbar_height = 64;
-        break;
-      case 'readable':
-        $navbar_height = 65;
-        break;
-      default:
-        $navbar_height = 50;
-    }
-
-  } else {
-    $navbar_height = 50;
-  }
-
-  $navbar_padding += $navbar_height;
-
-}
-
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title><?php echo $browserTitle ?></title>
+  <title><?php echo bootstrap3_page_browser_title() ?></title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
-  <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+  <?php foreach ($bootstrap_styles as  $bootstrap_style): ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders() ?>
@@ -110,10 +61,10 @@ if ($fixedTopNavbar) {
   <?php endif; ?>
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo (($bootstrapTheme == 'bootswatch') ? $bootswatchTheme : $bootstrapTheme) . ($pageOnPanel ? ' page-on-panel' : ''); ?>">
+<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
-  <div id="dokuwiki__site" class="container<?php echo ($fluidContainer) ? '-fluid' : '' ?>">
-    <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?> <?php echo (bootstrap3_conf('showSidebar')) ? 'hasSidebar' : ''; ?>">
+  <div id="dokuwiki__site" class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <div id="dokuwiki__top" class="site <?php echo tpl_classes(); ?>">
 
       <?php tpl_includeFile('topheader.html') ?>
 
@@ -141,7 +92,7 @@ if ($fixedTopNavbar) {
         <?php bootstrap3_sidebar_include('left') ?>
 
         <!-- ********** CONTENT ********** -->
-        <article id="dokuwiki__content" class="<?php echo $contentGrid ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s"', bootstrap3_conf('schemaOrgType')) : '') ?>>
+        <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
           <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>>
             <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
@@ -166,7 +117,7 @@ if ($fixedTopNavbar) {
                 $content = '<div class="dw-content">' . $content . '</div>';
 
                 // Include Page Tools
-                //require_once('tpl_page_tools.php');
+                require_once('tpl_page_tools.php');
 
                 // Include the TOC layout
                 if ($toc) {
@@ -200,13 +151,13 @@ if ($fixedTopNavbar) {
 
         <div class="text-right">
 
-          <?php if ($showPageInfo): ?>
+          <?php if (bootstrap3_conf('showPageInfo')): ?>
           <span class="docInfo text-muted">
             <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
           </span>
           <?php endif ?>
 
-          <?php if (bootstrap3_conf('showLoginOnFooter') && ! $_SERVER['REMOTE_USER']): ?>
+          <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
           <span class="loginLink hidden-print">
             <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
           </span>
