@@ -235,11 +235,23 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     });
 
     $dw_toc.parent().on('affixed.bs.affix', function(e) {
+
+      if ($dw_toc.find('.open').length) {
+        $dw_toc.find('h3').trigger('click');
+      }
+
       $dw_toc.width($toc_col.width());
+
     });
 
     $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
+
+      if ($dw_toc.find('.closed').length) {
+        $dw_toc.find('h3').trigger('click');
+       }
+
       $dw_toc.width('');
+
     });
 
     if ((jQuery(window).height() < jQuery('#dw__toc').height())) {
