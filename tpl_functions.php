@@ -1197,7 +1197,10 @@ function bootstrap3_page_browser_title() {
 
       }
 
-      $ns_titles[] = tpl_pagetitle($ID, true);
+      if ($exists) {
+        $ns_titles[] = tpl_pagetitle($ID, true);
+      }
+
       $ns_titles = array_unique($ns_titles);
 
     } else {
