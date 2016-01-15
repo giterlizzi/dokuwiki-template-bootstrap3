@@ -1189,19 +1189,23 @@ function bootstrap3_page_browser_title() {
 
           $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
           $ns_page_title_page    = noNSorNS($ns_page);
-          $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
+          $ns_page_title         = ($exists) ? $ns_page_title_heading : $ns_page_title_page;
 
-          $ns_titles[] = $ns_page_title;
+          if ($ns_page_title !== $conf['start']) {
+            $ns_titles[] = $ns_page_title;
+          }
 
         }
 
       }
 
+      resolve_pageid(getNS($ID), $ID, $exists);
+
       if ($exists) {
         $ns_titles[] = tpl_pagetitle($ID, true);
       }
 
-      $ns_titles = array_unique($ns_titles);
+      $ns_titles = array_filter(array_unique($ns_titles));
 
     } else {
       $ns_titles = $ns_parts;
