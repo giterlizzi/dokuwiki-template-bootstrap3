@@ -105,7 +105,7 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
                 tpl_includeFile('pageheader.html');
 
                 // Page-Header DokuWiki page
-                tpl_include_page('pageheader', 1, 1);
+                if ($ACT == 'show') tpl_include_page('pageheader', 1, 1);
 
                 // render the content into buffer for later use
                 ob_start();
@@ -132,7 +132,7 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
                 tpl_includeFile('pagefooter.html');
 
                 // Page-Footer DokuWiki page
-                tpl_include_page('pagefooter', 1, 1);
+                if ($ACT == 'show') tpl_include_page('pagefooter', 1, 1);
 
               ?>
 
