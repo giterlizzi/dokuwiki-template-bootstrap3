@@ -73,7 +73,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
-    if (NS == 'user' && dw_mode('show')) {
+    if (NS == 'user' && dw_mode('show') && jQuery('.notFound').length == 0) {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
