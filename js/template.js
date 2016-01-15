@@ -27,7 +27,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
     // Page heading
-    $dw_content.find('h1').addClass('page-header');
+    $dw_content.find('h1, h2').addClass('page-header');
 
     // Tables
     if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
