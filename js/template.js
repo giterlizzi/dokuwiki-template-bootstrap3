@@ -350,8 +350,44 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
 
     // Media Manager (page)
     if ($media_manager.length) {
+
+      var $sort_buttons = jQuery('.ui-buttonset');
+
       $media_manager.find('.file dl').addClass('dl-horizontal');
       $media_manager.find('.panel').removeClass('panel').addClass('pull-left');
+
+      $sort_buttons.addClass('btn-group');
+      $sort_buttons.find('label').addClass('btn btn-xs btn-default');
+      $sort_buttons.find('input').hide();
+
+      function buttonHandler(e) {
+
+        var $button    = jQuery(this),
+            option_for = $button.attr('for'),
+            option_set = option_for.replace('sortBy__', '').replace('listType__', '');
+
+        $sort_buttons.find('.active').removeClass('active');
+        $button.addClass('active');
+        $sort_buttons.find('#'+ option_for).prop('checked', true);
+
+        switch (option_set) {
+          case 'thumbs':
+          case 'rows':
+            dw_mediamanager.set_fileview_list(option_set);
+            $sort_buttons.find('[name=list_dwmedia]').val(option_set);
+            break;
+          case 'name':
+          case 'date':
+            dw_mediamanager.set_fileview_sort(option_set);
+            $sort_buttons.find('[name=sort_dwmedia]').val(option_set);
+            dw_mediamanager.list.call(jQuery('#dw__mediasearch')[0] || this, event);
+            break;
+        }
+
+      }
+
+      $sort_buttons.find('label').on('click', buttonHandler);
+
     }
 
   }, 0);

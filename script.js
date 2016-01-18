@@ -139,6 +139,7 @@ jQuery(document).ready(function() {
       jQuery(document).trigger('bootstrap3:init');
       jQuery(document).trigger('bootstrap3:buttons');
       jQuery(document).trigger('bootstrap3:tabs');
+      jQuery(document).trigger('bootstrap3:media-manager');
     });
 
   }
