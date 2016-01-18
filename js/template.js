@@ -200,8 +200,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
-    var $page_grid = jQuery('article .page > .row'),
-        $toc_col   = jQuery('.toc-col');
+    var $toc_col     = jQuery('article .toc-col'),
+        $content_col = jQuery('article .content-col');
 
     $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
@@ -213,8 +213,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
         $dw_toc.find('h3 strong').removeClass('fa-chevron-up')
                                  .addClass('fa-chevron-down');
 
-        $page_grid.find('.col-md-9').removeClass('col-md-9').addClass('col-md-11');
-        $page_grid.find('.col-md-3').removeClass('col-md-3').addClass('col-md-1');
+        $content_col.removeClass('col-md-9').addClass('col-md-11');
+        $toc_col.removeClass('col-md-3').addClass('col-md-1');
 
         $dw_toc.width('');
 
@@ -225,8 +225,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
         $dw_toc.find('h3 strong').addClass('fa-chevron-up')
                                  .removeClass('fa-chevron-down');
 
-        $page_grid.find('.col-md-11').removeClass('col-md-11').addClass('col-md-9');
-        $page_grid.find('.col-md-1').removeClass('col-md-1').addClass('col-md-3');
+        $content_col.removeClass('col-md-11').addClass('col-md-9');
+        $toc_col.removeClass('col-md-1').addClass('col-md-3');
 
         $dw_toc.width($toc_col.width());
 
