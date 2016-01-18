@@ -165,6 +165,10 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
 
         </div>
 
+        <div class="text-center hidden-print">
+          <p id="dw__license"><?php tpl_license('') ?></p>
+        </div>
+
         <?php
           // DokuWiki badges
           require_once('tpl_badges.php');

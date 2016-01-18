@@ -10,16 +10,13 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+if (bootstrap3_conf('showBadges')):
+
+  $target  = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
+  $dw_path = dirname(tpl_basedir());
+
 ?>
-<?php if (bootstrap3_conf('showBadges')): ?>
 <div class="text-center hidden-print">
-  <p id="dw__license">
-    <?php 
-      tpl_license('');
-      $target   = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
-      $dw_path = dirname(tpl_basedir());
-    ?>
-  </p>
   <p id="dw__badges">
     <?php tpl_license('button', true, false, false); // license button, no wrapper ?>
     <a href="http://getbootstrap.com" title="Built with Bootstrap 3" <?php echo $target ?>>
