@@ -22,7 +22,7 @@ if (!defined('DOKU_INC')) die();
       <li class="dropdown-header"><i class="fa fa-fw fa-tint"></i> Bootswatch Themes</li>
       <?php foreach (bootstrap3_bootswatch_themes_available() as $theme): ?>
       <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>>
-        <a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a>
+        <a href="?bootswatch-theme=<?php echo hsc($theme) ?>"><?php echo ucfirst($theme) ?></a>
       </li>
       <?php endforeach; ?>
     </ul>

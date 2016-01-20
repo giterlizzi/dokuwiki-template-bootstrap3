@@ -36,8 +36,8 @@ if (bootstrap3_conf('showThemeSwitcher')) {
     $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
   }
 
-  if ($INPUT->str('bootswatchTheme')) {
-    $bootswatch_theme = $INPUT->str('bootswatchTheme');
+  if ($INPUT->str('bootswatch-theme')) {
+    $bootswatch_theme = $INPUT->str('bootswatch-theme');
     set_doku_pref('bootswatchTheme', $bootswatch_theme);
   }
 
