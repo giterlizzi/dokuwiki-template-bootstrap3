@@ -551,13 +551,15 @@ function bootstrap3_navbar() {
  */
 function bootstrap3_dropdown_page($page) {
 
-  if (! page_exists($page)) return;
+  $page = page_findnearest($page);
+
+  if (! $page) return;
 
   $output   = bootstrap3_nav(tpl_include_page($page, 0, 1), 'pills', true);
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-              p_get_first_heading(page_findnearest($page)) .
+              p_get_first_heading($page) .
               ' <span class="caret"></span></a>' .
               '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
               '<li><div class="container">'.
