@@ -461,41 +461,47 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
-    // Extension page
-    var $ext_manager = $mode_admin.find('#extension__manager'),
-        $ext_actions = $ext_manager.find('.actions');
+    var $ext_manager  = $mode_admin.find('#extension__manager'),
+        $ext_actions  = $ext_manager.find('.actions'),
+        $user_manager = $mode_admin.find('#user__manager');
 
-    $ext_actions.addClass('btn-group');
+    // Extension Manager Actions
+    if ($ext_actions.length) {
 
-    $ext_actions.find('.permerror')
-      .addClass('pull-left');
+      $ext_actions.addClass('btn-group');
 
-    $ext_actions.find('.btn')
-      .addClass('btn-xs')
-      .input2button();
+      $ext_actions.find('.permerror')
+        .addClass('pull-left');
 
-    $ext_actions.find('.uninstall')
-      .addClass('btn-danger')
-      .prepend('<i class="fa fa-fw fa-trash"/> ');
+      $ext_actions.find('.btn')
+        .addClass('btn-xs')
+        .input2button();
 
-    $ext_actions.find('.install, .update, .reinstall')
-      .addClass('btn-primary')
-      .prepend('<i class="fa fa-fw fa-download"/> ');
+      $ext_actions.find('.uninstall')
+        .addClass('btn-danger')
+        .prepend('<i class="fa fa-fw fa-trash"/> ');
 
-    $ext_actions.find('.enable')
-      .addClass('btn-success')
-      .prepend('<i class="fa fa-fw fa-check"/> ');
+      $ext_actions.find('.install, .update, .reinstall')
+        .addClass('btn-primary')
+        .prepend('<i class="fa fa-fw fa-download"/> ');
 
-    $ext_actions.find('.disable').addClass('btn-warning')
-      .prepend('<i class="fa fa-fw fa-ban"/> ');
+      $ext_actions.find('.enable')
+        .addClass('btn-success')
+        .prepend('<i class="fa fa-fw fa-check"/> ');
 
-    if (! $mode_admin.find('#user__manager').length) {
-      $mode_admin.find('#dokuwiki__content :submit')
-        .addClass('btn-success');
+      $ext_actions.find('.disable').addClass('btn-warning')
+        .prepend('<i class="fa fa-fw fa-ban"/> ');
+
     }
-    if ($mode_admin.find('#user__manager').length) {
+
+
+    // User Manager
+    if ($user_manager.length) {
+
+      $mode_admin.find('.notes').removeClass('notes');
 
       $mode_admin.find('h2').each(function(index, node) {
+
         var $node = jQuery(this);
         switch (index) {
           case 0:
@@ -510,19 +516,49 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
             }
             break;
         }
+
       });
 
-      $mode_admin.find('#usrmgr__del').addClass('btn-danger');
-      $mode_admin.find('.edit_user :submit, .import_users :submit').addClass('btn-success');
+      jQuery(':button[name]').each(function(){
+
+        var $node = jQuery(this);
+        switch ($node.attr('name')) {
+          case 'fn[delete]':
+            $node.addClass('btn-danger');
+            $node.prepend('<i class="fa fa-trash"/> ');
+            break;
+          case 'fn[add]':
+            $node.addClass('btn-success');
+            $node.prepend('<i class="fa fa-plus"/> ');
+            break;
+          case 'fn[modify]':
+            $node.addClass('btn-success');
+            $node.prepend('<i class="fa fa-save"/> ');
+            break;
+          case 'fn[import]':
+            $node.prepend('<i class="fa fa-upload"/> ');
+            break;
+          case 'fn[export]':
+            $node.prepend('<i class="fa fa-download"/> ');
+            break;
+        }
+
+      });
+
     }
 
-    $ext_manager.find('form.search :submit, form.install :submit').input2button();
+    // Extension Manager
+    if ($ext_manager.length) {
 
-    $ext_manager.find('form.search button')
-      .prepend('<i class="fa fa-fw fa-search"/> ');
+      $ext_manager.find('form.search :submit, form.install :submit').input2button();
 
-    $ext_manager.find('form.install button')
-      .prepend('<i class="fa fa-fw fa-download"/> ');
+      $ext_manager.find('form.search button')
+        .prepend('<i class="fa fa-fw fa-search"/> ');
+
+      $ext_manager.find('form.install button')
+        .prepend('<i class="fa fa-fw fa-download"/> ');
+
+    }
 
   }, 0);
 
