@@ -485,8 +485,14 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     $ext_actions.find('.disable').addClass('btn-warning')
       .prepend('<i class="fa fa-fw fa-ban"/> ');
 
-    $mode_admin.find('#dokuwiki__content :submit')
-      .addClass('btn-success');
+    if (! $mode_admin.find('#user__manager').length) {
+      $mode_admin.find('#dokuwiki__content :submit')
+        .addClass('btn-success');
+    }
+    if ($mode_admin.find('#user__manager').length) {
+      $mode_admin.find('#usrmgr__del').addClass('btn-danger');
+      $mode_admin.find('.edit_user :submit, .import_users :submit').addClass('btn-success');
+    }
 
     $ext_manager.find('form.search :submit, form.install :submit').input2button();
 
