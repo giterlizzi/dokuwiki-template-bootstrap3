@@ -601,7 +601,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
   if (JSINFO.bootstrap3.useAnchorJS) {
-    anchors.add('article .dw-content h1, article .dw-content h2, article .dw-content h3, article .dw-content h4, article .dw-content h5');
+    anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
   }
 });
 
