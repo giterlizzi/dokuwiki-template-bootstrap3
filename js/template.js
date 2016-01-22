@@ -458,7 +458,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
     if (JSINFO.bootstrap3.tableFullWidth) {
-      $dw_content.find('div.table table.inline').css('width', '100%');
+      $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
     // Extension page
@@ -494,6 +494,24 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
         .addClass('btn-success');
     }
     if ($mode_admin.find('#user__manager').length) {
+
+      $mode_admin.find('h2').each(function(index, node) {
+        var $node = jQuery(this);
+        switch (index) {
+          case 0:
+            $node.prepend('<i class="fa fa-users"/> ');
+            break;
+          case 1:
+            $node.prepend('<i class="fa fa-user-plus"/> ');
+            break;
+          case 2:
+            if ($node.attr('id') !== 'bulk_user_import') {
+              $node.prepend('<i class="fa fa-user"/> ');
+            }
+            break;
+        }
+      });
+
       $mode_admin.find('#usrmgr__del').addClass('btn-danger');
       $mode_admin.find('.edit_user :submit, .import_users :submit').addClass('btn-success');
     }
