@@ -457,6 +457,10 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
+    if (JSINFO.bootstrap3.tableFullWidth) {
+      $dw_content.find('div.table table.inline').css('width', '100%');
+    }
+
     // Extension page
     var $ext_manager = $mode_admin.find('#extension__manager'),
         $ext_actions = $ext_manager.find('.actions');
