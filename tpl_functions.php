@@ -857,8 +857,6 @@ function bootstrap3_conf($key, $default = false) {
       return $value && $INFO['isadmin'];
 
     case 'hideLoginLink':
-      return ! $value || ! empty($_SERVER['REMOTE_USER']);
-
     case 'showLoginOnFooter':
       return ($value && ! $_SERVER['REMOTE_USER']);
 

@@ -136,8 +136,6 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
     jQuery('#dw__login, #dw__register, #subscribe__form, #media__manager').find(':submit').addClass('btn-success');
     jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
     jQuery('#edbtn__save').addClass('btn-success');
-    jQuery('nav li span .action.register').addClass('btn btn-success navbar-btn');
-    jQuery('nav li span .action.login, nav li span nav .action.logout').addClass('btn btn-default navbar-btn');
 
     // Section Button edit
     jQuery('.btn_secedit .btn').input2button();
@@ -494,7 +492,6 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     }
 
-
     // User Manager
     if ($user_manager.length) {
 
@@ -519,7 +516,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
       });
 
-      jQuery(':button[name]').each(function(){
+      $mode_admin.find(':button[name]').each(function(){
 
         var $node = jQuery(this);
         switch ($node.attr('name')) {

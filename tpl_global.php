@@ -14,7 +14,6 @@ global $ID;
 global $JSINFO;
 global $INPUT;
 
-$showLoginLink       = bootstrap3_conf('hideLoginLink');
 $fixedTopNavbar      = bootstrap3_conf('fixedTopNavbar');
 $pageOnPanel         = bootstrap3_conf('pageOnPanel');
 

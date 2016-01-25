@@ -101,10 +101,14 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
             <span class="dw__actions">
               <?php
 
-                echo bootstrap3_action_item('register', 'fa fa-fw fa-user-plus', true);
+                $register_btn = bootstrap3_action_item('register', 'fa fa-fw fa-user-plus', true);
+                $register_btn = str_replace('action', 'action btn btn-success navbar-btn', $register_btn);
+                echo $register_btn;
 
-                if ($showLoginLink) {
-                  echo bootstrap3_action_item('login', 'fa fa-fw fa-sign-in', true);
+                if (! bootstrap3_conf('hideLoginLink')) {
+                  $login_btn = bootstrap3_action_item('login', 'fa fa-fw fa-sign-in', true);
+                  $login_btn = str_replace('action', 'action btn btn-default navbar-btn', $login_btn);
+                  echo $login_btn;
                 }
 
               ?>
