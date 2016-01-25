@@ -12,7 +12,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
   setTimeout(function() {
 
-    var $dw_content = jQuery('#dokuwiki__content');  // Page Content node
+    var $dw_content = jQuery('#dokuwiki__content, #media__manager');  // Page Content node
 
     // Move/Save .curid to anchor child
     jQuery('.curid').find('a').addClass('curid');
@@ -27,7 +27,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
     // Page heading
-    $dw_content.find('h1').addClass('page-header');
+    $dw_content.find('h1, h2').addClass('page-header');
 
     // Tables
     if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
@@ -73,7 +73,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
-    if (NS == 'user' && dw_mode('show')) {
+    if (NS == 'user' && dw_mode('show') && jQuery('.notFound').length == 0) {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
@@ -133,11 +133,9 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
     jQuery('.button').removeClass('button');
     jQuery('.alert button').removeClass('btn btn-default');
-    jQuery('#dw__login, #dw__register, #subscribe__form').find(':submit').addClass('btn-success');
+    jQuery('#dw__login, #dw__register, #subscribe__form, #media__manager').find(':submit').addClass('btn-success');
     jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
     jQuery('#edbtn__save').addClass('btn-success');
-    jQuery('nav li span .action.register').addClass('btn btn-success navbar-btn');
-    jQuery('nav li span .action.login, nav li span nav .action.logout').addClass('btn btn-default navbar-btn');
 
     // Section Button edit
     jQuery('.btn_secedit .btn').input2button();
@@ -200,29 +198,35 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
+    var $toc_col     = jQuery('article .toc-col'),
+        $content_col = jQuery('article .content-col');
+
     $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
-    $dw_toc.find('h3').prepend('<i class="fa fa-fw fa-list" style="padding-right: 5px"/> ');
 
     $dw_toc.find('h3').click(function() {
 
       if ($dw_toc.find('.closed').length) {
 
         $dw_toc.find('h3 strong').removeClass('fa-chevron-up')
-                                  .addClass('fa-chevron-down');
+                                 .addClass('fa-chevron-down');
 
-        jQuery($dw_toc.find('h3 strong')[0].nextSibling).wrap('<span class="label hide"/>');
+        $content_col.removeClass('col-md-9').addClass('col-md-11');
+        $toc_col.removeClass('col-md-3').addClass('col-md-1');
+
+        $dw_toc.width('');
 
       }
 
       if ($dw_toc.find('.open').length) {
 
         $dw_toc.find('h3 strong').addClass('fa-chevron-up')
-                                  .removeClass('fa-chevron-down');
+                                 .removeClass('fa-chevron-down');
 
-        $dw_toc.find('h3 .label').replaceWith(function() {
-          return jQuery(this).contents();
-        });
+        $content_col.removeClass('col-md-11').addClass('col-md-9');
+        $toc_col.removeClass('col-md-1').addClass('col-md-3');
+
+        $dw_toc.width($toc_col.width());
 
       }
 
@@ -234,13 +238,17 @@ jQuery(document).on('bootstrap3:toc', function(e) {
         $dw_toc.find('h3').trigger('click');
       }
 
+      $dw_toc.width($toc_col.width());
+
     });
 
     $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
 
       if ($dw_toc.find('.closed').length) {
         $dw_toc.find('h3').trigger('click');
-      }
+       }
+
+      $dw_toc.width('');
 
     });
 
@@ -249,27 +257,40 @@ jQuery(document).on('bootstrap3:toc', function(e) {
       jQuery(window).resize(resizeToc);
     }
 
-    var bodyOffset = parseInt(jQuery('body').css('paddingTop')) || 0;
-
-    jQuery('body').scrollspy({
-      target: '#dw__toc',
-      offset: bodyOffset + 10
-    });
-    jQuery(window).on('load', function () {
-      jQuery('body').scrollspy('refresh');
-    });
-
     // Scrolling animation
     $dw_toc.find('a').click(function() {
 
-      var sectionPosition = (jQuery(jQuery.attr(this, 'href')).offset().top - bodyOffset);
+      var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+          section_position = (jQuery(jQuery.attr(this, 'href')).offset().top - body_offset);
 
       jQuery('html, body').animate({
-        scrollTop: sectionPosition
+        scrollTop: section_position
       }, 600);
 
       return false;
 
+    });
+
+  }, 0);
+
+});
+
+
+// Scroll Spy
+jQuery(document).on('bootstrap3:scrollspy', function(e) {
+
+  setTimeout(function() {
+
+    var body_offset = parseInt(jQuery('body').css('paddingTop')) || 0;
+
+    // TOC
+    jQuery('body').scrollspy({
+      target: '#dw__toc',
+      offset: body_offset + 10
+    });
+
+    jQuery(window).on('load', function() {
+      jQuery('body').scrollspy('refresh');
     });
 
   }, 0);
@@ -327,8 +348,44 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
 
     // Media Manager (page)
     if ($media_manager.length) {
+
+      var $sort_buttons = jQuery('.ui-buttonset');
+
       $media_manager.find('.file dl').addClass('dl-horizontal');
       $media_manager.find('.panel').removeClass('panel').addClass('pull-left');
+
+      $sort_buttons.addClass('btn-group');
+      $sort_buttons.find('label').addClass('btn btn-xs btn-default');
+      $sort_buttons.find('input').hide();
+
+      function buttonHandler(e) {
+
+        var $button    = jQuery(this),
+            option_for = $button.attr('for'),
+            option_set = option_for.replace('sortBy__', '').replace('listType__', '');
+
+        $sort_buttons.find('.active').removeClass('active');
+        $button.addClass('active');
+        $sort_buttons.find('#'+ option_for).prop('checked', true);
+
+        switch (option_set) {
+          case 'thumbs':
+          case 'rows':
+            dw_mediamanager.set_fileview_list(option_set);
+            $sort_buttons.find('[name=list_dwmedia]').val(option_set);
+            break;
+          case 'name':
+          case 'date':
+            dw_mediamanager.set_fileview_sort(option_set);
+            $sort_buttons.find('[name=sort_dwmedia]').val(option_set);
+            dw_mediamanager.list.call(jQuery('#dw__mediasearch')[0] || this, event);
+            break;
+        }
+
+      }
+
+      $sort_buttons.find('label').on('click', buttonHandler);
+
     }
 
   }, 0);
@@ -398,44 +455,107 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
-    // Extension page
-    var $ext_manager = $mode_admin.find('#extension__manager'),
-        $ext_actions = $ext_manager.find('.actions');
+    if (JSINFO.bootstrap3.tableFullWidth) {
+      $mode_admin.find('div.table table.inline').css('width', '100%');
+    }
 
-    $ext_actions.addClass('btn-group');
+    var $ext_manager  = $mode_admin.find('#extension__manager'),
+        $ext_actions  = $ext_manager.find('.actions'),
+        $user_manager = $mode_admin.find('#user__manager');
 
-    $ext_actions.find('.permerror')
-      .addClass('pull-left');
+    // Extension Manager Actions
+    if ($ext_actions.length) {
 
-    $ext_actions.find('.btn')
-      .addClass('btn-xs')
-      .input2button();
+      $ext_actions.addClass('btn-group');
 
-    $ext_actions.find('.uninstall')
-      .addClass('btn-danger')
-      .prepend('<i class="fa fa-fw fa-trash"/> ');
+      $ext_actions.find('.permerror')
+        .addClass('pull-left');
 
-    $ext_actions.find('.install, .update, .reinstall')
-      .addClass('btn-primary')
-      .prepend('<i class="fa fa-fw fa-download"/> ');
+      $ext_actions.find('.btn')
+        .addClass('btn-xs')
+        .input2button();
 
-    $ext_actions.find('.enable')
-      .addClass('btn-success')
-      .prepend('<i class="fa fa-fw fa-check"/> ');
+      $ext_actions.find('.uninstall')
+        .addClass('btn-danger')
+        .prepend('<i class="fa fa-fw fa-trash"/> ');
 
-    $ext_actions.find('.disable').addClass('btn-warning')
-      .prepend('<i class="fa fa-fw fa-ban"/> ');
+      $ext_actions.find('.install, .update, .reinstall')
+        .addClass('btn-primary')
+        .prepend('<i class="fa fa-fw fa-download"/> ');
 
-    $mode_admin.find('#dokuwiki__content :submit')
-      .addClass('btn-success');
+      $ext_actions.find('.enable')
+        .addClass('btn-success')
+        .prepend('<i class="fa fa-fw fa-check"/> ');
 
-    $ext_manager.find('form.search :submit, form.install :submit').input2button();
+      $ext_actions.find('.disable').addClass('btn-warning')
+        .prepend('<i class="fa fa-fw fa-ban"/> ');
 
-    $ext_manager.find('form.search button')
-      .prepend('<i class="fa fa-fw fa-search"/> ');
+    }
 
-    $ext_manager.find('form.install button')
-      .prepend('<i class="fa fa-fw fa-download"/> ');
+    // User Manager
+    if ($user_manager.length) {
+
+      $mode_admin.find('.notes').removeClass('notes');
+
+      $mode_admin.find('h2').each(function(index, node) {
+
+        var $node = jQuery(this);
+        switch (index) {
+          case 0:
+            $node.prepend('<i class="fa fa-users"/> ');
+            break;
+          case 1:
+            $node.prepend('<i class="fa fa-user-plus"/> ');
+            break;
+          case 2:
+            if ($node.attr('id') !== 'bulk_user_import') {
+              $node.prepend('<i class="fa fa-user"/> ');
+            }
+            break;
+        }
+
+      });
+
+      $mode_admin.find(':button[name]').each(function(){
+
+        var $node = jQuery(this);
+        switch ($node.attr('name')) {
+          case 'fn[delete]':
+            $node.addClass('btn-danger');
+            $node.prepend('<i class="fa fa-trash"/> ');
+            break;
+          case 'fn[add]':
+            $node.addClass('btn-success');
+            $node.prepend('<i class="fa fa-plus"/> ');
+            break;
+          case 'fn[modify]':
+            $node.addClass('btn-success');
+            $node.prepend('<i class="fa fa-save"/> ');
+            break;
+          case 'fn[import]':
+            $node.prepend('<i class="fa fa-upload"/> ');
+            break;
+          case 'fn[export]':
+            $node.prepend('<i class="fa fa-download"/> ');
+            break;
+        }
+
+      });
+
+    }
+
+    // Extension Manager
+    if ($ext_manager.length) {
+
+      $ext_manager.find('form.search :submit, form.install :submit').input2button();
+
+      $ext_manager.find('form.search button')
+        .prepend('<i class="fa fa-fw fa-search"/> ');
+
+      $ext_manager.find('form.install button')
+        .prepend('<i class="fa fa-fw fa-download"/> ');
+
+    }
 
   }, 0);
 
@@ -500,12 +620,12 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);
-      $icon.find('i').addClass('fa-2x', 200);
+      $icon.find('i').addClass('fa-2x', 250);
     });
 
     $page_tools_items.on('mouseleave', function () {
       var $icon = jQuery(this);
-      $icon.find('i').removeClass('fa-2x', 200);
+      $icon.find('i').removeClass('fa-2x', 250);
     });
 
   }, 0);
@@ -542,7 +662,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
   if (JSINFO.bootstrap3.useAnchorJS) {
-    anchors.add('article h1, article h2, article h3, article h4, article h5');
+    anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
   }
 });
 
@@ -551,7 +671,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'anchorjs',
+    var events = [ 'scrollspy', 'toc', 'nav', 'tabs', 'anchorjs',
                    'buttons', 'back-to-top', 'page-tools',
                    'dropdown-page', 'footnotes', 'alerts',
                    'mode-admin', 'mode-index', 'mode-search',

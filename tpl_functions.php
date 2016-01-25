@@ -413,7 +413,8 @@ function bootstrap3_toc($toc, $return = false) {
 
   $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
   $out = str_replace('<div>', '<div class="panel-body">', $out);
-  $out = str_replace('<h3 class="', '<h3 class="panel-heading ', $out);
+  $out = str_replace('<h3 class="toggle">', '<h3 class="toggle panel-heading"><span>', $out);
+  $out = str_replace('</h3>', '</span></h3>', $out);
 
   $out = bootstrap3_nav($out, 'pills', true);
 
@@ -435,6 +436,7 @@ function bootstrap3_toc($toc, $return = false) {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = bootstrap3_nav($sidebar, 'pills', true);
+  $out = preg_replace('/<h([1-6])/', '<h$1 class="page-header"', $out);
 
   if ($return) return $out;
   echo $out;
@@ -529,6 +531,8 @@ function bootstrap3_navbar() {
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
 
+  $navbar = str_replace('urlextern', '', $navbar);
+
   $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
                          '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
@@ -549,13 +553,15 @@ function bootstrap3_navbar() {
  */
 function bootstrap3_dropdown_page($page) {
 
-  if (! page_exists($page)) return;
+  $page = page_findnearest($page);
+
+  if (! $page) return;
 
   $output   = bootstrap3_nav(tpl_include_page($page, 0, 1), 'pills', true);
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-              p_get_first_heading(page_findnearest($page)) .
+              p_get_first_heading($page) .
               ' <span class="caret"></span></a>' .
               '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
               '<li><div class="container">'.
@@ -800,14 +806,14 @@ function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts
 
 
 /**
- * Get the template metadata
+ * Get the template configuration metadata
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string $key
  * @return  array
  */
-function bootstrap3_metadata($key = null) {
+function bootstrap3_conf_metadata($key = null) {
 
   $meta = array();
   $file = tpl_incdir() . 'conf/metadata.php';
@@ -851,60 +857,11 @@ function bootstrap3_conf($key, $default = false) {
       return $value && $INFO['isadmin'];
 
     case 'hideLoginLink':
-      return ! $value || ! empty($_SERVER['REMOTE_USER']);
-
-    case 'browserTitle':
-
-      if (bootstrap3_conf('browserTitleShowNS')) {
-
-        $ns_parts         = explode(':', $ID);
-        $ns_pages         = array();
-        $ns_titles        = array();
-        $ns_separator     = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
-
-        if (useHeading('navigation')) {
-
-          foreach ($ns_parts as $ns_part) {
-            $ns_page .= "$ns_part:";
-            $ns_pages[] = $ns_page;
-          }
-
-          $ns_pages = array_unique($ns_pages);
-
-          foreach ($ns_pages as $ns_page) {
-
-            resolve_pageid(getNS($ns_page), $ns_page, $exists);
-
-            $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
-            $ns_page_title_page    = noNSorNS($ns_page);
-            $ns_page_title         = ($ns_page_title_heading) ? $ns_page_title_heading : $ns_page_title_page;
-
-            $ns_titles[] = $ns_page_title;
-
-          }
-
-          $ns_titles[] = tpl_pagetitle($ID, true);
-          $ns_titles = array_unique($ns_titles);
-
-        } else {
-          $ns_titles = $ns_parts;
-        }
-
-        if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
-          $ns_titles = array_reverse($ns_titles);
-        }
-
-        $browser_title = implode($ns_separator, $ns_titles);
-
-      } else {
-        $browser_title = tpl_pagetitle($ID, true);
-      }
-
-      return str_replace(array('@WIKI@', '@TITLE@'),
-                         array(strip_tags($conf['title']), $browser_title),
-                         $value);
+    case 'showLoginOnFooter':
+      return ($value && ! $_SERVER['REMOTE_USER']);
 
     case 'showSidebar':
+      if (bootstrap3_conf('showLandingPage')) return false;
       return page_findnearest($conf['sidebar']) && ($ACT=='show');
 
     case 'showRightSidebar':
@@ -913,9 +870,19 @@ function bootstrap3_conf($key, $default = false) {
     case 'landingPages':
       return sprintf('/%s/', $value);
 
+    case 'showLandingPage':
+      return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
+
+    case 'pageOnPanel':
+      if (bootstrap3_conf('showLandingPage')) return false;
+      return $value;
+
+    case 'showThemeSwitcher':
+      return $value && (bootstrap3_conf('bootstrapTheme') == 'bootswatch');
+
   }
 
-  //$type = bootstrap3_metadata($key);
+  //$type = bootstrap3_conf_metadata($key);
 
   //if ($type[0] == 'regex') {
   //  return sprintf('/%s/', $value);
@@ -935,9 +902,21 @@ function bootstrap3_conf($key, $default = false) {
  */
 function bootstrap3_bootswatch_theme_list() {
 
-  $bootswatch_themes = bootstrap3_metadata('bootswatchTheme');
+  $bootswatch_themes = bootstrap3_conf_metadata('bootswatchTheme');
   return $bootswatch_themes['_choices'];
 
+}
+
+
+/**
+ * Return only the available Bootswatch.com themes
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  array
+ */
+function bootstrap3_bootswatch_themes_available() {
+  return array_diff(bootstrap3_bootswatch_theme_list(), bootstrap3_conf('hideInThemeSwitcher'));
 }
 
 
@@ -1180,5 +1159,95 @@ function bootstrap3_include($file) {
 
   require_once($file);
   return true;
+
+}
+
+
+function bootstrap3_page_browser_title() {
+
+  global $conf, $ACT, $ID;
+
+  if (bootstrap3_conf('browserTitleShowNS') && $ACT == 'show') {
+
+    $ns_parts     = explode(':', $ID);
+    $ns_pages     = array();
+    $ns_titles    = array();
+    $ns_separator = sprintf(' %s ', bootstrap3_conf('browserTitleCharSepNS'));
+
+    if (useHeading('navigation')) {
+
+      if (count($ns_parts) > 1) {
+
+        foreach ($ns_parts as $ns_part) {
+          $ns_page .= "$ns_part:";
+          $ns_pages[] = $ns_page;
+        }
+
+        $ns_pages = array_unique($ns_pages);
+
+        foreach ($ns_pages as $ns_page) {
+
+          resolve_pageid(getNS($ns_page), $ns_page, $exists);
+
+          $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
+          $ns_page_title_page    = noNSorNS($ns_page);
+          $ns_page_title         = ($exists) ? $ns_page_title_heading : $ns_page_title_page;
+
+          if ($ns_page_title !== $conf['start']) {
+            $ns_titles[] = $ns_page_title;
+          }
+
+        }
+
+      }
+
+      resolve_pageid(getNS($ID), $ID, $exists);
+
+      if ($exists) {
+        $ns_titles[] = tpl_pagetitle($ID, true);
+      }
+
+      $ns_titles = array_filter(array_unique($ns_titles));
+
+    } else {
+      $ns_titles = $ns_parts;
+    }
+
+    if (bootstrap3_conf('browserTitleOrderNS') == 'normal') {
+      $ns_titles = array_reverse($ns_titles);
+    }
+
+    $browser_title = implode($ns_separator, $ns_titles);
+
+  } else {
+    $browser_title = tpl_pagetitle($ID, true);
+  }
+
+  return str_replace(array('@WIKI@', '@TITLE@'),
+                      array(strip_tags($conf['title']), $browser_title),
+                      bootstrap3_conf('browserTitle'));
+
+}
+
+
+function bootstrap3_is_fluid_container() {
+
+  $fluid_container     = bootstrap3_conf('fluidContainer');
+  $fluid_container_btn = bootstrap3_fluid_container_button();
+
+  if ($fluid_container_btn) {
+    $fluid_container = true;
+  }
+
+  return $fluid_container;
+
+}
+
+function bootstrap3_is_fluid_navbar() {
+
+  $fluid_container  = bootstrap3_is_fluid_container();
+  $fixed_top_nabvar = bootstrap3_conf('fixedTopNavbar');
+
+  return ($fluid_container || ($fluid_container && ! $fixed_top_nabvar) || (! $fluid_container && ! $fixed_top_nabvar));
 
 }

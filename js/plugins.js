@@ -22,7 +22,14 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $dataplugin_table = jQuery('.dataplugin_table'),     // Data Plugin: Table
         $toc              = jQuery('#dw__toc'),              // DokuWiki TOC
         $toc2             = jQuery('div.inlinetoc2'),        // InlineTOC Plugin
-        $davcal           = jQuery('#fullCalendar');         // DAVCal Plugin
+        $davcal           = jQuery('#fullCalendar'),         // DAVCal Plugin
+        $include_readmore = jQuery('.include_readmore');     // Include Plugin (Read More)
+
+
+    // Include Plugin (Read More)
+    if ($include_readmore.length) {
+      $include_readmore.find('a').addClass('btn btn-default btn-xs');
+    }
 
 
     // DAVCal Plugin
@@ -189,9 +196,13 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
                                       .prepend('<i class="fa fa-fw fa-tag"/> ');
 
 
-        if (JSINFO.bootstrap3.tagsOnTop && $tag.prop('tagName').toLowerCase() == 'div') {
+        if (JSINFO.bootstrap3.tagsOnTop && $tag.prop('tagName').toLowerCase() == 'div' && ! $tag.parents('.plugin_include_content').length) {
           $tag.remove();
           $tagLabel.prependTo('.pageId');
+        }
+
+        if ($tag.parents('.plugin_include_content').length) {
+          $tag.find('span').contents().unwrap();
         }
 
       });

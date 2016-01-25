@@ -11,9 +11,7 @@
 if (!defined('DOKU_INC')) die();
 
 ?>
-<?php if (   bootstrap3_conf('showThemeSwitcher')
-          && bootstrap3_conf('bootstrapTheme') == 'bootswatch'
-          && $available_themes = array_diff(bootstrap3_bootswatch_theme_list(), bootstrap3_conf('hideInThemeSwitcher'))): ?>
+<?php if (bootstrap3_conf('showThemeSwitcher')): ?>
 <!-- theme-switcher -->
 <ul class="nav navbar-nav" id="dw__themes">
   <li class="dropdown">
@@ -22,9 +20,9 @@ if (!defined('DOKU_INC')) die();
 
     <ul class="dropdown-menu" aria-labelledby="themes">
       <li class="dropdown-header"><i class="fa fa-fw fa-tint"></i> Bootswatch Themes</li>
-      <?php foreach ($available_themes as $theme): ?>
+      <?php foreach (bootstrap3_bootswatch_themes_available() as $theme): ?>
       <li<?php echo ($bootswatchTheme == $theme) ? ' class="active"' : '' ?>>
-        <a href="?bootswatchTheme=<?php echo $theme ?>"><?php echo ucfirst($theme) ?></a>
+        <a href="?bootswatch-theme=<?php echo hsc($theme) ?>"><?php echo ucfirst($theme) ?></a>
       </li>
       <?php endforeach; ?>
     </ul>

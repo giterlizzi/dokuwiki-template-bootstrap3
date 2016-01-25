@@ -6,8 +6,6 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-@small_nav_padding: 5px 10px;
-
 body {
 
   &.default,
@@ -22,6 +20,10 @@ body {
     background: #FEFEFE;
   }
 
+}
+
+pre.code {
+  white-space: pre-wrap;
 }
 
 input,
@@ -66,7 +68,6 @@ nav {
 /* Table of contents */
 #dw__toc {
 
-  margin-left: 20px;
   width: auto;
 
   li {
@@ -80,7 +81,7 @@ nav {
     font-weight: bold;
     font-size: .9em;
 
-    span {
+    strong span {
       display: none;
     }
 
@@ -88,6 +89,10 @@ nav {
       padding-right: 5px;
     }
 
+  }
+
+  h3.closed > span {
+    display: none;
   }
 
   ul.toc ul {
@@ -108,8 +113,7 @@ nav {
   }
 
   .panel-body {
-    padding: 0.5em;
-    width: 16em;
+    padding: 5px;
   }
 
 }
@@ -214,10 +218,11 @@ nav {
 /* Page tools */
 #dw__pagetools {
 
-  position: absolute;
-  top: 15px;
-  width: 0;
-  right: 45px;
+  position: fixed;
+  right: -5px;
+  padding-right: 3px;
+  z-index: 9999;
+  text-align: center;
 
   ul li a {
     padding: 2px;
@@ -225,10 +230,6 @@ nav {
   
   ul li:not(.active) a:hover {
       background: transparent;
-  }
-
-  .tools {
-    position: fixed;
   }
 
 }
@@ -262,7 +263,62 @@ nav {
 
 }
 
+
+#user__manager .import_users {
+  clear: both;
+}
+
+
+/* Media Manager */
+#media__tree {
+
+  height: 300px;
+  overflow: auto;
+
+  li.media {
+    margin-top: 0;
+  }
+
+}
+
+#media__content {
+
+  height: auto;
+
+  input, label {
+    margin: 0;
+  }
+
+  label {
+    display: inline !important;
+  }
+
+  [type=submit] {
+    vertical-align: bottom;
+  }
+
+
+}
+
+#mediamgr__aside {
+  height: auto;
+  top: 0;
+  position: fixed;
+}
+
+#media__opts label {
+  display: inline !important;
+}
+
+#mediamanager__page .ui-buttonset label {
+  margin-right: 0 !important;
+}
+
 .dw__sidebar {
+
+  .page-header {
+    margin: 10px 0;
+  }
 
   .panel-heading {
     cursor: pointer;
@@ -277,7 +333,7 @@ nav {
     li {
 
       a {
-        padding: @small_nav_padding;
+        padding: 5px 10px;
       }
 
       a.urlextern,
@@ -320,10 +376,6 @@ nav {
     font-size: 1em;
   }
 
-  .page-header {
-    margin-top: 0;
-  }
-
 }
 
 
@@ -355,6 +407,11 @@ nav {
 
   }
 
+}
+
+
+.toc-col {
+  padding-left: 0;
 }
 
 
@@ -502,7 +559,7 @@ ul.btn-group {
   }
 
   .nav li a {
-    padding: @small_nav_padding;
+    padding: 5px 10px;
   }
 
 }

@@ -26,9 +26,11 @@ jQuery(document).ready(function() {
 
     if ($screen_mode.find('.visible-xs').is(':visible')) {
 
-      $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
-      $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
-      $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
+      if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
+        $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
+        $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
+        $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
+      }
 
     } else {
 
@@ -135,7 +137,9 @@ jQuery(document).ready(function() {
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:init');
+      jQuery(document).trigger('bootstrap3:buttons');
       jQuery(document).trigger('bootstrap3:tabs');
+      jQuery(document).trigger('bootstrap3:media-manager');
     });
 
   }

@@ -25,8 +25,8 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
-  <?php foreach ($bootstrapStyles as  $bootstrapStyle): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+  <?php foreach ($bootstrap_styles as  $bootstrap_style): ?>
+  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders() ?>
@@ -37,21 +37,9 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
   <style type="text/css">
-    #media_content label,
-    #media__opts label { display: inline !important; }
-
-    #media__tree { height: 300px; overflow: auto; }
-    #media__tree li { margin: 0; }
-
-    #media__content input,
-    #media__content label { margin: 0; }
-    #media__content [type=submit] { vertical-align: bottom; }
-
-    #mediamgr__aside, #mediamgr__content { height: auto; }
-    #mediamgr__aside { top: 0; position: fixed; }
+    body { position: initial; }
   </style>
 </head>
-
 <body class="container">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dw__msgarea">

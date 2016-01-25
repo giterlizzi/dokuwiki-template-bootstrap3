@@ -10,10 +10,14 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-?>
-<nav class="navbar <?php echo (($fixedTopNavbar) ? 'navbar-fixed-top' : '') ?> <?php echo (($inverseNavbar) ? 'navbar-inverse' : 'navbar-default') ?>" role="navigation">
+$navbar_classes   = array();
+$navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
+$navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
 
-  <div class="container<?php echo ($fluidContainer || ($fluidContainer && ! $fixedTopNavbar) || (! $fluidContainer && ! $fixedTopNavbar)) ? '-fluid' : '' ?>">
+?>
+<nav class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
+
+  <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid' : '') ?>">
 
     <div class="navbar-header">
 
@@ -68,9 +72,7 @@ if (!defined('DOKU_INC')) die();
 
       <div class="navbar-right">
 
-        <?php if ($showSearchForm): ?>
-          <?php bootstrap3_searchform() ?>
-        <?php endif; ?>
+        <?php if (bootstrap3_conf('showSearchForm')) bootstrap3_searchform(); ?>
 
         <?php
           // Admin Menu
@@ -88,7 +90,7 @@ if (!defined('DOKU_INC')) die();
 
         <ul class="nav navbar-nav">
 
-          <?php if ($fluidContainerBtn): ?>
+          <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
           <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">
             <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
@@ -99,10 +101,14 @@ if (!defined('DOKU_INC')) die();
             <span class="dw__actions">
               <?php
 
-                echo bootstrap3_action_item('register', 'fa fa-fw fa-user-plus', true);
+                $register_btn = bootstrap3_action_item('register', 'fa fa-fw fa-user-plus', true);
+                $register_btn = str_replace('action', 'action btn btn-success navbar-btn', $register_btn);
+                echo $register_btn;
 
-                if ($showLoginLink) {
-                  echo bootstrap3_action_item('login', 'fa fa-fw fa-sign-in', true);
+                if (! bootstrap3_conf('hideLoginLink')) {
+                  $login_btn = bootstrap3_action_item('login', 'fa fa-fw fa-sign-in', true);
+                  $login_btn = str_replace('action', 'action btn btn-default navbar-btn', $login_btn);
+                  echo $login_btn;
                 }
 
               ?>
