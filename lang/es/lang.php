@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for template
+ * Spanish Language file for template
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Nelson Martell <nelson6e65-dev@yahoo.es>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

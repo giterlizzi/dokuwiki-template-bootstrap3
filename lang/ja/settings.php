@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for config
+ * Japanese Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Hideaki SAWADA <chuno@live.jp>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

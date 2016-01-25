@@ -1,6 +1,6 @@
 <?php
 /**
- * Language file for config
+ * Italian Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)

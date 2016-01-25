@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for template
+ * Japanese Language file for template
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Hideaki SAWADA <chuno@live.jp>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

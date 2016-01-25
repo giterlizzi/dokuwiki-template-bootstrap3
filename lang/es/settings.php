@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for config
+ * Spanish Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Nelson Martell <nelson6e65-dev@yahoo.es>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -14,7 +15,7 @@ $lang['showUserHomeLink']    = 'Mostrar enlace a Página de Inicio de Usuario en
 $lang['showCookieLawBanner'] = 'Mostrar el banner Cookie Law en el pie de página';
 $lang['cookieLawBannerPage'] = 'Nombre de página del banner Cookie Law';
 $lang['cookieLawPolicyPage'] = 'Nombre de página de política de Cookie Law';
-$lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name) - see <a class="interwiki iw_doku" href="#config___title">title</a> config';
+$lang['browserTitle']        = 'Título del explorador para DokuWiki (por defecto es <code>@TITLE@ [@WIKI@]</code>, en donde el marcador de posición <code>@TITLE@</code> reemplaza el título de la página actual y <code>@WIKI@</code> reemplaza en nombre de la DokuWiki) - ver configuración <a class="interwiki iw_doku" href="#config___title">title</a>';
 $lang['showIndividualTool']  = 'Habilitar/Deshabilitar herramientas individuales de la barra de navegación';
 $lang['showTools']           = 'Mostrar Herramientas en la barra de navegación';
 $lang['individualTools']     = 'Dividir las Herramientas en un menú individual en la barra de navegación';
@@ -62,7 +63,7 @@ $lang['tableStyle']          = 'Estilo de tabla';
 $lang['tagsOnTop']           = 'Mover todas la Etiquetas, de la parte de arriba de la página, al lado del id de la página (requiere el <em>Tag Plugin</em>)';
 $lang['showPageId']          = 'Mostrar el nombre de la página DokuWiki (pageId) en la parte de arriba';
 $lang['useAnchorJS']         = 'Usar AnchorJS';
-$lang['showHomePageLink']    = 'Display Home-Page link in navbar';
+$lang['showHomePageLink']    = 'Mostrar enlace de Página de Inicio en la barra de navegación';
 $lang['useLegacyNavbar']     = 'Use legacy and deprecated "navbar.html" hook (consider in the future to use the ":navbar" hook)';
 $lang['browserTitleCharSepNS'] = 'Character separator for every namespaces on browser title';
 $lang['browserTitleShowNS']    = 'Display the previous page name of current page on the browser title';

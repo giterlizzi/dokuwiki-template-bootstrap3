@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for template
+ * German Language file for template
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Dominik Soeldner <soeldner@yteam.de>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
