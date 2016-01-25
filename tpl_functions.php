@@ -531,6 +531,8 @@ function bootstrap3_navbar() {
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
 
+  $navbar = str_replace('urlextern', '', $navbar);
+
   $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
                          '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
