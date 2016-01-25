@@ -1,8 +1,9 @@
 <?php
 /**
- * Language file for config
+ * Russian Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Andrey Shpak
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -14,7 +15,7 @@ $lang['showUserHomeLink']    = 'Display User Home-Page link in navbar';
 $lang['showCookieLawBanner'] = 'Display the Cookie Law banner on footer';
 $lang['cookieLawBannerPage'] = 'Cookie Law banner page name';
 $lang['cookieLawPolicyPage'] = 'Cookie Law policy page name';
-$lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name - see <a href="#config___title">title</a> config';
+$lang['browserTitle']        = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name) - see <a class="interwiki iw_doku" href="#config___title">title</a> config';
 $lang['showIndividualTool']  = 'Enable/Disable individual tool in navbar';
 $lang['showTools']           = 'Отображение инструментов в панели навигации';
 $lang['individualTools']     = 'Split the Tools in individual menu in navbar';
@@ -26,7 +27,7 @@ $lang['showSearchForm_o_never']  = 'Never';
 $lang['showSearchForm_o_logged'] = 'When logged in';
 $lang['showSearchForm_o_always'] = 'Always';
 $lang['sidebarPosition']     = 'Позиция боковой панели DokuWiki (<code>слева</code> или <code>справа</code>)';
-$lang['rightSidebar']        = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a href="#config___tpl____bootstrap3____sidebarPosition">tpl»bootstrap3»sidebarPosition</a> configuration with <code>right</code> value';
+$lang['rightSidebar']        = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
 $lang['tableFullWidth']      = 'Разрешить таблицы в 100% ширину';
 $lang['semantic']            = 'Включить семантические данные Schema.org. Для полной поддержи требуется установка <a href="https://www.dokuwiki.org/plugin:semantic">плагина</a>';
 $lang['schemaOrgType']       = 'Тип Schema.org данных';
@@ -61,3 +62,10 @@ $lang['useLocalBootswatch']  = 'Use the local Bootswatch directory. This option 
 $lang['tableStyle']          = 'Table style';
 $lang['tagsOnTop']           = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
 $lang['showPageId']          = 'Display the DokuWiki page name (pageId) on top';
+$lang['useAnchorJS']         = 'Use AnchorJS';
+$lang['showHomePageLink']    = 'Display Home-Page link in navbar';
+$lang['useLegacyNavbar']     = 'Use legacy and deprecated "navbar.html" hook (consider in the future to use the ":navbar" hook)';
+$lang['browserTitleCharSepNS'] = 'Character separator for every namespaces on browser title';
+$lang['browserTitleShowNS']    = 'Display the previous page name of current page on the browser title';
+$lang['browserTitleOrderNS']   = 'Set the order of namespaces';
+$lang['tocCollapseSubSections'] = 'Collapse all sub-sections in TOC to save space';
