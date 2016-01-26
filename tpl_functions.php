@@ -176,7 +176,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
           break;
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
-          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="" title="$1"><span>$1</span></a>', $html);
+          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
         default:
           $icon = 'puzzle-piece'; // Unknown
@@ -689,42 +689,47 @@ function bootstrap3_tools() {
 
   global $ACT;
 
-  $result = array();
-  $tools  = array(
-
-    'user' => array(
-      'icon'  => 'fa fa-fw fa-user',
-      'items' => array(
-        'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
-        'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
-        #'register' => array('icon' => 'fa fa-fw fa-user-plus'),
-        #'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
-      )
-    ),
-
-    'site' => array(
-      'icon'  => 'fa fa-fw fa-wrench',
-      'items' => array(
-        'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
-        'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
-        'index'  => array('icon' => 'fa fa-fw fa-sitemap'),
-      )
-    ),
-
-    'page' => array(
-      'icon'  => 'fa fa-fw fa-file',
-      'items' => array(
-        'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
-        'discussion' => array('icon' => 'fa fa-fw fa-comments'),
-        'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
-        'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
-        'backlink'   => array('icon' => 'fa fa-fw fa-link'),
-        'subscribe'  => array('icon' => 'fa fa-fw fa-envelope-o'),
-        'top'        => array('icon' => 'fa fa-fw fa-chevron-up'),
-      )
-    ),
-
+  $tools['user'] = array(
+    'icon'    => 'fa fa-fw fa-user',
+    'actions' => array(
+      'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
+      'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
+      #'register' => array('icon' => 'fa fa-fw fa-user-plus'),
+      #'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+    )
   );
+
+  $tools['site'] = array(
+    'icon'    => 'fa fa-fw fa-wrench',
+    'actions' => array(
+      'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
+      'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
+      'index'  => array('icon' => 'fa fa-fw fa-sitemap'),
+    )
+  );
+
+  $tools['page'] = array(
+    'icon'    => 'fa fa-fw fa-file',
+    'actions' => array(
+      'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+      'discussion' => array('icon' => 'fa fa-fw fa-comments'),
+      'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
+      'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
+      'backlink'   => array('icon' => 'fa fa-fw fa-link'),
+      'subscribe'  => array('icon' => 'fa fa-fw fa-envelope-o'),
+      'top'        => array('icon' => 'fa fa-fw fa-chevron-up'),
+    )
+  );
+
+  foreach ($tools as $id => $menu) {
+
+    foreach ($menu['actions'] as $action => $item) {
+      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
+    }
+
+    $tools[$id]['dropdown-menu'] = bootstrap3_toolsevent($id.'tools', $tools[$id]['menu'], 'main', true);
+
+  }
 
   return $tools;
 
@@ -740,15 +745,14 @@ function bootstrap3_tools() {
  */
 function bootstrap3_tools_menu() {
 
-  $tools = bootstrap3_tools();
+  $tools  = bootstrap3_tools();
+  $result = array();
 
-  foreach ($tools as $id => $menu) {
-    foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
-    }
+  foreach (bootstrap3_conf('showIndividualTool') as $id) {
+    $result[$id] = $tools[$id];
   }
 
-  return $tools;
+  return $result;
 
 }
 
