@@ -203,16 +203,18 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     $dw_toc.find('.open strong').addClass('fa fa-fw fa-chevron-up');
     $dw_toc.css('backgroundColor', jQuery('#dokuwiki__content .panel').css('backgroundColor'));
+    $dw_toc.find('h3').attr('title', $dw_toc.find('h3 > span').text());
 
     $dw_toc.find('h3').click(function() {
 
       if ($dw_toc.find('.closed').length) {
 
         $dw_toc.find('h3 strong').removeClass('fa-chevron-up')
-                                 .addClass('fa-chevron-down');
+                                 .addClass('fa-chevron-down')
+                                 .css('display', 'block');;
 
-        $content_col.removeClass('col-md-9').addClass('col-md-11');
-        $toc_col.removeClass('col-md-3').addClass('col-md-1');
+        $content_col.removeClass('col-md-9').addClass('col-md-12');
+        $toc_col.removeClass('col-md-3').addClass('pull-right').css('width', '12px');
 
         $dw_toc.width('');
 
@@ -221,10 +223,11 @@ jQuery(document).on('bootstrap3:toc', function(e) {
       if ($dw_toc.find('.open').length) {
 
         $dw_toc.find('h3 strong').addClass('fa-chevron-up')
-                                 .removeClass('fa-chevron-down');
+                                 .removeClass('fa-chevron-down')
+                                 .css('display', 'inline-block');
 
-        $content_col.removeClass('col-md-11').addClass('col-md-9');
-        $toc_col.removeClass('col-md-1').addClass('col-md-3');
+        $content_col.removeClass('col-md-12').addClass('col-md-9');
+        $toc_col.addClass('col-md-3').removeClass('pull-right').css('width', '');
 
         $dw_toc.width($toc_col.width());
 
@@ -237,8 +240,6 @@ jQuery(document).on('bootstrap3:toc', function(e) {
       if ($dw_toc.find('.open').length) {
         $dw_toc.find('h3').trigger('click');
       }
-
-      $dw_toc.width($toc_col.width());
 
     });
 
