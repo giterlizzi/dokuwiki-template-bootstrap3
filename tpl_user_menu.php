@@ -33,7 +33,7 @@ if (bootstrap3_conf('useGravatar')) {
         <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" />
       <?php else: ?>
         <i class="fa fa-fw fa-user"></i>
-      <?php endif; ?> <span class="caret"></span>
+      <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu dropdown-menu-large" role="menu">
