@@ -40,7 +40,7 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
     <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>
     #dw__toc .nav .nav .nav { display: none; }
     <?php endif; ?>
-    .dw-toc-affix { z-index: 9999; top: <?php echo ($navbar_padding -10) ?>px; }
+    .dw-toc-affix { top: <?php echo ($navbar_padding -10) ?>px; }
   </style>
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -122,9 +122,9 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
                 // Include the TOC layout
                 if ($toc) {
                   require_once('tpl_toc.php');
-                } else {
-                  echo $content;
                 }
+
+                echo $content;
 
                 tpl_flush();
 
