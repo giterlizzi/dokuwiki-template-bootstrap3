@@ -13,6 +13,7 @@ if (!defined('DOKU_INC')) die();
 global $ID;
 global $JSINFO;
 global $INPUT;
+global $ACT;
 
 $fixedTopNavbar      = bootstrap3_conf('fixedTopNavbar');
 $pageOnPanel         = bootstrap3_conf('pageOnPanel');
@@ -27,6 +28,7 @@ $JSINFO['bootstrap3'] = array(
   'tableStyle'     => bootstrap3_conf('tableStyle'),
   'tagsOnTop'      => (int) bootstrap3_conf('tagsOnTop'),
   'useAnchorJS'    => (int) bootstrap3_conf('useAnchorJS'),
+  'mode'           => $ACT,
 );
 
 if (bootstrap3_conf('showThemeSwitcher')) {

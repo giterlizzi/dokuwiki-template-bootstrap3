@@ -15,7 +15,7 @@ jQuery(document).ready(function() {
 
 
   function dw_mode(id) {
-    return ((jQuery('.mode_' + id).length) ? true : false);
+    return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
 
 
