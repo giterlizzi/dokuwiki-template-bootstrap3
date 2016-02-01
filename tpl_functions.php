@@ -852,11 +852,6 @@ function bootstrap3_conf($key, $default = false) {
     case 'showPageTools':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
-    case 'showIndividualTool':
-    case 'hideInThemeSwitcher':
-    case 'tableStyle':
-      return explode(',', $value);
-
     case 'showAdminMenu':
       return $value && $INFO['isadmin'];
 
@@ -871,9 +866,6 @@ function bootstrap3_conf($key, $default = false) {
     case 'showRightSidebar':
       return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
 
-    case 'landingPages':
-      return sprintf('/%s/', $value);
-
     case 'showLandingPage':
       return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
 
@@ -886,11 +878,14 @@ function bootstrap3_conf($key, $default = false) {
 
   }
 
-  //$type = bootstrap3_conf_metadata($key);
+  $metadata = bootstrap3_conf_metadata($key);
 
-  //if ($type[0] == 'regex') {
-  //  return sprintf('/%s/', $value);
-  //}
+  switch ($metadata[0]) {
+    case 'regex':
+      return sprintf('/%s/', $value);
+    case 'multicheckbox':
+      return explode(',', $value);
+  }
 
   return $value;
 
