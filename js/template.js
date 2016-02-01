@@ -650,12 +650,57 @@ jQuery(document).on('bootstrap3:anchorjs', function() {
 });
 
 
+jQuery(document).on('bootstrap3:page-icons', function() {
+
+  var $dw_page_icons = jQuery('.dw-page-icons');
+
+  var title = encodeURIComponent(document.title),
+      url   = encodeURIComponent(location),
+      window_options = 'width=600,height=460,menubar=no,location=no,status=no';
+
+  var share_to = {
+    'google-plus' : (function(){ return [ 'https://plus.google.com/share?ur\l=', url ].join(''); })(),
+    'twitter'     : (function(){ return [ 'https://twitter.com/intent/tweet?text=', title, '&url=', url ].join(''); })(),
+    'linkedin'    : (function(){ return [ 'https://www.linkedin.com/shareArticle?mini=true&url=', url, '&title=', title ].join(''); })(),
+    'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
+    'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join('') })(),
+    'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
+    'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
+  };
+
+  console.debug(share_to);
+
+  $dw_page_icons.find('.share-google-plus').on('click', function() {
+    window.open(share_to['google-plus'], 'Share to Google+', window_options);
+  });
+  $dw_page_icons.find('.share-twitter').on('click', function() {
+    window.open(share_to.twitter, 'Share to Twitter', window_options);
+  });
+  $dw_page_icons.find('.share-linkedin').on('click', function() {
+    window.open(share_to.linkedin, 'Share to Linkedin', window_options);
+  });
+  $dw_page_icons.find('.share-facebook').on('click', function() {
+    window.open(share_to.facebook, 'Share to Facebook', window_options);
+  });
+  $dw_page_icons.find('.share-pinterest').on('click', function() {
+    window.open(share_to.pinterest, 'Share to Pinterest', window_options);
+  });
+  $dw_page_icons.find('.send-mail').on('click', function(e) {
+    e.preventDefault();
+    window.location = share_to['send-mail'];
+  });
+
+  $dw_page_icons.find('.share-whatsapp').attr('href', share_to.whatsapp);
+
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
     var events = [ 'scrollspy', 'toc', 'nav', 'tabs', 'anchorjs',
-                   'buttons', 'back-to-top', 'page-tools',
+                   'buttons', 'back-to-top', 'page-tools', 'page-icons',
                    'dropdown-page', 'footnotes', 'alerts',
                    'mode-admin', 'mode-index', 'mode-search',
                    'media-manager', 'detail', 'cookie-law' ];

@@ -65,11 +65,14 @@ $meta['browserTitleCharSepNS'] = array('multichoice', '_choices' => array('-', '
 $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse'));
 
 // Others
-$meta['showPageInfo']        = array('onoff');
-$meta['showTranslation']     = array('onoff');
-$meta['showBadges']          = array('onoff');
-$meta['showLoginOnFooter']   = array('onoff');
-$meta['useGravatar']         = array('onoff');
-$meta['tagsOnTop']           = array('onoff');
-$meta['useAnchorJS']         = array('onoff');
-$meta['useLegacyNavbar']     = array('onoff');
+$meta['showPageInfo']         = array('onoff');
+$meta['showTranslation']      = array('onoff');
+$meta['showBadges']           = array('onoff');
+$meta['showLoginOnFooter']    = array('onoff');
+$meta['useGravatar']          = array('onoff');
+$meta['tagsOnTop']            = array('onoff');
+$meta['useAnchorJS']          = array('onoff');
+$meta['useLegacyNavbar']      = array('onoff');
+$meta['showPageIcons']        = array('onoff');
+$meta['pageIcons']            = array('multicheckbox', '_choices' => array('social-share', 'send-mail', 'print', 'help'));
+$meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter'));

@@ -99,6 +99,9 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
 
               <?php
 
+                // Page icons (print, email, share link, etc.)
+                require_once('tpl_page_icons.php');
+
                 tpl_flush(); /* flush the output buffer */
 
                 // Page-Header DokuWiki page
