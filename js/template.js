@@ -668,8 +668,6 @@ jQuery(document).on('bootstrap3:page-icons', function() {
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
   };
 
-  console.debug(share_to);
-
   $dw_page_icons.find('.share-google-plus').on('click', function() {
     window.open(share_to['google-plus'], 'Share to Google+', window_options);
   });
