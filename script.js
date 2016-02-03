@@ -45,7 +45,7 @@ jQuery(document).ready(function() {
 
   function resizeToc() {
 
-    jQuery('#dw__toc .panel-body').css({
+    jQuery('#dokuwiki__toc .panel-body').css({
       'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
       'overflow-y': 'scroll'
     });
@@ -94,9 +94,9 @@ jQuery(document).ready(function() {
 
     var $self = jQuery(this);
 
-    if (jQuery('#dokuwiki__site').hasClass('container')) {
+    if (jQuery('body > div.container').length) {
 
-      jQuery('#dokuwiki__site, nav > div, article, #dw__footer > div')
+      jQuery('body > div, nav > div, article, #dw__footer > div')
         .removeClass('container')
         .addClass('container-fluid');
       $self.parent().addClass('active');
@@ -105,7 +105,7 @@ jQuery(document).ready(function() {
 
     } else {
 
-      jQuery('#dokuwiki__site, nav > div, article, #dw__footer > div')
+      jQuery('body > div, nav > div, article, #dw__footer > div')
         .removeClass('container-fluid')
         .addClass('container');
       $self.parent().removeClass('active');
@@ -162,23 +162,23 @@ jQuery(document).ready(function() {
   if (dw_mode('admin')) {
 
     var tpl_sections = {
-      // Section        Insert before           Icon
-      'Themes'        : ['bootstrapTheme',      'fa-tint'],
-      'Sidebar'       : ['sidebarPosition',     'fa-columns'],
-      'Navbar'        : ['inverseNavbar',       'fa-navicon'],
-      'Semantic'      : ['semantic',            'fa-share-alt'],
-      'Layout'        : ['fluidContainer',      'fa-desktop'],
-      'Discussion'    : ['showDiscussion',      'fa-comments'],
-      'Cookie Law'    : ['showCookieLawBanner', 'fa-legal'],
-      'Browser Title' : ['browserTitle',        'fa-header'],
-      'Others'        : ['showPageInfo',        'fa-gears']
+      // Section          ID                Insert before           Icon
+      'Themes'        : [ 'themes',         'bootstrapTheme',       'fa-tint'      ],
+      'Sidebar'       : [ 'sidebar',        'sidebarPosition',      'fa-columns'   ],
+      'Navbar'        : [ 'navbar',         'inverseNavbar',        'fa-navicon'   ],
+      'Semantic'      : [ 'semantic',       'semantic',             'fa-share-alt' ],
+      'Layout'        : [ 'layout',         'fluidContainer',       'fa-desktop'   ],
+      'Discussion'    : [ 'discussion',     'showDiscussion',       'fa-comments'  ],
+      'Cookie Law'    : [ 'cookie_law',     'showCookieLawBanner',  'fa-legal'     ],
+      'Browser Title' : [ 'browser_title',  'browserTitle',         'fa-header'    ],
+      'Others'        : [ 'others',         'showPageInfo',         'fa-gears'     ]
     };
 
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
       var $node = jQuery(this);
       jQuery.each(tpl_sections, function(section, item){
-        if( $node.attr('for').match([item[0], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4><i class="fa ', item[1], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+        if( $node.attr('for').match([item[1], '$'].join('')) ) {
+          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
         }
       });
     });

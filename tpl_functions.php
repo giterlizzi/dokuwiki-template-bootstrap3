@@ -409,6 +409,7 @@ function bootstrap3_fluid_container_button() {
  * @param   boolean  $return
  * @return  string
  */
+/*
 function bootstrap3_toc($toc, $return = false) {
 
   $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
@@ -422,6 +423,7 @@ function bootstrap3_toc($toc, $return = false) {
   echo $out;
 
 }
+*/
 
 
 /**
@@ -1013,7 +1015,7 @@ function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
  * @param   integer $size
  * @return  string
  */
-function bootstrap_glyphicon($name, $classes = '', $size = -1) {
+function bootstrap3_glyphicon($name, $classes = '', $size = -1) {
   return bootstrap3_icon('glyphicon', $name, $classes, $size);
 }
 
@@ -1248,5 +1250,126 @@ function bootstrap3_is_fluid_navbar() {
   $fixed_top_nabvar = bootstrap3_conf('fixedTopNavbar');
 
   return ($fluid_container || ($fluid_container && ! $fixed_top_nabvar) || (! $fluid_container && ! $fixed_top_nabvar));
+
+}
+
+
+/**
+ * Places the TOC where the function is called
+ *
+ * If you use this you most probably want to call tpl_content with
+ * a false argument
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param bool $return Should the TOC be returned instead to be printed?
+ * @return string
+ */
+function bootstrap3_toc($return = false) {
+
+  global $TOC;
+  global $ACT;
+  global $ID;
+  global $REV;
+  global $INFO;
+  global $conf;
+  global $INPUT;
+
+  $toc = array();
+
+  if(is_array($TOC)) {
+    // if a TOC was prepared in global scope, always use it
+    $toc = $TOC;
+  } elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
+    // get TOC from metadata, render if neccessary
+    $meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
+    if(isset($meta['internal']['toc'])) {
+      $tocok = $meta['internal']['toc'];
+    } else {
+      $tocok = true;
+    }
+    $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
+    if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
+      $toc = array();
+    }
+  } elseif($ACT == 'admin') {
+
+    // try to load admin plugin TOC
+    /** @var $plugin DokuWiki_Admin_Plugin */
+    if ($plugin = plugin_getRequestAdminPlugin()) {
+      $toc = $plugin->getTOC();
+      $TOC = $toc; // avoid later rebuild
+    }
+
+  }
+
+  trigger_event('TPL_TOC_RENDER', $toc, null, false);
+
+  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+
+    $bootstrap3_sections = array(
+      'themes'        => 'Themes',
+      'sidebar'       => 'Sidebar',
+      'navbar'        => 'Navbar',
+      'semantic'      => 'Semantic',
+      'layout'        => 'Layout',
+      'discussion'    => 'Discussion',
+      'cookie_law'    => 'Cookie Law',
+      'browser_title' => 'Browser Title',
+      'others'        => 'Others'
+    );
+
+    foreach ($bootstrap3_sections as $id => $title) {
+      $toc[] = array(
+        'link'  => "#bootstrap3__$id",
+        'title' => $title,
+        'type'  => 'ul',
+        'level' => 3
+      );
+    }
+
+  }
+
+  $html = bootstrap3_html_toc($toc);
+
+  if($return) return $html;
+  echo $html;
+  return '';
+
+}
+
+
+/**
+ * Return the TOC rendered to XHTML with Bootstrap3 style
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param array $toc
+ * @return string html
+ */
+function bootstrap3_html_toc($toc){
+
+  if (!count($toc)) return '';
+
+  global $lang;
+
+  $out  = '<!-- TOC START -->'.DOKU_LF;
+  $out .= '<div id="dokuwiki__toc" class="panel panel-default">'.DOKU_LF;
+  $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
+  $out .= '<span>';
+  $out .= $lang['toc'];
+  $out .= '</span>';
+  $out .= ' <i class="caret"></i></h3></div>'.DOKU_LF;
+  $out .= '<div class="panel-collapse collapse in">'.DOKU_LF;
+  $out .= '<div class="panel-body">'.DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc,'nav nav-pills nav-stacked toc','html_list_toc')).DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
+  $out .= '<!-- TOC END -->'.DOKU_LF;
+
+  return $out;
 
 }

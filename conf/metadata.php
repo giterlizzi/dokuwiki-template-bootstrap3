@@ -24,6 +24,7 @@ $meta['rightSidebarGrid']    = array('string');
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
 $meta['fixedTopNavbar']      = array('onoff');
+$meta['showTranslation']     = array('onoff');
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showHomePageLink']    = array('onoff');
 $meta['showUserHomeLink']    = array('onoff');
@@ -32,6 +33,7 @@ $meta['individualTools']     = array('onoff');
 $meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showAdminMenu']       = array('onoff');
+$meta['useLegacyNavbar']     = array('onoff');
 
 // Semantic
 $meta['semantic']            = array('onoff');
@@ -66,13 +68,11 @@ $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('norma
 
 // Others
 $meta['showPageInfo']         = array('onoff');
-$meta['showTranslation']      = array('onoff');
 $meta['showBadges']           = array('onoff');
 $meta['showLoginOnFooter']    = array('onoff');
 $meta['useGravatar']          = array('onoff');
 $meta['tagsOnTop']            = array('onoff');
 $meta['useAnchorJS']          = array('onoff');
-$meta['useLegacyNavbar']      = array('onoff');
 $meta['showPageIcons']        = array('onoff');
 $meta['pageIcons']            = array('multicheckbox', '_choices' => array('social-share', 'send-mail', 'print', 'help'));
 $meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter'));

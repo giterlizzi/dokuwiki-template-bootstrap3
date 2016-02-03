@@ -72,33 +72,28 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 
 /* Table of contents */
-#dw__toc {
+#dokuwiki__toc {
 
-  width: auto;
-
-  li {
-    list-style-type: none;
-  }
-
-  h3 {
-
-    margin: 0;
+  .panel-body {
     padding: 5px;
-    font-weight: bold;
-    font-size: .9em;
-
-    strong span {
-      display: none;
-    }
-
-    strong {
-      padding-right: 5px;
-    }
-
+    width: 16em;
   }
 
-  h3.closed > span {
-    display: none;
+  .panel-heading {
+
+    padding: 5px 10px;
+
+    h3 {
+      font-weight: bold;
+      font-size: .9em;
+      cursor: pointer;
+
+      &.closed span {
+        display: none;
+      }
+
+    }
+
   }
 
   ul.toc ul {
@@ -109,18 +104,13 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
     li a {
       padding: 2px 4px;
-      font-size: .9em;
+      font-size: small;
     }
 
     .nav .active .nav {
       display: block;
     }
 
-  }
-
-  .panel-body {
-    padding: 5px;
-    width: 16em;
   }
 
 }
@@ -323,7 +313,7 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 
 .dw-toc-affix {
-  z-index: 1024;
+  z-index: 2048;
   padding-left: 15px;
   right: 25px;
 }

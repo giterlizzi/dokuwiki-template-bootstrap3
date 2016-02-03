@@ -15,13 +15,13 @@ global $JSINFO;
 global $INPUT;
 global $ACT;
 
-$fixedTopNavbar      = bootstrap3_conf('fixedTopNavbar');
-$pageOnPanel         = bootstrap3_conf('pageOnPanel');
+$fixedTopNavbar    = bootstrap3_conf('fixedTopNavbar');
+$pageOnPanel       = bootstrap3_conf('pageOnPanel');
 
-$bootstrap_theme      = bootstrap3_conf('bootstrapTheme');
-$custom_theme         = bootstrap3_conf('customTheme');
-$bootswatch_theme     = bootstrap3_conf('bootswatchTheme');
-$bootstrap_styles     = array();
+$bootstrap_theme   = bootstrap3_conf('bootstrapTheme');
+$custom_theme      = bootstrap3_conf('customTheme');
+$bootswatch_theme  = bootstrap3_conf('bootswatchTheme');
+$bootstrap_styles  = array();
 
 $JSINFO['bootstrap3'] = array(
   'tableFullWidth' => (int) bootstrap3_conf('tableFullWidth'),
