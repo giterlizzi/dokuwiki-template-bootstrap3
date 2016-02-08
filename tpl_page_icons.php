@@ -29,13 +29,19 @@ if (in_array('help', $page_icons)) {
 
   <ul class="list-inline pull-right">
     <?php if(in_array('send-mail', $page_icons)): ?>
-    <li><a href="#" title="Send e-Mail" class="send-mail"><i class="fa fa-envelope text-muted"></i></a></li>
+    <li>
+      <a href="#" title="Send e-Mail" class="send-mail"><i class="fa fa-envelope text-muted"></i></a>
+    </li>
     <?php endif;
-            if(in_array('print', $page_icons)): ?>
-    <li><a href="#" title="Print" onclick="window.print()"><i class="fa fa-print text-muted"></i></a></li>
+          if(in_array('print', $page_icons)): ?>
+    <li>
+      <a href="#" title="Print" onclick="window.print()"><i class="fa fa-print text-muted"></i></a>
+    </li>
     <?php endif;
-            if(in_array('help', $page_icons) && $help_page): ?>
-    <li><a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-question text-muted"></i></a></li>
+          if(in_array('help', $page_icons) && $help_page): ?>
+    <li>
+      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-question text-info"></i></a>
+    </li>
     <?php endif; ?>
   </ul>
 
@@ -50,22 +56,34 @@ if (in_array('help', $page_icons)) {
         <i class="fa fa-fw fa-share-alt"></i> Share on ...
       </li>
       <?php if(in_array('google-plus', $social_share_providers)): ?>
-      <li><a href="#" class="share-google-plus" title="Share on Google+"><i class="fa fa-fw fa-lg fa-google-plus-square"></i> Google+</a></li>
+      <li>
+        <a href="#" class="share-google-plus" title="Share on Google+"><i class="fa fa-fw fa-lg fa-google-plus-square"></i> Google+</a>
+      </li>
       <?php endif;
             if(in_array('twitter', $social_share_providers)): ?>
-      <li><a href="#" class="share-twitter" title="Share on Twitter"><i class="fa fa-fw fa-lg fa-twitter-square"></i> Twitter</a></li>
+      <li>
+        <a href="#" class="share-twitter" title="Share on Twitter"><i class="fa fa-fw fa-lg fa-twitter-square"></i> Twitter</a>
+      </li>
       <?php endif;
             if(in_array('linkedin', $social_share_providers)): ?>
-      <li><a href="#" class="share-linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-lg fa-linkedin-square"></i> LinkedIn</a></li>
+      <li>
+        <a href="#" class="share-linkedin" title="Share on LinkedIn"><i class="fa fa-fw fa-lg fa-linkedin-square"></i> LinkedIn</a>
+      </li>
       <?php endif;
             if(in_array('facebook', $social_share_providers)): ?>
-      <li><a href="#" class="share-facebook" title="Share on Facebook"><i class="fa fa-fw fa-lg fa-facebook-square"></i> Facebook</a></li>
+      <li>
+        <a href="#" class="share-facebook" title="Share on Facebook"><i class="fa fa-fw fa-lg fa-facebook-square"></i> Facebook</a>
+      </li>
       <?php endif;
             if(in_array('pinterest', $social_share_providers)): ?>
-      <li><a href="#" class="share-pinterest" title="Share on Pinterest"><i class="fa fa-fw fa-lg fa-pinterest"></i> Pinterest</a></li>
+      <li>
+        <a href="#" class="share-pinterest" title="Share on Pinterest"><i class="fa fa-fw fa-lg fa-pinterest"></i> Pinterest</a>
+      </li>
       <?php endif;
             if(in_array('whatsapp', $social_share_providers) && $INFO['ismobile']): ?>
-      <li><a href="whatsapp://send?text=" class="share-whatsapp" title="Share on Whatsapp" data-action="share/whatsapp/share"><i class="fa fa-fw fa-lg fa-whatsapp"></i> Whatsapp</a></li>
+      <li>
+        <a href="whatsapp://send?text=" class="share-whatsapp" title="Share on Whatsapp" data-action="share/whatsapp/share"><i class="fa fa-fw fa-lg fa-whatsapp"></i> Whatsapp</a>
+      </li>
       <?php endif; ?>
     </ul>
   </div>
