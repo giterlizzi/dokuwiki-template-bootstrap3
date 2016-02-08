@@ -1309,15 +1309,16 @@ function bootstrap3_toc($return = false) {
   if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
 
     $bootstrap3_sections = array(
-      'themes'        => 'Themes',
-      'sidebar'       => 'Sidebar',
-      'navbar'        => 'Navbar',
-      'semantic'      => 'Semantic',
-      'layout'        => 'Layout',
-      'discussion'    => 'Discussion',
-      'cookie_law'    => 'Cookie Law',
-      'browser_title' => 'Browser Title',
-      'others'        => 'Others'
+      'theme'            => 'Theme',
+      'sidebar'          => 'Sidebar',
+      'navbar'           => 'Navbar',
+      'semantic'         => 'Semantic',
+      'layout'           => 'Layout',
+      'discussion'       => 'Discussion',
+      'cookie_law'       => 'Cookie Law',
+      'google_analytics' => 'Google Analytics',
+      'browser_title'    => 'Browser Title',
+      'others'           => 'Others'
     );
 
     foreach ($bootstrap3_sections as $id => $title) {
@@ -1371,5 +1372,50 @@ function bootstrap3_html_toc($toc){
   $out .= '<!-- TOC END -->'.DOKU_LF;
 
   return $out;
+
+}
+
+
+/**
+ * Add Google Analytics
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function bootstrap3_google_analytics() {
+
+  global $INFO;
+  global $ID;
+
+  if (! bootstrap3_conf('useGoogleAnalytics')) return false;
+  if (! $google_analitycs_id = bootstrap3_conf('googleAnalyticsTrackID')) return false;
+
+  if (bootstrap3_conf('googleAnalyticsNoTrackAdmin') && $INFO['isadmin']) return false;
+  if (bootstrap3_conf('googleAnalyticsNoTrackUsers') && isset($_SERVER['REMOTE_USER'])) return false;
+
+  if (tpl_getConf('googleAnalyticsNoTrackPages')) {
+    if (preg_match_all(bootstrap3_conf('googleAnalyticsNoTrackPages'), $ID)) return false;
+  }
+
+  $out  = '<!-- Google Analytics -->'. DOKU_LF;
+  $out .= '<script type="text/javascript">'. DOKU_LF;
+  $out .= 'window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;'. DOKU_LF;
+  $out .= 'ga("create", "'.$google_analitycs_id.'", "auto");'. DOKU_LF;
+  $out .= 'ga("send", "pageview");'. DOKU_LF;
+
+  if (bootstrap3_conf('googleAnalyticsAnonymizeIP')) {
+    $out .= 'ga("set", "anonymizeIp", true);'.DOKU_LF;
+  }
+
+  if (bootstrap3_conf('googleAnalyticsTrackActions')) {
+    $out .= 'ga("send", "event", "DokuWiki", JSINFO.bootstrap3.mode);'.DOKU_LF;
+  }
+
+  $out .= '</script>'. DOKU_LF;
+  $out .= '<script type="text/javascript" async src="//www.google-analytics.com/analytics.js"></script>'. DOKU_LF;
+  $out .= '<!-- End Google Analytics -->'. DOKU_LF;
+
+  print $out;
 
 }

@@ -162,16 +162,17 @@ jQuery(document).ready(function() {
   if (dw_mode('admin')) {
 
     var tpl_sections = {
-      // Section          ID                Insert before           Icon
-      'Themes'        : [ 'themes',         'bootstrapTheme',       'fa-tint'      ],
-      'Sidebar'       : [ 'sidebar',        'sidebarPosition',      'fa-columns'   ],
-      'Navbar'        : [ 'navbar',         'inverseNavbar',        'fa-navicon'   ],
-      'Semantic'      : [ 'semantic',       'semantic',             'fa-share-alt' ],
-      'Layout'        : [ 'layout',         'fluidContainer',       'fa-desktop'   ],
-      'Discussion'    : [ 'discussion',     'showDiscussion',       'fa-comments'  ],
-      'Cookie Law'    : [ 'cookie_law',     'showCookieLawBanner',  'fa-legal'     ],
-      'Browser Title' : [ 'browser_title',  'browserTitle',         'fa-header'    ],
-      'Others'        : [ 'others',         'showPageInfo',         'fa-gears'     ]
+      // Section            ID                  Insert before           Icon
+      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
+      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
+      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
+      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
+      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
+      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
+      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
+      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
+      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
+      'Others'          : [ 'others',           'showPageInfo',         'fa-gears'     ]
     };
 
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {

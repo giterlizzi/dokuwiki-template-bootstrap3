@@ -35,6 +35,7 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders() ?>
+  <?php bootstrap3_google_analytics() ?>
   <style type="text/css">
     body { padding-top: <?php echo $navbar_padding ?>px; }
     <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>

@@ -7,7 +7,7 @@
  */
 
 
-// Themes
+// Theme
 $meta['bootstrapTheme']      = array('multichoice', '_choices' => array('default', 'optional', 'custom', 'bootswatch'));
 $meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'));
 $meta['customTheme']         = array('string');
@@ -59,6 +59,15 @@ $meta['discussionPage']      = array('string');
 $meta['showCookieLawBanner'] = array('onoff');
 $meta['cookieLawBannerPage'] = array('string');
 $meta['cookieLawPolicyPage'] = array('string');
+
+// Google Analytics
+$meta['useGoogleAnalytics']          = array('onoff');
+$meta['googleAnalyticsTrackID']      = array('string');
+$meta['googleAnalyticsAnonymizeIP']  = array('onoff');
+$meta['googleAnalyticsNoTrackAdmin'] = array('onoff');
+$meta['googleAnalyticsNoTrackUsers'] = array('onoff');
+$meta['googleAnalyticsNoTrackPages'] = array('regex');
+$meta['googleAnalyticsTrackActions'] = array('onoff');
 
 // Browser Title
 $meta['browserTitle']          = array('string');
