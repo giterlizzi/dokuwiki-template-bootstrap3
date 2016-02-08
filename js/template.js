@@ -29,6 +29,9 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Page heading
     $dw_content.find('h1, h2').addClass('page-header');
 
+    // Abbr tooltips
+    jQuery('abbr').tooltip();
+
     // Tables
     if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
       $dw_content.find('div.table').addClass('table-responsive');
