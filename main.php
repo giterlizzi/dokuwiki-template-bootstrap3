@@ -88,9 +88,9 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
       <?php bootstrap3_sidebar_include('left') ?>
 
       <!-- ********** CONTENT ********** -->
-      <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s"', bootstrap3_conf('schemaOrgType')) : '') ?>>
+      <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
-        <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($semantic) ? 'itemprop="articleBody"' : '') ?>>
+        <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
           <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
 
             <?php
@@ -144,50 +144,46 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
 
     </main>
 
-    <footer id="dokuwiki__footer" class="small">
+    <div class="small text-right">
 
-      <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
+      <?php if (bootstrap3_conf('showPageInfo')): ?>
+      <span class="docInfo text-muted">
+        <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
+      </span>
+      <?php endif ?>
 
-      <div class="text-right">
+      <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+      <span class="loginLink hidden-print">
+        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+      </span>
+      <?php endif; ?>
 
-        <?php if (bootstrap3_conf('showPageInfo')): ?>
-        <span class="docInfo text-muted">
-          <?php tpl_pageinfo() /* 'Last modified' etc */ ?>
-        </span>
-        <?php endif ?>
+    </div>
 
-        <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
-        <span class="loginLink hidden-print">
-          <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
-        </span>
-        <?php endif; ?>
-
-      </div>
-
-      <div class="text-center hidden-print">
-        <p id="dw__license"><?php tpl_license('') ?></p>
-      </div>
-
-      <?php
-        // DokuWiki badges
-        require_once('tpl_badges.php');
-
-        // Footer hook
-        tpl_includeFile('footer.html');
-
-        // Footer DokuWiki page
-        require_once('tpl_footer.php');
-      ?>
-
-    </footer>
+    <?php if ($conf['license']): ?>
+    <div id="dw__license" class="text-center small" <?php ((bootstrap3_conf('semantic')) ? 'itemprop="license"' : '') ?>>
+      <?php echo tpl_license('') ?>
+    </div>
+    <?php endif; ?>
 
     <?php
+      // DokuWiki badges
+      require_once('tpl_badges.php');
+
+      // Footer hook
+      tpl_includeFile('footer.html');
+
+      // Footer DokuWiki page
+      require_once('tpl_footer.php');
+
       // Cookie-Law banner
       require_once('tpl_cookielaw.php');
-    
+
       // Provide DokuWiki housekeeping, required in all templates
       tpl_indexerWebBug();
     ?>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
       <span class="visible-xs"></span>

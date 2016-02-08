@@ -1356,7 +1356,7 @@ function bootstrap3_html_toc($toc){
   global $lang;
 
   $out  = '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<div id="dokuwiki__toc" class="panel panel-default">'.DOKU_LF;
+  $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
   $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
   $out .= '<span>';
   $out .= $lang['toc'];
@@ -1367,7 +1367,7 @@ function bootstrap3_html_toc($toc){
   $out .= bootstrap3_lists(html_buildlist($toc,'nav nav-pills nav-stacked toc','html_list_toc')).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</div>'.DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
+  $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
 
   return $out;
