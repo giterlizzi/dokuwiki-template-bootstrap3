@@ -78,3 +78,7 @@ $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useGravatar']                  = 'Load Gravatar image';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
+$lang['pageInfo']                     = 'Display/Hide page info elements';
+$lang['pageInfoDateFormat']           = 'Date format';
+$lang['pageInfoDateFormat_o_human']   = 'Human readable';
+$lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki format';

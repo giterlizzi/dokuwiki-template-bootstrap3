@@ -50,6 +50,9 @@ $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showPageId']             = array('onoff');
 $meta['tocCollapseSubSections'] = array('onoff');
+$meta['showBadges']             = array('onoff');
+$meta['showLoginOnFooter']      = array('onoff');
+$meta['useGravatar']            = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
@@ -75,13 +78,12 @@ $meta['browserTitleShowNS']    = array('onoff');
 $meta['browserTitleCharSepNS'] = array('multichoice', '_choices' => array('-', '|', ',', '/', '>'));
 $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse'));
 
-// Others
+// Page
 $meta['showPageInfo']         = array('onoff');
-$meta['showBadges']           = array('onoff');
-$meta['showLoginOnFooter']    = array('onoff');
-$meta['useGravatar']          = array('onoff');
-$meta['tagsOnTop']            = array('onoff');
-$meta['useAnchorJS']          = array('onoff');
+$meta['pageInfo']             = array('multicheckbox', '_choices' => array('filename', 'extension', 'date', 'editor', 'locked'));
+$meta['pageInfoDateFormat']   = array('multichoice', '_choices'   => array('dformat', 'human'));
 $meta['showPageIcons']        = array('onoff');
 $meta['pageIcons']            = array('multicheckbox', '_choices' => array('social-share', 'send-mail', 'print', 'help'));
 $meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter'));
+$meta['tagsOnTop']            = array('onoff');
+$meta['useAnchorJS']          = array('onoff');

@@ -172,14 +172,14 @@ jQuery(document).ready(function() {
       'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
       'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
       'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Others'          : [ 'others',           'showPageInfo',         'fa-gears'     ]
+      'Page'            : [ 'page',             'showPageInfo',         'fa-file'     ]
     };
 
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
       var $node = jQuery(this);
       jQuery.each(tpl_sections, function(section, item){
         if( $node.attr('for').match([item[1], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
         }
       });
     });

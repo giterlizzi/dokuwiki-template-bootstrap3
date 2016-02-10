@@ -795,7 +795,7 @@ function bootstrap3_toolbar() {
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
 
-  $url = 'https://www.gravatar.com/avatar/';
+  $url = 'https://secure.gravatar.com/avatar/';
   $url .= md5( strtolower( trim( $email ) ) );
   $url .= "?s=$s&d=$d&r=$r";
 
@@ -1318,7 +1318,7 @@ function bootstrap3_toc($return = false) {
       'cookie_law'       => 'Cookie Law',
       'google_analytics' => 'Google Analytics',
       'browser_title'    => 'Browser Title',
-      'others'           => 'Others'
+      'page'             => 'Page'
     );
 
     foreach ($bootstrap3_sections as $id => $title) {
@@ -1418,4 +1418,114 @@ function bootstrap3_google_analytics() {
 
   print $out;
 
+}
+
+
+/**
+ * Print some info about the current page
+ *
+ * @author  Andreas Gohr <andi@splitbrain.org>
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   bool $ret return content instead of printing it
+ * @return  bool|string
+ */
+function bootstrap3_pageinfo($ret = false) {
+
+  global $conf;
+  global $lang;
+  global $INFO;
+  global $ID;
+
+  // return if we are not allowed to view the page
+  if (!auth_quickaclcheck($ID)) {
+    return false;
+  }
+
+  // prepare date and path
+  $fn = $INFO['filepath'];
+
+  if (!$conf['fullpath']) {
+
+    if ($INFO['rev']) {
+      $fn = str_replace(fullpath($conf['olddir']).'/', '', $fn);
+    } else {
+      $fn = str_replace(fullpath($conf['datadir']).'/', '', $fn);
+    }
+
+  }
+
+  $date_format = bootstrap3_conf('pageInfoDateFormat');
+  $page_info   = bootstrap3_conf('pageInfo');
+
+  $fn   = utf8_decodeFN($fn);
+  $date = (($date_format == 'dformat')
+    ? dformat($INFO['lastmod'])
+    : datetime_h($INFO['lastmod']));
+
+  // print it
+  if ($INFO['exists']) {
+
+    $fn_full = $fn;
+
+    if (! in_array('extension', $page_info)) {
+      $fn = str_replace(array('.txt.gz', '.txt'), '', $fn);
+    }
+
+    $out = '<ul class="list-inline">';
+
+    if (in_array('filename', $page_info)) {
+      $out .= '<li><i class="fa fa-fw fa-file-text-o text-muted"></i> <span title="'.$fn_full.'">'.$fn.'</span></li>';
+    }
+
+    if (in_array('date', $page_info)) {
+      $out .= '<li><i class="fa fa-fw fa-calendar text-muted"></i> ' . $lang['lastmod'] . ' <span title="'. dformat($INFO['lastmod']) .'">' . $date . '</span></li>';
+    }
+
+    if (in_array('editor', $page_info)) {
+
+      if($INFO['editor']) {
+
+        $user = editorinfo($INFO['editor']);
+
+        if (bootstrap3_conf('useGravatar')) {
+
+          global $auth;
+          $user_data = $auth->getUserData($INFO['editor']);
+
+          $HTTP = new DokuHTTPClient();
+
+          $gravatar_img   = get_gravatar($user_data['mail'], 16);
+          $gravatar_check = $HTTP->get($gravatar_img . '&d=404');
+
+          if ($gravatar_check) {
+            $user_img = '<img src="'.$gravatar_img.'" alt="" width="16" class="img-rounded" /> ';
+            $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
+            $user     = $user_img . $user;
+          }
+
+        }
+
+        $out .= '<li>'. $lang['by'] .' '. $user .'</li>';
+
+      } else {
+        $out .= '<li>('.$lang['external_edit'].')</li>';
+      }
+
+    }
+
+    if ($INFO['locked'] && in_array('locked', $page_info)) {
+      $out .= '<li><i class="fa fa-fw fa-lock text-muted"></i> ' . $lang['lockedby'] . ' ' .editorinfo($INFO['locked']). '</li>';
+    }
+
+    $out .= '</ul>';
+
+    if ($ret) {
+        return $out;
+    } else {
+        echo $out;
+        return true;
+    }
+  }
+  return false;
 }
