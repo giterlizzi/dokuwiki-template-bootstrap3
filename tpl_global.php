@@ -51,7 +51,7 @@ switch ($bootstrap_theme) {
     $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
     break;
   case 'custom':
-    $bootstrap_styles[] = $customTheme;
+    $bootstrap_styles[] = $custom_theme;
     break;
   case 'bootswatch':
     $url = (bootstrap3_conf('useLocalBootswatch')) ? DOKU_TPL.'assets/bootswatch' : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
@@ -69,10 +69,10 @@ $navbar_padding = 20;
 
 if (bootstrap3_conf('fixedTopNavbar')) {
 
-  if ($bootstrapTheme == 'bootswatch') {
+  if ($bootstrap_theme == 'bootswatch') {
 
     // Set the navbar height for all Bootswatch Themes (values from bootswatch/*/_variables.scss)
-    switch ($bootswatchTheme) {
+    switch ($bootswatch_theme) {
       case 'simplex':
       case 'superhero':
         $navbar_height = 40;
