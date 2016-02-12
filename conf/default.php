@@ -47,6 +47,7 @@ $conf['showHomePageLink']            = 0;
 $conf['showIndividualTool']          = 'user,site,page';
 $conf['showLandingPage']             = 0;
 $conf['showLoginOnFooter']           = 0;
+$conf['showNavbar']                  = 'always';
 $conf['showPageIcons']               = 0;
 $conf['showPageId']                  = 1;
 $conf['showPageInfo']                = 1;
