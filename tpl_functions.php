@@ -531,6 +531,8 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
  */
 function bootstrap3_navbar() {
 
+  if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
+
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
 
   $navbar = str_replace('urlextern', '', $navbar);
@@ -1475,16 +1477,16 @@ function bootstrap3_pageinfo($ret = false) {
     $out = '<ul class="list-inline">';
 
     if (in_array('filename', $page_info)) {
-      $out .= '<li><i class="fa fa-fw fa-file-text-o text-muted"></i> <span title="'.$fn_full.'">'.$fn.'</span></li>';
+      $out .= sprintf('<li><i class="fa fa-fw fa-file-text-o text-muted"></i> <span title="%s">%s</span></li>', $fn_full, $fn);
     }
 
     if (in_array('date', $page_info)) {
-      $out .= '<li><i class="fa fa-fw fa-calendar text-muted"></i> ' . $lang['lastmod'] . ' <span title="'. dformat($INFO['lastmod']) .'">' . $date . '</span></li>';
+      $out .= sprintf('<li><i class="fa fa-fw fa-calendar text-muted"></i> %s <span title="%s">%s</span></li>', $lang['lastmod'],  dformat($INFO['lastmod']), $date);
     }
 
     if (in_array('editor', $page_info)) {
 
-      if($INFO['editor']) {
+      if (isset($INFO['editor'])) {
 
         $user = editorinfo($INFO['editor']);
 
@@ -1499,33 +1501,35 @@ function bootstrap3_pageinfo($ret = false) {
           $gravatar_check = $HTTP->get($gravatar_img . '&d=404');
 
           if ($gravatar_check) {
-            $user_img = '<img src="'.$gravatar_img.'" alt="" width="16" class="img-rounded" /> ';
+            $user_img = sprintf('<img src="%s" alt="" width="16" class="img-rounded" /> ', $gravatar_img);
             $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
             $user     = $user_img . $user;
           }
 
         }
 
-        $out .= '<li>'. $lang['by'] .' '. $user .'</li>';
+        $out .= sprintf('<li class="text-muted">%s %s</li>', $lang['by'], $user);
 
       } else {
-        $out .= '<li>('.$lang['external_edit'].')</li>';
+        $out .= sprintf('<li>(%s)</li>', $lang['external_edit']);
       }
 
     }
 
     if ($INFO['locked'] && in_array('locked', $page_info)) {
-      $out .= '<li><i class="fa fa-fw fa-lock text-muted"></i> ' . $lang['lockedby'] . ' ' .editorinfo($INFO['locked']). '</li>';
+      $out .= sprintf('<li><i class="fa fa-fw fa-lock text-muted"></i> %s %s</li>', $lang['lockedby'], editorinfo($INFO['locked']));
     }
 
     $out .= '</ul>';
 
     if ($ret) {
-        return $out;
+      return $out;
     } else {
-        echo $out;
-        return true;
+      echo $out;
+      return true;
     }
+
   }
+
   return false;
 }
