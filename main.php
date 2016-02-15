@@ -148,7 +148,7 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
     <div class="small text-right">
 
       <?php if (bootstrap3_conf('showPageInfo')): ?>
-      <span class="docInfo">
+      <span class="docInfo" id="dw__pageinfo">
         <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
       </span>
       <?php endif ?>
