@@ -48,10 +48,10 @@ if (in_array('help', $page_icons)) {
   <?php if($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="#" title="Share to ..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <a href="#" title="Share on ..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       <i class="fa fa-share-alt text-muted"></i>
     </a>
-    <ul class="dropdown-menu" aria-labelledby="share-with">
+    <ul class="dropdown-menu">
       <li class="dropdown-header">
         <i class="fa fa-fw fa-share-alt"></i> Share on ...
       </li>
