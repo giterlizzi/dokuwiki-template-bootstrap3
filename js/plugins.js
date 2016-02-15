@@ -75,44 +75,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     // DataTables Plugin
     if ($datatables.length) {
-
       $datatables.find('.table-responsive').removeClass('table-responsive');
-      $datatables.find('.form-control').addClass('input-sm');
-
-      jQuery(document).on('bootstrap3:plugin-datatables', function(e, $wrapper) {
-
-        var $pagination = jQuery($wrapper).find('.dataTables_paginate');
-
-        $pagination.find('> span').wrapInner('<ul/>');
-        $pagination.find('ul').contents().wrap('<li/>');
-        $pagination.find('ul').addClass('pagination');
-        $pagination.find('.paginate_button').removeClass('paginate_button');
-        $pagination.find('.current').parent().addClass('active');
-        $pagination.find('.ellipsis').wrap('<a href="#"/>').removeClass('ellipsis');
-
-        var $previous = $pagination.find('.previous'),
-            $next     = $pagination.find('.next');
-
-        $previous.wrap('<li/>');
-        $previous.parent().prependTo($pagination.find('ul'));
-
-        $next.wrap('<li/>');
-        $next.parent().appendTo($pagination.find('ul'));
-
-        $pagination.find('a:not(.disabled)').on('click', function() {
-          jQuery(document).trigger('bootstrap3:plugin-datatables', $wrapper);
-        });
-
-      });
-
-      jQuery('.dataTables_wrapper').each(function() {
-        jQuery(document).trigger('bootstrap3:plugin-datatables', jQuery(this));
-      });
-
-      $datatables.find('th').on('click', function() {
-        jQuery(document).trigger('bootstrap3:plugin-datatables');
-      });
-
     }
 
 
