@@ -3,8 +3,8 @@
  * Chinese Language file for template
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @author   Small_Ku
  * @author   <dev@openbdh.com>
+ * @author   Small_Ku
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
