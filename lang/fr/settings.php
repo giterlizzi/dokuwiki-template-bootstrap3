@@ -1,19 +1,12 @@
 <?php
 /**
- * French Language file for config
+ * Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @author   Maxime Buque <pep+code@bouah.net>
- * @author   Digitalin
- * @author   Cyril
- * @author   Keyven
- * @author   momo choko
- * @author   Grègoire Leclercq
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussionPage']      = 'Nom de la page de discussion (<code>discussion:@ID@</code> par défaut,  <code>@ID@</code> étant le nom de la page courante). L
-e lien n\'est pas actif si le champ est laissé vide.';
+$lang['discussionPage']      = 'Nom de la page de discussion (<code>discussion:@ID@</code> par défaut, <code>@ID@</code> étant le nom de la page courante). Le lien n\'est pas actif si le champ est laissé vide.';
 $lang['showDiscussion']      = 'Afficher un lien vers la page de discussion dans les outils.';
 $lang['showLoginOnFooter']   = 'Afficher un "petit" lien vers le login en bas de page. Cette option est utile quand <code>hideLoginLink</code> est actif.';
 $lang['hideLoginLink']       = 'Cacher le bouton de login dans la barre de navigation. Cette option est utile quand le DokuWiki est en lecture seule, (e.g., blog, site perso)';
