@@ -1091,12 +1091,19 @@ function bootstrap3_youarehere() {
     $parts = explode(':', $ID);
     $count = count($parts);
 
-    echo '<ol class="breadcrumb">';
+    $semantic = bootstrap3_conf('semantic');
+
+    echo '<ol class="breadcrumb"'. ($semantic ? ' itemscope itemtype="http://schema.org/BreadcrumbList"' : '') .'>';
     echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
     // always print the startpage
-    echo '<li>';
-    tpl_link(wl($conf['start']), '<i class="fa fa-fw fa-home"></i>', 'title="'. $conf['start'] .'"');
+    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '').'>';
+
+    tpl_link(wl($conf['start']),
+             ($semantic ? '<span itemprop="name">' : '') . '<i class="fa fa-fw fa-home"></i>' . ($semantic ? '</span>' : ''),
+             ($semantic ? ' itemprop="item" ' : '') . 'title="'. $conf['start'] .'"'
+            );
+
     echo '</li>';
 
     // print intermediate namespace links
@@ -1110,8 +1117,15 @@ function bootstrap3_youarehere() {
         if($page == $conf['start']) continue; // Skip startpage
 
         // output
-        echo '<li>';
-        echo str_replace('curid', '', html_wikilink($page));
+        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+
+        $link = html_wikilink($page);
+        $link = str_replace(' class="curid"', '', html_wikilink($page));
+
+        if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
+
+        echo $link;
+
         echo '</li>';
 
     }
@@ -1131,8 +1145,15 @@ function bootstrap3_youarehere() {
       return true;
     }
 
-    echo '<li class="active">';
-    echo str_replace('curid', '', html_wikilink($page));
+    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+
+    $link = html_wikilink($page);
+    $link = str_replace(' class="curid"', '', html_wikilink($page));
+
+    if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
+
+    echo $link;
+
     echo '</li>';
 
     echo '</ol>';
