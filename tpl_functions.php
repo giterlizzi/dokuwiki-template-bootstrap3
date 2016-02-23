@@ -637,6 +637,12 @@ function bootstrap3_html_msgarea() {
     // store if the global $MSG has already been shown and thus HTML output has been started
     $MSG_shown = true;
 
+    // Check if translation is outdate
+    if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
+      global $ID;
+      if ($translation->istranslatable($ID)) $translation->checkage();
+    }
+
     if(!isset($MSG)) return;
 
     $shown = array();
