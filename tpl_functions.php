@@ -693,7 +693,7 @@ function bootstrap3_tools() {
   $tools  = array(
 
     'user' => array(
-      'icon'  => 'fa fa-fw fa-user',
+      'icon'  => 'fa fa-fw fa-user-plus',
       'items' => array(
         'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
         'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
