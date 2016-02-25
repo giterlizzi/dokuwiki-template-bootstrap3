@@ -11,6 +11,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
   setTimeout(function() {
 
     var $tags             = jQuery('.tags'),                 // Tags Plugin
+        $page             = jQuery('table tbody th.page'),   // Tags Plugin: Count
         $translation      = jQuery('#dw__translation'),      // Translation Plugin
         $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
         $publish          = jQuery('.approval'),             // Publish Plugin
@@ -24,6 +25,15 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
         $toc2             = jQuery('div.inlinetoc2'),        // InlineTOC Plugin
         $davcal           = jQuery('#fullCalendar'),         // DAVCal Plugin
         $include_readmore = jQuery('.include_readmore');     // Include Plugin (Read More)
+
+
+    // Tag Plugin: Count
+    if ($page.length) {
+      var $table = $page.parents('table');
+      $table.prepend('<thead><tr/></thead>');
+      $table.find('thead tr').append($page);
+      $page.removeClass('page');
+    }
 
 
     // Include Plugin (Read More)
