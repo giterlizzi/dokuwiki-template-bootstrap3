@@ -12,7 +12,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     var $tags             = jQuery('.tags'),                 // Tags Plugin
         $page             = jQuery('table tbody th.page'),   // Tags Plugin: Count
-        $csv              = jQuery('table tr.row0'),         // CSV Plugin
+        $csv              = jQuery('table tbody tr.row0'),   // CSV Plugin
         $translation      = jQuery('#dw__translation'),      // Translation Plugin
         $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
         $publish          = jQuery('.approval'),             // Publish Plugin
