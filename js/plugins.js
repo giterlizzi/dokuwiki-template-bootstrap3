@@ -12,7 +12,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     var $tags             = jQuery('.tags'),                 // Tags Plugin
         $page             = jQuery('table tbody th.page'),   // Tags Plugin: Count
-        $csv              = jQuery('table tbody tr.row0'),   // CSV Plugin
+        $csv              = jQuery('table tbody tr.row0 th.col0'), // CSV Plugin
         $translation      = jQuery('#dw__translation'),      // Translation Plugin
         $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
         $publish          = jQuery('.approval'),             // Publish Plugin
@@ -30,9 +30,16 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     // CSV Plugin
     if ($csv.length) {
-      var $table = $csv.parents('table');
-      $table.prepend('<thead/>');
-      $table.find('thead').append($csv);
+
+      $csv.each(function() {
+        var $table = jQuery(this).parents('table');
+        if ($table.find('tr.row1 th').length == 0) {
+          $table.prepend('<thead/>');
+          $header = $table.find('tr.row0');
+          $table.find('thead').append($header);
+        }
+      });
+
     }
 
 
