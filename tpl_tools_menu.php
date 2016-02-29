@@ -12,14 +12,7 @@ if (!defined('DOKU_INC')) die();
 
 if (bootstrap3_conf('showTools')):
 
-$all_tools = bootstrap3_tools_menu();
-
-foreach (bootstrap3_conf('showIndividualTool') as $tool) {
-  if ($dropdown = bootstrap3_toolsevent($tool.'tools', $all_tools[$tool]['menu'], 'main', true)) {
-    $tools[$tool] = $all_tools[$tool];
-    $tools[$tool]['dropdown'] = $dropdown;
-  }
-}
+$tools = bootstrap3_tools_menu();
 
 ?>
 
@@ -38,7 +31,7 @@ foreach (bootstrap3_conf('showIndividualTool') as $tool) {
       <li class="dropdown-header hidden-xs hidden-sm">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php echo $menu['dropdown'] ?>
+      <?php echo $menu['dropdown-menu'] ?>
 
     </ul>
   </li>
@@ -57,7 +50,7 @@ foreach (bootstrap3_conf('showIndividualTool') as $tool) {
       <li class="dropdown-header">
         <i class="<?php echo $menu['icon'] ?>"></i> <?php echo $lang[$id.'_tools'] ?>
       </li>
-      <?php echo $menu['dropdown'] ?>
+      <?php echo $menu['dropdown-menu'] ?>
 
       <?php if ($max > $i): ?>
       <li class="divider" role="separator"></li>

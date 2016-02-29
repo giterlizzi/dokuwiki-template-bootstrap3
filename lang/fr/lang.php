@@ -7,6 +7,8 @@
  * @author   Digitalin
  * @author   Cyril
  * @author   Keyven
+ * @author   momo choko
+ * @author   Grègoire Leclercq
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

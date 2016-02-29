@@ -10,20 +10,21 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
+global $ID;
 
-    if ($translation->istranslatable($INFO['id'])) {
+if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')):
 
-      $translation->checkage();
+if (! $translation->istranslatable($ID)) return false;
 
-      list($lc, $idpart) = $translation->getTransParts($INFO['id']);
+  list($lc, $idpart) = $translation->getTransParts($ID);
 
-      $trans_items = '';
-      $trans_label = $translation->getLang('translations');
+  $trans_items = '';
+  $trans_label = $translation->getLang('translations');
 
-      foreach ($translation->translations as $trans) {
-        $trans_items .= str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($trans, $idpart));
-      }
+  foreach ($translation->translations as $trans) {
+    $trans_items .= str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($trans, $idpart));
+  }
+
 ?>
 <ul class="nav navbar-nav" id="dw__translation">
   <li class="dropdown">
@@ -35,4 +36,4 @@ if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','t
     <?php echo $trans_items ?>
   </ul>
 </ul>
-<?php } } ?>
+<?php endif; ?>

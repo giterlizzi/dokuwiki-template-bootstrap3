@@ -3,15 +3,15 @@
  * Chinese Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @author   Small_Ku
  * @author   <dev@openbdh.com>
+ * @author   Small_Ku
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
 $lang['discussionPage']      = '讨论页名称（默认为 <code>discussion:@ID@</code>，其中的 <code>@ID@</code> 占位符用以代替当前页名称），本字段留空则禁用链接';
 $lang['showDiscussion']      = '在工具菜单中显示讨论链接';
-$lang['showLoginOnFooter']   = 'Display a "little" login link on footer. This option is useful when <code>hideLoginLink</code> is on';
-$lang['hideLoginLink']       = 'Hide the login button in navbar. This option is useful in "read-only" DokuWiki installations (eg. blog, personal website)';
+$lang['showLoginOnFooter']   = '在底部显示一个小小的登入连接。当<code>hideLoginLink</code>开启了的时候,这个选项很有用。';
+$lang['hideLoginLink']       = '隐藏导航栏的登入按钮。这个选项在只读的DokuWiki安装中有用。(例如:网址,个人网站等)';
 $lang['showUserHomeLink']    = '在导航栏中显示用户首页链接';
 $lang['showCookieLawBanner'] = '在页脚中显示 Cookie 法横幅';
 $lang['cookieLawBannerPage'] = 'Cookie 法横幅页名称';

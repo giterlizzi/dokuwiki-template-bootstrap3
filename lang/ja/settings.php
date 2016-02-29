@@ -49,8 +49,8 @@ $lang['showThemeSwitcher']   = 'Bootswatch.com テーマ選択を navbar に表�
 $lang['hideInThemeSwitcher'] = 'テーマ選択で表示しないテーマ';
 $lang['showPageInfo']        = 'ページのメタデータを表示する（日付、編集者など）';
 $lang['showBadges']          = 'バッチボタン(DokuWiki 寄付 等)を表示する';
-$lang['leftSidebarGrid']     = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
-$lang['rightSidebarGrid']    = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> マニュアルを参照）';
+$lang['leftSidebarGrid']     = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
+$lang['rightSidebarGrid']    = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
 $lang['useGravatar']         = 'Gravatar 画像を利用する';
 $lang['showLandingPage']     = '(ページの周囲にサイドバーやパネルがない)ランディングページを有効にする';
 $lang['landingPages']        = 'ランディングページ名(正規表現を含む)';

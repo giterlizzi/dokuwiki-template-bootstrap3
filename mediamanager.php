@@ -25,13 +25,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
-  <?php foreach ($bootstrap_styles as  $bootstrap_style): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
-  <?php endforeach; ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders() ?>
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

@@ -176,7 +176,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
           break;
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
-          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="" title="$1"><span>$1</span></a>', $html);
+          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
         default:
           $icon = 'puzzle-piece'; // Unknown
@@ -409,6 +409,7 @@ function bootstrap3_fluid_container_button() {
  * @param   boolean  $return
  * @return  string
  */
+/*
 function bootstrap3_toc($toc, $return = false) {
 
   $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
@@ -422,6 +423,7 @@ function bootstrap3_toc($toc, $return = false) {
   echo $out;
 
 }
+*/
 
 
 /**
@@ -436,7 +438,7 @@ function bootstrap3_toc($toc, $return = false) {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = bootstrap3_nav($sidebar, 'pills', true);
-  $out = preg_replace('/<h([1-6])/', '<h$1 class="page-header"', $out);
+  $out = preg_replace('/<h([1-6]) id="(.*)">/', '<h$1 id="$2" class="page-header">', $out);
 
   if ($return) return $out;
   echo $out;
@@ -528,6 +530,8 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
  * @return  string
  */
 function bootstrap3_navbar() {
+
+  if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
 
@@ -633,6 +637,12 @@ function bootstrap3_html_msgarea() {
     // store if the global $MSG has already been shown and thus HTML output has been started
     $MSG_shown = true;
 
+    // Check if translation is outdate
+    if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
+      global $ID;
+      if ($translation->istranslatable($ID)) $translation->checkage();
+    }
+
     if(!isset($MSG)) return;
 
     $shown = array();
@@ -688,43 +698,48 @@ function bootstrap3_html_msgarea() {
 function bootstrap3_tools() {
 
   global $ACT;
-
-  $result = array();
-  $tools  = array(
-
-    'user' => array(
-      'icon'  => 'fa fa-fw fa-user',
-      'items' => array(
-        'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
-        'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
-        #'register' => array('icon' => 'fa fa-fw fa-user-plus'),
-        #'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
-      )
-    ),
-
-    'site' => array(
-      'icon'  => 'fa fa-fw fa-wrench',
-      'items' => array(
-        'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
-        'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
-        'index'  => array('icon' => 'fa fa-fw fa-sitemap'),
-      )
-    ),
-
-    'page' => array(
-      'icon'  => 'fa fa-fw fa-file',
-      'items' => array(
-        'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
-        'discussion' => array('icon' => 'fa fa-fw fa-comments'),
-        'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
-        'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
-        'backlink'   => array('icon' => 'fa fa-fw fa-link'),
-        'subscribe'  => array('icon' => 'fa fa-fw fa-envelope-o'),
-        'top'        => array('icon' => 'fa fa-fw fa-chevron-up'),
-      )
-    ),
-
+  
+  $tools['user'] = array(
+    'icon'    => 'fa fa-fw fa-user',
+    'actions' => array(
+      'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
+      'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
+      'register' => array('icon' => 'fa fa-fw fa-user-plus'),
+      'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+    )
   );
+
+  $tools['site'] = array(
+    'icon'    => 'fa fa-fw fa-wrench',
+    'actions' => array(
+      'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
+      'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
+      'index'  => array('icon' => 'fa fa-fw fa-sitemap'),
+    )
+  );
+
+  $tools['page'] = array(
+    'icon'    => 'fa fa-fw fa-file',
+    'actions' => array(
+      'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+      'discussion' => array('icon' => 'fa fa-fw fa-comments'),
+      'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
+      'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
+      'backlink'   => array('icon' => 'fa fa-fw fa-link'),
+      'subscribe'  => array('icon' => 'fa fa-fw fa-envelope-o'),
+      'top'        => array('icon' => 'fa fa-fw fa-chevron-up'),
+    )
+  );
+
+  foreach ($tools as $id => $menu) {
+
+    foreach ($menu['actions'] as $action => $item) {
+      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
+    }
+
+    $tools[$id]['dropdown-menu'] = bootstrap3_toolsevent($id.'tools', $tools[$id]['menu'], 'main', true);
+
+  }
 
   return $tools;
 
@@ -740,15 +755,16 @@ function bootstrap3_tools() {
  */
 function bootstrap3_tools_menu() {
 
-  $tools = bootstrap3_tools();
+  $individual = bootstrap3_conf('showIndividualTool');
+  $tools      = bootstrap3_tools();
+  $result     = array();
 
-  foreach ($tools as $id => $menu) {
-    foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
-    }
+  foreach ($individual as $tool) {
+    if (! isset($_SERVER['REMOTE_USER']) && $tool == 'user') continue;
+    $result[$tool] = $tools[$tool];
   }
 
-  return $tools;
+  return $result;
 
 }
 
@@ -789,7 +805,7 @@ function bootstrap3_toolbar() {
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
 
-  $url = 'https://www.gravatar.com/avatar/';
+  $url = 'https://gravatar.com/avatar/';
   $url .= md5( strtolower( trim( $email ) ) );
   $url .= "?s=$s&d=$d&r=$r";
 
@@ -848,11 +864,6 @@ function bootstrap3_conf($key, $default = false) {
     case 'showPageTools':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
-    case 'showIndividualTool':
-    case 'hideInThemeSwitcher':
-    case 'tableStyle':
-      return explode(',', $value);
-
     case 'showAdminMenu':
       return $value && $INFO['isadmin'];
 
@@ -867,9 +878,6 @@ function bootstrap3_conf($key, $default = false) {
     case 'showRightSidebar':
       return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
 
-    case 'landingPages':
-      return sprintf('/%s/', $value);
-
     case 'showLandingPage':
       return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
 
@@ -882,11 +890,14 @@ function bootstrap3_conf($key, $default = false) {
 
   }
 
-  //$type = bootstrap3_conf_metadata($key);
+  $metadata = bootstrap3_conf_metadata($key);
 
-  //if ($type[0] == 'regex') {
-  //  return sprintf('/%s/', $value);
-  //}
+  switch ($metadata[0]) {
+    case 'regex':
+      return sprintf('/%s/', $value);
+    case 'multicheckbox':
+      return explode(',', $value);
+  }
 
   return $value;
 
@@ -1014,7 +1025,7 @@ function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
  * @param   integer $size
  * @return  string
  */
-function bootstrap_glyphicon($name, $classes = '', $size = -1) {
+function bootstrap3_glyphicon($name, $classes = '', $size = -1) {
   return bootstrap3_icon('glyphicon', $name, $classes, $size);
 }
 
@@ -1088,12 +1099,19 @@ function bootstrap3_youarehere() {
     $parts = explode(':', $ID);
     $count = count($parts);
 
-    echo '<ol class="breadcrumb">';
+    $semantic = bootstrap3_conf('semantic');
+
+    echo '<ol class="breadcrumb"'. ($semantic ? ' itemscope itemtype="http://schema.org/BreadcrumbList"' : '') .'>';
     echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
     // always print the startpage
-    echo '<li>';
-    tpl_link(wl($conf['start']), '<i class="fa fa-fw fa-home"></i>', 'title="'. $conf['start'] .'"');
+    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '').'>';
+
+    tpl_link(wl($conf['start']),
+             ($semantic ? '<span itemprop="name">' : '') . '<i class="fa fa-fw fa-home"></i>' . ($semantic ? '</span>' : ''),
+             ($semantic ? ' itemprop="item" ' : '') . 'title="'. $conf['start'] .'"'
+            );
+
     echo '</li>';
 
     // print intermediate namespace links
@@ -1107,8 +1125,15 @@ function bootstrap3_youarehere() {
         if($page == $conf['start']) continue; // Skip startpage
 
         // output
-        echo '<li>';
-        echo str_replace('curid', '', html_wikilink($page));
+        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+
+        $link = html_wikilink($page);
+        $link = str_replace(' class="curid"', '', html_wikilink($page));
+
+        if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
+
+        echo $link;
+
         echo '</li>';
 
     }
@@ -1128,8 +1153,15 @@ function bootstrap3_youarehere() {
       return true;
     }
 
-    echo '<li class="active">';
-    echo str_replace('curid', '', html_wikilink($page));
+    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+
+    $link = html_wikilink($page);
+    $link = str_replace(' class="curid"', '', html_wikilink($page));
+
+    if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
+
+    echo $link;
+
     echo '</li>';
 
     echo '</ol>';
@@ -1251,3 +1283,467 @@ function bootstrap3_is_fluid_navbar() {
   return ($fluid_container || ($fluid_container && ! $fixed_top_nabvar) || (! $fluid_container && ! $fixed_top_nabvar));
 
 }
+
+
+/**
+ * Places the TOC where the function is called
+ *
+ * If you use this you most probably want to call tpl_content with
+ * a false argument
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param bool $return Should the TOC be returned instead to be printed?
+ * @return string
+ */
+function bootstrap3_toc($return = false) {
+
+  global $TOC;
+  global $ACT;
+  global $ID;
+  global $REV;
+  global $INFO;
+  global $conf;
+  global $INPUT;
+
+  $toc = array();
+
+  if(is_array($TOC)) {
+    // if a TOC was prepared in global scope, always use it
+    $toc = $TOC;
+  } elseif(($ACT == 'show' || substr($ACT, 0, 6) == 'export') && !$REV && $INFO['exists']) {
+    // get TOC from metadata, render if neccessary
+    $meta = p_get_metadata($ID, '', METADATA_RENDER_USING_CACHE);
+    if(isset($meta['internal']['toc'])) {
+      $tocok = $meta['internal']['toc'];
+    } else {
+      $tocok = true;
+    }
+    $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
+    if(!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
+      $toc = array();
+    }
+  } elseif($ACT == 'admin') {
+
+    // try to load admin plugin TOC
+    /** @var $plugin DokuWiki_Admin_Plugin */
+    if ($plugin = plugin_getRequestAdminPlugin()) {
+      $toc = $plugin->getTOC();
+      $TOC = $toc; // avoid later rebuild
+    }
+
+  }
+
+  trigger_event('TPL_TOC_RENDER', $toc, null, false);
+
+  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+
+    $bootstrap3_sections = array(
+      'theme'            => 'Theme',
+      'sidebar'          => 'Sidebar',
+      'navbar'           => 'Navbar',
+      'semantic'         => 'Semantic',
+      'layout'           => 'Layout',
+      'discussion'       => 'Discussion',
+      'cookie_law'       => 'Cookie Law',
+      'google_analytics' => 'Google Analytics',
+      'browser_title'    => 'Browser Title',
+      'page'             => 'Page'
+    );
+
+    foreach ($bootstrap3_sections as $id => $title) {
+      $toc[] = array(
+        'link'  => "#bootstrap3__$id",
+        'title' => $title,
+        'type'  => 'ul',
+        'level' => 3
+      );
+    }
+
+  }
+
+  $html = bootstrap3_html_toc($toc);
+
+  if($return) return $html;
+  echo $html;
+  return '';
+
+}
+
+
+/**
+ * Return the TOC rendered to XHTML with Bootstrap3 style
+ *
+ * @author Andreas Gohr <andi@splitbrain.org>
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param array $toc
+ * @return string html
+ */
+function bootstrap3_html_toc($toc){
+
+  if (!count($toc)) return '';
+
+  global $lang;
+
+  $out  = '<!-- TOC START -->'.DOKU_LF;
+  $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
+  $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
+  $out .= '<span>';
+  $out .= $lang['toc'];
+  $out .= '</span>';
+  $out .= ' <i class="caret"></i></h3></div>'.DOKU_LF;
+  $out .= '<div class="panel-collapse collapse in">'.DOKU_LF;
+  $out .= '<div class="panel-body">'.DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc,'nav nav-pills nav-stacked toc','html_list_toc')).DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
+  $out .= '</nav>'.DOKU_LF;
+  $out .= '<!-- TOC END -->'.DOKU_LF;
+
+  return $out;
+
+}
+
+
+/**
+ * Add Google Analytics
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function bootstrap3_google_analytics() {
+
+  global $INFO;
+  global $ID;
+
+  if (! bootstrap3_conf('useGoogleAnalytics')) return false;
+  if (! $google_analitycs_id = bootstrap3_conf('googleAnalyticsTrackID')) return false;
+
+  if (bootstrap3_conf('googleAnalyticsNoTrackAdmin') && $INFO['isadmin']) return false;
+  if (bootstrap3_conf('googleAnalyticsNoTrackUsers') && isset($_SERVER['REMOTE_USER'])) return false;
+
+  if (tpl_getConf('googleAnalyticsNoTrackPages')) {
+    if (preg_match_all(bootstrap3_conf('googleAnalyticsNoTrackPages'), $ID)) return false;
+  }
+
+  $out  = '<!-- Google Analytics -->'. DOKU_LF;
+  $out .= '<script type="text/javascript">'. DOKU_LF;
+  $out .= 'window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;'. DOKU_LF;
+  $out .= 'ga("create", "'.$google_analitycs_id.'", "auto");'. DOKU_LF;
+  $out .= 'ga("send", "pageview");'. DOKU_LF;
+
+  if (bootstrap3_conf('googleAnalyticsAnonymizeIP')) {
+    $out .= 'ga("set", "anonymizeIp", true);'.DOKU_LF;
+  }
+
+  if (bootstrap3_conf('googleAnalyticsTrackActions')) {
+    $out .= 'ga("send", "event", "DokuWiki", JSINFO.bootstrap3.mode);'.DOKU_LF;
+  }
+
+  $out .= '</script>'. DOKU_LF;
+  $out .= '<script type="text/javascript" async src="//www.google-analytics.com/analytics.js"></script>'. DOKU_LF;
+  $out .= '<!-- End Google Analytics -->'. DOKU_LF;
+
+  print $out;
+
+}
+
+
+/**
+ * Print some info about the current page
+ *
+ * @author  Andreas Gohr <andi@splitbrain.org>
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   bool $ret return content instead of printing it
+ * @return  bool|string
+ */
+function bootstrap3_pageinfo($ret = false) {
+
+  global $conf;
+  global $lang;
+  global $INFO;
+  global $ID;
+
+  // return if we are not allowed to view the page
+  if (!auth_quickaclcheck($ID)) {
+    return false;
+  }
+
+  // prepare date and path
+  $fn = $INFO['filepath'];
+
+  if (!$conf['fullpath']) {
+
+    if ($INFO['rev']) {
+      $fn = str_replace(fullpath($conf['olddir']).'/', '', $fn);
+    } else {
+      $fn = str_replace(fullpath($conf['datadir']).'/', '', $fn);
+    }
+
+  }
+
+  $date_format = bootstrap3_conf('pageInfoDateFormat');
+  $page_info   = bootstrap3_conf('pageInfo');
+
+  $fn   = utf8_decodeFN($fn);
+  $date = (($date_format == 'dformat')
+    ? dformat($INFO['lastmod'])
+    : datetime_h($INFO['lastmod']));
+
+  // print it
+  if ($INFO['exists']) {
+
+    $fn_full = $fn;
+
+    if (! in_array('extension', $page_info)) {
+      $fn = str_replace(array('.txt.gz', '.txt'), '', $fn);
+    }
+
+    $out = '<ul class="list-inline">';
+
+    if (in_array('filename', $page_info)) {
+      $out .= sprintf('<li><i class="fa fa-fw fa-file-text-o text-muted"></i> <span title="%s">%s</span></li>', $fn_full, $fn);
+    }
+
+    if (in_array('date', $page_info)) {
+      $out .= sprintf('<li><i class="fa fa-fw fa-calendar text-muted"></i> %s <span title="%s">%s</span></li>', $lang['lastmod'],  dformat($INFO['lastmod']), $date);
+    }
+
+    if (in_array('editor', $page_info)) {
+
+      if (isset($INFO['editor'])) {
+
+        $user = editorinfo($INFO['editor']);
+
+        if (bootstrap3_conf('useGravatar')) {
+
+          global $auth;
+          $user_data = $auth->getUserData($INFO['editor']);
+
+          $HTTP = new DokuHTTPClient();
+
+          $gravatar_img   = get_gravatar($user_data['mail'], 16);
+          $gravatar_check = $HTTP->get($gravatar_img . '&d=404');
+
+          if ($gravatar_check) {
+            $user_img = sprintf('<img src="%s" alt="" width="16" class="img-rounded" /> ', $gravatar_img);
+            $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
+            $user     = $user_img . $user;
+          }
+
+        }
+
+        $out .= sprintf('<li class="text-muted">%s %s</li>', $lang['by'], $user);
+
+      } else {
+        $out .= sprintf('<li>(%s)</li>', $lang['external_edit']);
+      }
+
+    }
+
+    if ($INFO['locked'] && in_array('locked', $page_info)) {
+      $out .= sprintf('<li><i class="fa fa-fw fa-lock text-muted"></i> %s %s</li>', $lang['lockedby'], editorinfo($INFO['locked']));
+    }
+
+    $out .= '</ul>';
+
+    if ($ret) {
+      return $out;
+    } else {
+      echo $out;
+      return true;
+    }
+
+  }
+
+  return false;
+
+}
+
+
+/**
+ * Return (and set via cookie) the current Bootswatch theme
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function bootstrap3_bootswatch_theme() {
+
+  global $INPUT;
+
+  $bootswatch_theme = bootstrap3_conf('bootswatchTheme');
+
+  if (bootstrap3_conf('showThemeSwitcher')) {
+
+    if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
+      $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
+    }
+
+    if ($INPUT->str('bootswatch-theme')) {
+      $bootswatch_theme = $INPUT->str('bootswatch-theme');
+      set_doku_pref('bootswatchTheme', $bootswatch_theme);
+    }
+
+  }
+
+  return $bootswatch_theme;
+
+}
+
+
+/**
+ * Load the template assets (Bootstrap, AnchorJS, etc)
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  Doku_Event $event
+ * @param  array $param
+ */
+function bootstrap3_metaheaders(Doku_Event &$event, $param) {
+
+  global $INPUT;
+  global $ACT;
+
+  // Bootstrap Theme
+  $bootstrap_styles = array();
+  $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
+  $fixed_top_navbar = bootstrap3_conf('fixedTopNavbar');
+
+  switch ($bootstrap_theme) {
+
+    case 'optional':
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+      break;
+
+    case 'custom':
+      $bootstrap_styles[] = bootstrap3_conf('customTheme');
+      break;
+
+    case 'bootswatch':
+
+      $bootswatch_theme = bootstrap3_bootswatch_theme();
+      $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
+        ? DOKU_TPL.'assets/bootswatch'
+        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
+
+      $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+      break;
+
+    case 'default':
+    default:
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+      break;
+
+  }
+
+  foreach ($bootstrap_styles as $style) {
+    $event->data['link'][] = array(
+      'type' => 'text/css',
+      'rel'  => 'stylesheet',
+      'href' => $style);
+  }
+
+  $event->data['link'][] = array(
+    'type' => 'text/css',
+    'rel'  => 'stylesheet',
+    'href' => DOKU_TPL.'assets/font-awesome/css/font-awesome.min.css');
+
+  $event->data['script'][] = array(
+    'type' => 'text/javascript',
+    'src'  => DOKU_TPL.'assets/bootstrap/js/bootstrap.min.js');
+
+  $event->data['script'][] = array(
+    'type' => 'text/javascript',
+    'src'  => DOKU_TPL.'assets/anchorjs/anchor.min.js');
+
+
+  // Apply some FIX
+  if ($ACT) {
+
+    // Default Padding
+    $navbar_padding = 20;
+    
+    if ($fixed_top_navbar) {
+    
+      if ($bootstrap_theme == 'bootswatch') {
+    
+        // Set the navbar height for all Bootswatch Themes (values from @navbar-height in bootswatch/*/variables.less)
+        switch (bootstrap3_bootswatch_theme()) {
+          case 'simplex':
+          case 'superhero':
+            $navbar_height = 40;
+            break;
+          case 'yeti':
+            $navbar_height = 45;
+            break;
+          case 'cerulean':
+          case 'cosmo':
+          case 'custom':
+          case 'cyborg':
+          case 'lumen':
+          case 'slate':
+          case 'spacelab':
+          case 'united':
+            $navbar_height = 50;
+            break;
+          case 'darkly':
+          case 'flatly':
+          case 'journal':
+          case 'sandstone':
+            $navbar_height = 60;
+            break;
+          case 'paper':
+            $navbar_height = 64;
+            break;
+          case 'readable':
+            $navbar_height = 65;
+            break;
+          default:
+            $navbar_height = 50;
+        }
+    
+      } else {
+        $navbar_height = 50;
+      }
+    
+      $navbar_padding += $navbar_height;
+    
+    }
+
+    $style  = '';
+    $style .= '@media screen {';
+    $style .= " body { padding-top: {$navbar_padding}px; }" ;
+    $style .= ' .dw-toc-affix { top: '.($navbar_padding -10).'px; }';
+  
+    if (bootstrap3_conf('tocCollapseSubSections')) {
+      $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
+    }
+  
+    $style .= '}';
+  
+    $event->data['style'][] = array(
+      'type'  => 'text/css',
+      '_data' => $style
+    );
+  
+    if ($fixed_top_navbar) {
+  
+      $js = "jQuery(document).ready(function() { if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); } })";
+  
+      $event->data['script'][] = array(
+        'type'  => 'text/javascript',
+        '_data' => $js
+      );
+  
+    }
+  
+  }
+
+}
+
