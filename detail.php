@@ -65,7 +65,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
             <?php
               tpl_img_meta();
                //Comment in for Debug
-               dbg(tpl_img_getTag('Simple.Raw'));
+               //dbg(tpl_img_getTag('Simple.Raw'));
             ?>
 
             <hr/>
