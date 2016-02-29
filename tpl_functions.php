@@ -698,14 +698,14 @@ function bootstrap3_html_msgarea() {
 function bootstrap3_tools() {
 
   global $ACT;
-
+  
   $tools['user'] = array(
     'icon'    => 'fa fa-fw fa-user',
     'actions' => array(
       'admin'    => array('icon' => 'fa fa-fw fa-cogs'),
       'profile'  => array('icon' => 'fa fa-fw fa-refresh'),
-      #'register' => array('icon' => 'fa fa-fw fa-user-plus'),
-      #'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
+      'register' => array('icon' => 'fa fa-fw fa-user-plus'),
+      'login'    => array('icon' => 'fa fa-fw fa-sign-'.(!empty($_SERVER['REMOTE_USER']) ? 'out' : 'in')),
     )
   );
 
@@ -755,11 +755,13 @@ function bootstrap3_tools() {
  */
 function bootstrap3_tools_menu() {
 
-  $tools  = bootstrap3_tools();
-  $result = array();
+  $individual = bootstrap3_conf('showIndividualTool');
+  $tools      = bootstrap3_tools();
+  $result     = array();
 
-  foreach (bootstrap3_conf('showIndividualTool') as $id) {
-    $result[$id] = $tools[$id];
+  foreach ($individual as $tool) {
+    if (! isset($_SERVER['REMOTE_USER']) && $tool == 'user') continue;
+    $result[$tool] = $tools[$tool];
   }
 
   return $result;
@@ -803,7 +805,7 @@ function bootstrap3_toolbar() {
  */
 function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
 
-  $url = 'https://secure.gravatar.com/avatar/';
+  $url = 'https://gravatar.com/avatar/';
   $url .= md5( strtolower( trim( $email ) ) );
   $url .= "?s=$s&d=$d&r=$r";
 
@@ -1559,4 +1561,189 @@ function bootstrap3_pageinfo($ret = false) {
   }
 
   return false;
+
 }
+
+
+/**
+ * Return (and set via cookie) the current Bootswatch theme
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @return  string
+ */
+function bootstrap3_bootswatch_theme() {
+
+  global $INPUT;
+
+  $bootswatch_theme = bootstrap3_conf('bootswatchTheme');
+
+  if (bootstrap3_conf('showThemeSwitcher')) {
+
+    if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
+      $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
+    }
+
+    if ($INPUT->str('bootswatch-theme')) {
+      $bootswatch_theme = $INPUT->str('bootswatch-theme');
+      set_doku_pref('bootswatchTheme', $bootswatch_theme);
+    }
+
+  }
+
+  return $bootswatch_theme;
+
+}
+
+
+/**
+ * Load the template assets (Bootstrap, AnchorJS, etc)
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  Doku_Event $event
+ * @param  array $param
+ */
+function bootstrap3_metaheaders(Doku_Event &$event, $param) {
+
+  global $INPUT;
+  global $ACT;
+
+  // Bootstrap Theme
+  $bootstrap_styles = array();
+  $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
+  $fixed_top_navbar = bootstrap3_conf('fixedTopNavbar');
+
+  switch ($bootstrap_theme) {
+
+    case 'optional':
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+      break;
+
+    case 'custom':
+      $bootstrap_styles[] = bootstrap3_conf('customTheme');
+      break;
+
+    case 'bootswatch':
+
+      $bootswatch_theme = bootstrap3_bootswatch_theme();
+      $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
+        ? DOKU_TPL.'assets/bootswatch'
+        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
+
+      $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+      break;
+
+    case 'default':
+    default:
+      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+      break;
+
+  }
+
+  foreach ($bootstrap_styles as $style) {
+    $event->data['link'][] = array(
+      'type' => 'text/css',
+      'rel'  => 'stylesheet',
+      'href' => $style);
+  }
+
+  $event->data['link'][] = array(
+    'type' => 'text/css',
+    'rel'  => 'stylesheet',
+    'href' => DOKU_TPL.'assets/font-awesome/css/font-awesome.min.css');
+
+  $event->data['script'][] = array(
+    'type' => 'text/javascript',
+    'src'  => DOKU_TPL.'assets/bootstrap/js/bootstrap.min.js');
+
+  $event->data['script'][] = array(
+    'type' => 'text/javascript',
+    'src'  => DOKU_TPL.'assets/anchorjs/anchor.min.js');
+
+
+  // Apply some FIX
+  if ($ACT) {
+
+    // Default Padding
+    $navbar_padding = 20;
+    
+    if ($fixed_top_navbar) {
+    
+      if ($bootstrap_theme == 'bootswatch') {
+    
+        // Set the navbar height for all Bootswatch Themes (values from @navbar-height in bootswatch/*/variables.less)
+        switch (bootstrap3_bootswatch_theme()) {
+          case 'simplex':
+          case 'superhero':
+            $navbar_height = 40;
+            break;
+          case 'yeti':
+            $navbar_height = 45;
+            break;
+          case 'cerulean':
+          case 'cosmo':
+          case 'custom':
+          case 'cyborg':
+          case 'lumen':
+          case 'slate':
+          case 'spacelab':
+          case 'united':
+            $navbar_height = 50;
+            break;
+          case 'darkly':
+          case 'flatly':
+          case 'journal':
+          case 'sandstone':
+            $navbar_height = 60;
+            break;
+          case 'paper':
+            $navbar_height = 64;
+            break;
+          case 'readable':
+            $navbar_height = 65;
+            break;
+          default:
+            $navbar_height = 50;
+        }
+    
+      } else {
+        $navbar_height = 50;
+      }
+    
+      $navbar_padding += $navbar_height;
+    
+    }
+
+    $style  = '';
+    $style .= '@media screen {';
+    $style .= " body { padding-top: {$navbar_padding}px; }" ;
+    $style .= ' .dw-toc-affix { top: '.($navbar_padding -10).'px; }';
+  
+    if (bootstrap3_conf('tocCollapseSubSections')) {
+      $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
+    }
+  
+    $style .= '}';
+  
+    $event->data['style'][] = array(
+      'type'  => 'text/css',
+      '_data' => $style
+    );
+  
+    if ($fixed_top_navbar) {
+  
+      $js = "jQuery(document).ready(function() { if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); } })";
+  
+      $event->data['script'][] = array(
+        'type'  => 'text/javascript',
+        '_data' => $js
+      );
+  
+    }
+  
+  }
+
+}
+

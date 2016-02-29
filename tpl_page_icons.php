@@ -28,19 +28,22 @@ if (in_array('help', $page_icons)) {
 <div class="dw-page-icons pull-right hidden-print">
 
   <ul class="list-inline pull-right">
+    <li>
+      <a href="#" title="<?php echo $lang['btn_recent'] ?>"><i class="fa fa-fw fa-rss" style="color:#f26522"></i></a>
+    </li>
     <?php if(in_array('send-mail', $page_icons)): ?>
     <li>
-      <a href="#" title="Send e-Mail" class="send-mail"><i class="fa fa-envelope text-muted"></i></a>
+      <a href="#" title="Send e-Mail" class="send-mail"><i class="fa fa-fw fa-envelope text-muted"></i></a>
     </li>
     <?php endif;
           if(in_array('print', $page_icons)): ?>
     <li>
-      <a href="#" title="Print" onclick="window.print()"><i class="fa fa-print text-muted"></i></a>
+      <a href="#" title="Print" onclick="window.print()"><i class="fa fa-fw fa-print text-muted"></i></a>
     </li>
     <?php endif;
           if(in_array('help', $page_icons) && $help_page): ?>
     <li>
-      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-question text-info"></i></a>
+      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-fw fa-question text-info"></i></a>
     </li>
     <?php endif; ?>
   </ul>
@@ -49,7 +52,7 @@ if (in_array('help', $page_icons)) {
 
   <div class="dropdown pull-right">
     <a href="#" title="Share on ..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      <i class="fa fa-share-alt text-muted"></i>
+      <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">
       <li class="dropdown-header">

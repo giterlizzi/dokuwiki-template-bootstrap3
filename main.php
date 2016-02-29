@@ -30,36 +30,12 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
-  <?php foreach ($bootstrap_styles as  $bootstrap_style): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
-  <?php endforeach; ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders() ?>
   <?php bootstrap3_google_analytics() ?>
-  <style type="text/css">
-    body { padding-top: <?php echo $navbar_padding ?>px; }
-    <?php if (bootstrap3_conf('tocCollapseSubSections')): ?>
-    #dokuwiki__toc .nav .nav .nav { display: none; }
-    <?php endif; ?>
-    .dw-toc-affix { top: <?php echo ($navbar_padding -10) ?>px; }
-  </style>
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
-  <?php if ($fixedTopNavbar): ?>
-  <script type="text/javascript">/*<![CDATA[*/
-    jQuery(document).ready(function() {
-      if (location.hash) {
-        setTimeout(function() {
-          scrollBy(0, -<?php echo $navbar_padding ?>);
-        }, 1);
-      }
-    });
-  /*!]]>*/</script>
-  <?php endif; ?>
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>" data-spy="scroll" data-target="#dokuwiki__toc" data-offset="<?php echo $navbar_padding ?>">
@@ -91,8 +67,8 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
       <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
-        <div class="<?php echo ($pageOnPanel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
-          <div class="page <?php echo ($pageOnPanel ? 'panel-body' : '') ?>">
+        <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
+          <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
 
             <?php
 

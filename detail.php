@@ -26,13 +26,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
-  <?php foreach ($bootstrap_styles as $bootstrap_style): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
-  <?php endforeach; ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders()?>
-  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>
   <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
   <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -45,71 +39,73 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     <?php html_msgarea() ?>
 
-    <?php if($ERROR): print $ERROR; ?>
+    <?php if ($ERROR): print $ERROR; ?>
     <?php else: ?>
 
-      <h1 class="page-header">
-        <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
-      </h1>
+    <h1 class="page-header">
+      <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+    </h1>
 
-      <div class="row">
+    <main class="row">
 
-        <div class="col-md-8">
-          <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
-        </div>
-
-        <div class="col-md-4">
-
-          <div class="panel panel-default">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <i class="fa fa-picture-o"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
-              </h4>
-            </div>
-            <div class="panel-body">
-
-              <?php
-                tpl_img_meta();
-                 //Comment in for Debug
-                 // dbg(tpl_img_getTag('Simple.Raw'));
-              ?>
-
-              <hr/>
-
-              <dl class="dl-horizontal">
-                <?php
-                echo '<dt>'.$lang['reference'].':</dt>';
-                $media_usage = ft_mediause($IMG,true);
-                if(count($media_usage) > 0){
-                    foreach($media_usage as $path){
-                        echo '<dd>'.html_wikilink($path).'</dd>';
-                    }
-                }else{
-                    echo '<dd>'.$lang['nothingfound'].'</dd>';
-                }
-                ?>
-              </dl>
-
-              <?php
-              // This message is available from release 2015-08-10 "Detritus"
-              if(isset($lang['media_acl_warning'])): ?>
-              <div class="alert alert-warning">
-                <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
-              </div>
-              <?php endif; ?>
-
-            </div>
-          </div>
-
-        </div>
+      <div class="col-md-8">
+        <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
       </div>
 
-      <hr/>
+      <div class="col-md-4">
 
-      <div class="btn-group">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <i class="fa fa-picture-o"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+            </h4>
+          </div>
+          <div class="panel-body">
+
+            <?php
+              tpl_img_meta();
+               //Comment in for Debug
+               dbg(tpl_img_getTag('Simple.Raw'));
+            ?>
+
+            <hr/>
+
+            <dl class="dl-horizontal">
+              <?php
+              echo '<dt>'.$lang['reference'].':</dt>';
+              $media_usage = ft_mediause($IMG,true);
+              if (count($media_usage) > 0){
+                foreach($media_usage as $path){
+                  echo '<dd>'.html_wikilink($path).'</dd>';
+                }
+              } else {
+                echo '<dd>'.$lang['nothingfound'].'</dd>';
+              }
+              ?>
+            </dl>
+
+            <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
+            <div class="alert alert-warning">
+              <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
+            </div>
+            <?php endif; ?>
+
+          </div>
+        </div>
+
+      </div>
+    </main>
+
+    <hr/>
+
+    <footer>
+
+      <div class="btn-group-xs">
         <?php tpl_action('img_backto', 1) ?>
         <?php tpl_action('mediaManager', 1) ?>
       </div>
+
+    </footer>
 
     <?php endif; ?>
   </div>
