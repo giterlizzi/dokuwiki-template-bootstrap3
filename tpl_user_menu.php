@@ -77,6 +77,7 @@ if (bootstrap3_conf('useGravatar')) {
               <i class="fa fa-fw fa-envelope"></i> <?php echo $INFO['userinfo']['mail'] ?>
             </a>
           </li>
+          <?php echo bootstrap3_action_item('admin', 'fa fa-fw fa-cogs') ?>
           <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
         </ul>
 
