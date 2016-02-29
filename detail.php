@@ -27,7 +27,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
   <?php foreach ($bootstrap_styles as  $bootstrap_style): ?>
-  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrapStyle; ?>" />
+  <link type="text/css" rel="stylesheet" href="<?php echo $bootstrap_style; ?>" />
   <?php endforeach; ?>
   <link type="text/css" rel="stylesheet" href="<?php echo DOKU_TPL ?>assets/font-awesome/css/font-awesome.min.css" />
   <?php tpl_metaheaders()?>
