@@ -16,9 +16,14 @@ global $INPUT;
 global $ACT;
 global $EVENT_HANDLER;
 
+// Get the template info (useful for debug)
+if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
+  $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
+  msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+}
+
 $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
-$fixed_top_navbar  = bootstrap3_conf('fixedTopNavbar');
 $page_on_panel     = bootstrap3_conf('pageOnPanel');
 $bootstrap_theme   = bootstrap3_conf('bootstrapTheme');
 $bootswatch_theme  = bootstrap3_bootswatch_theme();

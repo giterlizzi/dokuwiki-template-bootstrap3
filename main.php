@@ -12,13 +12,6 @@ if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
 header('X-UA-Compatible: IE=edge,chrome=1');
 
 include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
-
-// Get the template info (useful for debug)
-if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
-  $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
-  msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
-}
-
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
@@ -90,17 +83,19 @@ if ($INFO['isadmin'] && isset($_GET['do']) && $_GET['do'] == 'check') {
               $content = ob_get_clean();
               $toc     = bootstrap3_toc(true);
 
-              $content = '<div class="dw-content">' . $content . '</div>';
-
               // Include Page Tools
               require_once('tpl_page_tools.php');
 
               // Include the TOC layout
               if ($toc) {
-                require_once('tpl_toc.php');
+                echo '<div class="pull-right hidden-print dw-toc-affix" data-spy="affix" data-offset-top="150">';
+                echo $toc;
+                echo '</div>';
               }
 
+              echo '<div class="dw-content">';
               echo $content;
+              echo '</div>';
 
               tpl_flush();
 
