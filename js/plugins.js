@@ -10,22 +10,22 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
   setTimeout(function() {
 
-    var $tags             = jQuery('.tags'),                 // Tags Plugin
-        $page             = jQuery('table tbody th.page'),   // Tags Plugin: Count
+    var $tags             = jQuery('.tags'),                       // Tags Plugin
+        $page             = jQuery('table tbody th.page:even'),    // Tags Plugin: Count
         $csv              = jQuery('table tbody tr.row0 th.col0'), // CSV Plugin
-        $translation      = jQuery('#dw__translation'),      // Translation Plugin
-        $discussion       = jQuery('.comment_wrapper'),      // Discussion Plugin
-        $publish          = jQuery('.approval'),             // Publish Plugin
-        $tagging_edit     = jQuery('.plugin_tagging_edit'),  // Tagging Plugin
-        $explain          = jQuery('.explain'),              // Explain Plugin
-        $wrap             = jQuery('.plugin_wrap'),          // Wrap Plugin
-        $datatables       = jQuery('.dt-wrapper'),           // DataTables Plugin
-        $dataplugin_entry = jQuery('.dataplugin_entry'),     // Data Plugin: Entry
-        $dataplugin_table = jQuery('.dataplugin_table'),     // Data Plugin: Table
-        $toc              = jQuery('#dw__toc'),              // DokuWiki TOC
-        $toc2             = jQuery('div.inlinetoc2'),        // InlineTOC Plugin
-        $davcal           = jQuery('#fullCalendar'),         // DAVCal Plugin
-        $include_readmore = jQuery('.include_readmore');     // Include Plugin (Read More)
+        $translation      = jQuery('#dw__translation'),            // Translation Plugin
+        $discussion       = jQuery('.comment_wrapper'),            // Discussion Plugin
+        $publish          = jQuery('.approval'),                   // Publish Plugin
+        $tagging_edit     = jQuery('.plugin_tagging_edit'),        // Tagging Plugin
+        $explain          = jQuery('.explain'),                    // Explain Plugin
+        $wrap             = jQuery('.plugin_wrap'),                // Wrap Plugin
+        $datatables       = jQuery('.dt-wrapper'),                 // DataTables Plugin
+        $dataplugin_entry = jQuery('.dataplugin_entry'),           // Data Plugin: Entry
+        $dataplugin_table = jQuery('.dataplugin_table'),           // Data Plugin: Table
+        $toc              = jQuery('#dw__toc'),                    // DokuWiki TOC
+        $toc2             = jQuery('div.inlinetoc2'),              // InlineTOC Plugin
+        $davcal           = jQuery('#fullCalendar'),               // DAVCal Plugin
+        $include_readmore = jQuery('.include_readmore');           // Include Plugin (Read More)
 
 
     // CSV Plugin
@@ -45,10 +45,15 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     // Tag Plugin: Count
     if ($page.length) {
-      var $table = $page.parents('table');
-      $table.prepend('<thead><tr/></thead>');
-      $table.find('thead tr').append($page);
-      $page.removeClass('page');
+
+      $page.each(function(){
+        var $table  = jQuery(this).parents('table'),
+            $header = $table.find('th');
+        $table.prepend('<thead><tr/></thead>');
+        $table.find('thead tr').append($header);
+        $header.removeClass('page');
+      });
+
     }
 
 
