@@ -89,23 +89,24 @@ jQuery(document).ready(function() {
 
   jQuery('.fluid-container').on('click', function() {
 
-    var $self = jQuery(this);
+    var $button     = jQuery(this),
+        $containers = jQuery('body > div, header nav > div, article, footer > div');
 
     if (jQuery('body > div.container').length) {
 
-      jQuery('body > div, nav > div, article, #dw__footer > div')
+      $containers
         .removeClass('container')
         .addClass('container-fluid');
-      $self.parent().addClass('active');
+      $button.parent().addClass('active');
 
       DokuCookie.setValue('fluidContainer', 1);
 
     } else {
 
-      jQuery('body > div, nav > div, article, #dw__footer > div')
+      $containers
         .removeClass('container-fluid')
         .addClass('container');
-      $self.parent().removeClass('active');
+      $button.parent().removeClass('active');
 
       DokuCookie.setValue('fluidContainer', 0);
 
