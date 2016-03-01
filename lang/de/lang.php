@@ -4,6 +4,7 @@
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Dominik Soeldner <soeldner@yteam.de>
+ * @author   Marko Šeremet
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

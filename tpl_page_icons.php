@@ -28,10 +28,12 @@ if (in_array('help', $page_icons)) {
 <div class="dw-page-icons pull-right hidden-print">
 
   <ul class="list-inline pull-right">
+    <?php if(in_array('feed', $page_icons)): ?>
     <li>
-      <a href="#" title="<?php echo $lang['btn_recent'] ?>"><i class="fa fa-fw fa-rss" style="color:#f26522"></i></a>
+      <a href="<?php echo DOKU_URL . 'feed.php' ?>" title="<?php echo $lang['btn_recent'] ?>"><i class="fa fa-fw fa-rss" style="color:#f26522"></i></a>
     </li>
-    <?php if(in_array('send-mail', $page_icons)): ?>
+    <?php endif;
+          if(in_array('send-mail', $page_icons)): ?>
     <li>
       <a href="#" title="Send e-Mail" class="send-mail"><i class="fa fa-fw fa-envelope text-muted"></i></a>
     </li>
