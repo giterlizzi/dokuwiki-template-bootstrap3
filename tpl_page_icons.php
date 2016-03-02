@@ -30,7 +30,7 @@ if (in_array('help', $page_icons)) {
   <ul class="list-inline pull-right">
     <?php if(in_array('feed', $page_icons)): ?>
     <li>
-      <a href="<?php echo DOKU_URL . 'feed.php' ?>" title="<?php echo $lang['btn_recent'] ?>"><i class="fa fa-fw fa-rss" style="color:#f26522"></i></a>
+      <a href="<?php echo DOKU_URL . 'feed.php' ?>" title="<?php echo $lang['btn_recent'] ?>" class="feed"><i class="fa fa-fw fa-rss text-muted"></i></a>
     </li>
     <?php endif;
           if(in_array('send-mail', $page_icons)): ?>
@@ -45,7 +45,7 @@ if (in_array('help', $page_icons)) {
     <?php endif;
           if(in_array('help', $page_icons) && $help_page): ?>
     <li>
-      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-fw fa-question text-info"></i></a>
+      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-fw fa-question text-muted"></i></a>
     </li>
     <?php endif; ?>
   </ul>
@@ -53,7 +53,7 @@ if (in_array('help', $page_icons)) {
   <?php if($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="#" title="Share on ..." data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <a href="#" title="Share on ..." class="share-on" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
       <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">
