@@ -1644,10 +1644,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   }
 
   foreach ($bootstrap_styles as $style) {
-    $event->data['link'][] = array(
+    array_unshift($event->data['link'], array(
       'type' => 'text/css',
       'rel'  => 'stylesheet',
-      'href' => $style);
+      'href' => $style));
   }
 
   $event->data['link'][] = array(
@@ -1669,11 +1669,11 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     // Default Padding
     $navbar_padding = 20;
-    
+
     if ($fixed_top_navbar) {
-    
+
       if ($bootstrap_theme == 'bootswatch') {
-    
+
         // Set the navbar height for all Bootswatch Themes (values from @navbar-height in bootswatch/*/variables.less)
         switch (bootstrap3_bootswatch_theme()) {
           case 'simplex':
@@ -1708,42 +1708,42 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
           default:
             $navbar_height = 50;
         }
-    
+
       } else {
         $navbar_height = 50;
       }
-    
+
       $navbar_padding += $navbar_height;
-    
+
     }
 
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
     $style .= ' .dw-toc-affix { top: '.($navbar_padding -10).'px; }';
-  
+
     if (bootstrap3_conf('tocCollapseSubSections')) {
       $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
     }
-  
+
     $style .= '}';
-  
+
     $event->data['style'][] = array(
       'type'  => 'text/css',
       '_data' => $style
     );
-  
+
     if ($fixed_top_navbar) {
-  
+
       $js = "jQuery(document).ready(function() { if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); } })";
-  
+
       $event->data['script'][] = array(
         'type'  => 'text/javascript',
         '_data' => $js
       );
-  
+
     }
-  
+
   }
 
 }
