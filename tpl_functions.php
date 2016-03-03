@@ -1397,7 +1397,7 @@ function bootstrap3_html_toc($toc){
   $out .= ' <i class="caret"></i></h3></div>'.DOKU_LF;
   $out .= '<div class="panel-collapse collapse in">'.DOKU_LF;
   $out .= '<div class="panel-body">'.DOKU_LF;
-  $out .= bootstrap3_lists(html_buildlist($toc,'nav nav-pills nav-stacked toc','html_list_toc')).DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc, 'nav nav-pills nav-stacked toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
