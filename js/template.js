@@ -44,7 +44,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     if (JSINFO.bootstrap3.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
     if (JSINFO.bootstrap3.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
 
-    $dw_content.find('table.inline').addClass(table_class.join(' '));
+    $dw_content.find('table.inline, table.import_failures').addClass(table_class.join(' '));
 
     if (! JSINFO.bootstrap3.tableFullWidth) {
       $dw_content.find('table.inline').css('width', 'auto');
