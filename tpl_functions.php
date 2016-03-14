@@ -1733,16 +1733,16 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       '_data' => $style
     );
 
+    $js = "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+
     if ($fixed_top_navbar) {
-
-      $js = "jQuery(document).ready(function() { if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); } })";
-
-      $event->data['script'][] = array(
-        'type'  => 'text/javascript',
-        '_data' => $js
-      );
-
+      $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
     }
+
+    $event->data['script'][] = array(
+      'type'  => 'text/javascript',
+      '_data' => "jQuery(document).ready(function() { $js });"
+    );
 
   }
 

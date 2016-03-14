@@ -31,7 +31,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo trim(implode(' ', $body_classes)) ?>" data-spy="scroll" data-target="#dokuwiki__toc" data-offset="<?php echo $navbar_padding ?>">
+<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
   <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
