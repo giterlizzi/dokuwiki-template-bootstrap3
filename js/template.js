@@ -243,7 +243,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
       e.preventDefault();
 
       var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-          section_position = (jQuery(jQuery.attr(this, 'href')).offset().top - body_offset);
+          section_position = (jQuery('#dokuwiki__content ' + jQuery.attr(this, 'href')).offset().top - body_offset);
 
       jQuery('html, body').animate({
         scrollTop: section_position
