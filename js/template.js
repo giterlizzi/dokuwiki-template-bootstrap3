@@ -301,9 +301,9 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
         $media_manager  = jQuery('#mediamanager__page'); // Media Manager (page)
 
     // Media Manager (pop-up)
-    if ($media_popup.length) {
+    if ($media_popup.length || $media_manager.length) {
       jQuery('.qq-upload-button').addClass('btn btn-default');
-      jQuery('#mediamanager__upload_button').addClass('btn-success');
+      jQuery('.qq-upload-action').addClass('btn btn-success');
     }
 
     // Media Manager (page)
