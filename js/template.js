@@ -240,16 +240,20 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     // Scrolling animation
     $dw_toc.find('a').click(function(e) {
 
-      e.preventDefault();
+      if (jQuery(this).attr('href').match(/^#/)) {
 
-      var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-          section_position = (jQuery('#dokuwiki__content ' + jQuery.attr(this, 'href')).offset().top - body_offset);
+        e.preventDefault();
 
-      jQuery('html, body').animate({
-        scrollTop: section_position
-      }, 600);
+        var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+            section_position = (jQuery('#dokuwiki__content ' + jQuery.attr(this, 'href')).offset().top - body_offset);
 
-      return false;
+        jQuery('html, body').animate({
+          scrollTop: section_position
+        }, 600);
+
+        return false;
+
+      }
 
     });
 
