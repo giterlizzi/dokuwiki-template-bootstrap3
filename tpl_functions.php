@@ -1665,7 +1665,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 
   // Apply some FIX
-  if ($ACT) {
+  if ($ACT || defined('DOKU_MEDIADETAIL')) {
 
     // Default Padding
     $navbar_padding = 20;

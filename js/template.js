@@ -367,7 +367,7 @@ jQuery(document).on('bootstrap3:detail', function(e) {
     if (! $detail_page.length) return false;
 
     $detail_page.find('img.img_detail')
-      .addClass('thumbnail img-responsive');
+      .addClass('img-responsive');
     $detail_page.find('dl')
       .addClass('dl-horizontal');
 
