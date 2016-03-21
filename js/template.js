@@ -370,12 +370,6 @@ jQuery(document).on('bootstrap3:detail', function(e) {
       .addClass('thumbnail img-responsive');
     $detail_page.find('dl')
       .addClass('dl-horizontal');
-    $detail_page.find('.img_backto')
-      .addClass('btn btn-success')
-      .prepend('<i class="fa fa-fw fa-arrow-left"/> ');
-    $detail_page.find('.mediaManager')
-      .addClass('btn btn-default')
-      .prepend('<i class="fa fa-fw fa-picture-o"/> ');
 
   }, 0);
 

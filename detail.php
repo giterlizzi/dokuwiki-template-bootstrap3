@@ -101,9 +101,14 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     <footer>
 
-      <div class="btn-group-xs">
-        <?php tpl_action('img_backto', 1) ?>
-        <?php tpl_action('mediaManager', 1) ?>
+      <div class="btn-group btn-group-xs">
+        <?php
+          $back_to   = bootstrap3_action_item('img_backto', 'fa fa-fw fa-arrow-left', true);
+          $media_mgr = bootstrap3_action_item('mediaManager', 'fa fa-fw fa-picture-o', true);
+          $back_to   = str_replace('action', 'action btn btn-success', $back_to);
+          $media_mgr = str_replace('action', 'action btn btn-default', $media_mgr);
+          echo $back_to . $media_mgr;
+        ?>
       </div>
 
     </footer>
