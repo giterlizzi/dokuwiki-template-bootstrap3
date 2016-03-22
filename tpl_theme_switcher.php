@@ -25,7 +25,7 @@ $bootswatch_theme = bootstrap3_bootswatch_theme();
       <li class="dropdown-header"><i class="fa fa-fw fa-tint"></i> Bootswatch Themes</li>
       <?php foreach (bootstrap3_bootswatch_themes_available() as $theme): ?>
       <li<?php echo ($bootswatch_theme == $theme) ? ' class="active"' : '' ?>>
-        <a href="?bootswatch-theme=<?php echo hsc($theme) ?>"><?php echo ucfirst($theme) ?></a>
+        <a href="<?php echo wl($ID, array('bootswatch-theme' => hsc($theme))); ?>"><?php echo ucfirst($theme) ?></a>
       </li>
       <?php endforeach; ?>
     </ul>
