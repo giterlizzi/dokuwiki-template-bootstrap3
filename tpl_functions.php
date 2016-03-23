@@ -1618,8 +1618,8 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap-theme.min.css';
       break;
 
     case 'custom':
@@ -1630,7 +1630,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? DOKU_TPL.'assets/bootswatch'
+        ? tpl_basedir() . 'assets/bootswatch'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
 
       $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
@@ -1638,7 +1638,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     case 'default':
     default:
-      $bootstrap_styles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
       break;
 
   }
@@ -1653,15 +1653,15 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   $event->data['link'][] = array(
     'type' => 'text/css',
     'rel'  => 'stylesheet',
-    'href' => DOKU_TPL.'assets/font-awesome/css/font-awesome.min.css');
+    'href' => tpl_basedir() . 'assets/font-awesome/css/font-awesome.min.css');
 
   $event->data['script'][] = array(
     'type' => 'text/javascript',
-    'src'  => DOKU_TPL.'assets/bootstrap/js/bootstrap.min.js');
+    'src'  => tpl_basedir() . 'assets/bootstrap/js/bootstrap.min.js');
 
   $event->data['script'][] = array(
     'type' => 'text/javascript',
-    'src'  => DOKU_TPL.'assets/anchorjs/anchor.min.js');
+    'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
 
 
   // Apply some FIX
