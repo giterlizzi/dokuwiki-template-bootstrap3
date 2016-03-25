@@ -166,11 +166,12 @@ jQuery(document).ready(function() {
       'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
       'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
       'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
+      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
       'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
       'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
       'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
       'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Page'            : [ 'page',             'showPageInfo',         'fa-file'     ]
+      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
     };
 
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {

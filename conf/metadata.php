@@ -50,10 +50,13 @@ $meta['showLandingPage']        = array('onoff');
 $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showPageId']             = array('onoff');
-$meta['tocCollapseSubSections'] = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
 $meta['useGravatar']            = array('onoff');
+
+// TOC
+$meta['tocAffix']               = array('onoff');
+$meta['tocCollapseSubSections'] = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
