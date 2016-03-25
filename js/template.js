@@ -64,8 +64,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
 
     // Toolbar
-    jQuery('#tool__bar').addClass('btn-group')
-      .find('.toolbutton').addClass('btn-xs');
+    jQuery('#tool__bar').addClass('btn-group btn-group-xs');
 
     // Picker
     if (dw_mode('edit')) {
