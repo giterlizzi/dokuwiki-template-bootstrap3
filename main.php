@@ -89,7 +89,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               // Include the TOC layout
               if ($toc) {
 
-                echo '<div class="pull-right hidden-print';
+                echo '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print';
                 if (bootstrap3_conf('tocAffix')) echo ' dw-toc-affix" data-spy="affix" data-offset-top="150';
                 echo '">';
 
