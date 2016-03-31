@@ -10,7 +10,7 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if ($ACT == 'show' && bootstrap3_conf('showPageIcons')):
+if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && bootstrap3_conf('showPageIcons')):
 
 $page_icons   = bootstrap3_conf('pageIcons');
 $social_share = in_array('social-share', $page_icons);

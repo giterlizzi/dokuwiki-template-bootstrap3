@@ -366,15 +366,9 @@ jQuery(document).on('bootstrap3:detail', function(e) {
     if (! $detail_page.length) return false;
 
     $detail_page.find('img.img_detail')
-      .addClass('thumbnail img-responsive');
+      .addClass('img-responsive');
     $detail_page.find('dl')
       .addClass('dl-horizontal');
-    $detail_page.find('.img_backto')
-      .addClass('btn btn-success')
-      .prepend('<i class="fa fa-fw fa-arrow-left"/> ');
-    $detail_page.find('.mediaManager')
-      .addClass('btn btn-default')
-      .prepend('<i class="fa fa-fw fa-picture-o"/> ');
 
   }, 0);
 

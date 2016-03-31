@@ -34,82 +34,154 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
   <![endif]-->
 </head>
 
-<body class="container">
+<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
-  <div id="dokuwiki__detail" class="<?php echo tpl_classes(); ?>">
 
-    <?php html_msgarea() ?>
+  <div id="dokuwiki__detail" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <?php if ($ERROR): print $ERROR; ?>
-    <?php else: ?>
+    <header id="dokuwiki__header">
+      <?php tpl_includeFile('topheader.html') ?>
+      <?php require_once('tpl_navbar.php'); ?>
+      <?php tpl_includeFile('header.html') ?>
+    </header>
 
-    <h1 class="page-header">
-      <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
-    </h1>
+    <?php tpl_includeFile('social.html') ?>
 
-    <main class="row">
+    <?php require_once('tpl_breadcrumbs.php'); ?>
 
-      <div class="col-md-8">
-        <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
-      </div>
+    <p class="pageId text-right">
+      <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
+    </p>
 
-      <div class="col-md-4">
+    <div id="dw__msgarea">
+      <?php bootstrap3_html_msgarea() ?>
+    </div>
 
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h4 class="panel-title">
-              <i class="fa fa-picture-o"></i> <?php print nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
-            </h4>
-          </div>
-          <div class="panel-body">
+    <main role="main">
+      <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>">
+        <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
 
+          <?php require_once('tpl_page_icons.php'); ?>
+
+          <?php if ($ERROR): print $ERROR; ?>
+          <?php else: ?>
+          <?php if($REV) echo p_locale_xhtml('showrev');?>
+
+          <h1 class="page-header">
+            <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+          </h1>
+
+          <p class="pull-right hidden-print list-inline">
+            <button type="button" class="btn btn-primary btn-xs" title="Info" data-toggle="modal" data-target="#detail-dialog"><i class="fa fa-fw fa-info-circle"></i></button>
+            <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" class="btn btn-default btn-xs" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="fa fa-fw fa-arrows-alt"></i></a>
+          </p>
+
+          <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+
+          <hr class="hidden-print" />
+
+          <div class="hidden-print pull-right">
             <?php
-              tpl_img_meta();
-               //Comment in for Debug
-               //dbg(tpl_img_getTag('Simple.Raw'));
+              $back_to   = bootstrap3_action_item('img_backto', 'fa fa-fw fa-arrow-left', true);
+              $media_mgr = bootstrap3_action_item('mediaManager', 'fa fa-fw fa-picture-o', true);
+              $back_to   = str_replace('action', 'action btn btn-success', $back_to);
+              $media_mgr = str_replace('action', 'action btn btn-default', $media_mgr);
+              echo $back_to . "\n" . $media_mgr;
             ?>
-
-            <hr/>
-
-            <dl class="dl-horizontal">
-              <?php
-              echo '<dt>'.$lang['reference'].':</dt>';
-              $media_usage = ft_mediause($IMG,true);
-              if (count($media_usage) > 0){
-                foreach($media_usage as $path){
-                  echo '<dd>'.html_wikilink($path).'</dd>';
-                }
-              } else {
-                echo '<dd>'.$lang['nothingfound'].'</dd>';
-              }
-              ?>
-            </dl>
-
-            <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
-            <div class="alert alert-warning">
-              <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
-            </div>
-            <?php endif; ?>
-
           </div>
-        </div>
 
+          <div class="modal fade" tabindex="-1" id="detail-dialog" role="dialog">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang['js']['mediaclose']; ?>"><span aria-hidden="true">&times;</span></button>
+                  <h4 class="modal-title"><i class="fa fa-fw fa-info-circle text-primary"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></h4>
+                </div>
+                <div class="modal-body">
+
+                  <?php
+                    tpl_img_meta();
+                    //Comment in for Debug
+                    //dbg(tpl_img_getTag('Simple.Raw'));
+                  ?>
+
+                  <hr/>
+
+                  <dl class="dl-horizontal">
+                    <?php
+                    echo '<dt>'.$lang['reference'].':</dt>';
+                    $media_usage = ft_mediause($IMG, true);
+                    if (count($media_usage) > 0){
+                      foreach($media_usage as $path){
+                        echo '<dd>'.html_wikilink($path).'</dd>';
+                      }
+                    } else {
+                      echo '<dd>'.$lang['nothingfound'].'</dd>';
+                    }
+                    ?>
+                  </dl>
+
+                  <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
+                  <div class="alert alert-warning">
+                    <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
+                  </div>
+                  <?php endif; ?>
+
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-primary" data-dismiss="modal"><?php echo $lang['js']['mediaclose']; ?></button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <?php endif; ?>
+
+        </div>
       </div>
     </main>
 
-    <hr/>
+    <div class="small text-right">
 
-    <footer>
+      <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+      <span class="loginLink hidden-print">
+        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+      </span>
+      <?php endif; ?>
 
-      <div class="btn-group-xs">
-        <?php tpl_action('img_backto', 1) ?>
-        <?php tpl_action('mediaManager', 1) ?>
-      </div>
+    </div>
 
-    </footer>
-
+    <?php if ($conf['license']): ?>
+    <div id="dw__license" class="text-center small" <?php ((bootstrap3_conf('semantic')) ? 'itemprop="license"' : '') ?>>
+      <?php echo tpl_license('') ?>
+    </div>
     <?php endif; ?>
+
+    <?php
+      // DokuWiki badges
+      require_once('tpl_badges.php');
+
+      // Footer hook
+      tpl_includeFile('footer.html');
+
+      // Footer DokuWiki page
+      require_once('tpl_footer.php');
+
+      // Cookie-Law banner
+      require_once('tpl_cookielaw.php');
+    ?>
+
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
+
+    <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
+      <span class="visible-xs"></span>
+      <span class="visible-sm"></span>
+      <span class="visible-md"></span>
+      <span class="visible-lg"></span>
+    </div>
+
   </div>
   <!--[if IE 8 ]></div><![endif]-->
+
 </body>
 </html>
