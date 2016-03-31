@@ -75,6 +75,7 @@ $lang['socialShareProviders']         = 'Select the social share links to displa
 $lang['tableFullWidth']               = 'Enable 100% full table width (Bootstrap default)';
 $lang['tableStyle']                   = 'Table style';
 $lang['tagsOnTop']                    = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
+$lang['tocAffix']                     = 'Affix the TOC during page scrolling';
 $lang['tocCollapseSubSections']       = 'Collapse all sub-sections in TOC to save space';
 $lang['useAnchorJS']                  = 'Use AnchorJS';
 $lang['useGoogleAnalytics']           = 'Enable Google Analytics';

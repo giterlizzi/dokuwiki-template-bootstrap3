@@ -62,6 +62,7 @@ $conf['socialShareProviders']        = 'facebook,google-plus,linkedin,pinterest,
 $conf['tableFullWidth']              = 1;
 $conf['tableStyle']                  = 'striped,condensed,responsive';
 $conf['tagsOnTop']                   = 1;
+$conf['tocAffix']                    = 1;
 $conf['tocCollapseSubSections']      = 1;
 $conf['useAnchorJS']                 = 1;
 $conf['useGoogleAnalytics']          = 0;

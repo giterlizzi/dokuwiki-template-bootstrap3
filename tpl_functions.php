@@ -699,7 +699,7 @@ function bootstrap3_html_msgarea() {
 function bootstrap3_tools() {
 
   global $ACT;
-  
+
   $tools['user'] = array(
     'icon'    => 'fa fa-fw fa-user',
     'actions' => array(
@@ -888,6 +888,10 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'showThemeSwitcher':
       return $value && (bootstrap3_conf('bootstrapTheme') == 'bootswatch');
+
+    case 'tocCollapseSubSections':
+      if (! bootstrap3_conf('tocAffix')) return false;
+      return $value;
 
   }
 
@@ -1346,6 +1350,7 @@ function bootstrap3_toc($return = false) {
       'navbar'           => 'Navbar',
       'semantic'         => 'Semantic',
       'layout'           => 'Layout',
+      'toc'              => 'TOC',
       'discussion'       => 'Discussion',
       'cookie_law'       => 'Cookie Law',
       'google_analytics' => 'Google Analytics',
@@ -1747,4 +1752,3 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   }
 
 }
-
