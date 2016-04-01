@@ -21,7 +21,7 @@ jQuery(document).ready(function() {
     var $screen_mode = jQuery('#screen__mode'), // Responsive Check
         $dw_aside    = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
 
-    if ($screen_mode.find('.visible-xs').is(':visible')) {
+    if ($screen_mode.find('.visible-xs-block').is(':visible')) {
 
       if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
         $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
