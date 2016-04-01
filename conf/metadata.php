@@ -91,3 +91,4 @@ $meta['pageIcons']            = array('multicheckbox', '_choices' => array('soci
 $meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter'));
 $meta['tagsOnTop']            = array('onoff');
 $meta['useAnchorJS']          = array('onoff');
+$meta['collapsibleSections']  = array('onoff');

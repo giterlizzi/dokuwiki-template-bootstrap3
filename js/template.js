@@ -685,7 +685,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
   setTimeout(function() {
 
-  if (mediaSize('xs')) {
+  if (mediaSize('xs') && JSINFO.bootstrap3.collapsibleSections) {
 
     var $headings = jQuery('div.level2').prev();
 
@@ -709,7 +709,9 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
       });
 
-      $headings.trigger('click');
+      if (mediaSize('xs')) {
+        $headings.trigger('click');
+      }
 
     }
 

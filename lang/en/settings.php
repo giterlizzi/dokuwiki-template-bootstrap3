@@ -16,6 +16,7 @@ $lang['browserTitle']                 = 'DokuWiki browser title (default is <cod
 $lang['browserTitleCharSepNS']        = 'Character separator for every namespaces on browser title';
 $lang['browserTitleOrderNS']          = 'Set the order of namespaces';
 $lang['browserTitleShowNS']           = 'Display the previous page name of current page on the browser title';
+$lang['collapsibleSections']          = 'Collapse 2nd section level (useful in mobile devices)';
 $lang['cookieLawBannerPage']          = 'Cookie Law banner page name';
 $lang['cookieLawPolicyPage']          = 'Cookie Law policy page name';
 $lang['customTheme']                  = 'Insert URL of custom theme';

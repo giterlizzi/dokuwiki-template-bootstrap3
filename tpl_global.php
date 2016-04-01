@@ -30,11 +30,12 @@ $bootswatch_theme  = bootstrap3_bootswatch_theme();
 
 
 $JSINFO['bootstrap3'] = array(
-  'tableFullWidth' => (int) bootstrap3_conf('tableFullWidth'),
-  'tableStyle'     => bootstrap3_conf('tableStyle'),
-  'tagsOnTop'      => (int) bootstrap3_conf('tagsOnTop'),
-  'useAnchorJS'    => (int) bootstrap3_conf('useAnchorJS'),
-  'mode'           => $ACT,
+  'tableFullWidth'      => (int) bootstrap3_conf('tableFullWidth'),
+  'tableStyle'          => bootstrap3_conf('tableStyle'),
+  'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
+  'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
+  'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+  'mode'                => $ACT,
 );
 
 

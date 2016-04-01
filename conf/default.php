@@ -12,6 +12,7 @@ $conf['browserTitle']                = '@TITLE@ [@WIKI@]';
 $conf['browserTitleCharSepNS']       = '-';
 $conf['browserTitleOrderNS']         = 'normal';
 $conf['browserTitleShowNS']          = 0;
+$conf['collapsibleSections']         = 0;
 $conf['cookieLawBannerPage']         = 'cookie:banner';
 $conf['cookieLawPolicyPage']         = 'cookie:policy';
 $conf['customTheme']                 = '';
