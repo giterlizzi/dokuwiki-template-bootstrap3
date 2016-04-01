@@ -232,8 +232,20 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     });
 
     if ((jQuery(window).height() < $dw_toc.height())) {
+
+      function resizeToc() {
+
+        jQuery('#dokuwiki__toc .panel-body').css({
+          'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+          'overflow-y': 'scroll'
+        });
+
+      }
+
       resizeToc();
+
       jQuery(window).resize(resizeToc);
+
     }
 
     // Scrolling animation
@@ -624,6 +636,7 @@ jQuery(document).on('bootstrap3:anchorjs', function() {
 });
 
 
+// Page icons
 jQuery(document).on('bootstrap3:page-icons', function() {
 
   var $dw_page_icons = jQuery('.dw-page-icons');
@@ -667,15 +680,81 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 });
 
 
+// Collapse sections on mobile (XS media)
+jQuery(document).on('bootstrap3:collapse-sections', function(e) {
+
+  setTimeout(function() {
+
+  if (mediaSize('xs')) {
+
+    var $headings = jQuery('div.level2').prev();
+
+    if (! $headings.find('i').length) {
+
+      $headings
+        .css('cursor', 'pointer')
+        .prepend(jQuery('<i class="fa fa-fw fa-chevron-down fa-pull-left" style="font-size:12px; padding:10px 0"/>'));
+
+      $headings.on('click', function() {
+
+        var $heading = jQuery(this),
+            $icon    = $heading.find('i');
+
+        $heading.nextUntil('h2').toggle();
+        $heading.css('cursor', 'pointer');
+
+        $icon.hasClass('fa-chevron-down')
+          ? $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up')
+          : $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+
+      });
+
+      $headings.trigger('click');
+
+    }
+
+  }
+
+  }, 0);
+
+});
+
+// Mobile Layout
+jQuery(document).on('bootstrap3:mobile-layout', function(e) {
+
+  setTimeout(function() {
+
+    var $dw_aside = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
+
+    if (mediaSize('xs')) {
+
+      if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
+        $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
+        $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
+        $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
+      }
+
+    } else {
+
+      $dw_aside.find('.dw-sidebar-content').removeClass('panel panel-default');
+      $dw_aside.find('.dw-sidebar-title').removeClass('panel-heading');
+      $dw_aside.find('.dw-sidebar-body').removeClass('panel-body').addClass('in');
+    }
+
+  }, 0);
+
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'anchorjs', 'back-to-top',
-                   'buttons', 'page-tools', 'page-icons',
-                   'dropdown-page', 'footnotes', 'alerts',
-                   'mode-admin', 'mode-index', 'mode-search',
-                   'media-manager', 'detail', 'cookie-law' ];
+    var events = [  'mobile-layout', 'toc', 'nav', 'tabs', 'anchorjs',
+                    'back-to-top', 'buttons', 'page-tools', 'page-icons',
+                    'dropdown-page', 'footnotes', 'alerts', 'mode-admin',
+                    'mode-index', 'mode-search', 'media-manager', 'detail',
+                    'cookie-law', 'collapse-sections' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

@@ -16,43 +16,14 @@ jQuery(document).ready(function() {
   }
 
 
-  function checkSize() {
-
-    var $screen_mode = jQuery('#screen__mode'), // Responsive Check
-        $dw_aside    = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
-
-    if ($screen_mode.find('.visible-xs-block').is(':visible')) {
-
-      if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
-        $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
-        $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
-        $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
-      }
-
-    } else {
-
-      $dw_aside.find('.dw-sidebar-content').removeClass('panel panel-default');
-      $dw_aside.find('.dw-sidebar-title').removeClass('panel-heading');
-      $dw_aside.find('.dw-sidebar-body').removeClass('panel-body').addClass('in');
-
-    }
-
+  function mediaSize(media) {
+    return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
 
-
-  function resizeToc() {
-
-    jQuery('#dokuwiki__toc .panel-body').css({
-      'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
-      'overflow-y': 'scroll'
-    });
-
-  }
-
-
-  checkSize();
-  jQuery(window).resize(checkSize);
-
+  jQuery(window).resize(function() {
+    jQuery(document).trigger('bootstrap3:mobile-layout');
+    jQuery(document).trigger('bootstrap3:collapse-sections');
+  });
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
