@@ -162,10 +162,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
-      <span class="visible-xs"></span>
-      <span class="visible-sm"></span>
-      <span class="visible-md"></span>
-      <span class="visible-lg"></span>
+      <span class="visible-xs-block"></span>
+      <span class="visible-sm-block"></span>
+      <span class="visible-md-block"></span>
+      <span class="visible-lg-block"></span>
     </div>
 
   </div>
