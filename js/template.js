@@ -116,7 +116,7 @@ jQuery(document).on('bootstrap3:tabs', function(e) {
 
     jQuery('ul.tabs').addClass('nav nav-tabs');
 
-    jQuery('ul.tabs strong').replaceWith(function() {
+    jQuery('.nav-tabs strong').replaceWith(function() {
 
       jQuery(this).parent().addClass('active');
       return jQuery('<a href="#"/>').html(jQuery(this).contents());
