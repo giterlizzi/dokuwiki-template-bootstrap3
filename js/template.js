@@ -424,15 +424,74 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
+    var $ext_manager  = $mode_admin.find('#extension__manager'),
+        $ext_actions  = $ext_manager.find('.actions'),
+        $user_manager = $mode_admin.find('#user__manager'),
+        $admin_tasks  = $mode_admin.find('ul.admin_tasks');
+
+    var tpl_sections = {
+      // Section            ID                  Insert before           Icon
+      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
+      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
+      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
+      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
+      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
+      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
+      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
+      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
+      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
+      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
+      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
+    };
+
+    var admin_tasks = {
+      // Task         Icon
+      'usermanager' : 'users',
+      'acl'         : 'key',
+      'extension'   : 'puzzle-piece',
+      'plugin'      : 'puzzle-piece',
+      'config'      : 'cogs',
+      'styling'     : 'paint-brush',
+      'revert'      : 'refresh',
+      'popularity'  : 'envelope',
+    };
+
+    // Admin Task icon
+    $admin_tasks.addClass('list-group');
+    $admin_tasks.find('a').addClass('list-group-item');
+
+    for (i in admin_tasks) {
+      $admin_tasks.find('li.admin_' + i + ' a')
+        .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
+    }
+
+    // DokuWiki logo
+    jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
+
+    // Configuration manager Template sections
+    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
+
+      var $node = jQuery(this);
+
+      for (var section in tpl_sections) {
+
+        var item = tpl_sections[section];
+
+        if( $node.attr('for').match([item[1], '$'].join('')) ) {
+          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+        }
+
+      }
+
+    });
+
+    // Set 100% width for ALL tables
     if (JSINFO.bootstrap3.tableFullWidth) {
       $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
+    // Set specific icon in Admin Page
     jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
-
-    var $ext_manager  = $mode_admin.find('#extension__manager'),
-        $ext_actions  = $ext_manager.find('.actions'),
-        $user_manager = $mode_admin.find('#user__manager');
 
     // Extension Manager Actions
     if ($ext_actions.length) {
@@ -480,25 +539,32 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $mode_admin.find(':button[name]').each(function(){
 
         var $node = jQuery(this);
+
         switch ($node.attr('name')) {
+
           case 'fn[delete]':
             $node.addClass('btn-danger');
             $node.prepend('<i class="fa fa-trash"/> ');
             break;
+
           case 'fn[add]':
             $node.addClass('btn-success');
             $node.prepend('<i class="fa fa-plus"/> ');
             break;
+
           case 'fn[modify]':
             $node.addClass('btn-success');
             $node.prepend('<i class="fa fa-save"/> ');
             break;
+
           case 'fn[import]':
             $node.prepend('<i class="fa fa-upload"/> ');
             break;
+
           case 'fn[export]':
             $node.prepend('<i class="fa fa-download"/> ');
             break;
+
         }
 
       });
@@ -507,10 +573,8 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     // Extension Manager
     if ($ext_manager.length) {
-
       $ext_manager.find('form.search :submit, form.install :submit').input2button();
       $ext_manager.find('form.search button, form.install button').addClass('btn-success');
-
     }
 
   }, 0);
