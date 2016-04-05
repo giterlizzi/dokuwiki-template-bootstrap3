@@ -10,11 +10,9 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-
   function dw_mode(id) {
     return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
-
 
   function mediaSize(media) {
     return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
@@ -122,57 +120,6 @@ jQuery(document).ready(function() {
 
     jQuery('#index__tree').click(function(e) {
       jQuery(document).trigger('bootstrap3:mode-index');
-    });
-
-  }
-
-
-  // Configuration manager
-  if (dw_mode('admin')) {
-
-    var tpl_sections = {
-      // Section            ID                  Insert before           Icon
-      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
-      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
-      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
-      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
-      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
-      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
-      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
-      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
-      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
-      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
-    };
-
-    var admin_tasks = {
-      'usermanager' : 'users',
-      'acl'         : 'key',
-      'extension'   : 'puzzle-piece',
-      'plugin'      : 'puzzle-piece',
-      'config'      : 'cogs',
-      'styling'     : 'paint-brush',
-      'revert'      : 'refresh',
-      'popularity'  : 'envelope',
-    };
-
-    jQuery('ul.admin_tasks').addClass('list-group');
-    jQuery('ul.admin_tasks a').addClass('list-group-item');
-
-    for(i in admin_tasks) {
-      jQuery('ul.admin_tasks li.admin_' + i + ' a')
-        .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
-    }
-
-    jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
-
-    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
-      var $node = jQuery(this);
-      jQuery.each(tpl_sections, function(section, item){
-        if( $node.attr('for').match([item[1], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
-        }
-      });
     });
 
   }
