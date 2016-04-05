@@ -38,6 +38,10 @@ $JSINFO['bootstrap3'] = array(
   'mode'                => $ACT,
 );
 
+if ($ACT == 'admin') {
+  $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
+}
+
 
 $body_classes   = array();
 $body_classes[] = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
