@@ -80,7 +80,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               ob_start();
               tpl_content(false);
 
-              $content = ob_get_clean();
+              $content = bootstrap3_content(ob_get_clean());
               $toc     = bootstrap3_toc(true);
 
               // Include Page Tools
