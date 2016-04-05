@@ -59,6 +59,68 @@
 
   &.mode_admin {
 
+    #admin__version img {
+      width: 16px;
+      height: 16px;
+      margin-right: 5px;
+    }
+
+    ul.admin_tasks {
+
+      li {
+        background: none !important;
+        font-weight: normal;
+        padding-left: 0;
+        margin-right: 10px;
+        margin-bottom: 10px;
+      }
+
+      .fa {
+        opacity: 0.6;
+        font-size: 24px;
+      }
+
+      .admin_acl        i { color: @color_warning; }
+      .admin_plugin     i,
+      .admin_revert     i { color: @color_success; }
+      .admin_popularity i { color: @color_info; }
+
+    }
+
+    article {
+
+      h1.usermanager::before { .icon(@fa-users); }
+      h1.acl::before         { .icon(@fa-key, @color_warning); }
+      h1.extension::before   { .icon(@fa-puzzle-piece, @color_success); }
+      h1.styling::before     { .icon(@fa-paint-brush); }
+      h1.revert::before      { .icon(@fa-refresh, @color_success); }
+      h1.popularity::before  { .icon(@fa-envelope, @color_info); }
+
+      h1.sqlite::before      { .icon(@fa-database); }
+      h1.tagging::before     { .icon(@fa-tags); }
+      h1.upgrade::before     { .icon(@fa-cloud-download); }
+      h1.smtp::before        { .icon(@fa-envelope-o); }
+      h1.searchindex::before { .icon(@fa-sitemap); }
+      h1.discussion::before  { .icon(@fa-comments); }
+
+    }
+
+    #extension__manager {
+
+      .btn {
+        &.uninstall::before { .icon(@fa-trash); }
+        &.install::before,
+        &.update::before,
+        &.reinstall::before { .icon(@fa-download); }
+        &.enable::before    { .icon(@fa-check); }
+        &.disable::before   { .icon(@fa-ban); }
+      }
+
+      form.search  button::before { .icon(@fa-search); }
+      form.install button::before { .icon(@fa-download); }
+
+    }
+
     #bulk_user_import::before { .icon(@fa-upload); }
 
     #plugin_settings::before   { .icon(@fa-puzzle-piece); }

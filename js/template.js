@@ -428,6 +428,8 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
+    jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
+
     var $ext_manager  = $mode_admin.find('#extension__manager'),
         $ext_actions  = $ext_manager.find('.actions'),
         $user_manager = $mode_admin.find('#user__manager');
@@ -444,20 +446,10 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
         .addClass('btn-xs')
         .input2button();
 
-      $ext_actions.find('.uninstall')
-        .addClass('btn-danger')
-        .prepend('<i class="fa fa-fw fa-trash"/> ');
-
-      $ext_actions.find('.install, .update, .reinstall')
-        .addClass('btn-primary')
-        .prepend('<i class="fa fa-fw fa-download"/> ');
-
-      $ext_actions.find('.enable')
-        .addClass('btn-success')
-        .prepend('<i class="fa fa-fw fa-check"/> ');
-
-      $ext_actions.find('.disable').addClass('btn-warning')
-        .prepend('<i class="fa fa-fw fa-ban"/> ');
+      $ext_actions.find('.uninstall').addClass('btn-danger');
+      $ext_actions.find('.install, .update, .reinstall').addClass('btn-primary');
+      $ext_actions.find('.enable').addClass('btn-success');
+      $ext_actions.find('.disable').addClass('btn-warning');
 
     }
 
@@ -517,12 +509,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     if ($ext_manager.length) {
 
       $ext_manager.find('form.search :submit, form.install :submit').input2button();
-
-      $ext_manager.find('form.search button')
-        .prepend('<i class="fa fa-fw fa-search"/> ');
-
-      $ext_manager.find('form.install button')
-        .prepend('<i class="fa fa-fw fa-download"/> ');
+      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
 
     }
 

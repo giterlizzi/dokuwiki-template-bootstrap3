@@ -145,6 +145,27 @@ jQuery(document).ready(function() {
       'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
     };
 
+    var admin_tasks = {
+      'usermanager' : 'users',
+      'acl'         : 'key',
+      'extension'   : 'puzzle-piece',
+      'plugin'      : 'puzzle-piece',
+      'config'      : 'cogs',
+      'styling'     : 'paint-brush',
+      'revert'      : 'refresh',
+      'popularity'  : 'envelope',
+    };
+
+    jQuery('ul.admin_tasks').addClass('list-group');
+    jQuery('ul.admin_tasks a').addClass('list-group-item');
+
+    for(i in admin_tasks) {
+      jQuery('ul.admin_tasks li.admin_' + i + ' a')
+        .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
+    }
+
+    jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
+
     jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
       var $node = jQuery(this);
       jQuery.each(tpl_sections, function(section, item){

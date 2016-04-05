@@ -57,7 +57,7 @@ $plugins = array(
               switch ($item) {
                 case 'usermanager': $icon = 'users'; break;
                 case 'acl':         $icon = 'key'; break;
-                case 'extension':   $icon = 'plus'; break;
+                case 'extension':   $icon = 'puzzle-piece'; break;
                 case 'config':      $icon = 'cogs'; break;
                 case 'styling':     $icon = 'paint-brush'; break;
                 case 'revert':      $icon = 'refresh'; break;
