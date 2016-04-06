@@ -28,4 +28,3 @@ if (!defined('DOKU_INC')) die();
   </div>
 </div>
 <?php endif; ?>
-

@@ -274,23 +274,27 @@ function bootstrap3_sidebar_include($type) {
  * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_action_item($action, $icon, $return = false) {
+function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
+
+  if ($icon) {
+    $icon = '<i class="'.$icon.'"></i> ';
+  }
 
   if ($action == 'discussion') {
 
     if (bootstrap3_conf('showDiscussion')) {
       $out = _tpl_action('discussion', 1, 'li', 1);
       $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
-      return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
+      return preg_replace('/(<a (.*?)>)/m', '$1'.$icon, $out);
     }
 
     return '';
 
   }
 
-  if ($link = tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ')) {
+  if ($link = tpl_action($action, 1, 0, 1, $icon)) {
 
     if ($return) {
       if ($ACT == $action) {
@@ -696,7 +700,7 @@ function bootstrap3_html_msgarea() {
  *
  * @return  array
  */
-function bootstrap3_tools() {
+function bootstrap3_tools($add_icons = true) {
 
   global $ACT;
 
@@ -735,7 +739,7 @@ function bootstrap3_tools() {
   foreach ($tools as $id => $menu) {
 
     foreach ($menu['actions'] as $action => $item) {
-      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
+      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, (($add_icons) ? $item['icon'] : false));
     }
 
     $tools[$id]['dropdown-menu'] = bootstrap3_toolsevent($id.'tools', $tools[$id]['menu'], 'main', true);
@@ -754,10 +758,10 @@ function bootstrap3_tools() {
  *
  * @return  array of tools
  */
-function bootstrap3_tools_menu() {
+function bootstrap3_tools_menu($add_icons = true) {
 
   $individual = bootstrap3_conf('showIndividualTool');
-  $tools      = bootstrap3_tools();
+  $tools      = bootstrap3_tools($add_icons);
   $result     = array();
 
   foreach ($individual as $tool) {
