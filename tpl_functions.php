@@ -405,32 +405,6 @@ function bootstrap3_fluid_container_button() {
 
 
 /**
- * Manipulate DokuWiki TOC to add Bootstrap3 styling
- *
- * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $toc from tpl_toc()
- * @param   boolean  $return
- * @return  string
- */
-/*
-function bootstrap3_toc($toc, $return = false) {
-
-  $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
-  $out = str_replace('<div>', '<div class="panel-body">', $out);
-  $out = str_replace('<h3 class="toggle">', '<h3 class="toggle panel-heading"><span>', $out);
-  $out = str_replace('</h3>', '</span></h3>', $out);
-
-  $out = bootstrap3_nav($out, 'pills', true);
-
-  if ($return) return $out;
-  echo $out;
-
-}
-*/
-
-
-/**
  * Manipulate Sidebar page to add Bootstrap3 styling
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
