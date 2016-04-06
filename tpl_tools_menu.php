@@ -12,7 +12,7 @@ if (!defined('DOKU_INC')) die();
 
 if (bootstrap3_conf('showTools')):
 
-$tools = bootstrap3_tools_menu();
+$tools = bootstrap3_tools_menu(false);
 
 ?>
 
