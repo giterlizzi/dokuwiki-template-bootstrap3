@@ -1734,6 +1734,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 function bootstrap3_content($content) {
 
+  $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
   $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
 
   return $content;

@@ -20,9 +20,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Unwrap several tags
     jQuery('bdi, span.curid').contents().unwrap();
 
-    // Search Hits
-    jQuery('.search_hit').addClass('mark');
-
     // a11y
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
