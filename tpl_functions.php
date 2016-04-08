@@ -594,7 +594,9 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '</div>';
 
-    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    if (bootstrap3_conf('showSearchButton')) {
+      print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    }
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';

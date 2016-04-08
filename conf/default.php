@@ -53,6 +53,7 @@ $conf['showPageIcons']               = 0;
 $conf['showPageId']                  = 1;
 $conf['showPageInfo']                = 1;
 $conf['showPageTools']               = 'always';
+$conf['showSearchButton']            = 0;
 $conf['showSearchForm']              = 'always';
 $conf['showThemeSwitcher']           = 0;
 $conf['showTools']                   = 'always';
