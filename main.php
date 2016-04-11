@@ -33,13 +33,14 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 <?php tpl_flush() ?>
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
-  <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <header id="dokuwiki__header">
-      <?php tpl_includeFile('topheader.html') ?>
-      <?php require_once('tpl_navbar.php'); ?>
-      <?php tpl_includeFile('header.html') ?>
-    </header>
+  <header id="dokuwiki__header">
+    <?php tpl_includeFile('topheader.html') ?>
+    <?php require_once('tpl_navbar.php'); ?>
+    <?php tpl_includeFile('header.html') ?>
+  </header>
+
+  <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
     <?php tpl_includeFile('social.html') ?>
 
