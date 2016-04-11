@@ -16,7 +16,7 @@ $tools = bootstrap3_tools_menu(false);
 
 ?>
 
-<ul class="nav navbar-nav" id="dw__tools">
+<ul class="nav navbar-nav dw-action-icon" id="dw__tools">
 
 <?php if (bootstrap3_conf('individualTools')): foreach($tools as $id => $menu): ?>
 

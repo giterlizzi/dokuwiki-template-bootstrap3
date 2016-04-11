@@ -138,7 +138,7 @@ if (!function_exists('tpl_classes')) {
 
 
 /**
- * Create event for tools menues
+ * Create event for tools menus
  *
  * @author  Anika Henke <anika@selfthinker.org>
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -579,7 +579,9 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
     global $QUERY;
 
     // don't print the search form if search action has been disabled
-    if (!actionOK('search')) return false;
+    if (! actionOK('search')) return false;
+
+    if (! bootstrap3_conf('showSearchForm')) return false;
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
@@ -613,58 +615,64 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
  */
 function bootstrap3_html_msgarea() {
 
-    global $MSG, $MSG_shown;
-    /** @var array $MSG */
-    // store if the global $MSG has already been shown and thus HTML output has been started
-    $MSG_shown = true;
+  global $MSG, $MSG_shown;
+  /** @var array $MSG */
+  // store if the global $MSG has already been shown and thus HTML output has been started
+  $MSG_shown = true;
 
-    // Check if translation is outdate
-    if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
-      global $ID;
-      if ($translation->istranslatable($ID)) $translation->checkage();
+  // Check if translation is outdate
+  if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
+    global $ID;
+    if ($translation->istranslatable($ID)) $translation->checkage();
+  }
+
+  if(!isset($MSG)) return;
+
+  $shown = array();
+
+  foreach($MSG as $msg){
+
+    $hash = md5($msg['msg']);
+    if(isset($shown[$hash])) continue; // skip double messages
+
+    if(info_msg_allowed($msg)){
+
+      switch ($msg['lvl']) {
+
+        case 'info':
+          $level = 'info';
+          $icon  = 'fa fa-fw fa-info-circle';
+          break;
+
+        case 'error':
+          $level = 'danger';
+          $icon  = 'fa fa-fw fa-times-circle';
+          break;
+
+        case 'notify':
+          $level = 'warning';
+          $icon  = 'fa fa-fw fa-warning';
+          break;
+
+        case 'success':
+          $level = 'success';
+          $icon  = 'fa fa-fw fa-check-circle';
+          break;
+
+      }
+
+      print '<div class="alert alert-'.$level.'">';
+      print '<i class="'.$icon.'"></i> ';
+      print $msg['msg'];
+      print '</div>';
+
     }
 
-    if(!isset($MSG)) return;
+    $shown[$hash] = 1;
 
-    $shown = array();
+  }
 
-    foreach($MSG as $msg){
-
-        $hash = md5($msg['msg']);
-        if(isset($shown[$hash])) continue; // skip double messages
-
-        if(info_msg_allowed($msg)){
-
-            switch ($msg['lvl']) {
-              case 'info':
-                $level = 'info';
-                $icon  = 'fa fa-fw fa-info-circle';
-                break;
-              case 'error':
-                $level = 'danger';
-                $icon  = 'fa fa-fw fa-times-circle';
-                break;
-              case 'notify':
-                $level = 'warning';
-                $icon  = 'fa fa-fw fa-warning';
-                break;
-              case 'success':
-                $level = 'success';
-                $icon  = 'fa fa-fw fa-check-circle';
-                break;
-            }
-
-            print '<div class="alert alert-'.$level.'">';
-            print '<i class="'.$icon.'"></i> ';
-            print $msg['msg'];
-            print '</div>';
-
-        }
-
-        $shown[$hash] = 1;
-    }
-
-    unset($GLOBALS['MSG']);
+  unset($GLOBALS['MSG']);
 
 }
 
@@ -1090,7 +1098,7 @@ function bootstrap3_youarehere() {
     echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
     // always print the startpage
-    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '').'>';
+    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '').'>';
 
     tpl_link(wl($conf['start']),
              ($semantic ? '<span itemprop="name">' : '') . '<i class="fa fa-fw fa-home"></i>' . ($semantic ? '</span>' : ''),
@@ -1110,7 +1118,7 @@ function bootstrap3_youarehere() {
         if($page == $conf['start']) continue; // Skip startpage
 
         // output
-        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
         $link = html_wikilink($page);
         $link = str_replace(' class="curid"', '', html_wikilink($page));
@@ -1138,7 +1146,7 @@ function bootstrap3_youarehere() {
       return true;
     }
 
-    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
     $link = html_wikilink($page);
     $link = str_replace(' class="curid"', '', html_wikilink($page));
@@ -1373,7 +1381,11 @@ function bootstrap3_html_toc($toc){
 
   global $lang;
 
-  $out  = '<!-- TOC START -->'.DOKU_LF;
+  $out  = '';
+  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print';
+  if (bootstrap3_conf('tocAffix')) $out .= ' dw-toc-affix" data-spy="affix" data-offset-top="150';
+  $out .= '">'.DOKU_LF;
+  $out .= '<!-- TOC START -->'.DOKU_LF;
   $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
   $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
   $out .= '<span>';
@@ -1387,6 +1399,7 @@ function bootstrap3_html_toc($toc){
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
 
   return $out;
 
