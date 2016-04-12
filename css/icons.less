@@ -1,10 +1,10 @@
 /*!
- * DokuWiki Bootstrap3 Template: Font Icons
- *
- * Home     http://dokuwiki.org/template:bootstrap3
- * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
- */
+* DokuWiki Bootstrap3 Template: Font Icons
+*
+* Home     http://dokuwiki.org/template:bootstrap3
+* Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+* License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+*/
 
 @import "fa-icons.less";
 
@@ -14,156 +14,189 @@
 @color_success: #5cb85c;
 @color_info: #5bc0de;
 
-.icon(@icon_name) {
+
+.fa-icon(@icon_name) {
   content: '@{icon_name}';
+  .fa-wrapper();
+}
+
+.fa-wrapper() {
   font: normal normal normal 14px/1 FontAwesome;
   display: inline-block;
   width: 1.28571429em;
   font-size: inherit;
 }
 
-.dokuwiki {
+.icon(@icon_name) {
+  content: '@{icon_name}';
+}
 
-  &.mode_denied    article h1:first-of-type:before { .icon(@fa-ban); color: @color_danger; opacity: .6; }
-  &.mode_login     article h1:first-of-type:before { .icon(@fa-sign-in); opacity: .6; }
-  &.mode_register  article h1:first-of-type:before { .icon(@fa-user-plus); opacity: .6; }
-  &.mode_search    article h1:first-of-type:before { .icon(@fa-search); opacity: .6; }
-  &.mode_index     article h1:first-of-type:before { .icon(@fa-sitemap); opacity: .6; }
-  &.mode_media     article h1:first-of-type:before { .icon(@fa-picture-o); opacity: .6; }
-  &.mode_admin     article h1:first-of-type:before { .icon(@fa-cogs); opacity: .6; }
-  &.mode_profile   article h1:first-of-type:before { .icon(@fa-user); opacity: .6; }
-  &.mode_revisions article h1:first-of-type:before { .icon(@fa-clock-o); opacity: .6; }
-  &.mode_backlink  article h1:first-of-type:before { .icon(@fa-link); opacity: .6; }
-  &.mode_draft     article h1:first-of-type:before { .icon(@fa-pencil-square-o); opacity: .6; }
-  &.mode_showtag   article h1:first-of-type:before { .icon(@fa-tags); opacity: .6; }
-  &.mode_locked    article h1:first-of-type:before { .icon(@fa-lock); color: @color_warning; opacity: .6; }
-  &.mode_preview   article h1#preview:before       { .icon(@fa-eye); opacity: .6; }
+// DokuWiki ACTs
+&.mode_denied    article h1:first-of-type:before { .fa-icon(@fa-ban); color: @color_danger; opacity: .6; }
+&.mode_login     article h1:first-of-type:before { .fa-icon(@fa-sign-in); opacity: .6; }
+&.mode_register  article h1:first-of-type:before { .fa-icon(@fa-user-plus); opacity: .6; }
+&.mode_search    article h1:first-of-type:before { .fa-icon(@fa-search); opacity: .6; }
+&.mode_index     article h1:first-of-type:before { .fa-icon(@fa-sitemap); opacity: .6; }
+&.mode_media     article h1:first-of-type:before { .fa-icon(@fa-picture-o); opacity: .6; }
+&.mode_admin     article h1:first-of-type:before { .fa-icon(@fa-cogs); opacity: .6; }
+&.mode_profile   article h1:first-of-type:before { .fa-icon(@fa-user); opacity: .6; }
+&.mode_revisions article h1:first-of-type:before { .fa-icon(@fa-clock-o); opacity: .6; }
+&.mode_backlink  article h1:first-of-type:before { .fa-icon(@fa-link); opacity: .6; }
+&.mode_draft     article h1:first-of-type:before { .fa-icon(@fa-pencil-square-o); opacity: .6; }
+&.mode_showtag   article h1:first-of-type:before { .fa-icon(@fa-tags); opacity: .6; }
+&.mode_locked    article h1:first-of-type:before { .fa-icon(@fa-lock); color: @color_warning; opacity: .6; }
+&.mode_preview   article h1#preview:before       { .fa-icon(@fa-eye); opacity: .6; }
 
-  &.mode_recent,
-  &.mode_diff {
-    article h1:first-of-type:before {
-      .icon(@fa-list-alt); }
+&.mode_recent,
+&.mode_diff {
+  article h1:first-of-type:before {
+    .fa-icon(@fa-list-alt); }
+}
+
+&.mode_conflict,
+&.mode_show.notFound {
+  article h1:first-of-type:before {
+    .fa-icon(@fa-warning);
+    color: @color_warning;
+  }
+}
+
+&.mode_subscribe,
+&.mode_unsubscribe {
+  article h1:first-of-type:before {
+    .fa-icon(@fa-envelope);
+    color: @color_warning;
+  }
+}
+
+
+&.mode_admin {
+
+  #admin__version img {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
   }
 
-  &.mode_conflict,
-  &.mode_show.notFound {
-    article h1:first-of-type:before {
-      .icon(@fa-warning);
-      color: @color_warning;
+  ul.admin_tasks {
+
+    li {
+      background: none !important;
+      font-weight: normal;
+      padding-left: 0;
+      margin-right: 10px;
+      margin-bottom: 10px;
     }
+
+    .fa {
+      opacity: .6;
+      font-size: 24px;
+    }
+
+    .admin_acl        i { color: @color_warning; }
+    .admin_plugin     i,
+    .admin_revert     i { color: @color_success; }
+    .admin_popularity i { color: @color_info; }
+
   }
 
-  &.mode_subscribe,
-  &.mode_unsubscribe {
-    article h1:first-of-type:before {
-      .icon(@fa-envelope);
-      color: @color_warning;
-    }
+  article {
+
+    h1.usermanager:before { .fa-icon(@fa-users); }
+    h1.acl:before         { .fa-icon(@fa-key); color: @color_warning; }
+    h1.extension:before   { .fa-icon(@fa-puzzle-piece); color: @color_success; }
+    h1.styling:before     { .fa-icon(@fa-paint-brush); }
+    h1.revert:before      { .fa-icon(@fa-refresh); color: @color_success; }
+    h1.popularity:before  { .fa-icon(@fa-envelope); color: @color_info; }
+
+    h1.sqlite:before      { .fa-icon(@fa-database); }
+    h1.tagging:before     { .fa-icon(@fa-tags); }
+    h1.upgrade:before     { .fa-icon(@fa-cloud-download); }
+    h1.smtp:before        { .fa-icon(@fa-envelope-o); }
+    h1.searchindex:before { .fa-icon(@fa-sitemap); }
+    h1.discussion:before  { .fa-icon(@fa-comments); }
+
   }
 
+  // Extension Manager
+  #extension__manager {
 
-  &.mode_admin {
+    form button {
 
-    #admin__version img {
-      width: 16px;
-      height: 16px;
-      margin-right: 5px;
-    }
-
-    ul.admin_tasks {
-
-      li {
-        background: none !important;
-        font-weight: normal;
-        padding-left: 0;
-        margin-right: 10px;
-        margin-bottom: 10px;
+      &:before {
+        .fa-wrapper();
       }
 
-      .fa {
-        opacity: .6;
-        font-size: 24px;
+      &.uninstall:before { .icon(@fa-trash); }
+      &.install:before,
+      &.update:before,
+      &.reinstall:before { .icon(@fa-download); }
+      &.enable:before    { .icon(@fa-check); }
+      &.disable:before   { .icon(@fa-ban); }
+    }
+
+    form.search  button:before { .icon(@fa-search); }
+    form.install button:before { .icon(@fa-download); }
+
+  }
+
+  #bulk_user_import:before { .fa-icon(@fa-upload); }
+
+  // Configuration Manager
+  #config__manager {
+
+    h4 { margin-top: 40px; }
+
+    fieldset[id^="plugin__"] legend:before { .icon(@fa-puzzle-piece); }
+
+    legend, h1 {
+      &:before {
+        .fa-wrapper();
       }
-
-      .admin_acl        i { color: @color_warning; }
-      .admin_plugin     i,
-      .admin_revert     i { color: @color_success; }
-      .admin_popularity i { color: @color_info; }
-
     }
 
-    article {
+    #_basic          legend:before { .icon(@fa-cog); }
+    #_display        legend:before { .icon(@fa-laptop); }
+    #_authentication legend:before { .icon(@fa-lock); }
+    #_anti_spam      legend:before { .icon(@fa-ban); }
+    #_editing        legend:before { .icon(@fa-edit); }
+    #_links          legend:before { .icon(@fa-link); }
+    #_media          legend:before { .icon(@fa-image); }
+    #_notifications  legend:before { .icon(@fa-envelope); }
+    #_syndication    legend:before { .icon(@fa-rss); }
+    #_advanced       legend:before { .icon(@fa-sliders); }
+    #_network        legend:before { .icon(@fa-share-alt); }
 
-      h1.usermanager:before { .icon(@fa-users); }
-      h1.acl:before         { .icon(@fa-key); color: @color_warning; }
-      h1.extension:before   { .icon(@fa-puzzle-piece); color: @color_success; }
-      h1.styling:before     { .icon(@fa-paint-brush); }
-      h1.revert:before      { .icon(@fa-refresh); color: @color_success; }
-      h1.popularity:before  { .icon(@fa-envelope); color: @color_info; }
-
-      h1.sqlite:before      { .icon(@fa-database); }
-      h1.tagging:before     { .icon(@fa-tags); }
-      h1.upgrade:before     { .icon(@fa-cloud-download); }
-      h1.smtp:before        { .icon(@fa-envelope-o); }
-      h1.searchindex:before { .icon(@fa-sitemap); }
-      h1.discussion:before  { .icon(@fa-comments); }
-
-    }
-
-    #extension__manager {
-
-      .btn {
-        &.uninstall:before { .icon(@fa-trash); }
-        &.install:before,
-        &.update:before,
-        &.reinstall:before { .icon(@fa-download); }
-        &.enable:before    { .icon(@fa-check); }
-        &.disable:before   { .icon(@fa-ban); }
-      }
-
-      form.search  button:before { .icon(@fa-search); }
-      form.install button:before { .icon(@fa-download); }
-
-    }
-
-    #bulk_user_import:before { .icon(@fa-upload); }
-
-    #plugin_settings:before   { .icon(@fa-puzzle-piece); }
+    #plugin_settings:before   { .icon(@fa-puzzle-piece); color: @color_success; }
     #template_settings:before { .icon(@fa-paint-brush); }
 
-    #config__manager {
+  }
 
-      h4 { margin-top: 40px; }
+}
 
-      #_basic          legend:before { .icon(@fa-cog); }
-      #_display        legend:before { .icon(@fa-laptop); }
-      #_authentication legend:before { .icon(@fa-lock); }
-      #_anti_spam      legend:before { .icon(@fa-ban); }
-      #_editing        legend:before { .icon(@fa-edit); }
-      #_links          legend:before { .icon(@fa-link); }
-      #_media          legend:before { .icon(@fa-image); }
-      #_notifications  legend:before { .icon(@fa-envelope); }
-      #_syndication    legend:before { .icon(@fa-rss); }
-      #_advanced       legend:before { .icon(@fa-sliders); }
-      #_network        legend:before { .icon(@fa-share-alt); }
+// DokuWiki User icon
+a.iw_user:before { .fa-icon(@fa-user); }
 
+// Section Edit Buttons
+.secedit {
+  & button:before {
+    .fa-wrapper();
+  }
+  &.editbutton_section button:before { .icon(@fa-pencil); }
+  &.editbutton_table   button:before { .icon(@fa-table); }
+}
+
+// Search result pages
+ul.search_quickhits li a:before { .fa-icon(@fa-file-text-o); color: #777; }
+
+// Action icons
+.dw-action-icon {
+
+  a.action {
+
+    &:before {
+      .fa-wrapper();
     }
-
-  }
-
-  // DokuWiki User icon
-  a.iw_user:before { .icon(@fa-user); }
-
-  // Section Edit Buttons
-  .secedit {
-    &.editbutton_section button:before { .icon(@fa-pencil); }
-    &.editbutton_table   button:before { .icon(@fa-table); }
-  }
-
-  // Search result pages
-  ul.search_quickhits li a:before { .icon(@fa-file-text-o); color: #777; }
-
-  .dw-action-icon a.action {
 
     &.admin:before      { .icon(@fa-cogs); }
     &.profile:before    { .icon(@fa-refresh); }
@@ -187,36 +220,36 @@
 
   }
 
+}
 
-  #dw__admin {
 
-    span {
-      &.administrative_tasks:before { .icon(@fa-cog); }
-      &.additional_plugins:before   { .icon(@fa-puzzle-piece); }
-    }
+#dw__admin {
 
-    a.admin {
+  span {
+    &.administrative_tasks:before { .fa-icon(@fa-cog); }
+    &.additional_plugins:before   { .fa-icon(@fa-puzzle-piece); }
+  }
 
-      &:before { .icon(@fa-puzzle-piece); }
+  a.admin {
 
-      // Admin Tasks
-      &.usermanager:before { .icon(@fa-users); }
-      &.acl:before         { .icon(@fa-key); }
-      &.config:before      { .icon(@fa-cog); }
-      &.extension:before   { .icon(@fa-puzzle-piece); }
-      &.styling:before     { .icon(@fa-paint-brush); }
-      &.revert:before      { .icon(@fa-refresh); }
-      &.popularity:before  { .icon(@fa-envelope); }
+    &:before { .fa-icon(@fa-puzzle-piece); }
 
-      // Plugins
-      &.sqlite:before      { .icon(@fa-database); }
-      &.tagging:before     { .icon(@fa-tags); }
-      &.upgrade:before     { .icon(@fa-cloud-download); }
-      &.smtp:before        { .icon(@fa-envelope-o); }
-      &.searchindex:before { .icon(@fa-sitemap); }
-      &.discussion:before  { .icon(@fa-comments); }
+    // Admin Tasks
+    &.usermanager:before { .icon(@fa-users); }
+    &.acl:before         { .icon(@fa-key); }
+    &.config:before      { .icon(@fa-cog); }
+    &.extension:before   { .icon(@fa-puzzle-piece); }
+    &.styling:before     { .icon(@fa-paint-brush); }
+    &.revert:before      { .icon(@fa-refresh); }
+    &.popularity:before  { .icon(@fa-envelope); }
 
-    }
+    // Plugins
+    &.sqlite:before      { .icon(@fa-database); }
+    &.tagging:before     { .icon(@fa-tags); }
+    &.upgrade:before     { .icon(@fa-cloud-download); }
+    &.smtp:before        { .icon(@fa-envelope-o); }
+    &.searchindex:before { .icon(@fa-sitemap); }
+    &.discussion:before  { .icon(@fa-comments); }
 
   }
 
