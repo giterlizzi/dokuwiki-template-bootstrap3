@@ -1,5 +1,59 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+In this release improved the stability, speed and the user experience with new layout for **Detail page** and new icons for **Admin pages** and **3th party plugins** and new options. Added support for **Loadskin** plugin. Updated **FontAwesome** and **AnchorJS** to latest release.
+
+### Added
+  * #164: Introduced new PHP function to wrap a DokuWiki content to replace/add or adjust code/tags/classes on server-side
+  * #168: Added missing button style in Media Manager (thanks to @nkukard)
+  * #170: Added missing Google Analytics code in ``detail.php`` (thanks to @AlekSet)
+  * #175: Added **Loadskin plugin** support
+  * Added Bootstrap table style to User Import Failure table
+  * Added automatic collapse of 2nd section levels in mobile devices and clean code
+  * Added ``tocAffix`` (default: 1) option to disable/enable the affix of TOC
+  * Added ``collapsibleSections`` (default:0) option to enable/disable 2nd section levels collapse
+  * Added ``showSearchButton`` (default:0) option to enable/disable search button in navbar. Turn off to save space in navbar
+  * Added ``forcewrapper=true`` in TOC to add initial ``<ul>`` tag
+
+### Changed
+  * #161: Removed RSS Feed icon color (thanks to @AlekSet and @polyzen)
+  * #171: Improvements in detail.php (thanks to @AlekSet for the idea)
+  * #172: Changed color of toolbar in Bootswatch Cosmo theme (thanks to @drguildo)
+  * #175: Use the ``tpl_basedir()`` function instead of deprecated ``DOKU_TPL`` constant (thanks to @umbomas)
+  * #177: Changed alignment and layout of form elements for mobile devices (thanks to @blacklord049 on #177)
+  * New layout for ``detail.php``
+  * Updated AnchorJS to v3.1.0
+  * Updated FontAwesome to v4.6.0
+  * Updated all translations from Transifex platform
+  * Splitted plugins hacks (CSS and JS) in different files
+  * Changed textarea ``font-family`` in edit mode
+  * Using ``wl()`` function to build the Theme Switcher URL
+  * Improvements in TOC, Admin Pages (new icons) and JS and Template engine
+  * Using CSS instead of ``<i>`` tag to add icons in page, to reduce page size
+  * Adding ``.mark`` class via PHP instead of JS
+  * Moved ``<header>`` out of main ``<div>``
+
+### Deprecated
+  * Using ``.visible-*-block`` classes instead of deprecated ``.visible-*`` classes to detect media/device size
+
+### Removed
+  * Removed old commented code
+
+### Fixed
+  * #26: Fixed regression image alignment after moving Bootstrap CSS before the custom CSS (thanks to @duenni)
+  * #154: Fixed multiple count syntax in same page (thanks to @duenni)
+  * #156: Fixed IE11 issue for User and Admin menu (thanks to @blacklord049)
+  * #161: Added missing Feed URL (thanks to @AlekSet)
+  * #163: Added new regex pattern to fix a ``.page-header`` with ``H1-H2`` tags in sidebar (thanks to @blacklord049)
+  * #166: Fixed TOC behavior with the same #ID in the article and sidebar (thanks to HanFox)
+  * #174: Fixed Pagetools are behind the scrollbar on IE11 (thanks to @blacklord049)
+  * #188: Fixed Media Manager popup issue on IE11 (thanks to @help53)
+  * Fixed unexpected behavior for ``fluidContainer`` button and TOC
+  * Fixed ScrollSpy behavior
+  * Fixed unhexpected behavior in TOC for SQLite and Advanced plugin
+
+
 ## [v2016-02-29]
 
 In this release improved the user experience with new icons for print, share the link (via mail and social network -- eg Google+, Fb, Twitter, WhatsApp) and new little-hook to an help page. Enjoy SEO user, with the OOTB integration with Google Analytics. Fixed some issues, reorganized and added new configurations.
@@ -145,108 +199,60 @@ In this release improved the user experience with new icons for Configuration Ma
 
 ## Older releases
 
-* [v2015-09-18]
-* [v2015-09-14]
-* [v2015-09-13]
-* [v2015-09-12]
-* [v2015-09-07]
-* [v2015-09-06]
-* [v2015-09-04]
-* [v2015-08-30]
-* [v2015-08-27]
-* [v2015-08-22]
-* [v2015-08-20]
-* [v2015-08-19]
-* [v2015-08-12]
-* [v2015-08-10]
-* [v2015-08-03]
-* [v2015-08-02]
-* [v2015-08-01]
-* [v2015-07-31]
-* [v2015-07-30]
-* [v2015-07-28]
-* [v2015-07-22]
-* [v2015-07-19]
-* [v2015-07-17]
-* [v2015-07-16]
-* [v2015-07-15]
-* [v2015-07-13]
-* [v2015-07-08]
-* [v2015-07-06]
-* [v2015-06-17]
-* [v2015-06-11]
-* [v2015-06-05]
-* [v2015-05-14]
-* [v2015-05-13]
-* [v2015-05-12]
-* [v2015-05-08]
-* [v2015-05-06]
-* [v2015-04-27]
-* [v2015-04-22]
-* [v2015-04-20]
-* [v2015-04-10]
-* [v2015-04-09]
-* [v2015-04-08]
-* [v2015-04-07]
-* [v2015-04-02]
-* [v2015-04-01]
-* [v2015-03-24]
-* [v2015-03-22]
-* [v2015-03-19]
-* [v2015-03-18]
+  * [v2015-09-18](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-14...v2015-09-18)
+  * [v2015-09-14](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-13...v2015-09-14)
+  * [v2015-09-13](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-12...v2015-09-13)
+  * [v2015-09-12](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-07...v2015-09-12)
+  * [v2015-09-07](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-06...v2015-09-07)
+  * [v2015-09-06](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-04...v2015-09-06)
+  * [v2015-09-04](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-30...v2015-09-04)
+  * [v2015-08-30](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-27...v2015-08-30)
+  * [v2015-08-27](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-22...v2015-08-27)
+  * [v2015-08-22](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-20...v2015-08-22)
+  * [v2015-08-20](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-19...v2015-08-20)
+  * [v2015-08-19](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-12...v2015-08-19)
+  * [v2015-08-12](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-10...v2015-08-12)
+  * [v2015-08-10](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-03...v2015-08-10)
+  * [v2015-08-03](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-02...v2015-08-03)
+  * [v2015-08-02](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-01...v2015-08-02)
+  * [v2015-08-01](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-31...v2015-08-01)
+  * [v2015-07-31](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-30...v2015-07-31)
+  * [v2015-07-30](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-28...v2015-07-30)
+  * [v2015-07-28](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-22...v2015-07-28)
+  * [v2015-07-22](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-19...v2015-07-22)
+  * [v2015-07-19](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-17...v2015-07-19)
+  * [v2015-07-17](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-16...v2015-07-17)
+  * [v2015-07-16](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-15...v2015-07-16)
+  * [v2015-07-15](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-13...v2015-07-15)
+  * [v2015-07-13](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-08...v2015-07-13)
+  * [v2015-07-08](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-06...v2015-07-08)
+  * [v2015-07-06](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-17...v2015-07-06)
+  * [v2015-06-17](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-11...v2015-06-17)
+  * [v2015-06-11](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-05...v2015-06-11)
+  * [v2015-06-05](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-14...v2015-06-05)
+  * [v2015-05-14](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-13...v2015-05-14)
+  * [v2015-05-13](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-12...v2015-05-13)
+  * [v2015-05-12](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-08...v2015-05-12)
+  * [v2015-05-08](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-06...v2015-05-08)
+  * [v2015-05-06](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-27...v2015-05-06)
+  * [v2015-04-27](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-22...v2015-04-27)
+  * [v2015-04-22](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-20...v2015-04-22)
+  * [v2015-04-20](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-10...v2015-04-20)
+  * [v2015-04-10](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-09...v2015-04-10)
+  * [v2015-04-09](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-08...v2015-04-09)
+  * [v2015-04-08](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-07...v2015-04-08)
+  * [v2015-04-07](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-02...v2015-04-07)
+  * [v2015-04-02](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-01...v2015-04-02)
+  * [v2015-04-01](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-24...v2015-04-01)
+  * [v2015-03-24](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-22...v2015-03-24)
+  * [v2015-03-22](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-19...v2015-03-22)
+  * [v2015-03-19](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-18...v2015-03-19)
+  * [v2015-03-18](https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-18...v2015-03-18)
 
-[v2015-03-18]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-18...v2015-03-18
-[v2015-03-19]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-18...v2015-03-19
-[v2015-03-22]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-19...v2015-03-22
-[v2015-03-24]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-22...v2015-03-24
-[v2015-04-01]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-03-24...v2015-04-01
-[v2015-04-02]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-01...v2015-04-02
-[v2015-04-07]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-02...v2015-04-07
-[v2015-04-08]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-07...v2015-04-08
-[v2015-04-09]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-08...v2015-04-09
-[v2015-04-10]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-09...v2015-04-10
-[v2015-04-20]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-10...v2015-04-20
-[v2015-04-22]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-20...v2015-04-22
-[v2015-04-27]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-22...v2015-04-27
-[v2015-05-06]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-04-27...v2015-05-06
-[v2015-05-08]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-06...v2015-05-08
-[v2015-05-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-08...v2015-05-12
-[v2015-05-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-12...v2015-05-13
-[v2015-05-14]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-13...v2015-05-14
-[v2015-06-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-05-14...v2015-06-05
-[v2015-06-11]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-05...v2015-06-11
-[v2015-06-17]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-11...v2015-06-17
-[v2015-07-06]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-06-17...v2015-07-06
-[v2015-07-08]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-06...v2015-07-08
-[v2015-07-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-08...v2015-07-13
-[v2015-07-15]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-13...v2015-07-15
-[v2015-07-16]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-15...v2015-07-16
-[v2015-07-17]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-16...v2015-07-17
-[v2015-07-19]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-17...v2015-07-19
-[v2015-07-22]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-19...v2015-07-22
-[v2015-07-28]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-22...v2015-07-28
-[v2015-07-30]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-28...v2015-07-30
-[v2015-07-31]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-30...v2015-07-31
-[v2015-08-01]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-07-31...v2015-08-01
-[v2015-08-02]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-01...v2015-08-02
-[v2015-08-03]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-02...v2015-08-03
-[v2015-08-10]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-03...v2015-08-10
-[v2015-08-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-10...v2015-08-12
-[v2015-08-19]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-12...v2015-08-19
-[v2015-08-20]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-19...v2015-08-20
-[v2015-08-22]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-20...v2015-08-22
-[v2015-08-27]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-22...v2015-08-27
-[v2015-08-30]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-27...v2015-08-30
-[v2015-09-04]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-08-30...v2015-09-04
-[v2015-09-06]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-04...v2015-09-06
-[v2015-09-07]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-06...v2015-09-07
-[v2015-09-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-07...v2015-09-12
-[v2015-09-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-12...v2015-09-13
-[v2015-09-14]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-13...v2015-09-14
-[v2015-09-18]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-14...v2015-09-18
-[v2015-10-08]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-18...v2015-10-08
-[v2015-10-27]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-10-08...v2015-10-27
-[v2015-11-23]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-10-27...v2015-11-23
-[v2016-01-25]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-11-23...v2016-01-25
+
+[Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
 [v2016-02-29]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...v2016-02-29
-[Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...develop
+[v2016-01-25]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-11-23...v2016-01-25
+[v2015-11-23]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-10-27...v2015-11-23
+[v2015-10-27]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-10-08...v2015-10-27
+[v2015-10-08]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-09-18...v2015-10-08
