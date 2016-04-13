@@ -32,6 +32,7 @@ $meta['hideLoginLink']       = array('onoff');
 $meta['individualTools']     = array('onoff');
 $meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['showSearchButton']    = array('onoff');
 $meta['showAdminMenu']       = array('onoff');
 $meta['useLegacyNavbar']     = array('onoff');
 $meta['showNavbar']          = array('multichoice', '_choices' => array('logged', 'always'));
@@ -50,10 +51,13 @@ $meta['showLandingPage']        = array('onoff');
 $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showPageId']             = array('onoff');
-$meta['tocCollapseSubSections'] = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
 $meta['useGravatar']            = array('onoff');
+
+// TOC
+$meta['tocAffix']               = array('onoff');
+$meta['tocCollapseSubSections'] = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
@@ -88,3 +92,4 @@ $meta['pageIcons']            = array('multicheckbox', '_choices' => array('soci
 $meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter'));
 $meta['tagsOnTop']            = array('onoff');
 $meta['useAnchorJS']          = array('onoff');
+$meta['collapsibleSections']  = array('onoff');

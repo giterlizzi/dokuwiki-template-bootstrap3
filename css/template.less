@@ -78,6 +78,9 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 /* Table of contents */
 #dokuwiki__toc {
 
+  margin-left: 15px;
+  dispay: table;
+
   .panel-body {
     padding: 5px;
     width: 16em;
@@ -245,6 +248,8 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
   .navbar-text {
     float: initial;
+    margin-left: 0;
+    margin-right: 0;
   }
 
 }
@@ -334,7 +339,6 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 .dw-toc-affix {
   z-index: 999;
-  padding-left: 15px;
   right: 25px;
 }
 
@@ -631,7 +635,7 @@ ul.btn-group {
 }
 
 
-/* Styles for XS and S devices */
+/* Styles for XS devices */
 @media screen and (max-width: 767px) {
 
   .dokuwiki {
@@ -640,10 +644,19 @@ ul.btn-group {
     label.block select,
     label.block input.edit {
       width: 100%;
+      text-align: left;
     }
 
     label.block {
       text-align: initial;
+    }
+
+    label[for="remember__me"] {
+      margin-left: 0 !important;
+    }
+
+    .centeralign form {
+      text-align: left;
     }
 
     #config__manager {

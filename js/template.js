@@ -20,9 +20,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // Unwrap several tags
     jQuery('bdi, span.curid').contents().unwrap();
 
-    // Search Hits
-    jQuery('.search_hit').addClass('mark');
-
     // a11y
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
@@ -116,7 +113,7 @@ jQuery(document).on('bootstrap3:tabs', function(e) {
 
     jQuery('ul.tabs').addClass('nav nav-tabs');
 
-    jQuery('ul.tabs strong').replaceWith(function() {
+    jQuery('.nav-tabs strong').replaceWith(function() {
 
       jQuery(this).parent().addClass('active');
       return jQuery('<a href="#"/>').html(jQuery(this).contents());
@@ -232,8 +229,20 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     });
 
     if ((jQuery(window).height() < $dw_toc.height())) {
+
+      function resizeToc() {
+
+        jQuery('#dokuwiki__toc .panel-body').css({
+          'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+          'overflow-y': 'scroll'
+        });
+
+      }
+
       resizeToc();
+
       jQuery(window).resize(resizeToc);
+
     }
 
     // Scrolling animation
@@ -366,15 +375,9 @@ jQuery(document).on('bootstrap3:detail', function(e) {
     if (! $detail_page.length) return false;
 
     $detail_page.find('img.img_detail')
-      .addClass('thumbnail img-responsive');
+      .addClass('img-responsive');
     $detail_page.find('dl')
       .addClass('dl-horizontal');
-    $detail_page.find('.img_backto')
-      .addClass('btn btn-success')
-      .prepend('<i class="fa fa-fw fa-arrow-left"/> ');
-    $detail_page.find('.mediaManager')
-      .addClass('btn btn-default')
-      .prepend('<i class="fa fa-fw fa-picture-o"/> ');
 
   }, 0);
 
@@ -418,13 +421,74 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
+    var $ext_manager  = $mode_admin.find('#extension__manager'),
+        $ext_actions  = $ext_manager.find('.actions'),
+        $user_manager = $mode_admin.find('#user__manager'),
+        $admin_tasks  = $mode_admin.find('ul.admin_tasks');
+
+    var tpl_sections = {
+      // Section            ID                  Insert before           Icon
+      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
+      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
+      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
+      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
+      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
+      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
+      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
+      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
+      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
+      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
+      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
+    };
+
+    var admin_tasks = {
+      // Task         Icon
+      'usermanager' : 'users',
+      'acl'         : 'key',
+      'extension'   : 'puzzle-piece',
+      'plugin'      : 'puzzle-piece',
+      'config'      : 'cogs',
+      'styling'     : 'paint-brush',
+      'revert'      : 'refresh',
+      'popularity'  : 'envelope',
+    };
+
+    // Admin Task icon
+    $admin_tasks.addClass('list-group');
+    $admin_tasks.find('a').addClass('list-group-item');
+
+    for (i in admin_tasks) {
+      $admin_tasks.find('li.admin_' + i + ' a')
+        .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
+    }
+
+    // DokuWiki logo
+    jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
+
+    // Configuration manager Template sections
+    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
+
+      var $node = jQuery(this);
+
+      for (var section in tpl_sections) {
+
+        var item = tpl_sections[section];
+
+        if( $node.attr('for').match([item[1], '$'].join('')) ) {
+          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+        }
+
+      }
+
+    });
+
+    // Set 100% width for ALL tables
     if (JSINFO.bootstrap3.tableFullWidth) {
       $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
-    var $ext_manager  = $mode_admin.find('#extension__manager'),
-        $ext_actions  = $ext_manager.find('.actions'),
-        $user_manager = $mode_admin.find('#user__manager');
+    // Set specific icon in Admin Page
+    jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
 
     // Extension Manager Actions
     if ($ext_actions.length) {
@@ -438,20 +502,10 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
         .addClass('btn-xs')
         .input2button();
 
-      $ext_actions.find('.uninstall')
-        .addClass('btn-danger')
-        .prepend('<i class="fa fa-fw fa-trash"/> ');
-
-      $ext_actions.find('.install, .update, .reinstall')
-        .addClass('btn-primary')
-        .prepend('<i class="fa fa-fw fa-download"/> ');
-
-      $ext_actions.find('.enable')
-        .addClass('btn-success')
-        .prepend('<i class="fa fa-fw fa-check"/> ');
-
-      $ext_actions.find('.disable').addClass('btn-warning')
-        .prepend('<i class="fa fa-fw fa-ban"/> ');
+      $ext_actions.find('.uninstall').addClass('btn-danger');
+      $ext_actions.find('.install, .update, .reinstall').addClass('btn-primary');
+      $ext_actions.find('.enable').addClass('btn-success');
+      $ext_actions.find('.disable').addClass('btn-warning');
 
     }
 
@@ -482,25 +536,32 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $mode_admin.find(':button[name]').each(function(){
 
         var $node = jQuery(this);
+
         switch ($node.attr('name')) {
+
           case 'fn[delete]':
             $node.addClass('btn-danger');
             $node.prepend('<i class="fa fa-trash"/> ');
             break;
+
           case 'fn[add]':
             $node.addClass('btn-success');
             $node.prepend('<i class="fa fa-plus"/> ');
             break;
+
           case 'fn[modify]':
             $node.addClass('btn-success');
             $node.prepend('<i class="fa fa-save"/> ');
             break;
+
           case 'fn[import]':
             $node.prepend('<i class="fa fa-upload"/> ');
             break;
+
           case 'fn[export]':
             $node.prepend('<i class="fa fa-download"/> ');
             break;
+
         }
 
       });
@@ -509,15 +570,8 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     // Extension Manager
     if ($ext_manager.length) {
-
       $ext_manager.find('form.search :submit, form.install :submit').input2button();
-
-      $ext_manager.find('form.search button')
-        .prepend('<i class="fa fa-fw fa-search"/> ');
-
-      $ext_manager.find('form.install button')
-        .prepend('<i class="fa fa-fw fa-download"/> ');
-
+      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
     }
 
   }, 0);
@@ -630,6 +684,7 @@ jQuery(document).on('bootstrap3:anchorjs', function() {
 });
 
 
+// Page icons
 jQuery(document).on('bootstrap3:page-icons', function() {
 
   var $dw_page_icons = jQuery('.dw-page-icons');
@@ -673,15 +728,83 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 });
 
 
+// Collapse sections on mobile (XS media)
+jQuery(document).on('bootstrap3:collapse-sections', function(e) {
+
+  setTimeout(function() {
+
+  if (mediaSize('xs') && JSINFO.bootstrap3.collapsibleSections) {
+
+    var $headings = jQuery('div.level2').prev();
+
+    if (! $headings.find('i').length) {
+
+      $headings
+        .css('cursor', 'pointer')
+        .prepend(jQuery('<i class="fa fa-fw fa-chevron-down fa-pull-left" style="font-size:12px; padding:10px 0"/>'));
+
+      $headings.on('click', function() {
+
+        var $heading = jQuery(this),
+            $icon    = $heading.find('i');
+
+        $heading.nextUntil('h2').toggle();
+        $heading.css('cursor', 'pointer');
+
+        $icon.hasClass('fa-chevron-down')
+          ? $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up')
+          : $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+
+      });
+
+      if (mediaSize('xs')) {
+        $headings.trigger('click');
+      }
+
+    }
+
+  }
+
+  }, 0);
+
+});
+
+// Mobile Layout
+jQuery(document).on('bootstrap3:mobile-layout', function(e) {
+
+  setTimeout(function() {
+
+    var $dw_aside = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
+
+    if (mediaSize('xs')) {
+
+      if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
+        $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
+        $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
+        $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
+      }
+
+    } else {
+
+      $dw_aside.find('.dw-sidebar-content').removeClass('panel panel-default');
+      $dw_aside.find('.dw-sidebar-title').removeClass('panel-heading');
+      $dw_aside.find('.dw-sidebar-body').removeClass('panel-body').addClass('in');
+    }
+
+  }, 0);
+
+});
+
+
 jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [ 'toc', 'nav', 'tabs', 'anchorjs', 'back-to-top',
-                   'buttons', 'page-tools', 'page-icons',
-                   'dropdown-page', 'footnotes', 'alerts',
-                   'mode-admin', 'mode-index', 'mode-search',
-                   'media-manager', 'detail', 'cookie-law' ];
+    var events = [  'mobile-layout', 'toc', 'nav', 'tabs', 'anchorjs',
+                    'back-to-top', 'buttons', 'page-tools', 'page-icons',
+                    'dropdown-page', 'footnotes', 'alerts', 'mode-admin',
+                    'mode-index', 'mode-search', 'media-manager', 'detail',
+                    'cookie-law', 'collapse-sections' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

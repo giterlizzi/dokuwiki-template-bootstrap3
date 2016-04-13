@@ -10,49 +10,18 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-
   function dw_mode(id) {
     return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
 
-
-  function checkSize() {
-
-    var $screen_mode = jQuery('#screen__mode'), // Responsive Check
-        $dw_aside    = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
-
-    if ($screen_mode.find('.visible-xs').is(':visible')) {
-
-      if (! $dw_aside.find('.dw-sidebar-content').hasClass('panel')) {
-        $dw_aside.find('.dw-sidebar-content').addClass('panel panel-default');
-        $dw_aside.find('.dw-sidebar-title').addClass('panel-heading');
-        $dw_aside.find('.dw-sidebar-body').addClass('panel-body').removeClass('in');
-      }
-
-    } else {
-
-      $dw_aside.find('.dw-sidebar-content').removeClass('panel panel-default');
-      $dw_aside.find('.dw-sidebar-title').removeClass('panel-heading');
-      $dw_aside.find('.dw-sidebar-body').removeClass('panel-body').addClass('in');
-
-    }
-
+  function mediaSize(media) {
+    return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
 
-
-  function resizeToc() {
-
-    jQuery('#dokuwiki__toc .panel-body').css({
-      'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
-      'overflow-y': 'scroll'
-    });
-
-  }
-
-
-  checkSize();
-  jQuery(window).resize(checkSize);
-
+  jQuery(window).resize(function() {
+    jQuery(document).trigger('bootstrap3:mobile-layout');
+    jQuery(document).trigger('bootstrap3:collapse-sections');
+  });
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
@@ -151,35 +120,6 @@ jQuery(document).ready(function() {
 
     jQuery('#index__tree').click(function(e) {
       jQuery(document).trigger('bootstrap3:mode-index');
-    });
-
-  }
-
-
-  // Configuration manager
-  if (dw_mode('admin')) {
-
-    var tpl_sections = {
-      // Section            ID                  Insert before           Icon
-      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
-      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
-      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
-      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
-      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
-      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
-      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
-      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
-      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Page'            : [ 'page',             'showPageInfo',         'fa-file'     ]
-    };
-
-    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
-      var $node = jQuery(this);
-      jQuery.each(tpl_sections, function(section, item){
-        if( $node.attr('for').match([item[1], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
-        }
-      });
     });
 
   }

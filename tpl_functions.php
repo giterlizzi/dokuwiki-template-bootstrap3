@@ -138,7 +138,7 @@ if (!function_exists('tpl_classes')) {
 
 
 /**
- * Create event for tools menues
+ * Create event for tools menus
  *
  * @author  Anika Henke <anika@selfthinker.org>
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -274,23 +274,27 @@ function bootstrap3_sidebar_include($type) {
  * @param   boolean  $return
  * @return  string
  */
-function bootstrap3_action_item($action, $icon, $return = false) {
+function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
+
+  if ($icon) {
+    $icon = '<i class="'.$icon.'"></i> ';
+  }
 
   if ($action == 'discussion') {
 
     if (bootstrap3_conf('showDiscussion')) {
       $out = _tpl_action('discussion', 1, 'li', 1);
       $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
-      return preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $out);
+      return preg_replace('/(<a (.*?)>)/m', '$1'.$icon, $out);
     }
 
     return '';
 
   }
 
-  if ($link = tpl_action($action, 1, 0, 1, '<i class="'.$icon.'"></i> ')) {
+  if ($link = tpl_action($action, 1, 0, 1, $icon)) {
 
     if ($return) {
       if ($ACT == $action) {
@@ -398,32 +402,6 @@ function bootstrap3_fluid_container_button() {
   return false;
 
 }
-
-
-/**
- * Manipulate DokuWiki TOC to add Bootstrap3 styling
- *
- * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $toc from tpl_toc()
- * @param   boolean  $return
- * @return  string
- */
-/*
-function bootstrap3_toc($toc, $return = false) {
-
-  $out = str_replace('<div id="', '<div class="panel panel-default" id="', $toc);
-  $out = str_replace('<div>', '<div class="panel-body">', $out);
-  $out = str_replace('<h3 class="toggle">', '<h3 class="toggle panel-heading"><span>', $out);
-  $out = str_replace('</h3>', '</span></h3>', $out);
-
-  $out = bootstrap3_nav($out, 'pills', true);
-
-  if ($return) return $out;
-  echo $out;
-
-}
-*/
 
 
 /**
@@ -601,7 +579,9 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
     global $QUERY;
 
     // don't print the search form if search action has been disabled
-    if (!actionOK('search')) return false;
+    if (! actionOK('search')) return false;
+
+    if (! bootstrap3_conf('showSearchForm')) return false;
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
@@ -616,7 +596,9 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '</div>';
 
-    print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    if (bootstrap3_conf('showSearchButton')) {
+      print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
+    }
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
@@ -633,58 +615,64 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
  */
 function bootstrap3_html_msgarea() {
 
-    global $MSG, $MSG_shown;
-    /** @var array $MSG */
-    // store if the global $MSG has already been shown and thus HTML output has been started
-    $MSG_shown = true;
+  global $MSG, $MSG_shown;
+  /** @var array $MSG */
+  // store if the global $MSG has already been shown and thus HTML output has been started
+  $MSG_shown = true;
 
-    // Check if translation is outdate
-    if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
-      global $ID;
-      if ($translation->istranslatable($ID)) $translation->checkage();
+  // Check if translation is outdate
+  if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')) {
+    global $ID;
+    if ($translation->istranslatable($ID)) $translation->checkage();
+  }
+
+  if(!isset($MSG)) return;
+
+  $shown = array();
+
+  foreach($MSG as $msg){
+
+    $hash = md5($msg['msg']);
+    if(isset($shown[$hash])) continue; // skip double messages
+
+    if(info_msg_allowed($msg)){
+
+      switch ($msg['lvl']) {
+
+        case 'info':
+          $level = 'info';
+          $icon  = 'fa fa-fw fa-info-circle';
+          break;
+
+        case 'error':
+          $level = 'danger';
+          $icon  = 'fa fa-fw fa-times-circle';
+          break;
+
+        case 'notify':
+          $level = 'warning';
+          $icon  = 'fa fa-fw fa-warning';
+          break;
+
+        case 'success':
+          $level = 'success';
+          $icon  = 'fa fa-fw fa-check-circle';
+          break;
+
+      }
+
+      print '<div class="alert alert-'.$level.'">';
+      print '<i class="'.$icon.'"></i> ';
+      print $msg['msg'];
+      print '</div>';
+
     }
 
-    if(!isset($MSG)) return;
+    $shown[$hash] = 1;
 
-    $shown = array();
+  }
 
-    foreach($MSG as $msg){
-
-        $hash = md5($msg['msg']);
-        if(isset($shown[$hash])) continue; // skip double messages
-
-        if(info_msg_allowed($msg)){
-
-            switch ($msg['lvl']) {
-              case 'info':
-                $level = 'info';
-                $icon  = 'fa fa-fw fa-info-circle';
-                break;
-              case 'error':
-                $level = 'danger';
-                $icon  = 'fa fa-fw fa-times-circle';
-                break;
-              case 'notify':
-                $level = 'warning';
-                $icon  = 'fa fa-fw fa-warning';
-                break;
-              case 'success':
-                $level = 'success';
-                $icon  = 'fa fa-fw fa-check-circle';
-                break;
-            }
-
-            print '<div class="alert alert-'.$level.'">';
-            print '<i class="'.$icon.'"></i> ';
-            print $msg['msg'];
-            print '</div>';
-
-        }
-
-        $shown[$hash] = 1;
-    }
-
-    unset($GLOBALS['MSG']);
+  unset($GLOBALS['MSG']);
 
 }
 
@@ -696,10 +684,10 @@ function bootstrap3_html_msgarea() {
  *
  * @return  array
  */
-function bootstrap3_tools() {
+function bootstrap3_tools($add_icons = true) {
 
   global $ACT;
-  
+
   $tools['user'] = array(
     'icon'    => 'fa fa-fw fa-user',
     'actions' => array(
@@ -735,7 +723,7 @@ function bootstrap3_tools() {
   foreach ($tools as $id => $menu) {
 
     foreach ($menu['actions'] as $action => $item) {
-      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, $item['icon']);
+      $tools[$id]['menu'][$action] = bootstrap3_action_item($action, (($add_icons) ? $item['icon'] : false));
     }
 
     $tools[$id]['dropdown-menu'] = bootstrap3_toolsevent($id.'tools', $tools[$id]['menu'], 'main', true);
@@ -754,10 +742,10 @@ function bootstrap3_tools() {
  *
  * @return  array of tools
  */
-function bootstrap3_tools_menu() {
+function bootstrap3_tools_menu($add_icons = true) {
 
   $individual = bootstrap3_conf('showIndividualTool');
-  $tools      = bootstrap3_tools();
+  $tools      = bootstrap3_tools($add_icons);
   $result     = array();
 
   foreach ($individual as $tool) {
@@ -888,6 +876,20 @@ function bootstrap3_conf($key, $default = false) {
 
     case 'showThemeSwitcher':
       return $value && (bootstrap3_conf('bootstrapTheme') == 'bootswatch');
+
+    case 'tocCollapseSubSections':
+      if (! bootstrap3_conf('tocAffix')) return false;
+      return $value;
+
+    case 'schemaOrgType':
+
+      if ($semantic = plugin_load('helper', 'semantic')) {
+        if (method_exists($semantic, 'getSchemaOrgType')) {
+          return $semantic->getSchemaOrgType();
+        }
+      }
+
+      return $value;
 
   }
 
@@ -1106,7 +1108,7 @@ function bootstrap3_youarehere() {
     echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
     // always print the startpage
-    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '').'>';
+    echo '<li'.($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '').'>';
 
     tpl_link(wl($conf['start']),
              ($semantic ? '<span itemprop="name">' : '') . '<i class="fa fa-fw fa-home"></i>' . ($semantic ? '</span>' : ''),
@@ -1126,7 +1128,7 @@ function bootstrap3_youarehere() {
         if($page == $conf['start']) continue; // Skip startpage
 
         // output
-        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+        echo '<li'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
         $link = html_wikilink($page);
         $link = str_replace(' class="curid"', '', html_wikilink($page));
@@ -1154,7 +1156,7 @@ function bootstrap3_youarehere() {
       return true;
     }
 
-    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope       itemtype="http://schema.org/ListItem"' : '') .'>';
+    echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
     $link = html_wikilink($page);
     $link = str_replace(' class="curid"', '', html_wikilink($page));
@@ -1346,6 +1348,7 @@ function bootstrap3_toc($return = false) {
       'navbar'           => 'Navbar',
       'semantic'         => 'Semantic',
       'layout'           => 'Layout',
+      'toc'              => 'TOC',
       'discussion'       => 'Discussion',
       'cookie_law'       => 'Cookie Law',
       'google_analytics' => 'Google Analytics',
@@ -1388,7 +1391,11 @@ function bootstrap3_html_toc($toc){
 
   global $lang;
 
-  $out  = '<!-- TOC START -->'.DOKU_LF;
+  $out  = '';
+  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print';
+  if (bootstrap3_conf('tocAffix')) $out .= ' dw-toc-affix" data-spy="affix" data-offset-top="150';
+  $out .= '">'.DOKU_LF;
+  $out .= '<!-- TOC START -->'.DOKU_LF;
   $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
   $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
   $out .= '<span>';
@@ -1402,6 +1409,7 @@ function bootstrap3_html_toc($toc){
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
 
   return $out;
 
@@ -1665,7 +1673,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 
   // Apply some FIX
-  if ($ACT) {
+  if ($ACT || defined('DOKU_MEDIADETAIL')) {
 
     // Default Padding
     $navbar_padding = 20;
@@ -1748,3 +1756,12 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 }
 
+
+function bootstrap3_content($content) {
+
+  $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+  $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
+
+  return $content;
+
+}

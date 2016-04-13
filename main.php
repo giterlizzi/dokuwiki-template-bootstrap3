@@ -33,13 +33,14 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 <?php tpl_flush() ?>
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>">
   <!--[if IE 8 ]><div id="IE8"><![endif]-->
-  <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <header id="dokuwiki__header">
-      <?php tpl_includeFile('topheader.html') ?>
-      <?php require_once('tpl_navbar.php'); ?>
-      <?php tpl_includeFile('header.html') ?>
-    </header>
+  <header id="dokuwiki__header">
+    <?php tpl_includeFile('topheader.html') ?>
+    <?php require_once('tpl_navbar.php'); ?>
+    <?php tpl_includeFile('header.html') ?>
+  </header>
+
+  <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
     <?php tpl_includeFile('social.html') ?>
 
@@ -80,18 +81,14 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               ob_start();
               tpl_content(false);
 
-              $content = ob_get_clean();
+              $content = bootstrap3_content(ob_get_clean());
               $toc     = bootstrap3_toc(true);
 
               // Include Page Tools
               require_once('tpl_page_tools.php');
 
               // Include the TOC layout
-              if ($toc) {
-                echo '<div class="pull-right hidden-print dw-toc-affix" data-spy="affix" data-offset-top="150">';
-                echo $toc;
-                echo '</div>';
-              }
+              if ($toc) echo $toc;
 
               echo '<div class="dw-content">';
               echo $content;
@@ -158,10 +155,10 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
-      <span class="visible-xs"></span>
-      <span class="visible-sm"></span>
-      <span class="visible-md"></span>
-      <span class="visible-lg"></span>
+      <span class="visible-xs-block"></span>
+      <span class="visible-sm-block"></span>
+      <span class="visible-md-block"></span>
+      <span class="visible-lg-block"></span>
     </div>
 
   </div>
