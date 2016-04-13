@@ -881,6 +881,16 @@ function bootstrap3_conf($key, $default = false) {
       if (! bootstrap3_conf('tocAffix')) return false;
       return $value;
 
+    case 'schemaOrgType':
+
+      if ($semantic = plugin_load('helper', 'semantic')) {
+        if (method_exists($semantic, 'getSchemaOrgType')) {
+          return $semantic->getSchemaOrgType();
+        }
+      }
+
+      return $value;
+
   }
 
   $metadata = bootstrap3_conf_metadata($key);
