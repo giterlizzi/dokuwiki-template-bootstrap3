@@ -1,6 +1,6 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
+## [v2016-04-13]
 
 In this release improved the stability, speed and the user experience with new layout for **Detail page** and new icons for **Admin pages** and **3th party plugins** and new options. Added support for **Loadskin** plugin. Updated **FontAwesome** and **AnchorJS** to latest release.
 
@@ -251,6 +251,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
+[v2016-04-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-02-29...v2016-04-13
 [v2016-02-29]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...v2016-02-29
 [v2016-01-25]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-11-23...v2016-01-25
 [v2015-11-23]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-10-27...v2015-11-23
