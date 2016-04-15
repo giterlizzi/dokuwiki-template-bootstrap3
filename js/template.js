@@ -427,18 +427,18 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
         $admin_tasks  = $mode_admin.find('ul.admin_tasks');
 
     var tpl_sections = {
-      // Section            ID                  Insert before           Icon
-      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
-      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
-      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
-      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
-      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
-      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
-      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
-      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
-      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
-      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
+      // ID                 Insert before           Icon
+      'theme'           : [ 'bootstrapTheme',       'fa-tint'      ],
+      'sidebar'         : [ 'sidebarPosition',      'fa-columns'   ],
+      'navbar'          : [ 'inverseNavbar',        'fa-navicon'   ],
+      'semantic'        : [ 'semantic',             'fa-share-alt' ],
+      'layout'          : [ 'fluidContainer',       'fa-desktop'   ],
+      'toc'             : [ 'tocAffix',             'fa-list'      ],
+      'discussion'      : [ 'showDiscussion',       'fa-comments'  ],
+      'cookie_law'      : [ 'showCookieLawBanner',  'fa-legal'     ],
+      'google_analytics': [ 'useGoogleAnalytics',   'fa-google'    ],
+      'browser_title'   : [ 'browserTitle',         'fa-header'    ],
+      'page'            : [ 'showPageInfo',         'fa-file'      ]
     };
 
     var admin_tasks = {
@@ -474,8 +474,8 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
         var item = tpl_sections[section];
 
-        if( $node.attr('for').match([item[1], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
+        if( $node.attr('for').match([item[0], '$'].join('')) ) {
+          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</h4></td><td></td></tr>'].join('')))
         }
 
       }
