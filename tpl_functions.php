@@ -1343,23 +1343,15 @@ function bootstrap3_toc($return = false) {
   if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
 
     $bootstrap3_sections = array(
-      'theme'            => 'Theme',
-      'sidebar'          => 'Sidebar',
-      'navbar'           => 'Navbar',
-      'semantic'         => 'Semantic',
-      'layout'           => 'Layout',
-      'toc'              => 'TOC',
-      'discussion'       => 'Discussion',
-      'cookie_law'       => 'Cookie Law',
-      'google_analytics' => 'Google Analytics',
-      'browser_title'    => 'Browser Title',
-      'page'             => 'Page'
+      'theme', 'sidebar', 'navbar', 'semantic',
+      'layout', 'toc', 'discussion', 'cookie_law',
+      'google_analytics', 'browser_title', 'page'
     );
 
-    foreach ($bootstrap3_sections as $id => $title) {
+    foreach ($bootstrap3_sections as $id) {
       $toc[] = array(
         'link'  => "#bootstrap3__$id",
-        'title' => $title,
+        'title' => tpl_getLang("config_$id"),
         'type'  => 'ul',
         'level' => 3
       );
