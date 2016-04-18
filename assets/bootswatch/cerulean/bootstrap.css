@@ -3465,6 +3465,7 @@ fieldset[disabled] .btn-link:focus {
 .btn-block + .btn-block {
   margin-top: 5px;
 }
+
 input[type="submit"].btn-block,
 input[type="reset"].btn-block,
 input[type="button"].btn-block {
@@ -6901,4 +6902,23 @@ button.close {
 .panel-danger .panel-title,
 .panel-info .panel-title {
   color: #fff;
+}
+
+#save_button {
+	color: #ffffff !important;
+    background-image: -webkit-linear-gradient(#88c149, #73a839 60%, #699934);
+    background-image: -o-linear-gradient(#88c149, #73a839 60%, #699934);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#88c149), color-stop(60%, #73a839), to(#699934));
+    background-image: linear-gradient(#88c149, #73a839 60%, #699934);
+    background-repeat: no-repeat;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff88c149', endColorstr='#ff699934', GradientType=0);
+    -webkit-filter: none;
+    filter: none;
+    border-bottom: 1px solid #59822c;
+}
+
+#save_button:hover {
+    color: #555555 !important;
+    background-color: #59822c;
+    border-color: #547a29;
 }
