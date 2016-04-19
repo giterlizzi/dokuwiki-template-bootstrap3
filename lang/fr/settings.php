@@ -9,6 +9,7 @@
  * @author   Keyven
  * @author   momo choko
  * @author   Grègoire Leclercq
+ * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -22,6 +23,7 @@ $lang['browserTitle']                 = 'Le titre du navigateur pour DokuWiki (p
 $lang['browserTitleCharSepNS']        = 'Caractère pour séparer chaque espaces de noms dans le titre du navigateur';
 $lang['browserTitleOrderNS']          = 'Définir l\'ordre des espaces de noms';
 $lang['browserTitleShowNS']           = 'Afficher le nom précédent de la page actuelle dans le titre du navigateur';
+$lang['collapsibleSections']          = 'Réduire le 2ème niveau de sous-sections (utile sur les périphériques mobiles)';
 $lang['cookieLawBannerPage']          = 'Nom de page de la bannière :  "Politique d\'Utilisation des cookies"';
 $lang['cookieLawPolicyPage']          = 'Nom de page de la "Politique d\'Utilisation des cookies"';
 $lang['customTheme']                  = 'Renseignez l\'URL du thème personalisé';
@@ -29,23 +31,27 @@ $lang['discussionPage']               = 'Nom de la page de discussion (<code>dis
 $lang['fixedTopNavbar']               = 'Fixer la barre de navigation en haut de la page';
 $lang['fluidContainer']               = 'Activer la classe "fluid-container" (pleine largeur de page)';
 $lang['fluidContainerBtn']            = 'Afficher un menu dans la barre de navigation pour développer le conteneur';
-$lang['googleAnalyticsAnonymizeIP']   = 'Anonymize the IP address of visitors';
-$lang['googleAnalyticsNoTrackAdmin']  = 'Disable tracking for the Admin users';
-$lang['googleAnalyticsNoTrackPages']  = 'Disable tracking for specified pages (insert a regex)';
-$lang['googleAnalyticsNoTrackUsers']  = 'Disable tracking for all logged users';
-$lang['googleAnalyticsTrackActions']  = 'Track DokuWiki actions (edit, search, etc)';
-$lang['googleAnalyticsTrackID']       = 'Tracking ID';
+$lang['googleAnalyticsAnonymizeIP']   = 'Rendre anonymes les adresses IP des visiteurs';
+$lang['googleAnalyticsNoTrackAdmin']  = 'Désactiver le suivi pour les utilisateurs étant administrateurs';
+$lang['googleAnalyticsNoTrackPages']  = 'Désactiver le suivi pour les pages spécifiées (insérez une expression régulière)';
+$lang['googleAnalyticsNoTrackUsers']  = 'Désactiver le suivi pour tous les utilisateurs connectés';
+$lang['googleAnalyticsTrackActions']  = 'Suivre les actions DokuWiki (édition, recherche, etc)';
+$lang['googleAnalyticsTrackID']       = 'Identifiant de suivi';
 $lang['hideInThemeSwitcher']          = 'Ne pas afficher les thèmes dans le menu de thèmes';
 $lang['hideLoginLink']                = 'Cacher le bouton de login dans la barre de navigation. Cette option est utile quand le DokuWiki est en lecture seule, (e.g., blog, site perso)';
 $lang['individualTools']              = 'Scinder les outils dans le menu personnel dans la barre de navigation';
 $lang['inverseNavbar']                = 'Inverser la barre de navigation';
 $lang['landingPages']                 = 'Nom de la page d\'accueil - format de page (insérer une regex)';
 $lang['leftSidebarGrid']              = 'Les classes de grille pour la sidebar de gauche <code>col-{xs,sm,md,lg}-x</code> (voir <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
-$lang['pageIcons']                    = 'Select the icons to display';
+$lang['pageIcons']                    = 'Sélectionnez les icônes à afficher';
+$lang['pageInfo']                     = 'Afficher/Cacher les éléments d\'information de la page';
+$lang['pageInfoDateFormat']           = 'Format de la date';
+$lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
+$lang['pageInfoDateFormat_o_human']   = 'Lisible par l\'homme';
 $lang['pageOnPanel']                  = 'Activer le cadre autour de la page';
-$lang['rightSidebar']                 = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
+$lang['rightSidebar']                 = 'Nom de la page pour la barre latérale droite. Un champ vide désactive la barre latérale de droite.<br/>Celle-ci est affichée seulement quand la <a class="interwiki iw_doku" href="#config___sidebar">barre latérale</a> par défaut de DokuWiki est activée avec la position <code>left</code> (voir la page de configuration <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Si vous voulez seulement la barre latérale DokuWiki à droite, définissez le paramètre <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> avec la valeur <code>right</code>';
 $lang['rightSidebarGrid']             = 'Les classes de grille pour la sidebar de droite  <code>col-{xs,sm,md,lg}-x</code> (voir <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
-$lang['schemaOrgType']                = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
+$lang['schemaOrgType']                = 'Type Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Activer les données sémantiques';
 $lang['showAdminMenu']                = 'Afficher le menu d\'administration';
 $lang['showBadges']                   = 'Afficher les boutons des badges (Dokuwiki, Don, etc)';
@@ -55,16 +61,17 @@ $lang['showHomePageLink']             = 'Afficher le lien de l\'Accueil dans la 
 $lang['showIndividualTool']           = 'Activer/Désactiver l\'outil personnel dans la barre de navigation';
 $lang['showLandingPage']              = 'Activer un format de page (sans sidebar et sans cadre autour de la page)';
 $lang['showLoginOnFooter']            = 'Afficher un "petit" lien vers le login en bas de page. Cette option est utile quand <code>hideLoginLink</code> est actif.';
-$lang['showNavbar']                   = 'Display navbar hook';
-$lang['showNavbar_o_always']          = 'Always';
-$lang['showNavbar_o_logged']          = 'When logged in';
-$lang['showPageIcons']                = 'Display useful icons (print, share link, send mail, etc.) on page';
+$lang['showNavbar']                   = 'Afficher l\'attache "Barre de navigation"';
+$lang['showNavbar_o_always']          = 'Toujours';
+$lang['showNavbar_o_logged']          = 'Une fois loggé';
+$lang['showPageIcons']                = 'Afficher des icônes utiles (imprimer, partager, envoyer un e-mail, etc.) sur la page';
 $lang['showPageId']                   = 'Afficher l\'identifiant de page Dokuwiki (pageId)  en haut';
 $lang['showPageInfo']                 = 'Afficher les informations de page (date, auteur,...)';
 $lang['showPageTools']                = 'Activer les outils de page dans le style Dokuwiki';
 $lang['showPageTools_o_always']       = 'Toujours';
 $lang['showPageTools_o_logged']       = 'Une fois loggé';
 $lang['showPageTools_o_never']        = 'Jamais';
+$lang['showSearchButton']             = 'Afficher le bouton de recherche dans la barre de navigation';
 $lang['showSearchForm']               = 'Afficher la barre de recherche dans la barre de navigation';
 $lang['showSearchForm_o_always']      = 'Toujours';
 $lang['showSearchForm_o_logged']      = 'Une fois loggé';
@@ -77,17 +84,14 @@ $lang['showTools_o_never']            = 'Jamais';
 $lang['showTranslation']              = 'Affiche la barre de langues (nécessite <em>Translation Plugin</em>)';
 $lang['showUserHomeLink']             = 'Afficher un lien vers la page utilisateur dans la barre de navigation';
 $lang['sidebarPosition']              = 'Position de la sidebar de DokuWiki (<code>left</code> (gauche) ou <code>right</code> (droite))';
-$lang['socialShareProviders']         = 'Select the social share links to display';
-$lang['tableFullWidth']               = 'Activer  en pleine largeur, 100% du tableau (Bootstrap par défaut)';
+$lang['socialShareProviders']         = 'Sélectionnez les réseaux sociaux pour lesquels afficher un lien de partage';
+$lang['tableFullWidth']               = 'Activer en pleine largeur, 100% du tableau (Bootstrap par défaut)';
 $lang['tableStyle']                   = 'Style de tableau';
 $lang['tagsOnTop']                    = 'Déplacer tous les Tags en haut de page, à côté de l\'identifiant de page (nécessite <em> Tag Plugin </em>)';
+$lang['tocAffix']                     = 'Rendre flottante la table des matières pour accompagner lors du défilement';
 $lang['tocCollapseSubSections']       = 'Réduire toutes les sous-sections dans les TOC pour économiser l\'espace';
 $lang['useAnchorJS']                  = 'Activer AnchorJS';
-$lang['useGoogleAnalytics']           = 'Enable Google Analytics';
+$lang['useGoogleAnalytics']           = 'Activer la fonctionnalité Google Analytics';
 $lang['useGravatar']                  = 'Charger l\'image Gravatar';
-$lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
+$lang['useLegacyNavbar']              = 'Utiliser l\'attache <code>navbar.html</code> héritée de DokuWiki et malheureusement dépréciée (dans le futur, pensez à utiliser l\'attache <code>:navbar</code>)';
 $lang['useLocalBootswatch']           = 'Utiliser le répertoire local de Bootswatch. Cette option est utile pour une installation de Dokuwiki en intranet';
-$lang['pageInfo']                     = 'Display/Hide page info elements';
-$lang['pageInfoDateFormat']           = 'Date format';
-$lang['pageInfoDateFormat_o_human']   = 'Human readable';
-$lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki format';

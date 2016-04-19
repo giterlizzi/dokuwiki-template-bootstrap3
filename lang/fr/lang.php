@@ -9,6 +9,7 @@
  * @author   Keyven
  * @author   momo choko
  * @author   Grègoire Leclercq
+ * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
