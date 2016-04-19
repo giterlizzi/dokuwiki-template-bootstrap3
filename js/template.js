@@ -43,10 +43,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
     $dw_content.find('table.inline, table.import_failures').addClass(table_class.join(' '));
 
-    if (! JSINFO.bootstrap3.tableFullWidth) {
-      $dw_content.find('table.inline').css('width', 'auto');
-    }
-
     // Form and controls
     $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
     jQuery('input, select, textarea')
@@ -421,6 +417,11 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
+    // Set specific icon in Admin Page
+    if (JSINFO.bootstrap3.admin) {
+      jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
+    }
+
     var $ext_manager  = $mode_admin.find('#extension__manager'),
         $ext_actions  = $ext_manager.find('.actions'),
         $user_manager = $mode_admin.find('#user__manager'),
@@ -466,32 +467,28 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
 
     // Configuration manager Template sections
-    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
+    if (dw_admin('config')) {
 
-      var $node = jQuery(this);
+      jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
 
-      for (var section in tpl_sections) {
+        var $node = jQuery(this);
 
-        var item = tpl_sections[section];
+        for (var section in tpl_sections) {
 
-        if( $node.attr('for').match([item[0], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</h4></td><td></td></tr>'].join('')))
+          var item = tpl_sections[section];
+
+          if( $node.attr('for').match([item[0], '$'].join('')) ) {
+            $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</h4></td><td></td></tr>'].join('')))
+          }
+
         }
 
-      }
+      });
 
-    });
-
-    // Set 100% width for ALL tables
-    if (JSINFO.bootstrap3.tableFullWidth) {
-      $mode_admin.find('div.table table.inline').css('width', '100%');
     }
 
-    // Set specific icon in Admin Page
-    jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
-
     // Extension Manager Actions
-    if ($ext_actions.length) {
+    if (dw_admin('extension')) {
 
       $ext_actions.addClass('btn-group');
 
@@ -507,10 +504,13 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $ext_actions.find('.enable').addClass('btn-success');
       $ext_actions.find('.disable').addClass('btn-warning');
 
+      $ext_manager.find('form.search :submit, form.install :submit').input2button();
+      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
+
     }
 
     // User Manager
-    if ($user_manager.length) {
+    if (dw_admin('usermanager')) {
 
       $mode_admin.find('.notes').removeClass('notes');
 
@@ -566,12 +566,6 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
       });
 
-    }
-
-    // Extension Manager
-    if ($ext_manager.length) {
-      $ext_manager.find('form.search :submit, form.install :submit').input2button();
-      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
     }
 
   }, 0);
@@ -635,6 +629,8 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
     var $page_tools_items = jQuery('#dw__pagetools ul li a');
 
+    if (! $page_tools_items.length) return false;
+
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);
       $icon.find('i').addClass('fa-2x', 250);
@@ -688,6 +684,8 @@ jQuery(document).on('bootstrap3:anchorjs', function() {
 jQuery(document).on('bootstrap3:page-icons', function() {
 
   var $dw_page_icons = jQuery('.dw-page-icons');
+
+  if (! $dw_page_icons.length) return false;
 
   var title = encodeURIComponent(document.title),
       url   = encodeURIComponent(location),
@@ -769,6 +767,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
 });
 
+
 // Mobile Layout
 jQuery(document).on('bootstrap3:mobile-layout', function(e) {
 
@@ -802,9 +801,8 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
     var events = [  'mobile-layout', 'toc', 'nav', 'tabs', 'anchorjs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
-                    'dropdown-page', 'footnotes', 'alerts', 'mode-admin',
-                    'mode-index', 'mode-search', 'media-manager', 'detail',
-                    'cookie-law', 'collapse-sections' ];
+                    'dropdown-page', 'footnotes', 'alerts', 'media-manager',
+                    'collapse-sections' ];
 
     for (i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

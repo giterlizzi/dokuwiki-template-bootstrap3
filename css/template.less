@@ -19,8 +19,8 @@ body {
 
   position: relative;
 
-  &.default.page-on-panel,
-  &.optional.page-on-panel, {
+  &.default.dw-page-on-panel,
+  &.optional.dw-page-on-panel, {
     background: #FEFEFE;
   }
 
@@ -438,6 +438,20 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 }
 
 
+.mode_admin {
+
+  h1#dokuwiki_settings,
+  h1#plugin_settings,
+  h1#template_settings {
+    font-size: 1.80em;
+  }
+
+  #config__manager legend {
+    cursor: pointer;
+  }
+}
+
+
 /* Back to top button */
 .back-to-top {
   position: fixed;
@@ -684,4 +698,14 @@ a.anchorjs-link:hover {
 body.cosmo #tool__bar .btn {
   border: 1px solid #CCC;
   background-color: #EEE;
+}
+
+
+.dw-table-width {
+  article table.inline {
+    width: auto;
+  }
+  .mode_admin table.inline {
+    width: 100%;
+  }
 }

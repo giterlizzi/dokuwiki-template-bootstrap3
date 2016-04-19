@@ -14,6 +14,10 @@ jQuery(document).ready(function() {
     return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
 
+  function dw_admin(page) {
+    return ((JSINFO.bootstrap3.admin === page) ? true : false);
+  }
+
   function mediaSize(media) {
     return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
@@ -111,8 +115,20 @@ jQuery(document).ready(function() {
 
   }
 
-  // Index tree
+  // Admin mode
+  if (dw_mode('admin')) {
+    jQuery(document).trigger('bootstrap3:mode-admin');
+  }
+
+  // Search mode
+  if (dw_mode('search')) {
+    jQuery(document).trigger('bootstrap3:mode-search');
+  }
+
+  // Index mode
   if (dw_mode('index')) {
+
+    jQuery(document).trigger('bootstrap3:mode-index');
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:mode-index');

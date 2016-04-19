@@ -32,37 +32,37 @@
 }
 
 // DokuWiki ACTs
-&.mode_denied    article h1:first-of-type:before { .fa-icon(@fa-ban); color: @color_danger; opacity: .6; }
-&.mode_login     article h1:first-of-type:before { .fa-icon(@fa-sign-in); opacity: .6; }
-&.mode_register  article h1:first-of-type:before { .fa-icon(@fa-user-plus); opacity: .6; }
-&.mode_search    article h1:first-of-type:before { .fa-icon(@fa-search); opacity: .6; }
-&.mode_index     article h1:first-of-type:before { .fa-icon(@fa-sitemap); opacity: .6; }
-&.mode_media     article h1:first-of-type:before { .fa-icon(@fa-picture-o); opacity: .6; }
-&.mode_admin     article h1:first-of-type:before { .fa-icon(@fa-cogs); opacity: .6; }
-&.mode_profile   article h1:first-of-type:before { .fa-icon(@fa-user); opacity: .6; }
-&.mode_revisions article h1:first-of-type:before { .fa-icon(@fa-clock-o); opacity: .6; }
-&.mode_backlink  article h1:first-of-type:before { .fa-icon(@fa-link); opacity: .6; }
-&.mode_draft     article h1:first-of-type:before { .fa-icon(@fa-pencil-square-o); opacity: .6; }
-&.mode_showtag   article h1:first-of-type:before { .fa-icon(@fa-tags); opacity: .6; }
-&.mode_locked    article h1:first-of-type:before { .fa-icon(@fa-lock); color: @color_warning; opacity: .6; }
-&.mode_preview   article h1#preview:before       { .fa-icon(@fa-eye); opacity: .6; }
+.mode_denied    article h1:first-of-type:before { .fa-icon(@fa-ban); color: @color_danger; opacity: .6; }
+.mode_login     article h1:first-of-type:before { .fa-icon(@fa-sign-in); opacity: .6; }
+.mode_register  article h1:first-of-type:before { .fa-icon(@fa-user-plus); opacity: .6; }
+.mode_search    article h1:first-of-type:before { .fa-icon(@fa-search); opacity: .6; }
+.mode_index     article h1:first-of-type:before { .fa-icon(@fa-sitemap); opacity: .6; }
+.mode_media     article h1:first-of-type:before { .fa-icon(@fa-picture-o); opacity: .6; }
+.mode_admin     article h1:first-of-type:before { .fa-icon(@fa-cogs); opacity: .6; }
+.mode_profile   article h1:first-of-type:before { .fa-icon(@fa-user); opacity: .6; }
+.mode_revisions article h1:first-of-type:before { .fa-icon(@fa-clock-o); opacity: .6; }
+.mode_backlink  article h1:first-of-type:before { .fa-icon(@fa-link); opacity: .6; }
+.mode_draft     article h1:first-of-type:before { .fa-icon(@fa-pencil-square-o); opacity: .6; }
+.mode_showtag   article h1:first-of-type:before { .fa-icon(@fa-tags); opacity: .6; }
+.mode_locked    article h1:first-of-type:before { .fa-icon(@fa-lock); color: @color_warning; opacity: .6; }
+.mode_preview   article h1#preview:before       { .fa-icon(@fa-eye); opacity: .6; }
 
-&.mode_recent,
-&.mode_diff {
+.mode_recent,
+.mode_diff {
   article h1:first-of-type:before {
     .fa-icon(@fa-list-alt); }
 }
 
-&.mode_conflict,
-&.mode_show.notFound {
+.mode_conflict,
+.mode_show.notFound {
   article h1:first-of-type:before {
     .fa-icon(@fa-warning);
     color: @color_warning;
   }
 }
 
-&.mode_subscribe,
-&.mode_unsubscribe {
+.mode_subscribe,
+.mode_unsubscribe {
   article h1:first-of-type:before {
     .fa-icon(@fa-envelope);
     color: @color_warning;
@@ -70,7 +70,7 @@
 }
 
 
-&.mode_admin {
+.mode_admin {
 
   #admin__version img {
     width: 16px;
