@@ -34,7 +34,6 @@ $bootstrap3_configs = array(
 );
 
 $JSINFO['bootstrap3'] = array(
-  'tableFullWidth'      => (int) bootstrap3_conf('tableFullWidth'),
   'tableStyle'          => bootstrap3_conf('tableStyle'),
   'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
   'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
@@ -53,5 +52,7 @@ if ($ACT == 'admin') {
 }
 
 $body_classes   = array();
-$body_classes[] = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
-$body_classes[] = ($page_on_panel ? ' page-on-panel' : null);
+$body_classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
+
+if ($page_on_panel)                       $body_classes[] = 'dw-page-on-panel';
+if (! bootstrap3_conf('tableFullWidth'))  $body_classes[] = 'dw-table-width';
