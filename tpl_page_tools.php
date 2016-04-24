@@ -16,7 +16,7 @@ if (!defined('DOKU_INC')) die();
   <div class="tools">
     <ul class="nav nav-stacked nav-pills">
       <?php
-        $tools = bootstrap3_tools_menu();
+        $tools = bootstrap3_tools();
         unset($tools['page']['menu']['top']);
         $tools_menu = bootstrap3_toolsevent('pagetools', $tools['page']['menu'], 'main', true);
         $tools_menu = str_replace(array('class="action', '</i>', '</a>'),
