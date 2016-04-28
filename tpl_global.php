@@ -46,3 +46,4 @@ if ($ACT == 'admin') {
 $body_classes   = array();
 $body_classes[] = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
 $body_classes[] = ($page_on_panel ? ' page-on-panel' : null);
+$body_classes[] = tpl_classes();
