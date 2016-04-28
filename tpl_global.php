@@ -53,6 +53,7 @@ if ($ACT == 'admin') {
 
 $body_classes   = array();
 $body_classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
+$body_classes[] = tpl_classes();
 
 if ($page_on_panel)                       $body_classes[] = 'dw-page-on-panel';
 if (! bootstrap3_conf('tableFullWidth'))  $body_classes[] = 'dw-table-width';

@@ -40,7 +40,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <?php tpl_includeFile('header.html') ?>
   </header>
 
-  <div id="dokuwiki__top" class="<?php echo tpl_classes(); ?> container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+  <div id="dokuwiki__top" class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
     <?php tpl_includeFile('social.html') ?>
 
