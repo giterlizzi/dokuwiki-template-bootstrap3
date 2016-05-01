@@ -134,7 +134,35 @@ if (!function_exists('tpl_classes')) {
     }
 }
 
+/**
+ * copied from core (available since Detritus)
+ */
+if (! function_exists('plugin_getRequestAdminPlugin')) {
+  function plugin_getRequestAdminPlugin(){
+    static $admin_plugin = false;
+    global $ACT,$INPUT,$INFO;
+  
+    if ($admin_plugin === false) {
+      if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
+        $pluginlist = plugin_list('admin');
+        if (in_array($page, $pluginlist)) {
+          // attempt to load the plugin
+          /** @var $admin_plugin DokuWiki_Admin_Plugin */
+          $admin_plugin = plugin_load('admin', $page);
+          // verify
+          if ($admin_plugin && $admin_plugin->forAdminOnly() && !$INFO['isadmin']) {
+            $admin_plugin = null;
+            $INPUT->remove('page');
+            msg('For admins only',-1);
+          }
+        }
+      }
+    }
+  
+    return $admin_plugin;
+  }
 
+}
 
 
 /**
