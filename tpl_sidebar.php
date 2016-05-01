@@ -12,9 +12,9 @@ if (!defined('DOKU_INC')) die();
 
 ?>
 <!-- ********** ASIDE ********** -->
-<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">
+<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print small">
   <div class="dw-sidebar-content">
-    <div class="dw-sidebar-title toogle hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .dw-sidebar-body">
+    <div class="dw-sidebar-title hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .dw-sidebar-body">
       <i class="fa fa-fw fa-th-list"></i> <?php echo $lang['sidebar'] ?>
     </div>
     <div class="dw-sidebar-body collapse in">

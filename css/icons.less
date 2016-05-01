@@ -175,7 +175,17 @@
 }
 
 // DokuWiki User icon
-a.iw_user:before { .fa-icon(@fa-user); }
+a.iw_user {
+
+  background-image: none;
+  padding: 0 !important;
+
+  &:before {
+    .fa-icon(@fa-user);
+  }
+
+}
+
 
 // Section Edit Buttons
 .secedit {

@@ -116,7 +116,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <div class="small text-right">
 
       <?php if (bootstrap3_conf('showPageInfo')): ?>
-      <span class="docInfo" id="dw__pageinfo">
+      <span class="docInfo">
         <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
       </span>
       <?php endif ?>

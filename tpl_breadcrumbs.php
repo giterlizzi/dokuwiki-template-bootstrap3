@@ -14,7 +14,7 @@ global $conf;
 
 ?>
 <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
-<div id="dw__breadcrumbs">
+<div id="dw__breadcrumbs" class="small">
   <hr/>
   <?php if($conf['youarehere']): ?>
   <div class="dw__youarehere">

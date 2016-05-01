@@ -6,9 +6,9 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
- html {
+html {
   -ms-overflow-style: scrollbar;
- }
+}
 
 body {
 
@@ -17,11 +17,57 @@ body {
     font-size: small;
   }
 
-  position: relative;
-
   &.default.dw-page-on-panel,
   &.optional.dw-page-on-panel, {
     background: #FEFEFE;
+  }
+
+}
+
+aside,
+.dw__dropdown_page {
+
+  word-wrap: break-word;
+
+  h1, h2, h3, h4 h5 {
+    margin: 10px 0 5px 0;
+  }
+
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.6em; }
+  h3 { font-size: 1.4em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1em;   }
+
+  .page-header {
+    margin: 10px 0;
+  }
+
+  .panel-heading {
+    cursor: pointer;
+  }
+
+  .nav {
+
+    ul {
+      padding-left: 10px;
+    }
+
+    li {
+
+      a {
+        padding: 5px 10px !important;
+      }
+
+      a.urlextern,
+      a.mail,
+      a.mediafile {
+        padding-left: 28px !important;
+        background-position: 8px center;
+      }
+
+    }
+
   }
 
 }
@@ -36,17 +82,9 @@ select {
   font-weight: 400;
 }
 
+body,
 main {
   position: relative;
-}
-
-nav {
-  &.navbar-fixed-top .dw__actions {
-    margin: 0 15px 0 5px;
-  }
-  .dw__actions .btn {
-    margin-left: 5px;
-  }
 }
 
 /* Ordered list style */
@@ -56,16 +94,52 @@ ol ol ol       { list-style-type: upper-roman; }  /* Roman (uppercase): I. II. I
 ol ol ol ol    { list-style-type: upper-alpha; }  /* Alpha (uppercase): A. B. C. ...    */
 ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. iii. ... */
 
+/* Header */
+header {
+
+  nav {
+
+    #dw__logo {
+      margin-right: 10px;
+    }
+
+    #dw__title {
+      display: inline-block;
+    }
+
+    #dw__tagline {
+      font-size: .6em;
+      display: block;
+      line-height: 1em;
+      white-space: nowrap;
+    }
+
+    &.navbar-fixed-top .dw__actions {
+      margin: 0 15px 0 5px;
+    }
+
+    .dw__actions .btn {
+      margin-left: 5px;
+    }
+
+  }
+
+}
+
+
 /* Message area (alerts, warnings, errors, etc.) */
 #dw__msgarea {
+
   .alert {
     padding: 5px;
     margin-bottom: 10px;
   }
+
   .bs-callout {
     margin-bottom: 10px;
     padding: 10px;
   }
+
 }
 
 
@@ -177,32 +251,14 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 }
 
-#dw__breadcrumbs,
-.dw__sidebar {
-  font-size: .9em;
-}
-
-#dw__logo {
-  margin-right: 10px;
-}
-
-#dw__title {
-  display: inline-block;
-}
-
-#dw__tagline {
-  font-size: .6em;
-  display: block;
-  line-height: 1em;
-  white-space: nowrap;
-}
-
 
 /* Footnotes */
 #insitu__fn {
   max-width: 20em;
 }
 
+
+/* User Menu */
 #dw__user_menu {
 
   .page-header {
@@ -237,6 +293,7 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
   }
 
 }
+
 
 /* Footer Page */
 #dw__footer {
@@ -277,6 +334,7 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 }
 
 
+/* User Manager */
 #user__manager .import_users {
   clear: both;
 }
@@ -294,9 +352,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 }
 
+
 #mediamgr__content {
   position: fixed;
 }
+
 
 #media__content {
 
@@ -314,8 +374,8 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
     vertical-align: bottom;
   }
 
-
 }
+
 
 #mediamgr__aside {
   height: auto;
@@ -323,9 +383,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
   position: fixed;
 }
 
+
 #media__opts label {
   display: inline !important;
 }
+
 
 #mediamanager__page .ui-buttonset label {
   margin-right: 0 !important;
@@ -340,70 +402,6 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 .dw-toc-affix {
   z-index: 999;
   right: 25px;
-}
-
-.dw__sidebar {
-
-  .page-header {
-    margin: 10px 0;
-  }
-
-  .panel-heading {
-    cursor: pointer;
-  }
-
-  .nav {
-
-    ul {
-      padding-left: 10px;
-    }
-
-    li {
-
-      a {
-        padding: 5px 10px;
-      }
-
-      a.urlextern,
-      a.mail,
-      a.mediafile {
-        padding-left: 28px;
-        background-position: 8px center;
-      }
-
-    }
-
-  }
-
-}
-
-.dw__sidebar,
-.dw__dropdown_page {
-
-  h1, h2, h3, h4 h5 {
-    margin: 10px 0 5px 0;
-  }
-
-  h1 {
-    font-size: 1.8em;
-  }
-
-  h2 {
-    font-size: 1.6em;
-  }
-
-  h3 {
-    font-size: 1.4em;
-  }
-
-  h4 {
-    font-size: 1.2em;
-  }
-
-  h5 {
-    font-size: 1em;
-  }
-
 }
 
 
@@ -475,7 +473,8 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 
 /* External URL (navbar) */
-.navbar-nav a.urlextern, .navbar-nav a.mail {
+.navbar-nav a.urlextern,
+.navbar-nav a.mail {
   padding: 15px 0 15px 18px;
 }
 
@@ -494,9 +493,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
   left: -5px;
 }
 
+
 .dw-content h1.page-header {
   margin-top: 20px;
 }
+
 
 /* Page icons (email, print, social share, etc.) */
 .dw-page-icons {
@@ -509,29 +510,12 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
     padding: 0 8px 0 0;
   }
 
-  .share-google-plus i.fa {
-    color: #DC4E41;
-  }
-
-  .share-twitter i.fa {
-    color: #55ACEE;
-  }
-
-  .share-linkedin i.fa {
-    color: #0077B5;
-  }
-
-  .share-facebook i.fa {
-    color: #3B5998;
-  }
-
-  .share-whatsapp i.fa {
-    color: #43D854;
-  }
-
-  .share-pinterest i.fa {
-    color: #BD081C;
-  }
+  .share-google-plus i.fa { color: #DC4E41; }
+  .share-twitter     i.fa { color: #55ACEE; }
+  .share-linkedin    i.fa { color: #0077B5; }
+  .share-facebook    i.fa { color: #3B5998; }
+  .share-whatsapp    i.fa { color: #43D854; }
+  .share-pinterest   i.fa { color: #BD081C; }
 
 }
 
@@ -582,10 +566,8 @@ ul.btn-group {
     padding-left: 15px;
   }
 
-  /* Interwiki User Page Icon */
-  a.iw_user {
-    background-image: none;
-    padding: 0 !important;
+  article .wikilink2 {
+    color: #d9534f;
   }
 
   .diffnav select {
@@ -594,10 +576,6 @@ ul.btn-group {
 
   .curid {
     font-weight: bold;
-  }
-
-  article .wikilink2 {
-    color: #d9534f;
   }
 
 }
@@ -654,45 +632,6 @@ ul.btn-group {
 }
 
 
-/* Styles for XS devices */
-@media screen and (max-width: 767px) {
-
-  .dokuwiki {
-
-    fieldset,
-    label.block select,
-    label.block input.edit {
-      width: 100%;
-      text-align: left;
-    }
-
-    label.block {
-      text-align: initial;
-    }
-
-    label[for="remember__me"] {
-      margin-left: 0 !important;
-    }
-
-    .centeralign form {
-      text-align: left;
-    }
-
-    #config__manager {
-      td {
-        display: block;
-        margin: 5px;
-      }
-      td.value {
-        border-top: 0px solid transparent
-      }
-    }
-
-  }
-
-}
-
-
 /* AnchorJS */
 a.anchorjs-link:hover {
   text-decoration: none;
@@ -707,10 +646,13 @@ body.cosmo #tool__bar .btn {
 
 
 .dw-table-width {
+
   article table.inline {
     width: auto;
   }
+
   .mode_admin table.inline {
     width: 100%;
   }
+
 }
