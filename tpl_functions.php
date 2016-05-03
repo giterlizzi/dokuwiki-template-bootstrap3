@@ -575,7 +575,7 @@ function bootstrap3_dropdown_page($page) {
               p_get_first_heading($page) .
               ' <span class="caret"></span></a>' .
               '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
-              '<li><div class="container">'.
+              '<li><div class="container small">'.
               $output .
               '</div></li></ul></li></ul>';
 
@@ -1412,7 +1412,7 @@ function bootstrap3_html_toc($toc){
   global $lang;
 
   $out  = '';
-  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print';
+  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print small';
   if (bootstrap3_conf('tocAffix')) $out .= ' dw-toc-affix" data-spy="affix" data-offset-top="150';
   $out .= '">'.DOKU_LF;
   $out .= '<!-- TOC START -->'.DOKU_LF;
