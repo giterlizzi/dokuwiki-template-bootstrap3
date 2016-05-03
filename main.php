@@ -46,7 +46,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     <?php require_once('tpl_breadcrumbs.php'); ?>
 
-    <p class="pageId text-right">
+    <p class="pageId text-right small">
       <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
     </p>
 
