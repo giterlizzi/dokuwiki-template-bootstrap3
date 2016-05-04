@@ -1646,8 +1646,8 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap-theme.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap-theme.min.css';
       break;
 
     case 'custom':
@@ -1658,7 +1658,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? tpl_basedir() . 'assets/bootswatch'
+        ? tpl_basedir() . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
 
       $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
