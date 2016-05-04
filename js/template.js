@@ -23,25 +23,8 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // a11y
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
-    // Page heading
-    $dw_content.find('h1, h2').addClass('page-header');
-
     // Abbr tooltips
     jQuery('abbr').tooltip();
-
-    // Tables
-    if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
-      $dw_content.find('div.table').addClass('table-responsive');
-    }
-
-    var table_class = ['table'];
-
-    if (JSINFO.bootstrap3.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
-
-    $dw_content.find('table.inline, table.import_failures').addClass(table_class.join(' '));
 
     // Form and controls
     $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
@@ -52,9 +35,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('input[type=radio]').addClass('radio-inline');
     jQuery('label').addClass('control-label');
     jQuery('main form').addClass('form-inline');
-
-    // Images
-    jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
 
     // Toolbar
     jQuery('#tool__bar').addClass('btn-group btn-group-xs');
@@ -674,9 +654,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
-  if (JSINFO.bootstrap3.useAnchorJS) {
-    anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
-  }
+  anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
 });
 
 
@@ -731,7 +709,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
   setTimeout(function() {
 
-  if (mediaSize('xs') && JSINFO.bootstrap3.collapsibleSections) {
+  if (mediaSize('xs') && JSINFO.bootstrap3.config.collapsibleSections) {
 
     var $headings = jQuery('div.level2').prev();
 
@@ -799,7 +777,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'nav', 'tabs', 'anchorjs',
+    var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
                     'dropdown-page', 'footnotes', 'alerts', 'media-manager',
                     'collapse-sections' ];

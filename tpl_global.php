@@ -34,11 +34,11 @@ $bootstrap3_configs = array(
 );
 
 $JSINFO['bootstrap3'] = array(
-  'tableStyle'          => bootstrap3_conf('tableStyle'),
-  'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
-  'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
-  'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
-  'mode'                => $ACT,
+  'mode'   => $ACT,
+  'config' => array(
+    'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
+    'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+  ),
 );
 
 if ($ACT == 'admin') {
