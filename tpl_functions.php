@@ -1767,6 +1767,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
     }
 
+    if (bootstrap3_conf('useAnchorJS')) {
+      $js .= "jQuery(document).trigger('bootstrap3:anchorjs');";
+    }
+
     $event->data['script'][] = array(
       'type'  => 'text/javascript',
       '_data' => "jQuery(document).ready(function() { $js });"
@@ -1776,11 +1780,45 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 }
 
-
+/**
+ * Add Bootstrap classes in DokuWiki Content
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $content from tpl_content()
+ * @return  string
+ * */
 function bootstrap3_content($content) {
 
+  // Search Hit
   $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+
+  // Tabs (Extension Manager)
   $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
+
+  // Page Heading (<h[1-2]>)
+  $content = preg_replace('/<h([1-2]) id="(.*)">/',              '<h$1 class="page-header" id="$2">',    $content);
+  $content = preg_replace('/<h([1-2]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $content);
+  $content = preg_replace('/<h([1-2])>/',                        '<h$1 class="page-header">',            $content);
+
+  // Media Images
+  $content = preg_replace('/<img (.*) class="(media|medialeft|mediacenter|mediaright)"/', '<img $1 class="$2 img-responsive"', $content);
+
+  // Tables
+  $table_classes = 'table';
+
+  foreach (bootstrap3_conf('tableStyle') as $class) {
+    if ($class == 'responsive') {
+      $content = str_replace('<div class="table', '<div class="table table-responsive', $content);
+    } else {
+      $table_classes .= " table-$class";
+    }
+  }
+
+  $content = preg_replace('/<table class="(inline|import_failures)">/',
+                          sprintf('<table class="$1 %s">', $table_classes), $content);
+
+  $content = str_replace('<div class="table ', '<div class="', $content);
 
   return $content;
 

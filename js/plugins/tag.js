@@ -36,7 +36,7 @@ if ($tags.length) {
                                   .prepend('<i class="fa fa-fw fa-tag"/> ');
 
 
-    if (JSINFO.bootstrap3.tagsOnTop && $tag.prop('tagName').toLowerCase() == 'div' && ! $tag.parents('.plugin_include_content').length) {
+    if (JSINFO.bootstrap3.config.tagsOnTop && $tag.prop('tagName').toLowerCase() == 'div' && ! $tag.parents('.plugin_include_content').length) {
       $tag.remove();
       $tagLabel.prependTo('.pageId');
     }
