@@ -1666,7 +1666,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     case 'default':
     default:
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
       break;
 
   }
