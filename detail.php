@@ -58,7 +58,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
       <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
     </p>
 
-    <div id="dw__msgarea">
+    <div id="dw__msgarea" class="small">
       <?php bootstrap3_html_msgarea() ?>
     </div>
 

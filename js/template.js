@@ -261,7 +261,7 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-times-circle"/> ');
 
     // Success
     jQuery('div.success')
@@ -779,7 +779,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
 
     var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
-                    'dropdown-page', 'footnotes', 'alerts', 'media-manager',
+                    'dropdown-page', 'footnotes', 'media-manager',
                     'collapse-sections' ];
 
     for (i in events) {
