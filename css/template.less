@@ -208,7 +208,6 @@ header {
 
   fieldset {
     background: initial !important;
-    margin: 0 !important;
     padding: 0 !important;
     text-align: left;
   }
@@ -224,6 +223,10 @@ header {
     padding: 0 !important;
     font-size: 1.2em !important;
     background: transparent !important;
+  }
+
+  #tpl____bootstrap3____template_settings_name legend {
+    padding-top: 25px;
   }
 
 }
@@ -638,6 +641,18 @@ body.cosmo #tool__bar .btn {
   background-color: #EEE;
 }
 
+body {
+
+  &.cyborg,
+  &.darkly,
+  &.slate,
+  &.superhero {
+    #config__manager .outkey {
+      color: #fff !important;
+    }
+  }
+
+}
 
 .dw-table-width {
 

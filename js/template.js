@@ -458,7 +458,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
           var item = tpl_sections[section];
 
           if( $node.attr('for').match([item[0], '$'].join('')) ) {
-            $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</h4></td><td></td></tr>'].join('')))
+            $node.parents('tr').before(jQuery(['<tr><td colspan="2"><legend id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</legend></td></tr>'].join('')))
           }
 
         }
