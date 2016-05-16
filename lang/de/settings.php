@@ -37,7 +37,6 @@ $lang['hideLoginLink']                = 'Versteckt den Login-Link in der Navigat
 $lang['individualTools']              = 'Teilt die Werkzeuge in einzelne Menüs in der Navigationsleiste.';
 $lang['inverseNavbar']                = 'Umgekehrte Navigationsleiste';
 $lang['landingPages']                 = 'Landingpage Name (benutze einen Regulären Ausdruck)';
-$lang['leftSidebarGrid']              = 'Linke Seitenleiste Raster Klasse <code>col-{xs,sm,md,lg}-x</code> (siehe <a href="http://holdirbootstrap.de/css/#grid" target="_blank">Bootstrap Raster-System</a> Dokumentation)';
 $lang['pageIcons']                    = 'Wähle die Icons die angezeigt werden solle';
 $lang['pageInfo']                     = 'Zeige/Verberge Seiten Info Elemente';
 $lang['pageInfoDateFormat']           = 'Datum Format';
@@ -45,7 +44,6 @@ $lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki Format';
 $lang['pageInfoDateFormat_o_human']   = 'Menschenlesbares Format';
 $lang['pageOnPanel']                  = 'Aktiviert einen Rahmen um die Seite';
 $lang['rightSidebar']                 = 'Seitenname der rechten Sidebar, ein leeres Feld deaktiviert die Sidebar.<br/>Die rechte Sidebar wird nur angezeigt wenn die Standard DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">Sidebar</a> aktiviert ist und sich auf der <code>linken</code> Seite befindet (Siehe <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> Einstellung). Wenn nur die Sidebar auf der rechten Seite aktiv sein soll, setze die <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> Einstellung auf den Wert <code>rechts</code>';
-$lang['rightSidebarGrid']             = 'Rechte Seitenleiste Raster Klasse <code>col-{xs,sm,md,lg}-x</code> (siehe <a href="http://holdirbootstrap.de/css/#grid" target="_blank">Bootstrap Raster-System</a> Dokumentation)';
 $lang['schemaOrgType']                = 'Schema.org Typ (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Aktiviert Semantischen Daten';
 $lang['showAdminMenu']                = 'Zeigt das Administrationsmenü';
