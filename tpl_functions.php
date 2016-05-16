@@ -251,8 +251,6 @@ function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, 
  */
 function bootstrap3_sidebar_include($type) {
 
-  if (! bootstrap3_conf('showSidebar')) return false;
-
   global $conf;
 
   $left_sidebar       = $conf['sidebar'];
@@ -264,6 +262,8 @@ function bootstrap3_sidebar_include($type) {
 
     case 'left':
 
+      if (! bootstrap3_conf('showSidebar')) return false;
+
       if (bootstrap3_conf('sidebarPosition') == 'left') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
                                   'sidebarheader.html', 'sidebarfooter.html');
@@ -273,6 +273,8 @@ function bootstrap3_sidebar_include($type) {
 
     case 'right':
 
+      if (! bootstrap3_conf('showRightSidebar')) return false;
+  
       if (bootstrap3_conf('sidebarPosition') == 'right') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
                                   'sidebarheader.html', 'sidebarfooter.html');
@@ -352,40 +354,48 @@ function bootstrap3_container_grid() {
   global $ID;
   global $conf;
 
-  $grids  = array();
   $result = '';
 
-  $showRightSidebar = bootstrap3_conf('showRightSidebar');
-  $showLeftSidebar  = bootstrap3_conf('showSidebar');
-  $fluidContainer   = bootstrap3_conf('fluidContainer');
+  $grids = array(
+    'sm' => array('left' => 0, 'right' => 0),
+    'md' => array('left' => 0, 'right' => 0),
+  );
 
-  if(bootstrap3_conf('fluidContainerBtn')) {
-    $fluidContainer = bootstrap3_fluid_container_button();
+  $show_right_sidebar = bootstrap3_conf('showRightSidebar');
+  $show_left_sidebar  = bootstrap3_conf('showSidebar');
+  $fluid_container    = bootstrap3_conf('fluidContainer');
+
+  if (bootstrap3_conf('fluidContainerBtn')) {
+    $fluid_container = bootstrap3_fluid_container_button();
   }
 
   if (   bootstrap3_conf('showLandingPage')
       && (bool) preg_match(bootstrap3_conf('landingPages'), $ID) ) {
-    $showLeftSidebar = false;
+    $show_left_sidebar = false;
   }
 
-  if (! $showLeftSidebar) {
-    return 'container' . (($fluidContainer) ? '-fluid' : '');
+  if (! $show_left_sidebar && ! $show_right_sidebar) {
+    return 'container' . (($fluid_container) ? '-fluid' : '');
   }
 
-  foreach (explode(' ', bootstrap3_conf('leftSidebarGrid')) as $grid) {
-    list($col, $media, $size) = explode('-', $grid);
-    $grids[$media]['left'] = (int) $size;
+  if ($show_left_sidebar) {
+    foreach (explode(' ', bootstrap3_conf('leftSidebarGrid')) as $grid) {
+      list($col, $media, $size) = explode('-', $grid);
+      $grids[$media]['left'] = (int) $size;
+    }
   }
 
-  foreach (explode(' ', bootstrap3_conf('rightSidebarGrid')) as $grid) {
-    list($col, $media, $size) = explode('-', $grid);
-    $grids[$media]['right'] = (int) $size;
+  if ($show_right_sidebar) {
+    foreach (explode(' ', bootstrap3_conf('rightSidebarGrid')) as $grid) {
+      list($col, $media, $size) = explode('-', $grid);
+      $grids[$media]['right'] = (int) $size;
+    }
   }
 
-  foreach ($grids as $media => $item) {
-    $left    = $item['left'];
-    $right   = $item['right'];
-    $result .= sprintf('col-%s-%s ', $media, (12 - $left - ($showRightSidebar ? $right : 0)));
+  foreach ($grids as $media => $position) {
+    $left    = $position['left'];
+    $right   = $position['right'];
+    $result .= sprintf('col-%s-%s ', $media, (12 - $left - $right));
   }
 
   return $result;
