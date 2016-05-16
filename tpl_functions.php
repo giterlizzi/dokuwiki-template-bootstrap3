@@ -235,7 +235,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
  * @param  string  $sidebar_header
  * @param  string  $sidebar_footer
  */
-function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
+function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_header, $sidebar_footer) {
   global $lang;
   @require('tpl_sidebar.php');
 }
@@ -253,10 +253,8 @@ function bootstrap3_sidebar_include($type) {
 
   global $conf;
 
-  $left_sidebar       = $conf['sidebar'];
-  $right_sidebar      = bootstrap3_conf('rightSidebar');
-  $left_sidebar_grid  = bootstrap3_conf('leftSidebarGrid');
-  $right_sidebar_grid = bootstrap3_conf('rightSidebarGrid');
+  $left_sidebar  = $conf['sidebar'];
+  $right_sidebar = bootstrap3_conf('rightSidebar');
 
   switch ($type) {
 
@@ -265,7 +263,7 @@ function bootstrap3_sidebar_include($type) {
       if (! bootstrap3_conf('showSidebar')) return false;
 
       if (bootstrap3_conf('sidebarPosition') == 'left') {
-        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
       }
 
@@ -276,13 +274,13 @@ function bootstrap3_sidebar_include($type) {
       if (! bootstrap3_conf('showRightSidebar')) return false;
   
       if (bootstrap3_conf('sidebarPosition') == 'right') {
-        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
       }
 
       if (   bootstrap3_conf('showRightSidebar')
           && bootstrap3_conf('sidebarPosition') == 'left') {
-        bootstrap3_sidebar_wrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid,
+        bootstrap3_sidebar_wrapper($right_sidebar, 'dokuwiki__rightaside',
                                   'rightsidebarheader.html', 'rightsidebarfooter.html');
       }
 
@@ -355,11 +353,7 @@ function bootstrap3_container_grid() {
   global $conf;
 
   $result = '';
-
-  $grids = array(
-    'sm' => array('left' => 0, 'right' => 0),
-    'md' => array('left' => 0, 'right' => 0),
-  );
+  $grids  = array();
 
   $show_right_sidebar = bootstrap3_conf('showRightSidebar');
   $show_left_sidebar  = bootstrap3_conf('showSidebar');
@@ -371,34 +365,24 @@ function bootstrap3_container_grid() {
 
   if (   bootstrap3_conf('showLandingPage')
       && (bool) preg_match(bootstrap3_conf('landingPages'), $ID) ) {
-    $show_left_sidebar = false;
+    $show_left_sidebar  = false;
+    $show_right_sidebar = false;
   }
 
-  if (! $show_left_sidebar && ! $show_right_sidebar) {
+  if (   ! $show_left_sidebar
+      && ! $show_right_sidebar) {
     return 'container' . (($fluid_container) ? '-fluid' : '');
   }
 
-  if ($show_left_sidebar) {
-    foreach (explode(' ', bootstrap3_conf('leftSidebarGrid')) as $grid) {
-      list($col, $media, $size) = explode('-', $grid);
-      $grids[$media]['left'] = (int) $size;
-    }
+  if (   $show_left_sidebar
+      && $show_right_sidebar) {
+    return 'col-sm-6 col-md-8';
   }
 
-  if ($show_right_sidebar) {
-    foreach (explode(' ', bootstrap3_conf('rightSidebarGrid')) as $grid) {
-      list($col, $media, $size) = explode('-', $grid);
-      $grids[$media]['right'] = (int) $size;
-    }
+  if (   ( ! $show_left_sidebar  && $show_right_sidebar )
+      || ( ! $show_right_sidebar && $show_left_sidebar  ) )  {
+    return 'col-sm-9 col-md-10';
   }
-
-  foreach ($grids as $media => $position) {
-    $left    = $position['left'];
-    $right   = $position['right'];
-    $result .= sprintf('col-%s-%s ', $media, (12 - $left - $right));
-  }
-
-  return $result;
 
 }
 
