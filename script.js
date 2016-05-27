@@ -63,7 +63,7 @@ jQuery(document).ready(function() {
   jQuery('.fluid-container').on('click', function() {
 
     var $button     = jQuery(this),
-        $containers = jQuery('body > div, header nav div, article, footer > div');
+        $containers = jQuery('body > div, header nav > div, article, footer > div');
 
     if (jQuery('body > div.container').length) {
 
