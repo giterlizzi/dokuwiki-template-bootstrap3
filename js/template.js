@@ -165,8 +165,72 @@ jQuery(document).on('bootstrap3:footnotes', function(e) {
 });
 
 
-// Table of Contents
 jQuery(document).on('bootstrap3:toc', function(e) {
+
+  setTimeout(function() {
+
+    var $dw_toc = jQuery('#dokuwiki__toc');
+
+    function resizeToc() {
+
+      $dw_toc.affix('checkPosition');
+      jQuery('.toc-body').width(jQuery('.dw-toc').width());
+      jQuery('#dokuwiki__toc .toc-body > ul').css({
+        'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+        'overflow-y' : 'scroll'
+      });
+
+    }
+
+    if (! $dw_toc.length) return false;
+
+    jQuery('.toc-body').width(jQuery('.dw-toc').width());
+    $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
+
+    $dw_toc.on('affixed.bs.affix', function(e) {
+      jQuery('.toc-body').width(jQuery('.dw-toc').width());
+      if (! jQuery('.dw-toc-closed').length) {
+        $dw_toc.find('.toc-title').trigger('click');
+      }
+    });
+
+    $dw_toc.on('affixed-top.bs.affix', function(e) {
+      jQuery('.toc-body').width('100%');
+      if (jQuery('.dw-toc-closed').length) {
+        $dw_toc.find('.toc-title').trigger('click');
+      }
+    });
+
+    $dw_toc.find('.toc-title').on('click', function() {
+
+      var $self = jQuery(this);
+
+      jQuery('article .dw-page-row').toggleClass('dw-toc-closed');
+
+      if (jQuery('.dw-toc-closed').length) {
+        $self.addClass('btn btn-default btn-xs');
+      } else {
+        if (! mediaSize('xs')) {
+          $self.removeClass('btn btn-default btn-xs');
+        }
+        resizeToc();
+      }
+
+    });
+
+    if ((jQuery(window).height() < $dw_toc.height())) {
+      resizeToc();
+    }
+    jQuery(window).resize(function(){
+      resizeToc();
+    });
+
+  }, 0);
+
+});
+
+// Table of Contents
+jQuery(document).on('bootstrap3:x-toc', function(e) {
 
   setTimeout(function() {
 
@@ -177,6 +241,8 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     var $toc_col     = jQuery('article .toc-col'),
         $content_col = jQuery('article .content-col');
 
+    $dw_toc.find('.toc-body').css('backgroundColor', jQuery('.dw-content').css('backgroundColor'));
+
     $dw_toc.find('h3').on('click', function() {
 
       var $self = jQuery(this);
@@ -186,6 +252,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
       } else {
         $self.addClass('open').removeClass('closed');
       }
+
     });
 
     $dw_toc.parent().on('affixed.bs.affix', function(e) {

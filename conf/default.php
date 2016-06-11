@@ -64,6 +64,7 @@ $conf['tableStyle']                  = 'striped,condensed,responsive';
 $conf['tagsOnTop']                   = 1;
 $conf['tocAffix']                    = 1;
 $conf['tocCollapseSubSections']      = 1;
+$conf['tocPosition']                 = 'right';
 $conf['useAnchorJS']                 = 1;
 $conf['useGoogleAnalytics']          = 0;
 $conf['useGravatar']                 = 0;
