@@ -165,6 +165,7 @@ jQuery(document).on('bootstrap3:footnotes', function(e) {
 });
 
 
+// Table of Contents
 jQuery(document).on('bootstrap3:toc', function(e) {
 
   setTimeout(function() {
@@ -224,69 +225,6 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     jQuery(window).resize(function(){
       resizeToc();
     });
-
-  }, 0);
-
-});
-
-// Table of Contents
-jQuery(document).on('bootstrap3:x-toc', function(e) {
-
-  setTimeout(function() {
-
-    var $dw_toc = jQuery('#dokuwiki__toc');
-
-    if (! $dw_toc.length) return false;
-
-    var $toc_col     = jQuery('article .toc-col'),
-        $content_col = jQuery('article .content-col');
-
-    $dw_toc.find('.toc-body').css('backgroundColor', jQuery('.dw-content').css('backgroundColor'));
-
-    $dw_toc.find('h3').on('click', function() {
-
-      var $self = jQuery(this);
-
-      if ($self.hasClass('open')) {
-        $self.addClass('closed').removeClass('open');
-      } else {
-        $self.addClass('open').removeClass('closed');
-      }
-
-    });
-
-    $dw_toc.parent().on('affixed.bs.affix', function(e) {
-
-      if ($dw_toc.find('.open').length) {
-        $dw_toc.find('h3').trigger('click');
-      }
-
-    });
-
-    $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
-
-      if ($dw_toc.find('.closed').length) {
-        $dw_toc.find('h3').trigger('click');
-       }
-
-    });
-
-    if ((jQuery(window).height() < $dw_toc.height())) {
-
-      function resizeToc() {
-
-        jQuery('#dokuwiki__toc .panel-body').css({
-          'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
-          'overflow-y': 'scroll'
-        });
-
-      }
-
-      resizeToc();
-
-      jQuery(window).resize(resizeToc);
-
-    }
 
     // Scrolling animation
     $dw_toc.find('a').click(function(e) {
