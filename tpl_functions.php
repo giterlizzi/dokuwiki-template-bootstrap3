@@ -1802,7 +1802,7 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="info">',    '<div class="alert alert-info"><i class="fa fa-fw fa-info-circle"></i>',     $content);
   $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
   $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
-  $content = str_replace('<div class="notify">',  '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
+  $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
  
   // Tables
   $table_classes = 'table';
