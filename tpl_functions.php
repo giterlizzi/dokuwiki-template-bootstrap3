@@ -1739,7 +1739,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dokuwiki__toc .nav .nav .nav{ display: none; }';
+      $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
     }
 
     $style .= '}';
