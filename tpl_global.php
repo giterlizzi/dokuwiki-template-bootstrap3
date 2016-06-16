@@ -38,6 +38,8 @@ $JSINFO['bootstrap3'] = array(
   'config' => array(
     'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
     'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+    'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
+    'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
   ),
 );
 

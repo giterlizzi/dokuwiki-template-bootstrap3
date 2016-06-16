@@ -174,7 +174,9 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     function resizeToc() {
 
-      $dw_toc.affix('checkPosition');
+      if (JSINFO.bootstrap3.config.tocAffix) {
+        $dw_toc.affix('checkPosition');
+      }
       jQuery('.toc-body').width(jQuery('.dw-toc').width());
       jQuery('#dokuwiki__toc .toc-body > ul').css({
         'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
@@ -188,19 +190,23 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     jQuery('.toc-body').width(jQuery('.dw-toc').width());
     $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
 
-    $dw_toc.on('affixed.bs.affix', function(e) {
-      jQuery('.toc-body').width(jQuery('.dw-toc').width());
-      if (! jQuery('.dw-toc-closed').length) {
-        $dw_toc.find('.toc-title').trigger('click');
-      }
-    });
+    if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
+      $dw_toc.on('affixed.bs.affix', function(e) {
+        jQuery('.toc-body').width(jQuery('.dw-toc').width());
+        if (! jQuery('.dw-toc-closed').length) {
+          $dw_toc.find('.toc-title').trigger('click');
+        }
+      });
+    }
 
-    $dw_toc.on('affixed-top.bs.affix', function(e) {
-      jQuery('.toc-body').width('100%');
-      if (jQuery('.dw-toc-closed').length) {
-        $dw_toc.find('.toc-title').trigger('click');
-      }
-    });
+    if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
+      $dw_toc.on('affixed-top.bs.affix', function(e) {
+        jQuery('.toc-body').width('100%');
+        if (jQuery('.dw-toc-closed').length) {
+          $dw_toc.find('.toc-title').trigger('click');
+        }
+      });
+    }
 
     $dw_toc.find('.toc-title').on('click', function() {
 

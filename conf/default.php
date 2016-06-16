@@ -63,6 +63,7 @@ $conf['tableFullWidth']              = 1;
 $conf['tableStyle']                  = 'striped,condensed,responsive';
 $conf['tagsOnTop']                   = 1;
 $conf['tocAffix']                    = 1;
+$conf['tocCollapseOnScroll']         = 1;
 $conf['tocCollapseSubSections']      = 1;
 $conf['tocPosition']                 = 'right';
 $conf['useAnchorJS']                 = 1;
