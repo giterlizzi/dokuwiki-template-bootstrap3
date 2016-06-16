@@ -8,7 +8,7 @@
 
 
 // Normalization & Basic Styling
-jQuery(document).on('bootstrap3:init', function(e) {
+jQuery(document).on('bootstrap3:init', function() {
 
   setTimeout(function() {
 
@@ -48,7 +48,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
-    if (NS == 'user' && dw_mode('show') && jQuery('.notFound').length == 0) {
+    if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
@@ -58,7 +58,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
 
 // Nav
-jQuery(document).on('bootstrap3:nav', function(e) {
+jQuery(document).on('bootstrap3:nav', function() {
 
   setTimeout(function() {
 
@@ -83,7 +83,7 @@ jQuery(document).on('bootstrap3:nav', function(e) {
 
 
 // Tabs
-jQuery(document).on('bootstrap3:tabs', function(e) {
+jQuery(document).on('bootstrap3:tabs', function() {
 
   setTimeout(function() {
 
@@ -102,7 +102,7 @@ jQuery(document).on('bootstrap3:tabs', function(e) {
 
 
 // Buttons
-jQuery(document).on('bootstrap3:buttons', function(e) {
+jQuery(document).on('bootstrap3:buttons', function() {
 
   setTimeout(function() {
 
@@ -122,7 +122,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
 
 // Back To Top
-jQuery(document).on('bootstrap3:back-to-top', function(e) {
+jQuery(document).on('bootstrap3:back-to-top', function() {
 
   setTimeout(function() {
 
@@ -146,7 +146,7 @@ jQuery(document).on('bootstrap3:back-to-top', function(e) {
 
 
 // Footnote
-jQuery(document).on('bootstrap3:footnotes', function(e) {
+jQuery(document).on('bootstrap3:footnotes', function() {
 
   setTimeout(function() {
 
@@ -166,7 +166,7 @@ jQuery(document).on('bootstrap3:footnotes', function(e) {
 
 
 // Table of Contents
-jQuery(document).on('bootstrap3:toc', function(e) {
+jQuery(document).on('bootstrap3:toc', function() {
 
   setTimeout(function() {
 
@@ -191,7 +191,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
 
     if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
-      $dw_toc.on('affixed.bs.affix', function(e) {
+      $dw_toc.on('affixed.bs.affix', function() {
         jQuery('.toc-body').width(jQuery('.dw-toc').width());
         if (! jQuery('.dw-toc-closed').length) {
           $dw_toc.find('.toc-title').trigger('click');
@@ -200,7 +200,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
     }
 
     if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
-      $dw_toc.on('affixed-top.bs.affix', function(e) {
+      $dw_toc.on('affixed-top.bs.affix', function() {
         jQuery('.toc-body').width('100%');
         if (jQuery('.dw-toc-closed').length) {
           $dw_toc.find('.toc-title').trigger('click');
@@ -258,7 +258,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
 
 // Alerts
-jQuery(document).on('bootstrap3:alerts', function(e) {
+jQuery(document).on('bootstrap3:alerts', function() {
 
   setTimeout(function() {
 
@@ -292,7 +292,7 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
 
 
 // Media Manager
-jQuery(document).on('bootstrap3:media-manager', function(e) {
+jQuery(document).on('bootstrap3:media-manager', function() {
 
   setTimeout(function() {
 
@@ -317,7 +317,7 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
       $sort_buttons.find('label').addClass('btn btn-xs btn-default');
       $sort_buttons.find('input').hide();
 
-      function buttonHandler(e) {
+      function buttonHandler() {
 
         var $button    = jQuery(this),
             option_for = $button.attr('for'),
@@ -353,7 +353,7 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
 
 
 // Detail page
-jQuery(document).on('bootstrap3:detail', function(e) {
+jQuery(document).on('bootstrap3:detail', function() {
 
   setTimeout(function() {
 
@@ -372,7 +372,7 @@ jQuery(document).on('bootstrap3:detail', function(e) {
 
 
 // Search mode
-jQuery(document).on('bootstrap3:mode-search', function(e) {
+jQuery(document).on('bootstrap3:mode-search', function() {
 
   setTimeout(function() {
 
@@ -387,8 +387,6 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
       jQuery('.search_results .label').before('&nbsp;&nbsp;&nbsp;');
 
-      var x = 0;
-
       jQuery('.search_results .label').each(function() {
         var $node = jQuery(this);
         $node.html($node.html().replace(/^\: /, ''));
@@ -400,7 +398,7 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
 
 // Administration
-jQuery(document).on('bootstrap3:mode-admin', function(e) {
+jQuery(document).on('bootstrap3:mode-admin', function() {
 
   setTimeout(function() {
 
@@ -449,7 +447,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     $admin_tasks.addClass('list-group');
     $admin_tasks.find('a').addClass('list-group-item');
 
-    for (i in admin_tasks) {
+    for (var i in admin_tasks) {
       $admin_tasks.find('li.admin_' + i + ' a')
         .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
     }
@@ -565,7 +563,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
 
 // Index Page
-jQuery(document).on('bootstrap3:mode-index', function(e) {
+jQuery(document).on('bootstrap3:mode-index', function() {
 
   setTimeout(function() {
 
@@ -685,7 +683,7 @@ jQuery(document).on('bootstrap3:page-icons', function() {
     'twitter'     : (function(){ return [ 'https://twitter.com/intent/tweet?text=', title, '&url=', url ].join(''); })(),
     'linkedin'    : (function(){ return [ 'https://www.linkedin.com/shareArticle?mini=true&url=', url, '&title=', title ].join(''); })(),
     'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
-    'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join('') })(),
+    'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
     'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
   };
@@ -716,7 +714,7 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 
 
 // Collapse sections on mobile (XS media)
-jQuery(document).on('bootstrap3:collapse-sections', function(e) {
+jQuery(document).on('bootstrap3:collapse-sections', function() {
 
   setTimeout(function() {
 
@@ -758,7 +756,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
 
 // Mobile Layout
-jQuery(document).on('bootstrap3:mobile-layout', function(e) {
+jQuery(document).on('bootstrap3:mobile-layout', function() {
 
   setTimeout(function() {
 
@@ -784,7 +782,7 @@ jQuery(document).on('bootstrap3:mobile-layout', function(e) {
 });
 
 
-jQuery(document).on('bootstrap3:components', function(e) {
+jQuery(document).on('bootstrap3:components', function() {
 
   setTimeout(function() {
 
@@ -793,7 +791,7 @@ jQuery(document).on('bootstrap3:components', function(e) {
                     'dropdown-page', 'footnotes', 'media-manager',
                     'collapse-sections' ];
 
-    for (i in events) {
+    for (var i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
     }
 
