@@ -8,12 +8,10 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-if (!defined('DOKU_INC')) die(); // must be run from within DokuWiki
-@require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
+if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
+@require_once(dirname(__FILE__).'/tpl_functions.php');  // include hook for template functions
+include_once(dirname(__FILE__).'/tpl_global.php');      // Include template global variables
 header('X-UA-Compatible: IE=edge,chrome=1');
-
-include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
-
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>"
   lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">
