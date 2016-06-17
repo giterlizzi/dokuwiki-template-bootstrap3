@@ -12,6 +12,8 @@ if (!defined('DOKU_INC')) die();
 
 if (bootstrap3_conf('showThemeSwitcher')):
 
+global $ID;
+
 $bootswatch_theme = bootstrap3_bootswatch_theme();
 
 ?>
@@ -19,7 +21,7 @@ $bootswatch_theme = bootstrap3_bootswatch_theme();
 <ul class="nav navbar-nav" id="dw__themes">
   <li class="dropdown">
 
-    <a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-fw fa-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-toggle="dropdown" data-target="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-tint"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span></a>
 
     <ul class="dropdown-menu" aria-labelledby="themes">
       <li class="dropdown-header"><i class="fa fa-fw fa-tint"></i> Bootswatch Themes</li>

@@ -589,8 +589,8 @@ function bootstrap3_dropdown_page($page) {
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @param bool $ajax
- * @param bool $autocomplete
+ * @param  bool $ajax
+ * @param  bool $autocomplete
  * @return bool
  */
 function bootstrap3_searchform($ajax = true, $autocomplete = true) {
@@ -1058,7 +1058,6 @@ function bootstrap3_youarehere() {
         if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
 
         echo $link;
-
         echo '</li>';
 
     }
@@ -1086,9 +1085,7 @@ function bootstrap3_youarehere() {
     if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
 
     echo $link;
-
     echo '</li>';
-
     echo '</ol>';
 
     return true;
