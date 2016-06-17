@@ -31,6 +31,7 @@ $conf['hideLoginLink']               = 0;
 $conf['individualTools']             = 0;
 $conf['inverseNavbar']               = 0;
 $conf['landingPages']                = '(intro)';
+$conf['navbarLabels']                = 'login,register';
 $conf['pageIcons']                   = 'social-share,feed,send-mail,print,help';
 $conf['pageInfo']                    = 'filename,extension,date,editor,locked';
 $conf['pageInfoDateFormat']          = 'dformat';
