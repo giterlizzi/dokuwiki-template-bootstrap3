@@ -1,11 +1,10 @@
 <?php
 /**
- * Template Functions
+ * DokuWiki Bootstrap3 Template: Core Functions
  *
- * This file provides template specific custom functions that are
- * not provided by the DokuWiki core.
- * It is common practice to start each function with an underscore
- * to make sure it won't interfere with future core functions.
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
 // must be run from within DokuWiki
@@ -98,7 +97,7 @@ function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
 
 
 /**
- * copied to core (available since Detritus)
+ * copied from core (available since Detritus)
  */
 if (!function_exists('tpl_toolsevent')) {
     function tpl_toolsevent($toolsname, $items, $view='main') {
@@ -957,105 +956,6 @@ function bootstrap3_bootswatch_themes_available() {
 
 
 /**
- * Add a font icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $pack
- * @param   string   $name of icon
- * @param   string   $classes
- * @param   integer  $size
- * @return  string
- */
-function bootstrap3_icon($pack, $name, $classes = '', $size = -1) {
-
-  if ($size > 0 && ! preg_match('/(em|px)$/', "$size")) {
-    $size = $size.'px';
-  }
-
-  $style   = ($size !== -1) ? sprintf(' style="font-size:%s"', $size) : '';
-
-  $class[] = $pack;
-  $class[] = "$pack-$name";
-  $class[] = $classes;
-
-  $output  = sprintf('<i class="%s"%s></i>', trim(implode(' ', $class)), $style);
-  return $output;
-
-}
-
-
-/**
- * Add a Font-Awesome icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string        $name of icon
- * @param   string|array  $options
- * @param   string        $classes
- * @param   integer       $size
- * @return  string
- */
-function bootstrap3_fa($name, $options = '', $classes = '', $size = -1) {
-
-  if (! is_array($options)) {
-    $options = explode(' ', $options);
-  }
-
-  foreach ($options as $option) {
-    $classes .= " fa-$option ";
-  }
-
-  return bootstrap3_icon('fa', $name, trim($classes), $size);
-}
-
-
-/**
- * Add a Font-Awesome stack icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $icon1
- * @param   string   $icon2
- * @param   boolead  $switch the position of icon1 and icon2
- * @return  string
- */
-function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
-
-  $icon2 = str_replace('class="', 'class="fa-stack-1x ', $icon2);
-  $icon1 = str_replace('class="', 'class="fa-stack-2x ', $icon1);
-
-  if ($switch) {
-
-    $tmp1  = $icon1;
-    $tmp2  = $icon2;
-
-    $icon1 = $tmp2;
-    $icon2 = $tmp1;
-
-  }
-
-  return sprintf('<span class="fa-stack fa-lg">%s %s</span>', $icon1, $icon2);
-
-}
-
-
-/**
- * Add a Glyophicon icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string  $name of icon
- * @param   string  $classes
- * @param   integer $size
- * @return  string
- */
-function bootstrap3_glyphicon($name, $classes = '', $size = -1) {
-  return bootstrap3_icon('glyphicon', $name, $classes, $size);
-}
-
-
-/**
  * Print the breadcrumbs trace with Bootstrap style
  *
  * @author Andreas Gohr <andi@splitbrain.org>
@@ -1192,30 +1092,6 @@ function bootstrap3_youarehere() {
     echo '</ol>';
 
     return true;
-
-}
-
-
-/**
- * Include (or override) a TPL file
- *
- * @see require_once()
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string $file
- * @return  boolean
- */
-function bootstrap3_include($file) {
-
-  $override = dirname(__FILE__) . "/override/$file";
-
-  if (file_exists($override)) {
-    require_once($override);
-    return true;
-  }
-
-  require_once($file);
-  return true;
 
 }
 
