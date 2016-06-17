@@ -28,7 +28,7 @@ $admin = array(
   <li class="dropdown dropdown-large">
 
     <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['btn_admin'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-      <i class="fa fa-fw fa-cogs"></i>  <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
+      <i class="fa fa-fw fa-cogs"></i> <span class="<?php echo (in_array('admin', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu dropdown-menu-large" role="menu">

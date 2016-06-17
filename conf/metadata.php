@@ -34,6 +34,7 @@ $meta['showSearchButton']    = array('onoff');
 $meta['showAdminMenu']       = array('onoff');
 $meta['useLegacyNavbar']     = array('onoff');
 $meta['showNavbar']          = array('multichoice', '_choices' => array('logged', 'always'));
+$meta['navbarLabels']        = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
 
 // Semantic
 $meta['semantic']            = array('onoff');

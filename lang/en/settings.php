@@ -35,6 +35,7 @@ $lang['hideLoginLink']                = 'Hide the login button in navbar. This o
 $lang['individualTools']              = 'Split the Tools in individual menu in navbar';
 $lang['inverseNavbar']                = 'Inverse navbar';
 $lang['landingPages']                 = 'Landing page name (insert a regex)';
+$lang['navbarLabels']                 = 'Show/Hide individual label';
 $lang['pageIcons']                    = 'Select the icons to display';
 $lang['pageInfo']                     = 'Display/Hide page info elements';
 $lang['pageInfoDateFormat']           = 'Date format';
