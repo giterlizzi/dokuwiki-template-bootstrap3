@@ -12,7 +12,7 @@
   .toc-title                         { cursor: pointer; margin-top: 0; }
   .toc-body > ul                     { overflow-y: auto !important; }
 
-  .nav > li > a                      { color: #666; padding: 4px 20px; font-weight: 500; display: block; }
+  .nav > li > a                      { /*color: #666;*/ padding: 4px 20px; font-weight: 500; display: block; }
   .nav > li > a:hover                { background-color: transparent; color: initial; }
   .nav > li > a:hover                { border-left: 1px solid #428bca; }
 
@@ -67,7 +67,7 @@
     width: 80px;
     position: absolute;
     float: right;
-    right: 0;
+    right: 1px;
 
     hr,
     .toc-title span,
@@ -87,6 +87,12 @@
     .toc-body {
       width: 100%;
       padding: 10px;
+    }
+  }
+
+  .dw-toc-closed {
+    .toc-title {
+      margin: 0;
     }
   }
 

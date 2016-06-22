@@ -165,6 +165,39 @@ jQuery(document).on('bootstrap3:footnotes', function() {
 });
 
 
+jQuery(document).on('bootstrap3:toc-resize', function() {
+
+  var $dw_toc = jQuery('#dokuwiki__toc');
+
+  if (! $dw_toc.length) return false;
+
+  if (JSINFO.bootstrap3.config.tocAffix) {
+    $dw_toc.affix('checkPosition');
+  }
+
+  jQuery('#dokuwiki__toc .toc-body > ul').css({
+    'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+    'overflow-y' : 'scroll'
+  });
+
+  if (! mediaSize('xs')) {
+    $dw_toc.removeClass('panel panel-default');
+    $dw_toc.find('.toc-title').removeClass('panel-heading');
+    $dw_toc.find('.toc-body').removeClass('panel-body');
+  }
+
+  if (mediaSize('xs') && ! $dw_toc.hasClass('panel')) {
+    $dw_toc.addClass('panel panel-default');
+    $dw_toc.find('.toc-title').addClass('panel-heading');
+    $dw_toc.find('.toc-body').addClass('panel-body');
+    $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
+  }
+
+  jQuery('.toc-body').width(jQuery('.dw-toc').width());
+
+});
+
+
 // Table of Contents
 jQuery(document).on('bootstrap3:toc', function() {
 
@@ -172,40 +205,33 @@ jQuery(document).on('bootstrap3:toc', function() {
 
     var $dw_toc = jQuery('#dokuwiki__toc');
 
-    function resizeToc() {
-
-      if (JSINFO.bootstrap3.config.tocAffix) {
-        $dw_toc.affix('checkPosition');
-      }
-      jQuery('.toc-body').width(jQuery('.dw-toc').width());
-      jQuery('#dokuwiki__toc .toc-body > ul').css({
-        'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
-        'overflow-y' : 'scroll'
-      });
-
-    }
-
     if (! $dw_toc.length) return false;
 
-    jQuery('.toc-body').width(jQuery('.dw-toc').width());
+    jQuery(document).trigger('bootstrap3:toc-resize');
+
     $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
+    $dw_toc.find('a').css('color', jQuery('body').css('color'));
 
     if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
-      $dw_toc.on('affixed.bs.affix', function() {
+
+      $dw_toc.on('affix.bs.affix', function() {
         jQuery('.toc-body').width(jQuery('.dw-toc').width());
-        if (! jQuery('.dw-toc-closed').length) {
+        if (! jQuery('.dw-toc-closed').length && ! $dw_toc.hasClass('affix-bottom')) {
           $dw_toc.find('.toc-title').trigger('click');
         }
       });
+
     }
 
     if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
-      $dw_toc.on('affixed-top.bs.affix', function() {
+
+      $dw_toc.on('affix-top.bs.affix', function() {
         jQuery('.toc-body').width('100%');
         if (jQuery('.dw-toc-closed').length) {
           $dw_toc.find('.toc-title').trigger('click');
         }
       });
+
     }
 
     $dw_toc.find('.toc-title').on('click', function() {
@@ -214,23 +240,23 @@ jQuery(document).on('bootstrap3:toc', function() {
 
       jQuery('article .dw-page-row').toggleClass('dw-toc-closed');
 
-      if (jQuery('.dw-toc-closed').length) {
-        $self.addClass('btn btn-default btn-xs');
-      } else {
-        if (! mediaSize('xs')) {
+      if (! mediaSize('xs')) {
+        if (jQuery('.dw-toc-closed').length) {
+          $self.addClass('btn btn-default btn-xs');
+        } else {
           $self.removeClass('btn btn-default btn-xs');
         }
-        resizeToc();
+      }
+
+      if (! jQuery('.dw-toc-closed').length) {
+        jQuery(document).trigger('bootstrap3:toc-resize');
       }
 
     });
 
     if ((jQuery(window).height() < $dw_toc.height())) {
-      resizeToc();
+      jQuery(document).trigger('bootstrap3:toc-resize');
     }
-    jQuery(window).resize(function(){
-      resizeToc();
-    });
 
     // Scrolling animation
     $dw_toc.find('a').click(function(e) {
@@ -240,7 +266,7 @@ jQuery(document).on('bootstrap3:toc', function() {
         e.preventDefault();
 
         var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-            section_position = (jQuery('#dokuwiki__content ' + jQuery.attr(this, 'href')).offset().top - body_offset);
+            section_position = (jQuery('article ' + jQuery.attr(this, 'href')).offset().top - body_offset);
 
         jQuery('html, body').animate({
           scrollTop: section_position

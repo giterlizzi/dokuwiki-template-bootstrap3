@@ -1407,15 +1407,13 @@ function bootstrap3_html_toc($toc){
 
   $out  = '';
   $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dokuwiki__toc" role="navigation" class="small"'.DOKU_LF;
-  if (bootstrap3_conf('tocAffix')) $out .= ' data-spy="affix" data-offset-top="150"';
-  $out .= '>'.DOKU_LF;
+  $out .= '<nav id="dokuwiki__toc" role="navigation" class="small">'.DOKU_LF;
   $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
   $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
   $out .= '<div class="toc-body collapse in">'.DOKU_LF;
   $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
-  $out .= '</div><hr/>'.DOKU_LF;
+  $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
 
@@ -1736,7 +1734,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; }';
+    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
       $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
@@ -1751,6 +1749,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     $js  = '';
     $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+
+    if (bootstrap3_conf('tocAffix')) {
+      $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+    }
 
     if ($fixed_top_navbar) {
       $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";

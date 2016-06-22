@@ -25,6 +25,7 @@ jQuery(document).ready(function() {
   jQuery(window).resize(function() {
     jQuery(document).trigger('bootstrap3:mobile-layout');
     jQuery(document).trigger('bootstrap3:collapse-sections');
+    jQuery(document).trigger('bootstrap3:toc-resize');
   });
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
