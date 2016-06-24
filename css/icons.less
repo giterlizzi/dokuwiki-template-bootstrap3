@@ -6,30 +6,11 @@
 * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
 */
 
-@import "fa-icons.less";
-
 @color_primary: #428bca;
 @color_danger: #d9534f;
 @color_warning: #f0ad4e;
 @color_success: #5cb85c;
 @color_info: #5bc0de;
-
-
-.fa-icon(@icon_name) {
-  content: '@{icon_name}';
-  .fa-wrapper();
-}
-
-.fa-wrapper() {
-  font: normal normal normal 14px/1 FontAwesome;
-  display: inline-block;
-  width: 1.28571429em;
-  font-size: inherit;
-}
-
-.icon(@icon_name) {
-  content: '@{icon_name}';
-}
 
 // DokuWiki ACTs
 .mode_denied    article h1:first-of-type:before { .fa-icon(@fa-ban); color: @color_danger; opacity: .6; }
