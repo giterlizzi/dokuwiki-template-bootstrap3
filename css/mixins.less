@@ -1,11 +1,12 @@
 /*!
-* DokuWiki Bootstrap3 Template: Very useful Mixins
+* DokuWiki Bootstrap3 Template: Mixins
 *
 * Home     http://dokuwiki.org/template:bootstrap3
 * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
 * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
 */
 
+/* Very useful Mixins */
 .text-shadow (@string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
   text-shadow: @string;
 }
@@ -155,4 +156,22 @@
      -moz-transform-origin: @x @y;
       -ms-transform-origin: @x @y;
        -o-transform-origin: @x @y;
+}
+
+
+/* Template Mixins */
+.fa-icon(@icon_name) {
+  content: '@{icon_name}';
+  .fa-wrapper();
+}
+
+.fa-wrapper() {
+  font: normal normal normal 14px/1 FontAwesome;
+  display: inline-block;
+  width: 1.28571429em;
+  font-size: inherit;
+}
+
+.icon(@icon_name) {
+  content: '@{icon_name}';
 }

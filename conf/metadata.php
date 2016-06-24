@@ -57,6 +57,8 @@ $meta['useGravatar']            = array('onoff');
 // TOC
 $meta['tocAffix']               = array('onoff');
 $meta['tocCollapseSubSections'] = array('onoff');
+$meta['tocPosition']            = array('multichoice', '_choices' => array('left', 'right'));
+$meta['tocCollapseOnScroll']    = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');

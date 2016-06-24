@@ -140,7 +140,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
   function plugin_getRequestAdminPlugin(){
     static $admin_plugin = false;
     global $ACT,$INPUT,$INFO;
-  
+
     if ($admin_plugin === false) {
       if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
         $pluginlist = plugin_list('admin');
@@ -157,7 +157,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
         }
       }
     }
-  
+
     return $admin_plugin;
   }
 
@@ -195,18 +195,29 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
     foreach($evt->data['items'] as $k => $html) {
 
       switch ($k) {
+
         case 'export_odt':
           $icon = 'file-text';
           break;
+
         case 'export_pdf':
           $icon = 'file-pdf-o';
           break;
+
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
           $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
+
+        case 'overlay':
+          $icon = 'clone text-muted';
+          $html = str_replace('href="', 'href="javascript:void(0)" onclick="', $html);
+          $html = preg_replace('/<a (.*?)>(.*?)<\/a>/', '<a $1><span>$2</span></a>', $html);
+          break;
+
         default:
           $icon = 'puzzle-piece'; // Unknown
+
       }
 
       $replace = array('<i class="fa fa-fw fa-'. $icon .'"></i> ', '');
@@ -271,7 +282,7 @@ function bootstrap3_sidebar_include($type) {
     case 'right':
 
       if (! bootstrap3_conf('showRightSidebar')) return false;
-  
+
       if (bootstrap3_conf('sidebarPosition') == 'right') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
@@ -1276,29 +1287,21 @@ function bootstrap3_toc($return = false) {
  */
 function bootstrap3_html_toc($toc){
 
-  if (!count($toc)) return '';
+  if (! count($toc)) return '';
 
   global $lang;
 
   $out  = '';
-  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print small';
-  if (bootstrap3_conf('tocAffix')) $out .= ' dw-toc-affix" data-spy="affix" data-offset-top="150';
-  $out .= '">'.DOKU_LF;
   $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
-  $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
-  $out .= '<span>';
-  $out .= $lang['toc'];
-  $out .= '</span>';
-  $out .= ' <i class="caret"></i></h3></div>'.DOKU_LF;
-  $out .= '<div class="panel-collapse collapse in">'.DOKU_LF;
-  $out .= '<div class="panel-body">'.DOKU_LF;
-  $out .= bootstrap3_lists(html_buildlist($toc, 'nav nav-pills nav-stacked toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
+  $out .= '<nav id="dokuwiki__toc" role="navigation" class="small">'.DOKU_LF;
+  $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+  $out .= '<span>'.$lang['toc'].'</span>';
+  $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
+  $out .= '<div class="toc-body collapse in">'.DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
 
   return $out;
 
@@ -1617,7 +1620,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' .dw-toc-affix { top: '.($navbar_padding -10).'px; }';
+    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
       $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
@@ -1630,7 +1633,12 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       '_data' => $style
     );
 
-    $js = "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+    $js  = '';
+    $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+
+    if (bootstrap3_conf('tocAffix')) {
+      $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+    }
 
     if ($fixed_top_navbar) {
       $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
@@ -1678,7 +1686,7 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
   $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
   $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
- 
+
   // Tables
   $table_classes = 'table';
 

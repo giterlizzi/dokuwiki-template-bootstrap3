@@ -86,12 +86,13 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               // Include Page Tools
               require_once('tpl_page_tools.php');
 
-              // Include the TOC layout
-              if ($toc) echo $toc;
-
-              echo '<div class="dw-content">';
+              if ($toc) echo '<div class="dw-page-row row">';
+              echo '<div class="dw-content'. (($toc) ? ' dw-content-with-toc col-sm-9'. ((bootstrap3_conf('tocPosition') == 'left') ? ' col-md-push-3' : '') : '') .'">';
               echo $content;
               echo '</div>';
+
+              // Include the TOC layout
+              if ($toc) echo '<div class="dw-toc hidden-print col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
 
               tpl_flush();
 
