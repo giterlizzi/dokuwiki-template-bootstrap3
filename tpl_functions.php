@@ -140,7 +140,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
   function plugin_getRequestAdminPlugin(){
     static $admin_plugin = false;
     global $ACT,$INPUT,$INFO;
-  
+
     if ($admin_plugin === false) {
       if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
         $pluginlist = plugin_list('admin');
@@ -157,7 +157,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
         }
       }
     }
-  
+
     return $admin_plugin;
   }
 
@@ -195,18 +195,29 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
     foreach($evt->data['items'] as $k => $html) {
 
       switch ($k) {
+
         case 'export_odt':
           $icon = 'file-text';
           break;
+
         case 'export_pdf':
           $icon = 'file-pdf-o';
           break;
+
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
           $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
+
+        case 'overlay':
+          $icon = 'clone text-muted';
+          $html = str_replace('href="', 'href="javascript:void(0)" onclick="', $html);
+          $html = preg_replace('/<a (.*?)>(.*?)<\/a>/', '<a $1><span>$2</span></a>', $html);
+          break;
+
         default:
           $icon = 'puzzle-piece'; // Unknown
+
       }
 
       $replace = array('<i class="fa fa-fw fa-'. $icon .'"></i> ', '');
@@ -271,7 +282,7 @@ function bootstrap3_sidebar_include($type) {
     case 'right':
 
       if (! bootstrap3_conf('showRightSidebar')) return false;
-  
+
       if (bootstrap3_conf('sidebarPosition') == 'right') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
@@ -1675,7 +1686,7 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
   $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
   $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
- 
+
   // Tables
   $table_classes = 'table';
 
