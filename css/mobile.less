@@ -39,6 +39,24 @@
       }
     }
 
+    #insitu__fn {
+      max-width: initial !important;
+      position: fixed !important;
+      bottom: 0 !important;
+      left: 0 !important;
+      top: initial !important;
+      width: 90% !important;
+      margin: 10px;
+      z-index: 9999;
+
+      &::before {
+        .fa-icon(@fa-close);
+        right: 5px;
+        position: absolute;
+        top: 5px;
+      }
+    }
+
   }
 
 }

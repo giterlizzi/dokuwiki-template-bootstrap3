@@ -52,6 +52,32 @@ jQuery(document).on('bootstrap3:init', function() {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
+    // Scrolling animation (on TOC , Sidebars and Content)
+    jQuery('aside, article, #dokuwiki__toc').find('a').on('click', function(e) {
+
+      var $link = jQuery(this);
+
+      if ($link.attr('href').match(/^#/)) {
+
+        e.preventDefault();
+
+        if (mediaSize('xs') && $link.hasClass('fn_top')) {
+          return false;
+        }
+
+        var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+            target_position  = Math.round(jQuery('body ' + $link.attr('href')).offset().top - body_offset);
+
+        jQuery('html, body').animate({
+          scrollTop: target_position
+        }, 600);
+
+        return false;
+
+      }
+
+    });
+
   }, 0);
 
 });
@@ -262,26 +288,6 @@ jQuery(document).on('bootstrap3:toc', function() {
     if ((jQuery(window).height() < $dw_toc.height())) {
       jQuery(document).trigger('bootstrap3:toc-resize');
     }
-
-    // Scrolling animation
-    $dw_toc.find('a').click(function(e) {
-
-      if (jQuery(this).attr('href').match(/^#/)) {
-
-        e.preventDefault();
-
-        var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-            section_position = (jQuery('article ' + jQuery.attr(this, 'href')).offset().top - body_offset);
-
-        jQuery('html, body').animate({
-          scrollTop: section_position
-        }, 600);
-
-        return false;
-
-      }
-
-    });
 
   }, 0);
 
