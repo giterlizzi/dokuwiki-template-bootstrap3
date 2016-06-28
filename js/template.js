@@ -453,21 +453,6 @@ jQuery(document).on('bootstrap3:mode-admin', function() {
         $user_manager = $mode_admin.find('#user__manager'),
         $admin_tasks  = $mode_admin.find('ul.admin_tasks');
 
-    var tpl_sections = {
-      // ID                 Insert before           Icon
-      'theme'           : [ 'bootstrapTheme',       'fa-tint'      ],
-      'sidebar'         : [ 'sidebarPosition',      'fa-columns'   ],
-      'navbar'          : [ 'inverseNavbar',        'fa-navicon'   ],
-      'semantic'        : [ 'semantic',             'fa-share-alt' ],
-      'layout'          : [ 'fluidContainer',       'fa-desktop'   ],
-      'toc'             : [ 'tocAffix',             'fa-list'      ],
-      'discussion'      : [ 'showDiscussion',       'fa-comments'  ],
-      'cookie_law'      : [ 'showCookieLawBanner',  'fa-legal'     ],
-      'google_analytics': [ 'useGoogleAnalytics',   'fa-google'    ],
-      'browser_title'   : [ 'browserTitle',         'fa-header'    ],
-      'page'            : [ 'showPageInfo',         'fa-file'      ]
-    };
-
     var admin_tasks = {
       // Task         Icon
       'usermanager' : 'users',
@@ -491,27 +476,6 @@ jQuery(document).on('bootstrap3:mode-admin', function() {
 
     // DokuWiki logo
     jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
-
-    // Configuration manager Template sections
-    if (dw_admin('config')) {
-
-      jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
-
-        var $node = jQuery(this);
-
-        for (var section in tpl_sections) {
-
-          var item = tpl_sections[section];
-
-          if( $node.attr('for').match([item[0], '$'].join('')) ) {
-            $node.parents('tr').before(jQuery(['<tr class="bootstrap3-section ', section ,'"><td colspan="2"><legend id="bootstrap3__', section ,'"><i class="fa fa-fw ', item[1], '"></i> ', JSINFO.bootstrap3.lang.config[section], '</legend></td></tr>'].join('')));
-          }
-
-        }
-
-      });
-
-    }
 
     // Extension Manager Actions
     if (dw_admin('extension')) {

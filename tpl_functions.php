@@ -1667,6 +1667,9 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
  * */
 function bootstrap3_content($content) {
 
+  global $ACT;
+  global $INPUT;
+
   // Search Hit
   $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
 
@@ -1686,6 +1689,37 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
   $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
   $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
+
+
+  // Configuration Manager Template Sections
+  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+
+    $admin_sections = array(
+    // Section                      Insert Before           Icon
+      'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
+      'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
+      'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
+      'semantic'          => array( 'semantic',             'fa-share-alt' ),
+      'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
+      'toc'               => array( 'tocAffix',             'fa-list'      ),
+      'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
+      'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
+      'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
+      'browser_title'     => array( 'browserTitle',         'fa-header'    ),
+      'page'              => array( 'showPageInfo',         'fa-file'      )
+    );
+  
+    foreach ($admin_sections as $section => $items) {
+
+      $search = $items[0];
+      $icon   = $items[1];
+
+      $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
+                              '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+
+    }
+
+  }
 
   // Tables
   $table_classes = 'table';
