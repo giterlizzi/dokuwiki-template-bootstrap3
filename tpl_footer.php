@@ -10,16 +10,12 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-$footer_page = 'footer';
-
-resolve_pageid('', $footer_page, $footer_page_exists);
-
-if ($footer_page_exists):
+if (page_findnearest('footer', bootstrap3_conf('useACL'))):
 ?>
 <footer id="dw__footer" class="small navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
   <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <div class="navbar-text">
-      <?php tpl_include_page($footer_page, 1, 1); ?>
+      <?php tpl_include_page('footer', 1, 1, bootstrap3_conf('useACL')); ?>
     </div>
   </div>
 </footer>
