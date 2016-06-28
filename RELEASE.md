@@ -3,6 +3,7 @@
 ## [Develop]
 
 ### Added
+  * #119, #223: Added ACL support for Sidebars (left and right) and for all DokuWiki hooks (eg. :navbar, :footer, etc) via "useACL" option (default: off). This feature is available since "Elenor of Tsort"
   * #162: Added new option ("tocCollapseOnScroll" - default is "on") to enable/disable automatic collapse of the TOC during the scroll of the page (thanks to @tysoncecka)
   * #193: Added localization variables for Admin TOC and sections in Configuration Manager
   * #208: Added missing function in DokuWiki "Hrun" release (thanks to @gropefruit)
@@ -26,7 +27,7 @@
   * Asset: Reorganized Bootstrap & Bootswatch asset directory
   * Asset: Removed non-minified Bootstrap, Bootswatch and FontAwesome assets to save space
   * Asset: Updated FontAwesome to v4.6.3
-  * Asset: Updated Bootswatch to v3.3.6+1
+  * Asset: Updated Bootswatch Themes to v3.3.6+2
   * Localization: Updated translations from Transifex platform
   * General: Reorganized and cleaned the code
 
