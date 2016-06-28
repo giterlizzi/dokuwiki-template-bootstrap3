@@ -84,6 +84,7 @@ $lang['tocAffix']                     = 'Affix the TOC during page scrolling';
 $lang['tocCollapseOnScroll']          = 'Collapse TOC during page scrolling';
 $lang['tocCollapseSubSections']       = 'Collapse all sub-sections in TOC to save space';
 $lang['tocPosition']                  = 'TOC position';
+$lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.))';
 $lang['useAnchorJS']                  = 'Use AnchorJS';
 $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useGravatar']                  = 'Load Gravatar image';

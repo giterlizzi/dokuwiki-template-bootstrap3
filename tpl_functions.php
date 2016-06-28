@@ -546,7 +546,7 @@ function bootstrap3_navbar() {
 
   global $ID;
 
-  $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
+  $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
   $navbar = str_replace('urlextern', '', $navbar);
 
@@ -570,11 +570,11 @@ function bootstrap3_navbar() {
  */
 function bootstrap3_dropdown_page($page) {
 
-  $page = page_findnearest($page);
+  $page = page_findnearest($page, bootstrap3_conf('useACL'));
 
   if (! $page) return;
 
-  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1), 'pills', true);
+  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true);
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
@@ -894,12 +894,15 @@ function bootstrap3_conf($key, $default = false) {
     case 'showLoginOnFooter':
       return ($value && ! $_SERVER['REMOTE_USER']);
 
+    case 'showCookieLawBanner':
+      return page_findnearest(tpl_getConf('cookieLawBannerPage'), bootstrap3_conf('useACL')) && ($ACT=='show');
+
     case 'showSidebar':
       if (bootstrap3_conf('showLandingPage')) return false;
-      return page_findnearest($conf['sidebar']) && ($ACT=='show');
+      return page_findnearest($conf['sidebar'], bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showRightSidebar':
-      return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
+      return page_findnearest(tpl_getConf('rightSidebar'), bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showLandingPage':
       return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));

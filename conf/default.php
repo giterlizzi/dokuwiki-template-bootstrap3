@@ -67,6 +67,7 @@ $conf['tocAffix']                    = 1;
 $conf['tocCollapseOnScroll']         = 1;
 $conf['tocCollapseSubSections']      = 1;
 $conf['tocPosition']                 = 'right';
+$conf['useACL']                      = 0;
 $conf['useAnchorJS']                 = 1;
 $conf['useGoogleAnalytics']          = 0;
 $conf['useGravatar']                 = 0;

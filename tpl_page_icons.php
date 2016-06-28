@@ -20,7 +20,7 @@ $help_page  = false;
 $help_title = null;
 
 if (in_array('help', $page_icons)) {
-  $help_page  = page_findnearest('help');
+  $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
   $help_title = hsc(p_get_first_heading($help_page));
 }
 

@@ -86,6 +86,7 @@ $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('norma
 
 // Page
 $meta['showPageInfo']         = array('onoff');
+$meta['useACL']               = array('onoff', '_caution' => 'warning');
 $meta['pageInfo']             = array('multicheckbox', '_choices' => array('filename', 'extension', 'date', 'editor', 'locked'));
 $meta['pageInfoDateFormat']   = array('multichoice', '_choices'   => array('dformat', 'human'));
 $meta['showPageIcons']        = array('onoff');
