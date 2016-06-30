@@ -31,7 +31,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>">
-  <!--[if IE 8 ]><div id="IE8"><![endif]-->
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <?php tpl_includeFile('topheader.html') ?>
@@ -163,6 +162,5 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
   </div>
 
-  <!--[if lte IE 8 ]></div><![endif]-->
 </body>
 </html>

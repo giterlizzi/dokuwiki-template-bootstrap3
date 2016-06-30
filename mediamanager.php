@@ -33,7 +33,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   </style>
 </head>
 <body class="container">
-  <!--[if IE 8 ]><div id="IE8"><![endif]-->
+
   <div id="dw__msgarea">
     <?php bootstrap3_html_msgarea() ?>
   </div>
@@ -52,6 +52,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       </div>
 
   </div>
-  <!--[if IE 8 ]></div"><![endif]-->
+
 </body>
 </html>
