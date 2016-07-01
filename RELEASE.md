@@ -24,6 +24,7 @@
   * Engine: Increased the performance of template engine
   * Engine: Added some Bootstrap elements/classes (alerts, table, images, page-heading) via PHP engine instead of JS engine
   * Layout: Moved DokuWiki logo inline style to "template.less"
+  * Layout: Added Bootstrap style to Difference page and optimized layout for Revisions and Recents pages
   * Asset: Reorganized Bootstrap & Bootswatch asset directory
   * Asset: Removed non-minified Bootstrap, Bootswatch and FontAwesome assets to save space
   * Asset: Updated FontAwesome to v4.6.3
@@ -44,6 +45,7 @@
 ### Removed
   * Removed old and unused functions
   * Removed unused left and right sidebar grid options to increase the performance
+  * Removed IE8 support
 
 
 ## [v2016-04-13]
