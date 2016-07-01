@@ -1724,6 +1724,30 @@ function bootstrap3_content($content) {
 
   }
 
+
+  // Revisions & Recents
+  if ($ACT == 'revisions' || $ACT == 'recent') {
+    $search  = array('class="sizechange positive"', 'class="sizechange negative"', 'class="minor"');
+    $replace = array('class="sizechange positive label label-success"', 'class="sizechange negative label label-danger"', 'class="minor text-muted"');
+    $content = str_replace($search, $replace, $content);
+  }
+
+
+  // Difference
+  if ($ACT == 'diff') {
+
+    $btn_default = 'btn btn-default fa';
+
+    $search  = array('class="diff-deletedline"', 'class="diff-addedline',
+                     'class="diffprevrev', 'class="diffnextrev', 'class="diffbothprevrev', 'class="minor"');
+
+    $replace = array('class="diff-deletedline bg-danger text-danger"', 'class="diff-addedline bg-success text-success"',
+                     "class=\"diffprevrev $btn_default fa-angle-left\"", "class=\"diffnextrev $btn_default fa-angle-right\"", "class=\"diffbothprevrev $btn_default fa-angle-double-left\"", 'class="minor text-muted"');
+
+    $content = str_replace($search, $replace, $content);
+
+  }
+
   // Tables
   $table_classes = 'table';
 

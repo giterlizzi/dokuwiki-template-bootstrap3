@@ -1,0 +1,98 @@
+/*!
+ * DokuWiki Bootstrap3 Template: Difference
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+.dokuwiki {
+
+  div.pagenav {
+    text-align: center;
+    margin: 1.5em 0;
+  }
+  div.pagenav-prev,
+  div.pagenav-next {
+    display: inline;
+    margin: 0 0.5em;
+  }
+
+}
+
+.dokuwiki table.diff {
+
+  width: 100%;
+  border-width: 0;
+  overflow: hidden;
+
+  form, label {
+    display: inline;
+  }
+
+  select {
+    font-size: small;
+    width: 60%;
+
+    option[selected] {
+     font-weight: bold;
+    }
+  }
+
+  th, td {
+    vertical-align: top;
+    padding: 0;
+    border-width: 0;
+  }
+
+  td {
+    font-family: monospace;
+    font-size: small;
+
+    &.diff-context {
+      background-color: #fafafa;
+    }
+  }
+
+  .diff_sidebyside th {
+    width: 50%;
+  }
+
+  .diff-lineheader {
+    width: 0;
+  }
+
+}
+
+.dokuwiki .diffnav {
+
+  span {
+    display: none;
+  }
+
+  a {
+    display: inline-block;
+  }
+
+}
+
+.dokuwiki {
+
+  .diffoptions,
+  .diffnav {
+    padding: 0.5em 0 !important;
+  }
+
+  .diff-blockheader {
+    padding: 0.5em 0 !important;
+  }
+
+  .diff_inline td, th {
+    vertical-align: middle;
+  }
+
+  .dokuwiki .diffoptions.group p {
+    float: right;
+  }
+
+}
