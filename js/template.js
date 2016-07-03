@@ -57,7 +57,7 @@ jQuery(document).on('bootstrap3:init', function() {
 
       var $link = jQuery(this);
 
-      if ($link.attr('href').match(/^#/)) {
+      if ($link.attr('href').match(/^#/) && $link.attr('href').length > 1) {
 
         e.preventDefault();
 
@@ -65,12 +65,18 @@ jQuery(document).on('bootstrap3:init', function() {
           return false;
         }
 
-        var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-            target_position  = Math.round(jQuery('body ' + $link.attr('href')).offset().top - body_offset);
+        var $target = jQuery('body ' + $link.attr('href'));
 
-        jQuery('html, body').animate({
-          scrollTop: target_position
-        }, 600);
+        if ($target.length) {
+
+          var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+              target_position  = Math.round($target.offset().top - body_offset);
+
+          jQuery('html, body').animate({
+            scrollTop: target_position
+          }, 600);
+
+        }
 
         return false;
 
