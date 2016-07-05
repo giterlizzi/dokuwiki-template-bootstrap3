@@ -15,6 +15,7 @@
   * Added ARIA support for all dropdown menu
   * Added missing notify/alert style
   * Added fallback "dokuwiki" class in <header/> and <main/> elements for 3th party plugins
+  * Added Korean language (thanks to @araname)
   * Added more bugs to fix later
 
 ### Changed
@@ -38,6 +39,7 @@
   * #198: Fixed Navbar container size (thanks to @aliasedv2)
   * #200: Fixed Admin Menu Collapses too fast issue (thanks to @issmirnov)
   * #201: Fixed Page Tools issue (thanks to @Digitalin)
+  * #218: Fixed overlap on IE and Opera (thanks to @Soeldner)
   * Fixed visibility of 3th level of TOC
   * Fixed a Right Sidebar bahavior. Now the Right Sidebar is indipendent from Left Sidebar
   * Changed selector to fix fluid container functionality
