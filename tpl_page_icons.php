@@ -12,6 +12,8 @@ if (!defined('DOKU_INC')) die();
 
 if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && bootstrap3_conf('showPageIcons')):
 
+global $ID;
+
 $page_icons   = bootstrap3_conf('pageIcons');
 $social_share = in_array('social-share', $page_icons);
 $social_share_providers = bootstrap3_conf('socialShareProviders');
@@ -20,7 +22,7 @@ $help_page  = false;
 $help_title = null;
 
 if (in_array('help', $page_icons)) {
-  $help_page  = page_findnearest('help');
+  $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
   $help_title = hsc(p_get_first_heading($help_page));
 }
 
@@ -53,7 +55,7 @@ if (in_array('help', $page_icons)) {
   <?php if($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="#" title="Share on ..." class="share-on" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="Share on ..." class="share-on">
       <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">

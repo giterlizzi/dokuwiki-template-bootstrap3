@@ -14,6 +14,10 @@ jQuery(document).ready(function() {
     return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
 
+  function dw_admin(page) {
+    return ((JSINFO.bootstrap3.admin === page) ? true : false);
+  }
+
   function mediaSize(media) {
     return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
@@ -21,6 +25,7 @@ jQuery(document).ready(function() {
   jQuery(window).resize(function() {
     jQuery(document).trigger('bootstrap3:mobile-layout');
     jQuery(document).trigger('bootstrap3:collapse-sections');
+    jQuery(document).trigger('bootstrap3:toc-resize');
   });
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
@@ -59,7 +64,7 @@ jQuery(document).ready(function() {
   jQuery('.fluid-container').on('click', function() {
 
     var $button     = jQuery(this),
-        $containers = jQuery('body > div, header, article, footer > div');
+        $containers = jQuery('body > div, header nav > div, article, footer > div');
 
     if (jQuery('body > div.container').length) {
 
@@ -107,12 +112,25 @@ jQuery(document).ready(function() {
       jQuery(document).trigger('bootstrap3:buttons');
       jQuery(document).trigger('bootstrap3:tabs');
       jQuery(document).trigger('bootstrap3:media-manager');
+      jQuery(document).trigger('bootstrap3:alerts')
     });
 
   }
 
-  // Index tree
+  // Admin mode
+  if (dw_mode('admin')) {
+    jQuery(document).trigger('bootstrap3:mode-admin');
+  }
+
+  // Search mode
+  if (dw_mode('search')) {
+    jQuery(document).trigger('bootstrap3:mode-search');
+  }
+
+  // Index mode
   if (dw_mode('index')) {
+
+    jQuery(document).trigger('bootstrap3:mode-index');
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:mode-index');

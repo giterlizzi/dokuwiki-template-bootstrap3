@@ -1,11 +1,10 @@
 <?php
 /**
- * Template Functions
+ * DokuWiki Bootstrap3 Template: Core Functions
  *
- * This file provides template specific custom functions that are
- * not provided by the DokuWiki core.
- * It is common practice to start each function with an underscore
- * to make sure it won't interfere with future core functions.
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
 // must be run from within DokuWiki
@@ -98,7 +97,7 @@ function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
 
 
 /**
- * copied to core (available since Detritus)
+ * copied from core (available since Detritus)
  */
 if (!function_exists('tpl_toolsevent')) {
     function tpl_toolsevent($toolsname, $items, $view='main') {
@@ -141,7 +140,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
   function plugin_getRequestAdminPlugin(){
     static $admin_plugin = false;
     global $ACT,$INPUT,$INFO;
-  
+
     if ($admin_plugin === false) {
       if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
         $pluginlist = plugin_list('admin');
@@ -158,7 +157,7 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
         }
       }
     }
-  
+
     return $admin_plugin;
   }
 
@@ -196,18 +195,29 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
     foreach($evt->data['items'] as $k => $html) {
 
       switch ($k) {
+
         case 'export_odt':
           $icon = 'file-text';
           break;
+
         case 'export_pdf':
           $icon = 'file-pdf-o';
           break;
+
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
           $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
+
+        case 'overlay':
+          $icon = 'clone text-muted';
+          $html = str_replace('href="', 'href="javascript:void(0)" onclick="', $html);
+          $html = preg_replace('/<a (.*?)>(.*?)<\/a>/', '<a $1><span>$2</span></a>', $html);
+          break;
+
         default:
           $icon = 'puzzle-piece'; // Unknown
+
       }
 
       $replace = array('<i class="fa fa-fw fa-'. $icon .'"></i> ', '');
@@ -235,7 +245,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
  * @param  string  $sidebar_header
  * @param  string  $sidebar_footer
  */
-function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
+function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_header, $sidebar_footer) {
   global $lang;
   @require('tpl_sidebar.php');
 }
@@ -251,21 +261,19 @@ function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, 
  */
 function bootstrap3_sidebar_include($type) {
 
-  if (! bootstrap3_conf('showSidebar')) return false;
-
   global $conf;
 
-  $left_sidebar       = $conf['sidebar'];
-  $right_sidebar      = bootstrap3_conf('rightSidebar');
-  $left_sidebar_grid  = bootstrap3_conf('leftSidebarGrid');
-  $right_sidebar_grid = bootstrap3_conf('rightSidebarGrid');
+  $left_sidebar  = $conf['sidebar'];
+  $right_sidebar = bootstrap3_conf('rightSidebar');
 
   switch ($type) {
 
     case 'left':
 
+      if (! bootstrap3_conf('showSidebar')) return false;
+
       if (bootstrap3_conf('sidebarPosition') == 'left') {
-        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
       }
 
@@ -273,14 +281,16 @@ function bootstrap3_sidebar_include($type) {
 
     case 'right':
 
+      if (! bootstrap3_conf('showRightSidebar')) return false;
+
       if (bootstrap3_conf('sidebarPosition') == 'right') {
-        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
+        bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside',
                                   'sidebarheader.html', 'sidebarfooter.html');
       }
 
       if (   bootstrap3_conf('showRightSidebar')
           && bootstrap3_conf('sidebarPosition') == 'left') {
-        bootstrap3_sidebar_wrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid,
+        bootstrap3_sidebar_wrapper($right_sidebar, 'dokuwiki__rightaside',
                                   'rightsidebarheader.html', 'rightsidebarfooter.html');
       }
 
@@ -352,43 +362,37 @@ function bootstrap3_container_grid() {
   global $ID;
   global $conf;
 
-  $grids  = array();
   $result = '';
+  $grids  = array();
 
-  $showRightSidebar = bootstrap3_conf('showRightSidebar');
-  $showLeftSidebar  = bootstrap3_conf('showSidebar');
-  $fluidContainer   = bootstrap3_conf('fluidContainer');
+  $show_right_sidebar = bootstrap3_conf('showRightSidebar');
+  $show_left_sidebar  = bootstrap3_conf('showSidebar');
+  $fluid_container    = bootstrap3_conf('fluidContainer');
 
-  if(bootstrap3_conf('fluidContainerBtn')) {
-    $fluidContainer = bootstrap3_fluid_container_button();
+  if (bootstrap3_conf('fluidContainerBtn')) {
+    $fluid_container = bootstrap3_fluid_container_button();
   }
 
   if (   bootstrap3_conf('showLandingPage')
       && (bool) preg_match(bootstrap3_conf('landingPages'), $ID) ) {
-    $showLeftSidebar = false;
+    $show_left_sidebar  = false;
+    $show_right_sidebar = false;
   }
 
-  if (! $showLeftSidebar) {
-    return 'container' . (($fluidContainer) ? '-fluid' : '');
+  if (   ! $show_left_sidebar
+      && ! $show_right_sidebar) {
+    return 'container' . (($fluid_container) ? '-fluid' : '');
   }
 
-  foreach (explode(' ', bootstrap3_conf('leftSidebarGrid')) as $grid) {
-    list($col, $media, $size) = explode('-', $grid);
-    $grids[$media]['left'] = (int) $size;
+  if (   $show_left_sidebar
+      && $show_right_sidebar) {
+    return 'col-sm-6 col-md-8';
   }
 
-  foreach (explode(' ', bootstrap3_conf('rightSidebarGrid')) as $grid) {
-    list($col, $media, $size) = explode('-', $grid);
-    $grids[$media]['right'] = (int) $size;
+  if (   ( ! $show_left_sidebar  && $show_right_sidebar )
+      || ( ! $show_right_sidebar && $show_left_sidebar  ) )  {
+    return 'col-sm-9 col-md-10';
   }
-
-  foreach ($grids as $media => $item) {
-    $left    = $item['left'];
-    $right   = $item['right'];
-    $result .= sprintf('col-%s-%s ', $media, (12 - $left - ($showRightSidebar ? $right : 0)));
-  }
-
-  return $result;
 
 }
 
@@ -540,12 +544,14 @@ function bootstrap3_navbar() {
 
   if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
-  $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1), 'navbar');
+  global $ID;
+
+  $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
   $navbar = str_replace('urlextern', '', $navbar);
 
   $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
-                         '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+                         '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
 
@@ -564,18 +570,18 @@ function bootstrap3_navbar() {
  */
 function bootstrap3_dropdown_page($page) {
 
-  $page = page_findnearest($page);
+  $page = page_findnearest($page, bootstrap3_conf('useACL'));
 
   if (! $page) return;
 
-  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1), 'pills', true);
+  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true);
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
               p_get_first_heading($page) .
               ' <span class="caret"></span></a>' .
               '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
-              '<li><div class="container">'.
+              '<li><div class="container small">'.
               $output .
               '</div></li></ul></li></ul>';
 
@@ -596,8 +602,8 @@ function bootstrap3_dropdown_page($page) {
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @param bool $ajax
- * @param bool $autocomplete
+ * @param  bool $ajax
+ * @param  bool $autocomplete
  * @return bool
  */
 function bootstrap3_searchform($ajax = true, $autocomplete = true) {
@@ -888,12 +894,15 @@ function bootstrap3_conf($key, $default = false) {
     case 'showLoginOnFooter':
       return ($value && ! $_SERVER['REMOTE_USER']);
 
+    case 'showCookieLawBanner':
+      return page_findnearest(tpl_getConf('cookieLawBannerPage'), bootstrap3_conf('useACL')) && ($ACT=='show');
+
     case 'showSidebar':
       if (bootstrap3_conf('showLandingPage')) return false;
-      return page_findnearest($conf['sidebar']) && ($ACT=='show');
+      return page_findnearest($conf['sidebar'], bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showRightSidebar':
-      return page_findnearest(tpl_getConf('rightSidebar')) && ($ACT=='show');
+      return page_findnearest(tpl_getConf('rightSidebar'), bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showLandingPage':
       return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
@@ -959,105 +968,6 @@ function bootstrap3_bootswatch_theme_list() {
  */
 function bootstrap3_bootswatch_themes_available() {
   return array_diff(bootstrap3_bootswatch_theme_list(), bootstrap3_conf('hideInThemeSwitcher'));
-}
-
-
-/**
- * Add a font icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $pack
- * @param   string   $name of icon
- * @param   string   $classes
- * @param   integer  $size
- * @return  string
- */
-function bootstrap3_icon($pack, $name, $classes = '', $size = -1) {
-
-  if ($size > 0 && ! preg_match('/(em|px)$/', "$size")) {
-    $size = $size.'px';
-  }
-
-  $style   = ($size !== -1) ? sprintf(' style="font-size:%s"', $size) : '';
-
-  $class[] = $pack;
-  $class[] = "$pack-$name";
-  $class[] = $classes;
-
-  $output  = sprintf('<i class="%s"%s></i>', trim(implode(' ', $class)), $style);
-  return $output;
-
-}
-
-
-/**
- * Add a Font-Awesome icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string        $name of icon
- * @param   string|array  $options
- * @param   string        $classes
- * @param   integer       $size
- * @return  string
- */
-function bootstrap3_fa($name, $options = '', $classes = '', $size = -1) {
-
-  if (! is_array($options)) {
-    $options = explode(' ', $options);
-  }
-
-  foreach ($options as $option) {
-    $classes .= " fa-$option ";
-  }
-
-  return bootstrap3_icon('fa', $name, trim($classes), $size);
-}
-
-
-/**
- * Add a Font-Awesome stack icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string   $icon1
- * @param   string   $icon2
- * @param   boolead  $switch the position of icon1 and icon2
- * @return  string
- */
-function bootstrap3_fa_stack($icon1, $icon2, $switch = false) {
-
-  $icon2 = str_replace('class="', 'class="fa-stack-1x ', $icon2);
-  $icon1 = str_replace('class="', 'class="fa-stack-2x ', $icon1);
-
-  if ($switch) {
-
-    $tmp1  = $icon1;
-    $tmp2  = $icon2;
-
-    $icon1 = $tmp2;
-    $icon2 = $tmp1;
-
-  }
-
-  return sprintf('<span class="fa-stack fa-lg">%s %s</span>', $icon1, $icon2);
-
-}
-
-
-/**
- * Add a Glyophicon icon
- *
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string  $name of icon
- * @param   string  $classes
- * @param   integer $size
- * @return  string
- */
-function bootstrap3_glyphicon($name, $classes = '', $size = -1) {
-  return bootstrap3_icon('glyphicon', $name, $classes, $size);
 }
 
 
@@ -1164,7 +1074,6 @@ function bootstrap3_youarehere() {
         if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
 
         echo $link;
-
         echo '</li>';
 
     }
@@ -1192,36 +1101,10 @@ function bootstrap3_youarehere() {
     if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
 
     echo $link;
-
     echo '</li>';
-
     echo '</ol>';
 
     return true;
-
-}
-
-
-/**
- * Include (or override) a TPL file
- *
- * @see require_once()
- * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- *
- * @param   string $file
- * @return  boolean
- */
-function bootstrap3_include($file) {
-
-  $override = dirname(__FILE__) . "/override/$file";
-
-  if (file_exists($override)) {
-    require_once($override);
-    return true;
-  }
-
-  require_once($file);
-  return true;
 
 }
 
@@ -1371,23 +1254,15 @@ function bootstrap3_toc($return = false) {
   if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
 
     $bootstrap3_sections = array(
-      'theme'            => 'Theme',
-      'sidebar'          => 'Sidebar',
-      'navbar'           => 'Navbar',
-      'semantic'         => 'Semantic',
-      'layout'           => 'Layout',
-      'toc'              => 'TOC',
-      'discussion'       => 'Discussion',
-      'cookie_law'       => 'Cookie Law',
-      'google_analytics' => 'Google Analytics',
-      'browser_title'    => 'Browser Title',
-      'page'             => 'Page'
+      'theme', 'sidebar', 'navbar', 'semantic',
+      'layout', 'toc', 'discussion', 'cookie_law',
+      'google_analytics', 'browser_title', 'page'
     );
 
-    foreach ($bootstrap3_sections as $id => $title) {
+    foreach ($bootstrap3_sections as $id) {
       $toc[] = array(
         'link'  => "#bootstrap3__$id",
-        'title' => $title,
+        'title' => tpl_getLang("config_$id"),
         'type'  => 'ul',
         'level' => 3
       );
@@ -1415,29 +1290,21 @@ function bootstrap3_toc($return = false) {
  */
 function bootstrap3_html_toc($toc){
 
-  if (!count($toc)) return '';
+  if (! count($toc)) return '';
 
   global $lang;
 
   $out  = '';
-  $out .= '<div id="dokuwiki__toc_wrapper" class="pull-right hidden-print';
-  if (bootstrap3_conf('tocAffix')) $out .= ' dw-toc-affix" data-spy="affix" data-offset-top="150';
-  $out .= '">'.DOKU_LF;
   $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dokuwiki__toc" class="panel panel-default" role="navigation">'.DOKU_LF;
-  $out .= '<div class="panel-heading"><h3 class="panel-title open" data-toggle="collapse" data-target="#dokuwiki__toc .panel-collapse"><i class="fa fa-th-list"></i> ';
-  $out .= '<span>';
-  $out .= $lang['toc'];
-  $out .= '</span>';
-  $out .= ' <i class="caret"></i></h3></div>'.DOKU_LF;
-  $out .= '<div class="panel-collapse collapse in">'.DOKU_LF;
-  $out .= '<div class="panel-body">'.DOKU_LF;
-  $out .= bootstrap3_lists(html_buildlist($toc, 'nav nav-pills nav-stacked toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
+  $out .= '<nav id="dokuwiki__toc" role="navigation" class="small">'.DOKU_LF;
+  $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+  $out .= '<span>'.$lang['toc'].'</span>';
+  $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
+  $out .= '<div class="toc-body collapse in">'.DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
   $out .= '<!-- TOC END -->'.DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
 
   return $out;
 
@@ -1654,8 +1521,8 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap-theme.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap-theme.min.css';
       break;
 
     case 'custom':
@@ -1666,7 +1533,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? tpl_basedir() . 'assets/bootswatch'
+        ? tpl_basedir() . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
 
       $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
@@ -1674,7 +1541,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     case 'default':
     default:
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/css/bootstrap.min.css';
+      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
       break;
 
   }
@@ -1756,7 +1623,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' .dw-toc-affix { top: '.($navbar_padding -10).'px; }';
+    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
       $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
@@ -1769,10 +1636,19 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       '_data' => $style
     );
 
-    $js = "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+    $js  = '';
+    $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+
+    if (bootstrap3_conf('tocAffix')) {
+      $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+    }
 
     if ($fixed_top_navbar) {
       $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
+    }
+
+    if (bootstrap3_conf('useAnchorJS')) {
+      $js .= "jQuery(document).trigger('bootstrap3:anchorjs');";
     }
 
     $event->data['script'][] = array(
@@ -1784,11 +1660,109 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
 }
 
-
+/**
+ * Add Bootstrap classes in DokuWiki Content
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $content from tpl_content()
+ * @return  string
+ * */
 function bootstrap3_content($content) {
 
+  global $ACT;
+  global $INPUT;
+
+  // Search Hit
   $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+
+  // Tabs (Extension Manager)
   $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
+
+  // Page Heading (<h[1-2]>)
+  $content = preg_replace('/<h([1-2]) id="(.*)">/',              '<h$1 class="page-header" id="$2">',    $content);
+  $content = preg_replace('/<h([1-2]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $content);
+  $content = preg_replace('/<h([1-2])>/',                        '<h$1 class="page-header">',            $content);
+
+  // Media Images
+  $content = preg_replace('/<img (.*) class="(media|medialeft|mediacenter|mediaright)"/', '<img $1 class="$2 img-responsive"', $content);
+
+  // Alerts
+  $content = str_replace('<div class="info">',    '<div class="alert alert-info"><i class="fa fa-fw fa-info-circle"></i>',     $content);
+  $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
+  $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
+  $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
+
+
+  // Configuration Manager Template Sections
+  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+
+    $admin_sections = array(
+    // Section                      Insert Before           Icon
+      'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
+      'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
+      'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
+      'semantic'          => array( 'semantic',             'fa-share-alt' ),
+      'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
+      'toc'               => array( 'tocAffix',             'fa-list'      ),
+      'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
+      'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
+      'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
+      'browser_title'     => array( 'browserTitle',         'fa-header'    ),
+      'page'              => array( 'showPageInfo',         'fa-file'      )
+    );
+  
+    foreach ($admin_sections as $section => $items) {
+
+      $search = $items[0];
+      $icon   = $items[1];
+
+      $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
+                              '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+
+    }
+
+  }
+
+
+  // Revisions & Recents
+  if ($ACT == 'revisions' || $ACT == 'recent') {
+    $search  = array('class="sizechange positive"', 'class="sizechange negative"', 'class="minor"');
+    $replace = array('class="sizechange positive label label-success"', 'class="sizechange negative label label-danger"', 'class="minor text-muted"');
+    $content = str_replace($search, $replace, $content);
+  }
+
+
+  // Difference
+  if ($ACT == 'diff') {
+
+    $btn_default = 'btn btn-default fa';
+
+    $search  = array('class="diff-deletedline"', 'class="diff-addedline',
+                     'class="diffprevrev', 'class="diffnextrev', 'class="diffbothprevrev', 'class="minor"');
+
+    $replace = array('class="diff-deletedline bg-danger text-danger"', 'class="diff-addedline bg-success text-success"',
+                     "class=\"diffprevrev $btn_default fa-angle-left\"", "class=\"diffnextrev $btn_default fa-angle-right\"", "class=\"diffbothprevrev $btn_default fa-angle-double-left\"", 'class="minor text-muted"');
+
+    $content = str_replace($search, $replace, $content);
+
+  }
+
+  // Tables
+  $table_classes = 'table';
+
+  foreach (bootstrap3_conf('tableStyle') as $class) {
+    if ($class == 'responsive') {
+      $content = str_replace('<div class="table', '<div class="table table-responsive', $content);
+    } else {
+      $table_classes .= " table-$class";
+    }
+  }
+
+  $content = preg_replace('/<table class="(inline|import_failures)">/',
+                          sprintf('<table class="$1 %s">', $table_classes), $content);
+
+  $content = str_replace('<div class="table ', '<div class="', $content);
 
   return $content;
 

@@ -10,6 +10,9 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+global $lang;
+
+$navbar_labels    = bootstrap3_conf('navbarLabels');
 $navbar_classes   = array();
 $navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
 $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
@@ -37,7 +40,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
         $logo_size = 'height="20"';
 
         if ($tagline) {
-          $logo_size = 'height="32" style="margin-top:-5px"';
+          $logo_size = 'height="32"';
         }
 
         // display logo and wiki title in a link to the home page
@@ -92,7 +95,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
           <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
           <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">
-            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="hidden-lg hidden-md hidden-sm"> <?php echo tpl_getLang('expand_container') ?></span></a>
+            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
 
@@ -101,12 +104,15 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
             <span class="dw__actions dw-action-icon">
               <?php
 
-                $register_btn = bootstrap3_action_item('register', false, true);
+                $register_label = sprintf('<span class="%s">%s</span>', (in_array('register', $navbar_labels) ? null : 'sr-only'), $lang['btn_register']);
+                $login_label    = sprintf('<span class="%s">%s</span>', (in_array('login', $navbar_labels) ? null : 'sr-only'), $lang['btn_login']);
+
+                $register_btn = tpl_actionlink('register', null, null, $register_label, true);
                 $register_btn = str_replace('action', 'action btn btn-success navbar-btn', $register_btn);
                 echo $register_btn;
 
                 if (! bootstrap3_conf('hideLoginLink')) {
-                  $login_btn = bootstrap3_action_item('login', false, true);
+                  $login_btn = tpl_actionlink('login', null, null, $login_label, true);
                   $login_btn = str_replace('action', 'action btn btn-default navbar-btn', $login_btn);
                   echo $login_btn;
                 }

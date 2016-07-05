@@ -28,7 +28,7 @@ if (! $translation->istranslatable($ID)) return false;
 ?>
 <ul class="nav navbar-nav" id="dw__translation">
   <li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $trans_label ?>">
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $trans_label ?>" role="button" aria-haspopup="true" aria-expanded="false">
       <i class="fa fa-fw fa-flag"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $trans_label ?></span><span class="caret"></span>
     </a>
   <ul class="dropdown-menu" role="menu">

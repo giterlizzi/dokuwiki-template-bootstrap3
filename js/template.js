@@ -8,7 +8,7 @@
 
 
 // Normalization & Basic Styling
-jQuery(document).on('bootstrap3:init', function(e) {
+jQuery(document).on('bootstrap3:init', function() {
 
   setTimeout(function() {
 
@@ -23,29 +23,8 @@ jQuery(document).on('bootstrap3:init', function(e) {
     // a11y
     jQuery('.a11y').not('.picker').addClass('sr-only');
 
-    // Page heading
-    $dw_content.find('h1, h2').addClass('page-header');
-
     // Abbr tooltips
     jQuery('abbr').tooltip();
-
-    // Tables
-    if (JSINFO.bootstrap3.tableStyle.indexOf('responsive') !== -1) {
-      $dw_content.find('div.table').addClass('table-responsive');
-    }
-
-    var table_class = ['table'];
-
-    if (JSINFO.bootstrap3.tableStyle.indexOf('striped') !== -1)   table_class.push('table-striped');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('condensed') !== -1) table_class.push('table-condensed');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('hover') !== -1)     table_class.push('table-hover');
-    if (JSINFO.bootstrap3.tableStyle.indexOf('bordered') !== -1)  table_class.push('table-bordered');
-
-    $dw_content.find('table.inline, table.import_failures').addClass(table_class.join(' '));
-
-    if (! JSINFO.bootstrap3.tableFullWidth) {
-      $dw_content.find('table.inline').css('width', 'auto');
-    }
 
     // Form and controls
     $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
@@ -56,9 +35,6 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('input[type=radio]').addClass('radio-inline');
     jQuery('label').addClass('control-label');
     jQuery('main form').addClass('form-inline');
-
-    // Images
-    jQuery('img.media, img.mediacenter, img.medialeft, img.mediaright').addClass('img-responsive');
 
     // Toolbar
     jQuery('#tool__bar').addClass('btn-group btn-group-xs');
@@ -72,9 +48,41 @@ jQuery(document).on('bootstrap3:init', function(e) {
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
-    if (NS == 'user' && dw_mode('show') && jQuery('.notFound').length == 0) {
+    if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
+
+    // Scrolling animation (on TOC , Sidebars and Content)
+    jQuery('aside, article, #dokuwiki__toc').find('a').on('click', function(e) {
+
+      var $link = jQuery(this);
+
+      if ($link.attr('href').match(/^#/) && $link.attr('href').length > 1) {
+
+        e.preventDefault();
+
+        if (mediaSize('xs') && $link.hasClass('fn_top')) {
+          return false;
+        }
+
+        var $target = jQuery('body ' + $link.attr('href'));
+
+        if ($target.length) {
+
+          var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+              target_position  = Math.round($target.offset().top - body_offset);
+
+          jQuery('html, body').animate({
+            scrollTop: target_position
+          }, 600);
+
+        }
+
+        return false;
+
+      }
+
+    });
 
   }, 0);
 
@@ -82,7 +90,7 @@ jQuery(document).on('bootstrap3:init', function(e) {
 
 
 // Nav
-jQuery(document).on('bootstrap3:nav', function(e) {
+jQuery(document).on('bootstrap3:nav', function() {
 
   setTimeout(function() {
 
@@ -107,7 +115,7 @@ jQuery(document).on('bootstrap3:nav', function(e) {
 
 
 // Tabs
-jQuery(document).on('bootstrap3:tabs', function(e) {
+jQuery(document).on('bootstrap3:tabs', function() {
 
   setTimeout(function() {
 
@@ -126,7 +134,7 @@ jQuery(document).on('bootstrap3:tabs', function(e) {
 
 
 // Buttons
-jQuery(document).on('bootstrap3:buttons', function(e) {
+jQuery(document).on('bootstrap3:buttons', function() {
 
   setTimeout(function() {
 
@@ -146,7 +154,7 @@ jQuery(document).on('bootstrap3:buttons', function(e) {
 
 
 // Back To Top
-jQuery(document).on('bootstrap3:back-to-top', function(e) {
+jQuery(document).on('bootstrap3:back-to-top', function() {
 
   setTimeout(function() {
 
@@ -170,7 +178,7 @@ jQuery(document).on('bootstrap3:back-to-top', function(e) {
 
 
 // Footnote
-jQuery(document).on('bootstrap3:footnotes', function(e) {
+jQuery(document).on('bootstrap3:footnotes', function() {
 
   setTimeout(function() {
 
@@ -189,8 +197,41 @@ jQuery(document).on('bootstrap3:footnotes', function(e) {
 });
 
 
+jQuery(document).on('bootstrap3:toc-resize', function() {
+
+  var $dw_toc = jQuery('#dokuwiki__toc');
+
+  if (! $dw_toc.length) return false;
+
+  if (JSINFO.bootstrap3.config.tocAffix) {
+    $dw_toc.affix('checkPosition');
+  }
+
+  jQuery('#dokuwiki__toc .toc-body > ul').css({
+    'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+    'overflow-y' : 'scroll'
+  });
+
+  if (! mediaSize('xs')) {
+    $dw_toc.removeClass('panel panel-default');
+    $dw_toc.find('.toc-title').removeClass('panel-heading');
+    $dw_toc.find('.toc-body').removeClass('panel-body');
+  }
+
+  if (mediaSize('xs') && ! $dw_toc.hasClass('panel')) {
+    $dw_toc.addClass('panel panel-default');
+    $dw_toc.find('.toc-title').addClass('panel-heading');
+    $dw_toc.find('.toc-body').addClass('panel-body');
+    $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
+  }
+
+  jQuery('.toc-body').width(jQuery('.dw-toc').width());
+
+});
+
+
 // Table of Contents
-jQuery(document).on('bootstrap3:toc', function(e) {
+jQuery(document).on('bootstrap3:toc', function() {
 
   setTimeout(function() {
 
@@ -198,72 +239,61 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
     if (! $dw_toc.length) return false;
 
-    var $toc_col     = jQuery('article .toc-col'),
-        $content_col = jQuery('article .content-col');
+    jQuery(document).trigger('bootstrap3:toc-resize');
 
-    $dw_toc.find('h3').on('click', function() {
+    $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
+    $dw_toc.find('a').css('color', jQuery('body').css('color'));
+
+    if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
+
+      $dw_toc.on('affix.bs.affix', function() {
+
+        jQuery('.toc-body').width(jQuery('.dw-toc').width());
+
+        if (! $dw_toc.hasClass('affix-bottom')) {
+          jQuery('article .dw-page-row').addClass('dw-toc-closed');
+          $dw_toc.find('.toc-body').collapse('hide');
+          if (! mediaSize('xs')) {
+            $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
+          }
+        }
+
+      });
+
+      $dw_toc.on('affix-top.bs.affix', function() {
+
+        jQuery('.toc-body').width('100%');
+        jQuery('article .dw-page-row').removeClass('dw-toc-closed');
+        $dw_toc.find('.toc-body').collapse('show');
+        $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
+
+      });
+
+    }
+
+    $dw_toc.find('.toc-title').on('click', function() {
 
       var $self = jQuery(this);
 
-      if ($self.hasClass('open')) {
-        $self.addClass('closed').removeClass('open');
-      } else {
-        $self.addClass('open').removeClass('closed');
-      }
-    });
+      jQuery('article .dw-page-row').toggleClass('dw-toc-closed');
 
-    $dw_toc.parent().on('affixed.bs.affix', function(e) {
-
-      if ($dw_toc.find('.open').length) {
-        $dw_toc.find('h3').trigger('click');
+      if (! mediaSize('xs')) {
+        if (jQuery('.dw-toc-closed').length) {
+          $self.addClass('btn btn-default btn-xs');
+        } else {
+          $self.removeClass('btn btn-default btn-xs');
+        }
       }
 
-    });
-
-    $dw_toc.parent().on('affixed-top.bs.affix', function(e) {
-
-      if ($dw_toc.find('.closed').length) {
-        $dw_toc.find('h3').trigger('click');
-       }
+      if (! jQuery('.dw-toc-closed').length) {
+        jQuery(document).trigger('bootstrap3:toc-resize');
+      }
 
     });
 
     if ((jQuery(window).height() < $dw_toc.height())) {
-
-      function resizeToc() {
-
-        jQuery('#dokuwiki__toc .panel-body').css({
-          'height'    : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
-          'overflow-y': 'scroll'
-        });
-
-      }
-
-      resizeToc();
-
-      jQuery(window).resize(resizeToc);
-
+      jQuery(document).trigger('bootstrap3:toc-resize');
     }
-
-    // Scrolling animation
-    $dw_toc.find('a').click(function(e) {
-
-      if (jQuery(this).attr('href').match(/^#/)) {
-
-        e.preventDefault();
-
-        var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
-            section_position = (jQuery('#dokuwiki__content ' + jQuery.attr(this, 'href')).offset().top - body_offset);
-
-        jQuery('html, body').animate({
-          scrollTop: section_position
-        }, 600);
-
-        return false;
-
-      }
-
-    });
 
   }, 0);
 
@@ -271,7 +301,7 @@ jQuery(document).on('bootstrap3:toc', function(e) {
 
 
 // Alerts
-jQuery(document).on('bootstrap3:alerts', function(e) {
+jQuery(document).on('bootstrap3:alerts', function() {
 
   setTimeout(function() {
 
@@ -285,7 +315,7 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
+      .prepend('<i class="fa fa-fw fa-times-circle"/> ');
 
     // Success
     jQuery('div.success')
@@ -305,7 +335,7 @@ jQuery(document).on('bootstrap3:alerts', function(e) {
 
 
 // Media Manager
-jQuery(document).on('bootstrap3:media-manager', function(e) {
+jQuery(document).on('bootstrap3:media-manager', function() {
 
   setTimeout(function() {
 
@@ -330,7 +360,7 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
       $sort_buttons.find('label').addClass('btn btn-xs btn-default');
       $sort_buttons.find('input').hide();
 
-      function buttonHandler(e) {
+      function buttonHandler() {
 
         var $button    = jQuery(this),
             option_for = $button.attr('for'),
@@ -366,7 +396,7 @@ jQuery(document).on('bootstrap3:media-manager', function(e) {
 
 
 // Detail page
-jQuery(document).on('bootstrap3:detail', function(e) {
+jQuery(document).on('bootstrap3:detail', function() {
 
   setTimeout(function() {
 
@@ -385,7 +415,7 @@ jQuery(document).on('bootstrap3:detail', function(e) {
 
 
 // Search mode
-jQuery(document).on('bootstrap3:mode-search', function(e) {
+jQuery(document).on('bootstrap3:mode-search', function() {
 
   setTimeout(function() {
 
@@ -400,8 +430,6 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
       jQuery('.search_results .label').before('&nbsp;&nbsp;&nbsp;');
 
-      var x = 0;
-
       jQuery('.search_results .label').each(function() {
         var $node = jQuery(this);
         $node.html($node.html().replace(/^\: /, ''));
@@ -413,7 +441,7 @@ jQuery(document).on('bootstrap3:mode-search', function(e) {
 
 
 // Administration
-jQuery(document).on('bootstrap3:mode-admin', function(e) {
+jQuery(document).on('bootstrap3:mode-admin', function() {
 
   setTimeout(function() {
 
@@ -421,25 +449,15 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
+    // Set specific icon in Admin Page
+    if (JSINFO.bootstrap3.admin) {
+      jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
+    }
+
     var $ext_manager  = $mode_admin.find('#extension__manager'),
         $ext_actions  = $ext_manager.find('.actions'),
         $user_manager = $mode_admin.find('#user__manager'),
         $admin_tasks  = $mode_admin.find('ul.admin_tasks');
-
-    var tpl_sections = {
-      // Section            ID                  Insert before           Icon
-      'Theme'           : [ 'theme',            'bootstrapTheme',       'fa-tint'      ],
-      'Sidebar'         : [ 'sidebar',          'sidebarPosition',      'fa-columns'   ],
-      'Navbar'          : [ 'navbar',           'inverseNavbar',        'fa-navicon'   ],
-      'Semantic'        : [ 'semantic',         'semantic',             'fa-share-alt' ],
-      'Layout'          : [ 'layout',           'fluidContainer',       'fa-desktop'   ],
-      'TOC'             : [ 'toc',              'tocAffix',             'fa-list'      ],
-      'Discussion'      : [ 'discussion',       'showDiscussion',       'fa-comments'  ],
-      'Cookie Law'      : [ 'cookie_law',       'showCookieLawBanner',  'fa-legal'     ],
-      'Google Analytics': [ 'google_analytics', 'useGoogleAnalytics',   'fa-google'    ],
-      'Browser Title'   : [ 'browser_title',    'browserTitle',         'fa-header'    ],
-      'Page'            : [ 'page',             'showPageInfo',         'fa-file'      ]
-    };
 
     var admin_tasks = {
       // Task         Icon
@@ -457,7 +475,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     $admin_tasks.addClass('list-group');
     $admin_tasks.find('a').addClass('list-group-item');
 
-    for (i in admin_tasks) {
+    for (var i in admin_tasks) {
       $admin_tasks.find('li.admin_' + i + ' a')
         .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
     }
@@ -465,33 +483,8 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
     // DokuWiki logo
     jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
 
-    // Configuration manager Template sections
-    jQuery('label[for^=config___tpl____bootstrap3]').each(function() {
-
-      var $node = jQuery(this);
-
-      for (var section in tpl_sections) {
-
-        var item = tpl_sections[section];
-
-        if( $node.attr('for').match([item[1], '$'].join('')) ) {
-          $node.parents('tr').before(jQuery(['<tr><td><h4 id="bootstrap3__', item[0] ,'"><i class="fa fa-fw ', item[2], '"></i> ', section, '</h4></td><td></td></tr>'].join('')))
-        }
-
-      }
-
-    });
-
-    // Set 100% width for ALL tables
-    if (JSINFO.bootstrap3.tableFullWidth) {
-      $mode_admin.find('div.table table.inline').css('width', '100%');
-    }
-
-    // Set specific icon in Admin Page
-    jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
-
     // Extension Manager Actions
-    if ($ext_actions.length) {
+    if (dw_admin('extension')) {
 
       $ext_actions.addClass('btn-group');
 
@@ -507,10 +500,13 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
       $ext_actions.find('.enable').addClass('btn-success');
       $ext_actions.find('.disable').addClass('btn-warning');
 
+      $ext_manager.find('form.search :submit, form.install :submit').input2button();
+      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
+
     }
 
     // User Manager
-    if ($user_manager.length) {
+    if (dw_admin('usermanager')) {
 
       $mode_admin.find('.notes').removeClass('notes');
 
@@ -568,19 +564,13 @@ jQuery(document).on('bootstrap3:mode-admin', function(e) {
 
     }
 
-    // Extension Manager
-    if ($ext_manager.length) {
-      $ext_manager.find('form.search :submit, form.install :submit').input2button();
-      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
-    }
-
   }, 0);
 
 });
 
 
 // Index Page
-jQuery(document).on('bootstrap3:mode-index', function(e) {
+jQuery(document).on('bootstrap3:mode-index', function() {
 
   setTimeout(function() {
 
@@ -635,6 +625,8 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
     var $page_tools_items = jQuery('#dw__pagetools ul li a');
 
+    if (! $page_tools_items.length) return false;
+
     $page_tools_items.on('mouseenter', function () {
       var $icon = jQuery(this);
       $icon.find('i').addClass('fa-2x', 250);
@@ -678,9 +670,7 @@ jQuery(document).on('bootstrap3:cookie-law', function() {
 
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function() {
-  if (JSINFO.bootstrap3.useAnchorJS) {
-    anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
-  }
+  anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
 });
 
 
@@ -688,6 +678,8 @@ jQuery(document).on('bootstrap3:anchorjs', function() {
 jQuery(document).on('bootstrap3:page-icons', function() {
 
   var $dw_page_icons = jQuery('.dw-page-icons');
+
+  if (! $dw_page_icons.length) return false;
 
   var title = encodeURIComponent(document.title),
       url   = encodeURIComponent(location),
@@ -698,7 +690,7 @@ jQuery(document).on('bootstrap3:page-icons', function() {
     'twitter'     : (function(){ return [ 'https://twitter.com/intent/tweet?text=', title, '&url=', url ].join(''); })(),
     'linkedin'    : (function(){ return [ 'https://www.linkedin.com/shareArticle?mini=true&url=', url, '&title=', title ].join(''); })(),
     'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
-    'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join('') })(),
+    'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
     'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
   };
@@ -729,11 +721,11 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 
 
 // Collapse sections on mobile (XS media)
-jQuery(document).on('bootstrap3:collapse-sections', function(e) {
+jQuery(document).on('bootstrap3:collapse-sections', function() {
 
   setTimeout(function() {
 
-  if (mediaSize('xs') && JSINFO.bootstrap3.collapsibleSections) {
+  if (mediaSize('xs') && JSINFO.bootstrap3.config.collapsibleSections) {
 
     var $headings = jQuery('div.level2').prev();
 
@@ -769,8 +761,9 @@ jQuery(document).on('bootstrap3:collapse-sections', function(e) {
 
 });
 
+
 // Mobile Layout
-jQuery(document).on('bootstrap3:mobile-layout', function(e) {
+jQuery(document).on('bootstrap3:mobile-layout', function() {
 
   setTimeout(function() {
 
@@ -796,17 +789,16 @@ jQuery(document).on('bootstrap3:mobile-layout', function(e) {
 });
 
 
-jQuery(document).on('bootstrap3:components', function(e) {
+jQuery(document).on('bootstrap3:components', function() {
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'nav', 'tabs', 'anchorjs',
+    var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
-                    'dropdown-page', 'footnotes', 'alerts', 'mode-admin',
-                    'mode-index', 'mode-search', 'media-manager', 'detail',
-                    'cookie-law', 'collapse-sections' ];
+                    'dropdown-page', 'footnotes', 'media-manager',
+                    'collapse-sections' ];
 
-    for (i in events) {
+    for (var i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);
     }
 

@@ -7,11 +7,10 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-if (!defined('DOKU_INC')) die(); /* must be run from within DokuWiki */
-@require_once(dirname(__FILE__).'/tpl_functions.php'); /* include hook for template functions */
+if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
+@require_once(dirname(__FILE__).'/tpl_functions.php');  // include hook for template functions
+include_once(dirname(__FILE__).'/tpl_global.php');      // Include template global variables
 header('X-UA-Compatible: IE=edge,chrome=1');
-
-include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global variables
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang'] ?>"
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
@@ -32,7 +31,6 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 </head>
 <?php tpl_flush() ?>
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>">
-  <!--[if IE 8 ]><div id="IE8"><![endif]-->
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <?php tpl_includeFile('topheader.html') ?>
@@ -46,11 +44,11 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
     <?php require_once('tpl_breadcrumbs.php'); ?>
 
-    <p class="pageId text-right">
+    <p class="pageId text-right small">
       <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
     </p>
 
-    <div id="dw__msgarea">
+    <div id="dw__msgarea" class="small">
       <?php bootstrap3_html_msgarea() ?>
     </div>
 
@@ -75,7 +73,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               tpl_includeFile('pageheader.html');
 
               // Page-Header DokuWiki page
-              if ($ACT == 'show') tpl_include_page('pageheader', 1, 1);
+              if ($ACT == 'show') tpl_include_page('pageheader', 1, 1, bootstrap3_conf('useACL'));
 
               // render the content into buffer for later use
               ob_start();
@@ -87,12 +85,13 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               // Include Page Tools
               require_once('tpl_page_tools.php');
 
-              // Include the TOC layout
-              if ($toc) echo $toc;
-
-              echo '<div class="dw-content">';
+              if ($toc) echo '<div class="dw-page-row row">';
+              echo '<div class="dw-content'. (($toc) ? ' dw-content-with-toc col-sm-9'. ((bootstrap3_conf('tocPosition') == 'left') ? ' col-md-push-3' : '') : '') .'">';
               echo $content;
               echo '</div>';
+
+              // Include the TOC layout
+              if ($toc) echo '<div class="dw-toc hidden-print col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
 
               tpl_flush();
 
@@ -100,7 +99,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
               tpl_includeFile('pagefooter.html');
 
               // Page-Footer DokuWiki page
-              if ($ACT == 'show') tpl_include_page('pagefooter', 1, 1);
+              if ($ACT == 'show') tpl_include_page('pagefooter', 1, 1, bootstrap3_conf('useACL'));
 
             ?>
 
@@ -116,7 +115,7 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
     <div class="small text-right">
 
       <?php if (bootstrap3_conf('showPageInfo')): ?>
-      <span class="docInfo" id="dw__pageinfo">
+      <span class="docInfo">
         <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
       </span>
       <?php endif ?>
@@ -163,6 +162,5 @@ include_once(dirname(__FILE__).'/tpl_global.php'); // Include template global va
 
   </div>
 
-  <!--[if lte IE 8 ]></div><![endif]-->
 </body>
 </html>

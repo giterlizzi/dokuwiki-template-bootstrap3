@@ -36,7 +36,6 @@ $lang['hideLoginLink']                = 'Ocultar el botón de inicio de sesión 
 $lang['individualTools']              = 'Dividir las Herramientas en un menú individual en la barra de navegación';
 $lang['inverseNavbar']                = 'Barra de navegación (navbar) invertida';
 $lang['landingPages']                 = 'Nombre de la página de llegada (inserte una expresión regular)';
-$lang['leftSidebarGrid']              = 'Clases grid para barra lateral izquierda <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['pageIcons']                    = 'Selecciona los íconos a mostrar';
 $lang['pageInfo']                     = 'Mostrar/Ocultar elementos de información de la página';
 $lang['pageInfoDateFormat']           = 'Formato de fecha';
@@ -44,7 +43,6 @@ $lang['pageInfoDateFormat_o_dformat'] = 'Formato DokuWiki';
 $lang['pageInfoDateFormat_o_human']   = 'Legible para humanos';
 $lang['pageOnPanel']                  = 'Habilitar el panel alrededor de la página';
 $lang['rightSidebar']                 = 'El nombre de la página en la Barra Lateral a la Derecha, el campo vacío deshabilita la barra lateral derecha.<br/>La Barra Lateral Derecha sólo se muestra cuando la <a class="interwiki iw_doku" href="#config___sidebar">barra lateral</a> DokuWiki predeterminada está habilitada y está sobre la posición <code>izquierda</code> (ver la configuración <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Si sólo quieres la barra lateral de DokuWiki en la posición derecha, establece configuración <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> con el valor <code>right</code>';
-$lang['rightSidebarGrid']             = 'Clases grid para barra lateral derecha <code>col-{xs,sm,md,lg}-x</code> (ver documentación de <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['schemaOrgType']                = 'Tipo de Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Habilitar datos semánticos';
 $lang['showAdminMenu']                = 'Mostrar menú de Administración';

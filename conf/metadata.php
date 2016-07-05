@@ -18,8 +18,6 @@ $meta['useLocalBootswatch']  = array('onoff');
 // Sidebar
 $meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 'right'));
 $meta['rightSidebar']        = array('string');
-$meta['leftSidebarGrid']     = array('string');
-$meta['rightSidebarGrid']    = array('string');
 
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
@@ -36,6 +34,7 @@ $meta['showSearchButton']    = array('onoff');
 $meta['showAdminMenu']       = array('onoff');
 $meta['useLegacyNavbar']     = array('onoff');
 $meta['showNavbar']          = array('multichoice', '_choices' => array('logged', 'always'));
+$meta['navbarLabels']        = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
 
 // Semantic
 $meta['semantic']            = array('onoff');
@@ -58,6 +57,8 @@ $meta['useGravatar']            = array('onoff');
 // TOC
 $meta['tocAffix']               = array('onoff');
 $meta['tocCollapseSubSections'] = array('onoff');
+$meta['tocPosition']            = array('multichoice', '_choices' => array('left', 'right'));
+$meta['tocCollapseOnScroll']    = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
@@ -85,6 +86,7 @@ $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('norma
 
 // Page
 $meta['showPageInfo']         = array('onoff');
+$meta['useACL']               = array('onoff', '_caution' => 'warning');
 $meta['pageInfo']             = array('multicheckbox', '_choices' => array('filename', 'extension', 'date', 'editor', 'locked'));
 $meta['pageInfoDateFormat']   = array('multichoice', '_choices'   => array('dformat', 'human'));
 $meta['showPageIcons']        = array('onoff');

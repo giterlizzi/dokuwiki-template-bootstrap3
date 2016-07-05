@@ -24,26 +24,38 @@ if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
 
 $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
-$page_on_panel     = bootstrap3_conf('pageOnPanel');
-$bootstrap_theme   = bootstrap3_conf('bootstrapTheme');
-$bootswatch_theme  = bootstrap3_bootswatch_theme();
-
+$page_on_panel      = bootstrap3_conf('pageOnPanel');
+$bootstrap_theme    = bootstrap3_conf('bootstrapTheme');
+$bootswatch_theme   = bootstrap3_bootswatch_theme();
+$bootstrap3_configs = array(
+  'theme', 'sidebar', 'navbar', 'semantic',
+  'layout', 'toc', 'discussion', 'cookie_law',
+  'google_analytics', 'browser_title', 'page'
+);
 
 $JSINFO['bootstrap3'] = array(
-  'tableFullWidth'      => (int) bootstrap3_conf('tableFullWidth'),
-  'tableStyle'          => bootstrap3_conf('tableStyle'),
-  'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
-  'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
-  'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
-  'mode'                => $ACT,
+  'mode'   => $ACT,
+  'config' => array(
+    'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
+    'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+    'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
+    'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
+  ),
 );
 
 if ($ACT == 'admin') {
+
   $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
+
+  foreach ($bootstrap3_configs as $id) {
+    $JSINFO['bootstrap3']['lang']['config'][$id] = tpl_getLang("config_$id");
+  }
+
 }
 
-
 $body_classes   = array();
-$body_classes[] = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
-$body_classes[] = ($page_on_panel ? ' page-on-panel' : null);
+$body_classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
 $body_classes[] = tpl_classes();
+
+if ($page_on_panel)                       $body_classes[] = 'dw-page-on-panel';
+if (! bootstrap3_conf('tableFullWidth'))  $body_classes[] = 'dw-table-width';

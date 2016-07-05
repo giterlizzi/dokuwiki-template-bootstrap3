@@ -28,7 +28,7 @@ if (bootstrap3_conf('useGravatar')) {
 <ul class="nav navbar-nav" id="dw__user_menu">
   <li class="dropdown dropdown-large">
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
       <?php if ($gravatar_check): ?>
         <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" />
       <?php else: ?>

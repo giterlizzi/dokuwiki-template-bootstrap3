@@ -1,5 +1,55 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+### Added
+  * #119, #223: Added ACL support for Sidebars (left and right) and for all DokuWiki hooks (eg. :navbar, :footer, etc) via "useACL" option (default: off). This feature is available since "Elenor of Tsort"
+  * #162: Added new option ("tocCollapseOnScroll" - default is "on") to enable/disable automatic collapse of the TOC during the scroll of the page (thanks to @tysoncecka)
+  * #193: Added localization variables for Admin TOC and sections in Configuration Manager
+  * #208: Added missing function in DokuWiki "Hrun" release (thanks to @gropefruit)
+  * #217: Added Linkback support (thanks to @downhamdave)
+  * #219: Added Overlay plugin support (thanks to @lattekun)
+  * #220: Added scroll animation and new UI for mobile for Footnote (thanks to @lattekun)
+  * Added missing "create" action icon
+  * Added new option ("navbarLabels") to display/hide labels on navbar
+  * Added ARIA support for all dropdown menu
+  * Added missing notify/alert style
+  * Added fallback "dokuwiki" class in <header/> and <main/> elements for 3th party plugins
+  * Added Korean language (thanks to @araname)
+  * Added more bugs to fix later
+
+### Changed
+  * Layout: Changed default Bootstrap layout and "page-id" font-size
+  * Configuration Manager: Moved Bootstrap section builder from JS to PHP to increase the performance during rendering of the page
+  * TOC: Switched to Bootstrap Documentation style
+  * Engine: Increased the performance of template engine
+  * Engine: Added some Bootstrap elements/classes (alerts, table, images, page-heading) via PHP engine instead of JS engine
+  * Layout: Moved DokuWiki logo inline style to "template.less"
+  * Layout: Added Bootstrap style to Difference page and optimized layout for Revisions and Recents pages
+  * Asset: Reorganized Bootstrap & Bootswatch asset directory
+  * Asset: Removed non-minified Bootstrap, Bootswatch and FontAwesome assets to save space
+  * Asset: Updated FontAwesome to v4.6.3
+  * Asset: Updated Bootswatch Themes to v3.3.6+2
+  * Localization: Updated translations from Transifex platform
+  * General: Reorganized and cleaned the code
+
+### Fixed
+  * #190: Fixed height of "Upload Extension" input form in "Extension Manager" (thanks to @blacklord049)
+  * #191: Fixed visibility of config options on darker Bootswatch Themes (thanks to @oscon)
+  * #198: Fixed Navbar container size (thanks to @aliasedv2)
+  * #200: Fixed Admin Menu Collapses too fast issue (thanks to @issmirnov)
+  * #201: Fixed Page Tools issue (thanks to @Digitalin)
+  * #218: Fixed overlap on IE and Opera (thanks to @Soeldner)
+  * Fixed visibility of 3th level of TOC
+  * Fixed a Right Sidebar bahavior. Now the Right Sidebar is indipendent from Left Sidebar
+  * Changed selector to fix fluid container functionality
+  
+### Removed
+  * Removed old and unused functions
+  * Removed unused left and right sidebar grid options to increase the performance
+  * Removed IE8 support
+
+
 ## [v2016-04-13]
 
 In this release improved the stability, speed and the user experience with new layout for **Detail page** and new icons for **Admin pages** and **3th party plugins** and new options. Added support for **Loadskin** plugin. Updated **FontAwesome** and **AnchorJS** to latest release.

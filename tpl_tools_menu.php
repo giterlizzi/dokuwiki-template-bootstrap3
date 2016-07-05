@@ -12,7 +12,10 @@ if (!defined('DOKU_INC')) die();
 
 if (bootstrap3_conf('showTools')):
 
-$tools = bootstrap3_tools_menu(false);
+global $ID;
+
+$tools         = bootstrap3_tools_menu(false);
+$navbar_labels = bootstrap3_conf('navbarLabels');
 
 ?>
 
@@ -22,8 +25,8 @@ $tools = bootstrap3_tools_menu(false);
 
   <li class="dropdown">
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php echo $lang[$id.'_tools'] ?>">
-      <i class="<?php echo $menu['icon'] ?>"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang[$id.'_tools'] ?></span> <span class="caret"></span>
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang[$id.'_tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="<?php echo $menu['icon'] ?>"></i> <span class="<?php echo (in_array($id, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$id.'_tools'] ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu tools" role="menu">
@@ -40,8 +43,8 @@ $tools = bootstrap3_tools_menu(false);
 
   <li class="dropdown">
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="<?php $lang['tools'] ?>">
-      <i class="fa fa-fw fa-wrench"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php $lang['tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-fw fa-wrench"></i> <span class="<?php echo (in_array('tools', $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu tools" role="menu">

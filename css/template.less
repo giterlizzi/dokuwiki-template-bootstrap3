@@ -6,22 +6,63 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
- html {
+html {
   -ms-overflow-style: scrollbar;
- }
+}
 
 body {
 
-  &.default,
-  &.optional {
-    font-size: small;
+  &.default.dw-page-on-panel,
+  &.optional.dw-page-on-panel, {
+    background: #FEFEFE;
   }
 
-  position: relative;
+}
 
-  &.default.page-on-panel,
-  &.optional.page-on-panel, {
-    background: #FEFEFE;
+aside,
+.dw__dropdown_page {
+
+  word-wrap: break-word;
+
+  h1, h2, h3, h4 h5 {
+    margin: 10px 0 5px 0;
+  }
+
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.6em; }
+  h3 { font-size: 1.4em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1em;   }
+
+  .page-header {
+    margin: 10px 0;
+  }
+
+  .panel-heading {
+    cursor: pointer;
+  }
+
+  .nav {
+
+    ul {
+      padding-left: 10px;
+    }
+
+    li {
+
+      a {
+        padding: 5px 10px !important;
+      }
+
+      a.urlextern,
+      a.mail,
+      a.mediafile {
+        padding-left: 28px !important;
+        background-position: 8px center;
+      }
+
+    }
+
   }
 
 }
@@ -36,17 +77,9 @@ select {
   font-weight: 400;
 }
 
+body,
 main {
   position: relative;
-}
-
-nav {
-  &.navbar-fixed-top .dw__actions {
-    margin: 0 15px 0 5px;
-  }
-  .dw__actions .btn {
-    margin-left: 5px;
-  }
 }
 
 /* Ordered list style */
@@ -56,70 +89,64 @@ ol ol ol       { list-style-type: upper-roman; }  /* Roman (uppercase): I. II. I
 ol ol ol ol    { list-style-type: upper-alpha; }  /* Alpha (uppercase): A. B. C. ...    */
 ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. iii. ... */
 
+/* Header */
+header {
+
+  nav {
+
+    #dw__logo {
+      margin-right: 10px;
+    }
+
+    #dw__title {
+      display: inline-block;
+    }
+
+    #dw__tagline {
+      font-size: .6em;
+      display: block;
+      line-height: 1em;
+      white-space: nowrap;
+    }
+
+    &.navbar-fixed-top .dw__actions {
+      margin: 0 15px 0 5px;
+    }
+
+    .dw__actions .btn {
+      margin-left: 5px;
+    }
+
+  }
+
+}
+
+
 /* Message area (alerts, warnings, errors, etc.) */
 #dw__msgarea {
+
   .alert {
     padding: 5px;
     margin-bottom: 10px;
   }
+
   .bs-callout {
     margin-bottom: 10px;
     padding: 10px;
   }
+
+}
+
+
+/* NavBar Logo */
+#dw__logo {
+  margin-top: -5px;
 }
 
 
 /* Badges */
 #dw__badges {
   margin-top: 50px;
-}
-
-
-/* Table of contents */
-#dokuwiki__toc {
-
-  margin-left: 15px;
-  display: table;
-
-  .panel-body {
-    padding: 5px;
-    width: 16em;
-  }
-
-  .panel-heading {
-
-    padding: 5px 10px;
-
-    h3 {
-      font-weight: bold;
-      font-size: .9em;
-      cursor: pointer;
-
-      &.closed span {
-        display: none;
-      }
-
-    }
-
-  }
-
-  ul.toc ul {
-    padding: 2px 0 2px 10px;
-  }
-
-  .nav {
-
-    li a {
-      padding: 2px 4px;
-      font-size: small;
-    }
-
-    .nav .active .nav {
-      display: block;
-    }
-
-  }
-
 }
 
 
@@ -139,7 +166,6 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
   fieldset {
     background: initial !important;
-    margin: 0 !important;
     padding: 0 !important;
     text-align: left;
   }
@@ -155,6 +181,10 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
     padding: 0 !important;
     font-size: 1.2em !important;
     background: transparent !important;
+  }
+
+  #tpl____bootstrap3____template_settings_name legend {
+    padding-top: 25px;
   }
 
 }
@@ -177,32 +207,14 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 }
 
-#dw__breadcrumbs,
-.dw__sidebar {
-  font-size: .9em;
-}
-
-#dw__logo {
-  margin-right: 10px;
-}
-
-#dw__title {
-  display: inline-block;
-}
-
-#dw__tagline {
-  font-size: .6em;
-  display: block;
-  line-height: 1em;
-  white-space: nowrap;
-}
-
 
 /* Footnotes */
 #insitu__fn {
   max-width: 20em;
 }
 
+
+/* User Menu */
 #dw__user_menu {
 
   .page-header {
@@ -238,16 +250,21 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 }
 
+
 /* Footer Page */
 #dw__footer {
 
   position: absolute;
-  bottom: initial;
-  margin-top: 50px;
+  left: 0;
+  right: 0;
+  border-radius: 0px;
+  border-width: 1px 0 0 0;
+  margin: 50px 0 0 0;
   z-index: 995;
 
   .navbar-text {
     float: initial;
+    width: 100%;
     margin-left: 0;
     margin-right: 0;
   }
@@ -277,6 +294,7 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 }
 
 
+/* User Manager */
 #user__manager .import_users {
   clear: both;
 }
@@ -294,9 +312,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 }
 
+
 #mediamgr__content {
   position: fixed;
 }
+
 
 #media__content {
 
@@ -314,8 +334,8 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
     vertical-align: bottom;
   }
 
-
 }
+
 
 #mediamgr__aside {
   height: auto;
@@ -323,9 +343,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
   position: fixed;
 }
 
+
 #media__opts label {
   display: inline !important;
 }
+
 
 #mediamanager__page .ui-buttonset label {
   margin-right: 0 !important;
@@ -334,76 +356,6 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 .pageId a.label {
   white-space: initial;
-}
-
-
-.dw-toc-affix {
-  z-index: 999;
-  right: 25px;
-}
-
-.dw__sidebar {
-
-  .page-header {
-    margin: 10px 0;
-  }
-
-  .panel-heading {
-    cursor: pointer;
-  }
-
-  .nav {
-
-    ul {
-      padding-left: 10px;
-    }
-
-    li {
-
-      a {
-        padding: 5px 10px;
-      }
-
-      a.urlextern,
-      a.mail,
-      a.mediafile {
-        padding-left: 28px;
-        background-position: 8px center;
-      }
-
-    }
-
-  }
-
-}
-
-.dw__sidebar,
-.dw__dropdown_page {
-
-  h1, h2, h3, h4 h5 {
-    margin: 10px 0 5px 0;
-  }
-
-  h1 {
-    font-size: 1.8em;
-  }
-
-  h2 {
-    font-size: 1.6em;
-  }
-
-  h3 {
-    font-size: 1.4em;
-  }
-
-  h4 {
-    font-size: 1.2em;
-  }
-
-  h5 {
-    font-size: 1em;
-  }
-
 }
 
 
@@ -438,6 +390,25 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 }
 
 
+.mode_admin {
+
+  input[name="installfile"] {
+    height: auto;
+  }
+
+  h1#dokuwiki_settings,
+  h1#plugin_settings,
+  h1#template_settings {
+    font-size: 1.80em;
+  }
+
+  #config__manager legend {
+    cursor: pointer;
+  }
+
+}
+
+
 /* Back to top button */
 .back-to-top {
   position: fixed;
@@ -456,7 +427,8 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
 
 
 /* External URL (navbar) */
-.navbar-nav a.urlextern, .navbar-nav a.mail {
+.navbar-nav a.urlextern,
+.navbar-nav a.mail {
   padding: 15px 0 15px 18px;
 }
 
@@ -475,9 +447,11 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
   left: -5px;
 }
 
+
 .dw-content h1.page-header {
   margin-top: 20px;
 }
+
 
 /* Page icons (email, print, social share, etc.) */
 .dw-page-icons {
@@ -490,29 +464,12 @@ ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. i
     padding: 0 8px 0 0;
   }
 
-  .share-google-plus i.fa {
-    color: #DC4E41;
-  }
-
-  .share-twitter i.fa {
-    color: #55ACEE;
-  }
-
-  .share-linkedin i.fa {
-    color: #0077B5;
-  }
-
-  .share-facebook i.fa {
-    color: #3B5998;
-  }
-
-  .share-whatsapp i.fa {
-    color: #43D854;
-  }
-
-  .share-pinterest i.fa {
-    color: #BD081C;
-  }
+  .share-google-plus i.fa { color: #DC4E41; }
+  .share-twitter     i.fa { color: #55ACEE; }
+  .share-linkedin    i.fa { color: #0077B5; }
+  .share-facebook    i.fa { color: #3B5998; }
+  .share-whatsapp    i.fa { color: #43D854; }
+  .share-pinterest   i.fa { color: #BD081C; }
 
 }
 
@@ -563,10 +520,8 @@ ul.btn-group {
     padding-left: 15px;
   }
 
-  /* Interwiki User Page Icon */
-  a.iw_user {
-    background-image: none;
-    padding: 0 !important;
+  article .wikilink2 {
+    color: #d9534f;
   }
 
   .diffnav select {
@@ -575,10 +530,6 @@ ul.btn-group {
 
   .curid {
     font-weight: bold;
-  }
-
-  article .wikilink2 {
-    color: #d9534f;
   }
 
 }
@@ -624,51 +575,11 @@ ul.btn-group {
 .dw__dropdown_page {
 
   .dropdown-menu-large {
-    font-size: .9em;
     background: #FFF;
   }
 
   .nav li a {
     padding: 5px 10px;
-  }
-
-}
-
-
-/* Styles for XS devices */
-@media screen and (max-width: 767px) {
-
-  .dokuwiki {
-
-    fieldset,
-    label.block select,
-    label.block input.edit {
-      width: 100%;
-      text-align: left;
-    }
-
-    label.block {
-      text-align: initial;
-    }
-
-    label[for="remember__me"] {
-      margin-left: 0 !important;
-    }
-
-    .centeralign form {
-      text-align: left;
-    }
-
-    #config__manager {
-      td {
-        display: block;
-        margin: 5px;
-      }
-      td.value {
-        border-top: 0px solid transparent
-      }
-    }
-
   }
 
 }
@@ -684,4 +595,29 @@ a.anchorjs-link:hover {
 body.cosmo #tool__bar .btn {
   border: 1px solid #CCC;
   background-color: #EEE;
+}
+
+body {
+
+  &.cyborg,
+  &.darkly,
+  &.slate,
+  &.superhero {
+    #config__manager .outkey {
+      color: #fff !important;
+    }
+  }
+
+}
+
+.dw-table-width {
+
+  article table.inline {
+    width: auto;
+  }
+
+  .mode_admin table.inline {
+    width: 100%;
+  }
+
 }
