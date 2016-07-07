@@ -52,8 +52,8 @@ jQuery(document).on('bootstrap3:init', function() {
       jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
     }
 
-    // Scrolling animation (on TOC , Sidebars and Content)
-    jQuery('aside, article, #dokuwiki__toc').find('a').on('click', function(e) {
+    // Scrolling animation (on TOC and FootNotes)
+    jQuery('#dokuwiki__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
 
       var $link = jQuery(this);
 
