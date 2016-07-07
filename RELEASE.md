@@ -1,6 +1,11 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
+## [v2016-07-05]
+
+In this release improved stability and performance during rendering of the page. Fixed more issues, added new features and plugin support and updated the assets (Bootswatch, FontAwesome and AnchorJS). Added Bootstrap Documentation style for TOC (Table of Contents).
+This release is compatible with DokuWiki "Elenor of Tsort" release with ACL support for sidebars and DokuWiki hooks.
+
+Enjoy!
 
 ### Added
   * #119, #223: Added ACL support for Sidebars (left and right) and for all DokuWiki hooks (eg. :navbar, :footer, etc) via "useACL" option (default: off). This feature is available since "Elenor of Tsort"
@@ -301,6 +306,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
+[v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-04-13...v2016-05-07
 [v2016-04-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-02-29...v2016-04-13
 [v2016-02-29]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...v2016-02-29
 [v2016-01-25]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2015-11-23...v2016-01-25
