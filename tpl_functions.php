@@ -895,7 +895,7 @@ function bootstrap3_conf($key, $default = false) {
       return ($value && ! $_SERVER['REMOTE_USER']);
 
     case 'showCookieLawBanner':
-      return page_findnearest(tpl_getConf('cookieLawBannerPage'), bootstrap3_conf('useACL')) && ($ACT=='show');
+      return $value && page_findnearest(tpl_getConf('cookieLawBannerPage'), bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showSidebar':
       if (bootstrap3_conf('showLandingPage')) return false;
