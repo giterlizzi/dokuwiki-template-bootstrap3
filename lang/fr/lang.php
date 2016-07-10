@@ -20,3 +20,16 @@ $lang['themes']               = 'Thèmes';
 $lang['expand_container']     = 'Développer/Réduire';
 $lang['administrative_tasks'] = 'Tâches administratives';
 $lang['additional_plugins']   = 'Greffons supplémentaires';
+
+// Configuration Manager Template Sections
+$lang['config_theme']            = 'Theme';
+$lang['config_sidebar']          = 'Sidebar';
+$lang['config_navbar']           = 'Navbar';
+$lang['config_semantic']         = 'Semantic';
+$lang['config_layout']           = 'Layout';
+$lang['config_toc']              = 'TOC';
+$lang['config_discussion']       = 'Discussion';
+$lang['config_cookie_law']       = 'Cookie Law';
+$lang['config_google_analytics'] = 'Google Analytics';
+$lang['config_browser_title']    = 'Browser Title';
+$lang['config_page']             = 'Page';
