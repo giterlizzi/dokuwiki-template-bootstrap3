@@ -4,6 +4,7 @@
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Nelson Martell <nelson6e65-dev@yahoo.es>
+ * @author   Rafa Merino
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -36,6 +37,7 @@ $lang['hideLoginLink']                = 'Ocultar el botón de inicio de sesión 
 $lang['individualTools']              = 'Dividir las Herramientas en un menú individual en la barra de navegación';
 $lang['inverseNavbar']                = 'Barra de navegación (navbar) invertida';
 $lang['landingPages']                 = 'Nombre de la página de llegada (inserte una expresión regular)';
+$lang['navbarLabels']                 = 'Show/Hide individual label';
 $lang['pageIcons']                    = 'Selecciona los íconos a mostrar';
 $lang['pageInfo']                     = 'Mostrar/Ocultar elementos de información de la página';
 $lang['pageInfoDateFormat']           = 'Formato de fecha';
@@ -81,7 +83,10 @@ $lang['tableFullWidth']               = 'Habilitar el ancho de tabla a 100% (pre
 $lang['tableStyle']                   = 'Estilo de tabla';
 $lang['tagsOnTop']                    = 'Mover todas la Etiquetas, de la parte de arriba de la página, al lado del id de la página (requiere el <em>Tag Plugin</em>)';
 $lang['tocAffix']                     = 'Pegar la Tabla de Contenido durante el desplazamiento de la página';
+$lang['tocCollapseOnScroll']          = 'Collapse TOC during page scrolling';
 $lang['tocCollapseSubSections']       = 'Contraer todas las sub-secciones de la Tabla de Contenido para ahorrar espacio';
+$lang['tocPosition']                  = 'TOC position';
+$lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" release';
 $lang['useAnchorJS']                  = 'Usar AnchorJS';
 $lang['useGoogleAnalytics']           = 'Habilitar Google Analytics';
 $lang['useGravatar']                  = 'Cargar imagen Gravatar';
