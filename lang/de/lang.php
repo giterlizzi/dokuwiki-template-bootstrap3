@@ -15,3 +15,16 @@ $lang['themes']               = 'Themes';
 $lang['expand_container']     = 'Erweitern/Reduzieren';
 $lang['administrative_tasks'] = 'Verwaltungsaufgaben';
 $lang['additional_plugins']   = 'Weitere Plugins';
+
+// Configuration Manager Template Sections
+$lang['config_theme']            = 'Theme';
+$lang['config_sidebar']          = 'Seitenleiste';
+$lang['config_navbar']           = 'Navigationsleiste';
+$lang['config_semantic']         = 'Semantic';
+$lang['config_layout']           = 'Layout';
+$lang['config_toc']              = 'Inhaltsverzeichnis (TOC)';
+$lang['config_discussion']       = 'Diskussion';
+$lang['config_cookie_law']       = 'Cookie Einverständniserklärung';
+$lang['config_google_analytics'] = 'Google Analytics';
+$lang['config_browser_title']    = 'Browser Title';
+$lang['config_page']             = 'Seite';
