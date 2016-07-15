@@ -18,6 +18,8 @@ $meta['useLocalBootswatch']  = array('onoff');
 // Sidebar
 $meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 'right'));
 $meta['rightSidebar']        = array('string');
+$meta['leftSidebarGrid']     = array('string');
+$meta['rightSidebarGrid']    = array('string');
 
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
