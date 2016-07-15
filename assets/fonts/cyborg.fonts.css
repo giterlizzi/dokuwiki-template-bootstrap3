@@ -1,0 +1,26 @@
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		local('Roboto'),
+		local('Roboto-Regular'),
+		url('Roboto_400.eot?#iefix') format('embedded-opentype'),
+		url('Roboto_400.woff') format('woff'),
+		url('Roboto_400.woff2') format('woff2'),
+		url('Roboto_400.svg#Roboto') format('svg'),
+		url('Roboto_400.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Roboto';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		local('Roboto Bold'),
+		local('Roboto-Bold'),
+		url('Roboto_700.eot?#iefix') format('embedded-opentype'),
+		url('Roboto_700.woff') format('woff'),
+		url('Roboto_700.woff2') format('woff2'),
+		url('Roboto_700.svg#Roboto') format('svg'),
+		url('Roboto_700.ttf') format('truetype');
+}
