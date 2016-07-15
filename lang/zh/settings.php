@@ -38,6 +38,7 @@ $lang['hideLoginLink']                = '隐藏导航栏的登入按钮。这个
 $lang['individualTools']              = 'Split the Tools in individual menu in navbar';
 $lang['inverseNavbar']                = '逆向导航栏';
 $lang['landingPages']                 = 'Landing page name (insert a regex)';
+$lang['leftSidebarGrid']              = '左侧边栏网格类 <code>col-{xs,sm,md,lg}-x</code>（请参阅 <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap 网格</a>文档）';
 $lang['pageIcons']                    = 'Select the icons to display';
 $lang['pageInfo']                     = 'Display/Hide page info elements';
 $lang['pageInfoDateFormat']           = 'Date format';
@@ -45,6 +46,7 @@ $lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki format';
 $lang['pageInfoDateFormat_o_human']   = 'Human readable';
 $lang['pageOnPanel']                  = '使面板绕在页面上';
 $lang['rightSidebar']                 = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
+$lang['rightSidebarGrid']             = '右侧边栏网格类 <code>col-{xs,sm,md,lg}-x</code>（请参阅 <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap 网格</a>文档）';
 $lang['schemaOrgType']                = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = '启用语义数据';
 $lang['showAdminMenu']                = 'Display Administration menu';
