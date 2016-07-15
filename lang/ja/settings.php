@@ -36,6 +36,7 @@ $lang['hideLoginLink']                = 'Navbar 上のログインボタンを�
 $lang['individualTools']              = 'Navbar 内のツールを個々のメニューに分割する';
 $lang['inverseNavbar']                = 'Navbar の色を反転する';
 $lang['landingPages']                 = 'ランディングページ名(正規表現を含む)';
+$lang['leftSidebarGrid']              = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
 $lang['pageIcons']                    = '表示するアイコンを選択する';
 $lang['pageInfo']                     = 'ページのメタデータの各要素の表示・非表示';
 $lang['pageInfoDateFormat']           = '日付形式';
@@ -44,6 +45,7 @@ $lang['pageInfoDateFormat_o_human']   = '人が読める形式';
 $lang['pageOnPanel']                  = 'ページ周囲のパネルを有効にする';
 $lang['rightSidebar']                 = '右サイドバーのページ名。空欄で右サイドバー無効。<br/>デフォルトの DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">サイドバー</a>が有効で <code>left</code> に配置している場合 (<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">
 sidebarPosition</a> 設定を参照) のみ右サイドバーを表示します。DokuWiki サイドバーを右側に配置したい場合、<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> 設定を <code>right</code> にしてください。';
+$lang['rightSidebarGrid']             = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
 $lang['schemaOrgType']                = 'Schema.org の型 (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'semantic データを有効にする';
 $lang['showAdminMenu']                = '管理者メニューを表示する';

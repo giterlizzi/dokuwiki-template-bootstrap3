@@ -35,6 +35,7 @@ $lang['hideLoginLink']                = 'Hide the login button in navbar. This o
 $lang['individualTools']              = 'Split the Tools in individual menu in navbar';
 $lang['inverseNavbar']                = 'Inverse navbar';
 $lang['landingPages']                 = 'Landing page name (insert a regex)';
+$lang['leftSidebarGrid']              = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['navbarLabels']                 = 'Show/Hide individual label';
 $lang['pageIcons']                    = 'Select the icons to display';
 $lang['pageInfo']                     = 'Display/Hide page info elements';
@@ -43,6 +44,7 @@ $lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki format';
 $lang['pageInfoDateFormat_o_human']   = 'Human readable';
 $lang['pageOnPanel']                  = 'Enable the panel around the page';
 $lang['rightSidebar']                 = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
+$lang['rightSidebarGrid']             = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['schemaOrgType']                = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Enable semantic data';
 $lang['showAdminMenu']                = 'Display Administration menu';

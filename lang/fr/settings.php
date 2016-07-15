@@ -42,6 +42,7 @@ $lang['hideLoginLink']                = 'Cacher le bouton de login dans la barre
 $lang['individualTools']              = 'Scinder les outils dans le menu personnel dans la barre de navigation';
 $lang['inverseNavbar']                = 'Inverser la barre de navigation';
 $lang['landingPages']                 = 'Nom de la page d\'accueil - format de page (insérer une regex)';
+$lang['leftSidebarGrid']              = 'Les classes de grille pour la sidebar de gauche <code>col-{xs,sm,md,lg}-x</code> (voir <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['pageIcons']                    = 'Sélectionnez les icônes à afficher';
 $lang['pageInfo']                     = 'Afficher/Cacher les éléments d\'information de la page';
 $lang['pageInfoDateFormat']           = 'Format de la date';
@@ -49,6 +50,7 @@ $lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
 $lang['pageInfoDateFormat_o_human']   = 'Lisible par l\'homme';
 $lang['pageOnPanel']                  = 'Activer le cadre autour de la page';
 $lang['rightSidebar']                 = 'Nom de la page pour la barre latérale droite. Un champ vide désactive la barre latérale de droite.<br/>Celle-ci est affichée seulement quand la <a class="interwiki iw_doku" href="#config___sidebar">barre latérale</a> par défaut de DokuWiki est activée avec la position <code>left</code> (voir la page de configuration <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Si vous voulez seulement la barre latérale DokuWiki à droite, définissez le paramètre <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> avec la valeur <code>right</code>';
+$lang['rightSidebarGrid']             = 'Les classes de grille pour la sidebar de droite  <code>col-{xs,sm,md,lg}-x</code> (voir <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['schemaOrgType']                = 'Type Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Activer les données sémantiques';
 $lang['showAdminMenu']                = 'Afficher le menu d\'administration';
