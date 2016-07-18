@@ -267,12 +267,12 @@ function bootstrap3_sidebar_include($type) {
   $right_sidebar      = bootstrap3_conf('rightSidebar');
   $left_sidebar_grid  = bootstrap3_conf('leftSidebarGrid');
   $right_sidebar_grid = bootstrap3_conf('rightSidebarGrid');
+  
+  if (! bootstrap3_conf('showSidebar')) return false;
 
   switch ($type) {
 
     case 'left':
-
-      if (! bootstrap3_conf('showSidebar')) return false;
 
       if (bootstrap3_conf('sidebarPosition') == 'left') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
@@ -282,8 +282,6 @@ function bootstrap3_sidebar_include($type) {
       return true;
 
     case 'right':
-
-      if (! bootstrap3_conf('showRightSidebar')) return false;
 
       if (bootstrap3_conf('sidebarPosition') == 'right') {
         bootstrap3_sidebar_wrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
@@ -914,11 +912,14 @@ function bootstrap3_conf($key, $default = false) {
       return $value && page_findnearest(tpl_getConf('cookieLawBannerPage'), bootstrap3_conf('useACL')) && ($ACT=='show');
 
     case 'showSidebar':
+      if ($ACT !== 'show') return false;
       if (bootstrap3_conf('showLandingPage')) return false;
-      return page_findnearest($conf['sidebar'], bootstrap3_conf('useACL')) && ($ACT=='show');
+      return page_findnearest($conf['sidebar'], bootstrap3_conf('useACL'));
 
     case 'showRightSidebar':
-      return page_findnearest(tpl_getConf('rightSidebar'), bootstrap3_conf('useACL')) && ($ACT=='show');
+      if ($ACT !== 'show') return false;
+      if (bootstrap3_conf('sidebarPosition') == 'right') return false;
+      return page_findnearest(tpl_getConf('rightSidebar'), bootstrap3_conf('useACL'));
 
     case 'showLandingPage':
       return ($value && (bool) preg_match_all(bootstrap3_conf('landingPages'), $ID));
