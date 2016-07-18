@@ -44,6 +44,9 @@ jQuery(document).on('bootstrap3:init', function() {
       jQuery('.picker').addClass('btn-group');
     }
 
+    // Footer links
+    jQuery('footer a').addClass('navbar-link');
+
     // Fix list overlap in media images
     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
