@@ -4,6 +4,7 @@
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Nelson Martell <nelson6e65-dev@yahoo.es>
+ * @author   Rafa Merino
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -14,3 +15,16 @@ $lang['themes']               = 'Temas';
 $lang['expand_container']     = 'Expandir/Reducir';
 $lang['administrative_tasks'] = 'Tareas Administrativas';
 $lang['additional_plugins']   = 'Complementos Adicionales';
+
+// Configuration Manager Template Sections
+$lang['config_theme']            = 'Tema';
+$lang['config_sidebar']          = 'Barra lateral';
+$lang['config_navbar']           = 'Barra de navegación';
+$lang['config_semantic']         = 'Semántico';
+$lang['config_layout']           = 'Diseño';
+$lang['config_toc']              = 'TDC';
+$lang['config_discussion']       = 'Discusión';
+$lang['config_cookie_law']       = 'Cookie Law';
+$lang['config_google_analytics'] = 'Google Analytics';
+$lang['config_browser_title']    = 'Título del explorador';
+$lang['config_page']             = 'Página';

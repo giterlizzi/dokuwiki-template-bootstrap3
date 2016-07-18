@@ -10,10 +10,11 @@
  * @author   momo choko
  * @author   Grègoire Leclercq
  * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
+ * @author   Dominique HAAS
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['bootstrapTheme']               = 'Choisissez un theme (thème Bootstrap, thème Bootstrap optionnel, thème de Bootswatch.com ou thème personalisé)';
+$lang['bootstrapTheme']               = 'Choisissez un thème (thème Bootstrap, thème Bootstrap optionnel, thème de Bootswatch.com ou thème personalisé)';
 $lang['bootstrapTheme_o_bootswatch']  = 'Theme Bootswatch.com';
 $lang['bootstrapTheme_o_custom']      = 'Thème personnalisé Bootstrap';
 $lang['bootstrapTheme_o_default']     = 'Thème Vanilla Bootstrap';
@@ -43,6 +44,7 @@ $lang['individualTools']              = 'Scinder les outils dans le menu personn
 $lang['inverseNavbar']                = 'Inverser la barre de navigation';
 $lang['landingPages']                 = 'Nom de la page d\'accueil - format de page (insérer une regex)';
 $lang['leftSidebarGrid']              = 'Les classes de grille pour la sidebar de gauche <code>col-{xs,sm,md,lg}-x</code> (voir <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
+$lang['navbarLabels']                 = 'Afficher/Masquer l\'étiquette individuelle';
 $lang['pageIcons']                    = 'Sélectionnez les icônes à afficher';
 $lang['pageInfo']                     = 'Afficher/Cacher les éléments d\'information de la page';
 $lang['pageInfoDateFormat']           = 'Format de la date';
@@ -63,23 +65,23 @@ $lang['showLandingPage']              = 'Activer un format de page (sans sidebar
 $lang['showLoginOnFooter']            = 'Afficher un "petit" lien vers le login en bas de page. Cette option est utile quand <code>hideLoginLink</code> est actif.';
 $lang['showNavbar']                   = 'Afficher l\'attache "Barre de navigation"';
 $lang['showNavbar_o_always']          = 'Toujours';
-$lang['showNavbar_o_logged']          = 'Une fois loggé';
+$lang['showNavbar_o_logged']          = 'Une fois connecté';
 $lang['showPageIcons']                = 'Afficher des icônes utiles (imprimer, partager, envoyer un e-mail, etc.) sur la page';
 $lang['showPageId']                   = 'Afficher l\'identifiant de page Dokuwiki (pageId)  en haut';
 $lang['showPageInfo']                 = 'Afficher les informations de page (date, auteur,...)';
 $lang['showPageTools']                = 'Activer les outils de page dans le style Dokuwiki';
 $lang['showPageTools_o_always']       = 'Toujours';
-$lang['showPageTools_o_logged']       = 'Une fois loggé';
+$lang['showPageTools_o_logged']       = 'Une fois connecté';
 $lang['showPageTools_o_never']        = 'Jamais';
 $lang['showSearchButton']             = 'Afficher le bouton de recherche dans la barre de navigation';
 $lang['showSearchForm']               = 'Afficher la barre de recherche dans la barre de navigation';
 $lang['showSearchForm_o_always']      = 'Toujours';
-$lang['showSearchForm_o_logged']      = 'Une fois loggé';
+$lang['showSearchForm_o_logged']      = 'Une fois connecté';
 $lang['showSearchForm_o_never']       = 'Jamais';
 $lang['showThemeSwitcher']            = 'Afficher un menu pour les thèmes de Bootswatch.com dans la barre de navigation';
 $lang['showTools']                    = 'Afficher les outils dans la barre de navigation';
 $lang['showTools_o_always']           = 'Toujours';
-$lang['showTools_o_logged']           = 'Une fois loggé';
+$lang['showTools_o_logged']           = 'Une fois connecté';
 $lang['showTools_o_never']            = 'Jamais';
 $lang['showTranslation']              = 'Affiche la barre de langues (nécessite <em>Translation Plugin</em>)';
 $lang['showUserHomeLink']             = 'Afficher un lien vers la page utilisateur dans la barre de navigation';
@@ -89,7 +91,10 @@ $lang['tableFullWidth']               = 'Activer en pleine largeur, 100% du tabl
 $lang['tableStyle']                   = 'Style de tableau';
 $lang['tagsOnTop']                    = 'Déplacer tous les Tags en haut de page, à côté de l\'identifiant de page (nécessite <em> Tag Plugin </em>)';
 $lang['tocAffix']                     = 'Rendre flottante la table des matières pour accompagner lors du défilement';
+$lang['tocCollapseOnScroll']          = 'Réduire la table des matières lors du défilement de la page';
 $lang['tocCollapseSubSections']       = 'Réduire toutes les sous-sections dans les TOC pour économiser l\'espace';
+$lang['tocPosition']                  = 'Position de la table des matières';
+$lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" release';
 $lang['useAnchorJS']                  = 'Activer AnchorJS';
 $lang['useGoogleAnalytics']           = 'Activer la fonctionnalité Google Analytics';
 $lang['useGravatar']                  = 'Charger l\'image Gravatar';

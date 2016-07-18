@@ -37,13 +37,14 @@ $lang['individualTools']              = 'Rozdziel Narzędzia w indywidualnym men
 $lang['inverseNavbar']                = 'Odwrócony Pasek nawigacyjny';
 $lang['landingPages']                 = 'Nazwa Strony produktowej (wstaw regex)';
 $lang['leftSidebarGrid']              = 'Klasy lewego paska bocznego <code>col-{xs,sm,md,lg}-x</code> (zobacz dokumentację <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
+$lang['navbarLabels']                 = 'Pokaż/Ukryj indywidualną etykietę';
 $lang['pageIcons']                    = 'Wybierz ikony do wyświetlenia';
 $lang['pageInfo']                     = 'Pokaż/ukryj elementy informacji o stronie';
 $lang['pageInfoDateFormat']           = 'Format daty';
 $lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
 $lang['pageInfoDateFormat_o_human']   = 'Czytelny dla człowieka';
 $lang['pageOnPanel']                  = 'Włącz panel wokół strony';
-$lang['rightSidebar']                 = 'Nazwa Prawego Paska bocznego, puste pole wyłącza prawy pasek boczny.<br/>Prawy pasek boczny jest wyświetlany tylko wtedy gdy domyślny <a href="#config___sidebar">pasek boczny</a> DokuWiki jest włączony i jest ustawiony w pozycji <code>left</code> (zobacz: konfiguracja<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Jeśli chcesz z prawej strony tylko pasek boczny DokuWiki, ustaw konfigurację <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> na <code>right</code>';
+$lang['rightSidebar']                 = 'Nazwa Prawego Paska bocznego, puste pole wyłącza prawy pasek boczny.<br/>Prawy pasek boczny jest wyświetlany tylko wtedy gdy domyślny <a href="#config___sidebar">pasek boczny</a> DokuWiki jest włączony i jest ustawiony w pozycji <code>left</code> (zobacz: konfiguracja <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Jeśli chcesz z prawej strony tylko pasek boczny DokuWiki, ustaw konfigurację <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> na <code>right</code>';
 $lang['rightSidebarGrid']             = 'Klasy prawego paska bocznego <code>col-{xs,sm,md,lg}-x</code> (zobacz dokumentację <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['schemaOrgType']                = 'Typ Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'Włącz dane semantyczne';
@@ -83,7 +84,10 @@ $lang['tableFullWidth']               = 'Włącz pełną szerokość tabeli 100%
 $lang['tableStyle']                   = 'Styl tabeli';
 $lang['tagsOnTop']                    = 'Przenieś Tagi na górę strony, obok page-id (wymaga <em>Tag Plugin</em>)';
 $lang['tocAffix']                     = 'Przylep Spis treści przy przewijaniu strony';
+$lang['tocCollapseOnScroll']          = 'Zwiń Spis treści podczas przewijania strony';
 $lang['tocCollapseSubSections']       = 'Aby zaoszczędzić miejsce, zwiń wszystkie podsekcje w Spisie treści';
+$lang['tocPosition']                  = 'Pozycja Spisu treści';
+$lang['useACL']                       = 'Wykorzystaj kontrolę uprawnień ACL dla pasków bocznych (lewy i prawy) oraz dla wszystkich haków DokuWiki (np <code>:footer</code>, <code>:navbar</code>, itd.) <br/> <strong> UWAGA </strong> Dostępne od wydania „Elenor of Tsort”';
 $lang['useAnchorJS']                  = 'Użyj AnchorJS';
 $lang['useGoogleAnalytics']           = 'Włącz Google Analytics';
 $lang['useGravatar']                  = 'Ładuj Gravatar';
