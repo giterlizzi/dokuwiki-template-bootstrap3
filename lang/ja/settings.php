@@ -18,8 +18,8 @@ $lang['browserTitleCharSepNS']        = 'ブラウザタイトル上での全名
 $lang['browserTitleOrderNS']          = '名前空間の順序を設定する';
 $lang['browserTitleShowNS']           = 'ブラウザタイトル上、現在のページの直前のページ名を表示します';
 $lang['collapsibleSections']          = 'セクションの第2レベルを折りたたむ (モバイル機器の場合便利)';
-$lang['cookieLawBannerPage']          = 'Cookie Law banner page name';
-$lang['cookieLawPolicyPage']          = 'Cookie Law policy page name';
+$lang['cookieLawBannerPage']          = 'Cookie Law banner ページ名';
+$lang['cookieLawPolicyPage']          = 'Cookie Law policy ページ名';
 $lang['customTheme']                  = 'custom テーマの URL';
 $lang['discussionPage']               = 'コメントページ名（<code>discussion:@ID@</code> がデフォルト。<code>@ID@</code> は現在ページ名に置き換えるプレースホルダー）。リンクしない場合は空にする。';
 $lang['fixedTopNavbar']               = 'ナビゲーション・バーを上部に固定する';
@@ -36,7 +36,7 @@ $lang['hideLoginLink']                = 'ナビゲーション・バー上のロ
 $lang['individualTools']              = 'ナビゲーション・バー内のツールを個々のメニューに分割する';
 $lang['inverseNavbar']                = 'ナビゲーション・バーの色を反転する';
 $lang['landingPages']                 = 'ランディングページ名(正規表現を含む)';
-$lang['leftSidebarGrid']              = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
+$lang['leftSidebarGrid']              = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code> (<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照)';
 $lang['navbarLabels']                 = '個々のラベルの表示・非表示';
 $lang['pageIcons']                    = '表示するアイコンを選択する';
 $lang['pageInfo']                     = 'ページのメタデータの各要素の表示・非表示';
@@ -46,7 +46,7 @@ $lang['pageInfoDateFormat_o_human']   = '人が読める形式';
 $lang['pageOnPanel']                  = 'ページ周囲のパネルを有効にする';
 $lang['rightSidebar']                 = '右サイドバーのページ名。空欄で右サイドバー無効。<br/>デフォルトの DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">サイドバー</a>が有効で <code>left</code> に配置している場合 (<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">
 sidebarPosition</a> 設定を参照) のみ右サイドバーを表示します。DokuWiki サイドバーを右側に配置したい場合、<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> 設定を <code>right</code> にしてください。';
-$lang['rightSidebarGrid']             = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code>（<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照）';
+$lang['rightSidebarGrid']             = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code> (<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照)';
 $lang['schemaOrgType']                = 'Schema.org の型 (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = 'セマンティックデータを有効にする';
 $lang['showAdminMenu']                = '管理者メニューを表示する';

@@ -36,6 +36,7 @@ $lang['hideLoginLink']                = '네비게이션 바에 로그인 버튼
 $lang['individualTools']              = '네비게이션 바에 개별 메뉴에서 도구 나누기';
 $lang['inverseNavbar']                = '역 네비게이션 바';
 $lang['landingPages']                 = '방문 문서 이름 (정규 표현식을 넣으세요)';
+$lang['leftSidebarGrid']              = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['navbarLabels']                 = 'Show/Hide individual label';
 $lang['pageIcons']                    = '보여줄 아이콘 선택';
 $lang['pageInfo']                     = '문서 정보 요소 보이기/숨기기';
@@ -44,6 +45,7 @@ $lang['pageInfoDateFormat_o_dformat'] = '도쿠위키 형식';
 $lang['pageInfoDateFormat_o_human']   = '사람이 읽을 수 있도록';
 $lang['pageOnPanel']                  = '문서 주위에 패널 활성화';
 $lang['rightSidebar']                 = '오른쪽 사이드바 문서 이름, 오른쪽 사이드바를 비활성화하려면 필드를 비우세요.<br/>오른쪽 사이드바는 기본 도쿠위키 <a class="interwiki iw_doku" href="#config___sidebar">사이드바</a>가 활성화되어 있을 때에만 보여지며 <code>left</code> 위치에 있습니다. (<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> 환경 설정을 보세요) 만약 도쿠위키 사이드바를 오른쪽 위치에만 놓고 싶으면, <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> 환경설정에 <code>right</code> 값으로 설정하세요';
+$lang['rightSidebarGrid']             = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
 $lang['schemaOrgType']                = 'Schema.org 유형 (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
 $lang['semantic']                     = '시맨틱 데이터 활성화';
 $lang['showAdminMenu']                = '관리 메뉴 보이기';

@@ -10,6 +10,7 @@
  * @author   momo choko
  * @author   Grègoire Leclercq
  * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
+ * @author   Dominique HAAS
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -22,14 +23,14 @@ $lang['administrative_tasks'] = 'Tâches administratives';
 $lang['additional_plugins']   = 'Greffons supplémentaires';
 
 // Configuration Manager Template Sections
-$lang['config_theme']            = 'Theme';
-$lang['config_sidebar']          = 'Sidebar';
-$lang['config_navbar']           = 'Navbar';
-$lang['config_semantic']         = 'Semantic';
-$lang['config_layout']           = 'Layout';
-$lang['config_toc']              = 'TOC';
+$lang['config_theme']            = 'Thème';
+$lang['config_sidebar']          = ' Barre latérale';
+$lang['config_navbar']           = 'Barre de navigation';
+$lang['config_semantic']         = 'Sémantiques';
+$lang['config_layout']           = 'Disposition';
+$lang['config_toc']              = 'Table des matières';
 $lang['config_discussion']       = 'Discussion';
-$lang['config_cookie_law']       = 'Cookie Law';
+$lang['config_cookie_law']       = 'Loi sur les cookies';
 $lang['config_google_analytics'] = 'Google Analytics';
-$lang['config_browser_title']    = 'Browser Title';
+$lang['config_browser_title']    = 'Titre du navigateur';
 $lang['config_page']             = 'Page';
