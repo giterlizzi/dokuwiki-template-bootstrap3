@@ -1809,7 +1809,7 @@ function bootstrap3_theme_by_namespace() {
     krsort($config);
 
     foreach ($config as $page => $theme) {
-      if (preg_match("/^$page/", $ID)) {
+      if (preg_match("/^$page/", ":$ID")) {
         return split('/', $theme);
       }
     }
