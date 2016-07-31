@@ -896,6 +896,16 @@ function bootstrap3_conf($key, $default = false) {
 
   switch ($key) {
 
+    case 'bootstrapTheme':
+      @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
+      if ($theme) return $theme;
+      return $value;
+
+    case 'bootswatchTheme':
+      @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
+      if ($bootswatch) return $bootswatch;
+      return $value;
+
     case 'showTools':
     case 'showSearchForm':
     case 'showPageTools':
@@ -1786,5 +1796,41 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="table ', '<div class="', $content);
 
   return $content;
+
+}
+
+
+
+function bootstrap3_theme_by_namespace() {
+
+  global $ID;
+
+  $themes_filename = DOKU_CONF.'bootstrap3.themes.conf';
+
+  if (! bootstrap3_conf('themeByNamespace')) return array();
+  if (! file_exists($themes_filename))       return array();
+
+  $config = confToHash($themes_filename);
+  krsort($config);
+
+  foreach ($config as $page => $theme) {
+
+    if (preg_match("/^$page/", "$ID")) {
+
+      list($bootstrap, $bootswatch) = split('/', $theme);
+
+      if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
+        return array($bootstrap, $bootswatch);
+      }
+
+      if ($bootstrap == 'bootswatch' && in_array($bootswatch, bootstrap3_bootswatch_theme_list())) {
+        return array($bootstrap, $bootswatch);
+      }
+
+    }
+
+  }
+
+  return array();
 
 }

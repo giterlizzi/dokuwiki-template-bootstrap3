@@ -64,6 +64,7 @@ $conf['sidebarPosition']             = 'left';
 $conf['socialShareProviders']        = 'facebook,google-plus,linkedin,pinterest,whatsapp,twitter';
 $conf['tableFullWidth']              = 1;
 $conf['tableStyle']                  = 'striped,condensed,responsive';
+$conf['themeByNamespace']            = 1;
 $conf['tagsOnTop']                   = 1;
 $conf['tocAffix']                    = 1;
 $conf['tocCollapseOnScroll']         = 1;
