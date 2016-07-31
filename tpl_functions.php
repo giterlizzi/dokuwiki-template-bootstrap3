@@ -1803,16 +1803,28 @@ function bootstrap3_theme_by_namespace() {
 
   $themes_filename = DOKU_CONF.'bootstrap3.themes.conf';
 
-  if (file_exists($themes_filename)) {
+  if (! bootstrap3_conf('themeByNamespace')) return array();
+  if (! file_exists($themes_filename))       return array();
 
-    $config = confToHash($themes_filename);
-    krsort($config);
+  $config = confToHash($themes_filename);
+  krsort($config);
 
-    foreach ($config as $page => $theme) {
-      if (preg_match("/^$page/", ":$ID")) {
-        return split('/', $theme);
+  foreach ($config as $page => $theme) {
+
+    if (preg_match("/^$page/", "$ID")) {
+
+      list($bootstrap, $bootswatch) = split('/', $theme);
+
+      if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
+        return array($bootstrap, $bootswatch);
       }
+
+      if ($bootstrap == 'bootswatch' && in_array($bootswatch, bootstrap3_bootswatch_theme_list())) {
+        return array($bootstrap, $bootswatch);
+      }
+
     }
+
   }
 
   return array();
