@@ -1553,6 +1553,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
         ? tpl_basedir() . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
 
+      if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
+        $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
+      }
+
       $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
       break;
 

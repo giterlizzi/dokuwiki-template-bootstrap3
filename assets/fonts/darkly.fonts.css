@@ -1,0 +1,39 @@
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	src:
+		local('Lato Regular'),
+		local('Lato-Regular'),
+		url('Lato_400.eot?#iefix') format('embedded-opentype'),
+		url('Lato_400.woff') format('woff'),
+		url('Lato_400.woff2') format('woff2'),
+		url('Lato_400.svg#Lato') format('svg'),
+		url('Lato_400.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		local('Lato Bold'),
+		local('Lato-Bold'),
+		url('Lato_700.eot?#iefix') format('embedded-opentype'),
+		url('Lato_700.woff') format('woff'),
+		url('Lato_700.woff2') format('woff2'),
+		url('Lato_700.svg#Lato') format('svg'),
+		url('Lato_700.ttf') format('truetype');
+}
+@font-face {
+	font-family: 'Lato';
+	font-style: italic;
+	font-weight: 400;
+	src:
+		local('Lato Italic'),
+		local('Lato-Italic'),
+		url('Lato_400italic.eot?#iefix') format('embedded-opentype'),
+		url('Lato_400italic.woff') format('woff'),
+		url('Lato_400italic.woff2') format('woff2'),
+		url('Lato_400italic.svg#Lato') format('svg'),
+		url('Lato_400italic.ttf') format('truetype');
+}
