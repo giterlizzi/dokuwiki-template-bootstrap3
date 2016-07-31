@@ -1,5 +1,15 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+### Added
+  * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino)
+  * #229: Revert sidebar grid configurations
+
+### Fixed
+  * #225: Fixed Cookie Banner Law visibility (thanks to @legend2360)
+  * #226: Fixed conflict with Bootstrap Wrapper Pane Plugin (thanks to @legend2360)
+
 ## [v2016-07-05]
 
 In this release improved stability and performance during rendering of the page. Fixed more issues, added new features and plugin support and updated the assets (Bootswatch, FontAwesome and AnchorJS). Added Bootstrap Documentation style for TOC (Table of Contents).
