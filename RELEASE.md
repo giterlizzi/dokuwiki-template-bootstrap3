@@ -6,6 +6,7 @@
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino)
   * #229: Revert sidebar grid configurations
   * #230: Added Template by Namespace feature and new option to enable/disable this feature (thanks to @Digitalin for idea)
+  * Added Portuguese (Brazil) language and updated more localization strings (thanks for all translators)
 
 ### Fixed
   * #225: Fixed Cookie Banner Law visibility (thanks to @legend2360)
