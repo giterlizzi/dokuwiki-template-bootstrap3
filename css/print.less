@@ -21,3 +21,11 @@ a.interwiki:after,
 a.mail:after {
   content: " (" attr(href) ")" !important;
 }
+
+abbr[href]:after {
+  content: "" !important;
+}
+
+abbr[data-original-title]:after {
+    content: " (" attr(data-original-title) ")";
+}
