@@ -3,14 +3,14 @@
  * French Language file for config
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @author   Maxime Buque <pep+code@bouah.net>
- * @author   Digitalin
  * @author   Cyril
- * @author   Keyven
- * @author   momo choko
- * @author   Grègoire Leclercq
- * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
+ * @author   Digitalin
  * @author   Dominique HAAS
+ * @author   Grègoire Leclercq
+ * @author   Keyven
+ * @author   Maxime Buque <pep+code@bouah.net>
+ * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
+ * @author   momo choko
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

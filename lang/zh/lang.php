@@ -4,8 +4,8 @@
  *
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   <dev@openbdh.com>
- * @author   Small_Ku
  * @author   Bendihua
+ * @author   Small_Ku
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
