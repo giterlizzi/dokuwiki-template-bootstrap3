@@ -11,20 +11,20 @@
 $lang['discussion']           = 'Обсуждение';
 $lang['back_to_article']      = 'Назад к статье';
 $lang['userpage']             = 'Страница пользователя';
-$lang['themes']               = 'Themes';
-$lang['expand_container']     = 'Expand/Reduce';
-$lang['administrative_tasks'] = 'Administrative Tasks';
-$lang['additional_plugins']   = 'Additional Plugins';
+$lang['themes']               = 'Темы';
+$lang['expand_container']     = 'Развернуть/Свернуть';
+$lang['administrative_tasks'] = 'Административные задачи';
+$lang['additional_plugins']   = 'Дополнительные плагины';
 
 // Configuration Manager Template Sections
-$lang['config_theme']            = 'Theme';
-$lang['config_sidebar']          = 'Sidebar';
-$lang['config_navbar']           = 'Navbar';
+$lang['config_theme']            = 'Тема';
+$lang['config_sidebar']          = 'Боковая панель';
+$lang['config_navbar']           = 'Навигационное меню';
 $lang['config_semantic']         = 'Semantic';
 $lang['config_layout']           = 'Layout';
-$lang['config_toc']              = 'TOC';
-$lang['config_discussion']       = 'Discussion';
+$lang['config_toc']              = 'Содержание';
+$lang['config_discussion']       = 'Обсуждение';
 $lang['config_cookie_law']       = 'Cookie Law';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Browser Title';
-$lang['config_page']             = 'Page';
+$lang['config_page']             = 'Страница';
