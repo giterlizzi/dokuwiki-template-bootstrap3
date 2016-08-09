@@ -14,12 +14,15 @@
 
 ### Versions
 
-  * Bootstrap3 Template
-  * DokuWiki
-  * Plugin
-  * Browser
+  * [Bootstrap3 Template]
+  * [DokuWiki]
+  * [Plugin]
+  * [Browser]
 
 ### Screenshots or Logs
 
 [Paste your logs or attach the screenshot]
 
+### Sample Page
+
+[Paste your sample DokuWiki page]
