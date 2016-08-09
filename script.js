@@ -10,6 +10,10 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
+  if (typeof JSINFO.bootstrap3 === 'undefined') {
+    JSINFO.bootstrap3 = {};
+  }
+
   function dw_mode(id) {
     return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
