@@ -29,6 +29,7 @@ Enjoy!
   * #217: Added Linkback support (thanks to @downhamdave)
   * #219: Added Overlay plugin support (thanks to @lattekun)
   * #220: Added scroll animation and new UI for mobile for Footnote (thanks to @lattekun)
+  * #239: Added Table Width plugin support (thanks to @Lethert and @lukderp)
   * Added missing "create" action icon
   * Added new option ("navbarLabels") to display/hide labels on navbar
   * Added ARIA support for all dropdown menu
@@ -62,7 +63,7 @@ Enjoy!
   * Fixed visibility of 3th level of TOC
   * Fixed a Right Sidebar bahavior. Now the Right Sidebar is indipendent from Left Sidebar
   * Changed selector to fix fluid container functionality
-  
+
 ### Removed
   * Removed old and unused functions
   * Removed unused left and right sidebar grid options to increase the performance
