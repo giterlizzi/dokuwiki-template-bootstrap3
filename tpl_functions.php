@@ -1776,8 +1776,8 @@ function bootstrap3_content($content) {
     }
   }
 
-  $content = preg_replace('/<table class="(inline|import_failures)">/',
-                          sprintf('<table class="$1 %s">', $table_classes), $content);
+  $content = preg_replace('/<table(.*)class="(inline|import_failures)"(.*)>/',
+                          sprintf('<table$1class="$2 %s"$3>', $table_classes), $content);
 
   $content = str_replace('<div class="table ', '<div class="', $content);
 
