@@ -12,16 +12,11 @@ if (!defined('DOKU_INC')) die();
 
 if (! empty($_SERVER['REMOTE_USER'])):
 
-$gravatar_check = false;
+$use_gravatar = bootstrap3_conf('useGravatar');
 
-if (bootstrap3_conf('useGravatar')) {
-
-  $HTTP = new DokuHTTPClient();
-
-  $gravatar_img_small = get_gravatar($INFO['userinfo']['mail'], 30);
-  $gravatar_img       = get_gravatar($INFO['userinfo']['mail'], 64);
-  $gravatar_check     = $HTTP->get($gravatar_img . '&d=404');
-
+if ($use_gravatar) {
+  $gravatar_img_small = ml(get_gravatar($INFO['userinfo']['mail'], 30).'&.jpg', array('cache' => 'recache', 'w' => 30, 'h' => 30));
+  $gravatar_img       = ml(get_gravatar($INFO['userinfo']['mail'], 64).'&.jpg', array('cache' => 'recache', 'w' => 64, 'h' => 64));
 }
 
 ?>
@@ -29,8 +24,8 @@ if (bootstrap3_conf('useGravatar')) {
   <li class="dropdown dropdown-large">
 
     <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-      <?php if ($gravatar_check): ?>
-        <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" />
+      <?php if ($use_gravatar): ?>
+        <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" width="30" height="30" />
       <?php else: ?>
         <i class="fa fa-fw fa-user"></i>
       <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
@@ -46,8 +41,8 @@ if (bootstrap3_conf('useGravatar')) {
 
         <ul class="dropdown-menu" style="min-width:64px">
           <li class="dropdown-header">
-            <?php if ($gravatar_check): ?>
-              <img src="<?php echo $gravatar_img ?>" class="img-circle" />
+            <?php if ($use_gravatar): ?>
+              <img src="<?php echo $gravatar_img ?>" class="img-circle" width="64" height="64" />
             <?php else: ?>
               <i class="fa fa-fw fa-user fa-4x">&nbsp;</i>
             <?php endif; ?>

@@ -1455,16 +1455,11 @@ function bootstrap3_pageinfo($ret = false) {
           global $auth;
           $user_data = $auth->getUserData($INFO['editor']);
 
-          $HTTP = new DokuHTTPClient();
+          $gravatar_img = ml(get_gravatar($user_data['mail'], 16).'&.jpg', array('cache' => 'recache', 'w' => 16, 'h' => 16));
 
-          $gravatar_img   = get_gravatar($user_data['mail'], 16);
-          $gravatar_check = $HTTP->get($gravatar_img . '&d=404');
-
-          if ($gravatar_check) {
-            $user_img = sprintf('<img src="%s" alt="" width="16" class="img-rounded" /> ', $gravatar_img);
-            $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
-            $user     = $user_img . $user;
-          }
+          $user_img = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $gravatar_img);
+          $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
+          $user     = $user_img . $user;
 
         }
 
