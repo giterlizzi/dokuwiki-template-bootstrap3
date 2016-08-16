@@ -7,74 +7,64 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
 global $ID, $auth;
+
+if (bootstrap3_conf('showAdminMenu')):
 
 $admin_plugins        = plugin_list('admin');
 $administrative_tasks = array('usermanager', 'acl', 'extension', 'config', 'styling', 'revert', 'popularity');
 $additional_plugins   = array_diff($admin_plugins, $administrative_tasks);
 
-$plugins = array(
-  'Administrative Tasks' => $administrative_tasks,
-  'Additional Plugins'   => $additional_plugins
+$admin = array(
+  'administrative_tasks' => array('label' => tpl_getLang('administrative_tasks'), 'plugins' => $administrative_tasks),
+  'additional_plugins'   => array('label' => tpl_getLang('additional_plugins'),   'plugins' => $additional_plugins),
 );
-?>
-<?php if($showAdminMenu): ?>
-<ul class="nav navbar-nav">
-  <li class="dropdown">
 
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Administration">
-      <i class="fa fa-fw fa-cogs"></i>  <span class="hidden-lg hidden-md hidden-sm">Administration</span> <span class="caret"></span>
+?>
+<ul class="nav navbar-nav" id="dw__admin">
+  <li class="dropdown dropdown-large">
+
+    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['btn_admin'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
+      <i class="fa fa-fw fa-cogs"></i> <span class="<?php echo (in_array('admin', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
     </a>
 
-    <ul class="dropdown-menu" role="menu">
-
+    <ul class="dropdown-menu dropdown-menu-large" role="menu">
       <li class="open dropdown-row">
-      <?php foreach ($plugins as $name => $items): ?>
-      <ul class="col-sm-6 dropdown-menu">
 
-        <li class="dropdown-header">
-          <i class="fa fa-fw fa-cog"></i> <?php echo ucfirst($name) ?>
-        </li>
+        <?php foreach ($admin as $key => $items): if (! count($items['plugins'])) continue ?>
 
-        <?php
-          foreach($items as $item) {
+        <ul class="dropdown-menu col-sm-<?php echo (count($additional_plugins) > 0) ? '6' : '12' ?>">
 
-            if(($plugin = plugin_load('admin', $item)) === null) continue;
-            if($plugin->forAdminOnly() && !$INFO['isadmin']) continue;
-            if($item == 'usermanager' && ! ($auth && $auth->canDo('getUsers'))) continue;
+          <li class="dropdown-header">
+            <span class="<?php echo $key ?>"><?php echo ucfirst($items['label']) ?></span>
+          </li>
 
-            $label = $plugin->getMenuText($conf['lang']);
+          <?php
 
-            if (! $label) continue;
+            foreach($items['plugins'] as $item) {
 
-            switch ($item) {
-              case 'usermanager': $icon = 'users'; break;
-              case 'acl':         $icon = 'key'; break;
-              case 'extension':   $icon = 'plus'; break;
-              case 'config':      $icon = 'cogs'; break;
-              case 'styling':     $icon = 'paint-brush'; break;
-              case 'revert':      $icon = 'refresh'; break;
-              case 'popularity':  $icon = 'envelope'; break;
+              if (($plugin = plugin_load('admin', $item)) === null) continue;
+              if ($plugin->forAdminOnly() && !$INFO['isadmin']) continue;
+              if ($item == 'usermanager' && ! ($auth && $auth->canDo('getUsers'))) continue;
 
-              case 'sqlite':      $icon = 'database'; break;
-              case 'tagging':     $icon = 'tags'; break;
-              case 'upgrade':     $icon = 'cloud-download'; break;
-              case 'smtp':        $icon = 'envelope-o'; break;
-              case 'searchindex': $icon = 'sitemap'; break;
-              case 'discussion':  $icon = 'comments'; break;
-              default:            $icon = 'puzzle-piece';
+              $label = $plugin->getMenuText($conf['lang']);
+
+              if (! $label) continue;
+
+              echo sprintf('<li><a href="%s" title="%s" class="admin %s">%s</a></li>',
+                           wl($ID, array('do' => 'admin', 'page' => $item)), $label, $item, $label);
+
             }
 
-            echo sprintf('<li><a href="%s" title="%s"><i class="fa fa-fw fa-%s"></i> %s</a></li>', wl($ID, array('do' => 'admin','page' => $item)), $label, $icon, $label);
+          ?>
 
-          }
-        ?>
-      </ul>
-      <?php endforeach; ?>
-
+        </ul>
+        <?php endforeach; ?>
       </li>
     </ul>
-
   </li>
 </ul>
 <?php endif; ?>

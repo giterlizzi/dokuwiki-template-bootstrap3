@@ -1,0 +1,31 @@
+/*!
+ * DokuWiki Bootstrap3 Template: Print styles
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+
+#dokuwiki__content {
+  width: 100%;
+}
+
+a[href]:after {
+  content: "" !important;
+}
+
+/* display href after link */
+a.urlextern:after,
+a.interwiki:after,
+a.mail:after {
+  content: " (" attr(href) ")" !important;
+}
+
+abbr[href]:after {
+  content: "" !important;
+}
+
+abbr[data-original-title]:after {
+    content: " (" attr(data-original-title) ")";
+}

@@ -6,6 +6,7 @@
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
+<<<<<<< HEAD
  
 $showTools           = tpl_getConf('showTools') != 'never' &&
                        ( tpl_getConf('showTools') == 'always' || !empty($_SERVER['REMOTE_USER']) );
@@ -50,41 +51,58 @@ $bootstrapStyles     = array();
 $tplConfigJSON       = array(
   'tableFullWidth' => (int) tpl_getConf('tableFullWidth'),
 );
+=======
+>>>>>>> 6983e7ba0beb49ff6d8c5cbeae903f84dbb11204
 
-if($fluidContainerBtn) {
-  $fluidContainer = _tpl_fluid_container_button();
+// must be run from within DokuWiki
+if (!defined('DOKU_INC')) die();
+
+global $ID;
+global $JSINFO;
+global $INPUT;
+global $ACT;
+global $EVENT_HANDLER;
+
+// Get the template info (useful for debug)
+if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
+  $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
+  msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
 }
 
-if ($showThemeSwitcher && $bootstrapTheme == 'bootswatch') {
+$EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
-  if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
-    $bootswatchTheme = get_doku_pref('bootswatchTheme', null);
+$page_on_panel      = bootstrap3_conf('pageOnPanel');
+$bootstrap_theme    = bootstrap3_conf('bootstrapTheme');
+$bootswatch_theme   = bootstrap3_bootswatch_theme();
+$bootstrap3_configs = array(
+  'theme', 'sidebar', 'navbar', 'semantic',
+  'layout', 'toc', 'discussion', 'cookie_law',
+  'google_analytics', 'browser_title', 'page'
+);
+
+$JSINFO['bootstrap3'] = array(
+  'mode'   => $ACT,
+  'config' => array(
+    'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
+    'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+    'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
+    'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
+  ),
+);
+
+if ($ACT == 'admin') {
+
+  $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
+
+  foreach ($bootstrap3_configs as $id) {
+    $JSINFO['bootstrap3']['lang']['config'][$id] = tpl_getLang("config_$id");
   }
 
-  global $INPUT;
-
-  if ($INPUT->str('bootswatchTheme')) {
-    $bootswatchTheme = $INPUT->str('bootswatchTheme');
-    set_doku_pref('bootswatchTheme', $bootswatchTheme);
-  }
-
 }
 
-switch ($bootstrapTheme) {
+$body_classes   = array();
+$body_classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
+$body_classes[] = tpl_classes();
 
-  case 'optional':
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap-theme.min.css';
-    break;
-  case 'custom':
-    $bootstrapStyles[] = $customTheme;
-    break;
-  case 'bootswatch':
-    $bootstrapStyles[] = "//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/$bootswatchTheme/bootstrap.min.css";
-    break;
-  case 'default':
-  default:
-    $bootstrapStyles[] = DOKU_TPL.'assets/bootstrap/css/bootstrap.min.css';
-    break;
-
-}
+if ($page_on_panel)                       $body_classes[] = 'dw-page-on-panel';
+if (! bootstrap3_conf('tableFullWidth'))  $body_classes[] = 'dw-table-width';

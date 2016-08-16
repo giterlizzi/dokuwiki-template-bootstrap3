@@ -1,0 +1,623 @@
+/*!
+ * DokuWiki Bootstrap3 Template: Template
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+html {
+  -ms-overflow-style: scrollbar;
+}
+
+body {
+
+  &.default.dw-page-on-panel,
+  &.optional.dw-page-on-panel, {
+    background: #FEFEFE;
+  }
+
+}
+
+aside,
+.dw__dropdown_page {
+
+  word-wrap: break-word;
+
+  h1, h2, h3, h4 h5 {
+    margin: 10px 0 5px 0;
+  }
+
+  h1 { font-size: 1.8em; }
+  h2 { font-size: 1.6em; }
+  h3 { font-size: 1.4em; }
+  h4 { font-size: 1.2em; }
+  h5 { font-size: 1em;   }
+
+  .page-header {
+    margin: 10px 0;
+  }
+
+  .panel-heading {
+    cursor: pointer;
+  }
+
+  .nav {
+
+    ul {
+      padding-left: 10px;
+    }
+
+    li {
+
+      a {
+        padding: 5px 10px !important;
+      }
+
+      a.urlextern,
+      a.mail,
+      a.mediafile {
+        padding-left: 28px !important;
+        background-position: 8px center;
+      }
+
+    }
+
+  }
+
+}
+
+pre.code {
+  white-space: pre-wrap;
+}
+
+input,
+textarea,
+select {
+  font-weight: 400;
+}
+
+body,
+main {
+  position: relative;
+}
+
+/* Ordered list style */
+ol             { list-style: decimal outside; }   /* Decimal: 1. 2. 3. ...              */
+ol ol          { list-style-type: lower-alpha; }  /* Alpha (lowercase): a. b. c. ...    */
+ol ol ol       { list-style-type: upper-roman; }  /* Roman (uppercase): I. II. III. ... */
+ol ol ol ol    { list-style-type: upper-alpha; }  /* Alpha (uppercase): A. B. C. ...    */
+ol ol ol ol ol { list-style-type: lower-roman; }  /* Roman (lowercase): i. ii. iii. ... */
+
+/* Header */
+header {
+
+  nav {
+
+    #dw__logo {
+      margin-right: 10px;
+    }
+
+    #dw__title {
+      display: inline-block;
+    }
+
+    #dw__tagline {
+      font-size: .6em;
+      display: block;
+      line-height: 1em;
+      white-space: nowrap;
+    }
+
+    &.navbar-fixed-top .dw__actions {
+      margin: 0 15px 0 5px;
+    }
+
+    .dw__actions .btn {
+      margin-left: 5px;
+    }
+
+  }
+
+}
+
+
+/* Message area (alerts, warnings, errors, etc.) */
+#dw__msgarea {
+
+  .alert {
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .bs-callout {
+    margin-bottom: 10px;
+    padding: 10px;
+  }
+
+}
+
+
+/* NavBar Logo */
+#dw__logo {
+  margin-top: -5px;
+}
+
+
+/* Badges */
+#dw__badges {
+  margin-top: 50px;
+}
+
+
+/* Configuration Manager */
+#config__manager {
+
+  label {
+    color: initial;
+    white-space: initial;
+    font-size: 1.2em;
+    font-weight: initial;
+  }
+
+  td {
+    padding: 5px;
+  }
+
+  fieldset {
+    background: initial !important;
+    padding: 0 !important;
+    text-align: left;
+  }
+
+  .label {
+    display: block;
+    font-weight: normal;
+    color: initial;
+  }
+
+  .outkey {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 1.2em !important;
+    background: transparent !important;
+  }
+
+  #tpl____bootstrap3____template_settings_name legend {
+    padding-top: 25px;
+  }
+
+}
+
+
+/* Breadcrumbs */
+#dw__breadcrumbs {
+
+  hr {
+    margin: 5px 0;
+    padding: 0;
+  }
+
+  .breadcrumb {
+    background: transparent;
+    border: 0 none;
+    padding-left: 0;
+    display: inline;
+  }
+
+}
+
+
+/* Footnotes */
+#insitu__fn {
+  max-width: 20em;
+}
+
+
+/* User Menu */
+#dw__user_menu {
+
+  .page-header {
+    margin: 20px 0 10px;
+  }
+
+  .nav > li > a {
+    padding: 5px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden !important;
+  }
+
+}
+
+
+/* Page tools */
+#dw__pagetools {
+
+  position: fixed;
+  right: -5px;
+  padding-right: 3px;
+  z-index: 1000;
+  text-align: center;
+
+  ul li a {
+    padding: 2px;
+  }
+
+  ul li:not(.active) a:hover {
+      background: transparent;
+  }
+
+}
+
+
+/* Footer Page */
+#dw__footer {
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  border-radius: 0px;
+  border-width: 1px 0 0 0;
+  margin: 50px 0 0 0;
+  z-index: 995;
+
+  .navbar-text {
+    float: initial;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+}
+
+
+/* License */
+#dw__license {
+  margin: 15px 0;
+}
+
+
+/* Extension Manager */
+#extension__manager {
+
+  ul.tabs li.active a,
+  .panelHeader {
+    background-color: initial;
+  }
+
+  ul.tabs li.active a {
+    /* FIXME */
+    border-bottom-color: white;
+  }
+
+}
+
+
+/* User Manager */
+#user__manager .import_users {
+  clear: both;
+}
+
+
+/* Media Manager */
+#media__tree {
+
+  height: 300px;
+  overflow: auto;
+
+  li.media {
+    margin-top: 0;
+  }
+
+}
+
+
+#mediamgr__content {
+  position: fixed;
+}
+
+
+#media__content {
+
+  height: auto;
+
+  input, label {
+    margin: 0;
+  }
+
+  label {
+    display: inline !important;
+  }
+
+  [type=submit] {
+    vertical-align: bottom;
+  }
+
+}
+
+
+#mediamgr__aside {
+  height: auto;
+  top: 0;
+  position: fixed;
+}
+
+
+#media__opts label {
+  display: inline !important;
+}
+
+
+#mediamanager__page .ui-buttonset label {
+  margin-right: 0 !important;
+}
+
+
+.pageId a.label {
+  white-space: initial;
+}
+
+
+.mode_search li {
+  list-style-type: none;
+}
+
+.mode_index {
+
+  ul.idx {
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    i {
+      padding-right: 5px;
+    }
+
+    strong {
+      font-weight: normal;
+    }
+
+    li {
+      list-style-type: none;
+      list-style-image: none !important;
+    }
+
+  }
+
+}
+
+
+.mode_admin {
+
+  input[name="installfile"] {
+    height: auto;
+  }
+
+  h1#dokuwiki_settings,
+  h1#plugin_settings,
+  h1#template_settings {
+    font-size: 1.80em;
+  }
+
+  #config__manager legend {
+    cursor: pointer;
+  }
+
+}
+
+
+/* Back to top button */
+.back-to-top {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+  opacity: .8;
+  display: none;
+  z-index: 1024;
+}
+
+
+/* Fix for media list overlap */
+.fix-media-list-overlap {
+  overflow: hidden;
+}
+
+
+/* External URL (navbar) */
+.navbar-nav a.urlextern,
+.navbar-nav a.mail {
+  padding: 15px 0 15px 18px;
+}
+
+
+/* Page Info */
+.docInfo .list-inline li {
+  padding-left : 0;
+}
+
+
+/* User profile image */
+.profile-image {
+  position: relative;
+  top: -5px;
+  float: left;
+  left: -5px;
+}
+
+
+.dw-content h1.page-header {
+  margin-top: 20px;
+}
+
+
+/* Page icons (email, print, social share, etc.) */
+.dw-page-icons {
+
+  ul.list-inline li {
+    padding: 0 0 0 2px;
+  }
+
+  .dropdown {
+    padding: 0 8px 0 0;
+  }
+
+  .share-google-plus i.fa { color: #DC4E41; }
+  .share-twitter     i.fa { color: #55ACEE; }
+  .share-linkedin    i.fa { color: #0077B5; }
+  .share-facebook    i.fa { color: #3B5998; }
+  .share-whatsapp    i.fa { color: #43D854; }
+  .share-pinterest   i.fa { color: #BD081C; }
+
+}
+
+
+/* Override Bootstrap3 style */
+
+/* Set ".img-responsive" to "inline" */
+.img-responsive {
+  display: inline;
+}
+
+ul.btn-group {
+  padding: 0;
+}
+
+
+/* Commond DokuWiki styles */
+.dokuwiki {
+
+  fieldset {
+    border: none;
+  }
+
+  img.media {
+    margin: .2em 0;
+  }
+
+  img.medialeft {
+    float: left;
+    margin: .2em 1em .2em 0;
+  }
+
+  img.mediaright {
+    float: right;
+    margin: .2em 0 .2em 1em;
+  }
+
+  img.mediacenter {
+    display: block;
+    margin: .2em auto;
+  }
+
+  textarea.edit {
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace
+  }
+
+  ul.idx {
+    padding-left: 15px;
+  }
+
+  article .wikilink2 {
+    color: #d9534f;
+  }
+
+  .diffnav select {
+    height: auto;
+  }
+
+  .curid {
+    font-weight: bold;
+  }
+
+}
+
+/* Custom DropDown menu with multiple columns */
+.dropdown-row {
+
+  > ul {
+    position: static;
+    border: 0px;
+    box-shadow: none;
+  }
+
+  > li a {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden !important;
+  }
+
+}
+
+
+/* Custom DropDoown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
+.dropdown-large {
+  position: static !important;
+}
+
+.dropdown-menu-large {
+  margin-left: 16px;
+  margin-right: 16px;
+  padding: 20px 0px;
+}
+
+@media (max-width: 768px) {
+  .dropdown-menu-large {
+    margin-left: 0 ;
+    margin-right: 0 ;
+  }
+}
+
+
+/* Dropdown menu page */
+.dw__dropdown_page {
+
+  .dropdown-menu-large {
+    background: #FFF;
+  }
+
+  .nav li a {
+    padding: 5px 10px;
+  }
+
+}
+
+
+/* AnchorJS */
+a.anchorjs-link:hover {
+  text-decoration: none;
+}
+
+
+/* Override Bootswatch Style */
+body.cosmo #tool__bar .btn {
+  border: 1px solid #CCC;
+  background-color: #EEE;
+}
+
+body {
+
+  &.cyborg,
+  &.darkly,
+  &.slate,
+  &.superhero {
+    #config__manager .outkey {
+      color: #fff !important;
+    }
+  }
+
+}
+
+.dw-table-width {
+
+  article table.inline {
+    width: auto;
+  }
+
+  .mode_admin table.inline {
+    width: 100%;
+  }
+
+}

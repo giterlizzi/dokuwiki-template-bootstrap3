@@ -10,69 +10,27 @@ jQuery(document).ready(function() {
 
   //'use strict';
 
-  // Icons for DokuWiki Actions
-  var icons = [
-    // Mode           Selector  Icon
-    ['denied',        'h1',     'fa fa-fw fa-ban text-danger'],
-    ['show.notFound', 'h1',     'fa fa-fw fa-warning text-warning'],
-    ['login',         'h1',     'fa fa-fw fa-sign-in text-muted'],
-    ['register',      'h1',     'fa fa-fw fa-user-plus text-muted'],
-    ['search',        'h1',     'fa fa-fw fa-search text-muted'],
-    ['index',         'h1',     'fa fa-fw fa-sitemap text-muted'],
-    ['recent',        'h1',     'fa fa-fw fa-list-alt text-muted'],
-    ['media',         'h1',     'fa fa-fw fa-picture-o text-muted'],
-    ['admin',         'h1',     'fa fa-fw fa-cogs text-muted'],
-    ['profile',       'h1',     'fa fa-fw fa-user text-muted'],
-    ['revisions',     'h1',     'fa fa-fw fa-clock-o text-muted'],
-    ['backlink',      'h1',     'fa fa-fw fa-link text-muted'],
-    ['diff',          'h1',     'fa fa-fw fa-list-alt text-muted'],
-    ['preview',       'h1',     'fa fa-fw fa-eye text-muted'],
-    ['conflict',      'h1',     'fa fa-fw fa-warning text-warning'],
-    ['subscribe',     'h1',     'fa fa-fw fa-envelope text-warning'],
-    ['unsubscribe',   'h1',     'fa fa-fw fa-envelope text-warning'],
-    ['draft',         'h1',     'fa fa-fw fa-pencil-square-o text-muted'],
-    ['showtag',       'h1',     'fa fa-fw fa-tags text-muted'],
-    ['locked',        'h1',     'fa fa-fw fa-lock text-warning']
-  ];
-
+  if (typeof JSINFO.bootstrap3 === 'undefined') {
+    JSINFO.bootstrap3 = {};
+  }
 
   function dw_mode(id) {
-    return ((jQuery('.mode_' + id).length) ? true : false);
+    return ((JSINFO.bootstrap3.mode === id) ? true : false);
   }
 
-
-  function checkSize() {
-
-    var $screen_mode = jQuery('#screen__mode'), // Responsive Check
-        $dw_aside    = jQuery('.dw__sidebar');  // Sidebar (left and/or right) node
-
-    if ($screen_mode.find('.visible-xs').is(':visible')) {
-
-      $dw_aside.find('.content').addClass('panel panel-default');
-      $dw_aside.find('.toogle').addClass('panel-heading');
-      $dw_aside.find('.collapse').addClass('panel-body').removeClass('in');
-
-    } else {
-
-      $dw_aside.find('.content').removeClass('panel panel-default');
-      $dw_aside.find('.collapse').removeClass('panel-body').addClass('in');
-
-    }
-
+  function dw_admin(page) {
+    return ((JSINFO.bootstrap3.admin === page) ? true : false);
   }
 
-  function resizeToc() {
-
-    jQuery('#dw__toc .panel-body').css({
-      'height'    : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
-      'overflow-y': 'scroll'
-    });
-
+  function mediaSize(media) {
+    return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
 
-  checkSize();
-  jQuery(window).resize(checkSize);
-
+  jQuery(window).resize(function() {
+    jQuery(document).trigger('bootstrap3:mobile-layout');
+    jQuery(document).trigger('bootstrap3:collapse-sections');
+    jQuery(document).trigger('bootstrap3:toc-resize');
+  });
 
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
@@ -109,19 +67,24 @@ jQuery(document).ready(function() {
 
   jQuery('.fluid-container').on('click', function() {
 
-    var $self = jQuery(this);
+    var $button     = jQuery(this),
+        $containers = jQuery('body > div, header nav > div, article, footer > div');
 
-    if (jQuery('#dokuwiki__site').hasClass('container')) {
+    if (jQuery('body > div.container').length) {
 
-      jQuery('#dokuwiki__site, nav > div, article').removeClass('container').addClass('container-fluid');
-      $self.parent().addClass('active');
+      $containers
+        .removeClass('container')
+        .addClass('container-fluid');
+      $button.parent().addClass('active');
 
       DokuCookie.setValue('fluidContainer', 1);
 
     } else {
 
-      jQuery('#dokuwiki__site, nav > div, article').removeClass('container-fluid').addClass('container');
-      $self.parent().removeClass('active');
+      $containers
+        .removeClass('container-fluid')
+        .addClass('container');
+      $button.parent().removeClass('active');
 
       DokuCookie.setValue('fluidContainer', 0);
 
@@ -150,13 +113,28 @@ jQuery(document).ready(function() {
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:init');
+      jQuery(document).trigger('bootstrap3:buttons');
       jQuery(document).trigger('bootstrap3:tabs');
+      jQuery(document).trigger('bootstrap3:media-manager');
+      jQuery(document).trigger('bootstrap3:alerts')
     });
 
   }
 
-  // Index tree
+  // Admin mode
+  if (dw_mode('admin')) {
+    jQuery(document).trigger('bootstrap3:mode-admin');
+  }
+
+  // Search mode
+  if (dw_mode('search')) {
+    jQuery(document).trigger('bootstrap3:mode-search');
+  }
+
+  // Index mode
   if (dw_mode('index')) {
+
+    jQuery(document).trigger('bootstrap3:mode-index');
 
     jQuery(document).ajaxSuccess(function() {
       jQuery(document).trigger('bootstrap3:mode-index');
