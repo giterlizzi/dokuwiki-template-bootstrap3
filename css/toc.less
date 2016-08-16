@@ -1,0 +1,99 @@
+/*!
+ * DokuWiki Bootstrap3 Template: TOC
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+#dokuwiki__toc {
+
+  hr                                 { margin: 0; opacity: 0.5; }
+  &.affix                            { z-index: 999; }
+  .toc-title                         { cursor: pointer; margin-top: 0; }
+  .toc-body > ul                     { overflow-y: auto !important; }
+
+  .nav > li > a                      { /*color: #666;*/ padding: 4px 20px; font-weight: 500; display: block; }
+  .nav > li > a:hover                { background-color: transparent; color: initial; }
+  .nav > li > a:hover                { border-left: 1px solid #428bca; }
+
+  .nav .nav                          { padding-bottom: 10px; }
+  .nav .nav .nav > li > a            { padding-top: 1px; padding-bottom: 1px }
+  .nav .nav .nav > .active > a       { font-weight: 500;   }
+
+  /* .nav .nav .nav                    { display: none;  } */
+  .nav > .active > ul                { display: block !important; }
+
+  .nav > li > a                      { padding-left: 20px; }
+  .nav .nav > li > a                 { padding-left: 30px; }
+  .nav .nav .nav > li > a            { padding-left: 40px; }
+  .nav .nav .nav .nav > li > a       { padding-left: 50px; }
+
+
+  .nav > li > a:hover                { padding-left: 19px; }
+  .nav .nav > li > a:hover           { padding-left: 29px; }
+  .nav .nav .nav > li > a:hover      { padding-left: 39px; }
+  .nav .nav .nav .nav > li > a:hover { padding-left: 49px; }
+
+  .nav > .active > a,
+  .nav > .active > a:hover                { padding-left: 18px; }
+
+  .nav .nav > .active > a,
+  .nav .nav > .active > a:hover           { padding-left: 28px; }
+
+  .nav .nav .nav > .active > a,
+  .nav .nav .nav > .active > a:hover      { padding-left: 38px; }
+
+  .nav .nav .nav .nav > .active > a,
+  .nav .nav .nav .nav > .active > a:hover { padding-left: 48px; }
+
+  .nav > .active > a,
+  .nav > .active > a:hover,
+  .nav > .active > a:focus {
+    font-weight: bold;
+    background-color: transparent;
+    border-left: 2px solid #428bca;
+  }
+
+}
+
+.dw-toc-closed {
+
+  .dw-content {
+    width: 100%;
+    left: 0;
+  }
+
+  .dw-toc {
+    width: 80px;
+    position: absolute;
+    float: right;
+    right: 1px;
+
+    hr,
+    .toc-title span,
+    .toc-body         { display: none; }
+
+  }
+
+}
+
+@media screen and (max-width: 767px) {
+
+  #dokuwiki__toc {
+    .toc-title {
+      width:100%;
+      text-align: left;
+    }
+    .toc-body {
+      width: 100%;
+      padding: 10px;
+    }
+  }
+
+  .dw-toc-closed {
+    .toc-title {
+      margin: 0;
+    }
+  }
+
+}
