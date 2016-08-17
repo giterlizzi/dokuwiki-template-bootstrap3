@@ -24,14 +24,9 @@ if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
 
 $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
-$page_on_panel      = bootstrap3_conf('pageOnPanel');
-$bootstrap_theme    = bootstrap3_conf('bootstrapTheme');
-$bootswatch_theme   = bootstrap3_bootswatch_theme();
-$bootstrap3_configs = array(
-  'theme', 'sidebar', 'navbar', 'semantic',
-  'layout', 'toc', 'discussion', 'cookie_law',
-  'google_analytics', 'browser_title', 'page'
-);
+$page_on_panel    = bootstrap3_conf('pageOnPanel');
+$bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
+$bootswatch_theme = bootstrap3_bootswatch_theme();
 
 $JSINFO['bootstrap3'] = array(
   'mode'   => $ACT,
@@ -44,13 +39,7 @@ $JSINFO['bootstrap3'] = array(
 );
 
 if ($ACT == 'admin') {
-
   $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
-
-  foreach ($bootstrap3_configs as $id) {
-    $JSINFO['bootstrap3']['lang']['config'][$id] = tpl_getLang("config_$id");
-  }
-
 }
 
 $body_classes   = array();
