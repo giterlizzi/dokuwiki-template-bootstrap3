@@ -36,7 +36,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 </script>
 </head>
 
-<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
+<body class="<?php echo trim(implode(' ', $body_classes)) ?>" data-img-id="<?php echo $IMG ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <?php tpl_includeFile('topheader.html') ?>

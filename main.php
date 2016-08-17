@@ -30,7 +30,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
+<body class="<?php echo trim(implode(' ', $body_classes)) ?>" data-page-id="<?php echo $ID ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <?php tpl_includeFile('topheader.html') ?>
