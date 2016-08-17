@@ -4,6 +4,7 @@
 
 ### Added
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
+  * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
   * #230: Added Template by Namespace feature and new option to enable/disable this feature (thanks to @Digitalin for idea)
   * Added Portuguese (Brazil) language and updated more localization strings (thanks for all translators)
@@ -63,6 +64,7 @@ Enjoy!
   * Fixed visibility of 3th level of TOC
   * Fixed a Right Sidebar bahavior. Now the Right Sidebar is indipendent from Left Sidebar
   * Changed selector to fix fluid container functionality
+  * Fixed logo padding without tagline
 
 ### Removed
   * Removed old and unused functions
