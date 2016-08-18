@@ -91,7 +91,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               echo '</div>';
 
               // Include the TOC layout
-              if ($toc) echo '<div class="dw-toc hidden-print col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
+              if ($toc) echo '<div class="dw-toc hidden-print dw-toc-'. bootstrap3_conf('tocPosition') .' col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
 
               tpl_flush();
 

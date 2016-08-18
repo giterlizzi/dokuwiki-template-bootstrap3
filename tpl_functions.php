@@ -1326,7 +1326,7 @@ function bootstrap3_html_toc($toc){
   $out .= '<nav id="dokuwiki__toc" role="navigation" class="small">'.DOKU_LF;
   $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
-  $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
+  $out .= ' <i class="caret pull-right"></i></h6>'.DOKU_LF;
   $out .= '<div class="toc-body collapse in">'.DOKU_LF;
   $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;

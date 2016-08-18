@@ -256,6 +256,7 @@ jQuery(document).on('bootstrap3:toc', function() {
         if (! $dw_toc.hasClass('affix-bottom')) {
           jQuery('article .dw-page-row').addClass('dw-toc-closed');
           $dw_toc.find('.toc-body').collapse('hide');
+          $dw_toc.find('.caret').removeClass('pull-right');
           if (! mediaSize('xs')) {
             $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
           }
@@ -269,6 +270,7 @@ jQuery(document).on('bootstrap3:toc', function() {
         jQuery('article .dw-page-row').removeClass('dw-toc-closed');
         $dw_toc.find('.toc-body').collapse('show');
         $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
+        $dw_toc.find('.caret').addClass('pull-right');
 
       });
 
@@ -283,8 +285,10 @@ jQuery(document).on('bootstrap3:toc', function() {
       if (! mediaSize('xs')) {
         if (jQuery('.dw-toc-closed').length) {
           $self.addClass('btn btn-default btn-xs');
+          $self.find('.caret').removeClass('pull-right');
         } else {
           $self.removeClass('btn btn-default btn-xs');
+          $self.find('.caret').addClass('pull-right');
         }
       }
 

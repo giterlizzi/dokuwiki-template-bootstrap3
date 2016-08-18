@@ -7,7 +7,6 @@
  */
 #dokuwiki__toc {
 
-  hr                                 { margin: 0; opacity: 0.5; }
   &.affix                            { z-index: 999; }
   .toc-title                         { cursor: pointer; margin-top: 0; }
   .toc-body > ul                     { overflow-y: auto !important; }
@@ -56,6 +55,11 @@
 
 }
 
+.dw-toc {
+  &.dw-toc-right { padding-left: 0; }
+  &.dw-toc-left  { padding-right: 0; }
+}
+
 .dw-toc-closed {
 
   .dw-content {
@@ -64,7 +68,7 @@
   }
 
   .dw-toc {
-    width: 80px;
+    width: 70px;
     position: absolute;
     float: right;
     right: 1px;
@@ -76,6 +80,8 @@
   }
 
 }
+
+
 
 @media screen and (max-width: 767px) {
 
