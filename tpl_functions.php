@@ -1795,7 +1795,6 @@ function bootstrap3_content($content) {
 }
 
 
-
 function bootstrap3_theme_by_namespace() {
 
   global $ID;
@@ -1827,5 +1826,30 @@ function bootstrap3_theme_by_namespace() {
   }
 
   return array();
+
+}
+
+/**
+ * Return template classes
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @see tpl_classes();
+ *
+ * @return string
+ **/
+function bootstrap3_classes() {
+
+  $page_on_panel    = bootstrap3_conf('pageOnPanel');
+  $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
+  $bootswatch_theme = bootstrap3_bootswatch_theme();
+
+  $classes   = array();
+  $classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
+  $classes[] = trim(tpl_classes());
+
+  if ($page_on_panel)                       $classes[] = 'dw-page-on-panel';
+  if (! bootstrap3_conf('tableFullWidth'))  $classes[] = 'dw-table-width';
+
+  return implode(' ', $classes);
 
 }

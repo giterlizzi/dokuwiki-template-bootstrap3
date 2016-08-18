@@ -24,10 +24,9 @@ if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
 
 $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
-$page_on_panel    = bootstrap3_conf('pageOnPanel');
-$bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
-$bootswatch_theme = bootstrap3_bootswatch_theme();
+$page_on_panel = bootstrap3_conf('pageOnPanel');
 
+// Populate JSINFO object
 $JSINFO['bootstrap3'] = array(
   'mode'   => $ACT,
   'config' => array(
@@ -41,10 +40,3 @@ $JSINFO['bootstrap3'] = array(
 if ($ACT == 'admin') {
   $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
 }
-
-$body_classes   = array();
-$body_classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
-$body_classes[] = tpl_classes();
-
-if ($page_on_panel)                       $body_classes[] = 'dw-page-on-panel';
-if (! bootstrap3_conf('tableFullWidth'))  $body_classes[] = 'dw-table-width';
