@@ -85,13 +85,32 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               // Include Page Tools
               require_once('tpl_page_tools.php');
 
-              if ($toc) echo '<div class="dw-page-row row">';
-              echo '<div class="dw-content'. (($toc) ? ' dw-content-with-toc col-sm-9'. ((bootstrap3_conf('tocPosition') == 'left') ? ' col-md-push-3' : '') : '') .'">';
+              if ($toc) echo '<div class="dw-page-row row' . (bootstrap3_conf('tocCollapsed') ? ' dw-toc-closed': '') . '">';
+
+              $content_classes = array();
+              $toc_classes     = array();
+
+              if ($toc) {
+
+                $content_classes[] = 'dw-content-with-toc';
+                $content_classes[] = 'col-sm-9';
+
+                $toc_classes[]     = 'col-sm-3';
+                $toc_classes[] = 'dw-toc-' . bootstrap3_conf('tocPosition');
+
+                if (bootstrap3_conf('tocPosition') == 'left') {
+                  $content_classes[] = 'col-md-push-3';
+                  $toc_classes[]     = 'col-md-pull-9';
+                }
+
+              }
+
+              echo '<div class="dw-content '. implode(' ', $content_classes) .'">';
               echo $content;
               echo '</div>';
 
               // Include the TOC layout
-              if ($toc) echo '<div class="dw-toc hidden-print dw-toc-'. bootstrap3_conf('tocPosition') .' col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
+              if ($toc) echo '<div class="dw-toc hidden-print '. implode(' ', $toc_classes) .'">' . $toc . '</div></div>';
 
               tpl_flush();
 

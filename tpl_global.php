@@ -34,6 +34,7 @@ $JSINFO['bootstrap3'] = array(
     'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
     'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
     'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
+    'tocCollapsed'        => (int) bootstrap3_conf('tocCollapsed'),
   ),
 );
 

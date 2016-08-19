@@ -83,6 +83,7 @@ $lang['tableFullWidth']               = 'Enable 100% full table width (Bootstrap
 $lang['tableStyle']                   = 'Table style';
 $lang['tagsOnTop']                    = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
 $lang['tocAffix']                     = 'Affix the TOC during page scrolling';
+$lang['tocCollapsed']                 = 'Collapse TOC on every pages';
 $lang['tocCollapseOnScroll']          = 'Collapse TOC during page scrolling';
 $lang['tocCollapseSubSections']       = 'Collapse all sub-sections in TOC to save space';
 $lang['tocPosition']                  = 'TOC position';
