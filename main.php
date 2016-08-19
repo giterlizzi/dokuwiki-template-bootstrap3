@@ -34,6 +34,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo trim(implode(' ', $body_classes)) ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <?php require_once('tpl_jumbotron.php'); ?>
     <?php tpl_includeFile('topheader.html') ?>
     <?php require_once('tpl_navbar.php'); ?>
     <?php tpl_includeFile('header.html') ?>
