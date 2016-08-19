@@ -7,7 +7,9 @@
   * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
   * #230: Added Template by Namespace feature and new option to enable/disable this feature (thanks to @Digitalin for idea)
+  * #231: Added "tocCollapsed" (default:0) option to automatic collapse the TOC on every pages (thanks to @tysoncecka)
   * Added Portuguese (Brazil) language and updated more localization strings (thanks for all translators)
+  * Added HTML5 Data Attributes to identify and styling current page/namespace via JS and CSS
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)

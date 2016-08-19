@@ -62,6 +62,7 @@ $meta['tocAffix']               = array('onoff');
 $meta['tocCollapseSubSections'] = array('onoff');
 $meta['tocPosition']            = array('multichoice', '_choices' => array('left', 'right'));
 $meta['tocCollapseOnScroll']    = array('onoff');
+$meta['tocCollapsed']           = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');

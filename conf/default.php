@@ -67,6 +67,7 @@ $conf['tableStyle']                  = 'striped,condensed,responsive';
 $conf['themeByNamespace']            = 1;
 $conf['tagsOnTop']                   = 1;
 $conf['tocAffix']                    = 1;
+$conf['tocCollapsed']                = 0;
 $conf['tocCollapseOnScroll']         = 1;
 $conf['tocCollapseSubSections']      = 1;
 $conf['tocPosition']                 = 'right';
