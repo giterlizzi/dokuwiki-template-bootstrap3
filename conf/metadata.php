@@ -21,6 +21,7 @@ $meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 
 $meta['rightSidebar']        = array('string');
 $meta['leftSidebarGrid']     = array('string');
 $meta['rightSidebarGrid']    = array('string');
+$meta['sidebarOnNavbar']     = array('onoff');
 
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
