@@ -30,10 +30,11 @@ $page_on_panel = bootstrap3_conf('pageOnPanel');
 $JSINFO['bootstrap3'] = array(
   'mode'   => $ACT,
   'config' => array(
-    'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
     'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
-    'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
+    'sidebarOnNavbar'     => (int) bootstrap3_conf('sidebarOnNavbar'),
+    'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
     'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
+    'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
     'tocCollapsed'        => (int) bootstrap3_conf('tocCollapsed'),
   ),
 );
