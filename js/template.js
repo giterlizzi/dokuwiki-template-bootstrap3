@@ -68,6 +68,10 @@ jQuery(document).on('bootstrap3:init', function() {
           return false;
         }
 
+        if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
+          jQuery(document).trigger('bootstrap3:toc-close');
+        }
+
         var $target = jQuery('body ' + $link.attr('href'));
 
         if ($target.length) {
@@ -203,7 +207,6 @@ jQuery(document).on('bootstrap3:footnotes', function() {
 jQuery(document).on('bootstrap3:toc-resize', function() {
 
   var $dw_toc = jQuery('#dokuwiki__toc');
-
   if (! $dw_toc.length) return false;
 
   if (JSINFO.bootstrap3.config.tocAffix) {
@@ -233,13 +236,46 @@ jQuery(document).on('bootstrap3:toc-resize', function() {
 });
 
 
+jQuery(document).on('bootstrap3:toc-close', function() {
+
+  var $dw_toc = jQuery('#dokuwiki__toc');
+  if (! $dw_toc.length) return false;
+
+  jQuery('.toc-body').width(jQuery('.dw-toc').width());
+
+  if (! $dw_toc.hasClass('affix-bottom')) {
+    jQuery('article .dw-page-row').addClass('dw-toc-closed');
+    $dw_toc.find('.toc-body').collapse('hide');
+    $dw_toc.find('.caret').removeClass('pull-right');
+    if (! mediaSize('xs')) {
+      $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
+    }
+  }
+
+});
+
+
+jQuery(document).on('bootstrap3:toc-open', function() {
+
+  var $dw_toc = jQuery('#dokuwiki__toc');
+  if (! $dw_toc.length) return false;
+
+  jQuery('.toc-body').width('100%');
+  jQuery('article .dw-page-row').removeClass('dw-toc-closed');
+
+  $dw_toc.find('.toc-body').collapse('show');
+  $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
+  $dw_toc.find('.caret').addClass('pull-right');
+
+});
+
+
 // Table of Contents
 jQuery(document).on('bootstrap3:toc', function() {
 
   setTimeout(function() {
 
     var $dw_toc = jQuery('#dokuwiki__toc');
-
     if (! $dw_toc.length) return false;
 
     jQuery(document).trigger('bootstrap3:toc-resize');
@@ -250,29 +286,12 @@ jQuery(document).on('bootstrap3:toc', function() {
     if (JSINFO.bootstrap3.config.tocCollapseOnScroll && JSINFO.bootstrap3.config.tocAffix) {
 
       $dw_toc.on('affix.bs.affix', function() {
-
-        jQuery('.toc-body').width(jQuery('.dw-toc').width());
-
-        if (! $dw_toc.hasClass('affix-bottom')) {
-          jQuery('article .dw-page-row').addClass('dw-toc-closed');
-          $dw_toc.find('.toc-body').collapse('hide');
-          $dw_toc.find('.caret').removeClass('pull-right');
-          if (! mediaSize('xs')) {
-            $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
-          }
-        }
-
+        jQuery(document).trigger('bootstrap3:toc-close');
       });
 
-      if (! JSINFO.bootstrap3.config.tocCollapsed) {  
+      if (! JSINFO.bootstrap3.config.tocCollapsed) {
         $dw_toc.on('affix-top.bs.affix', function() {
-  
-          jQuery('.toc-body').width('100%');
-          jQuery('article .dw-page-row').removeClass('dw-toc-closed');
-          $dw_toc.find('.toc-body').collapse('show');
-          $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
-          $dw_toc.find('.caret').addClass('pull-right');
-  
+          jQuery(document).trigger('bootstrap3:toc-open');
         });
       }
 
