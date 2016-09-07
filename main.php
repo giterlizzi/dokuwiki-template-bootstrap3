@@ -54,7 +54,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
     <main class="main row" role="main">
 
-      <?php bootstrap3_sidebar_include('left') ?>
+      <?php require_once('tpl_page_tools.php'); // Page Tools ?>
+      <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
 
       <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
@@ -81,9 +82,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
               $content = bootstrap3_content(ob_get_clean());
               $toc     = bootstrap3_toc(true);
-
-              // Include Page Tools
-              require_once('tpl_page_tools.php');
 
               if ($toc) echo '<div class="dw-page-row row' . (bootstrap3_conf('tocCollapsed') ? ' dw-toc-closed': '') . '">';
 
@@ -127,7 +125,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
       </article>
 
-      <?php bootstrap3_sidebar_include('right') ?>
+      <?php bootstrap3_sidebar_include('right'); // Right Sidebar ?>
 
     </main>
 
