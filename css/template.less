@@ -234,9 +234,9 @@ header {
 /* Page tools */
 #dw__pagetools {
 
-  position: fixed;
-  right: -5px;
-  padding-right: 3px;
+  position: absolute;
+  right: 25px;
+  top: 50px;
   z-index: 1000;
   text-align: center;
 
@@ -246,6 +246,10 @@ header {
 
   ul li:not(.active) a:hover {
       background: transparent;
+  }
+
+  .tools {
+    position: fixed;
   }
 
 }
