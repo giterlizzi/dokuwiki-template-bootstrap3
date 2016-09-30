@@ -3,6 +3,7 @@
 ## [Develop]
 
 ### Added
+  * #110: Added "sidebarOnNavbar" (default:0) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
   * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
@@ -11,11 +12,14 @@
   * #242: Added Dir plugin support (thanks to @huksley for the patch)
   * Added Portuguese (Brazil) and Norwegian language and updated more localization strings (thanks for all translators)
   * Added HTML5 Data Attributes to identify and styling current page/namespace via JS and CSS
+  * Added Telegram integration
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
   * #225: Fixed Cookie Banner Law visibility (thanks to @legend2360)
   * #226: Fixed conflict with Bootstrap Wrapper Pane Plugin (thanks to @legend2360)
+  * #248: Fixed unhexpected behavior for TOC when the user click on anchor link (special thanks to @algorys, @Digitalin and @polyzen)
+  * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
   * Corrected link style on footer
 
 ## [v2016-07-05]
