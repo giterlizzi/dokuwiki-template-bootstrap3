@@ -218,19 +218,6 @@ jQuery(document).on('bootstrap3:toc-resize', function() {
     'overflow-y' : 'scroll'
   });
 
-  if (! mediaSize('xs')) {
-    $dw_toc.removeClass('panel panel-default');
-    $dw_toc.find('.toc-title').removeClass('panel-heading');
-    $dw_toc.find('.toc-body').removeClass('panel-body');
-  }
-
-  if (mediaSize('xs') && ! $dw_toc.hasClass('panel')) {
-    $dw_toc.addClass('panel panel-default');
-    $dw_toc.find('.toc-title').addClass('panel-heading');
-    $dw_toc.find('.toc-body').addClass('panel-body');
-    $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
-  }
-
   jQuery('.toc-body').width(jQuery('.dw-toc').width());
 
 });
@@ -241,15 +228,9 @@ jQuery(document).on('bootstrap3:toc-close', function() {
   var $dw_toc = jQuery('#dokuwiki__toc');
   if (! $dw_toc.length) return false;
 
-  jQuery('.toc-body').width(jQuery('.dw-toc').width());
-
   if (! $dw_toc.hasClass('affix-bottom')) {
-    jQuery('article .dw-page-row').addClass('dw-toc-closed');
+    jQuery('article .dw-content').addClass('dw-toc-closed');
     $dw_toc.find('.toc-body').collapse('hide');
-    $dw_toc.find('.caret').removeClass('pull-right');
-    if (! mediaSize('xs')) {
-      $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
-    }
   }
 
 });
@@ -260,12 +241,9 @@ jQuery(document).on('bootstrap3:toc-open', function() {
   var $dw_toc = jQuery('#dokuwiki__toc');
   if (! $dw_toc.length) return false;
 
-  jQuery('.toc-body').width('100%');
-  jQuery('article .dw-page-row').removeClass('dw-toc-closed');
+  jQuery('article .dw-content').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
-  $dw_toc.find('.toc-title').removeClass('btn btn-default btn-xs');
-  $dw_toc.find('.caret').addClass('pull-right');
 
 });
 
@@ -301,17 +279,7 @@ jQuery(document).on('bootstrap3:toc', function() {
 
       var $self = jQuery(this);
 
-      jQuery('article .dw-page-row').toggleClass('dw-toc-closed');
-
-      if (! mediaSize('xs')) {
-        if (jQuery('.dw-toc-closed').length) {
-          $self.addClass('btn btn-default btn-xs');
-          $self.find('.caret').removeClass('pull-right');
-        } else {
-          $self.removeClass('btn btn-default btn-xs');
-          $self.find('.caret').addClass('pull-right');
-        }
-      }
+      jQuery('article .dw-content').toggleClass('dw-toc-closed');
 
       if (! jQuery('.dw-toc-closed').length) {
         jQuery(document).trigger('bootstrap3:toc-resize');
@@ -321,11 +289,6 @@ jQuery(document).on('bootstrap3:toc', function() {
 
     if ((jQuery(window).height() < $dw_toc.height())) {
       jQuery(document).trigger('bootstrap3:toc-resize');
-    }
-
-    if (JSINFO.bootstrap3.config.tocCollapsed) {
-      $dw_toc.find('.toc-title').addClass('btn btn-default btn-xs');
-      $dw_toc.find('.caret').removeClass('pull-right');
     }
 
   }, 0);
