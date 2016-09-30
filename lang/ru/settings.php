@@ -41,8 +41,8 @@ $lang['leftSidebarGrid']              = 'Left sidebar grid classes <code>col-{xs
 $lang['navbarLabels']                 = 'Show/Hide individual label';
 $lang['pageIcons']                    = 'Выбрать иконку для отображения';
 $lang['pageInfo']                     = 'Display/Hide page info elements';
-$lang['pageInfoDateFormat']           = 'Date format';
-$lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki format';
+$lang['pageInfoDateFormat']           = 'Формат даты';
+$lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki формат';
 $lang['pageInfoDateFormat_o_human']   = 'Human readable';
 $lang['pageOnPanel']                  = 'Включить рамку вокруг страницы';
 $lang['rightSidebar']                 = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
