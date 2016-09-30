@@ -56,52 +56,40 @@
 }
 
 .dw-toc {
-  &.dw-toc-right { padding-left: 0; }
-  &.dw-toc-left  { padding-right: 0; }
+  width: 16em;
+  float: right;
+  height: auto;
+  margin: 0 0 1.5em 1.5em;
 }
-
-.dw-toc-closed .dw-toc { width: 55px; }
-.dw-page-on-panel .dw-toc-closed .dw-toc { width: 70px; }
 
 .dw-toc-closed {
-
-  .dw-content {
-    width: 100%;
-    left: 0;
-  }
-
-  .dw-toc {
-    position: absolute;
-    float: right;
-    right: 1px;
-
-    hr,
-    .toc-title span,
-    .toc-body         { display: none; }
-
-  }
-
+  hr,
+  .toc-title span,
+  .toc-body         { display: none; }
 }
 
+.dw-toc .panel-body {
+  padding: 0;
+}
 
+.dw-toc .panel-heading {
+  margin-bottom: 0;
+  padding: 5px;
+}
 
-@media screen and (max-width: 767px) {
+.dw-toc-closed .dw-toc {
+  position: absolute;
+  width: 50px;
+  right: 30px;
+}
 
-  #dokuwiki__toc {
-    .toc-title {
-      width:100%;
-      text-align: left;
-    }
-    .toc-body {
-      width: 100%;
-      padding: 10px;
+.dw-toc {
+  &.dw-toc-left  { 
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+
+    .dw-toc-closed {
+      right: auto;
     }
   }
-
-  .dw-toc-closed {
-    .toc-title {
-      margin: 0;
-    }
-  }
-
 }
