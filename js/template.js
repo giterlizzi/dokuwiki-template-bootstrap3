@@ -724,6 +724,7 @@ jQuery(document).on('bootstrap3:page-icons', function() {
     'linkedin'    : (function(){ return [ 'https://www.linkedin.com/shareArticle?mini=true&url=', url, '&title=', title ].join(''); })(),
     'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
     'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
+    'telegram'    : (function(){ return [ 'https://telegram.me/share/url?url=', url ].join(''); })(),
     'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
   };
@@ -742,6 +743,9 @@ jQuery(document).on('bootstrap3:page-icons', function() {
   });
   $dw_page_icons.find('.share-pinterest').on('click', function() {
     window.open(share_to.pinterest, 'Share to Pinterest', window_options);
+  });
+  $dw_page_icons.find('.share-telegram').on('click', function() {
+    window.open(share_to.telegram, 'Share to Telegram', window_options);
   });
   $dw_page_icons.find('.send-mail').on('click', function(e) {
     e.preventDefault();
