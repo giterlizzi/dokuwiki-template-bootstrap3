@@ -1666,6 +1666,8 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $js  = '';
     $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
 
+    $js .= 'jQuery("#dw__pagetools .tools").affix({ offset: { bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+
     if (bootstrap3_conf('tocAffix')) {
       $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
     }
