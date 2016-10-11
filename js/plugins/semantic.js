@@ -14,7 +14,7 @@ if (typeof JSINFO.plugin === 'undefined') {
   JSINFO.plugin = { semantic : {} };
 }
 
-if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService) {
+if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService && JSINFO.bootstrap3.config.showSemanticPopup) {
 
   $wikilinks.hover(function() {
 
