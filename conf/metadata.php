@@ -31,6 +31,7 @@ $meta['showTools']           = array('multichoice', '_choices' => array('never',
 $meta['showHomePageLink']    = array('onoff');
 $meta['showUserHomeLink']    = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
+$meta['showEditBtn']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['individualTools']     = array('onoff');
 $meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
@@ -53,6 +54,7 @@ $meta['tableStyle']             = array('multicheckbox', '_choices' => array('st
 $meta['showLandingPage']        = array('onoff');
 $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');

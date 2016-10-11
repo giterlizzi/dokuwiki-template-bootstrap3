@@ -614,26 +614,24 @@ jQuery(document).on('bootstrap3:mode-index', function() {
 });
 
 
-// Page Tools
+// Page Tools (animaton)
 jQuery(document).on('bootstrap3:page-tools', function() {
 
-  setTimeout(function() {
+  var $page_tools       = jQuery('#dw__pagetools'),
+      $page_tools_items = $page_tools.find('ul li a'),
+      $animation        = $page_tools.find('.tools-animation');
 
-    var $page_tools_items = jQuery('#dw__pagetools ul li a');
+  if (! ($page_tools_items.length && $animation.length)) return false;
 
-    if (! $page_tools_items.length) return false;
+  $page_tools_items.on('mouseenter', function () {
+    var $icon = jQuery(this);
+    $icon.find('i').addClass('fa-2x', 250);
+  });
 
-    $page_tools_items.on('mouseenter', function () {
-      var $icon = jQuery(this);
-      $icon.find('i').addClass('fa-2x', 250);
-    });
-
-    $page_tools_items.on('mouseleave', function () {
-      var $icon = jQuery(this);
-      $icon.find('i').removeClass('fa-2x', 250);
-    });
-
-  }, 0);
+  $page_tools_items.on('mouseleave', function () {
+    var $icon = jQuery(this);
+    $icon.find('i').removeClass('fa-2x', 250);
+  });
 
 });
 

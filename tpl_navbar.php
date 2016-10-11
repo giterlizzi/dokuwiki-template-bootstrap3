@@ -93,6 +93,12 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         <ul class="nav navbar-nav">
 
+          <?php if (bootstrap3_conf('editBtn')): ?>
+          <li class="dw-action-icon hidden-xs">
+            <?php tpl_actionlink('edit', '<span class="sr-only">', '</span>'); ?>
+          </li>
+          <?php endif; ?>
+
           <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
           <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">
             <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span></a>

@@ -909,6 +909,7 @@ function bootstrap3_conf($key, $default = false) {
     case 'showTools':
     case 'showSearchForm':
     case 'showPageTools':
+    case 'showEditBtn':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showAdminMenu':
