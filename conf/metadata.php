@@ -45,6 +45,7 @@ $meta['navbarLabels']        = array('multicheckbox', '_choices' => array('login
 // Semantic
 $meta['semantic']            = array('onoff');
 $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
+$meta['showSemanticPopup']   = array('onoff');
 
 // Layout
 $meta['fluidContainer']         = array('onoff');

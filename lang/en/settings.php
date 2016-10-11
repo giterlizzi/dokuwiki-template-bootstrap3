@@ -75,6 +75,7 @@ $lang['showSearchForm']               = 'Display Search form in navbar';
 $lang['showSearchForm_o_always']      = 'Always';
 $lang['showSearchForm_o_logged']      = 'When logged in';
 $lang['showSearchForm_o_never']       = 'Never';
+$lang['showSemanticPopup']            = 'Display a popup with an extract of the page when the user hover on wikilink (require <em>Semantic Plugin</em>)';
 $lang['showThemeSwitcher']            = 'Show Bootswatch.com theme switcher in navbar';
 $lang['showTools']                    = 'Display Tools in navbar';
 $lang['showTools_o_always']           = 'Always';
@@ -100,3 +101,4 @@ $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useGravatar']                  = 'Load Gravatar image';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
+

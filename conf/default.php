@@ -58,6 +58,7 @@ $conf['showPageInfo']                = 1;
 $conf['showPageTools']               = 'always';
 $conf['showSearchButton']            = 1;
 $conf['showSearchForm']              = 'always';
+$conf['showSemanticPopup']           = 0;
 $conf['showThemeSwitcher']           = 0;
 $conf['showTools']                   = 'always';
 $conf['showTranslation']             = 0;
@@ -81,3 +82,4 @@ $conf['useGoogleAnalytics']          = 0;
 $conf['useGravatar']                 = 0;
 $conf['useLegacyNavbar']             = 0;
 $conf['useLocalBootswatch']          = 1;
+

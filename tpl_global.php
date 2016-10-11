@@ -36,6 +36,7 @@ $JSINFO['bootstrap3'] = array(
     'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
     'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
     'tocCollapsed'        => (int) bootstrap3_conf('tocCollapsed'),
+    'showSemanticPopup'   => (int) bootstrap3_conf('showSemanticPopup'),
   ),
 );
 
