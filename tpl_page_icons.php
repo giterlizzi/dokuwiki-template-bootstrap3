@@ -17,6 +17,7 @@ global $ID;
 $page_icons   = bootstrap3_conf('pageIcons');
 $social_share = in_array('social-share', $page_icons);
 $social_share_providers = bootstrap3_conf('socialShareProviders');
+$current_ns   = getNS($ID);
 
 $help_page  = false;
 $help_title = null;
@@ -32,7 +33,7 @@ if (in_array('help', $page_icons)) {
   <ul class="list-inline pull-right">
     <?php if(in_array('feed', $page_icons)): ?>
     <li>
-      <a href="<?php echo DOKU_URL . 'feed.php' ?>" title="<?php echo $lang['btn_recent'] ?>" class="feed"><i class="fa fa-fw fa-rss text-muted"></i></a>
+      <a href="<?php echo DOKU_URL . 'feed.php?ns=' . $current_ns ?>" title="<?php echo $lang['btn_recent'] ?>" class="feed" target="_blank"><i class="fa fa-fw fa-rss text-muted"></i></a>
     </li>
     <?php endif;
           if(in_array('send-mail', $page_icons)): ?>
