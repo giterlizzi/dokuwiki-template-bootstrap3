@@ -37,13 +37,13 @@ if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService) {
         $wikilink.attr('title', '');
 
         var title       = jsonld.headline;
-        var image       = ('image' in jsonld) ? [ '<img src="', jsonld.image.url, '" alt="" class="img-responsive img-thumbnail" /><br/>'].join('') : '';
+        var image       = ('image' in jsonld) ? [ '<img src="', jsonld.image.url, '" alt="" class="img-responsive" /><br/>' ].join('') : '';
         var description = jQuery.trim(jsonld.description.replace(/\t\*$/, ''))
                             .replace(/\*(.*)/g, '<i class="fa fa-circle small"></i> $1')
                             .replace(/\n/g, "<br/>\n")
                             .replace(/\t/g, '&nbsp;');
 
-        var content = [ '<div class="row small"><div class="col-md-12">', image, description, ' ... </div></div>'].join('');
+        var content = [ '<div class="row small"><div class="col-md-12">', image, description, ' ... </div></div>' ].join('');
 
         $wikilink.popover({
           trigger   : 'manual',
