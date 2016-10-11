@@ -17,11 +17,12 @@ $meta['useLocalBootswatch']  = array('onoff');
 $meta['themeByNamespace']    = array('onoff');
 
 // Sidebar
-$meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 'right'));
-$meta['rightSidebar']        = array('string');
-$meta['leftSidebarGrid']     = array('string');
-$meta['rightSidebarGrid']    = array('string');
-$meta['sidebarOnNavbar']     = array('onoff');
+$meta['sidebarPosition']      = array('multichoice', '_choices' => array('left', 'right'));
+$meta['rightSidebar']         = array('string');
+$meta['leftSidebarGrid']      = array('string');
+$meta['rightSidebarGrid']     = array('string');
+$meta['sidebarOnNavbar']      = array('onoff');
+$meta['sidebarShowPageTitle'] = array('onoff');
 
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
