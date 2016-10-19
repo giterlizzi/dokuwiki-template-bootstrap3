@@ -3,7 +3,9 @@
 ## [Develop]
 
 ### Added
-  * #110: Added "sidebarOnNavbar" (default:0) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
+  * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for idea in PR and @NoriSilverrage)
+  * #110: Added "sidebarOnNavbar" (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
+  * #150: Added option to disable Page Tools animation (pageToolsAnimation: on)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
   * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
@@ -13,6 +15,11 @@
   * Added Portuguese (Brazil) and Norwegian language and updated more localization strings (thanks for all translators)
   * Added HTML5 Data Attributes to identify and styling current page/namespace via JS and CSS
   * Added Telegram integration
+  * Added configuration (sidebarShowPageTitle: on) to display the page title of sidebar on mobile layout
+  * Added DokuWiki Semantic webservice integration. Now is possible display a popup with a brief text of DokuWiki page when the user over on DokuWiki link
+
+### Changed
+  * Changed position of Page Tools
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
@@ -20,6 +27,7 @@
   * #226: Fixed conflict with Bootstrap Wrapper Pane Plugin (thanks to @legend2360)
   * #248: Fixed unhexpected behavior for TOC when the user click on anchor link (special thanks to @algorys, @Digitalin and @polyzen)
   * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
+  * #253: Fixed Feed URL NS (thanks to @Juergen-aus-Koeln)
   * Corrected link style on footer
 
 ## [v2016-07-05]
