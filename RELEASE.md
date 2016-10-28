@@ -3,7 +3,7 @@
 ## [Develop]
 
 ### Added
-  * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for idea in PR and @NoriSilverrage)
+  * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
   * #110: Added "sidebarOnNavbar" (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
   * #150: Added option to disable Page Tools animation (pageToolsAnimation: on)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
@@ -20,6 +20,7 @@
 
 ### Changed
   * Changed position of Page Tools
+  * Updated Font-Awesome to v4.7
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
