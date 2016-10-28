@@ -90,7 +90,7 @@ if (in_array('help', $page_icons)) {
       <?php endif;
             if(in_array('telegram', $social_share_providers)): ?>
       <li>
-        <a href="#" class="share-telegram" title="Share on Telegram"><i class="fa fa-fw fa-lg fa-paper-plane"></i> Telegram</a>
+        <a href="#" class="share-telegram" title="Share on Telegram"><i class="fa fa-fw fa-lg fa-telegram"></i> Telegram</a>
       </li>
       <?php endif;
             if(in_array('whatsapp', $social_share_providers) && $INFO['ismobile']): ?>
