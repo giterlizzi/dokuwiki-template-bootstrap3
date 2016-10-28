@@ -6,13 +6,16 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussion']           = 'Discussion';
-$lang['back_to_article']      = 'Back to article';
-$lang['userpage']             = 'User page';
-$lang['themes']               = 'Themes';
-$lang['expand_container']     = 'Expand/Reduce';
-$lang['administrative_tasks'] = 'Administrative Tasks';
-$lang['additional_plugins']   = 'Additional Plugins';
+$lang['discussion']              = 'Discussion';
+$lang['back_to_article']         = 'Back to article';
+$lang['userpage']                = 'User page';
+$lang['themes']                  = 'Themes';
+$lang['expand_container']        = 'Expand/Reduce';
+$lang['administrative_tasks']    = 'Administrative Tasks';
+$lang['additional_plugins']      = 'Additional Plugins';
+$lang['share_on']                = 'Share on';
+$lang['send_mail']               = 'Send e-Mail';
+$lang['print']                   = 'Print';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
@@ -26,3 +29,4 @@ $lang['config_cookie_law']       = 'Cookie Law';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Browser Title';
 $lang['config_page']             = 'Page';
+
