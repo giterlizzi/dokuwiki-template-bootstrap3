@@ -17,6 +17,7 @@
   * Added Telegram integration
   * Added configuration (sidebarShowPageTitle: on) to display the page title of sidebar on mobile layout
   * Added DokuWiki Semantic webservice integration. Now is possible display a popup with a brief text of DokuWiki page when the user over on DokuWiki link
+  * Added Print, Send e-Mail and Share on localization strings
 
 ### Changed
   * Changed position of Page Tools
