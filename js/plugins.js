@@ -22,6 +22,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
     /* DOKUWIKI:include js/plugins/overlay.js */
     /* DOKUWIKI:include js/plugins/publish.js */
     /* DOKUWIKI:include js/plugins/semantic.js */
+    /* DOKUWIKI:include js/plugins/struct.js */
     /* DOKUWIKI:include js/plugins/tag.js */
     /* DOKUWIKI:include js/plugins/tagging.js */
     /* DOKUWIKI:include js/plugins/translation.js */

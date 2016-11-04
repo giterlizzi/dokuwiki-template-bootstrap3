@@ -40,7 +40,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
         $logo_size = 'height="20"';
 
         if ($tagline) {
-          $logo_size = 'height="32"';
+          $logo_size = 'height="32" style="margin-top:-5px"';
         }
 
         // display logo and wiki title in a link to the home page
