@@ -22,6 +22,11 @@ if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
   msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
 }
 
+if ($INPUT->str('bootswatch-theme')) {
+  set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
+}
+
+
 $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
 
 $page_on_panel = bootstrap3_conf('pageOnPanel');

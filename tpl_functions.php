@@ -1513,7 +1513,6 @@ function bootstrap3_bootswatch_theme() {
 
     if ($INPUT->str('bootswatch-theme')) {
       $bootswatch_theme = $INPUT->str('bootswatch-theme');
-      set_doku_pref('bootswatchTheme', $bootswatch_theme);
     }
 
   }
