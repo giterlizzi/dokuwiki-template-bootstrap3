@@ -30,6 +30,7 @@
   * #248: Fixed unhexpected behavior for TOC when the user click on anchor link (special thanks to @algorys, @Digitalin and @polyzen)
   * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
   * #253: Fixed Feed URL NS (thanks to @Juergen-aus-Koeln)
+  * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
   * Corrected link style on footer
 
 ## [v2016-07-05]
