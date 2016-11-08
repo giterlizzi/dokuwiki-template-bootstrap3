@@ -93,7 +93,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         <ul class="nav navbar-nav">
 
-          <?php if (bootstrap3_conf('editBtn')): ?>
+          <?php if (bootstrap3_conf('showEditBtn')): ?>
           <li class="dw-action-icon hidden-xs">
             <?php tpl_actionlink('edit', '<span class="sr-only">', '</span>'); ?>
           </li>
