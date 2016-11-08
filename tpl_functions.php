@@ -747,7 +747,7 @@ function bootstrap3_tools($add_icons = true) {
   );
 
   $tools['site'] = array(
-    'icon'    => 'fa fa-fw fa-wrench',
+    'icon'    => 'fa fa-fw fa-cubes',
     'actions' => array(
       'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
       'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
