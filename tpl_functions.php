@@ -1757,7 +1757,7 @@ function bootstrap3_content($content) {
     $search  = array('class="diff-deletedline"', 'class="diff-addedline',
                      'class="diffprevrev', 'class="diffnextrev', 'class="diffbothprevrev', 'class="minor"');
 
-    $replace = array('class="diff-deletedline bg-danger text-danger"', 'class="diff-addedline bg-success text-success"',
+    $replace = array('class="diff-deletedline bg-danger"', 'class="diff-addedline bg-success"',
                      "class=\"diffprevrev $btn_default fa-angle-left\"", "class=\"diffnextrev $btn_default fa-angle-right\"", "class=\"diffbothprevrev $btn_default fa-angle-double-left\"", 'class="minor text-muted"');
 
     $content = str_replace($search, $replace, $content);
