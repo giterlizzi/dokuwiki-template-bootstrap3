@@ -5,7 +5,8 @@
 ### Added
   * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
   * #110: Added "sidebarOnNavbar" (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
-  * #150: Added option to disable Page Tools animation (pageToolsAnimation: on)
+  * #150: Added option to disable Page Tools animation (pageToolsAnimation: on) (thanks to @Juergen-aus-Koeln and @hvarga)
+  * #186: Added "Add New Page" plugin support into navbar (thanks to @blacklord049)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
   * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
@@ -21,6 +22,7 @@
 
 ### Changed
   * Changed position of Page Tools
+  * Revert layout of TOC
   * Updated Font-Awesome to v4.7
 
 ### Fixed
@@ -29,8 +31,10 @@
   * #226: Fixed conflict with Bootstrap Wrapper Pane Plugin (thanks to @legend2360)
   * #248: Fixed unhexpected behavior for TOC when the user click on anchor link (special thanks to @algorys, @Digitalin and @polyzen)
   * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
+  * #250: Fixed "headers already send" issue when change theme (thanks to @bobdeh)
   * #253: Fixed Feed URL NS (thanks to @Juergen-aus-Koeln)
   * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
+  * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
   * Corrected link style on footer
 
 ## [v2016-07-05]
