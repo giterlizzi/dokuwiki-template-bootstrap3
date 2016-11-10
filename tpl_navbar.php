@@ -89,6 +89,9 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
           // Translation Menu
           include_once(dirname(__FILE__).'/tpl_translation.php');
+
+          // Add New Page
+          include_once(dirname(__FILE__).'/tpl_new_page.php');
         ?>
 
         <ul class="nav navbar-nav">

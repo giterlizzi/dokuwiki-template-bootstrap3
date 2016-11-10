@@ -42,6 +42,7 @@ $conf['rightSidebar']                = 'rightsidebar';
 $conf['rightSidebarGrid']            = 'col-sm-3 col-md-2';
 $conf['schemaOrgType']               = 'Article';
 $conf['semantic']                    = 0;
+$conf['showAddNewPage']              = 'never';
 $conf['showAdminMenu']               = 0;
 $conf['showBadges']                  = 1;
 $conf['showCookieLawBanner']         = 0;

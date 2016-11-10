@@ -16,6 +16,7 @@ $lang['additional_plugins']      = 'Additional Plugins';
 $lang['share_on']                = 'Share on';
 $lang['send_mail']               = 'Send e-Mail';
 $lang['print']                   = 'Print';
+$lang['add_new_page']            = 'Add New Page';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
