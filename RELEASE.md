@@ -6,7 +6,8 @@
   * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
   * #110: Added "sidebarOnNavbar" (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
   * #150: Added option to disable Page Tools animation (pageToolsAnimation: on) (thanks to @Juergen-aus-Koeln and @hvarga)
-  * #186: Added "Add New Page" plugin support into navbar (thanks to @blacklord049)
+  * #186: Added "Add New Page" plugin support into navbar (thanks to @blacklord049 for idea)
+  * #214: Added "Simplenavi" Plugin support (thanks to @Braintelligence and @Valiantiam)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
   * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
   * #229: Revert sidebar grid configurations
