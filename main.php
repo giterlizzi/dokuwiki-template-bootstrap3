@@ -54,11 +54,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
     <main class="main row" role="main">
 
-      <?php require_once('tpl_page_tools.php'); // Page Tools ?>
       <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
 
       <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
+
+        <?php require_once('tpl_page_tools.php'); // Page Tools ?>
 
         <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
           <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
