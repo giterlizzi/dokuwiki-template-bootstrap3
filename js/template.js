@@ -76,6 +76,8 @@ jQuery(document).on('bootstrap3:init', function() {
             scrollTop: target_position
           }, 600);
 
+          document.location.hash = $link.attr('href');
+
         }
 
         return false;
