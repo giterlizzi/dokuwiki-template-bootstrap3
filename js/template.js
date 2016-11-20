@@ -56,7 +56,7 @@ jQuery(document).on('bootstrap3:init', function() {
     }
 
     // Scrolling animation (on TOC and FootNotes)
-    jQuery('#dokuwiki__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
+    jQuery('#dw__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
 
       var $link = jQuery(this);
 
@@ -208,14 +208,14 @@ jQuery(document).on('bootstrap3:footnotes', function() {
 
 jQuery(document).on('bootstrap3:toc-resize', function() {
 
-  var $dw_toc = jQuery('#dokuwiki__toc');
+  var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
   if (JSINFO.bootstrap3.config.tocAffix) {
     $dw_toc.affix('checkPosition');
   }
 
-  jQuery('#dokuwiki__toc .toc-body > ul').css({
+  jQuery('#dw__toc .toc-body > ul').css({
     'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
     'overflow-y' : 'scroll'
   });
@@ -227,7 +227,7 @@ jQuery(document).on('bootstrap3:toc-resize', function() {
 
 jQuery(document).on('bootstrap3:toc-close', function() {
 
-  var $dw_toc = jQuery('#dokuwiki__toc');
+  var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
   if (! $dw_toc.hasClass('affix-bottom')) {
@@ -240,7 +240,7 @@ jQuery(document).on('bootstrap3:toc-close', function() {
 
 jQuery(document).on('bootstrap3:toc-open', function() {
 
-  var $dw_toc = jQuery('#dokuwiki__toc');
+  var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
   jQuery('article .dw-content').removeClass('dw-toc-closed');
@@ -255,7 +255,7 @@ jQuery(document).on('bootstrap3:toc', function() {
 
   setTimeout(function() {
 
-    var $dw_toc = jQuery('#dokuwiki__toc');
+    var $dw_toc = jQuery('#dw__toc');
     if (! $dw_toc.length) return false;
 
     jQuery(document).trigger('bootstrap3:toc-resize');

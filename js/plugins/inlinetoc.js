@@ -8,8 +8,8 @@
 
 // InlineTOC Plugin
 
-var $toc  = jQuery('#dw__toc, #dokuwiki_toc'),  // DokuWiki TOC
-    $toc2 = jQuery('div.inlinetoc2');           // InlineTOC Plugin
+var $toc  = jQuery('#dw__toc, #dokuwiki__toc'),  // DokuWiki TOC
+    $toc2 = jQuery('div.inlinetoc2');            // InlineTOC Plugin
 
 // InlineTOC Plugin
 if ($toc2.length && $toc.length) {
