@@ -1325,8 +1325,8 @@ function bootstrap3_html_toc($toc){
 
   $out  = '';
   $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dokuwiki__toc" role="navigation" class="panel panel-default small">'.DOKU_LF;
-  $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+  $out .= '<nav id="dw__toc" role="navigation" class="panel panel-default small">'.DOKU_LF;
+  $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
   $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
   $out .= '<div class="panel-body toc-body collapse in">'.DOKU_LF;
@@ -1650,10 +1650,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
+    $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
+      $style .= ' #dw__toc .nav .nav .nav { display: none; }';
     }
 
     $style .= '}';
@@ -1664,12 +1664,12 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     );
 
     $js  = '';
-    $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+    $js .= "jQuery('body').scrollspy({ target: '#dw__toc', offset: ". ($navbar_padding + 10) ." });";
 
-    $js .= 'jQuery("#dw__pagetools .tools").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("article").height()) } });';
+    $js .= 'jQuery("#dw__pagetools .tools").affix({ offset: { top: (jQuery("main").position().top), bottom: ((jQuery(document).height() - jQuery("article").height()) + 50) } });';
 
     if (bootstrap3_conf('tocAffix')) {
-      $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+      $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
     }
 
     if ($fixed_top_navbar) {
