@@ -40,16 +40,20 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
   <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <?php tpl_includeFile('social.html') ?>
+    <div id="dokuwiki__pageheader">
 
-    <?php require_once('tpl_breadcrumbs.php'); ?>
+      <?php tpl_includeFile('social.html') ?>
 
-    <p class="pageId text-right small">
-      <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
-    </p>
+      <?php require_once('tpl_breadcrumbs.php'); ?>
 
-    <div id="dw__msgarea" class="small">
-      <?php bootstrap3_html_msgarea() ?>
+      <p class="pageId text-right small">
+        <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
+      </p>
+
+      <div id="dw__msgarea" class="small">
+        <?php bootstrap3_html_msgarea() ?>
+      </div>
+
     </div>
 
     <main class="main row" role="main">

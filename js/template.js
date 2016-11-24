@@ -619,6 +619,17 @@ jQuery(document).on('bootstrap3:mode-index', function() {
 // Page Tools (animaton)
 jQuery(document).on('bootstrap3:page-tools', function() {
 
+  // Page Tools Affix
+  jQuery('#dw__pagetools .tools').affix({
+    offset : {
+      top    : (jQuery('main').position().top),
+      bottom : ((   jQuery(document).height()
+                  - jQuery('article').height()
+                  - jQuery('#dokuwiki__pageheader').height()
+                  - jQuery('#dokuwiki__header').height() ))
+    }
+  });
+
   var $page_tools       = jQuery('#dw__pagetools'),
       $page_tools_items = $page_tools.find('ul li a'),
       $animation        = $page_tools.find('.tools-animation');

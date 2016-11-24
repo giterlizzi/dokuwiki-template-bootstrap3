@@ -1666,8 +1666,6 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $js  = '';
     $js .= "jQuery('body').scrollspy({ target: '#dw__toc', offset: ". ($navbar_padding + 10) ." });";
 
-    $js .= 'jQuery("#dw__pagetools .tools").affix({ offset: { top: (jQuery("main").position().top), bottom: ((jQuery(document).height() - jQuery("article").height()) + 50) } });';
-
     if (bootstrap3_conf('tocAffix')) {
       $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
     }

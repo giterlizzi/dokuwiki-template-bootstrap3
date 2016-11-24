@@ -46,19 +46,24 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
   <div id="dokuwiki__detail" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <?php tpl_includeFile('social.html') ?>
+    <div id="dokuwiki__pageheader">
 
-    <?php require_once('tpl_breadcrumbs.php'); ?>
+      <?php tpl_includeFile('social.html') ?>
 
-    <p class="pageId text-right small">
-      <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
-    </p>
+      <?php require_once('tpl_breadcrumbs.php'); ?>
 
-    <div id="dw__msgarea" class="small">
-      <?php bootstrap3_html_msgarea() ?>
+      <p class="pageId text-right small">
+        <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
+      </p>
+
+      <div id="dw__msgarea" class="small">
+        <?php bootstrap3_html_msgarea() ?>
+      </div>
+
     </div>
 
     <main role="main">
+
       <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>">
         <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
 
@@ -66,7 +71,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
           <?php if ($ERROR): print $ERROR; ?>
           <?php else: ?>
-          <?php if($REV) echo p_locale_xhtml('showrev');?>
+          <?php if ($REV) echo p_locale_xhtml('showrev'); ?>
 
           <h1 class="page-header">
             <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
