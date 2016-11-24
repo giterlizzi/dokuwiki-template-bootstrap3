@@ -6,14 +6,19 @@
 
 ## Contributors
 
-  * Hideaki SAWADA ([sawachan](https://github.com/sawachan))
-  * Nelson Martell ([nelson6e65](https://github.com/nelson6e65))
-  * Maxime Buquet ([Ppjet6](https://github.com/Ppjet6))
   * Andrey Shpak ([insspb](https://github.com/insspb))
-  * Matt ([mdjordan](https://github.com/mdjordan))
+  * Brian Fogarty ([bfogarty](https://github.com/bfogarty))
   * Clément OUDOT ([coudot](https://github.com/coudot))
+  * ERTurner ([ERTurner](https://github.com/ERTurner))
+  * Hideaki SAWADA ([sawachan](https://github.com/sawachan))
+  * Lars Vierbergen ([vierbergenlars](https://github.com/vierbergenlars))
   * Malte Dik ([mdik](https://github.com/mdik))
+  * Matt ([mdjordan](https://github.com/mdjordan))
+  * Maxime Buquet ([Ppjet6](https://github.com/Ppjet6))
   * Michael Wegener ([MWsatwareAG](https://github.com/MWsatwareAG))
+  * Nelson Martell ([nelson6e65](https://github.com/nelson6e65))
+  * Tyson Cecka ([tysoncecka](https://github.com/tysoncecka))
+  * asmith3006 ([asmith3006](https://github.com/asmith3006))
 
 *For a list of people who have contributed to the template, see [GitHub's list of contributors](https://github.com/LotarProject/dokuwiki-template-bootstrap3/contributors).*
 
