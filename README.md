@@ -19,6 +19,7 @@ Bootstrap3 template for DokuWiki
 
 ## Plugin Integration
 
+  * Add New Page
   * Bootstrap Wrapper
   * DataTables
   * Diagram
