@@ -267,7 +267,7 @@ function bootstrap3_sidebar_include($type) {
   $right_sidebar      = bootstrap3_conf('rightSidebar');
   $left_sidebar_grid  = bootstrap3_conf('leftSidebarGrid');
   $right_sidebar_grid = bootstrap3_conf('rightSidebarGrid');
-  
+
   if (! bootstrap3_conf('showSidebar')) return false;
 
   switch ($type) {
@@ -371,11 +371,7 @@ function bootstrap3_container_grid() {
 
   $show_right_sidebar = bootstrap3_conf('showRightSidebar');
   $show_left_sidebar  = bootstrap3_conf('showSidebar');
-  $fluid_container    = bootstrap3_conf('fluidContainer');
-
-  if (bootstrap3_conf('fluidContainerBtn')) {
-    $fluid_container = bootstrap3_fluid_container_button();
-  }
+  $fluid_container    = bootstrap3_is_fluid_container();
 
   if (   bootstrap3_conf('showLandingPage')
       && (bool) preg_match(bootstrap3_conf('landingPages'), $ID) ) {
