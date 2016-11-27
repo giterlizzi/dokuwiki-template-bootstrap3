@@ -13,6 +13,7 @@ if (!defined('DOKU_INC')) die();
 if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && bootstrap3_conf('showPageIcons')):
 
 global $ID;
+global $INFO;
 
 $page_icons   = bootstrap3_conf('pageIcons');
 $social_share = in_array('social-share', $page_icons);
@@ -25,6 +26,7 @@ $help_title = null;
 if (in_array('help', $page_icons)) {
   $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
   $help_title = hsc(p_get_first_heading($help_page));
+  $help_popup = wl($help_page, array('do' => 'export_xhtmlbody'));
 }
 
 ?>
@@ -48,7 +50,7 @@ if (in_array('help', $page_icons)) {
     <?php endif;
           if(in_array('help', $page_icons) && $help_page): ?>
     <li>
-      <a href="<?php echo wl($help_page) ?>" title="<?php echo $help_title ?>"><i class="fa fa-fw fa-question text-muted"></i></a>
+      <a href="#" title="<?php echo $help_title ?>" data-toggle="modal" data-target=".dw-page-icons .modal.help" data-remote="<?php echo $help_popup; ?>"><i class="fa fa-fw fa-question text-muted"></i></a>
     </li>
     <?php endif; ?>
   </ul>
@@ -56,7 +58,7 @@ if (in_array('help', $page_icons)) {
   <?php if($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ..." class="share-on">
+    <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ..." class="share-on">
       <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">
@@ -102,6 +104,15 @@ if (in_array('help', $page_icons)) {
   </div>
 
   <?php endif; ?>
+
+
+  <div class="help modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content" style="padding:20px">
+      </div>
+    </div>
+  </div>
+
 
 </div>
 <span class="clearfix"></span>
