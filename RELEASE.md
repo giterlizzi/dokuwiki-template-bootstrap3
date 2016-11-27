@@ -3,21 +3,21 @@
 ## [Develop]
 
 ### Added
-  * #63, #64: Added Edit Button (showEditBtn: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
-  * #110: Added "sidebarOnNavbar" (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
+  * #63, #64: Added Edit Button (``showEditBtn``: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
+  * #110: Added ``sidebarOnNavbar`` (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
   * #150: Added option to disable Page Tools animation (pageToolsAnimation: on) (thanks to @Juergen-aus-Koeln and @hvarga)
   * #186: Added "Add New Page" plugin support into navbar (thanks to @blacklord049 for idea)
   * #214: Added "Simplenavi" Plugin support (thanks to @Braintelligence and @Valiantiam)
   * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
-  * #228: Added Gravatar caching via DokuWiki external image fetch (see "fetchsize" DokuWiki config)
+  * #228: Added Gravatar caching via DokuWiki external image fetch (see ``fetchsize`` DokuWiki config)
   * #229: Revert sidebar grid configurations
   * #230: Added Template by Namespace feature and new option to enable/disable this feature (thanks to @Digitalin for idea)
-  * #231: Added "tocCollapsed" (default:0) option to automatic collapse the TOC on every pages (thanks to @tysoncecka)
+  * #231: Added ``tocCollapsed`` (default:0) option to automatic collapse the TOC on every pages (thanks to @tysoncecka)
   * #242: Added Dir plugin support (thanks to @huksley for the patch)
   * Added Portuguese (Brazil) and Norwegian language and updated more localization strings (thanks for all translators)
   * Added HTML5 Data Attributes to identify and styling current page/namespace via JS and CSS
   * Added Telegram integration
-  * Added configuration (sidebarShowPageTitle: on) to display the page title of sidebar on mobile layout
+  * Added configuration (``sidebarShowPageTitle``: on) to display the page title of sidebar on mobile layout
   * Added DokuWiki Semantic webservice integration. Now is possible display a popup with a brief text of DokuWiki page when the user over on DokuWiki link
   * Added Print, Send e-Mail and Share on localization strings
 
@@ -25,6 +25,7 @@
   * Changed position of Page Tools
   * Revert layout of TOC
   * Updated Font-Awesome to v4.7
+  * Moved Help page (``:help`` hook) into a modal popup
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
@@ -34,6 +35,7 @@
   * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
   * #250: Fixed "headers already send" issue when change theme (thanks to @bobdeh)
   * #253: Fixed Feed URL NS (thanks to @Juergen-aus-Koeln)
+  * #260: Fixed Fluid container behavior (thanks to @Hakker)
   * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
   * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
   * Corrected link style on footer
