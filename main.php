@@ -91,7 +91,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               $toc_classes     = array();
               $content_classes = array();
 
-              if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-collapsed dw-toc-closed';
+              if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
               if (bootstrap3_conf('tocPosition'))  $toc_classes[]     = 'dw-toc-'. bootstrap3_conf('tocPosition');
 
               echo '<div class="dw-content '. implode(' ', $content_classes) .'">';

@@ -1325,7 +1325,7 @@ function bootstrap3_html_toc($toc){
   $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
   $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
-  $out .= '<div class="panel-body toc-body collapse in">'.DOKU_LF;
+  $out .= '<div class="panel-body toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">'.DOKU_LF;
   $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
@@ -1734,7 +1734,7 @@ function bootstrap3_content($content) {
       'browser_title'     => array( 'browserTitle',         'fa-header'    ),
       'page'              => array( 'showPageInfo',         'fa-file'      )
     );
-  
+
     foreach ($admin_sections as $section => $items) {
 
       $search = $items[0];
