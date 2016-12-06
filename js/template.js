@@ -727,9 +727,14 @@ jQuery(document).on('bootstrap3:collapse-sections', function() {
 
   setTimeout(function() {
 
-  if (mediaSize('xs') && JSINFO.bootstrap3.config.collapsibleSections) {
+  if (! JSINFO.bootstrap3.config.collapsibleSections) return false;
 
-    var $headings = jQuery('div.level2').prev();
+  var $sections = jQuery('article div.level2'),
+      $headings = $sections.prev();
+
+  if (mediaSize('xs')) {
+
+    $sections.addClass('hide');
 
     if (! $headings.find('i').length) {
 
@@ -740,9 +745,10 @@ jQuery(document).on('bootstrap3:collapse-sections', function() {
       $headings.on('click', function() {
 
         var $heading = jQuery(this),
-            $icon    = $heading.find('i');
+            $icon    = $heading.find('i'),
+            $section = $heading.nextUntil('h2');
 
-        $heading.nextUntil('h2').toggle();
+        $section.toggleClass('hide');
         $heading.css('cursor', 'pointer');
 
         $icon.hasClass('fa-chevron-down')
@@ -757,6 +763,10 @@ jQuery(document).on('bootstrap3:collapse-sections', function() {
 
     }
 
+  } else {
+    if ($sections.hasClass('hide')) {
+      $sections.removeClass('hide');
+    }
   }
 
   }, 0);
