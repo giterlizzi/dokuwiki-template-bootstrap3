@@ -26,6 +26,7 @@
   * Revert layout of TOC
   * Updated Font-Awesome to v4.7
   * Moved Help page (``:help`` hook) into a modal popup
+  * Changed verical alignment of rowspan table headers
 
 ### Fixed
   * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
