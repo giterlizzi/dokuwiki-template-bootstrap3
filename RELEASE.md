@@ -1,6 +1,8 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
+## [v2016-12-12]
+
+In this release new TOC and Page Tools layout, improved speed page loading, stability for third party plugins and UX and updated all assets (Bootstrap, Font-Awesome). Introduced new configurations and special data attribute for customize the template or single page or NS.
 
 ### Added
   * #63, #64: Added Edit Button (``showEditBtn``: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
@@ -39,6 +41,7 @@
   * #260: Fixed Fluid container behavior (thanks to @Hakker)
   * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
   * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
+  * #272: Fidex TOC word break for JCK languages (thanks to @lattekun)
   * Corrected link style on footer
 
 ## [v2016-07-05]
@@ -349,6 +352,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
+[v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
 [v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-04-13...v2016-05-07
 [v2016-04-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-02-29...v2016-04-13
 [v2016-02-29]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...v2016-02-29
