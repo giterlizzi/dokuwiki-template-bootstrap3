@@ -34,7 +34,7 @@ jQuery(document).on('bootstrap3:init', function() {
     jQuery('input[type=checkbox]').addClass('checkbox-inline');
     jQuery('input[type=radio]').addClass('radio-inline');
     jQuery('label').addClass('control-label');
-    jQuery('main form').addClass('form-inline');
+    jQuery('main form:not(.form-horizontal)').addClass('form-inline');
 
     // Toolbar
     jQuery('#tool__bar').addClass('btn-group btn-group-xs');
