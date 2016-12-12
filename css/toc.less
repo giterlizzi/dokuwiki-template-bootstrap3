@@ -5,12 +5,11 @@
  * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
-#dokuwiki__toc {
+#dw__toc {
 
-  hr                                 { margin: 0; opacity: 0.5; }
   &.affix                            { z-index: 999; }
   .toc-title                         { cursor: pointer; margin-top: 0; }
-  .toc-body > ul                     { overflow-y: auto !important; }
+  .toc-body > ul                     { overflow-y: auto !important; padding-left: 10px; }
 
   .nav > li > a                      { /*color: #666;*/ padding: 4px 20px; font-weight: 500; display: block; word-break: keep-all; }
   .nav > li > a:hover                { background-color: transparent; color: initial; }
@@ -56,44 +55,40 @@
 
 }
 
-.dw-toc-closed {
-
-  .dw-content {
-    width: 100%;
-    left: 0;
-  }
-
-  .dw-toc {
-    width: 80px;
-    position: absolute;
-    float: right;
-    right: 1px;
-
-    hr,
-    .toc-title span,
-    .toc-body         { display: none; }
-
-  }
-
+.dw-toc {
+  width: 16em;
+  float: right;
+  height: auto;
+  margin: 0 0 1.5em 1.5em;
 }
 
-@media screen and (max-width: 767px) {
+.dw-toc-closed {
+  .toc-title span,
+  .toc-body         { display: none; }
+}
 
-  #dokuwiki__toc {
-    .toc-title {
-      width:100%;
-      text-align: left;
-    }
-    .toc-body {
-      width: 100%;
-      padding: 10px;
+.dw-toc .panel-body {
+  padding: 0;
+}
+
+.dw-toc .panel-heading {
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+.dw-toc-closed .dw-toc {
+  position: absolute;
+  width: 50px;
+  right: 30px;
+}
+
+.dw-toc {
+  &.dw-toc-left  { 
+    float: left;
+    margin: 0 1.5em 1.5em 0;
+
+    .dw-toc-closed {
+      right: auto;
     }
   }
-
-  .dw-toc-closed {
-    .toc-title {
-      margin: 0;
-    }
-  }
-
 }

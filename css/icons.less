@@ -90,12 +90,15 @@
     h1.revert:before      { .fa-icon(@fa-refresh); color: @color_success; }
     h1.popularity:before  { .fa-icon(@fa-envelope); color: @color_info; }
 
+    // Plugins
     h1.sqlite:before      { .fa-icon(@fa-database); }
     h1.tagging:before     { .fa-icon(@fa-tags); }
     h1.upgrade:before     { .fa-icon(@fa-cloud-download); }
     h1.smtp:before        { .fa-icon(@fa-envelope-o); }
     h1.searchindex:before { .fa-icon(@fa-sitemap); }
     h1.discussion:before  { .fa-icon(@fa-comments); }
+    h1.farmer:before      { .fa-icon(@fa-cubes); }
+    h1.submgr:before      { .fa-icon(@fa-envelope-open-o); }
 
   }
 
@@ -199,7 +202,8 @@ ul.search_quickhits li a:before { .fa-icon(@fa-file-text-o); color: #777; }
     &.media:before      { .icon(@fa-picture-o); }
     &.index:before      { .icon(@fa-sitemap); }
     &.create:before,
-    &.edit:before       { .icon(@fa-pencil-square-o); }
+    &.edit:before,
+    &.draft:before      { .icon(@fa-pencil-square-o); }
     &.show:before       { .icon(@fa-file-text-o); }
     &.source:before     { .icon(@fa-file-text-o); }
 
@@ -242,6 +246,8 @@ ul.search_quickhits li a:before { .fa-icon(@fa-file-text-o); color: #777; }
     &.smtp:before        { .icon(@fa-envelope-o); }
     &.searchindex:before { .icon(@fa-sitemap); }
     &.discussion:before  { .icon(@fa-comments); }
+    &.farmer:before      { .icon(@fa-cubes); }
+    &.submgr:before      { .icon(@fa-envelope-open-o); }
 
   }
 

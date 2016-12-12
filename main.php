@@ -30,7 +30,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo trim(implode(' ', $body_classes)) ?>">
+<body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <?php tpl_includeFile('topheader.html') ?>
@@ -40,24 +40,30 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
   <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
-    <?php tpl_includeFile('social.html') ?>
+    <div id="dokuwiki__pageheader">
 
-    <?php require_once('tpl_breadcrumbs.php'); ?>
+      <?php tpl_includeFile('social.html') ?>
 
-    <p class="pageId text-right small">
-      <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
-    </p>
+      <?php require_once('tpl_breadcrumbs.php'); ?>
 
-    <div id="dw__msgarea" class="small">
-      <?php bootstrap3_html_msgarea() ?>
+      <p class="pageId text-right small">
+        <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
+      </p>
+
+      <div id="dw__msgarea" class="small">
+        <?php bootstrap3_html_msgarea() ?>
+      </div>
+
     </div>
 
     <main class="main row" role="main">
 
-      <?php bootstrap3_sidebar_include('left') ?>
+      <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
 
       <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
+
+        <?php require_once('tpl_page_tools.php'); // Page Tools ?>
 
         <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
           <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
@@ -82,16 +88,18 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               $content = bootstrap3_content(ob_get_clean());
               $toc     = bootstrap3_toc(true);
 
-              // Include Page Tools
-              require_once('tpl_page_tools.php');
+              $toc_classes     = array();
+              $content_classes = array();
 
-              if ($toc) echo '<div class="dw-page-row row">';
-              echo '<div class="dw-content'. (($toc) ? ' dw-content-with-toc col-sm-9'. ((bootstrap3_conf('tocPosition') == 'left') ? ' col-md-push-3' : '') : '') .'">';
-              echo $content;
-              echo '</div>';
+              if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
+              if (bootstrap3_conf('tocPosition'))  $toc_classes[]     = 'dw-toc-'. bootstrap3_conf('tocPosition');
+
+              echo '<div class="dw-content '. implode(' ', $content_classes) .'">';
 
               // Include the TOC layout
-              if ($toc) echo '<div class="dw-toc hidden-print col-sm-3'.((bootstrap3_conf('tocPosition') == 'left') ? ' col-sm-pull-9' : '').'">' . $toc . '</div></div>';
+              if ($toc) echo '<div class="dw-toc '. implode(' ', $toc_classes) .' hidden-print">' . $toc . '</div>';
+              echo $content;
+              echo '</div>';
 
               tpl_flush();
 
@@ -108,7 +116,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
       </article>
 
-      <?php bootstrap3_sidebar_include('right') ?>
+      <?php bootstrap3_sidebar_include('right'); // Right Sidebar ?>
 
     </main>
 

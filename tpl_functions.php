@@ -743,7 +743,7 @@ function bootstrap3_tools($add_icons = true) {
   );
 
   $tools['site'] = array(
-    'icon'    => 'fa fa-fw fa-wrench',
+    'icon'    => 'fa fa-fw fa-cubes',
     'actions' => array(
       'recent' => array('icon' => 'fa fa-fw fa-list-alt'),
       'media'  => array('icon' => 'fa fa-fw fa-picture-o'),
@@ -892,9 +892,21 @@ function bootstrap3_conf($key, $default = false) {
 
   switch ($key) {
 
+    case 'bootstrapTheme':
+      @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
+      if ($theme) return $theme;
+      return $value;
+
+    case 'bootswatchTheme':
+      @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
+      if ($bootswatch) return $bootswatch;
+      return $value;
+
     case 'showTools':
     case 'showSearchForm':
     case 'showPageTools':
+    case 'showEditBtn':
+    case 'showAddNewPage':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showAdminMenu':
@@ -1309,11 +1321,11 @@ function bootstrap3_html_toc($toc){
 
   $out  = '';
   $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dokuwiki__toc" role="navigation" class="small">'.DOKU_LF;
-  $out .= '<h6 data-toggle="collapse" data-target="#dokuwiki__toc .toc-body" title="'.$lang['toc'].'" class="toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+  $out .= '<nav id="dw__toc" role="navigation" class="panel panel-default small">'.DOKU_LF;
+  $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
   $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
-  $out .= '<div class="toc-body collapse in">'.DOKU_LF;
+  $out .= '<div class="panel-body toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">'.DOKU_LF;
   $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
   $out .= '</div>'.DOKU_LF;
   $out .= '</nav>'.DOKU_LF;
@@ -1441,16 +1453,11 @@ function bootstrap3_pageinfo($ret = false) {
           global $auth;
           $user_data = $auth->getUserData($INFO['editor']);
 
-          $HTTP = new DokuHTTPClient();
+          $gravatar_img = ml(get_gravatar($user_data['mail'], 16).'&.jpg', array('cache' => 'recache', 'w' => 16, 'h' => 16));
 
-          $gravatar_img   = get_gravatar($user_data['mail'], 16);
-          $gravatar_check = $HTTP->get($gravatar_img . '&d=404');
-
-          if ($gravatar_check) {
-            $user_img = sprintf('<img src="%s" alt="" width="16" class="img-rounded" /> ', $gravatar_img);
-            $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
-            $user     = $user_img . $user;
-          }
+          $user_img = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $gravatar_img);
+          $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
+          $user     = $user_img . $user;
 
         }
 
@@ -1548,6 +1555,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
         ? tpl_basedir() . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
 
+      if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
+        $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
+      }
+
       $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
       break;
 
@@ -1635,10 +1646,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     $style  = '';
     $style .= '@media screen {';
     $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' #dokuwiki__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
+    $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dokuwiki__toc .nav .nav .nav { display: none; }';
+      $style .= ' #dw__toc .nav .nav .nav { display: none; }';
     }
 
     $style .= '}';
@@ -1649,10 +1660,10 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     );
 
     $js  = '';
-    $js .= "jQuery('body').scrollspy({ target: '#dokuwiki__toc', offset: ". ($navbar_padding + 10) ." });";
+    $js .= "jQuery('body').scrollspy({ target: '#dw__toc', offset: ". ($navbar_padding + 10) ." });";
 
     if (bootstrap3_conf('tocAffix')) {
-      $js .= 'jQuery("#dokuwiki__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
+      $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
     }
 
     if ($fixed_top_navbar) {
@@ -1723,7 +1734,7 @@ function bootstrap3_content($content) {
       'browser_title'     => array( 'browserTitle',         'fa-header'    ),
       'page'              => array( 'showPageInfo',         'fa-file'      )
     );
-  
+
     foreach ($admin_sections as $section => $items) {
 
       $search = $items[0];
@@ -1777,5 +1788,65 @@ function bootstrap3_content($content) {
   $content = str_replace('<div class="table ', '<div class="', $content);
 
   return $content;
+
+}
+
+
+function bootstrap3_theme_by_namespace() {
+
+  global $ID;
+
+  $themes_filename = DOKU_CONF.'bootstrap3.themes.conf';
+
+  if (! bootstrap3_conf('themeByNamespace')) return array();
+  if (! file_exists($themes_filename))       return array();
+
+  $config = confToHash($themes_filename);
+  krsort($config);
+
+  foreach ($config as $page => $theme) {
+
+    if (preg_match("/^$page/", "$ID")) {
+
+      list($bootstrap, $bootswatch) = split('/', $theme);
+
+      if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
+        return array($bootstrap, $bootswatch);
+      }
+
+      if ($bootstrap == 'bootswatch' && in_array($bootswatch, bootstrap3_bootswatch_theme_list())) {
+        return array($bootstrap, $bootswatch);
+      }
+
+    }
+
+  }
+
+  return array();
+
+}
+
+/**
+ * Return template classes
+ *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @see tpl_classes();
+ *
+ * @return string
+ **/
+function bootstrap3_classes() {
+
+  $page_on_panel    = bootstrap3_conf('pageOnPanel');
+  $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
+  $bootswatch_theme = bootstrap3_bootswatch_theme();
+
+  $classes   = array();
+  $classes[] = (($bootstrap_theme == 'bootswatch')  ? $bootswatch_theme  : $bootstrap_theme);
+  $classes[] = trim(tpl_classes());
+
+  if ($page_on_panel)                       $classes[] = 'dw-page-on-panel';
+  if (! bootstrap3_conf('tableFullWidth'))  $classes[] = 'dw-table-width';
+
+  return implode(' ', $classes);
 
 }

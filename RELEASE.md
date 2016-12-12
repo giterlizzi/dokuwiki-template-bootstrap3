@@ -1,5 +1,47 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+### Added
+  * #63, #64: Added Edit Button (``showEditBtn``: never) in Navbar (special thanks to @huksley for PR and @NoriSilverrage, @HavocKKS for idea)
+  * #110: Added ``sidebarOnNavbar`` (default:off) option for display the sidebar contents inside the navbar (special thanks to @chtiland for the idea)
+  * #150: Added option to disable Page Tools animation (pageToolsAnimation: on) (thanks to @Juergen-aus-Koeln and @hvarga)
+  * #186: Added "Add New Page" plugin support into navbar (thanks to @blacklord049 for idea)
+  * #214: Added "Simplenavi" Plugin support (thanks to @Braintelligence and @Valiantiam)
+  * #228: Added all Google Fonts used in Bootswatch Theme to recude load delay in intranet DokuWiki installations (thanks to @rafamerino for idea)
+  * #228: Added Gravatar caching via DokuWiki external image fetch (see ``fetchsize`` DokuWiki config)
+  * #229: Revert sidebar grid configurations
+  * #230: Added Template by Namespace feature and new option to enable/disable this feature (thanks to @Digitalin for idea)
+  * #231: Added ``tocCollapsed`` (default:0) option to automatic collapse the TOC on every pages (thanks to @tysoncecka)
+  * #242: Added Dir plugin support (thanks to @huksley for the patch)
+  * Added Portuguese (Brazil) and Norwegian language and updated more localization strings (thanks for all translators)
+  * Added HTML5 Data Attributes to identify and styling current page/namespace via JS and CSS
+  * Added Telegram integration
+  * Added configuration (``sidebarShowPageTitle``: on) to display the page title of sidebar on mobile layout
+  * Added DokuWiki Semantic webservice integration. Now is possible display a popup with a brief text of DokuWiki page when the user over on DokuWiki link
+  * Added Print, Send e-Mail and Share on localization strings
+
+### Changed
+  * Changed position of Page Tools
+  * Revert layout of TOC
+  * Updated Font-Awesome to v4.7
+  * Moved Help page (``:help`` hook) into a modal popup
+  * Changed verical alignment of rowspan table headers
+
+### Fixed
+  * #115: Fixed inlinetoc plugin visibility (thanks to @baxq)
+  * #225: Fixed Cookie Banner Law visibility (thanks to @legend2360)
+  * #226: Fixed conflict with Bootstrap Wrapper Pane Plugin (thanks to @legend2360)
+  * #248: Fixed unhexpected behavior for TOC when the user click on anchor link (special thanks to @algorys, @Digitalin and @polyzen)
+  * #249: Revert TOC to the original behavior (no Bootstrap grid) + enhancements
+  * #250: Fixed "headers already send" issue when change theme (thanks to @bobdeh)
+  * #253: Fixed Feed URL NS (thanks to @Juergen-aus-Koeln)
+  * #260: Fixed Fluid container behavior (thanks to @Hakker)
+  * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
+  * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
+  * #272: Fidex TOC word break for JCK languages (thanks to @lattekun)
+  * Corrected link style on footer
+
 ## [v2016-07-05]
 
 In this release improved stability and performance during rendering of the page. Fixed more issues, added new features and plugin support and updated the assets (Bootswatch, FontAwesome and AnchorJS). Added Bootstrap Documentation style for TOC (Table of Contents).
@@ -15,6 +57,7 @@ Enjoy!
   * #217: Added Linkback support (thanks to @downhamdave)
   * #219: Added Overlay plugin support (thanks to @lattekun)
   * #220: Added scroll animation and new UI for mobile for Footnote (thanks to @lattekun)
+  * #239: Added Table Width plugin support (thanks to @Lethert and @lukderp)
   * Added missing "create" action icon
   * Added new option ("navbarLabels") to display/hide labels on navbar
   * Added ARIA support for all dropdown menu
@@ -48,7 +91,8 @@ Enjoy!
   * Fixed visibility of 3th level of TOC
   * Fixed a Right Sidebar bahavior. Now the Right Sidebar is indipendent from Left Sidebar
   * Changed selector to fix fluid container functionality
-  
+  * Fixed logo padding without tagline
+
 ### Removed
   * Removed old and unused functions
   * Removed unused left and right sidebar grid options to increase the performance

@@ -46,7 +46,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
         // display logo and wiki title in a link to the home page
         tpl_link(
             wl(),
-            '<img src="'.$logo.'" alt="'.$title.'" class="pull-left" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
+            '<img src="'.$logo.'" alt="'.$title.'" class="pull-left'.(($tagline) ? ' dw-logo-tagline' : '').'" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
             'accesskey="h" title="[H]" class="navbar-brand"'
         );
 
@@ -89,9 +89,18 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
           // Translation Menu
           include_once(dirname(__FILE__).'/tpl_translation.php');
+
+          // Add New Page
+          include_once(dirname(__FILE__).'/tpl_new_page.php');
         ?>
 
         <ul class="nav navbar-nav">
+
+          <?php if (bootstrap3_conf('showEditBtn')): ?>
+          <li class="dw-action-icon hidden-xs">
+            <?php tpl_actionlink('edit', '<span class="sr-only">', '</span>'); ?>
+          </li>
+          <?php endif; ?>
 
           <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
           <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">

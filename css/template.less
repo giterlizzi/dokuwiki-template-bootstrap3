@@ -138,6 +138,12 @@ header {
 }
 
 
+/* NavBar Logo */
+#dw__logo.dw-logo-tagline {
+  margin-top: -5px;
+}
+
+
 /* Badges */
 #dw__badges {
   margin-top: 50px;
@@ -228,9 +234,9 @@ header {
 /* Page tools */
 #dw__pagetools {
 
-  position: fixed;
-  right: -5px;
-  padding-right: 3px;
+  position: absolute;
+  right: 27px;
+  top: 50px;
   z-index: 1000;
   text-align: center;
 
@@ -240,6 +246,10 @@ header {
 
   ul li:not(.active) a:hover {
       background: transparent;
+  }
+
+  .tools {
+    position: fixed;
   }
 
 }
@@ -403,6 +413,11 @@ header {
 }
 
 
+.admin_tasks {
+  width: 50% !important;
+}
+
+
 /* Back to top button */
 .back-to-top {
   position: fixed;
@@ -464,6 +479,7 @@ header {
   .share-facebook    i.fa { color: #3B5998; }
   .share-whatsapp    i.fa { color: #43D854; }
   .share-pinterest   i.fa { color: #BD081C; }
+  .share-telegram    i.fa { color: #0088CC; }
 
 }
 
@@ -477,6 +493,10 @@ header {
 
 ul.btn-group {
   padding: 0;
+}
+
+.table thead tr th[rowspan] {
+  vertical-align: top !important;
 }
 
 
@@ -516,6 +536,10 @@ ul.btn-group {
 
   article .wikilink2 {
     color: #d9534f;
+  }
+
+  article .page {
+    min-height: 400px;
   }
 
   .diffnav select {

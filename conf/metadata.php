@@ -14,12 +14,15 @@ $meta['customTheme']         = array('string');
 $meta['showThemeSwitcher']   = array('onoff');
 $meta['hideInThemeSwitcher'] = array('multicheckbox', '_choices' => $meta['bootswatchTheme']['_choices']);
 $meta['useLocalBootswatch']  = array('onoff');
+$meta['themeByNamespace']    = array('onoff');
 
 // Sidebar
-$meta['sidebarPosition']     = array('multichoice', '_choices' => array('left', 'right'));
-$meta['rightSidebar']        = array('string');
-$meta['leftSidebarGrid']     = array('string');
-$meta['rightSidebarGrid']    = array('string');
+$meta['sidebarPosition']      = array('multichoice', '_choices' => array('left', 'right'));
+$meta['rightSidebar']         = array('string');
+$meta['leftSidebarGrid']      = array('string');
+$meta['rightSidebarGrid']     = array('string');
+$meta['sidebarOnNavbar']      = array('onoff');
+$meta['sidebarShowPageTitle'] = array('onoff');
 
 // Navbar
 $meta['inverseNavbar']       = array('onoff');
@@ -29,6 +32,7 @@ $meta['showTools']           = array('multichoice', '_choices' => array('never',
 $meta['showHomePageLink']    = array('onoff');
 $meta['showUserHomeLink']    = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
+$meta['showEditBtn']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['individualTools']     = array('onoff');
 $meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
@@ -37,10 +41,12 @@ $meta['showAdminMenu']       = array('onoff');
 $meta['useLegacyNavbar']     = array('onoff');
 $meta['showNavbar']          = array('multichoice', '_choices' => array('logged', 'always'));
 $meta['navbarLabels']        = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
+$meta['showAddNewPage']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 
 // Semantic
 $meta['semantic']            = array('onoff');
 $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
+$meta['showSemanticPopup']   = array('onoff');
 
 // Layout
 $meta['fluidContainer']         = array('onoff');
@@ -51,6 +57,7 @@ $meta['tableStyle']             = array('multicheckbox', '_choices' => array('st
 $meta['showLandingPage']        = array('onoff');
 $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
+$meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
@@ -61,6 +68,7 @@ $meta['tocAffix']               = array('onoff');
 $meta['tocCollapseSubSections'] = array('onoff');
 $meta['tocPosition']            = array('multichoice', '_choices' => array('left', 'right'));
 $meta['tocCollapseOnScroll']    = array('onoff');
+$meta['tocCollapsed']           = array('onoff');
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');
