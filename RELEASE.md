@@ -39,6 +39,7 @@
   * #260: Fixed Fluid container behavior (thanks to @Hakker)
   * #261: Fixed TOC elements visibility for Struct Plugin (thanks to @Digitalin)
   * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
+  * #272: Fidex TOC word break for JCK languages (thanks to @lattekun)
   * Corrected link style on footer
 
 ## [v2016-07-05]
