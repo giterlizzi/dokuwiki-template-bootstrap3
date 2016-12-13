@@ -11,7 +11,11 @@
 var $wikilinks = jQuery('article .wikilink1');
 
 if (typeof JSINFO.plugin === 'undefined') {
-  JSINFO.plugin = { semantic : {} };
+  JSINFO.plugin = {};
+}
+
+if (typeof JSINFO.plugin.semantic === 'undefined') {
+  JSINFO.plugin.semantic = {};
 }
 
 if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService && JSINFO.bootstrap3.config.showSemanticPopup) {
