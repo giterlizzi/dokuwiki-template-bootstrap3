@@ -206,7 +206,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
 
         case 'plugin_move':
           $icon = 'i-cursor text-muted';
-          $html = preg_replace('/<a href=""><span>(.*?)<\/span>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
+          $html = preg_replace('/<a href=""><span>(.*?)<\/span><\/a>/', '<a href="javascript:void(0)" title="$1"><span>$1</span></a>', $html);
           break;
 
         case 'overlay':
