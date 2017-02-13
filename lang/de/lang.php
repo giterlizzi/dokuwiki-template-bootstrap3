@@ -5,16 +5,21 @@
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Dominik Soeldner <soeldner@yteam.de>
  * @author   Marko Šeremet
+ * @author   Torsten Widmann
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussion']           = 'Diskussion';
-$lang['back_to_article']      = 'Zurück zum Artikel';
-$lang['userpage']             = 'Benutzerseite';
-$lang['themes']               = 'Themes';
-$lang['expand_container']     = 'Erweitern/Reduzieren';
-$lang['administrative_tasks'] = 'Verwaltungsaufgaben';
-$lang['additional_plugins']   = 'Weitere Plugins';
+$lang['discussion']              = 'Diskussion';
+$lang['back_to_article']         = 'Zurück zum Artikel';
+$lang['userpage']                = 'Benutzerseite';
+$lang['themes']                  = 'Themes';
+$lang['expand_container']        = 'Erweitern/Reduzieren';
+$lang['administrative_tasks']    = 'Verwaltungsaufgaben';
+$lang['additional_plugins']      = 'Weitere Plugins';
+$lang['share_on']                = 'Share on';
+$lang['send_mail']               = 'Send e-Mail';
+$lang['print']                   = 'Print';
+$lang['add_new_page']            = 'Add New Page';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
@@ -28,3 +33,4 @@ $lang['config_cookie_law']       = 'Cookie Einverständniserklärung';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Browser Titel';
 $lang['config_page']             = 'Seite';
+
