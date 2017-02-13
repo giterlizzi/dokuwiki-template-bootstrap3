@@ -77,6 +77,7 @@ $conf['tocCollapseOnScroll']         = 1;
 $conf['tocCollapseSubSections']      = 1;
 $conf['tocCollapsed']                = 0;
 $conf['tocPosition']                 = 'right';
+$conf['tocLayout']                   = 'bootstrap';
 $conf['useACL']                      = 0;
 $conf['useAnchorJS']                 = 1;
 $conf['useGoogleAnalytics']          = 0;

@@ -55,7 +55,7 @@
 
 }
 
-.dw-toc {
+.dw-toc-default {
   width: 16em;
   float: right;
   height: auto;
@@ -65,24 +65,23 @@
 .dw-toc-closed {
   .toc-title span,
   .toc-body         { display: none; }
+  .dw-toc {
+    position: absolute;
+    width: 50px;
+    right: 30px;
+  }
 }
 
-.dw-toc .panel-body {
+.dw-toc-default .panel-body {
   padding: 0;
 }
 
-.dw-toc .panel-heading {
+.dw-toc-default .panel-heading {
   margin-bottom: 0;
   padding: 5px;
 }
 
-.dw-toc-closed .dw-toc {
-  position: absolute;
-  width: 50px;
-  right: 30px;
-}
-
-.dw-toc {
+.dw-toc-default {
   &.dw-toc-left  { 
     float: left;
     margin: 0 1.5em 1.5em 0;
