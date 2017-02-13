@@ -7,13 +7,17 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-$lang['discussion']           = '토론';
-$lang['back_to_article']      = '문서로 돌아가기';
-$lang['userpage']             = '사용자 문서';
-$lang['themes']               = '테마';
-$lang['expand_container']     = '펼치기/접기';
-$lang['administrative_tasks'] = '관리 작업';
-$lang['additional_plugins']   = '추가적인 플러그인';
+$lang['discussion']              = '토론';
+$lang['back_to_article']         = '문서로 돌아가기';
+$lang['userpage']                = '사용자 문서';
+$lang['themes']                  = '테마';
+$lang['expand_container']        = '펼치기/접기';
+$lang['administrative_tasks']    = '관리 작업';
+$lang['additional_plugins']      = '추가적인 플러그인';
+$lang['share_on']                = 'Share on';
+$lang['send_mail']               = 'Send e-Mail';
+$lang['print']                   = 'Print';
+$lang['add_new_page']            = 'Add New Page';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = '테마';
@@ -27,3 +31,4 @@ $lang['config_cookie_law']       = '쿠키 법률';
 $lang['config_google_analytics'] = 'Google 웹로그 분석';
 $lang['config_browser_title']    = '브라우저 제목';
 $lang['config_page']             = '문서';
+
