@@ -629,18 +629,13 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
-    print '<div class="input-group">';
-
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
     if (!$autocomplete)   print 'autocomplete="off" ';
     print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
 
-    if (bootstrap3_conf('showSearchButton')) {
-      print '<div class="input-group-btn"><button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button></div>';
-    }
+    print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
-    print '</div>';
     print '<input type="hidden" name="do" value="search" />';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
