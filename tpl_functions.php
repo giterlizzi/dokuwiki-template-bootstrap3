@@ -1551,7 +1551,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
         ? tpl_basedir() . 'assets/bootstrap'
-        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
+        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
       if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
         $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
