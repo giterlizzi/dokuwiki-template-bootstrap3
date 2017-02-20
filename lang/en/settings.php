@@ -74,7 +74,6 @@ $lang['showPageTools']                = 'Enable the DokuWiki-style Page Tools';
 $lang['showPageTools_o_always']       = 'Always';
 $lang['showPageTools_o_logged']       = 'When logged in';
 $lang['showPageTools_o_never']        = 'Never';
-$lang['showSearchButton']             = 'Display search button in navbar';
 $lang['showSearchForm']               = 'Display Search form in navbar';
 $lang['showSearchForm_o_always']      = 'Always';
 $lang['showSearchForm_o_logged']      = 'When logged in';

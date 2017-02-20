@@ -12,6 +12,7 @@ jQuery(document).on('bootstrap3:plugins', function(e) {
 
     /* DOKUWIKI:include js/plugins/csv.js */
     /* DOKUWIKI:include js/plugins/data.js */
+    /* DOKUWIKI:include js/plugins/database2.js */
     /* DOKUWIKI:include js/plugins/datatables.js */
     /* DOKUWIKI:include js/plugins/davcal.js */
     /* DOKUWIKI:include js/plugins/discussion.js */

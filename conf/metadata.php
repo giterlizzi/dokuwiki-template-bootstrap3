@@ -36,7 +36,6 @@ $meta['showEditBtn']         = array('multichoice', '_choices' => array('never',
 $meta['individualTools']     = array('onoff');
 $meta['showIndividualTool']  = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']      = array('multichoice', '_choices' => array('never', 'logged', 'always'));
-$meta['showSearchButton']    = array('onoff');
 $meta['showAdminMenu']       = array('onoff');
 $meta['useLegacyNavbar']     = array('onoff');
 $meta['showNavbar']          = array('multichoice', '_choices' => array('logged', 'always'));
@@ -69,6 +68,7 @@ $meta['tocCollapseSubSections'] = array('onoff');
 $meta['tocPosition']            = array('multichoice', '_choices' => array('left', 'right'));
 $meta['tocCollapseOnScroll']    = array('onoff');
 $meta['tocCollapsed']           = array('onoff');
+$meta['tocLayout']              = array('multichoice', '_choices' => array('default', 'bootstrap'));
 
 // Discussion
 $meta['showDiscussion']      = array('onoff');

@@ -629,20 +629,14 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
-    print '<div class="form-group">';
-
-    print '<input type="hidden" name="do" value="search" />';
-
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
-    if (!$autocomplete) print 'autocomplete="off" ';
-    print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="edit form-control" title="[F]" />';
+    if (!$autocomplete)   print 'autocomplete="off" ';
+    print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
 
-    print '</div>';
+    print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
-    if (bootstrap3_conf('showSearchButton')) {
-      print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
-    }
+    print '<input type="hidden" name="do" value="search" />';
 
     if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
@@ -951,6 +945,10 @@ function bootstrap3_conf($key, $default = false) {
         }
       }
 
+      return $value;
+
+    case 'tocCollapseOnScroll':
+      if (bootstrap3_conf('tocLayout') !== 'default') return false;
       return $value;
 
   }
@@ -1320,16 +1318,16 @@ function bootstrap3_html_toc($toc){
   global $lang;
 
   $out  = '';
-  $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dw__toc" role="navigation" class="panel panel-default small">'.DOKU_LF;
-  $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+  $out .= '<!-- TOC START -->' . DOKU_LF;
+  $out .= '<nav id="dw__toc" role="navigation" class="'. ((bootstrap3_conf('tocLayout') == 'default') ? 'panel panel-default ' : '') .'small">' . DOKU_LF;
+  $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="'. ((bootstrap3_conf('tocLayout') == 'default') ? 'panel-heading ' : '') .'toc-title"><i class="fa fa-fw fa-th-list"></i> ';
   $out .= '<span>'.$lang['toc'].'</span>';
-  $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
-  $out .= '<div class="panel-body toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">'.DOKU_LF;
-  $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
-  $out .= '</nav>'.DOKU_LF;
-  $out .= '<!-- TOC END -->'.DOKU_LF;
+  $out .= ' <i class="caret"></i></h6>' . DOKU_LF;
+  $out .= '<div class="'. ((bootstrap3_conf('tocLayout') == 'default') ? 'panel-body ' : '') .'toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">' . DOKU_LF;
+  $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)) . DOKU_LF;
+  $out .= '</div>' . DOKU_LF;
+  $out .= '</nav>' . DOKU_LF;
+  $out .= '<!-- TOC END -->' . DOKU_LF;
 
   return $out;
 
@@ -1553,7 +1551,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
         ? tpl_basedir() . 'assets/bootstrap'
-        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
+        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
       if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
         $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";

@@ -109,6 +109,33 @@ header {
       white-space: nowrap;
     }
 
+    #dw__search {
+
+      input[type=search] {
+        padding-left: 30px;
+        display: inline-block;
+      }
+
+      button[type=submit] {
+       position:absolute;
+       left: 5px;
+       padding: 5px;
+       background: transparent;
+       border: 0px solid;
+      }
+
+      button[type=submit]:hover,
+      button[type=submit]:focus {
+        outline: 0;
+      }
+
+      #qsearch__out {
+        overflow-y: auto;
+        max-height: 400px;
+      }
+
+    }
+
     &.navbar-fixed-top .dw__actions {
       margin: 0 15px 0 5px;
     }
