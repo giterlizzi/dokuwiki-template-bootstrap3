@@ -1317,7 +1317,19 @@ function bootstrap3_html_toc($toc){
 
   global $lang;
 
+  $json_toc = array();
+
+  foreach ($toc as $item) {
+    $json_toc[] = array(
+      'link'   => (isset($item['link']) ? $item['link'] : '#' . $item['hid']),
+      'title'  => $item['title'],
+      'level'  => $item['level'],
+    );
+  }
+
   $out  = '';
+  $out .= '<script>JSINFO.bootstrap3.toc = ' . json_encode($json_toc) . ';</script>' . DOKU_LF;
+
   $out .= '<!-- TOC START -->' . DOKU_LF;
   $out .= '<nav id="dw__toc" role="navigation" class="'. ((bootstrap3_conf('tocLayout') == 'default') ? 'panel panel-default ' : '') .'small">' . DOKU_LF;
   $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="'. ((bootstrap3_conf('tocLayout') == 'default') ? 'panel-heading ' : '') .'toc-title"><i class="fa fa-fw fa-th-list"></i> ';
@@ -1659,6 +1671,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     $js  = '';
     $js .= "jQuery('body').scrollspy({ target: '#dw__toc', offset: ". ($navbar_padding + 10) ." });";
+    $js .= "jQuery('body').scrollspy({ target: '#dw__navbar div.navbar-right', offset: ". ($navbar_padding + 10) ." });";
 
     if (bootstrap3_conf('tocAffix')) {
       $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';

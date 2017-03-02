@@ -56,7 +56,7 @@ jQuery(document).on('bootstrap3:init', function() {
     }
 
     // Scrolling animation (on TOC and FootNotes)
-    jQuery('#dw__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
+    jQuery('#dw__toc a, #dw__toc_menu a, a.fn_top, a.fn_bot').on('click', function(e) {
 
       var $link = jQuery(this);
 
@@ -246,6 +246,32 @@ jQuery(document).on('bootstrap3:toc-open', function() {
   jQuery('.dw-page').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
+
+});
+
+
+// Table of Contents (Navbar)
+jQuery(document).on('bootstrap3:toc-menu', function() {
+
+  if (! jQuery("#dw__toc_menu").length) return false;
+
+  if (jQuery(JSINFO.bootstrap3.toc.length)) {
+    jQuery("#dw__toc_menu").removeClass("hide");
+  }
+
+  jQuery.each(JSINFO.bootstrap3.toc, function(idx, item) {
+
+    var indent = "";
+
+    if (item.level > 1) {
+      for (var i=0; i<= item.level; i++) {
+        indent += "&nbsp;&nbsp;"
+      }
+    }
+
+    jQuery("#dw__toc_menu ul").append(['<li><a class="small" href="', item.link, '">', indent , item.title, '</a></li>'].join(''));
+
+  });
 
 });
 
@@ -847,7 +873,7 @@ jQuery(document).on('bootstrap3:components', function() {
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
+    var events = [  'mobile-layout', 'toc', 'toc-menu', 'nav', 'tabs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
                     'dropdown-page', 'footnotes', 'media-manager',
                     'collapse-sections' ];

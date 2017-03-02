@@ -18,7 +18,7 @@ $navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : nu
 $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
 
 ?>
-<nav class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
+<nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
   <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid' : '') ?>">
 
@@ -133,7 +133,19 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         </ul>
 
+        <ul class="nav navbar-nav hide" id="dw__toc_menu">
+          <li class="dropdown">
+            <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-fw fa-th-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" style="max-height: 400px; overflow-y: auto">
+              <li class="dropdown-header"><i class="fa fa-fw fa-th-list"></i> <?php echo $lang['toc'] ?></li>
+            </ul>
+          </li>
+        </ul>
+
         <?php include_once(dirname(__FILE__).'/tpl_user_menu.php'); ?>
+
 
       </div>
 
