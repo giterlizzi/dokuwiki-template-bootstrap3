@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	src:
+		local('Lato Bold'),
+		local('Lato-Bold'),
+		url('Lato_700.eot?#iefix') format('embedded-opentype'),
+		url('Lato_700.woff') format('woff'),
+		url('Lato_700.woff2') format('woff2'),
+		url('Lato_700.svg#Lato') format('svg'),

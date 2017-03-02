@@ -1,0 +1,15 @@
+<?php
+/**
+ * DokuWiki Bootstrap3 Template: navbar.html
+ *
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ *
+ * Copy this file in <dokuwiki>/conf directory
+ */
+?>
+<?php global $ID ?>
+<li<?php echo ((wl($ID) == wl()) ? ' class="active"' : ''); ?>>
+  <?php tpl_link(wl(), '<i class="glyphicon glyphicon-home"></i> Home') ?>
+</li>

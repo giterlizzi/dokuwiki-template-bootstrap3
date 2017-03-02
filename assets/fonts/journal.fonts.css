@@ -7,10 +7,6 @@
 		local('NewsCycle'),
 		url('News_Cycle_400.eot?#iefix') format('embedded-opentype'),
 		url('News_Cycle_400.woff') format('woff'),
-		url('News_Cycle_400.woff2') format('woff2'),
-		url('News_Cycle_400.svg#NewsCycle') format('svg'),
-		url('News_Cycle_400.ttf') format('truetype');
-}
 @font-face {
 	font-family: 'News Cycle';
 	font-style: normal;
@@ -22,5 +18,3 @@
 		url('News_Cycle_700.woff') format('woff'),
 		url('News_Cycle_700.woff2') format('woff2'),
 		url('News_Cycle_700.svg#NewsCycle') format('svg'),
-		url('News_Cycle_700.ttf') format('truetype');
-}

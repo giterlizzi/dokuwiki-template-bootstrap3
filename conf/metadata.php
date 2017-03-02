@@ -9,7 +9,7 @@
 
 // Theme
 $meta['bootstrapTheme']      = array('multichoice', '_choices' => array('default', 'optional', 'custom', 'bootswatch'));
-$meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'slate', 'spacelab', 'superhero', 'united', 'yeti'));
+$meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'solar', 'slate', 'spacelab', 'superhero', 'united', 'yeti'));
 $meta['customTheme']         = array('string');
 $meta['showThemeSwitcher']   = array('onoff');
 $meta['hideInThemeSwitcher'] = array('multicheckbox', '_choices' => $meta['bootswatchTheme']['_choices']);

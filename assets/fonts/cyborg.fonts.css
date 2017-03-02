@@ -9,8 +9,6 @@
 		url('Roboto_400.woff') format('woff'),
 		url('Roboto_400.woff2') format('woff2'),
 		url('Roboto_400.svg#Roboto') format('svg'),
-		url('Roboto_400.ttf') format('truetype');
-}
 @font-face {
 	font-family: 'Roboto';
 	font-style: normal;
@@ -22,5 +20,3 @@
 		url('Roboto_700.woff') format('woff'),
 		url('Roboto_700.woff2') format('woff2'),
 		url('Roboto_700.svg#Roboto') format('svg'),
-		url('Roboto_700.ttf') format('truetype');
-}
