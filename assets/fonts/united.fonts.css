@@ -8,8 +8,6 @@
 		url('Ubuntu_400.woff') format('woff'),
 		url('Ubuntu_400.woff2') format('woff2'),
 		url('Ubuntu_400.svg#Ubuntu') format('svg'),
-		url('Ubuntu_400.ttf') format('truetype');
-}
 @font-face {
 	font-family: 'Ubuntu';
 	font-style: normal;
@@ -21,5 +19,3 @@
 		url('Ubuntu_700.woff') format('woff'),
 		url('Ubuntu_700.woff2') format('woff2'),
 		url('Ubuntu_700.svg#Ubuntu') format('svg'),
-		url('Ubuntu_700.ttf') format('truetype');
-}

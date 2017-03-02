@@ -1,0 +1,11 @@
+@font-face {
+	font-family: 'Lato';
+	font-style: italic;
+	font-weight: 400;
+	src:
+		local('Lato Italic'),
+		local('Lato-Italic'),
+		url('Lato_400italic.eot?#iefix') format('embedded-opentype'),
+		url('Lato_400italic.woff') format('woff'),
+		url('Lato_400italic.woff2') format('woff2'),
+		url('Lato_400italic.svg#Lato') format('svg'),
