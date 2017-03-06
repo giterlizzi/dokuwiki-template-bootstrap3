@@ -16,10 +16,10 @@ $lang['themes']                  = 'Themes';
 $lang['expand_container']        = 'Erweitern/Reduzieren';
 $lang['administrative_tasks']    = 'Verwaltungsaufgaben';
 $lang['additional_plugins']      = 'Weitere Plugins';
-$lang['share_on']                = 'Share on';
-$lang['send_mail']               = 'Send e-Mail';
-$lang['print']                   = 'Print';
-$lang['add_new_page']            = 'Add New Page';
+$lang['share_on']                = 'Teilen auf';
+$lang['send_mail']               = 'eMail versenden';
+$lang['print']                   = 'Drucken';
+$lang['add_new_page']            = 'Neue Seite hinzufügen';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
