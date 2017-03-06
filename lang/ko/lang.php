@@ -14,10 +14,10 @@ $lang['themes']                  = '테마';
 $lang['expand_container']        = '펼치기/접기';
 $lang['administrative_tasks']    = '관리 작업';
 $lang['additional_plugins']      = '추가적인 플러그인';
-$lang['share_on']                = 'Share on';
-$lang['send_mail']               = 'Send e-Mail';
-$lang['print']                   = 'Print';
-$lang['add_new_page']            = 'Add New Page';
+$lang['share_on']                = '다음에 공유';
+$lang['send_mail']               = '이메일 보내기';
+$lang['print']                   = '인쇄';
+$lang['add_new_page']            = '새 문서 추가';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = '테마';
