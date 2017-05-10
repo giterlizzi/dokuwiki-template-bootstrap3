@@ -1589,6 +1589,26 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     'type' => 'text/javascript',
     'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
 
+  // If there's a "local" directory in the "assets" directory, then
+  // look for .css and .js files to add:
+  if ( is_dir(tpl_incdir() . 'assets/local') ) {
+    if ( ($dirH = opendir(tpl_incdir() . 'assets/local')) ) {
+      while ( ($fname = readdir($dirH)) !== false ) {
+        if ( substr_compare($fname, '.css', -4, 4) == 0 ) {
+          $event->data['link'][] = array(
+            'type' => 'text/css',
+            'rel'  => 'stylesheet',
+            'href' => tpl_basedir() . 'assets/local/' . $fname);
+        }
+        else if ( substr_compare($fname, '.js', -3, 3) == 0 ) {
+          $event->data['script'][] = array(
+            'type' => 'text/javascript',
+            'src' => tpl_basedir() . 'assets/local/' . $fname);
+        }
+      }
+    }
+  }
+
 
   // Apply some FIX
   if ($ACT || defined('DOKU_MEDIADETAIL')) {
