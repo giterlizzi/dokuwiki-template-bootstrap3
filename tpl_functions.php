@@ -1606,6 +1606,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
             'src' => tpl_basedir() . 'assets/local/' . $fname);
         }
       }
+      closedir($dirH);
     }
   }
 
