@@ -1645,7 +1645,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     $style  = '';
     $style .= '@media screen {';
-    $style .= " body { padding-top: {$navbar_padding}px; }" ;
+    $style .= " body { margin-top: {$navbar_padding}px; }" ;
     $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
@@ -1667,7 +1667,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     }
 
     if ($fixed_top_navbar) {
-      $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
+      $js .= "var shiftWindow = function() { if(location.hash && location.hash.indexOf('#') == 0 && document.getElementById(location.hash.substr(1))) scrollBy(0, -$navbar_padding) }; shiftWindow(); window.addEventListener('hashchange', shiftWindow);";
     }
 
     if (bootstrap3_conf('useAnchorJS')) {
