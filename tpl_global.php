@@ -34,6 +34,7 @@ $page_on_panel = bootstrap3_conf('pageOnPanel');
 // Populate JSINFO object
 $JSINFO['bootstrap3'] = array(
   'mode'   => $ACT,
+  'toc'    => array(),
   'config' => array(
     'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
     'sidebarOnNavbar'     => (int) bootstrap3_conf('sidebarOnNavbar'),

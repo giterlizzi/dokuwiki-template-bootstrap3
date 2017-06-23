@@ -56,7 +56,7 @@ jQuery(document).on('bootstrap3:init', function() {
     }
 
     // Scrolling animation (on TOC and FootNotes)
-    jQuery('#dw__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
+    jQuery('#dw__toc a, #dw__toc_menu a, a.fn_top, a.fn_bot').on('click', function(e) {
 
       var $link = jQuery(this);
 
@@ -231,7 +231,7 @@ jQuery(document).on('bootstrap3:toc-close', function() {
   if (! $dw_toc.length) return false;
 
   if (! $dw_toc.hasClass('affix-bottom')) {
-    jQuery('.dw-page').addClass('dw-toc-closed');
+    jQuery('.dw-content').addClass('dw-toc-closed');
     $dw_toc.find('.toc-body').collapse('hide');
   }
 
@@ -243,9 +243,35 @@ jQuery(document).on('bootstrap3:toc-open', function() {
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  jQuery('.dw-page').removeClass('dw-toc-closed');
+  jQuery('.dw-content').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
+
+});
+
+
+// Table of Contents (Navbar)
+jQuery(document).on('bootstrap3:toc-menu', function() {
+
+  if (! jQuery("#dw__toc_menu").length) return false;
+
+  if (jQuery(JSINFO.bootstrap3.toc.length)) {
+    jQuery("#dw__toc_menu").removeClass("hide");
+  }
+
+  jQuery.each(JSINFO.bootstrap3.toc, function(idx, item) {
+
+    var indent = "";
+
+    if (item.level > 1) {
+      for (var i=0; i<= item.level; i++) {
+        indent += "&nbsp;&nbsp;"
+      }
+    }
+
+    jQuery("#dw__toc_menu ul").append(['<li><a class="small" href="', item.link, '">', indent , item.title, '</a></li>'].join(''));
+
+  });
 
 });
 
@@ -283,10 +309,10 @@ jQuery(document).on('bootstrap3:toc', function() {
 
     $dw_toc.find('.toc-title').on('click', function() {
 
-      jQuery('.dw-page').toggleClass('dw-toc-closed');
+      jQuery('.dw-content').toggleClass('dw-toc-closed');
 
       if (jQuery('.dw-toc').hasClass('dw-toc-bootstrap')) {
-        if (jQuery('.dw-page').hasClass('dw-toc-closed')) {
+        if (jQuery('.dw-content').hasClass('dw-toc-closed')) {
           jQuery('.dw-toc').removeClass('col-md-3');
           jQuery('.dw-content').removeClass('col-md-9').addClass('col-md-12');
         } else {
@@ -847,7 +873,7 @@ jQuery(document).on('bootstrap3:components', function() {
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
+    var events = [  'mobile-layout', 'toc', 'toc-menu', 'nav', 'tabs',
                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
                     'dropdown-page', 'footnotes', 'media-manager',
                     'collapse-sections' ];
