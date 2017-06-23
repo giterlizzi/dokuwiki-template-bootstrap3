@@ -92,33 +92,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               $content_classes      = array();
               $content_wrap_classes = array();
 
-              if (bootstrap3_conf('tocCollapsed')) $toc_classes[] = 'dw-toc-closed';
-              if (bootstrap3_conf('tocPosition'))  $toc_classes[] = 'dw-toc-'. bootstrap3_conf('tocPosition');
+              if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
 
-              if (bootstrap3_conf('tocLayout') == 'bootstrap') {
-                $content_classes[]      = (($toc) ? 'col-md-9' : 'col-md-12');
-                $toc_classes[]          = 'col-md-3';
-                $content_wrap_classes[] = 'row';
-              }
-
-              $toc_classes[] = 'dw-toc-' . bootstrap3_conf('tocLayout');
-
-              echo '<div class="dw-page '. implode(' ', $content_wrap_classes) .'">';
               echo '<div class="dw-content '. implode(' ', $content_classes) .'">';
-
-              // Include the TOC layout
-              if ($toc && bootstrap3_conf('tocLayout') == 'default') {
-                echo '<div class="dw-toc '. implode(' ', $toc_classes) .' hidden-print">' . $toc . '</div>';
-              }
-
+              echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
               echo $content;
-              echo '</div>';
-
-              // Include the TOC layout
-              if ($toc && bootstrap3_conf('tocLayout') == 'bootstrap') {
-                echo '<div class="dw-toc '. implode(' ', $toc_classes) .' hidden-print">' . $toc . '</div>';
-              }
-
               echo '</div>';
 
               tpl_flush();

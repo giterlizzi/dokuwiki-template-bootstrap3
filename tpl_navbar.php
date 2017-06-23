@@ -73,7 +73,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
       </ul>
       <?php endif; ?>
 
-      <div class="navbar-right">
+      <div class="navbar-right" id="dw__navbar_items">
 
         <?php bootstrap3_searchform() ?>
 
@@ -133,6 +133,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         </ul>
 
+        <?php if (bootstrap3_conf('tocLayout') == 'navbar'): ?>
         <ul class="nav navbar-nav hide" id="dw__toc_menu">
           <li class="dropdown">
             <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
@@ -143,6 +144,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
             </ul>
           </li>
         </ul>
+        <?php endif; ?>
 
         <?php include_once(dirname(__FILE__).'/tpl_user_menu.php'); ?>
 

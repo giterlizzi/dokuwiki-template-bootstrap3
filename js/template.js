@@ -231,7 +231,7 @@ jQuery(document).on('bootstrap3:toc-close', function() {
   if (! $dw_toc.length) return false;
 
   if (! $dw_toc.hasClass('affix-bottom')) {
-    jQuery('.dw-page').addClass('dw-toc-closed');
+    jQuery('.dw-content').addClass('dw-toc-closed');
     $dw_toc.find('.toc-body').collapse('hide');
   }
 
@@ -243,7 +243,7 @@ jQuery(document).on('bootstrap3:toc-open', function() {
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  jQuery('.dw-page').removeClass('dw-toc-closed');
+  jQuery('.dw-content').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
 
@@ -309,10 +309,10 @@ jQuery(document).on('bootstrap3:toc', function() {
 
     $dw_toc.find('.toc-title').on('click', function() {
 
-      jQuery('.dw-page').toggleClass('dw-toc-closed');
+      jQuery('.dw-content').toggleClass('dw-toc-closed');
 
       if (jQuery('.dw-toc').hasClass('dw-toc-bootstrap')) {
-        if (jQuery('.dw-page').hasClass('dw-toc-closed')) {
+        if (jQuery('.dw-content').hasClass('dw-toc-closed')) {
           jQuery('.dw-toc').removeClass('col-md-3');
           jQuery('.dw-content').removeClass('col-md-9').addClass('col-md-12');
         } else {
