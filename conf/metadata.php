@@ -30,7 +30,7 @@ $meta['fixedTopNavbar']      = array('onoff');
 $meta['showTranslation']     = array('onoff');
 $meta['showTools']           = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showHomePageLink']    = array('onoff');
-$meta['homePageURL']         = array('string', '_caution' => 'danger');
+$meta['homePageURL']         = array('string', '_caution' => 'warning');
 $meta['showUserHomeLink']    = array('onoff');
 $meta['hideLoginLink']       = array('onoff');
 $meta['showEditBtn']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
