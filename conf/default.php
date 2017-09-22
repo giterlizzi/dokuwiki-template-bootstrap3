@@ -28,6 +28,7 @@ $conf['googleAnalyticsTrackActions'] = 0;
 $conf['googleAnalyticsTrackID']      = '';
 $conf['hideInThemeSwitcher']         = '';
 $conf['hideLoginLink']               = 0;
+$conf['homePageURL']                 = '';
 $conf['individualTools']             = 0;
 $conf['inverseNavbar']               = 0;
 $conf['landingPages']                = '(intro)';

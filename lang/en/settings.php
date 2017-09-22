@@ -32,6 +32,7 @@ $lang['googleAnalyticsTrackActions']  = 'Track DokuWiki actions (edit, search, e
 $lang['googleAnalyticsTrackID']       = 'Tracking ID';
 $lang['hideInThemeSwitcher']          = 'Hide themes in theme switcher';
 $lang['hideLoginLink']                = 'Hide the login button in navbar. This option is useful in "read-only" DokuWiki installations (eg. blog, personal website)';
+$lang['homePageURL']                  = 'Use custom URL for home-page links';
 $lang['individualTools']              = 'Split the Tools in individual menu in navbar';
 $lang['inverseNavbar']                = 'Inverse navbar';
 $lang['landingPages']                 = 'Landing page name (insert a regex)';
@@ -105,4 +106,3 @@ $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useGravatar']                  = 'Load Gravatar image';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
-

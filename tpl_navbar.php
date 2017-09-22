@@ -16,6 +16,7 @@ $navbar_labels    = bootstrap3_conf('navbarLabels');
 $navbar_classes   = array();
 $navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
 $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
+$home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
 
 ?>
 <nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
@@ -45,7 +46,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         // display logo and wiki title in a link to the home page
         tpl_link(
-            wl(),
+            $home_link,
             '<img src="'.$logo.'" alt="'.$title.'" class="pull-left'.(($tagline) ? ' dw-logo-tagline' : '').'" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
             'accesskey="h" title="[H]" class="navbar-brand"'
         );
@@ -58,8 +59,8 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
       <?php if (bootstrap3_conf('showHomePageLink')) :?>
       <ul class="nav navbar-nav">
-        <li<?php echo ((wl($ID) == wl()) ? ' class="active"' : ''); ?>>
-          <?php tpl_link(wl(), '<i class="fa fa-fw fa-home"></i> Home') ?>
+        <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
+          <?php tpl_link($home_link, '<i class="fa fa-fw fa-home"></i> Home') ?>
         </li>
       </ul>
       <?php endif; ?>
