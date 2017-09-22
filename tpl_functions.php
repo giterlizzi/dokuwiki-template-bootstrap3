@@ -904,7 +904,7 @@ function bootstrap3_conf($key, $default = false) {
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showAdminMenu':
-      return $value && $INFO['isadmin'];
+      return $value && ( $INFO['isadmin'] || $INFO['ismanager'] );
 
     case 'hideLoginLink':
     case 'showLoginOnFooter':
