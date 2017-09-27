@@ -1808,7 +1808,7 @@ function bootstrap3_theme_by_namespace() {
 
     if (preg_match("/^$page/", "$ID")) {
 
-      list($bootstrap, $bootswatch) = split('/', $theme);
+      list($bootstrap, $bootswatch) = explode('/', $theme);
 
       if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
         return array($bootstrap, $bootswatch);
