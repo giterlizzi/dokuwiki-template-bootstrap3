@@ -33,9 +33,21 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
-    <?php tpl_includeFile('topheader.html') ?>
-    <?php require_once('tpl_navbar.php'); ?>
-    <?php tpl_includeFile('header.html') ?>
+    <?php
+
+      tpl_includeFile('topheader.html');
+
+      // Top-Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('topheader', 1, 1, bootstrap3_conf('useACL'));
+
+      require_once('tpl_navbar.php');
+
+      tpl_includeFile('header.html');
+
+      // Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('header', 1, 1, bootstrap3_conf('useACL'));
+
+    ?>
   </header>
 
   <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
