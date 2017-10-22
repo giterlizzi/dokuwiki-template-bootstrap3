@@ -10,41 +10,77 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+// class DebugObject {
+// 
+//   public function __construct() {}
+// 
+//   public function debugLog() {
+//     var_dump(json_encode(func_get_args()));
+//   }
+// 
+//   public function debugLogEntry($level) {}
+// 
+// }
+// 
+// function get_debug() {
+// 
+//   $obj = new stdclass;
+//   $obj->debug = new DebugObject();
+// 
+//   return $obj->debug;
+// }
+
+// global $debugObject;
+// $debugObject = get_debug();
+
+include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
+
 /**
  * Create link/button to discussion page and back
  *
  * @author Anika Henke <anika@selfthinker.org>
  */
 function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=0, $return=0) {
-    global $ID;
-    $output = '';
-    $discussPage    = str_replace('@ID@', $ID, $discussionPage);
-    $discussPageRaw = str_replace('@ID@', '', $discussionPage);
-    $isDiscussPage  = strpos($ID, $discussPageRaw) !== false;
-    $backID         = ':'.str_replace($discussPageRaw, '', $ID);
-    if ($wrapper) $output .= "<$wrapper>";
-    if ($isDiscussPage) {
-        if ($link) {
-            ob_start();
-            tpl_pagelink($backID, $backTitle);
-            $output .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $output .= html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
-        }
+
+  global $ID;
+
+  $output         = '';
+  $discussPage    = str_replace('@ID@', $ID, $discussionPage);
+  $discussPageRaw = str_replace('@ID@', '', $discussionPage);
+  $isDiscussPage  = strpos($ID, $discussPageRaw) !== false;
+  $backID         = ':'.str_replace($discussPageRaw, '', $ID);
+
+  if ($wrapper) $output .= "<$wrapper>";
+
+  if ($isDiscussPage) {
+
+    if ($link) {
+      ob_start();
+      tpl_pagelink($backID, $backTitle);
+      $output .= ob_get_contents();
+      ob_end_clean();
     } else {
-        if ($link) {
-            ob_start();
-            tpl_pagelink($discussPage, $title);
-            $output .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $output .= html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
-        }
+      $output .= html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
     }
-    if ($wrapper) $output .= "</$wrapper>";
-    if ($return) return $output;
-    echo $output;
+
+  } else {
+
+    if ($link) {
+      ob_start();
+      tpl_pagelink($discussPage, $title);
+      $output .= ob_get_contents();
+      ob_end_clean();
+    } else {
+      $output .= html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
+    }
+
+  }
+
+  if ($wrapper) $output .= "</$wrapper>";
+  if ($return) return $output;
+
+  echo $output;
+
 }
 
 
@@ -54,19 +90,22 @@ function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=
  * @author Anika Henke <anika@selfthinker.org>
  */
 function _tpl_userpage($userPage, $title, $link=0, $wrapper=0) {
-    if (empty($_SERVER['REMOTE_USER'])) return;
 
-    global $conf;
-    $userPage = str_replace('@USER@', $_SERVER['REMOTE_USER'], $userPage);
+  if (empty($_SERVER['REMOTE_USER'])) return;
 
-    if ($wrapper) echo "<$wrapper>";
+  global $conf;
+  $userPage = str_replace('@USER@', $_SERVER['REMOTE_USER'], $userPage);
 
-    if ($link)
-        tpl_pagelink($userPage, $title);
-    else
-        echo html_btn('userpage', $userPage, '', array(), 'get', 0, $title);
+  if ($wrapper) echo "<$wrapper>";
 
-    if ($wrapper) echo "</$wrapper>";
+  if ($link) {
+    tpl_pagelink($userPage, $title);
+  } else {
+    echo html_btn('userpage', $userPage, '', array(), 'get', 0, $title);
+  }
+
+  if ($wrapper) echo "</$wrapper>";
+
 }
 
 
@@ -76,22 +115,31 @@ function _tpl_userpage($userPage, $title, $link=0, $wrapper=0) {
  * @author Anika Henke <anika@selfthinker.org>
  */
 function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
-    switch ($type) {
-        case 'discussion':
-            if (tpl_getConf('discussionPage')) {
-                $output = _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper, 1);
-                if ($return) return $output;
-                echo $output;
-            }
-            break;
-        case 'userpage':
-            if (tpl_getConf('userPage')) {
-                $output = _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper, 1);
-                if ($return) return $output;
-                echo $output;
-            }
-            break;
-    }
+
+  switch ($type) {
+
+     case 'discussion':
+
+      if (tpl_getConf('discussionPage')) {
+        $output = _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper, 1);
+        if ($return) return $output;
+        echo $output;
+      }
+
+      break;
+
+    case 'userpage':
+
+      if (tpl_getConf('userPage')) {
+        $output = _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper, 1);
+        if ($return) return $output;
+        echo $output;
+      }
+
+      break;
+
+  }
+
 }
 
 
@@ -100,18 +148,24 @@ function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
  * copied from core (available since Detritus)
  */
 if (!function_exists('tpl_toolsevent')) {
-    function tpl_toolsevent($toolsname, $items, $view='main') {
-        $data = array(
-            'view'  => $view,
-            'items' => $items
-        );
-        $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
-        $evt = new Doku_Event($hook, $data);
-        if($evt->advise_before()){
-            foreach($evt->data['items'] as $k => $html) echo $html;
-        }
-        $evt->advise_after();
+
+  function tpl_toolsevent($toolsname, $items, $view='main') {
+
+    $data = array(
+      'view'  => $view,
+      'items' => $items
+    );
+
+    $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
+    $evt = new Doku_Event($hook, $data);
+
+    if($evt->advise_before()){
+      foreach($evt->data['items'] as $k => $html) echo $html;
     }
+    $evt->advise_after();
+
+  }
+
 }
 
 
@@ -119,25 +173,33 @@ if (!function_exists('tpl_toolsevent')) {
  * copied from core (available since Binky)
  */
 if (!function_exists('tpl_classes')) {
-    function tpl_classes() {
-        global $ACT, $conf, $ID, $INFO;
-        $classes = array(
-            'dokuwiki',
-            'mode_'.$ACT,
-            'tpl_'.$conf['template'],
-            !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
-            $INFO['exists'] ? '' : 'notFound',
-            ($ID == $conf['start']) ? 'home' : '',
-        );
-        return join(' ', $classes);
-    }
+
+  function tpl_classes() {
+
+    global $ACT, $conf, $ID, $INFO;
+
+    $classes = array(
+      'dokuwiki',
+      'mode_'.$ACT,
+      'tpl_'.$conf['template'],
+      !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
+      $INFO['exists'] ? '' : 'notFound',
+      ($ID == $conf['start']) ? 'home' : '',
+    );
+
+    return join(' ', $classes);
+
+  }
+
 }
 
 /**
  * copied from core (available since Detritus)
  */
 if (! function_exists('plugin_getRequestAdminPlugin')) {
+
   function plugin_getRequestAdminPlugin(){
+
     static $admin_plugin = false;
     global $ACT,$INPUT,$INFO;
 
@@ -458,8 +520,18 @@ function bootstrap3_fluid_container_button() {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = bootstrap3_nav($sidebar, 'pills', true);
-  $out = preg_replace('/<h([1-6]) id="(.*)">/', '<h$1 class="page-header" id="$2">', $out);
-  $out = preg_replace('/<h([1-6]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $out);
+  $out = bootstrap3_content($out);
+
+  $html = new simple_html_dom;
+  $html->load($out);
+
+  foreach ($html->find('h1, h2, h3, h4, h5, h6') as $elm) {
+    $elm->class .= ' page-header';
+  }
+
+  $out = $html->save();
+  $html->clear();
+  unset($html);
 
   if ($return) return $out;
   echo $out;
@@ -584,7 +656,7 @@ function bootstrap3_dropdown_page($page) {
 
   if (! $page) return;
 
-  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true);
+  $output   = bootstrap3_content(bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true));
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
@@ -664,11 +736,11 @@ function bootstrap3_html_msgarea() {
     if ($translation->istranslatable($ID)) $translation->checkage();
   }
 
-  if(!isset($MSG)) return;
+  if (!isset($MSG)) return;
 
   $shown = array();
 
-  foreach($MSG as $msg){
+  foreach ($MSG as $msg) {
 
     $hash = md5($msg['msg']);
     if(isset($shown[$hash])) continue; // skip double messages
@@ -1704,108 +1776,689 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 }
 
 /**
- * Add Bootstrap classes in DokuWiki Content
+ * Add Bootstrap classes in a DokuWiki content
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
- * @param   string  $content from tpl_content()
- * @return  string
+ * @param   string  $content from tpl_content() or from tpl_include_page()
+ * @return  string  with Bootstrap styles
  * */
 function bootstrap3_content($content) {
 
   global $ACT;
   global $INPUT;
 
-  // Search Hit
-  $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+  $html = new simple_html_dom();
+  $html->load($content, true, false);
 
-  // Tabs (Extension Manager)
-  $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
+  #var_dump($ACT);
 
-  // Page Heading (<h[1-2]>)
-  $content = preg_replace('/<h([1-2]) id="(.*)">/',              '<h$1 class="page-header" id="$2">',    $content);
-  $content = preg_replace('/<h([1-2]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $content);
-  $content = preg_replace('/<h([1-2])>/',                        '<h$1 class="page-header">',            $content);
-
-  // Media Images
-  $content = preg_replace('/<img (.*) class="(media|medialeft|mediacenter|mediaright)"/', '<img $1 class="$2 img-responsive"', $content);
-
-  // Alerts
-  $content = str_replace('<div class="info">',    '<div class="alert alert-info"><i class="fa fa-fw fa-info-circle"></i>',     $content);
-  $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
-  $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
-  $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
+  # Move Current Page ID to <a> element and create data-curid HTML5 attribute
+  foreach ($html->find('.curid') as $elm) {
+    foreach ($elm->find('a') as $link) {
+      $link->class .= ' curid';
+      $link->attr['data-curid'] = 'true';
+    }
+  }
 
 
-  // Configuration Manager Template Sections
-  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+  # Unwrap span.curid elements
+  foreach ($html->find('span.curid') as $elm) {
+    $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
+  }
 
-    $admin_sections = array(
-    // Section                      Insert Before           Icon
-      'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
-      'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
-      'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
-      'semantic'          => array( 'semantic',             'fa-share-alt' ),
-      'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
-      'toc'               => array( 'tocAffix',             'fa-list'      ),
-      'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
-      'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
-      'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
-      'browser_title'     => array( 'browserTitle',         'fa-header'    ),
-      'page'              => array( 'showPageInfo',         'fa-file'      )
-    );
 
-    foreach ($admin_sections as $section => $items) {
+  # Unwrap <bdi> elements
+  foreach ($html->find('bdi') as $elm) {
+    $elm->outertext = str_replace(array('<bdi>', '</bdi>'), '', $elm->outertext);
+  }
 
-      $search = $items[0];
-      $icon   = $items[1];
 
-      $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
-                              '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+  # Footnotes
+  foreach ($html->find('.footnotes') as $elm) {
+    $elm->outertext = '<hr/>' . $elm->outertext;
+  }
+
+
+  # Accessibility (a11y)
+  foreach ($html->find('.a11y') as $elm) {
+    if (preg_match('/picker/', $elm->class)) continue;
+    $elm->class .= ' sr-only';
+  }
+
+
+  # Fix list overlap in media images
+  foreach ($html->find('ul, ol') as $elm) {
+    if (preg_match('/(nav|dropdown-menu)/', $elm->class)) continue;
+    $elm->class .= ' fix-media-list-overlap';
+  }
+
+
+  # Buttons
+  foreach ($html->find('.button') as $elm) {
+    if ($elm->tag == 'form') continue;
+    $elm->class .= ' btn';
+  }
+
+  foreach ($html->find('[type=button], [type=submit], [type=reset]') as $elm) {
+    $elm->class .= ' btn btn-default';
+  }
+
+  foreach ($html->find('#dw__login, #subscribe__form, #media__manager') as $elm) {
+    foreach ($elm->find('[type=submit]') as $btn) {
+      $btn->class .= ' btn btn-success';
+    }
+  }
+
+
+  # Section Edit Button
+  foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
+    $elm->class .= ' btn btn-xs btn-default';
+  }
+
+
+  # Search Hit
+  foreach ($html->find('.search_hit') as $elm) {
+    $elm->class = 'mark';
+  }
+
+  # Tabs
+  foreach ($html->find('.tabs') as $elm) {
+    $elm->class = 'nav nav-tabs';
+  }
+
+  # Tabs (active)
+  foreach ($html->find('.nav-tabs strong') as $elm) {
+    $elm->outertext = '<a href="#">' . $elm->innertext . "</a>";
+    $parent = $elm->parent()->class .= ' active';
+  }
+
+
+  # Page Heading (h1-h2)
+  foreach ($html->find('h1,h2') as $elm) {
+    $elm->class .= ' page-header';
+  }
+
+
+  # Media Images
+  foreach ($html->find('img[class^=media]') as $elm) {
+    $elm->class .= ' img-responsive';
+  }
+
+
+  # Checkbox
+  foreach ($html->find('input[type=checkbox]') as $elm) {
+    $elm->class .= ' checkbox-inline';
+  }
+
+
+  # Radio button
+  foreach ($html->find('input[type=radio]') as $elm) {
+    $elm->class .= ' radio-inline';
+  }
+
+
+  # Label
+  foreach ($html->find('label') as $elm) {
+    $elm->class .= ' control-label';
+  }
+
+
+  # Form controls
+  foreach ($html->find('input, select, textarea') as $elm) {
+    if (in_array($elm->type, array('submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'))) continue;
+    $elm->class .= ' form-control';
+  }
+
+
+  # Forms
+  # TODO main form
+  foreach ($html->find('form') as $elm) {
+    if (preg_match('/form-horizontal/', $elm->class)) continue;
+    $elm->class .= ' form-inline';
+  }
+
+
+  # Alerts
+  foreach ($html->find('div.info, div.error, div.success, div.notify') as $elm) {
+
+    switch ($elm->class) {
+
+      case 'info' :
+        $elm->class     = 'alert alert-info';
+        $elm->innertext = '<i class="fa fa-fw fa-info-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'error' :
+        $elm->class     = 'alert alert-danger';
+        $elm->innertext = '<i class="fa fa-fw fa-times-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'success' :
+        $elm->class     = 'alert alert-success';
+        $elm->innertext = '<i class="fa fa-fw fa-check-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'notify':
+      case 'msg notify':
+        $elm->class     = 'alert alert-warning';
+        $elm->innertext = '<i class="fa fa-fw fa-warning"></i> ' . $elm->innertext;
+        break;
 
     }
 
   }
 
 
-  // Revisions & Recents
-  if ($ACT == 'revisions' || $ACT == 'recent') {
-    $search  = array('class="sizechange positive"', 'class="sizechange negative"', 'class="minor"');
-    $replace = array('class="sizechange positive label label-success"', 'class="sizechange negative label label-danger"', 'class="minor text-muted"');
-    $content = str_replace($search, $replace, $content);
-  }
+  # Tables
 
-
-  // Difference
-  if ($ACT == 'diff') {
-
-    $btn_default = 'btn btn-default fa';
-
-    $search  = array('class="diff-deletedline"', 'class="diff-addedline',
-                     'class="diffprevrev', 'class="diffnextrev', 'class="diffbothprevrev', 'class="minor"');
-
-    $replace = array('class="diff-deletedline bg-danger"', 'class="diff-addedline bg-success"',
-                     "class=\"diffprevrev $btn_default fa-angle-left\"", "class=\"diffnextrev $btn_default fa-angle-right\"", "class=\"diffbothprevrev $btn_default fa-angle-double-left\"", 'class="minor text-muted"');
-
-    $content = str_replace($search, $replace, $content);
-
-  }
-
-  // Tables
   $table_classes = 'table';
 
   foreach (bootstrap3_conf('tableStyle') as $class) {
+
     if ($class == 'responsive') {
-      $content = str_replace('<div class="table', '<div class="table table-responsive', $content);
+
+      foreach ($html->find('div.table') as $elm) {
+        $elm->class = 'table-responsive';
+      }
+
     } else {
       $table_classes .= " table-$class";
     }
+
   }
 
-  $content = preg_replace('/<table(.*)class="(inline|import_failures)"(.*)>/',
-                          sprintf('<table$1class="$2 %s"$3>', $table_classes), $content);
+  foreach ($html->find('table.inline,table.import_failures') as $elm) {
+    $elm->class .= " $table_classes";
+  }
 
-  $content = str_replace('<div class="table ', '<div class="', $content);
+  foreach ($html->find('div.table') as $elm) {
+    $elm->class = trim(str_replace('table', '', $eml->class));
+  }
+
+  $content = $html->save();
+
+  $html->clear();
+  unset($html);
+
+
+  # Search
+
+  if ($ACT == 'search') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    foreach ($html->find('.search_results dt') as $elm) {
+
+      $elm->outertext = str_replace(
+        array('</a>: ', '</dt>'),
+        array('</a>&nbsp;&nbsp;&nbsp;<span class="label label-primary">', '</span></dt>'),
+        $elm->outertext);
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Profile
+
+  if ($ACT == 'profile' || $ACT == 'register') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+
+    foreach ($html->find('#dw__register') as $elm) {
+
+      foreach ($elm->find('legend') as $title) {
+        $title->innertext = '<i class="fa fa-vcard-o"></i> ' . $title->innertext;
+      }
+
+      foreach ($elm->find('[type=submit]') as $btn) {
+        $btn->class .= ' btn btn-success';
+      }
+
+    }
+
+
+    foreach ($html->find('#dw__profiledelete') as $elm) {
+
+      foreach ($elm->find('legend') as $title) {
+        $title->innertext = '<i class="fa fa-user-times"></i> ' . $title->innertext;
+      }
+
+      foreach ($elm->find('[type=submit]') as $btn) {
+        $btn->class .= ' btn btn-danger';
+      }
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Index / Sitemap
+
+  if ($ACT == 'index') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    foreach ($html->find('.idx_dir') as $idx => $elm) {
+
+      $parent = $elm->parent()->parent();
+
+      if (preg_match('/open/', $parent->class)) {
+        $elm->innertext = '<i class="fa fa-folder-open text-primary"></i> ' . $elm->innertext;
+      }
+
+      if (preg_match('/closed/', $parent->class)) {
+        $elm->innertext = '<i class="fa fa-folder text-primary"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('.idx .wikilink1') as $elm) {
+      $elm->innertext = '<i class="fa fa-file-text-o text-muted"></i> ' . $elm->innertext;
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+  # Admin Pages
+
+  if ($ACT == 'admin') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    // Set specific icon in Admin Page
+    if ($INPUT->str('page')) {
+      if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
+        $admin_pagetitle->class .= ' ' . $INPUT->str('page');
+      }
+    }
+
+
+    # ACL
+
+    if ($INPUT->str('page') == 'acl') {
+
+      foreach($html->find('[name=cmd[update]]') as $elm) {
+        $elm->class .= ' btn-success';
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+        }
+      }
+
+    }
+
+
+    # Popularity
+
+    if ($INPUT->str('page') == 'popularity') {
+
+      foreach($html->find('[type=submit]') as $elm) {
+
+        $elm->class .= ' btn-primary';
+
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-arrow-right"></i> ' . $elm->innertext;
+        }
+
+      }
+
+    }
+
+
+    # Revert Manager
+
+    if ($INPUT->str('page') == 'revert') {
+
+      foreach($html->find('[type=submit]') as $idx => $elm) {
+
+        if ($idx == 0) {
+
+          $elm->class .= ' btn-primary';
+          if ($elm->tag == 'button') {
+            $elm->innertext = '<i class="fa fa-search"></i> ' . $elm->innertext;
+          }
+
+        }
+
+        if ($idx == 1) {
+
+          $elm->class .= ' btn-success';
+          if ($elm->tag == 'button') {
+            $elm->innertext = '<i class="fa fa-refresh"></i> ' . $elm->innertext;
+          }
+
+        }
+
+      }
+
+    }
+
+
+    # Config
+
+    if ($INPUT->str('page') == 'config') {
+
+      foreach($html->find('[type=submit]') as $elm) {
+        $elm->class .= ' btn-success';
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+        }
+      }
+
+    }
+
+
+    # User Manager
+
+    if ($INPUT->str('page') == 'usermanager') {
+
+      foreach ($html->find('.notes') as $elm) {
+        $elm->class = str_replace('notes', '', $eml->class);
+      }
+
+      foreach ($html->find('h2') as $idx => $elm) {
+
+        switch ($idx) {
+          case 0:
+            $elm->innertext = '<i class="fa fa-users"></i> ' . $elm->innertext;
+            break;
+          case 1:
+            $elm->innertext = '<i class="fa fa-plus text-success"></i> ' . $elm->innertext;
+            break;
+          case 2:
+            if ($elm->id !== 'bulk_user_import') {
+              $elm->innertext = '<i class="fa fa-user"></i> ' . $elm->innertext;
+            }
+            break;
+        }
+
+      }
+
+      foreach ($html->find('button[name=fn[delete]]') as $elm) {
+        $elm->class    .= ' btn btn-danger';
+        $elm->innertext = '<i class="fa fa-trash"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[add]]') as $elm) {
+        $elm->class    .= ' btn btn-success';
+        $elm->innertext = '<i class="fa fa-plus"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[modify]]') as $elm) {
+        $elm->class    .= ' btn btn-success';
+        $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[import]]') as $elm) {
+        $elm->class    .= ' btn btn-primary';
+        $elm->innertext = '<i class="fa fa-upload"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[export]]') as $elm) {
+        $elm->class    .= ' btn btn-primary';
+        $elm->innertext = '<i class="fa fa-download"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[start]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-double-left"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[prev]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-left"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[next]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-right"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[last]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-double-right"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    # Extension Manager
+
+    if ($INPUT->str('page') == 'extension') {
+
+      $html = new simple_html_dom();
+      $html->load($content, true, false);
+
+      foreach ($html->find('.actions') as $elm) {
+        $elm->class .= ' btn-group btn-group-xs';
+      }
+
+      foreach ($html->find('.actions .uninstall') as $elm) {
+        $elm->class .= ' btn-danger';
+      }
+
+      foreach ($html->find('.actions .enable') as $elm) {
+        $elm->class .= ' btn-success';
+      }
+
+      foreach ($html->find('.actions .disable') as $elm) {
+        $elm->class .= ' btn-warning';
+      }
+
+      foreach ($html->find('.actions .install, .actions .update, .actions .reinstall') as $elm) {
+        $elm->class .= ' btn-primary';
+      }
+
+      foreach ($html->find('form.install [type=submit]') as $elm) {
+        $elm->class .= ' btn btn-success';
+      }
+
+      foreach ($html->find('form.search [type=submit]') as $elm) {
+        $elm->class .= ' btn btn-primary';
+      }
+
+      foreach ($html->find('.permerror') as $elm) {
+        $elm->class .= ' pull-left';
+      }
+
+    }
+
+
+    # Admin page
+    if ($INPUT->str('page') == null) {
+
+      # Admin tasks
+      # TODO correggere icone e list-group per le ultime versioni di DokuWiki
+      foreach ($html->find('ul.admin_tasks') as $admin_task) {
+
+        $admin_task->class .= ' list-group';
+
+        foreach ($admin_task->find('a') as $item) {
+          $item->class .= ' list-group-item';
+        }
+
+      }
+
+      # DokuWiki logo
+      if ($admin_version = $html->getElementById('admin__version')) {
+        $admin_version->innertext = '<img src="'. DOKU_BASE .'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ' . $admin_version->innertext;
+      }
+
+    }
+
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+
+    # Configuration Manager Template Sections
+    if ($INPUT->str('page') == 'config') {
+
+      $admin_sections = array(
+      // Section                      Insert Before           Icon
+        'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
+        'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
+        'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
+        'semantic'          => array( 'semantic',             'fa-share-alt' ),
+        'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
+        'toc'               => array( 'tocAffix',             'fa-list'      ),
+        'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
+        'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
+        'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
+        'browser_title'     => array( 'browserTitle',         'fa-header'    ),
+        'page'              => array( 'showPageInfo',         'fa-file'      )
+      );
+
+      foreach ($admin_sections as $section => $items) {
+
+        $search = $items[0];
+        $icon   = $items[1];
+
+//         $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
+//                                 '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+
+      }
+
+    }
+
+  }
+
+
+  # Edit / Preview / Draft
+
+  if ($ACT == 'edit' || $ACT == 'preview' || $ACT == 'draft') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    foreach ($html->find('[name=do[save]], [name=do[recover]]') as $elm) {
+
+      $elm->class .= ' btn btn-success';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('[name=do[preview]], [name=do[show]]') as $elm) {
+
+      $elm->class .= ' btn btn-default';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-file-text-o"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('[name=do[draftdel]]') as $elm) {
+
+      $elm->class .= ' btn btn-danger';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-close"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Revisions & Recents
+
+  if ($ACT == 'revisions' || $ACT == 'recent') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    foreach ($html->find('.sizechange') as $elm) {
+
+      if (strstr($elm->class, 'positive')) {
+        $elm->class .= ' label label-success';
+      }
+
+      if (strstr($elm->class, 'negative')) {
+        $elm->class .= ' label label-danger';
+      }
+
+    }
+
+    foreach ($html->find('.minor') as $elm) {
+      $elm->class .= ' text-muted';
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Difference
+
+  if ($ACT == 'diff') {
+
+    $html = new simple_html_dom();
+    $html->load($content, true, false);
+
+    foreach ($html->find('.diff-deletedline') as $elm) {
+      $elm->class .= ' bg-danger';
+    }
+
+    foreach ($html->find('.diff-addedline') as $elm) {
+      $elm->class .= ' bg-success';
+    }
+
+    foreach ($html->find('.diffprevrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-left';
+    }
+
+    foreach ($html->find('.diffnextrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-right';
+    }
+
+    foreach ($html->find('.diffbothprevrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-double-left';
+    }
+
+    foreach ($html->find('.minor') as $elm) {
+      $elm->class .= ' text-muted';
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
 
   return $content;
 

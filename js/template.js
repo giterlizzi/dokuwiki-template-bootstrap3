@@ -15,18 +15,21 @@ jQuery(document).on('bootstrap3:init', function() {
     var $dw_content = jQuery('#dokuwiki__content, #media__manager');  // Page Content node
 
     // Move/Save .curid to anchor child
-    jQuery('.curid').find('a').addClass('curid');
+    // TODO ported
+//     jQuery('.curid').find('a').addClass('curid');
 
     // Unwrap several tags
-    jQuery('bdi, span.curid').contents().unwrap();
+    // TODO ported
+//     jQuery('bdi, span.curid').contents().unwrap();
 
     // a11y
-    jQuery('.a11y').not('.picker').addClass('sr-only');
+//     jQuery('.a11y').not('.picker').addClass('sr-only');
 
     // Abbr tooltips
     jQuery('abbr').tooltip();
 
     // Form and controls
+    // TODO ported
     $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
     jQuery('input, select, textarea')
       .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
@@ -40,15 +43,17 @@ jQuery(document).on('bootstrap3:init', function() {
     jQuery('#tool__bar').addClass('btn-group btn-group-xs');
 
     // Picker
-    if (dw_mode('edit')) {
-      jQuery('.picker').addClass('btn-group');
-    }
+    // TODO ported
+//     if (dw_mode('edit')) {
+//       jQuery('.picker').addClass('btn-group');
+//     }
 
     // Footer links
     jQuery('footer a').addClass('navbar-link');
 
     // Fix list overlap in media images
-    jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
+    // TODO ported
+//     jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
@@ -128,6 +133,7 @@ jQuery(document).on('bootstrap3:tabs', function() {
 
   setTimeout(function() {
 
+    // TODO ported
     jQuery('ul.tabs').addClass('nav nav-tabs');
 
     jQuery('.nav-tabs strong').replaceWith(function() {
@@ -143,17 +149,20 @@ jQuery(document).on('bootstrap3:tabs', function() {
 
 
 // Buttons
+// TODO remove from init
 jQuery(document).on('bootstrap3:buttons', function() {
 
   setTimeout(function() {
 
-    jQuery('.button').removeClass('button');
+    // TODO ported
+    jQuery('.button').removeClass('button'); // Not ported
     jQuery('.alert button').removeClass('btn btn-default');
     jQuery('#dw__login, #dw__register, #subscribe__form, #media__manager').find(':submit').addClass('btn-success');
     jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
     jQuery('#edbtn__save').addClass('btn-success');
 
     // Section Button edit
+    // TODO ported
     jQuery('.btn_secedit .btn').input2button();
     jQuery('.btn_secedit .btn').addClass('btn-xs');
 
@@ -189,17 +198,18 @@ jQuery(document).on('bootstrap3:back-to-top', function() {
 // Footnote
 jQuery(document).on('bootstrap3:footnotes', function() {
 
-  setTimeout(function() {
+  if (! jQuery('.footnotes').length) return false;
 
-    if (! jQuery('.footnotes').length) return false;
+  setTimeout(function() {
 
     jQuery(document).bind('DOMNodeInserted', function(){
       jQuery('#insitu__fn').addClass('panel panel-body panel-default');
     });
 
-    if (jQuery('.footnotes').length) {
-      jQuery('.footnotes').prepend(jQuery('<hr/>'));
-    }
+    // TODO ported (to be removed)
+//     if (jQuery('.footnotes').length) {
+//       jQuery('.footnotes').prepend(jQuery('<hr/>'));
+//     }
 
   }, 0);
 
@@ -341,6 +351,7 @@ jQuery(document).on('bootstrap3:toc', function() {
 
 
 // Alerts
+// TODO ported -- no remove (used for standard DokuWiki messages with html_msgarea)
 jQuery(document).on('bootstrap3:alerts', function() {
 
   setTimeout(function() {
@@ -455,32 +466,35 @@ jQuery(document).on('bootstrap3:detail', function() {
 
 
 // Search mode
-jQuery(document).on('bootstrap3:mode-search', function() {
-
-  setTimeout(function() {
-
-    if (! dw_mode('search')) return false;
-
-    jQuery('.search_results dt')
-      .contents()
-      .filter(function() {
-        return this.nodeType === 3;
-      })
-      .wrap('<span class="label label-primary"/>');
-
-      jQuery('.search_results .label').before('&nbsp;&nbsp;&nbsp;');
-
-      jQuery('.search_results .label').each(function() {
-        var $node = jQuery(this);
-        $node.html($node.html().replace(/^\: /, ''));
-      });
-
-  }, 0);
-
-});
+// TODO ported
+// TODO to remove
+// jQuery(document).on('bootstrap3:mode-search', function() {
+// 
+//   setTimeout(function() {
+// 
+//     if (! dw_mode('search')) return false;
+// 
+//     jQuery('.search_results dt')
+//       .contents()
+//       .filter(function() {
+//         return this.nodeType === 3;
+//       })
+//       .wrap('<span class="label label-primary"/>');
+// 
+//       jQuery('.search_results .label').before('&nbsp;&nbsp;&nbsp;');
+// 
+//       jQuery('.search_results .label').each(function() {
+//         var $node = jQuery(this);
+//         $node.html($node.html().replace(/^\: /, ''));
+//       });
+// 
+//   }, 0);
+// 
+// });
 
 
 // Administration
+// TODO ported (without icons !!!)
 jQuery(document).on('bootstrap3:mode-admin', function() {
 
   setTimeout(function() {
@@ -610,11 +624,12 @@ jQuery(document).on('bootstrap3:mode-admin', function() {
 
 
 // Index Page
+// TODO ported (don't remove)
 jQuery(document).on('bootstrap3:mode-index', function() {
 
-  setTimeout(function() {
+  if (! dw_mode('index')) return false;
 
-    if (! dw_mode('index')) return false;
+  setTimeout(function() {
 
     var $directories = jQuery('ul.idx a.idx_dir'),
         $pages       = jQuery('ul.idx a.wikilink1');
@@ -776,9 +791,9 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 // Collapse sections on mobile (XS media)
 jQuery(document).on('bootstrap3:collapse-sections', function() {
 
-  setTimeout(function() {
-
   if (! JSINFO.bootstrap3.config.collapsibleSections) return false;
+
+  setTimeout(function() {
 
   var $sections = jQuery('article div.level2'),
       $headings = $sections.prev();
@@ -873,10 +888,26 @@ jQuery(document).on('bootstrap3:components', function() {
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'toc-menu', 'nav', 'tabs',
-                    'back-to-top', 'buttons', 'page-tools', 'page-icons',
-                    'dropdown-page', 'footnotes', 'media-manager',
-                    'collapse-sections' ];
+//     var events = [  'mobile-layout', 'toc', 'toc-menu', 'nav', 'tabs',
+//                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
+//                     'dropdown-page', 'footnotes', 'media-manager',
+//                     'collapse-sections' ];
+
+    var events = [
+      'mobile-layout',
+      'toc',
+      'toc-menu',
+      'nav',
+      'tabs',
+      'back-to-top',
+      //'buttons',
+      'page-tools',
+      'page-icons',
+      'dropdown-page',
+      'footnotes',
+      'media-manager',
+      'collapse-sections',
+    ];
 
     for (var i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

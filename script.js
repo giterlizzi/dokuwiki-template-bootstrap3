@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
 
 
   // Init template
-  jQuery(document).trigger('bootstrap3:init');
+  //jQuery(document).trigger('bootstrap3:init');
 
   // Init other components
   jQuery(document).trigger('bootstrap3:components');
@@ -111,38 +111,38 @@ jQuery(document).ready(function() {
   // Re-initialize some components in media-manager
   if (dw_mode('media') || jQuery('#media__manager')) {
 
-    jQuery(document).ajaxSuccess(function() {
-      jQuery(document).trigger('bootstrap3:init');
-      jQuery(document).trigger('bootstrap3:buttons');
-      jQuery(document).trigger('bootstrap3:tabs');
-      jQuery(document).trigger('bootstrap3:media-manager');
-      jQuery(document).trigger('bootstrap3:alerts')
-    });
+   jQuery(document).ajaxSuccess(function() {
+     jQuery(document).trigger('bootstrap3:init');
+     jQuery(document).trigger('bootstrap3:buttons');
+     jQuery(document).trigger('bootstrap3:tabs');
+     jQuery(document).trigger('bootstrap3:media-manager');
+     jQuery(document).trigger('bootstrap3:alerts')
+   });
 
   }
 
   // Admin mode
-  if (dw_mode('admin')) {
-    jQuery(document).trigger('bootstrap3:mode-admin');
-  }
+  //if (dw_mode('admin')) {
+  //  jQuery(document).trigger('bootstrap3:mode-admin');
+  //}
 
   // Search mode
-  if (dw_mode('search')) {
-    jQuery(document).trigger('bootstrap3:mode-search');
-  }
+  //if (dw_mode('search')) {
+  //  jQuery(document).trigger('bootstrap3:mode-search');
+  //}
 
   // Index mode
   if (dw_mode('index')) {
 
-    jQuery(document).trigger('bootstrap3:mode-index');
+   jQuery(document).trigger('bootstrap3:mode-index');
 
-    jQuery(document).ajaxSuccess(function() {
-      jQuery(document).trigger('bootstrap3:mode-index');
-    });
+   jQuery(document).ajaxSuccess(function() {
+     jQuery(document).trigger('bootstrap3:mode-index');
+   });
 
-    jQuery('#index__tree').click(function(e) {
-      jQuery(document).trigger('bootstrap3:mode-index');
-    });
+   jQuery('#index__tree').click(function(e) {
+     jQuery(document).trigger('bootstrap3:mode-index');
+   });
 
   }
 
