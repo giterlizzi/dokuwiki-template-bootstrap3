@@ -101,8 +101,11 @@ function file_get_html($url, $use_include_path = false, $context=null, $offset =
 			// has a 301 redirect header been sent?
 			$pattern = "/^Location:\s*(.*)$/i";
 			$location_headers = preg_grep($pattern, $http_response_header);
-
-			if (!empty($location_headers) && preg_match($pattern, array_values($location_headers)[0], $matches)) {
+			
+			# FIX for older PHP version (5.2)
+			$location_headers_values = array_values($location_headers);
+			
+			if (!empty($location_headers) && preg_match($pattern, $location_headers_values[0], $matches)) {
 				// set the URL to that returned via the redirect header and repeat this loop
 				$url = $matches[1];
 				$repeat = true;

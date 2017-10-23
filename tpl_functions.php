@@ -10,29 +10,6 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-// class DebugObject {
-// 
-//   public function __construct() {}
-// 
-//   public function debugLog() {
-//     var_dump(json_encode(func_get_args()));
-//   }
-// 
-//   public function debugLogEntry($level) {}
-// 
-// }
-// 
-// function get_debug() {
-// 
-//   $obj = new stdclass;
-//   $obj->debug = new DebugObject();
-// 
-//   return $obj->debug;
-// }
-
-// global $debugObject;
-// $debugObject = get_debug();
-
 include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
 /**
