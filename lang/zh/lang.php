@@ -16,21 +16,21 @@ $lang['themes']                  = '主题';
 $lang['expand_container']        = '拓展/减少';
 $lang['administrative_tasks']    = '管理任务';
 $lang['additional_plugins']      = '额外插件';
-$lang['share_on']                = 'Share on';
-$lang['send_mail']               = 'Send e-Mail';
-$lang['print']                   = 'Print';
-$lang['add_new_page']            = 'Add New Page';
+$lang['share_on']                = '分享';
+$lang['send_mail']               = '发送 e-Mail';
+$lang['print']                   = '打印';
+$lang['add_new_page']            = '添加新页面';
 
 // Configuration Manager Template Sections
-$lang['config_theme']            = 'Theme';
-$lang['config_sidebar']          = 'Sidebar';
-$lang['config_navbar']           = 'Navbar';
-$lang['config_semantic']         = 'Semantic';
-$lang['config_layout']           = 'Layout';
-$lang['config_toc']              = 'TOC';
-$lang['config_discussion']       = 'Discussion';
+$lang['config_theme']            = '主题';
+$lang['config_sidebar']          = '侧栏';
+$lang['config_navbar']           = '导航栏';
+$lang['config_semantic']         = '语义';
+$lang['config_layout']           = '布局';
+$lang['config_toc']              = '内容目录';
+$lang['config_discussion']       = '评论';
 $lang['config_cookie_law']       = 'Cookie Law';
-$lang['config_google_analytics'] = 'Google Analytics';
-$lang['config_browser_title']    = 'Browser Title';
-$lang['config_page']             = 'Page';
+$lang['config_google_analytics'] = 'Google 分析';
+$lang['config_browser_title']    = '浏览器标题';
+$lang['config_page']             = '页面';
 
