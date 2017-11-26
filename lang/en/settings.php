@@ -105,4 +105,4 @@ $lang['useAnchorJS']                  = 'Use AnchorJS';
 $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
-$lang['userAvatar']                   = 'Shows the user profile image. It can be loaded locally in the namespace <code>user:NOMEUTENTE.jpg</code> or automatically downloaded from the Gravatar account linked to the user\'s email address. ';
+$lang['userAvatar']                   = 'Shows the user profile image. It can be loaded locally in the namespace <code>user:USERNAME.jpg</code> or automatically downloaded from the Gravatar account linked to the user\'s email address. ';
