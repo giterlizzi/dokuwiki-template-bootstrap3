@@ -80,7 +80,7 @@ $conf['tocPosition']                 = 'right';
 $conf['useACL']                      = 0;
 $conf['useAnchorJS']                 = 1;
 $conf['useGoogleAnalytics']          = 0;
-$conf['useGravatar']                 = 0;
 $conf['useLegacyNavbar']             = 0;
 $conf['useLocalBootswatch']          = 1;
+$conf['userAvatar']                  = 'noAvatar';
 

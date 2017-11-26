@@ -12,11 +12,15 @@ if (!defined('DOKU_INC')) die();
 
 if (! empty($_SERVER['REMOTE_USER'])):
 
-$use_gravatar = bootstrap3_conf('useGravatar');
+$avatar_conf = bootstrap3_conf('userAvatar');
+$use_avatar = ($avatar_conf != 'noAvatar');
 
-if ($use_gravatar) {
-  $gravatar_img_small = ml(get_gravatar($INFO['userinfo']['mail'], 30).'&.jpg', array('cache' => 'recache', 'w' => 30, 'h' => 30));
-  $gravatar_img       = ml(get_gravatar($INFO['userinfo']['mail'], 64).'&.jpg', array('cache' => 'recache', 'w' => 64, 'h' => 64));
+if ($avatar_conf == 'Gravatar') {
+  $avatar_img_small = ml(get_gravatar($INFO['userinfo']['mail'], 30).'&.jpg', array('cache' => 'recache', 'w' => 30, 'h' => 30));
+  $avatar_img       = ml(get_gravatar($INFO['userinfo']['mail'], 64).'&.jpg', array('cache' => 'recache', 'w' => 64, 'h' => 64));
+} elseif ($avatar_conf == 'localAvatar') {
+  $avatar_img_small = '../../wiki/data/media/user/'.$_SERVER['REMOTE_USER'].'.jpg?nocache';
+  $avatar_img       = '../../wiki/data/media/user/'.$_SERVER['REMOTE_USER'].'.jpg?nocache';
 }
 
 ?>
@@ -24,8 +28,8 @@ if ($use_gravatar) {
   <li class="dropdown dropdown-large">
 
     <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-      <?php if ($use_gravatar): ?>
-        <img src="<?php echo $gravatar_img_small ?>" class="img-circle profile-image" width="30" height="30" />
+      <?php if ($use_avatar): ?>
+        <img src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="30" height="30" alt="<?php echo $_SERVER['REMOTE_USER'] ?>"/>
       <?php else: ?>
         <i class="fa fa-fw fa-user"></i>
       <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
@@ -41,8 +45,8 @@ if ($use_gravatar) {
 
         <ul class="dropdown-menu" style="min-width:64px">
           <li class="dropdown-header">
-            <?php if ($use_gravatar): ?>
-              <img src="<?php echo $gravatar_img ?>" class="img-circle" width="64" height="64" />
+            <?php if ($use_avatar): ?>
+              <img src="<?php echo $avatar_img ?>" class="img-circle" width="64" height="64" alt="<?php echo $_SERVER['REMOTE_USER'] ?>"/>
             <?php else: ?>
               <i class="fa fa-fw fa-user fa-4x">&nbsp;</i>
             <?php endif; ?>

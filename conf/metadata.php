@@ -61,7 +61,7 @@ $meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
-$meta['useGravatar']            = array('onoff');
+$meta['userAvatar']             = array('multichoice', '_choices' => array('noAvatar', 'localAvatar', 'Gravatar'));
 
 // TOC
 $meta['tocAffix']               = array('onoff');

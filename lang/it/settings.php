@@ -103,7 +103,6 @@ $lang['tocPosition']                  = 'Posizione dell\'indice';
 $lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" release';
 $lang['useAnchorJS']                  = 'Utilizza AnchorJS';
 $lang['useGoogleAnalytics']           = 'Abilita Google Analytics';
-$lang['useGravatar']                  = 'Carica le immagini da Gravatar';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Utilizza la directory locale di Bootswatch. Questa opzione è utile nei casi DokuWiki sia utilizzato in una "intranet"';
-
+$lang['userAvatar']                   = 'Mostra l\'immagine di profilo dell\'utente. Può essere caricata localmente nel namespace <code>user:NOMEUTENTE.jpg</code> oppure scaricate automaticamente dall\'account di Gravatar legato all\'indirizzo mail dell\'utente.';
