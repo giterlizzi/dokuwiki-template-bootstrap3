@@ -21,7 +21,7 @@ $lang['add_new_page']            = 'Aggiungi una nuova pagina';
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Tema';
 $lang['config_sidebar']          = 'Sidebar';
-$lang['config_navbar']           = 'Barra di nagivazione';
+$lang['config_navbar']           = 'Barra di navigazione';
 $lang['config_semantic']         = 'Semantica';
 $lang['config_layout']           = 'Layout';
 $lang['config_toc']              = 'Indice';
