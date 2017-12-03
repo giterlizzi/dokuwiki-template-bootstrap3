@@ -201,6 +201,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
           break;
 
         case 'export_pdf':
+        case 'export_odt_pdf':
           $icon = 'file-pdf-o';
           break;
 
