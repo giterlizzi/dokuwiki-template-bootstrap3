@@ -2146,11 +2146,11 @@ function bootstrap3_content($content) {
 
       foreach($html->find('#config__manager') as $cm_elm) {
 
-        foreach ($cm_elm->find('h1') as $idx => $elm) {
-          $elm->class = 'panel-heading panel-title';
-          $elm->role  = 'tab';
-          $elm->outertext = (($idx == 0) ? '' : '</div>') . '<div class="panel panel-default">' . $elm->outertext;
-        }
+//         foreach ($cm_elm->find('h1') as $idx => $elm) {
+//           $elm->class = 'panel-heading panel-title';
+//           $elm->role  = 'tab';
+//           $elm->outertext = (($idx == 0) ? '' : '</div>') . '<div class="panel panel-default">' . $elm->outertext;
+//         }
 
         $save_button = '';
 
@@ -2336,8 +2336,8 @@ function bootstrap3_content($content) {
         $search = $items[0];
         $icon   = $items[1];
 
-//         $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
-//                                 '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+        $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
+                                '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
 
       }
 
