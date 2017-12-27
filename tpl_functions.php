@@ -911,7 +911,9 @@ function bootstrap3_conf_metadata($key = null) {
   $file = tpl_incdir() . 'conf/metadata.php';
   include $file;
 
-  if ($key) return $meta[$key];
+  if ($key && isset($meta[$key])) {
+    return $meta[$key];
+  }
 
   return $meta;
 
@@ -1736,7 +1738,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     }
 
     if ($fixed_top_navbar) {
-      $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, -$navbar_padding); }, 1); }";
+      $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, - $navbar_padding); }, 1); }";
     }
 
     if (bootstrap3_conf('useAnchorJS')) {
@@ -2140,6 +2142,28 @@ function bootstrap3_content($content) {
         if ($elm->tag == 'button') {
           $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
         }
+      }
+
+      foreach($html->find('#config__manager') as $cm_elm) {
+
+        foreach ($cm_elm->find('h1') as $idx => $elm) {
+          $elm->class = 'panel-heading panel-title';
+          $elm->role  = 'tab';
+          $elm->outertext = (($idx == 0) ? '' : '</div>') . '<div class="panel panel-default">' . $elm->outertext;
+        }
+
+        $save_button = '';
+
+        foreach ($cm_elm->find('p') as $elm) {
+          $save_button = '<div class="pull-right">'.$elm->outertext.'</div>';
+          $elm->outertext = '</div>' . $elm->outertext;
+        }
+
+        foreach($cm_elm->find('fieldset') as $elm) {  
+          $elm->innertext .= $save_button;
+        }
+
+
       }
 
     }

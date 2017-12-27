@@ -97,7 +97,7 @@ jQuery(document).ready(function() {
 
 
   // Init template
-  //jQuery(document).trigger('bootstrap3:init');
+  jQuery(document).trigger('bootstrap3:init');
 
   // Init other components
   jQuery(document).trigger('bootstrap3:components');
@@ -124,11 +124,6 @@ jQuery(document).ready(function() {
   // Admin mode
   //if (dw_mode('admin')) {
   //  jQuery(document).trigger('bootstrap3:mode-admin');
-  //}
-
-  // Search mode
-  //if (dw_mode('search')) {
-  //  jQuery(document).trigger('bootstrap3:mode-search');
   //}
 
   // Index mode
