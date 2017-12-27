@@ -15,7 +15,7 @@ if (page_findnearest('footer', bootstrap3_conf('useACL'))):
 <footer id="dw__footer" class="small navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
   <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
     <div class="navbar-text">
-      <?php tpl_include_page('footer', 1, 1, bootstrap3_conf('useACL')); ?>
+      <?php echo bootstrap3_content(tpl_include_page('footer', 0, 1, bootstrap3_conf('useACL'))); ?>
     </div>
   </div>
 </footer>
