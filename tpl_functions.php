@@ -1767,8 +1767,8 @@ function bootstrap3_content($content) {
   global $ACT;
   global $INPUT;
 
-  $html = new simple_html_dom();
-  $html->load($content);
+  # Import HTML string
+  $html = str_get_html($content);
 
   #var_dump($ACT);
 
@@ -1965,8 +1965,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'search') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     foreach ($html->find('.search_results dt') as $elm) {
 
@@ -1989,8 +1989,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'profile' || $ACT == 'register') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
 
     foreach ($html->find('#dw__register') as $elm) {
@@ -2030,8 +2030,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'index') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     foreach ($html->find('.idx_dir') as $idx => $elm) {
 
@@ -2062,8 +2062,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'admin') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     // Set specific icon in Admin Page
     if ($INPUT->str('page')) {
@@ -2246,8 +2246,8 @@ function bootstrap3_content($content) {
 
     if ($INPUT->str('page') == 'extension') {
 
-      $html = new simple_html_dom();
-      $html->load($content);
+      # Import HTML string
+      $html = str_get_html($content);
 
       foreach ($html->find('.actions') as $elm) {
         $elm->class .= ' btn-group btn-group-xs';
@@ -2350,8 +2350,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'edit' || $ACT == 'preview' || $ACT == 'draft') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     foreach ($html->find('[name=do[save]], [name=do[recover]]') as $elm) {
 
@@ -2395,8 +2395,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'revisions' || $ACT == 'recent') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     foreach ($html->find('.sizechange') as $elm) {
 
@@ -2426,8 +2426,8 @@ function bootstrap3_content($content) {
 
   if ($ACT == 'diff') {
 
-    $html = new simple_html_dom();
-    $html->load($content);
+    # Import HTML string
+    $html = str_get_html($content);
 
     foreach ($html->find('.diff-deletedline') as $elm) {
       $elm->class .= ' bg-danger';
