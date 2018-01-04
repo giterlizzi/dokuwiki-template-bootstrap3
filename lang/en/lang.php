@@ -26,6 +26,7 @@ $lang['config_semantic']         = 'Semantic';
 $lang['config_layout']           = 'Layout';
 $lang['config_toc']              = 'TOC';
 $lang['config_discussion']       = 'Discussion';
+$lang['config_avatar']           = 'Avatar';
 $lang['config_cookie_law']       = 'Cookie Law';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Browser Title';

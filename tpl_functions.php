@@ -868,31 +868,68 @@ function bootstrap3_toolbar() {
 
 
 /**
- * Get either a Gravatar URL or complete image tag for a specified email address.
+ * Get a Gravatar, Libravatar, Office365/EWS URL or local ":user" DokuWiki namespace
  *
- * @param   string  $email  The email address
- * @param   string  $s      Size in pixels, defaults to 80px [ 1 - 2048 ]
- * @param   string  $d      Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
- * @param   string  $r      Maximum rating (inclusive) [ g | pg | r | x ]
- * @param   boolean $img    True to return a complete IMG tag False for just the URL
- * @param   array   $atts   Optional, additional key/value attributes to include in the IMG tag
- * @return  String containing either just a URL or a complete image tag
- * @source  http://gravatar.com/site/implement/images/php/
+ * @param   string  $username  User ID
+ * @param   string  $email     The email address
+ * @param   string  $size      Size in pixels, defaults to 80px [ 1 - 2048 ]
+ * @param   string  $d         Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param   string  $r         Maximum rating (inclusive) [ g | pg | r | x ]
  */
-function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
-  $url = 'https://gravatar.com/avatar/';
-  $url .= md5( strtolower( trim( $email ) ) );
-  $url .= "?s=$s&d=$d&r=$r";
+  $avatar_url      = '';
+  $avatar_provider = bootstrap3_conf('useAvatar');
 
-  if ( $img ) {
-    $url = '<img src="' . $url . '"';
-    foreach ( $atts as $key => $val )
-      $url .= ' ' . $key . '="' . $val . '"';
-    $url .= ' />';
+  if (! $avatar_provider) {
+    return false;
   }
 
-  return $url;
+  if ($avatar_provider == 'local') {
+
+    $interwiki  = getInterwiki();
+    $user_url   = str_replace('{NAME}', $username, $interwiki['user']);
+    $logo_size  = array();
+    $logo       = tpl_getMediaFile(array("$user_url.png", 'images/avatar.png'), false, $logo_size);
+
+    return $logo;
+  }
+
+  $email = strtolower(trim($email));
+
+  if ($avatar_provider == 'office365') {
+
+    $office365_url = rtrim(bootstrap3_conf('office365URL'), '/');
+    $avatar_url    = sprintf('%s/owa/service.svc/s/GetPersonaPhoto?email=%s&size=HR%sx%s',
+      $email, $size, $size);
+
+  }
+
+  if ($avatar_provider == 'gravatar' || $avatar_provider == 'libavatar') {
+
+    $gravatar_url  = rtrim(bootstrap3_conf('gravatarURL'), '/') . '/';
+    $libavatar_url = rtrim(bootstrap3_conf('libavatarURL'), '/') . '/';
+
+    switch ($avatar_provider) {
+      case 'gravatar':
+        $avatar_url = $gravatar_url;
+        break;
+      case 'libavatar':
+        $avatar_url = $libavatar_url;
+        break;
+    }
+
+    $avatar_url .= md5($email);
+    $avatar_url .= "?s=$size&d=$d&r=$r";
+var_dump($avatar_url);
+  }
+
+  if ($avatar_url) {
+    $media_link = ml("$avatar_url&.jpg", array('cache' => 'recache', 'w' => $size, 'h' => $size));
+    return $media_link;
+  }
+
+  return false;
 
 }
 
@@ -936,6 +973,10 @@ function bootstrap3_conf($key, $default = false) {
   $value = tpl_getConf($key, $default);
 
   switch ($key) {
+
+    case 'useAvatar':
+      if ($value == 'off') return false;
+      return $value;
 
     case 'bootstrapTheme':
       @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
@@ -1329,7 +1370,7 @@ function bootstrap3_toc($return = false) {
 
     $bootstrap3_sections = array(
       'theme', 'sidebar', 'navbar', 'semantic',
-      'layout', 'toc', 'discussion', 'cookie_law',
+      'layout', 'toc', 'discussion', 'avatar', 'cookie_law',
       'google_analytics', 'browser_title', 'page'
     );
 
@@ -1513,16 +1554,15 @@ function bootstrap3_pageinfo($ret = false) {
 
         $user = editorinfo($INFO['editor']);
 
-        if (bootstrap3_conf('useGravatar')) {
+        if (bootstrap3_conf('useAvatar')) {
 
           global $auth;
           $user_data = $auth->getUserData($INFO['editor']);
 
-          $gravatar_img = ml(get_gravatar($user_data['mail'], 16).'&.jpg', array('cache' => 'recache', 'w' => 16, 'h' => 16));
-
-          $user_img = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $gravatar_img);
-          $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
-          $user     = $user_img . $user;
+          $avatar_img = get_avatar($INFO['editor'], $user_data['mail'], 16);
+          $user_img   = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $avatar_img);
+          $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
+          $user       = $user_img . $user;
 
         }
 
@@ -2325,6 +2365,7 @@ function bootstrap3_content($content) {
         'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
         'toc'               => array( 'tocAffix',             'fa-list'      ),
         'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
+        'avatar'            => array( 'useAvatar',            'fa-user'      ),
         'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
         'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
         'browser_title'     => array( 'browserTitle',         'fa-header'    ),
