@@ -61,7 +61,6 @@ $meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
-$meta['useGravatar']            = array('onoff');
 
 // TOC
 $meta['tocAffix']               = array('onoff');
@@ -73,6 +72,12 @@ $meta['tocLayout']              = array('multichoice', '_choices' => array('defa
 // Discussion
 $meta['showDiscussion']      = array('onoff');
 $meta['discussionPage']      = array('string');
+
+// Avatar
+$meta['useAvatar']           = array('multichoice', '_choices' => array('off', 'gravatar', 'libravatar', 'office365', 'local'));
+$meta['gravatarURL']         = array('string');
+$meta['libravatarURL']       = array('string');
+$meta['office365URL']        = array('string');
 
 // Cookie Law
 $meta['showCookieLawBanner'] = array('onoff');

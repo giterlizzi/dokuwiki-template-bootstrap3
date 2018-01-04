@@ -7,7 +7,7 @@
  */
 
 $conf['bootstrapTheme']              = 'default';
-$conf['bootswatchTheme']             = 'spacelab';
+$conf['bootswatchTheme']             = 'yeti';
 $conf['browserTitle']                = '@TITLE@ [@WIKI@]';
 $conf['browserTitleCharSepNS']       = '-';
 $conf['browserTitleOrderNS']         = 'normal';
@@ -26,6 +26,7 @@ $conf['googleAnalyticsNoTrackPages'] = '';
 $conf['googleAnalyticsNoTrackUsers'] = 0;
 $conf['googleAnalyticsTrackActions'] = 0;
 $conf['googleAnalyticsTrackID']      = '';
+$conf['gravatarURL']                 = 'https://secure.gravatar.com/avatar';
 $conf['hideInThemeSwitcher']         = '';
 $conf['hideLoginLink']               = 0;
 $conf['homePageURL']                 = '';
@@ -33,7 +34,9 @@ $conf['individualTools']             = 0;
 $conf['inverseNavbar']               = 0;
 $conf['landingPages']                = '(intro)';
 $conf['leftSidebarGrid']             = 'col-sm-3 col-md-2';
+$conf['libravatarURL']               = 'https://seccdn.libravatar.org/avatar';
 $conf['navbarLabels']                = 'login,register';
+$conf['office365URL']                = 'https://outlook.office365.com';
 $conf['pageIcons']                   = 'social-share,feed,send-mail,print,help';
 $conf['pageInfo']                    = 'filename,extension,date,editor,locked';
 $conf['pageInfoDateFormat']          = 'dformat';
@@ -79,8 +82,7 @@ $conf['tocCollapsed']                = 0;
 $conf['tocLayout']                   = 'default';
 $conf['useACL']                      = 0;
 $conf['useAnchorJS']                 = 1;
+$conf['useAvatar']                   = 'off';
 $conf['useGoogleAnalytics']          = 0;
-$conf['useGravatar']                 = 0;
 $conf['useLegacyNavbar']             = 0;
 $conf['useLocalBootswatch']          = 1;
-
