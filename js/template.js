@@ -10,7 +10,7 @@
 // Normalization & Basic Styling
 jQuery(document).on('bootstrap3:init', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -18,6 +18,11 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
     // Abbr tooltips
     jQuery('abbr').tooltip();
+
+    // Fix accesskey issue on dropdown menu
+    jQuery('ul.dropdown-menu li a[accesskey]')
+      .closest('.top, .revs, .show, .edit')
+      .removeAttr('accesskey');
 
     // Form and controls
     // TODO ported
@@ -93,7 +98,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 // Nav
 jQuery(document).on('bootstrap3:nav', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -120,7 +125,7 @@ jQuery(document).on('bootstrap3:nav', function(event) {
 // Tabs
 jQuery(document).on('bootstrap3:tabs', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -142,7 +147,7 @@ jQuery(document).on('bootstrap3:tabs', function(event) {
 // TODO remove from init
 jQuery(document).on('bootstrap3:buttons', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -166,7 +171,7 @@ jQuery(document).on('bootstrap3:buttons', function(event) {
 // Back To Top
 jQuery(document).on('bootstrap3:back-to-top', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -194,7 +199,7 @@ jQuery(document).on('bootstrap3:footnotes', function(event) {
 
   if (! jQuery('.footnotes').length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -212,7 +217,7 @@ jQuery(document).on('bootstrap3:toc-resize', function(event) {
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   if (JSINFO.bootstrap3.config.tocAffix) {
     $dw_toc.affix('checkPosition');
@@ -233,7 +238,7 @@ jQuery(document).on('bootstrap3:toc-close', function(event) {
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   if (! $dw_toc.hasClass('affix-bottom')) {
     jQuery('.dw-content').addClass('dw-toc-closed');
@@ -248,7 +253,7 @@ jQuery(document).on('bootstrap3:toc-open', function(event) {
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   jQuery('.dw-content').removeClass('dw-toc-closed');
 
@@ -262,7 +267,7 @@ jQuery(document).on('bootstrap3:toc-menu', function(event) {
 
   if (! jQuery("#dw__toc_menu").length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   if (jQuery(JSINFO.bootstrap3.toc.length)) {
     jQuery("#dw__toc_menu").removeClass("hide");
@@ -293,7 +298,7 @@ jQuery(document).on('bootstrap3:toc', function(event) {
     var $dw_toc = jQuery('#dw__toc');
     if (! $dw_toc.length) return false;
 
-    console.debug(event.type + ' event fired');
+    // console.debug(event.type + ' event fired');
 
     jQuery(document).trigger('bootstrap3:toc-resize');
 
@@ -355,7 +360,7 @@ jQuery(document).on('bootstrap3:toc', function(event) {
 // TODO ported -- no remove (used for standard DokuWiki messages with html_msgarea)
 jQuery(document).on('bootstrap3:alerts', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -399,7 +404,7 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
     // Media Manager (pop-up)
     if ($media_popup.length || $media_manager.length) {
 
-      console.debug(event.type + ' event fired');
+      // console.debug(event.type + ' event fired');
 
       jQuery('.qq-upload-button').addClass('btn btn-default');
       jQuery('.qq-upload-action').addClass('btn btn-success');
@@ -409,7 +414,7 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
     // Media Manager (page)
     if ($media_manager.length) {
 
-      console.debug(event.type + ' event fired');
+      // console.debug(event.type + ' event fired');
 
       var $sort_buttons = jQuery('.ui-buttonset');
 
@@ -464,7 +469,7 @@ jQuery(document).on('bootstrap3:detail', function(event) {
 
     if (! $detail_page.length) return false;
 
-    console.debug(event.type + ' event fired');
+    // console.debug(event.type + ' event fired');
 
     $detail_page.find('img.img_detail')
       .addClass('img-responsive');
@@ -484,7 +489,7 @@ jQuery(document).on('bootstrap3:mode-admin', function(event) {
 
     if (! dw_mode('admin')) return false;
 
-    console.debug(event.type + ' event fired');
+    // console.debug(event.type + ' event fired');
 
     var $mode_admin = jQuery('.mode_admin');  // Admin mode node
 
@@ -613,7 +618,7 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
 
   if (! dw_mode('index')) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -662,7 +667,7 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
 // Page Tools (animaton)
 jQuery(document).on('bootstrap3:page-tools', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   // Page Tools Affix
   jQuery('#dw__pagetools .tools').affix({
@@ -697,7 +702,7 @@ jQuery(document).on('bootstrap3:page-tools', function(event) {
 // Dropdown-Page
 jQuery(document).on('bootstrap3:dropdown-page', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   jQuery('.dw__dropdown_page .dropdown').hover(function() {
     if (! jQuery('#screen_mode').find('.visible-xs').is(':visible')) {
@@ -716,7 +721,7 @@ jQuery(document).on('bootstrap3:dropdown-page', function(event) {
 // Cookie-Law
 jQuery(document).on('bootstrap3:cookie-law', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
@@ -729,7 +734,7 @@ jQuery(document).on('bootstrap3:cookie-law', function(event) {
 // AnchorJS
 jQuery(document).on('bootstrap3:anchorjs', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   anchors.add('.mode_show article .dw-content h1, .mode_show article ' + 
               '.dw-content h2, .mode_show article .dw-content h3, '    + 
@@ -746,7 +751,7 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
 
   if (! $dw_page_icons.length) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   var title = encodeURIComponent(document.title),
       url   = encodeURIComponent(location),
@@ -802,7 +807,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
   if (! JSINFO.bootstrap3.config.collapsibleSections) return false;
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -859,7 +864,7 @@ jQuery(document).on('bootstrap3:mobile-layout', function(event) {
     var $dw_aside = jQuery('.dw__sidebar');
     if (! $dw_aside.length) return false;
 
-    console.debug(event.type + ' event fired');
+    // console.debug(event.type + ' event fired');
 
     if (mediaSize('xs')) {
 
@@ -899,14 +904,9 @@ jQuery(document).on('bootstrap3:mobile-layout', function(event) {
 
 jQuery(document).on('bootstrap3:components', function(event) {
 
-  console.debug(event.type + ' event fired');
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
-
-//     var events = [  'mobile-layout', 'toc', 'toc-menu', 'nav', 'tabs',
-//                     'back-to-top', 'buttons', 'page-tools', 'page-icons',
-//                     'dropdown-page', 'footnotes', 'media-manager',
-//                     'collapse-sections' ];
 
     var events = [
       'mobile-layout',
