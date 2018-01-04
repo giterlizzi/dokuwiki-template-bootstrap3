@@ -20,9 +20,11 @@ jQuery(document).on('bootstrap3:init', function(event) {
     jQuery('abbr').tooltip();
 
     // Fix accesskey issue on dropdown menu
-    jQuery('ul.dropdown-menu li a[accesskey]')
-      .closest('.top, .revs, .show, .edit')
-      .removeAttr('accesskey');
+    if (jQuery('#dw__pagetools').length) {
+      jQuery('ul.dropdown-menu li a[accesskey]')
+        .closest('.top, .revs, .show, .edit')
+        .removeAttr('accesskey');
+    }
 
     // Form and controls
     // TODO ported
