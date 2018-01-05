@@ -921,7 +921,7 @@ function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
     $avatar_url .= md5($email);
     $avatar_url .= "?s=$size&d=$d&r=$r";
-var_dump($avatar_url);
+
   }
 
   if ($avatar_url) {
