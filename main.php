@@ -97,7 +97,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               ob_start();
               tpl_content(false);
 
-              $content = bootstrap3_content(ob_get_clean());
+              $content = ob_get_clean();
               $toc     = bootstrap3_toc(true);
 
               $toc_classes          = array();
@@ -108,7 +108,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
               echo '<div class="dw-content '. implode(' ', $content_classes) .'">';
               echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
-              echo $content;
+              echo '<!-- CONTENT -->';
+              echo bootstrap3_content($content);
+              echo '<!-- /CONTENT -->';
               echo '</div>';
 
               tpl_flush();
