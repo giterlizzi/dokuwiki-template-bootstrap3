@@ -890,7 +890,7 @@ function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
     $interwiki  = getInterwiki();
     $user_url   = str_replace('{NAME}', $username, $interwiki['user']);
     $logo_size  = array();
-    $logo       = tpl_getMediaFile(array("$user_url.png", 'images/avatar.png'), false, $logo_size);
+    $logo       = tpl_getMediaFile(array("$user_url.png", "$user_url.jpg", 'images/avatar.png'), false, $logo_size);
 
     return $logo;
   }
