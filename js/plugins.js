@@ -8,7 +8,7 @@
 
 jQuery(document).on('bootstrap3:plugins', function(event) {
 
-  console.debug(event.type + ' event fired');
+  //console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
