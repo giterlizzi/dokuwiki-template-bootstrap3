@@ -10,7 +10,7 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-global $ID, $auth;
+global $ID, $INPUT, $auth;
 
 if (bootstrap3_conf('showAdminMenu')):
 
@@ -54,8 +54,10 @@ $admin = array(
 
               if (! $label) continue;
 
-              echo sprintf('<li><a href="%s" title="%s" class="admin %s">%s</a></li>',
-                           wl($ID, array('do' => 'admin', 'page' => $item)), $label, $item, $label);
+              echo sprintf('<li class="%s"><a href="%s" title="%s" class="admin %s">%s</a></li>',
+                           (($INPUT->str('page') == $item) ? 'active' : ''),
+                           wl($ID, array('do' => 'admin', 'page' => $item)),
+                           $label, $item, $label);
 
             }
 
