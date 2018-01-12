@@ -49,6 +49,11 @@ if (in_array('help', $page_icons)) {
       <a href="#" title="<?php echo tpl_getLang('print') ?>" onclick="window.print()"><i class="fa fa-fw fa-print text-muted"></i></a>
     </li>
     <?php endif;
+          if (in_array('permalink', $page_icons) && $INFO['lastmod']): ?>
+    <li>
+      <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>"><i class="fa fa-fw fa-link text-muted"></i></a>
+    </li>
+    <?php endif;
           if (in_array('help', $page_icons) && $help_page): ?>
     <li>
       <a href="#" title="<?php echo $help_title ?>" data-toggle="modal" data-target=".dw-page-icons .modal.help" data-page="<?php echo $help_popup; ?>" onclick="return jQuery('.modal.help .modal-body').load(jQuery(this).data('page'));"><i class="fa fa-fw fa-question text-muted"></i></a>

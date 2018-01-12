@@ -72,7 +72,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
       <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
 
-      <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
         <?php require_once('tpl_page_tools.php'); // Page Tools ?>
@@ -97,12 +96,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               ob_start();
               tpl_content(false);
 
-              $content = ob_get_clean();
-              $toc     = bootstrap3_toc(true);
-
-              $toc_classes          = array();
-              $content_classes      = array();
-              $content_wrap_classes = array();
+              $content         = ob_get_clean();
+              $toc             = bootstrap3_toc(true);
+              $content_classes = array();
 
               if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
 

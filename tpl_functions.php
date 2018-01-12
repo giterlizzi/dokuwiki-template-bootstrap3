@@ -12,110 +12,79 @@ if (!defined('DOKU_INC')) die();
 
 include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
-/**
- * Create link/button to discussion page and back
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=0, $return=0) {
 
+function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false) {
+
+  global $ACT;
   global $ID;
 
-  $output         = '';
-  $discussPage    = str_replace('@ID@', $ID, $discussionPage);
-  $discussPageRaw = str_replace('@ID@', '', $discussionPage);
-  $isDiscussPage  = strpos($ID, $discussPageRaw) !== false;
-  $backID         = ':'.str_replace($discussPageRaw, '', $ID);
+  $output = '';
 
-  if ($wrapper) $output .= "<$wrapper>";
+  $custom_actions = array('purge', 'discussion');
 
-  if ($isDiscussPage) {
+  if (in_array($type, $custom_actions)) {
 
-    if ($link) {
-      ob_start();
-      tpl_pagelink($backID, $backTitle);
-      $output .= ob_get_contents();
-      ob_end_clean();
-    } else {
-      $output .= html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
+    if ($wrapper) $output .= "<$wrapper>";
+
+    if ($type == 'purge') {
+
+      $link  = wl($ID, array('purge' => 'true'));
+      $title = tpl_getLang('purge_cache_page');
+
+      $output .= sprintf('<a href="%s" class="action %s%s" title="%s">%s%s</a>',
+                          $link,
+                          $type,
+                          (($ACT == $type) ? ' active': ''),
+                          $title,
+                          (($icon) ? "<i class='$icon'></i> ": ''),
+                          $title);
+
     }
+
+    if ($type == 'discussion') {
+
+      $discuss_page     = str_replace('@ID@', $ID, tpl_getConf('discussionPage'));
+      $discuss_page_raw = str_replace('@ID@', '',  tpl_getConf('discussionPage'));
+      $is_discussPage   = strpos($ID, $discuss_page_raw) !== false;
+      $back_id          = ':'.str_replace($discuss_page_raw, '', $ID);
+
+      if ($is_discussPage) {
+
+        $link = html_wikilink($back_id, tpl_getLang('back_to_article'));
+        $link = str_replace('title="', 'title="' . tpl_getLang('back_to_article') . ': ', $link);
+
+      } else {
+
+        $link = html_wikilink($discuss_page, tpl_getLang('discussion'));
+        $link = str_replace('title="', 'title="' . tpl_getLang('discussion') . ': ', $link);
+
+      }
+
+      $output .= str_replace(array('class="', 'wikilink1', 'wikilink2'),
+                             array('class="action discussion ', '', ''), $link);
+
+      if ($icon) {
+        $output = preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $output);
+      }
+
+    }
+
+    if ($wrapper) $output .= "</$wrapper>";
 
   } else {
 
-    if ($link) {
-      ob_start();
-      tpl_pagelink($discussPage, $title);
-      $output .= ob_get_contents();
-      ob_end_clean();
-    } else {
-      $output .= html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
-    }
+    $inner = '';
+
+    if ($icon) $inner = '<i class="'. $icon . '"></i>';
+
+    $output .= tpl_actionlink($type, '', '', $inner, true, $wrapper);
+
+    if ($type == $ACT) $output = str_replace('class="action ', 'class="action active ', $output);
 
   }
 
-  if ($wrapper) $output .= "</$wrapper>";
   if ($return) return $output;
-
   echo $output;
-
-}
-
-
-/**
- * Create link/button to user page
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_userpage($userPage, $title, $link=0, $wrapper=0) {
-
-  if (empty($_SERVER['REMOTE_USER'])) return;
-
-  global $conf;
-  $userPage = str_replace('@USER@', $_SERVER['REMOTE_USER'], $userPage);
-
-  if ($wrapper) echo "<$wrapper>";
-
-  if ($link) {
-    tpl_pagelink($userPage, $title);
-  } else {
-    echo html_btn('userpage', $userPage, '', array(), 'get', 0, $title);
-  }
-
-  if ($wrapper) echo "</$wrapper>";
-
-}
-
-
-/**
- * Wrapper around custom template actions
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
-
-  switch ($type) {
-
-     case 'discussion':
-
-      if (tpl_getConf('discussionPage')) {
-        $output = _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper, 1);
-        if ($return) return $output;
-        echo $output;
-      }
-
-      break;
-
-    case 'userpage':
-
-      if (tpl_getConf('userPage')) {
-        $output = _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper, 1);
-        if ($return) return $output;
-        echo $output;
-      }
-
-      break;
-
-  }
 
 }
 
@@ -354,33 +323,37 @@ function bootstrap3_sidebar_include($type) {
 function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
+  global $ID;
 
-  if ($icon) {
-    $icon = '<i class="'.$icon.'"></i> ';
-  }
 
-  if ($action == 'discussion') {
+  if ($action == 'purge') {
 
-    if (bootstrap3_conf('showDiscussion')) {
-      $out = _tpl_action('discussion', 1, 'li', 1);
-      $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
-      return preg_replace('/(<a (.*?)>)/m', '$1'.$icon, $out);
+    if (bootstrap3_conf('showPurgePageCache')) {
+      return bootstrap3_action('purge', $icon, 'li', true);
     }
 
     return '';
 
   }
 
-  if ($link = tpl_action($action, 1, 0, 1, $icon)) {
+  if ($action == 'discussion') {
 
-    if ($return) {
-      if ($ACT == $action) {
-        $link = str_replace('class="action ', 'class="action active ', $link);
-      }
-      return $link;
+    if (bootstrap3_conf('showDiscussion')) {
+      return bootstrap3_action('discussion', $icon, 'li', true);
     }
 
-    return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>';
+    return '';
+
+  }
+
+  if ($link = bootstrap3_action($action, $icon, 'li', true)) {
+
+    # Navbar
+    if ($return) return $link;
+
+    # Pagetools
+    return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>'; 
+
   }
 
   return '';
@@ -519,6 +492,7 @@ function bootstrap3_sidebar($sidebar, $return = false) {
 /**
  * Normalize the DokuWiki list items
  *
+ * @todo    Port to Simple PHP HTML DOM
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @param   string  $html
@@ -798,6 +772,7 @@ function bootstrap3_tools($add_icons = true) {
     'icon'    => 'fa fa-fw fa-file',
     'actions' => array(
       'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+      'purge'      => array('icon' => 'fa fa-fw fa-eraser'),
       'discussion' => array('icon' => 'fa fa-fw fa-comments'),
       'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
       'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
@@ -993,6 +968,7 @@ function bootstrap3_conf($key, $default = false) {
     case 'showPageTools':
     case 'showEditBtn':
     case 'showAddNewPage':
+    case 'showPurgePageCache':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showAdminMenu':
@@ -2330,15 +2306,30 @@ function bootstrap3_content($content) {
     # Admin page
     if ($INPUT->str('page') == null) {
 
-      # Admin tasks
-      # TODO correggere icone e list-group per le ultime versioni di DokuWiki
-      foreach ($html->find('ul.admin_tasks') as $admin_task) {
+      foreach ($html->find('ul.admin_tasks, ul.admin_plugins') as $admin_task) {
 
         $admin_task->class .= ' list-group';
 
         foreach ($admin_task->find('a') as $item) {
           $item->class .= ' list-group-item';
         }
+
+        foreach ($admin_task->find('.icon') as $item) {
+          if ($item->innertext) continue;
+          $item->innertext = '<i class="fa fa-fw fa-puzzle-piece text-success"></i>';
+        }
+
+      }
+
+      foreach ($html->find('ul.admin_plugins') as $admin_plugins) {
+
+        $admin_plugins->class .= ' col-sm-4';
+        foreach ($admin_plugins->find('li') as $idx => $item) {
+          if ($idx > 0 && $idx % 5 == 0) {
+            $item->outertext = '</ul><ul class="' . $admin_plugins->class . '">' . $item->outertext;
+          }
+        }
+
 
       }
 
