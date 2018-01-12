@@ -2086,11 +2086,12 @@ function bootstrap3_content($content) {
 
     // Set specific icon in Admin Page
     if ($INPUT->str('page')) {
+
       if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
         $admin_pagetitle->class .= ' ' . $INPUT->str('page');
       }
-    }
 
+    }
 
     # ACL
 
@@ -2264,9 +2265,6 @@ function bootstrap3_content($content) {
     # Extension Manager
 
     if ($INPUT->str('page') == 'extension') {
-
-      # Import HTML string
-      $html = str_get_html($content);
 
       foreach ($html->find('.actions') as $elm) {
         $elm->class .= ' btn-group btn-group-xs';
