@@ -32,6 +32,55 @@ jQuery(document).ready(function() {
     jQuery(document).trigger('bootstrap3:toc-resize');
   });
 
+
+  // Add typeahead support for quick seach
+  jQuery("#qsearch__in").typeahead({
+
+    source: function(query, process) {
+
+      return jQuery.post(DOKU_BASE + 'lib/exe/ajax.php', {
+        call: 'qsearch',
+        q: encodeURI(query)
+      },
+
+      function(data) {
+
+        var results = [];
+
+        jQuery(data).find('a').each(function(){
+
+          var page = jQuery(this);
+
+          results.push({
+            name  : page.text(),
+            href  : page.attr('href'),
+            title : page.attr('title'),
+          });
+
+        });
+
+        return process(results);
+
+      });
+    },
+
+    itemLink: function (item) {
+      return item.href;
+    },
+
+    itemTitle: function (item) {
+      return item.title;
+    },
+
+    followLinkOnSelect : true,
+    autoSelect         : false,
+    items              : 50,
+    fitToElement       : true,
+    delay              : 500,
+
+  });
+
+
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
 

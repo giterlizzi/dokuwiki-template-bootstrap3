@@ -13,10 +13,102 @@ if (!defined('DOKU_INC')) die();
 include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
 
+/**
+ * copied from core (available since Detritus)
+ */
+if (!function_exists('tpl_toolsevent')) {
+
+  function tpl_toolsevent($toolsname, $items, $view='main') {
+
+    $data = array(
+      'view'  => $view,
+      'items' => $items
+    );
+
+    $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
+    $evt = new Doku_Event($hook, $data);
+
+    if($evt->advise_before()){
+      foreach($evt->data['items'] as $k => $html) echo $html;
+    }
+    $evt->advise_after();
+
+  }
+
+}
+
+
+/**
+ * copied from core (available since Binky)
+ */
+if (!function_exists('tpl_classes')) {
+
+  function tpl_classes() {
+
+    global $ACT, $conf, $ID, $INFO;
+
+    $classes = array(
+      'dokuwiki',
+      'mode_'.$ACT,
+      'tpl_'.$conf['template'],
+      !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
+      $INFO['exists'] ? '' : 'notFound',
+      ($ID == $conf['start']) ? 'home' : '',
+    );
+
+    return join(' ', $classes);
+
+  }
+
+}
+
+
+/**
+ * copied from core (available since Detritus)
+ */
+if (! function_exists('plugin_getRequestAdminPlugin')) {
+
+  function plugin_getRequestAdminPlugin(){
+
+    static $admin_plugin = false;
+    global $ACT,$INPUT,$INFO;
+
+    if ($admin_plugin === false) {
+      if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
+        $pluginlist = plugin_list('admin');
+        if (in_array($page, $pluginlist)) {
+          // attempt to load the plugin
+          /** @var $admin_plugin DokuWiki_Admin_Plugin */
+          $admin_plugin = plugin_load('admin', $page);
+          // verify
+          if ($admin_plugin && $admin_plugin->forAdminOnly() && !$INFO['isadmin']) {
+            $admin_plugin = null;
+            $INPUT->remove('page');
+            msg('For admins only',-1);
+          }
+        }
+      }
+    }
+
+    return $admin_plugin;
+  }
+
+}
+
+
+/**
+ * Create link for DokuWiki actions
+ *
+ * @param string          $type action
+ * @param string          $icon class
+ * @param boolean|string  $wrapper
+ * @param boolean         $return
+ */
 function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false) {
 
   global $ACT;
   global $ID;
+  global $lang;
 
   $output = '';
 
@@ -73,9 +165,9 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
   } else {
 
-    $inner = '';
+    $inner = $lang['btn_' . $type];
 
-    if ($icon) $inner = '<i class="'. $icon . '"></i>';
+    if ($icon) $inner = '<i class="'. $icon . '"></i> ' . $inner;
 
     $output .= tpl_actionlink($type, '', '', $inner, true, $wrapper);
 
@@ -85,89 +177,6 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
   if ($return) return $output;
   echo $output;
-
-}
-
-
-
-/**
- * copied from core (available since Detritus)
- */
-if (!function_exists('tpl_toolsevent')) {
-
-  function tpl_toolsevent($toolsname, $items, $view='main') {
-
-    $data = array(
-      'view'  => $view,
-      'items' => $items
-    );
-
-    $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
-    $evt = new Doku_Event($hook, $data);
-
-    if($evt->advise_before()){
-      foreach($evt->data['items'] as $k => $html) echo $html;
-    }
-    $evt->advise_after();
-
-  }
-
-}
-
-
-/**
- * copied from core (available since Binky)
- */
-if (!function_exists('tpl_classes')) {
-
-  function tpl_classes() {
-
-    global $ACT, $conf, $ID, $INFO;
-
-    $classes = array(
-      'dokuwiki',
-      'mode_'.$ACT,
-      'tpl_'.$conf['template'],
-      !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
-      $INFO['exists'] ? '' : 'notFound',
-      ($ID == $conf['start']) ? 'home' : '',
-    );
-
-    return join(' ', $classes);
-
-  }
-
-}
-
-/**
- * copied from core (available since Detritus)
- */
-if (! function_exists('plugin_getRequestAdminPlugin')) {
-
-  function plugin_getRequestAdminPlugin(){
-
-    static $admin_plugin = false;
-    global $ACT,$INPUT,$INFO;
-
-    if ($admin_plugin === false) {
-      if (($ACT == 'admin') && ($page = $INPUT->str('page', '', true)) != '') {
-        $pluginlist = plugin_list('admin');
-        if (in_array($page, $pluginlist)) {
-          // attempt to load the plugin
-          /** @var $admin_plugin DokuWiki_Admin_Plugin */
-          $admin_plugin = plugin_load('admin', $page);
-          // verify
-          if ($admin_plugin && $admin_plugin->forAdminOnly() && !$INFO['isadmin']) {
-            $admin_plugin = null;
-            $INPUT->remove('page');
-            msg('For admins only',-1);
-          }
-        }
-      }
-    }
-
-    return $admin_plugin;
-  }
 
 }
 
@@ -323,8 +332,6 @@ function bootstrap3_sidebar_include($type) {
 function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
-  global $ID;
-
 
   if ($action == 'purge') {
 
@@ -639,7 +646,7 @@ function bootstrap3_dropdown_page($page) {
  * @param  bool $autocomplete
  * @return bool
  */
-function bootstrap3_searchform($ajax = true, $autocomplete = true) {
+function bootstrap3_searchform() {
 
     global $lang;
     global $ACT;
@@ -654,14 +661,11 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
-    if (!$autocomplete)   print 'autocomplete="off" ';
-    print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
+    print 'id="qsearch__in" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
 
     print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
     print '<input type="hidden" name="do" value="search" />';
-
-    if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
     print '</div></form>';
 
     return true;
@@ -829,11 +833,11 @@ function bootstrap3_tools_menu($add_icons = true) {
  */
 function bootstrap3_toolbar() {
 
-  $tools = _tpl_tools();
+  $tools = bootstrap3_tools();
 
-  foreach ($tools as $id => $menu) {
-    foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = str_replace('class="action ', 'class="action btn btn-default ', bootstrap3_action_item($action, $item['icon'], 1));
+  foreach ($tools as $tool => $data) {
+    foreach($data['menu'] as $action => $item) {
+      $tools[$tool]['menu'][$action] = str_replace(array('class="action ', '<li>', '</li>'), array('class="action btn btn-default ', '', ''), $item);
     }
   }
 
@@ -1670,6 +1674,9 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
     'type' => 'text/javascript',
     'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
 
+  $event->data['script'][] = array(
+    'type' => 'text/javascript',
+    'src'  => tpl_basedir() . 'assets/typeahead/bootstrap3-typeahead.min.js');
 
   // Apply some FIX
   if ($ACT || defined('DOKU_MEDIADETAIL')) {
