@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
 
 
   // Add typeahead support for quick seach
-  jQuery("#qsearch__in").typeahead({
+  jQuery("#qsearch").typeahead({
 
     source: function(query, process) {
 

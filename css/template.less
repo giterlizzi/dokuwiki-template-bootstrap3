@@ -130,10 +130,15 @@ header {
       }
 
       /* Typeahead plugin */
-      .typeahead a.dropdown-item {
-        font-size: 85%;
-        text-overflow:ellipsis;
-        overflow:hidden
+      .typeahead {
+        max-height: 250px;
+        overflow-y: auto;
+
+        a.dropdown-item {
+          font-size: 85%;
+          text-overflow:ellipsis;
+          overflow:hidden
+        }
       }
 
     }

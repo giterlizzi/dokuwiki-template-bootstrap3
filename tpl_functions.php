@@ -631,19 +631,10 @@ function bootstrap3_dropdown_page($page) {
 
 
 /**
- * Print the search form in Bootstrap Style
- *
- * If the first parameter is given a div with the ID 'qsearch_out' will
- * be added which instructs the ajax pagequicksearch to kick in and place
- * its output into this div. The second parameter controls the propritary
- * attribute autocomplete. If set to false this attribute will be set with an
- * value of "off" to instruct the browser to disable it's own built in
- * autocompletion feature (MSIE and Firefox)
+ * Print the search form in Bootstrap style
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @param  bool $ajax
- * @param  bool $autocomplete
  * @return bool
  */
 function bootstrap3_searchform() {
@@ -661,7 +652,7 @@ function bootstrap3_searchform() {
 
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
-    print 'id="qsearch__in" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
+    print 'id="qsearch" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
 
     print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
@@ -706,28 +697,28 @@ function bootstrap3_html_msgarea() {
 
         case 'info':
           $level = 'info';
-          $icon  = 'fa fa-fw fa-info-circle';
+          $icon  = 'fa-info-circle';
           break;
 
         case 'error':
           $level = 'danger';
-          $icon  = 'fa fa-fw fa-times-circle';
+          $icon  = 'fa-times-circle';
           break;
 
         case 'notify':
           $level = 'warning';
-          $icon  = 'fa fa-fw fa-warning';
+          $icon  = 'fa-warning';
           break;
 
         case 'success':
           $level = 'success';
-          $icon  = 'fa fa-fw fa-check-circle';
+          $icon  = 'fa-check-circle';
           break;
 
       }
 
       print '<div class="alert alert-'.$level.'">';
-      print '<i class="'.$icon.'"></i> ';
+      print '<i class="fa fa-fw '.$icon.'"></i> ';
       print $msg['msg'];
       print '</div>';
 
