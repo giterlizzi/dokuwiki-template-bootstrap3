@@ -64,7 +64,7 @@ if (in_array('help', $page_icons)) {
   <?php if ($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ..." class="share-on">
+    <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ...">
       <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">
