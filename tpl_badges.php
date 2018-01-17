@@ -20,8 +20,8 @@ if (bootstrap3_conf('showBadges')):
 
   <?php echo tpl_license('button', true, false, false); // license button, no wrapper ?>
 
-  <a href="http://getbootstrap.com" title="Built with Bootstrap 3" <?php echo $target ?>>
-    <img src="<?php echo tpl_basedir(); ?>images/button-bootstrap3.png" width="80" height="15" alt="Built with Bootstrap 3" />
+  <a href="https://www.dokuwiki.org/template:bootstrap3" title="Built with DokuWiki Bootstrap3 Template" <?php echo $target ?>>
+    <img src="<?php echo tpl_basedir(); ?>images/button-bootstrap3.png" width="80" height="15" alt="Built with DokuWiki Bootstrap3 Template" />
   </a>
 
   <a href="http://www.php.net" title="Powered by PHP" <?php echo $target ?>>
