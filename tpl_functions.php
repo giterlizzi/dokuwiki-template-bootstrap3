@@ -167,6 +167,12 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
     $inner = $lang['btn_' . $type];
 
+    if ($type == 'img_backto') {
+      if(strpos($inner, '%s')){
+        $inner = sprintf($inner, $ID);
+      }
+    }
+
     if ($icon) $inner = '<i class="'. $icon . '"></i> ' . $inner;
 
     $output .= tpl_actionlink($type, '', '', $inner, true, $wrapper);
@@ -332,6 +338,7 @@ function bootstrap3_sidebar_include($type) {
 function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
+  global $ID;
 
   if ($action == 'purge') {
 
@@ -2553,5 +2560,41 @@ function bootstrap3_classes() {
   if (! bootstrap3_conf('tableFullWidth'))  $classes[] = 'dw-table-width';
 
   return implode(' ', $classes);
+
+}
+
+
+function bootstrap3_license($type = 'link', $size = 24, $return = false) {
+
+  global $conf, $license, $lang;
+
+  $target = $conf['target']['extern'];
+  $lic    = $license[$conf['license']];
+  $output = '';
+
+  if (! $lic) return '';
+
+  if ($type == 'link') {
+    $output .= $lang['license'] . '<br/>';
+  }
+
+  $output .= '<a href="'. $lic['url'] .'" title="'. $lic['name'] .'" targe="'.$target.'" rel="license" class="license">';
+
+  if ($type == 'image') {
+
+    foreach (explode('-', $conf['license']) as $license_img) {
+      if ($license_img == 'publicdomain') $license_img = 'pd';
+      $output .= '<img src="'. tpl_basedir() .'images/license/'. $license_img .'.png" width="'. $size .'" height="'. $size .'" alt="'. $license_img .'" /> ';
+    }
+
+  } else {
+    $output .= $lic['name'];
+  }
+
+  $output .= '</a>';
+
+  if ($return) return $output;
+  echo $output;
+  return '';
 
 }

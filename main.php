@@ -122,37 +122,31 @@ header('X-UA-Compatible: IE=edge,chrome=1');
           </div>
         </div>
 
+        <div class="small text-right">
+
+          <?php if (bootstrap3_conf('showPageInfo')): ?>
+          <span class="docInfo">
+            <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
+          </span>
+          <?php endif ?>
+
+          <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+          <span class="loginLink hidden-print">
+            <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+          </span>
+          <?php endif; ?>
+
+        </div>
+
       </article>
 
       <?php bootstrap3_sidebar_include('right'); // Right Sidebar ?>
 
     </main>
 
-    <div class="small text-right">
-
-      <?php if (bootstrap3_conf('showPageInfo')): ?>
-      <span class="docInfo">
-        <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
-      </span>
-      <?php endif ?>
-
-      <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
-      <span class="loginLink hidden-print">
-        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
-      </span>
-      <?php endif; ?>
-
-    </div>
-
-    <?php if ($conf['license']): ?>
-    <div id="dw__license" class="text-center small" <?php ((bootstrap3_conf('semantic')) ? 'itemprop="license"' : '') ?>>
-      <?php echo tpl_license('') ?>
-    </div>
-    <?php endif; ?>
-
     <?php
       // DokuWiki badges
-      require_once('tpl_badges.php');
+#      require_once('tpl_badges.php');
 
       // Footer hook
       tpl_includeFile('footer.html');
