@@ -108,6 +108,7 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
   global $ACT;
   global $ID;
+  global $INPUT;
   global $lang;
 
   $output = '';
@@ -171,6 +172,10 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
       if(strpos($inner, '%s')){
         $inner = sprintf($inner, $ID);
       }
+    }
+
+    if ($type == 'login' && $INPUT->server->has('REMOTE_USER')) {
+      $inner = $lang['btn_logout'];
     }
 
     if ($icon) $inner = '<i class="'. $icon . '"></i> ' . $inner;
@@ -1800,7 +1805,7 @@ function bootstrap3_content($content) {
   foreach ($html->find('.curid') as $elm) {
     foreach ($elm->find('a') as $link) {
       $link->class .= ' curid';
-      $link->attr['data-curid'] = 'true';
+      $link->attr[' data-curid'] = 'true'; # FIX attribute
     }
   }
 
@@ -2578,7 +2583,11 @@ function bootstrap3_license($type = 'link', $size = 24, $return = false) {
     $output .= $lang['license'] . '<br/>';
   }
 
-  $output .= '<a href="'. $lic['url'] .'" title="'. $lic['name'] .'" targe="'.$target.'" rel="license" class="license">';
+  $semantic     = (bootstrap3_conf('semantic') ? 'itemscope itemtype="http://schema.org/CreativeWork" itemprop="license"' : '');
+  $license_url  = $lic['url'];
+  $license_name = $lic['name'];
+
+  $output .= '<a href="'. $license_url .'" title="'. $license_name .'" target="'. $target .'" '. $semantic .' rel="license" class="license">';
 
   if ($type == 'image') {
 
