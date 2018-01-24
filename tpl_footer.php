@@ -30,40 +30,47 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
 
     <div class="small navbar-text">
 
-      <div class="media">
-        <div class="media-left">
-          <img src="<?php echo $wiki_logo ?>" alt="<?php echo $wiki_title ?>" class="media-object" style="width:32px" />
+      <div class="footer-dw-title">
+        <div class="media">
+          <div class="media-left">
+            <img src="<?php echo $wiki_logo ?>" alt="<?php echo $wiki_title ?>" class="media-object" style="width:32px" />
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading"><?php echo $wiki_title ?></h4>
+            <p>
+              <?php echo $wiki_tagline ?>
+            </p>
+          </div>
         </div>
-        <div class="media-body">
-          <h4 class="media-heading"><?php echo $wiki_title ?></h4>
-          <p><?php echo $wiki_tagline ?></p>
-        </div>
+        <p>&nbsp;</p>
       </div>
 
       <?php if ($footer_page_exist): ?>
-      <div class="footer-content">
+      <div class="footer-dw-content">
         <?php echo bootstrap3_content(tpl_include_page('footer', 0, 1, bootstrap3_conf('useACL'))); ?>
       </div>
+
+      <p>&nbsp;</p>
       <?php endif; ?>
 
-      <div class="row">
+      <div class="footer-license row">
 
-        <?php if ($license_is_enabled): ?>
-        <div class="dw__license col-sm-6">
+        <div class="col-sm-6">
+          <?php if ($license_is_enabled): ?>
           <p>
             <?php bootstrap3_license('image') ?>
           </p>
           <p class="small">
             <?php bootstrap3_license('link') ?>
           </p>
+          <?php endif; ?>
         </div>
-        <?php endif; ?>
 
-        <?php if ($badges_is_enabled): ?>
         <div class="col-sm-6">
+          <?php if ($badges_is_enabled): ?>
           <?php require_once('tpl_badges.php'); ?>
+          <?php endif; ?>
         </div>
-        <?php endif; ?>
 
       </div>
 

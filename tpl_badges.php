@@ -11,43 +11,37 @@
 if (!defined('DOKU_INC')) die();
 
 global $conf;
-global $lic;
 
-if (bootstrap3_conf('showBadges')):
-
-  $target  = ($conf['target']['extern']) ? 'target="'.$conf['target']['extern'].'"' : '';
-  $dw_path = dirname(tpl_basedir());
-
-?>
+if (bootstrap3_conf('showBadges')): ?>
 <ul id="dw__badges" class="list-inline text-right hidden-print">
 
   <li>
-    <a href="https://www.dokuwiki.org/template:bootstrap3" title="Bootstrap template for DokuWiki" <?php echo $target ?>>
-      <img src="<?php echo tpl_basedir(); ?>images/bootstrap.png" width="16" alt="Bootstrap template for DokuWiki" />
+    <a href="https://www.dokuwiki.org/template:bootstrap3" title="Bootstrap template for DokuWiki" target="<?php echo $conf['target']['extern'] ?>">
+      <img src="<?php echo tpl_basedir(); ?>images/bootstrap.png" width="20" alt="Bootstrap template for DokuWiki" />
     </a>
   </li>
 
   <li>
-    <a href="http://www.php.net" title="Powered by PHP" <?php echo $target ?>>
-      <img src="<?php echo tpl_basedir(); ?>images/php.png" width="16" alt="Powered by PHP" />
+    <a href="https://www.php.net" title="Powered by PHP" target="<?php echo $conf['target']['extern'] ?>">
+      <img src="<?php echo tpl_basedir(); ?>images/php.png" width="20" alt="Powered by PHP" />
     </a>
   </li>
 
   <li>
-    <a href="http://validator.w3.org/check/referer" title="Valid HTML5" <?php echo $target ?>>
-      <img src="<?php echo tpl_basedir(); ?>images/html5.png" width="16" alt="Valid HTML5" />
+    <a href="http://validator.w3.org/check/referer" title="Valid HTML5" target="<?php echo $conf['target']['extern'] ?>">
+      <img src="<?php echo tpl_basedir(); ?>images/html5.png" width="20" alt="Valid HTML5" />
     </a>
   </li>
 
   <li>
-    <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3" title="Valid CSS" <?php echo $target ?>>
-      <img src="<?php echo tpl_basedir(); ?>images/css3.png" width="16" alt="Valid CSS" />
+    <a href="http://jigsaw.w3.org/css-validator/check/referer?profile=css3" title="Valid CSS" target="<?php echo $conf['target']['extern'] ?>">
+      <img src="<?php echo tpl_basedir(); ?>images/css3.png" width="20" alt="Valid CSS" />
     </a>
   </li>
 
   <li>
-    <a href="http://dokuwiki.org/" title="Driven by DokuWiki" <?php echo $target ?>>
-      <img src="<?php echo tpl_basedir(); ?>images/logo.png" width="16" alt="Driven by DokuWiki" />
+    <a href="https://www.dokuwiki.org/" title="Driven by DokuWiki" target="<?php echo $conf['target']['extern'] ?>">
+      <img src="<?php echo tpl_basedir(); ?>images/logo.png" width="20" alt="Driven by DokuWiki" />
     </a>
   </li>
 
