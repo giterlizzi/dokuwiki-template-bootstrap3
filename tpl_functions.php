@@ -1799,7 +1799,8 @@ function bootstrap3_content($content) {
   # Import HTML string
   $html = str_get_html($content);
 
-  #var_dump($ACT);
+  # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
+  if (! $html) return $content;
 
   # Move Current Page ID to <a> element and create data-curid HTML5 attribute
   foreach ($html->find('.curid') as $elm) {
@@ -2175,12 +2176,6 @@ function bootstrap3_content($content) {
       }
 
       foreach($html->find('#config__manager') as $cm_elm) {
-
-//         foreach ($cm_elm->find('h1') as $idx => $elm) {
-//           $elm->class = 'panel-heading panel-title';
-//           $elm->role  = 'tab';
-//           $elm->outertext = (($idx == 0) ? '' : '</div>') . '<div class="panel panel-default">' . $elm->outertext;
-//         }
 
         $save_button = '';
 
