@@ -10,6 +10,10 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+if ($pagesize = bootstrap3_conf('domParserMaxPageSize')) {
+  define('MAX_FILE_SIZE', $pagesize);
+}
+
 include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
 

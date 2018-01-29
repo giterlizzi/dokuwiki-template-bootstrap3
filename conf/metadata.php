@@ -61,6 +61,7 @@ $meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');
+$meta['showWikiInfo']           = array('onoff');
 
 // TOC
 $meta['tocAffix']               = array('onoff');
@@ -111,3 +112,4 @@ $meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('face
 $meta['tagsOnTop']            = array('onoff');
 $meta['useAnchorJS']          = array('onoff');
 $meta['collapsibleSections']  = array('onoff');
+$meta['domParserMaxPageSize'] = array('numeric', '_min' => 0);

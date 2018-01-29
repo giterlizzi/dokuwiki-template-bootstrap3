@@ -12,9 +12,10 @@ if (!defined('DOKU_INC')) die();
 
 global $conf;
 
-$footer_page_exist  = page_findnearest('footer', bootstrap3_conf('useACL'));
-$license_is_enabled = $conf['license'];
-$badges_is_enabled  = bootstrap3_conf('showBadges');
+$footer_page_exist    = page_findnearest('footer', bootstrap3_conf('useACL'));
+$license_is_enabled   = $conf['license'];
+$badges_is_enabled    = bootstrap3_conf('showBadges');
+$wiki_info_is_enabled = bootstrap3_conf('showWikiInfo');
 
 $logo_size      = array();
 $wiki_logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
@@ -24,12 +25,13 @@ $wiki_logo_size = 'height="32"';
 $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
 
 ?>
-<?php if ($footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
+<?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <footer id="dw__footer" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
   <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
 
     <div class="small navbar-text">
 
+      <?php if ($wiki_info_is_enabled): ?>
       <div class="footer-dw-title">
         <div class="media">
           <div class="media-left">
@@ -44,6 +46,7 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
         </div>
         <p>&nbsp;</p>
       </div>
+      <?php endif; ?>
 
       <?php if ($footer_page_exist): ?>
       <div class="footer-dw-content">
