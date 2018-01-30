@@ -16,7 +16,6 @@ if ($pagesize = bootstrap3_conf('domParserMaxPageSize')) {
 
 include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
-
 /**
  * copied from core (available since Detritus)
  */
@@ -608,6 +607,11 @@ function bootstrap3_navbar() {
 
   $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
                          '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+
+  # FIX for Purplenumbers renderer plugin
+  $navbar = preg_replace('/<li class="level1"> (.*)/',
+                         '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
 
@@ -1197,7 +1201,6 @@ function bootstrap3_youarehere() {
 
     echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
-    $link = html_wikilink($page);
     $link = str_replace(' class="curid"', '', html_wikilink($page));
 
     if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
