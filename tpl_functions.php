@@ -1242,7 +1242,7 @@ function bootstrap3_page_browser_title() {
 
           $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
           $ns_page_title_page    = noNSorNS($ns_page);
-          $ns_page_title         = ($exists) ? $ns_page_title_heading : $ns_page_title_page;
+          $ns_page_title         = ($exists) ? $ns_page_title_heading : null;
 
           if ($ns_page_title !== $conf['start']) {
             $ns_titles[] = $ns_page_title;
@@ -1714,6 +1714,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
           case 'lumen':
           case 'slate':
           case 'spacelab':
+          case 'solar':
           case 'united':
             $navbar_height = 50;
             break;
