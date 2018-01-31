@@ -23,6 +23,7 @@ $current_ns   = getNS($ID);
 
 $help_page  = false;
 $help_title = null;
+$help_popup = null;
 
 if (in_array('help', $page_icons)) {
   $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
@@ -51,7 +52,7 @@ if (in_array('help', $page_icons)) {
     <?php endif;
           if (in_array('permalink', $page_icons) && $INFO['lastmod']): ?>
     <li>
-      <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>"><i class="fa fa-fw fa-link text-muted"></i></a>
+      <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>" target="_blank"><i class="fa fa-fw fa-link text-muted"></i></a>
     </li>
     <?php endif;
           if (in_array('help', $page_icons) && $help_page): ?>
@@ -117,14 +118,13 @@ if (in_array('help', $page_icons)) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><?php echo $conf['title'] ?></h4>
+          <h4 class="modal-title"><?php echo $conf['title'] ?> - <?php echo $help_title ?></h4>
         </div>
         <div class="modal-body" style="padding:20px"></div>
       </div>
     </div>
   </div>
   <?php endif; ?>
-
 
 </div>
 <span class="clearfix"></span>
