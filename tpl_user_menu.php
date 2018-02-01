@@ -28,7 +28,7 @@ if ($use_avatar) {
 }
 
 ?>
-<ul class="nav navbar-nav" id="dw__user_menu2">
+<ul class="nav navbar-nav" id="dw__user_menu">
   <li class="dropdown">
 
     <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
