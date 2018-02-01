@@ -114,34 +114,6 @@ jQuery(document).ready(function() {
   });
 
 
-  jQuery('.fluid-container').on('click', function() {
-
-    var $button     = jQuery(this),
-        $containers = jQuery('body > div, header, header nav > div, article, footer > div');
-
-    if (jQuery('body > div.container').length) {
-
-      $containers
-        .removeClass('container')
-        .addClass('container-fluid');
-      $button.parent().addClass('active');
-
-      DokuCookie.setValue('fluidContainer', 1);
-
-    } else {
-
-      $containers
-        .removeClass('container-fluid')
-        .addClass('container');
-      $button.parent().removeClass('active');
-
-      DokuCookie.setValue('fluidContainer', 0);
-
-    }
-
-  });
-
-
   /* DOKUWIKI:include js/template.js */
 
 

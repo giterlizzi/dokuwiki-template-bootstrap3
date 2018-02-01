@@ -196,6 +196,41 @@ jQuery(document).on('bootstrap3:back-to-top', function(event) {
 });
 
 
+// Container Fluid
+jQuery(document).on('bootstrap3:fluid-container', function(event) {
+
+  // console.debug(event.type + ' event fired');
+
+  jQuery('.btn-fluid-container').on('click', function() {
+
+    var $button     = jQuery(this),
+        $containers = jQuery('body > div, header, header nav > div, article, footer > div');
+
+    if (jQuery('body > div.container').length) {
+
+      $containers
+        .removeClass('container')
+        .addClass('container-fluid');
+      $button.parent().addClass('active');
+
+      DokuCookie.setValue('fluidContainer', 1);
+
+    } else {
+
+      $containers
+        .removeClass('container-fluid')
+        .addClass('container');
+      $button.parent().removeClass('active');
+
+      DokuCookie.setValue('fluidContainer', 0);
+
+    }
+
+  });
+
+});
+
+
 // Footnote
 jQuery(document).on('bootstrap3:footnotes', function(event) {
 
@@ -780,6 +815,7 @@ jQuery(document).on('bootstrap3:components', function(event) {
 
     var events = [
       'mobile-layout',
+      'fluid-container',
       'toc',
       'toc-menu',
       'nav',
