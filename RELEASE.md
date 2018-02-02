@@ -40,6 +40,7 @@
   * #287: Fixed printing abbreviations (thanks to @Juergen-aus-Koeln)
   * #325: Fixed accesskey issue (thanks to @dedeibel)
   * #342: Fixed Purplenumbers renderer plugin issue (thanks to @molefunk)
+  * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
 
 ### Removed
   * Removed `.map` file from bootstrap assets (thanks to  Andrew Gent)
