@@ -2,7 +2,7 @@
 
 [Description of the bug or feature]
 
-### Steps to Reproduce
+### Steps to reproduce
 
 1. [First Step]
 2. [Second Step]
@@ -14,15 +14,15 @@
 
 ### Versions
 
-  * [Bootstrap3 Template]
-  * [DokuWiki]
-  * [Plugin]
-  * [Browser]
+* [Bootstrap3 Template]
+* [DokuWiki]
+* [Plugins]
+* [Browser]
 
 ### Screenshots or Logs
 
 [Paste your logs or attach the screenshot]
 
-### Sample Page
+### Sample page or snippet
 
-[Paste your sample DokuWiki page]
+[Paste your sample DokuWiki page or snippet using MarkDown code syntax]
