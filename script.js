@@ -52,9 +52,10 @@ jQuery(document).ready(function() {
           var page = jQuery(this);
 
           results.push({
-            name  : page.text(),
-            href  : page.attr('href'),
-            title : page.attr('title'),
+            name     : page.text(),
+            href     : page.attr('href'),
+            title    : page.attr('title'),
+            category : page.attr('title').replace(/:/g, ' » '),
           });
 
         });
