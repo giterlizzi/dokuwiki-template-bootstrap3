@@ -203,8 +203,14 @@ jQuery(document).on('bootstrap3:fluid-container', function(event) {
 
   jQuery('.btn-fluid-container').on('click', function() {
 
+    var selectors = 'body > div, header, header nav > div, article, footer > div';
+
+    if (! jQuery('.navbar-fixed-top').length) {
+      selectors = 'body > div, header, article, footer > div';
+    }
+
     var $button     = jQuery(this),
-        $containers = jQuery('body > div, header, header nav > div, article, footer > div');
+        $containers = jQuery(selectors);
 
     if (jQuery('body > div.container').length) {
 
