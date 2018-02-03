@@ -23,6 +23,7 @@ $current_ns   = getNS($ID);
 
 $help_page  = false;
 $help_title = null;
+$help_popup = null;
 
 if (in_array('help', $page_icons)) {
   $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
@@ -49,6 +50,11 @@ if (in_array('help', $page_icons)) {
       <a href="#" title="<?php echo tpl_getLang('print') ?>" onclick="window.print()"><i class="fa fa-fw fa-print text-muted"></i></a>
     </li>
     <?php endif;
+          if (in_array('permalink', $page_icons) && $INFO['lastmod']): ?>
+    <li>
+      <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>" target="_blank"><i class="fa fa-fw fa-link text-muted"></i></a>
+    </li>
+    <?php endif;
           if (in_array('help', $page_icons) && $help_page): ?>
     <li>
       <a href="#" title="<?php echo $help_title ?>" data-toggle="modal" data-target=".dw-page-icons .modal.help" data-page="<?php echo $help_popup; ?>" onclick="return jQuery('.modal.help .modal-body').load(jQuery(this).data('page'));"><i class="fa fa-fw fa-question text-muted"></i></a>
@@ -59,7 +65,7 @@ if (in_array('help', $page_icons)) {
   <?php if ($social_share && count($social_share_providers)): ?>
 
   <div class="dropdown pull-right">
-    <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ..." class="share-on">
+    <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ...">
       <i class="fa fa-share-alt fa-fw text-muted"></i>
     </a>
     <ul class="dropdown-menu">
@@ -112,14 +118,13 @@ if (in_array('help', $page_icons)) {
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h4 class="modal-title"><?php echo $conf['title'] ?></h4>
+          <h4 class="modal-title"><?php echo $conf['title'] ?> - <?php echo $help_title ?></h4>
         </div>
         <div class="modal-body" style="padding:20px"></div>
       </div>
     </div>
   </div>
   <?php endif; ?>
-
 
 </div>
 <span class="clearfix"></span>

@@ -91,14 +91,19 @@
     h1.popularity:before  { .fa-icon(@fa-envelope); color: @color_info; }
 
     // Plugins
-    h1.sqlite:before      { .fa-icon(@fa-database); }
-    h1.tagging:before     { .fa-icon(@fa-tags); }
-    h1.upgrade:before     { .fa-icon(@fa-cloud-download); }
-    h1.smtp:before        { .fa-icon(@fa-envelope-o); }
-    h1.searchindex:before { .fa-icon(@fa-sitemap); }
-    h1.discussion:before  { .fa-icon(@fa-comments); }
-    h1.farmer:before      { .fa-icon(@fa-cubes); }
-    h1.submgr:before      { .fa-icon(@fa-envelope-open-o); }
+    h1.sqlite:before          { .fa-icon(@fa-database); }
+    h1.tagging:before         { .fa-icon(@fa-tags); }
+    h1.upgrade:before         { .fa-icon(@fa-cloud-download); }
+    h1.smtp:before            { .fa-icon(@fa-envelope-o); }
+    h1.searchindex:before     { .fa-icon(@fa-sitemap); }
+    h1.discussion:before      { .fa-icon(@fa-comments); }
+    h1.translation:before     { .fa-icon(@fa-flag); }
+    h1.farmer:before          { .fa-icon(@fa-cubes); }
+    h1.submgr:before          { .fa-icon(@fa-envelope-open-o); }
+    h1.advanced_import:before { .fa-icon(@fa-download); }
+    h1.advanced_export:before { .fa-icon(@fa-upload); }
+    h1.advanced_config:before { .fa-icon(@fa-wrench); }
+
 
   }
 
@@ -208,6 +213,7 @@ ul.search_quickhits li a:before { .fa-icon(@fa-file-text-o); color: #777; }
     &.source:before     { .icon(@fa-file-text-o); }
 
     &.discussion:before { .icon(@fa-comments); }
+    &.purge:before      { .icon(@fa-eraser); }
     &.revert:before     { .icon(@fa-repeat); }
     &.revs:before       { .icon(@fa-clock-o); }
     &.backlink:before   { .icon(@fa-link); }
@@ -240,14 +246,18 @@ ul.search_quickhits li a:before { .fa-icon(@fa-file-text-o); color: #777; }
     &.popularity:before  { .icon(@fa-envelope); }
 
     // Plugins
-    &.sqlite:before      { .icon(@fa-database); }
-    &.tagging:before     { .icon(@fa-tags); }
-    &.upgrade:before     { .icon(@fa-cloud-download); }
-    &.smtp:before        { .icon(@fa-envelope-o); }
-    &.searchindex:before { .icon(@fa-sitemap); }
-    &.discussion:before  { .icon(@fa-comments); }
-    &.farmer:before      { .icon(@fa-cubes); }
-    &.submgr:before      { .icon(@fa-envelope-open-o); }
+    &.sqlite:before          { .icon(@fa-database); }
+    &.tagging:before         { .icon(@fa-tags); }
+    &.upgrade:before         { .icon(@fa-cloud-download); }
+    &.smtp:before            { .icon(@fa-envelope-o); }
+    &.searchindex:before     { .icon(@fa-sitemap); }
+    &.discussion:before      { .icon(@fa-comments); }
+    &.translation:before     { .icon(@fa-flag); }
+    &.farmer:before          { .icon(@fa-cubes); }
+    &.submgr:before          { .icon(@fa-envelope-open-o); }
+    &.advanced_import:before { .icon(@fa-download); }
+    &.advanced_export:before { .icon(@fa-upload); }
+    &.advanced_config:before { .icon(@fa-wrench); }
 
   }
 

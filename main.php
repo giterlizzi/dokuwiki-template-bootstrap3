@@ -33,9 +33,21 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
-    <?php tpl_includeFile('topheader.html') ?>
-    <?php require_once('tpl_navbar.php'); ?>
-    <?php tpl_includeFile('header.html') ?>
+    <?php
+
+      tpl_includeFile('topheader.html');
+
+      // Top-Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('topheader', 1, 1, bootstrap3_conf('useACL'));
+
+      require_once('tpl_navbar.php');
+
+      tpl_includeFile('header.html');
+
+      // Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('header', 1, 1, bootstrap3_conf('useACL'));
+
+    ?>
   </header>
 
   <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
@@ -60,7 +72,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
       <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
 
-      <!-- ********** CONTENT ********** -->
       <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
 
         <?php require_once('tpl_page_tools.php'); // Page Tools ?>
@@ -85,20 +96,19 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               ob_start();
               tpl_content(false);
 
-              $content = bootstrap3_content(ob_get_clean());
-              $toc     = bootstrap3_toc(true);
-
-              $toc_classes     = array();
+              $content         = ob_get_clean();
+              $toc             = bootstrap3_toc(true);
               $content_classes = array();
 
               if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
-              if (bootstrap3_conf('tocPosition'))  $toc_classes[]     = 'dw-toc-'. bootstrap3_conf('tocPosition');
 
-              echo '<div class="dw-content '. implode(' ', $content_classes) .'">';
-
-              // Include the TOC layout
-              if ($toc) echo '<div class="dw-toc '. implode(' ', $toc_classes) .' hidden-print">' . $toc . '</div>';
-              echo $content;
+              echo '<div class="dw-content-page '. implode(' ', $content_classes) .'">';
+              echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
+              echo '<!-- CONTENT -->';
+              echo '<div class="dw-content">';
+              echo bootstrap3_content($content);
+              echo '</div>';
+              echo '<!-- /CONTENT -->';
               echo '</div>';
 
               tpl_flush();
@@ -114,37 +124,31 @@ header('X-UA-Compatible: IE=edge,chrome=1');
           </div>
         </div>
 
+        <div class="small text-right">
+
+          <?php if (bootstrap3_conf('showPageInfo')): ?>
+          <span class="docInfo">
+            <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
+          </span>
+          <?php endif ?>
+
+          <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+          <span class="loginLink hidden-print">
+            <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+          </span>
+          <?php endif; ?>
+
+        </div>
+
       </article>
 
       <?php bootstrap3_sidebar_include('right'); // Right Sidebar ?>
 
     </main>
 
-    <div class="small text-right">
-
-      <?php if (bootstrap3_conf('showPageInfo')): ?>
-      <span class="docInfo">
-        <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
-      </span>
-      <?php endif ?>
-
-      <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
-      <span class="loginLink hidden-print">
-        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
-      </span>
-      <?php endif; ?>
-
-    </div>
-
-    <?php if ($conf['license']): ?>
-    <div id="dw__license" class="text-center small" <?php ((bootstrap3_conf('semantic')) ? 'itemprop="license"' : '') ?>>
-      <?php echo tpl_license('') ?>
-    </div>
-    <?php endif; ?>
-
     <?php
       // DokuWiki badges
-      require_once('tpl_badges.php');
+#      require_once('tpl_badges.php');
 
       // Footer hook
       tpl_includeFile('footer.html');

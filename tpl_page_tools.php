@@ -13,7 +13,7 @@ if (!defined('DOKU_INC')) die();
 ?>
 <?php if (bootstrap3_conf('showPageTools')): ?>
 
-<div id="dw__pagetools" class="hidden-print">
+<nav id="dw__pagetools" class="hidden-print">
   <div class="tools panel panel-default pull-right <?php echo ((bootstrap3_conf('pageToolsAnimation')) ? 'tools-animation' : '') ?>">
     <ul class="nav nav-stacked nav-pills">
       <?php
@@ -27,5 +27,5 @@ if (!defined('DOKU_INC')) die();
       ?>
     </ul>
   </div>
-</div>
+</nav>
 <?php endif; ?>

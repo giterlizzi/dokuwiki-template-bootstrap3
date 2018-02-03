@@ -39,9 +39,21 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo bootstrap3_classes() ?>" data-img-id="<?php echo $IMG ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
-    <?php tpl_includeFile('topheader.html') ?>
-    <?php require_once('tpl_navbar.php'); ?>
-    <?php tpl_includeFile('header.html') ?>
+    <?php
+
+      tpl_includeFile('topheader.html');
+
+      // Top-Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('topheader', 1, 1, bootstrap3_conf('useACL'));
+
+      require_once('tpl_navbar.php');
+
+      tpl_includeFile('header.html');
+
+      // Header DokuWiki page
+      if ($ACT == 'show') tpl_include_page('header', 1, 1, bootstrap3_conf('useACL'));
+
+    ?>
   </header>
 
   <div id="dokuwiki__detail" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
@@ -145,6 +157,23 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
         </div>
       </div>
+
+      <div class="small text-right">
+
+        <?php if (bootstrap3_conf('showPageInfo')): ?>
+        <span class="docInfo">
+          <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
+        </span>
+        <?php endif ?>
+
+        <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+        <span class="loginLink hidden-print">
+          <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+        </span>
+        <?php endif; ?>
+
+      </div>
+
     </main>
 
     <div class="small text-right">
@@ -157,16 +186,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
     </div>
 
-    <?php if ($conf['license']): ?>
-    <div id="dw__license" class="text-center small" <?php ((bootstrap3_conf('semantic')) ? 'itemprop="license"' : '') ?>>
-      <?php echo tpl_license('') ?>
-    </div>
-    <?php endif; ?>
-
     <?php
-      // DokuWiki badges
-      require_once('tpl_badges.php');
-
       // Footer hook
       tpl_includeFile('footer.html');
 

@@ -8,25 +8,26 @@
 
 
 // Normalization & Basic Styling
-jQuery(document).on('bootstrap3:init', function() {
+jQuery(document).on('bootstrap3:init', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
     var $dw_content = jQuery('#dokuwiki__content, #media__manager');  // Page Content node
 
-    // Move/Save .curid to anchor child
-    jQuery('.curid').find('a').addClass('curid');
-
-    // Unwrap several tags
-    jQuery('bdi, span.curid').contents().unwrap();
-
-    // a11y
-    jQuery('.a11y').not('.picker').addClass('sr-only');
-
     // Abbr tooltips
     jQuery('abbr').tooltip();
 
+    // Fix accesskey issue on dropdown menu
+    if (jQuery('#dw__pagetools').length) {
+      jQuery('ul.dropdown-menu li a[accesskey]')
+        .closest('.top, .revs, .show, .edit')
+        .removeAttr('accesskey');
+    }
+
     // Form and controls
+    // TODO ported
     $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
     jQuery('input, select, textarea')
       .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
@@ -40,15 +41,13 @@ jQuery(document).on('bootstrap3:init', function() {
     jQuery('#tool__bar').addClass('btn-group btn-group-xs');
 
     // Picker
-    if (dw_mode('edit')) {
-      jQuery('.picker').addClass('btn-group');
-    }
+    // TODO ported
+//     if (dw_mode('edit')) {
+//       jQuery('.picker').addClass('btn-group');
+//     }
 
     // Footer links
     jQuery('footer a').addClass('navbar-link');
-
-    // Fix list overlap in media images
-    jQuery('main ul, main ol').not('.nav, .dropdown-menu').addClass('fix-media-list-overlap');
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
@@ -56,7 +55,7 @@ jQuery(document).on('bootstrap3:init', function() {
     }
 
     // Scrolling animation (on TOC and FootNotes)
-    jQuery('#dw__toc a, a.fn_top, a.fn_bot').on('click', function(e) {
+    jQuery('#dw__toc a, #dw__toc_menu a, a.fn_top, a.fn_bot').on('click', function(e) {
 
       var $link = jQuery(this);
 
@@ -99,7 +98,9 @@ jQuery(document).on('bootstrap3:init', function() {
 
 
 // Nav
-jQuery(document).on('bootstrap3:nav', function() {
+jQuery(document).on('bootstrap3:nav', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -124,7 +125,9 @@ jQuery(document).on('bootstrap3:nav', function() {
 
 
 // Tabs
-jQuery(document).on('bootstrap3:tabs', function() {
+jQuery(document).on('bootstrap3:tabs', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -143,17 +146,22 @@ jQuery(document).on('bootstrap3:tabs', function() {
 
 
 // Buttons
-jQuery(document).on('bootstrap3:buttons', function() {
+// TODO remove from init
+jQuery(document).on('bootstrap3:buttons', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
-    jQuery('.button').removeClass('button');
+    // TODO ported
+    jQuery('.button').removeClass('button'); // Not ported
     jQuery('.alert button').removeClass('btn btn-default');
     jQuery('#dw__login, #dw__register, #subscribe__form, #media__manager').find(':submit').addClass('btn-success');
     jQuery('#dw__profiledelete').find(':submit').addClass('btn-danger');
     jQuery('#edbtn__save').addClass('btn-success');
 
     // Section Button edit
+    // TODO ported
     jQuery('.btn_secedit .btn').input2button();
     jQuery('.btn_secedit .btn').addClass('btn-xs');
 
@@ -163,7 +171,9 @@ jQuery(document).on('bootstrap3:buttons', function() {
 
 
 // Back To Top
-jQuery(document).on('bootstrap3:back-to-top', function() {
+jQuery(document).on('bootstrap3:back-to-top', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -186,30 +196,71 @@ jQuery(document).on('bootstrap3:back-to-top', function() {
 });
 
 
+// Container Fluid
+jQuery(document).on('bootstrap3:fluid-container', function(event) {
+
+  // console.debug(event.type + ' event fired');
+
+  jQuery('.btn-fluid-container').on('click', function() {
+
+    var selectors = 'body > div, header, header nav > div, article, footer > div';
+
+    if (! jQuery('.navbar-fixed-top').length) {
+      selectors = 'body > div, header, article, footer > div';
+    }
+
+    var $button     = jQuery(this),
+        $containers = jQuery(selectors);
+
+    if (jQuery('body > div.container').length) {
+
+      $containers
+        .removeClass('container')
+        .addClass('container-fluid');
+      $button.parent().addClass('active');
+
+      DokuCookie.setValue('fluidContainer', 1);
+
+    } else {
+
+      $containers
+        .removeClass('container-fluid')
+        .addClass('container');
+      $button.parent().removeClass('active');
+
+      DokuCookie.setValue('fluidContainer', 0);
+
+    }
+
+  });
+
+});
+
+
 // Footnote
-jQuery(document).on('bootstrap3:footnotes', function() {
+jQuery(document).on('bootstrap3:footnotes', function(event) {
+
+  if (! jQuery('.footnotes').length) return false;
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
-
-    if (! jQuery('.footnotes').length) return false;
 
     jQuery(document).bind('DOMNodeInserted', function(){
       jQuery('#insitu__fn').addClass('panel panel-body panel-default');
     });
-
-    if (jQuery('.footnotes').length) {
-      jQuery('.footnotes').prepend(jQuery('<hr/>'));
-    }
 
   }, 0);
 
 });
 
 
-jQuery(document).on('bootstrap3:toc-resize', function() {
+jQuery(document).on('bootstrap3:toc-resize', function(event) {
 
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
+
+  // console.debug(event.type + ' event fired');
 
   if (JSINFO.bootstrap3.config.tocAffix) {
     $dw_toc.affix('checkPosition');
@@ -225,40 +276,100 @@ jQuery(document).on('bootstrap3:toc-resize', function() {
 });
 
 
-jQuery(document).on('bootstrap3:toc-close', function() {
+jQuery(document).on('bootstrap3:toc-close', function(event) {
 
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
+  // console.debug(event.type + ' event fired');
+
   if (! $dw_toc.hasClass('affix-bottom')) {
-    jQuery('article .dw-content').addClass('dw-toc-closed');
+    jQuery('.dw-content-page').addClass('dw-toc-closed');
     $dw_toc.find('.toc-body').collapse('hide');
   }
 
 });
 
 
-jQuery(document).on('bootstrap3:toc-open', function() {
+jQuery(document).on('bootstrap3:toc-open', function(event) {
 
   var $dw_toc = jQuery('#dw__toc');
   if (! $dw_toc.length) return false;
 
-  jQuery('article .dw-content').removeClass('dw-toc-closed');
+  // console.debug(event.type + ' event fired');
+
+  jQuery('.dw-content-page').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
 
 });
 
 
+// Table of Contents (Navbar)
+jQuery(document).on('bootstrap3:toc-menu', function(event) {
+
+  if (! jQuery("#dw__toc_menu").length) return false;
+
+  // console.debug(event.type + ' event fired');
+
+  if (jQuery(JSINFO.bootstrap3.toc.length)) {
+    jQuery("#dw__toc_menu").removeClass("hide");
+  }
+
+  jQuery.each(JSINFO.bootstrap3.toc, function(idx, item) {
+
+    var indent = "";
+
+    if (item.level > 1) {
+      for (var i=0; i<= item.level; i++) {
+        indent += "&nbsp;&nbsp;"
+      }
+    }
+
+    jQuery("#dw__toc_menu ul").append(['<li><a class="small" href="', item.link, '">', indent , item.title, '</a></li>'].join(''));
+
+  });
+
+});
+
+
 // Table of Contents
-jQuery(document).on('bootstrap3:toc', function() {
+jQuery(document).on('bootstrap3:toc', function(event) {
 
   setTimeout(function() {
 
     var $dw_toc = jQuery('#dw__toc');
     if (! $dw_toc.length) return false;
 
+    // console.debug(event.type + ' event fired');
+
+    // Set TOC Affix
+    if (JSINFO.bootstrap3.config.tocAffix) {
+      $dw_toc.affix({
+        offset : {
+          top    : (jQuery("main").position().top),
+          bottom : (jQuery(document).height() - jQuery("main").height()),
+        }
+      });
+    }
+
+    // ScrollSpy
+    var scrollspy_target = '#dw__toc';
+
+    if (JSINFO.bootstrap3.config.tocLayout == 'navbar') {
+      scrollspy_target = '#dw__navbar_items';
+    }
+
+    jQuery('body').scrollspy({
+      target : scrollspy_target,
+      offset : ((parseInt(jQuery('body').css('marginTop')) || 0) + 10),
+    });
+
     jQuery(document).trigger('bootstrap3:toc-resize');
+
+    if (mediaSize('xs')) {
+      jQuery(document).trigger('bootstrap3:toc-close');
+    }
 
     $dw_toc.css('backgroundColor', jQuery('article > .panel').css('backgroundColor'));
     $dw_toc.find('a').css('color', jQuery('body').css('color'));
@@ -279,9 +390,18 @@ jQuery(document).on('bootstrap3:toc', function() {
 
     $dw_toc.find('.toc-title').on('click', function() {
 
-      var $self = jQuery(this);
+      jQuery('.dw-content-page').toggleClass('dw-toc-closed');
 
-      jQuery('article .dw-content').toggleClass('dw-toc-closed');
+      if (jQuery('.dw-toc').hasClass('dw-toc-bootstrap')) {
+        if (jQuery('.dw-content-page').hasClass('dw-toc-closed')) {
+          jQuery('.dw-toc').removeClass('col-md-3');
+          jQuery('.dw-content-page').removeClass('col-md-9').addClass('col-md-12');
+        } else {
+          jQuery('.dw-toc').addClass('col-md-3');
+          jQuery('.dw-content-page').removeClass('col-md-12').addClass('col-md-9');
+          jQuery(document).trigger('bootstrap3:toc-resize');
+        }
+      }
 
       if (! jQuery('.dw-toc-closed').length) {
         jQuery(document).trigger('bootstrap3:toc-resize');
@@ -299,7 +419,10 @@ jQuery(document).on('bootstrap3:toc', function() {
 
 
 // Alerts
-jQuery(document).on('bootstrap3:alerts', function() {
+// TODO ported -- no remove (used for standard DokuWiki messages with html_msgarea)
+jQuery(document).on('bootstrap3:alerts', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
@@ -333,7 +456,7 @@ jQuery(document).on('bootstrap3:alerts', function() {
 
 
 // Media Manager
-jQuery(document).on('bootstrap3:media-manager', function() {
+jQuery(document).on('bootstrap3:media-manager', function(event) {
 
   setTimeout(function() {
 
@@ -342,12 +465,18 @@ jQuery(document).on('bootstrap3:media-manager', function() {
 
     // Media Manager (pop-up)
     if ($media_popup.length || $media_manager.length) {
+
+      // console.debug(event.type + ' event fired');
+
       jQuery('.qq-upload-button').addClass('btn btn-default');
       jQuery('.qq-upload-action').addClass('btn btn-success');
+
     }
 
     // Media Manager (page)
     if ($media_manager.length) {
+
+      // console.debug(event.type + ' event fired');
 
       var $sort_buttons = jQuery('.ui-buttonset');
 
@@ -394,13 +523,15 @@ jQuery(document).on('bootstrap3:media-manager', function() {
 
 
 // Detail page
-jQuery(document).on('bootstrap3:detail', function() {
+jQuery(document).on('bootstrap3:detail', function(event) {
 
   setTimeout(function() {
 
     var $detail_page = jQuery('#dokuwiki__detail'); // Detail Page node
 
     if (! $detail_page.length) return false;
+
+    // console.debug(event.type + ' event fired');
 
     $detail_page.find('img.img_detail')
       .addClass('img-responsive');
@@ -412,167 +543,14 @@ jQuery(document).on('bootstrap3:detail', function() {
 });
 
 
-// Search mode
-jQuery(document).on('bootstrap3:mode-search', function() {
-
-  setTimeout(function() {
-
-    if (! dw_mode('search')) return false;
-
-    jQuery('.search_results dt')
-      .contents()
-      .filter(function() {
-        return this.nodeType === 3;
-      })
-      .wrap('<span class="label label-primary"/>');
-
-      jQuery('.search_results .label').before('&nbsp;&nbsp;&nbsp;');
-
-      jQuery('.search_results .label').each(function() {
-        var $node = jQuery(this);
-        $node.html($node.html().replace(/^\: /, ''));
-      });
-
-  }, 0);
-
-});
-
-
-// Administration
-jQuery(document).on('bootstrap3:mode-admin', function() {
-
-  setTimeout(function() {
-
-    if (! dw_mode('admin')) return false;
-
-    var $mode_admin = jQuery('.mode_admin');  // Admin mode node
-
-    // Set specific icon in Admin Page
-    if (JSINFO.bootstrap3.admin) {
-      jQuery('article h1').first().addClass(JSINFO.bootstrap3.admin);
-    }
-
-    var $ext_manager  = $mode_admin.find('#extension__manager'),
-        $ext_actions  = $ext_manager.find('.actions'),
-        $user_manager = $mode_admin.find('#user__manager'),
-        $admin_tasks  = $mode_admin.find('ul.admin_tasks');
-
-    var admin_tasks = {
-      // Task         Icon
-      'usermanager' : 'users',
-      'acl'         : 'key',
-      'extension'   : 'puzzle-piece',
-      'plugin'      : 'puzzle-piece',
-      'config'      : 'cogs',
-      'styling'     : 'paint-brush',
-      'revert'      : 'refresh',
-      'popularity'  : 'envelope',
-    };
-
-    // Admin Task icon
-    $admin_tasks.addClass('list-group');
-    $admin_tasks.find('a').addClass('list-group-item');
-
-    for (var i in admin_tasks) {
-      $admin_tasks.find('li.admin_' + i + ' a')
-        .prepend(jQuery('<i class="fa fa-' + admin_tasks[i] + ' fa-fw fa-pull-left" />'));
-    }
-
-    // DokuWiki logo
-    jQuery('#admin__version').prepend('<img src="'+ DOKU_BASE +'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ');
-
-    // Extension Manager Actions
-    if (dw_admin('extension')) {
-
-      $ext_actions.addClass('btn-group');
-
-      $ext_actions.find('.permerror')
-        .addClass('pull-left');
-
-      $ext_actions.find('.btn')
-        .addClass('btn-xs')
-        .input2button();
-
-      $ext_actions.find('.uninstall').addClass('btn-danger');
-      $ext_actions.find('.install, .update, .reinstall').addClass('btn-primary');
-      $ext_actions.find('.enable').addClass('btn-success');
-      $ext_actions.find('.disable').addClass('btn-warning');
-
-      $ext_manager.find('form.search :submit, form.install :submit').input2button();
-      $ext_manager.find('form.search button, form.install button').addClass('btn-success');
-
-    }
-
-    // User Manager
-    if (dw_admin('usermanager')) {
-
-      $mode_admin.find('.notes').removeClass('notes');
-
-      $mode_admin.find('h2').each(function(index, node) {
-
-        var $node = jQuery(this);
-        switch (index) {
-          case 0:
-            $node.prepend('<i class="fa fa-users"/> ');
-            break;
-          case 1:
-            $node.prepend('<i class="fa fa-user-plus"/> ');
-            break;
-          case 2:
-            if ($node.attr('id') !== 'bulk_user_import') {
-              $node.prepend('<i class="fa fa-user"/> ');
-            }
-            break;
-        }
-
-      });
-
-      $mode_admin.find(':button[name]').each(function(){
-
-        var $node = jQuery(this);
-
-        switch ($node.attr('name')) {
-
-          case 'fn[delete]':
-            $node.addClass('btn-danger');
-            $node.prepend('<i class="fa fa-trash"/> ');
-            break;
-
-          case 'fn[add]':
-            $node.addClass('btn-success');
-            $node.prepend('<i class="fa fa-plus"/> ');
-            break;
-
-          case 'fn[modify]':
-            $node.addClass('btn-success');
-            $node.prepend('<i class="fa fa-save"/> ');
-            break;
-
-          case 'fn[import]':
-            $node.prepend('<i class="fa fa-upload"/> ');
-            break;
-
-          case 'fn[export]':
-            $node.prepend('<i class="fa fa-download"/> ');
-            break;
-
-        }
-
-      });
-
-    }
-
-  }, 0);
-
-});
-
-
 // Index Page
-jQuery(document).on('bootstrap3:mode-index', function() {
+jQuery(document).on('bootstrap3:mode-index', function(event) {
+
+  if (! dw_mode('index')) return false;
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
-
-    if (! dw_mode('index')) return false;
 
     var $directories = jQuery('ul.idx a.idx_dir'),
         $pages       = jQuery('ul.idx a.wikilink1');
@@ -617,7 +595,9 @@ jQuery(document).on('bootstrap3:mode-index', function() {
 
 
 // Page Tools (animaton)
-jQuery(document).on('bootstrap3:page-tools', function() {
+jQuery(document).on('bootstrap3:page-tools', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   // Page Tools Affix
   jQuery('#dw__pagetools .tools').affix({
@@ -650,7 +630,9 @@ jQuery(document).on('bootstrap3:page-tools', function() {
 
 
 // Dropdown-Page
-jQuery(document).on('bootstrap3:dropdown-page', function() {
+jQuery(document).on('bootstrap3:dropdown-page', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   jQuery('.dw__dropdown_page .dropdown').hover(function() {
     if (! jQuery('#screen_mode').find('.visible-xs').is(':visible')) {
@@ -667,26 +649,39 @@ jQuery(document).on('bootstrap3:dropdown-page', function() {
 
 
 // Cookie-Law
-jQuery(document).on('bootstrap3:cookie-law', function() {
+jQuery(document).on('bootstrap3:cookie-law', function(event) {
+
+  // console.debug(event.type + ' event fired');
+
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
     DokuCookie.setValue('cookieNoticeAccepted', true);
   });
+
 });
 
 
 // AnchorJS
-jQuery(document).on('bootstrap3:anchorjs', function() {
-  anchors.add('.mode_show article .dw-content h1, .mode_show article .dw-content h2, .mode_show article .dw-content h3, .mode_show article .dw-content h4, .mode_show article .dw-content h5');
+jQuery(document).on('bootstrap3:anchorjs', function(event) {
+
+  // console.debug(event.type + ' event fired');
+
+  anchors.add('.mode_show article .dw-content h1, .mode_show article ' + 
+              '.dw-content h2, .mode_show article .dw-content h3, '    + 
+              '.mode_show article .dw-content h4, .mode_show article ' + 
+              '.dw-content h5');
+
 });
 
 
 // Page icons
-jQuery(document).on('bootstrap3:page-icons', function() {
+jQuery(document).on('bootstrap3:page-icons', function(event) {
 
   var $dw_page_icons = jQuery('.dw-page-icons');
 
   if (! $dw_page_icons.length) return false;
+
+  // console.debug(event.type + ' event fired');
 
   var title = encodeURIComponent(document.title),
       url   = encodeURIComponent(location),
@@ -706,21 +701,27 @@ jQuery(document).on('bootstrap3:page-icons', function() {
   $dw_page_icons.find('.share-google-plus').on('click', function() {
     window.open(share_to['google-plus'], 'Share to Google+', window_options);
   });
+
   $dw_page_icons.find('.share-twitter').on('click', function() {
     window.open(share_to.twitter, 'Share to Twitter', window_options);
   });
+
   $dw_page_icons.find('.share-linkedin').on('click', function() {
     window.open(share_to.linkedin, 'Share to Linkedin', window_options);
   });
+
   $dw_page_icons.find('.share-facebook').on('click', function() {
     window.open(share_to.facebook, 'Share to Facebook', window_options);
   });
+
   $dw_page_icons.find('.share-pinterest').on('click', function() {
     window.open(share_to.pinterest, 'Share to Pinterest', window_options);
   });
+
   $dw_page_icons.find('.share-telegram').on('click', function() {
     window.open(share_to.telegram, 'Share to Telegram', window_options);
   });
+
   $dw_page_icons.find('.send-mail').on('click', function(e) {
     e.preventDefault();
     window.location = share_to['send-mail'];
@@ -732,11 +733,13 @@ jQuery(document).on('bootstrap3:page-icons', function() {
 
 
 // Collapse sections on mobile (XS media)
-jQuery(document).on('bootstrap3:collapse-sections', function() {
-
-  setTimeout(function() {
+jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
   if (! JSINFO.bootstrap3.config.collapsibleSections) return false;
+
+  // console.debug(event.type + ' event fired');
+
+  setTimeout(function() {
 
   var $sections = jQuery('article div.level2'),
       $headings = $sections.prev();
@@ -784,12 +787,14 @@ jQuery(document).on('bootstrap3:collapse-sections', function() {
 
 
 // Mobile Layout
-jQuery(document).on('bootstrap3:mobile-layout', function() {
+jQuery(document).on('bootstrap3:mobile-layout', function(event) {
 
   setTimeout(function() {
 
     var $dw_aside = jQuery('.dw__sidebar');
     if (! $dw_aside.length) return false;
+
+    // console.debug(event.type + ' event fired');
 
     if (mediaSize('xs')) {
 
@@ -827,14 +832,26 @@ jQuery(document).on('bootstrap3:mobile-layout', function() {
 });
 
 
-jQuery(document).on('bootstrap3:components', function() {
+jQuery(document).on('bootstrap3:components', function(event) {
+
+  // console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
-    var events = [  'mobile-layout', 'toc', 'nav', 'tabs',
-                    'back-to-top', 'buttons', 'page-tools', 'page-icons',
-                    'dropdown-page', 'footnotes', 'media-manager',
-                    'collapse-sections' ];
+    var events = [
+      'mobile-layout',
+      'fluid-container',
+      'toc',
+      'toc-menu',
+      'nav',
+      'back-to-top',
+      'page-tools',
+      'page-icons',
+      'dropdown-page',
+      'footnotes',
+      'media-manager',
+      'collapse-sections',
+    ];
 
     for (var i in events) {
       jQuery(document).trigger('bootstrap3:' + events[i]);

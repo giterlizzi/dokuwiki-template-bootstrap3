@@ -18,14 +18,22 @@ if (typeof JSINFO.plugin.semantic === 'undefined') {
   JSINFO.plugin.semantic = {};
 }
 
-if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService && JSINFO.bootstrap3.config.showSemanticPopup) {
+if (    $wikilinks.length
+     && JSINFO.plugin.semantic.exposeWebService
+     && JSINFO.bootstrap3.config.showSemanticPopup ) {
 
   $wikilinks.hover(function() {
+
+    $wikilinks.popover('destroy');
 
     var $wikilink = jQuery(this),
         page_id   = $wikilink.attr('title');
 
-    $wikilinks.popover('destroy');
+    // Disable popup for linked tabs/navs items (Bootstrap Wrapper Plugin)
+    if ($wikilink.parents('.bs-wrap-nav').length) {
+      return false;
+    }
+
     if (! page_id) return false;
 
     jQuery.post(
@@ -66,7 +74,7 @@ if ($wikilinks.length && JSINFO.plugin.semantic.exposeWebService && JSINFO.boots
     var self = this;
 
     setTimeout(function() {
-      if (! jQuery(self).next('.popover:hover').length) {
+      if ( jQuery(self).next('.popover').length && ! jQuery(self).next('.popover:hover').length ) {
         jQuery(self).popover('destroy');
       }
     }, 300);

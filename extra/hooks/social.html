@@ -1,0 +1,34 @@
+<?php
+/**
+ * DokuWiki Bootstrap3 Template: social.html
+ *
+ * @link     http://dokuwiki.org/template:bootstrap3
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ *
+ * Copy this file in <dokuwiki>/conf directory
+ */
+?>
+<?php global $ACT; if ($ACT == 'show'): ?>
+
+<div class="pull-right hidden-print btn-toolbar" role="toolbar">
+
+  <div class="btn-group btn-group-xs" role="group">
+
+    <a class="btn btn-primary" href="#" title="Share on Facebook" target="_blank" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.URL)); return false;"><i class="fa fa-fw fa-facebook"></i></a>
+
+    <a class="btn btn-info" href="#" target="_blank" title="Tweet" onclick="window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(document.title) + ':%20'  + encodeURIComponent(document.URL)); return false;"><i class="fa fa-fw fa-twitter"></i></a>
+
+    <a class="btn btn-danger" href="#" target="_blank" title="Share on Google+" onclick="window.open('https://plus.google.com/share?url=' + encodeURIComponent(document.URL)); return false;"><i class="fa fa-fw fa-google-plus"></i></a>
+
+    <a class="btn btn-primary" href="#" target="_blank" title="Share on LinkedIn" onclick="window.open('http://www.linkedin.com/shareArticle?mini=true&url=' + encodeURIComponent(document.URL) + '&title=' +  encodeURIComponent(document.title)); return false;"><i class="fa fa-fw fa-linkedin"></i></a>
+
+    <a class="btn btn-warning" href="#" title="Send via mail" onclick="this.href=('mailto:?subject=' + encodeURIComponent(document.title) + '&body=' +  encodeURIComponent(document.URL))"><i class="fa fa-fw fa-envelope"></i></a>
+
+  </div>
+
+</div>
+
+<p class="clearfix">&nbsp;</p>
+
+<?php endif; ?>

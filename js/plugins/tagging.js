@@ -10,7 +10,7 @@
 var $tagging_edit = jQuery('.plugin_tagging_edit');
 
 if ($tagging_edit.length) {
-  $tagging_edit.find(':submit').addClass('btn-xs');
+  $tagging_edit.find(':submit').addClass('btn btn-default btn-xs');
   $tagging_edit.find('[type=text]').addClass('input-sm');
   $tagging_edit.find('#tagging__edit_save').addClass('btn-success');
 }
