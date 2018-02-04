@@ -75,7 +75,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
         if ($target.length) {
 
-          var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+          var body_offset      = (parseInt(jQuery('body').css('marginTop')) || 0),
               target_position  = Math.round($target.offset().top - body_offset);
 
           jQuery('html, body').animate({

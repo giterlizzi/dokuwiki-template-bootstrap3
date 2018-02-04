@@ -151,19 +151,19 @@ jQuery(document).ready(function() {
   // Hash change
   if (JSINFO.bootstrap3.config.fixedTopNavbar) {
 
-//     var scrollOnHashChange = function() {
-//       scrollBy(0, - (parseInt(jQuery('body').css('marginTop')) || 0));
-//     }
-// 
-//     if (location.hash) {
-//       setTimeout(function() {
-//         scrollOnHashChange();
-//       }, 1);
-//     }
-// 
-//     jQuery(window).on('hashchange', function() {
-//       scrollOnHashChange();
-//     });
+    var scrollOnHashChange = function() {
+      scrollBy(0, - (parseInt(jQuery('body').css('marginTop')) || 0));
+    }
+
+    if (location.hash) {
+      setTimeout(function() {
+        scrollOnHashChange();
+      }, 1);
+    }
+
+    jQuery(window).on('hashchange', function() {
+      scrollOnHashChange();
+    });
 
   }
 
