@@ -102,10 +102,13 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
 /**
  * Create link for DokuWiki actions
  *
- * @param string          $type action
- * @param string          $icon class
- * @param boolean|string  $wrapper
- * @param boolean         $return
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string          $type action
+ * @param  string          $icon class
+ * @param  boolean|string  $wrapper
+ * @param  boolean         $return
+ * @return string
  */
 function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false) {
 
@@ -515,8 +518,9 @@ function bootstrap3_sidebar($sidebar, $return = false) {
 /**
  * Normalize the DokuWiki list items
  *
- * @todo    Port to Simple PHP HTML DOM
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    use Simple DOM HTML
  *
  * @param   string  $html
  * @return  string
@@ -592,6 +596,7 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
 /**
  * Return a Bootstrap NavBar and or drop-down menu
  *
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @return  string
@@ -601,6 +606,7 @@ function bootstrap3_navbar() {
   if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
   global $ID;
+  global $conf;
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
@@ -610,8 +616,11 @@ function bootstrap3_navbar() {
                          '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
   # FIX for Purplenumbers renderer plugin
-  $navbar = preg_replace('/<li class="level1"> (.*)/',
-                         '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  # TODO use Simple DOM HTML or improve the regex!
+  if ($conf['renderer_xhtml'] == 'purplenumbers') {
+    $navbar = preg_replace('/<li class="level1"> (.*)/',
+                          '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  }
 
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
@@ -656,6 +665,7 @@ function bootstrap3_dropdown_page($page) {
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
  * @return bool
  */
 function bootstrap3_searchform() {
@@ -861,11 +871,15 @@ function bootstrap3_toolbar() {
 /**
  * Get a Gravatar, Libravatar, Office365/EWS URL or local ":user" DokuWiki namespace
  *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
  * @param   string  $username  User ID
  * @param   string  $email     The email address
  * @param   string  $size      Size in pixels, defaults to 80px [ 1 - 2048 ]
  * @param   string  $d         Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
  * @param   string  $r         Maximum rating (inclusive) [ g | pg | r | x ]
+ *
+ * @return  string
  */
 function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
@@ -1215,6 +1229,12 @@ function bootstrap3_youarehere() {
 }
 
 
+/**
+ * Display the page title (and previous namespace page title) on browser titlebar
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_page_browser_title() {
 
   global $conf, $ACT, $ID;
@@ -1282,6 +1302,12 @@ function bootstrap3_page_browser_title() {
 }
 
 
+/**
+ * Detect fluid container flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_container() {
 
   $fluid_container     = bootstrap3_conf('fluidContainer');
@@ -1295,6 +1321,12 @@ function bootstrap3_is_fluid_container() {
 
 }
 
+/**
+ * Detect the fluid navbar flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_navbar() {
 
   $fluid_container  = bootstrap3_is_fluid_container();
@@ -1619,6 +1651,7 @@ function bootstrap3_bootswatch_theme() {
  * Load the template assets (Bootstrap, AnchorJS, etc)
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    Move the specific-padding size of Bootswatch template in template.less
  *
  * @param  Doku_Event $event
  * @param  array $param
@@ -2487,6 +2520,12 @@ function bootstrap3_content($content) {
 }
 
 
+/**
+ * Return the theme for current namespace
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_theme_by_namespace() {
 
   global $ID;
@@ -2547,6 +2586,16 @@ function bootstrap3_classes() {
 }
 
 
+/**
+ * Get the license (link or image)
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string  $type ("link" or "image")
+ * @param  integer $size of image
+ * @param  bool    $return or print
+ * @return string
+ */
 function bootstrap3_license($type = 'link', $size = 24, $return = false) {
 
   global $conf, $license, $lang;
