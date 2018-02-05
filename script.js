@@ -153,7 +153,7 @@ jQuery(document).ready(function() {
 
     var scrollOnHashChange = function() {
       scrollBy(0, - (parseInt(jQuery('body').css('marginTop')) || 0));
-    }
+    };
 
     if (location.hash) {
       setTimeout(function() {
