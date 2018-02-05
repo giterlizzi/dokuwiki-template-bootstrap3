@@ -556,6 +556,7 @@ function bootstrap3_navbar() {
   if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
   global $ID;
+  global $conf;
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
@@ -564,10 +565,11 @@ function bootstrap3_navbar() {
   $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
                          '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
-  # FIX for Purplenumbers renderer plugin
-  $navbar = preg_replace('/<li class="level1"> (.*)/',
-                         '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
-
+  if ($conf['renderer_xhtml'] == 'purplenumbers') {
+    # FIX for Purplenumbers renderer plugin
+    $navbar = preg_replace('/<li class="level1"> (.*)/',
+                           '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  }
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
 
