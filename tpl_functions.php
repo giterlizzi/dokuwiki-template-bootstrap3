@@ -1662,65 +1662,69 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   global $ACT;
 
   // Bootstrap Theme
-  $bootstrap_styles = array();
   $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
   $fixed_top_navbar = bootstrap3_conf('fixedTopNavbar');
+  $tpl_basedir      = tpl_basedir();
+
+  $stylesheets = array();
+  $scripts     = array();
 
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap-theme.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
       break;
 
     case 'custom':
-      $bootstrap_styles[] = bootstrap3_conf('customTheme');
+      $stylesheets[] = bootstrap3_conf('customTheme');
       break;
 
     case 'bootswatch':
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? tpl_basedir() . 'assets/bootstrap'
+        ? $tpl_basedir . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
-      if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
-        $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
+      if (file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
+        $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
       }
 
-      $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+      $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
       break;
 
     case 'default':
     default:
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
       break;
 
   }
 
-  foreach ($bootstrap_styles as $style) {
+  # FontAwesome
+  $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
+
+  # Bootstrap JavaScript
+  $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
+
+  # AnchorJS
+  $scripts[] = $tpl_basedir . 'assets/anchorjs/anchor.min.js';
+
+  # Typeahead (Bootstrap3)
+  $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
+
+  foreach ($stylesheets as $style) {
     array_unshift($event->data['link'], array(
       'type' => 'text/css',
       'rel'  => 'stylesheet',
       'href' => $style));
   }
 
-  $event->data['link'][] = array(
-    'type' => 'text/css',
-    'rel'  => 'stylesheet',
-    'href' => tpl_basedir() . 'assets/font-awesome/css/font-awesome.min.css');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/bootstrap/js/bootstrap.min.js');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/typeahead/bootstrap3-typeahead.min.js');
+  foreach ($scripts as $script) {
+    $event->data['script'][] = array(
+      'type' => 'text/javascript',
+      'src' => $script);
+  }
 
   // Apply some FIX
   if ($ACT || defined('DOKU_MEDIADETAIL')) {
@@ -1776,20 +1780,18 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     }
 
-    $style  = '';
-    $style .= '@media screen {';
-    $style .= " body { margin-top: {$navbar_padding}px; }" ;
-    $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
+    $styles = array();
+
+    $styles[] = "body { margin-top: {$navbar_padding}px; }";
+    $styles[] = ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dw__toc .nav .nav .nav { display: none; }';
+      $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
     }
-
-    $style .= '}';
 
     $event->data['style'][] = array(
       'type'  => 'text/css',
-      '_data' => $style
+      '_data' => '@media screen { ' . implode(' ', $styles) . ' }'
     );
 
   }
