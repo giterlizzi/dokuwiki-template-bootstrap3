@@ -172,7 +172,11 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
   } else {
 
-    $inner = $lang['btn_' . $type];
+    $inner = '';
+
+    if (isset($lang['btn_' . $type])) {
+      $inner = $lang['btn_' . $type];
+    }
 
     if ($type == 'img_backto') {
       if(strpos($inner, '%s')){
@@ -1053,11 +1057,15 @@ function bootstrap3_conf($key, $default = false) {
 
   $metadata = bootstrap3_conf_metadata($key);
 
-  switch ($metadata[0]) {
-    case 'regex':
-      return sprintf('/%s/', $value);
-    case 'multicheckbox':
-      return explode(',', $value);
+  if (isset($metadata[0])) {
+
+    switch ($metadata[0]) {
+      case 'regex':
+        return sprintf('/%s/', $value);
+      case 'multicheckbox':
+        return explode(',', $value);
+    }
+
   }
 
   return $value;
@@ -1722,8 +1730,9 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
   foreach ($scripts as $script) {
     $event->data['script'][] = array(
-      'type' => 'text/javascript',
-      'src' => $script);
+      'type'  => 'text/javascript',
+      '_data' => '',
+      'src'   => $script);
   }
 
   // Apply some FIX
