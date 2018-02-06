@@ -20,6 +20,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   <title><?php echo bootstrap3_page_browser_title() ?></title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta property="og:url" content="<?php echo wl($ID, "", 1); ?>">
   <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
   <?php tpl_includeFile('meta.html') ?>
   <?php tpl_metaheaders() ?>
@@ -33,6 +34,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
 
   <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <?php require_once('tpl_jumbotron.php'); ?>
     <?php tpl_includeFile('topheader.html') ?>
     <?php require_once('tpl_navbar.php'); ?>
     <?php tpl_includeFile('header.html') ?>
