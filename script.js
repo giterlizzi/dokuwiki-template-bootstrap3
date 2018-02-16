@@ -143,10 +143,29 @@ jQuery(document).ready(function() {
 
   }
 
-  // Admin mode
-  //if (dw_mode('admin')) {
-  //  jQuery(document).trigger('bootstrap3:mode-admin');
-  //}
+  // Init AnchorJS
+  if (JSINFO.bootstrap3.config.useAnchorJS) {
+    jQuery(document).trigger('bootstrap3:anchorjs');
+  }
+
+  // Hash change
+  if (JSINFO.bootstrap3.config.fixedTopNavbar) {
+
+    var scrollOnHashChange = function() {
+      scrollBy(0, - (parseInt(jQuery('body').css('marginTop')) || 0));
+    };
+
+    if (location.hash) {
+      setTimeout(function() {
+        scrollOnHashChange();
+      }, 1);
+    }
+
+    jQuery(window).on('hashchange', function() {
+      scrollOnHashChange();
+    });
+
+  }
 
   // Index mode
   if (dw_mode('index')) {

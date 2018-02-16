@@ -75,7 +75,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
         if ($target.length) {
 
-          var body_offset      = (parseInt(jQuery('body').css('paddingTop')) || 0),
+          var body_offset      = (parseInt(jQuery('body').css('marginTop')) || 0),
               target_position  = Math.round($target.offset().top - body_offset);
 
           jQuery('html, body').animate({
@@ -284,7 +284,7 @@ jQuery(document).on('bootstrap3:toc-close', function(event) {
   // console.debug(event.type + ' event fired');
 
   if (! $dw_toc.hasClass('affix-bottom')) {
-    jQuery('.dw-content').addClass('dw-toc-closed');
+    jQuery('.dw-content-page').addClass('dw-toc-closed');
     $dw_toc.find('.toc-body').collapse('hide');
   }
 
@@ -298,7 +298,7 @@ jQuery(document).on('bootstrap3:toc-open', function(event) {
 
   // console.debug(event.type + ' event fired');
 
-  jQuery('.dw-content').removeClass('dw-toc-closed');
+  jQuery('.dw-content-page').removeClass('dw-toc-closed');
 
   $dw_toc.find('.toc-body').collapse('show');
 
@@ -343,6 +343,28 @@ jQuery(document).on('bootstrap3:toc', function(event) {
 
     // console.debug(event.type + ' event fired');
 
+    // Set TOC Affix
+    if (JSINFO.bootstrap3.config.tocAffix) {
+      $dw_toc.affix({
+        offset : {
+          top    : (jQuery("main").position().top),
+          bottom : (jQuery(document).height() - jQuery("main").height()),
+        }
+      });
+    }
+
+    // ScrollSpy
+    var scrollspy_target = '#dw__toc';
+
+    if (JSINFO.bootstrap3.config.tocLayout == 'navbar') {
+      scrollspy_target = '#dw__navbar_items';
+    }
+
+    jQuery('body').scrollspy({
+      target : scrollspy_target,
+      offset : ((parseInt(jQuery('body').css('marginTop')) || 0) + 10),
+    });
+
     jQuery(document).trigger('bootstrap3:toc-resize');
 
     if (mediaSize('xs')) {
@@ -368,24 +390,21 @@ jQuery(document).on('bootstrap3:toc', function(event) {
 
     $dw_toc.find('.toc-title').on('click', function() {
 
-      jQuery('.dw-content').toggleClass('dw-toc-closed');
+      jQuery('.dw-content-page').toggleClass('dw-toc-closed');
 
       if (jQuery('.dw-toc').hasClass('dw-toc-bootstrap')) {
-        if (jQuery('.dw-content').hasClass('dw-toc-closed')) {
+        if (jQuery('.dw-content-page').hasClass('dw-toc-closed')) {
           jQuery('.dw-toc').removeClass('col-md-3');
-          jQuery('.dw-content').removeClass('col-md-9').addClass('col-md-12');
+          jQuery('.dw-content-page').removeClass('col-md-9').addClass('col-md-12');
         } else {
           jQuery('.dw-toc').addClass('col-md-3');
-          jQuery('.dw-content').removeClass('col-md-12').addClass('col-md-9');
+          jQuery('.dw-content-page').removeClass('col-md-12').addClass('col-md-9');
           jQuery(document).trigger('bootstrap3:toc-resize');
         }
       }
 
       if (! jQuery('.dw-toc-closed').length) {
         jQuery(document).trigger('bootstrap3:toc-resize');
-        //$dw_toc.css('margin-left', 0);
-      } else {
-        //$dw_toc.css('margin-left', $dw_toc.find('.toc-body').css('width'));
       }
 
     });

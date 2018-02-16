@@ -35,4 +35,3 @@ $lang['config_cookie_law']       = 'Cookie Law';
 $lang['config_google_analytics'] = '谷歌分析';
 $lang['config_browser_title']    = '浏览器标题';
 $lang['config_page']             = '页面';
-

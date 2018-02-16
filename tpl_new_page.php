@@ -11,6 +11,7 @@
 if (!defined('DOKU_INC')) die();
 
 global $ID;
+global $INFO;
 
 if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && bootstrap3_conf('showAddNewPage')):
 
@@ -28,7 +29,11 @@ if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && bootstrap3_conf('show
           $current_ns = false;
           $search     = array('addnewpage', 'class="button"');
           $replace    = array('addnewpage form-inline', 'class="btn btn-success pull-right"');
+          // hack to keep struct plugin from rendering its output
+          $keep       = $INFO['id'];
+          $INFO['id'] = $ID.'_nostruct';
           $form       = p_render('xhtml',p_get_instructions(sprintf('{{NEWPAGE>%s}}', $current_ns)), $info);
+          $INFO['id'] = $keep;
           $form       = str_replace($search, $replace, $form);
 
           echo $form;

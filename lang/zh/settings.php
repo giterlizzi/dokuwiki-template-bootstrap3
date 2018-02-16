@@ -111,4 +111,3 @@ $lang['useGoogleAnalytics']           = '启用谷歌分析';
 $lang['useGravatar']                  = '载入Gravatar 头像';
 $lang['useLegacyNavbar']              = '使用旧版和不建议使用的<code>navbar.html</code> hook(以后考虑使用：<code>导航栏</code> hook)';
 $lang['useLocalBootswatch']           = '使用本地Bootswatch目录。,此选项在“intranet”DokuWiki安装中很有用 ';
-

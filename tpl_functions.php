@@ -102,10 +102,13 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
 /**
  * Create link for DokuWiki actions
  *
- * @param string          $type action
- * @param string          $icon class
- * @param boolean|string  $wrapper
- * @param boolean         $return
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string          $type action
+ * @param  string          $icon class
+ * @param  boolean|string  $wrapper
+ * @param  boolean         $return
+ * @return string
  */
 function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false) {
 
@@ -169,7 +172,11 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
   } else {
 
-    $inner = $lang['btn_' . $type];
+    $inner = '';
+
+    if (isset($lang['btn_' . $type])) {
+      $inner = $lang['btn_' . $type];
+    }
 
     if ($type == 'img_backto') {
       if(strpos($inner, '%s')){
@@ -232,6 +239,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
           break;
 
         case 'export_pdf':
+        case 'export_odt_pdf':
           $icon = 'file-pdf-o';
           break;
 
@@ -514,8 +522,9 @@ function bootstrap3_sidebar($sidebar, $return = false) {
 /**
  * Normalize the DokuWiki list items
  *
- * @todo    Port to Simple PHP HTML DOM
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    use Simple DOM HTML
  *
  * @param   string  $html
  * @return  string
@@ -591,6 +600,7 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
 /**
  * Return a Bootstrap NavBar and or drop-down menu
  *
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @return  string
@@ -600,6 +610,7 @@ function bootstrap3_navbar() {
   if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
   global $ID;
+  global $conf;
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
@@ -609,8 +620,11 @@ function bootstrap3_navbar() {
                          '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
   # FIX for Purplenumbers renderer plugin
-  $navbar = preg_replace('/<li class="level1"> (.*)/',
-                         '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  # TODO use Simple DOM HTML or improve the regex!
+  if ($conf['renderer_xhtml'] == 'purplenumbers') {
+    $navbar = preg_replace('/<li class="level1"> (.*)/',
+                          '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  }
 
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
@@ -655,6 +669,7 @@ function bootstrap3_dropdown_page($page) {
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
  * @return bool
  */
 function bootstrap3_searchform() {
@@ -860,11 +875,15 @@ function bootstrap3_toolbar() {
 /**
  * Get a Gravatar, Libravatar, Office365/EWS URL or local ":user" DokuWiki namespace
  *
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
  * @param   string  $username  User ID
  * @param   string  $email     The email address
  * @param   string  $size      Size in pixels, defaults to 80px [ 1 - 2048 ]
  * @param   string  $d         Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
  * @param   string  $r         Maximum rating (inclusive) [ g | pg | r | x ]
+ *
+ * @return  string
  */
 function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
@@ -1038,11 +1057,15 @@ function bootstrap3_conf($key, $default = false) {
 
   $metadata = bootstrap3_conf_metadata($key);
 
-  switch ($metadata[0]) {
-    case 'regex':
-      return sprintf('/%s/', $value);
-    case 'multicheckbox':
-      return explode(',', $value);
+  if (isset($metadata[0])) {
+
+    switch ($metadata[0]) {
+      case 'regex':
+        return sprintf('/%s/', $value);
+      case 'multicheckbox':
+        return explode(',', $value);
+    }
+
   }
 
   return $value;
@@ -1214,6 +1237,12 @@ function bootstrap3_youarehere() {
 }
 
 
+/**
+ * Display the page title (and previous namespace page title) on browser titlebar
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_page_browser_title() {
 
   global $conf, $ACT, $ID;
@@ -1256,6 +1285,8 @@ function bootstrap3_page_browser_title() {
 
       if ($exists) {
         $ns_titles[] = tpl_pagetitle($ID, true);
+      } else {
+        $ns_titles[] = noNS($ID);
       }
 
       $ns_titles = array_filter(array_unique($ns_titles));
@@ -1281,6 +1312,12 @@ function bootstrap3_page_browser_title() {
 }
 
 
+/**
+ * Detect fluid container flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_container() {
 
   $fluid_container     = bootstrap3_conf('fluidContainer');
@@ -1294,6 +1331,12 @@ function bootstrap3_is_fluid_container() {
 
 }
 
+/**
+ * Detect the fluid navbar flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_navbar() {
 
   $fluid_container  = bootstrap3_is_fluid_container();
@@ -1618,6 +1661,7 @@ function bootstrap3_bootswatch_theme() {
  * Load the template assets (Bootstrap, AnchorJS, etc)
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    Move the specific-padding size of Bootswatch template in template.less
  *
  * @param  Doku_Event $event
  * @param  array $param
@@ -1628,65 +1672,70 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   global $ACT;
 
   // Bootstrap Theme
-  $bootstrap_styles = array();
   $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
   $fixed_top_navbar = bootstrap3_conf('fixedTopNavbar');
+  $tpl_basedir      = tpl_basedir();
+
+  $stylesheets = array();
+  $scripts     = array();
 
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap-theme.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
       break;
 
     case 'custom':
-      $bootstrap_styles[] = bootstrap3_conf('customTheme');
+      $stylesheets[] = bootstrap3_conf('customTheme');
       break;
 
     case 'bootswatch':
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? tpl_basedir() . 'assets/bootstrap'
+        ? $tpl_basedir . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
-      if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
-        $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
+      if (file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
+        $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
       }
 
-      $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+      $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
       break;
 
     case 'default':
     default:
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
       break;
 
   }
 
-  foreach ($bootstrap_styles as $style) {
+  # FontAwesome
+  $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
+
+  # Bootstrap JavaScript
+  $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
+
+  # AnchorJS
+  $scripts[] = $tpl_basedir . 'assets/anchorjs/anchor.min.js';
+
+  # Typeahead (Bootstrap3)
+  $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
+
+  foreach ($stylesheets as $style) {
     array_unshift($event->data['link'], array(
       'type' => 'text/css',
       'rel'  => 'stylesheet',
       'href' => $style));
   }
 
-  $event->data['link'][] = array(
-    'type' => 'text/css',
-    'rel'  => 'stylesheet',
-    'href' => tpl_basedir() . 'assets/font-awesome/css/font-awesome.min.css');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/bootstrap/js/bootstrap.min.js');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/typeahead/bootstrap3-typeahead.min.js');
+  foreach ($scripts as $script) {
+    $event->data['script'][] = array(
+      'type'  => 'text/javascript',
+      '_data' => '',
+      'src'   => $script);
+  }
 
   // Apply some FIX
   if ($ACT || defined('DOKU_MEDIADETAIL')) {
@@ -1742,46 +1791,18 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     }
 
-    $style  = '';
-    $style .= '@media screen {';
-    $style .= " body { padding-top: {$navbar_padding}px; }" ;
-    $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
+    $styles = array();
+
+    $styles[] = "body { margin-top: {$navbar_padding}px; }";
+    $styles[] = ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dw__toc .nav .nav .nav { display: none; }';
+      $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
     }
-
-    $style .= '}';
 
     $event->data['style'][] = array(
       'type'  => 'text/css',
-      '_data' => $style
-    );
-
-    $js  = '';
-    $scrollspy_target = '#dw__toc';
-
-    if (bootstrap3_conf('tocLayout') == 'navbar') {
-      $scrollspy_target = '#dw__navbar_items';
-    }
-
-    $js .= "jQuery('body').scrollspy({ target: '". $scrollspy_target ."', offset: ". ($navbar_padding + 10) ." });";
-
-    if (bootstrap3_conf('tocAffix')) {
-      $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
-    }
-
-    if ($fixed_top_navbar) {
-      $js .= "if (location.hash) { setTimeout(function() { scrollBy(0, - $navbar_padding); }, 1); }";
-    }
-
-    if (bootstrap3_conf('useAnchorJS')) {
-      $js .= "jQuery(document).trigger('bootstrap3:anchorjs');";
-    }
-
-    $event->data['script'][] = array(
-      'type'  => 'text/javascript',
-      '_data' => "jQuery(document).ready(function() { $js });"
+      '_data' => '@media screen { ' . implode(' ', $styles) . ' }'
     );
 
   }
@@ -2512,6 +2533,12 @@ function bootstrap3_content($content) {
 }
 
 
+/**
+ * Return the theme for current namespace
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_theme_by_namespace() {
 
   global $ID;
@@ -2572,6 +2599,16 @@ function bootstrap3_classes() {
 }
 
 
+/**
+ * Get the license (link or image)
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string  $type ("link" or "image")
+ * @param  integer $size of image
+ * @param  bool    $return or print
+ * @return string
+ */
 function bootstrap3_license($type = 'link', $size = 24, $return = false) {
 
   global $conf, $license, $lang;

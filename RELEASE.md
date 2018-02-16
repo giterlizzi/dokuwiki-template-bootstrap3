@@ -1,14 +1,18 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
+## [v2018-02-16]
+
+After a long development cycle a new release of Bootstrap3 template is issued. This release introduce a DOM Engine (in pure PHP) can speedup a rendering of the page (estimated in 0.3 ~ 0.8 seconds per page) on client-side, by removing most of JS Hack code. Improved the Avatar support with Gravatar, Libravatar, Office365 and local DokuWiki `:user` namespace media. Added new DokuWiki hooks (`:header` and `:topheader`), configuration options and new fresh layout for footer, user menu and admin page.
+
+Enjoy!
 
 ### Added
-  * Improved Avatar support with Gravatar, Libravatar, Office365 or local DokuWiki `:user` namespace (thanks to @iosonopersia for the idea on #337 PR)
+  * Improved Avatar support with Gravatar, Libravatar, Office365 or local DokuWiki `:user` namespace media (thanks to @iosonopersia for the idea on #337 PR)
   * Added TOC Navbar
   * Added new DokuWiki hooks `:header` and `:topheader`
   * Added Persian localization support (thanks to Shevin Shiasi)
   * Added Indonesian localization support (thanks to Arif Budiman)
-  * Added Simple DOM HTML Parser to increase client performance during rendering of template
+  * Added Simple DOM HTML Parser to increase client-side performance during rendering of template
   * Added default Bootstrap theme in Theme Switcher menu
   * Added `showPurgePageCache` option for display in Page Tools a link to `?purge=true` useful to purge current page
   * Added `domParserMaxPageSize` option to set the Max page size for DOM Parser
@@ -22,6 +26,7 @@
   * #286: Added "homePageURL" config option to add custom Home-Page link (thanks to @rgleason)
   * #238, #297: Added initial support of Styling Plugin and `style.ini` placeholders
   * #300: Re-Added `social.html` sample hook (thanks to @igittigitt)
+  * Added new bugs to fix later!
 
 ### Changed
   * New Search Bar layout
@@ -43,7 +48,7 @@
   * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
 
 ### Removed
-  * Removed `.map` file from bootstrap assets (thanks to  Andrew Gent)
+  * Removed `.map` file from bootstrap assets (thanks to Andrew Gent)
   * Removed `split()` deprecated PHP function (thanks to Andrew Gent for the fix)
   * Dropped support for legacy `_tpl` functions
   * Removed old JS code
@@ -402,6 +407,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
+[v2018-02-16]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
 [v2016-12-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
 [v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-04-13...v2016-05-07
 [v2016-04-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-02-29...v2016-04-13

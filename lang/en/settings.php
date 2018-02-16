@@ -16,7 +16,7 @@ $lang['browserTitle']                 = 'DokuWiki browser title (default is <cod
 $lang['browserTitleCharSepNS']        = 'Character separator for every namespaces on browser title';
 $lang['browserTitleOrderNS']          = 'Set the order of namespaces';
 $lang['browserTitleShowNS']           = 'Display the previous page name of current page on the browser title';
-$lang['collapsibleSections']          = 'Collapse 2nd section level (useful in mobile devices)';
+$lang['collapsibleSections']          = 'Collapse 2nd section level (useful in mobile/tablet devices)';
 $lang['cookieLawBannerPage']          = 'Cookie Law banner page name';
 $lang['cookieLawPolicyPage']          = 'Cookie Law policy page name';
 $lang['customTheme']                  = 'Insert URL of custom theme';
@@ -96,7 +96,7 @@ $lang['showTools_o_never']            = 'Never';
 $lang['showTranslation']              = 'Display translation toolbar (require <em>Translation Plugin</em>)';
 $lang['showUserHomeLink']             = 'Display User Home-Page link in navbar';
 $lang['showWikiInfo']                 = 'Display DokuWiki <a class="interwiki iw_doku" href="#config___title">name</a>, logo and <a class="interwiki iw_doku" href="#config___tagline">tagline</a> on footer';
-$lang['sidebarOnNavbar']              = 'Display the sidebar contents inside the navbar';
+$lang['sidebarOnNavbar']              = 'Display the sidebar contents inside the navbar (useful on mobile/tablet devices)';
 $lang['sidebarPosition']              = 'DokuWiki Sidebar position (<code>left</code> or <code>right</code>)';
 $lang['sidebarShowPageTitle']         = 'Display Sidebar page title';
 $lang['socialShareProviders']         = 'Select the social share links to display';
