@@ -2,7 +2,7 @@
 
 ## [v2018-02-16]
 
-After a long development cycle a new release of Bootstrap3 template is issued. This release introduce a DOM Engine (in pure PHP) can speedup a rendering of the page (estimated in 0.3 ~ 0.8 seconds per page) on client-side, by removing most of JS Hack code. Improved the Avatar support with Gravatar, Libravatar, Office365 and local DokuWiki `:user` namespace media. Added new DokuWiki hooks (`:header` and `:topheader`), configuration options and new fresh layout for footer, user menu and admin page.
+After a long development cycle a new release of Bootstrap3 template is issued. This release introduce a DOM Engine (in pure PHP) can speedup a rendering of the page (estimated in 0.3 ~ 0.8 seconds per page) on client-side, by removing most of JS Hack code. Improved the Avatar support with Gravatar, Libravatar, Office365 and local DokuWiki `:user` namespace media. Added new DokuWiki hooks (`:header` and `:topheader`), configuration options and new fresh layout for search bar, footer, user menu and admin page.
 
 Enjoy!
 
