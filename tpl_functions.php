@@ -1285,6 +1285,8 @@ function bootstrap3_page_browser_title() {
 
       if ($exists) {
         $ns_titles[] = tpl_pagetitle($ID, true);
+      } else {
+        $ns_titles[] = noNS($ID);
       }
 
       $ns_titles = array_filter(array_unique($ns_titles));
