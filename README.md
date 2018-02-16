@@ -66,7 +66,7 @@ All documentation for this template can be found at
 https://www.dokuwiki.org/template:bootstrap3
 
 If you install this template manually, make sure it is installed in
-lib/tpl/bootstrap3/ - if the folder is called different it
+`lib/tpl/bootstrap3/` - if the folder is called different it
 will not work!
 
 Please refer to https://www.dokuwiki.org/template for additional info
