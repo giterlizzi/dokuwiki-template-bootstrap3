@@ -1,5 +1,59 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [v2018-02-16]
+
+After a long development cycle a new release of Bootstrap3 template is issued. This release introduce a DOM Engine (in pure PHP) can speedup a rendering of the page (estimated in 0.3 ~ 0.8 seconds per page) on client-side, by removing most of JS Hack code. Improved the Avatar support with Gravatar, Libravatar, Office365 and local DokuWiki `:user` namespace media. Added new DokuWiki hooks (`:header` and `:topheader`), configuration options and new fresh layout for footer, user menu and admin page.
+
+Enjoy!
+
+### Added
+  * Improved Avatar support with Gravatar, Libravatar, Office365 or local DokuWiki `:user` namespace media (thanks to @iosonopersia for the idea on #337 PR)
+  * Added TOC Navbar
+  * Added new DokuWiki hooks `:header` and `:topheader`
+  * Added Persian localization support (thanks to Shevin Shiasi)
+  * Added Indonesian localization support (thanks to Arif Budiman)
+  * Added Simple DOM HTML Parser to increase client-side performance during rendering of template
+  * Added default Bootstrap theme in Theme Switcher menu
+  * Added `showPurgePageCache` option for display in Page Tools a link to `?purge=true` useful to purge current page
+  * Added `domParserMaxPageSize` option to set the Max page size for DOM Parser
+  * Added `showWikiInfo` option for display Wiki title, logo and tagline on footer
+  * Added "permalink" (dokuwiki URL + page + revision ID) in Page Icons section
+  * Added icons for Discussion, Translation and Advanced plugins
+  * Added `active` class on link menu for current Admin page
+  * Added Typeahead support for quick search using `qsearch` DokuWiki AJAX service and fixed action items functions
+  * #295: Added solar theme from Bootswatch (thanks to @alaricljs) and updated all theme fonts
+  * #315: Added visibility of Admin menu for Manager users (thank to @FosseWay)
+  * #286: Added "homePageURL" config option to add custom Home-Page link (thanks to @rgleason)
+  * #238, #297: Added initial support of Styling Plugin and `style.ini` placeholders
+  * #300: Re-Added `social.html` sample hook (thanks to @igittigitt)
+  * Added new bugs to fix later!
+
+### Changed
+  * New Search Bar layout
+  * Improved User Menu with new fresh layout
+  * New Admin Page layout
+  * Updated all translations from Transifex platform
+
+### Fixed
+  * Fix duplicate `</a>` in plugin_move intergration
+  * #274: Fixed Semantic Plugin integration (thanks to @kiritype)
+  * #288: Fixed Database2 plugin conflict with Bootstrap's label class (thanks to @justemu)
+  * #294: Fixed footnote behavior after Frusteric Manners update (thanks to @sanctus17)
+  * #265, #309: Fix color in Diff view (thanks to @vidschofelix for PR and for all "bug hunters")
+  * #302: Fixed issue for large dropdown menu (Admin and User) in fixed navbar (thanks to @mguitvlugt)
+  * #281, #282, #299: Fixed Semantic popup behavior
+  * #287: Fixed printing abbreviations (thanks to @Juergen-aus-Koeln)
+  * #325: Fixed accesskey issue (thanks to @dedeibel)
+  * #342: Fixed Purplenumbers renderer plugin issue (thanks to @molefunk)
+  * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
+
+### Removed
+  * Removed `.map` file from bootstrap assets (thanks to Andrew Gent)
+  * Removed `split()` deprecated PHP function (thanks to Andrew Gent for the fix)
+  * Dropped support for legacy `_tpl` functions
+  * Removed old JS code
+
+
 ## [v2016-12-12]
 
 In this release new TOC and Page Tools layout, improved speed page loading, stability for third party plugins and UX and updated all assets (Bootstrap, Font-Awesome). Introduced new configurations and special data attribute for customize the template or single page or NS.
@@ -43,6 +97,7 @@ In this release new TOC and Page Tools layout, improved speed page loading, stab
   * #264: Added missing icon for "Edit draft" (thanks to @polyzen)
   * #272: Fidex TOC word break for JCK languages (thanks to @lattekun)
   * Corrected link style on footer
+
 
 ## [v2016-07-05]
 
@@ -352,7 +407,8 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
-[v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
+[v2018-02-16]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
+[v2016-12-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
 [v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-04-13...v2016-05-07
 [v2016-04-13]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-02-29...v2016-04-13
 [v2016-02-29]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-01-25...v2016-02-29

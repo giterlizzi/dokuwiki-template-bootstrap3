@@ -19,12 +19,12 @@ if (bootstrap3_conf('sidebarShowPageTitle')) {
 
 ?>
 <!-- ********** ASIDE ********** -->
-<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print small">
+<aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">
   <div class="dw-sidebar-content">
     <div class="dw-sidebar-title hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .dw-sidebar-body">
       <i class="fa fa-fw fa-th-list"></i> <?php echo $sidebar_title ?>
     </div>
-    <div class="dw-sidebar-body collapse in">
+    <div class="dw-sidebar-body collapse in small">
       <?php tpl_includeFile($sidebar_header) ?>
       <?php bootstrap3_sidebar(tpl_include_page($sidebar_page, 0, 1, bootstrap3_conf('useACL'))) /* includes the nearest sidebar page */ ?>
       <?php tpl_includeFile($sidebar_footer) ?>

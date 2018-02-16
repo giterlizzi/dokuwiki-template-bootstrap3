@@ -16,9 +16,10 @@ $navbar_labels    = bootstrap3_conf('navbarLabels');
 $navbar_classes   = array();
 $navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
 $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
+$home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
 
 ?>
-<nav class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
+<nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
   <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid' : '') ?>">
 
@@ -45,7 +46,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         // display logo and wiki title in a link to the home page
         tpl_link(
-            wl(),
+            $home_link,
             '<img src="'.$logo.'" alt="'.$title.'" class="pull-left'.(($tagline) ? ' dw-logo-tagline' : '').'" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
             'accesskey="h" title="[H]" class="navbar-brand"'
         );
@@ -58,8 +59,8 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
       <?php if (bootstrap3_conf('showHomePageLink')) :?>
       <ul class="nav navbar-nav">
-        <li<?php echo ((wl($ID) == wl()) ? ' class="active"' : ''); ?>>
-          <?php tpl_link(wl(), '<i class="fa fa-fw fa-home"></i> Home') ?>
+        <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
+          <?php tpl_link($home_link, '<i class="fa fa-fw fa-home"></i> Home') ?>
         </li>
       </ul>
       <?php endif; ?>
@@ -73,7 +74,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
       </ul>
       <?php endif; ?>
 
-      <div class="navbar-right">
+      <div class="navbar-right" id="dw__navbar_items">
 
         <?php bootstrap3_searchform() ?>
 
@@ -103,8 +104,8 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
           <?php endif; ?>
 
           <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
-          <li class="hidden-xs<?php echo (bootstrap3_fluid_container_button() ? ' active' : '')?>">
-            <a href="#" class="fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span></a>
+          <li class="hidden-xs <?php echo (bootstrap3_fluid_container_button() ? 'active' : '')?>">
+            <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>"><i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span></a>
           </li>
           <?php endif; ?>
 
@@ -133,7 +134,21 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 
         </ul>
 
+        <?php if (bootstrap3_conf('tocLayout') == 'navbar'): ?>
+        <ul class="nav navbar-nav hide" id="dw__toc_menu">
+          <li class="dropdown">
+            <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-fw fa-th-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu" style="max-height: 400px; overflow-y: auto">
+              <li class="dropdown-header"><i class="fa fa-fw fa-th-list"></i> <?php echo $lang['toc'] ?></li>
+            </ul>
+          </li>
+        </ul>
+        <?php endif; ?>
+
         <?php include_once(dirname(__FILE__).'/tpl_user_menu.php'); ?>
+
 
       </div>
 

@@ -10,108 +10,34 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-/**
- * Create link/button to discussion page and back
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_discussion($discussionPage, $title, $backTitle, $link=0, $wrapper=0, $return=0) {
-    global $ID;
-    $output = '';
-    $discussPage    = str_replace('@ID@', $ID, $discussionPage);
-    $discussPageRaw = str_replace('@ID@', '', $discussionPage);
-    $isDiscussPage  = strpos($ID, $discussPageRaw) !== false;
-    $backID         = ':'.str_replace($discussPageRaw, '', $ID);
-    if ($wrapper) $output .= "<$wrapper>";
-    if ($isDiscussPage) {
-        if ($link) {
-            ob_start();
-            tpl_pagelink($backID, $backTitle);
-            $output .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $output .= html_btn('back2article', $backID, '', array(), 'get', 0, $backTitle);
-        }
-    } else {
-        if ($link) {
-            ob_start();
-            tpl_pagelink($discussPage, $title);
-            $output .= ob_get_contents();
-            ob_end_clean();
-        } else {
-            $output .= html_btn('discussion', $discussPage, '', array(), 'get', 0, $title);
-        }
-    }
-    if ($wrapper) $output .= "</$wrapper>";
-    if ($return) return $output;
-    echo $output;
+if ($pagesize = bootstrap3_conf('domParserMaxPageSize')) {
+  define('MAX_FILE_SIZE', $pagesize);
 }
 
-
-/**
- * Create link/button to user page
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_userpage($userPage, $title, $link=0, $wrapper=0) {
-    if (empty($_SERVER['REMOTE_USER'])) return;
-
-    global $conf;
-    $userPage = str_replace('@USER@', $_SERVER['REMOTE_USER'], $userPage);
-
-    if ($wrapper) echo "<$wrapper>";
-
-    if ($link)
-        tpl_pagelink($userPage, $title);
-    else
-        echo html_btn('userpage', $userPage, '', array(), 'get', 0, $title);
-
-    if ($wrapper) echo "</$wrapper>";
-}
-
-
-/**
- * Wrapper around custom template actions
- *
- * @author Anika Henke <anika@selfthinker.org>
- */
-function _tpl_action($type, $link=0, $wrapper=0, $return=0) {
-    switch ($type) {
-        case 'discussion':
-            if (tpl_getConf('discussionPage')) {
-                $output = _tpl_discussion(tpl_getConf('discussionPage'), tpl_getLang('discussion'), tpl_getLang('back_to_article'), $link, $wrapper, 1);
-                if ($return) return $output;
-                echo $output;
-            }
-            break;
-        case 'userpage':
-            if (tpl_getConf('userPage')) {
-                $output = _tpl_userpage(tpl_getConf('userPage'), tpl_getLang('userpage'), $link, $wrapper, 1);
-                if ($return) return $output;
-                echo $output;
-            }
-            break;
-    }
-}
-
-
+include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
 
 /**
  * copied from core (available since Detritus)
  */
 if (!function_exists('tpl_toolsevent')) {
-    function tpl_toolsevent($toolsname, $items, $view='main') {
-        $data = array(
-            'view'  => $view,
-            'items' => $items
-        );
-        $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
-        $evt = new Doku_Event($hook, $data);
-        if($evt->advise_before()){
-            foreach($evt->data['items'] as $k => $html) echo $html;
-        }
-        $evt->advise_after();
+
+  function tpl_toolsevent($toolsname, $items, $view='main') {
+
+    $data = array(
+      'view'  => $view,
+      'items' => $items
+    );
+
+    $hook = 'TEMPLATE_'.strtoupper($toolsname).'_DISPLAY';
+    $evt = new Doku_Event($hook, $data);
+
+    if($evt->advise_before()){
+      foreach($evt->data['items'] as $k => $html) echo $html;
     }
+    $evt->advise_after();
+
+  }
+
 }
 
 
@@ -119,25 +45,34 @@ if (!function_exists('tpl_toolsevent')) {
  * copied from core (available since Binky)
  */
 if (!function_exists('tpl_classes')) {
-    function tpl_classes() {
-        global $ACT, $conf, $ID, $INFO;
-        $classes = array(
-            'dokuwiki',
-            'mode_'.$ACT,
-            'tpl_'.$conf['template'],
-            !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
-            $INFO['exists'] ? '' : 'notFound',
-            ($ID == $conf['start']) ? 'home' : '',
-        );
-        return join(' ', $classes);
-    }
+
+  function tpl_classes() {
+
+    global $ACT, $conf, $ID, $INFO;
+
+    $classes = array(
+      'dokuwiki',
+      'mode_'.$ACT,
+      'tpl_'.$conf['template'],
+      !empty($_SERVER['REMOTE_USER']) ? 'loggedIn' : '',
+      $INFO['exists'] ? '' : 'notFound',
+      ($ID == $conf['start']) ? 'home' : '',
+    );
+
+    return join(' ', $classes);
+
+  }
+
 }
+
 
 /**
  * copied from core (available since Detritus)
  */
 if (! function_exists('plugin_getRequestAdminPlugin')) {
+
   function plugin_getRequestAdminPlugin(){
+
     static $admin_plugin = false;
     global $ACT,$INPUT,$INFO;
 
@@ -160,6 +95,109 @@ if (! function_exists('plugin_getRequestAdminPlugin')) {
 
     return $admin_plugin;
   }
+
+}
+
+
+/**
+ * Create link for DokuWiki actions
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string          $type action
+ * @param  string          $icon class
+ * @param  boolean|string  $wrapper
+ * @param  boolean         $return
+ * @return string
+ */
+function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false) {
+
+  global $ACT;
+  global $ID;
+  global $INPUT;
+  global $lang;
+
+  $output = '';
+
+  $custom_actions = array('purge', 'discussion');
+
+  if (in_array($type, $custom_actions)) {
+
+    if ($wrapper) $output .= "<$wrapper>";
+
+    if ($type == 'purge') {
+
+      $link  = wl($ID, array('purge' => 'true'));
+      $title = tpl_getLang('purge_cache_page');
+
+      $output .= sprintf('<a href="%s" class="action %s%s" title="%s">%s%s</a>',
+                          $link,
+                          $type,
+                          (($ACT == $type) ? ' active': ''),
+                          $title,
+                          (($icon) ? "<i class='$icon'></i> ": ''),
+                          $title);
+
+    }
+
+    if ($type == 'discussion') {
+
+      $discuss_page     = str_replace('@ID@', $ID, tpl_getConf('discussionPage'));
+      $discuss_page_raw = str_replace('@ID@', '',  tpl_getConf('discussionPage'));
+      $is_discussPage   = strpos($ID, $discuss_page_raw) !== false;
+      $back_id          = ':'.str_replace($discuss_page_raw, '', $ID);
+
+      if ($is_discussPage) {
+
+        $link = html_wikilink($back_id, tpl_getLang('back_to_article'));
+        $link = str_replace('title="', 'title="' . tpl_getLang('back_to_article') . ': ', $link);
+
+      } else {
+
+        $link = html_wikilink($discuss_page, tpl_getLang('discussion'));
+        $link = str_replace('title="', 'title="' . tpl_getLang('discussion') . ': ', $link);
+
+      }
+
+      $output .= str_replace(array('class="', 'wikilink1', 'wikilink2'),
+                             array('class="action discussion ', '', ''), $link);
+
+      if ($icon) {
+        $output = preg_replace('/(<a (.*?)>)/m', '$1<i class="'.$icon.'"></i> ', $output);
+      }
+
+    }
+
+    if ($wrapper) $output .= "</$wrapper>";
+
+  } else {
+
+    $inner = '';
+
+    if (isset($lang['btn_' . $type])) {
+      $inner = $lang['btn_' . $type];
+    }
+
+    if ($type == 'img_backto') {
+      if(strpos($inner, '%s')){
+        $inner = sprintf($inner, $ID);
+      }
+    }
+
+    if ($type == 'login' && $INPUT->server->has('REMOTE_USER')) {
+      $inner = $lang['btn_logout'];
+    }
+
+    if ($icon) $inner = '<i class="'. $icon . '"></i> ' . $inner;
+
+    $output .= tpl_actionlink($type, '', '', $inner, true, $wrapper);
+
+    if ($type == $ACT) $output = str_replace('class="action ', 'class="action active ', $output);
+
+  }
+
+  if ($return) return $output;
+  echo $output;
 
 }
 
@@ -316,33 +354,36 @@ function bootstrap3_sidebar_include($type) {
 function bootstrap3_action_item($action, $icon = null, $return = false) {
 
   global $ACT;
+  global $ID;
 
-  if ($icon) {
-    $icon = '<i class="'.$icon.'"></i> ';
-  }
+  if ($action == 'purge') {
 
-  if ($action == 'discussion') {
-
-    if (bootstrap3_conf('showDiscussion')) {
-      $out = _tpl_action('discussion', 1, 'li', 1);
-      $out = str_replace(array('<bdi>', '</bdi>'), '', $out);
-      return preg_replace('/(<a (.*?)>)/m', '$1'.$icon, $out);
+    if (bootstrap3_conf('showPurgePageCache')) {
+      return bootstrap3_action('purge', $icon, 'li', true);
     }
 
     return '';
 
   }
 
-  if ($link = tpl_action($action, 1, 0, 1, $icon)) {
+  if ($action == 'discussion') {
 
-    if ($return) {
-      if ($ACT == $action) {
-        $link = str_replace('class="action ', 'class="action active ', $link);
-      }
-      return $link;
+    if (bootstrap3_conf('showDiscussion')) {
+      return bootstrap3_action('discussion', $icon, 'li', true);
     }
 
-    return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>';
+    return '';
+
+  }
+
+  if ($link = bootstrap3_action($action, $icon, 'li', true)) {
+
+    # Navbar
+    if ($return) return $link;
+
+    # Pagetools
+    return '<li' . (($ACT == $action) ? ' class="active"' : ''). '>' . $link . '</li>'; 
+
   }
 
   return '';
@@ -459,8 +500,18 @@ function bootstrap3_fluid_container_button() {
 function bootstrap3_sidebar($sidebar, $return = false) {
 
   $out = bootstrap3_nav($sidebar, 'pills', true);
-  $out = preg_replace('/<h([1-6]) id="(.*)">/', '<h$1 class="page-header" id="$2">', $out);
-  $out = preg_replace('/<h([1-6]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $out);
+  $out = bootstrap3_content($out);
+
+  $html = new simple_html_dom;
+  $html->load($out);
+
+  foreach ($html->find('h1, h2, h3, h4, h5, h6') as $elm) {
+    $elm->class .= ' page-header';
+  }
+
+  $out = $html->save();
+  $html->clear();
+  unset($html);
 
   if ($return) return $out;
   echo $out;
@@ -471,7 +522,9 @@ function bootstrap3_sidebar($sidebar, $return = false) {
 /**
  * Normalize the DokuWiki list items
  *
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    use Simple DOM HTML
  *
  * @param   string  $html
  * @return  string
@@ -547,6 +600,7 @@ function bootstrap3_nav($html, $type = '', $stacked = false, $optional_class = '
 /**
  * Return a Bootstrap NavBar and or drop-down menu
  *
+ * @todo    use Simple DOM HTML library
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
  * @return  string
@@ -556,6 +610,7 @@ function bootstrap3_navbar() {
   if (bootstrap3_conf('showNavbar') === 'logged' && ! $_SERVER['REMOTE_USER']) return false;
 
   global $ID;
+  global $conf;
 
   $navbar = bootstrap3_nav(tpl_include_page('navbar', 0, 1, bootstrap3_conf('useACL')), 'navbar');
 
@@ -565,8 +620,11 @@ function bootstrap3_navbar() {
                          '<li class="level$1 node dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
   # FIX for Purplenumbers renderer plugin
-  $navbar = preg_replace('/<li class="level1"> (.*)/',
-                         '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  # TODO use Simple DOM HTML or improve the regex!
+  if ($conf['renderer_xhtml'] == 'purplenumbers') {
+    $navbar = preg_replace('/<li class="level1"> (.*)/',
+                          '<li class="level1 dropdown"><a href="'.wl($ID).'" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+  }
 
   $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
                          '<ul class="dropdown-menu" role="menu">'. PHP_EOL .'<li class="level2$2">', $navbar);
@@ -590,7 +648,7 @@ function bootstrap3_dropdown_page($page) {
 
   if (! $page) return;
 
-  $output   = bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true);
+  $output   = bootstrap3_content(bootstrap3_nav(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL')), 'pills', true));
   $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
               '<li class="dropdown dropdown-large">' .
               '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
@@ -607,22 +665,14 @@ function bootstrap3_dropdown_page($page) {
 
 
 /**
- * Print the search form in Bootstrap Style
- *
- * If the first parameter is given a div with the ID 'qsearch_out' will
- * be added which instructs the ajax pagequicksearch to kick in and place
- * its output into this div. The second parameter controls the propritary
- * attribute autocomplete. If set to false this attribute will be set with an
- * value of "off" to instruct the browser to disable it's own built in
- * autocompletion feature (MSIE and Firefox)
+ * Print the search form in Bootstrap style
  *
  * @author Andreas Gohr <andi@splitbrain.org>
  * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
- * @param  bool $ajax
- * @param  bool $autocomplete
+ *
  * @return bool
  */
-function bootstrap3_searchform($ajax = true, $autocomplete = true) {
+function bootstrap3_searchform() {
 
     global $lang;
     global $ACT;
@@ -635,22 +685,13 @@ function bootstrap3_searchform($ajax = true, $autocomplete = true) {
 
     print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
-    print '<div class="form-group">';
-
-    print '<input type="hidden" name="do" value="search" />';
-
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
-    if (!$autocomplete) print 'autocomplete="off" ';
-    print 'id="qsearch__in" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="edit form-control" title="[F]" />';
+    print 'id="qsearch" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
 
-    print '</div>';
+    print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
-    if (bootstrap3_conf('showSearchButton')) {
-      print ' <button type="submit" class="btn btn-default" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i><span class="hidden-lg hidden-md hidden-sm"> '.$lang['btn_search'].'</span></button>';
-    }
-
-    if ($ajax) print '<div id="qsearch__out" class="panel panel-default ajax_qsearch JSpopup"></div>';
+    print '<input type="hidden" name="do" value="search" />';
     print '</div></form>';
 
     return true;
@@ -676,11 +717,11 @@ function bootstrap3_html_msgarea() {
     if ($translation->istranslatable($ID)) $translation->checkage();
   }
 
-  if(!isset($MSG)) return;
+  if (!isset($MSG)) return;
 
   $shown = array();
 
-  foreach($MSG as $msg){
+  foreach ($MSG as $msg) {
 
     $hash = md5($msg['msg']);
     if(isset($shown[$hash])) continue; // skip double messages
@@ -691,28 +732,28 @@ function bootstrap3_html_msgarea() {
 
         case 'info':
           $level = 'info';
-          $icon  = 'fa fa-fw fa-info-circle';
+          $icon  = 'fa-info-circle';
           break;
 
         case 'error':
           $level = 'danger';
-          $icon  = 'fa fa-fw fa-times-circle';
+          $icon  = 'fa-times-circle';
           break;
 
         case 'notify':
           $level = 'warning';
-          $icon  = 'fa fa-fw fa-warning';
+          $icon  = 'fa-warning';
           break;
 
         case 'success':
           $level = 'success';
-          $icon  = 'fa fa-fw fa-check-circle';
+          $icon  = 'fa-check-circle';
           break;
 
       }
 
       print '<div class="alert alert-'.$level.'">';
-      print '<i class="'.$icon.'"></i> ';
+      print '<i class="fa fa-fw '.$icon.'"></i> ';
       print $msg['msg'];
       print '</div>';
 
@@ -761,6 +802,7 @@ function bootstrap3_tools($add_icons = true) {
     'icon'    => 'fa fa-fw fa-file',
     'actions' => array(
       'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
+      'purge'      => array('icon' => 'fa fa-fw fa-eraser'),
       'discussion' => array('icon' => 'fa fa-fw fa-comments'),
       'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
       'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
@@ -817,11 +859,11 @@ function bootstrap3_tools_menu($add_icons = true) {
  */
 function bootstrap3_toolbar() {
 
-  $tools = _tpl_tools();
+  $tools = bootstrap3_tools();
 
-  foreach ($tools as $id => $menu) {
-    foreach ($menu['items'] as $action => $item) {
-      $tools[$id]['menu'][$action] = str_replace('class="action ', 'class="action btn btn-default ', bootstrap3_action_item($action, $item['icon'], 1));
+  foreach ($tools as $tool => $data) {
+    foreach($data['menu'] as $action => $item) {
+      $tools[$tool]['menu'][$action] = str_replace(array('class="action ', '<li>', '</li>'), array('class="action btn btn-default ', '', ''), $item);
     }
   }
 
@@ -831,31 +873,72 @@ function bootstrap3_toolbar() {
 
 
 /**
- * Get either a Gravatar URL or complete image tag for a specified email address.
+ * Get a Gravatar, Libravatar, Office365/EWS URL or local ":user" DokuWiki namespace
  *
- * @param   string  $email  The email address
- * @param   string  $s      Size in pixels, defaults to 80px [ 1 - 2048 ]
- * @param   string  $d      Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
- * @param   string  $r      Maximum rating (inclusive) [ g | pg | r | x ]
- * @param   boolean $img    True to return a complete IMG tag False for just the URL
- * @param   array   $atts   Optional, additional key/value attributes to include in the IMG tag
- * @return  String containing either just a URL or a complete image tag
- * @source  http://gravatar.com/site/implement/images/php/
+ * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param   string  $username  User ID
+ * @param   string  $email     The email address
+ * @param   string  $size      Size in pixels, defaults to 80px [ 1 - 2048 ]
+ * @param   string  $d         Default imageset to use [ 404 | mm | identicon | monsterid | wavatar ]
+ * @param   string  $r         Maximum rating (inclusive) [ g | pg | r | x ]
+ *
+ * @return  string
  */
-function get_gravatar( $email, $s = 80, $d = 'mm', $r = 'g', $img = false, $atts = array() ) {
+function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
-  $url = 'https://gravatar.com/avatar/';
-  $url .= md5( strtolower( trim( $email ) ) );
-  $url .= "?s=$s&d=$d&r=$r";
+  $avatar_url      = '';
+  $avatar_provider = bootstrap3_conf('useAvatar');
 
-  if ( $img ) {
-    $url = '<img src="' . $url . '"';
-    foreach ( $atts as $key => $val )
-      $url .= ' ' . $key . '="' . $val . '"';
-    $url .= ' />';
+  if (! $avatar_provider) {
+    return false;
   }
 
-  return $url;
+  if ($avatar_provider == 'local') {
+
+    $interwiki  = getInterwiki();
+    $user_url   = str_replace('{NAME}', $username, $interwiki['user']);
+    $logo_size  = array();
+    $logo       = tpl_getMediaFile(array("$user_url.png", "$user_url.jpg", 'images/avatar.png'), false, $logo_size);
+
+    return $logo;
+  }
+
+  $email = strtolower(trim($email));
+
+  if ($avatar_provider == 'office365') {
+
+    $office365_url = rtrim(bootstrap3_conf('office365URL'), '/');
+    $avatar_url    = sprintf('%s/owa/service.svc/s/GetPersonaPhoto?email=%s&size=HR%sx%s',
+      $email, $size, $size);
+
+  }
+
+  if ($avatar_provider == 'gravatar' || $avatar_provider == 'libavatar') {
+
+    $gravatar_url  = rtrim(bootstrap3_conf('gravatarURL'), '/') . '/';
+    $libavatar_url = rtrim(bootstrap3_conf('libavatarURL'), '/') . '/';
+
+    switch ($avatar_provider) {
+      case 'gravatar':
+        $avatar_url = $gravatar_url;
+        break;
+      case 'libavatar':
+        $avatar_url = $libavatar_url;
+        break;
+    }
+
+    $avatar_url .= md5($email);
+    $avatar_url .= "?s=$size&d=$d&r=$r";
+
+  }
+
+  if ($avatar_url) {
+    $media_link = ml("$avatar_url&.jpg", array('cache' => 'recache', 'w' => $size, 'h' => $size));
+    return $media_link;
+  }
+
+  return false;
 
 }
 
@@ -874,7 +957,9 @@ function bootstrap3_conf_metadata($key = null) {
   $file = tpl_incdir() . 'conf/metadata.php';
   include $file;
 
-  if ($key) return $meta[$key];
+  if ($key && isset($meta[$key])) {
+    return $meta[$key];
+  }
 
   return $meta;
 
@@ -898,6 +983,10 @@ function bootstrap3_conf($key, $default = false) {
 
   switch ($key) {
 
+    case 'useAvatar':
+      if ($value == 'off') return false;
+      return $value;
+
     case 'bootstrapTheme':
       @list($theme, $bootswatch) = bootstrap3_theme_by_namespace();
       if ($theme) return $theme;
@@ -913,10 +1002,11 @@ function bootstrap3_conf($key, $default = false) {
     case 'showPageTools':
     case 'showEditBtn':
     case 'showAddNewPage':
+    case 'showPurgePageCache':
       return $value !== 'never' && ( $value == 'always' || ! empty($_SERVER['REMOTE_USER']) );
 
     case 'showAdminMenu':
-      return $value && ($INFO['isadmin'] || $INFO['ismanager']);
+      return $value && ( $INFO['isadmin'] || $INFO['ismanager'] );
 
     case 'hideLoginLink':
     case 'showLoginOnFooter':
@@ -959,15 +1049,23 @@ function bootstrap3_conf($key, $default = false) {
 
       return $value;
 
+    case 'tocCollapseOnScroll':
+      if (bootstrap3_conf('tocLayout') !== 'default') return false;
+      return $value;
+
   }
 
   $metadata = bootstrap3_conf_metadata($key);
 
-  switch ($metadata[0]) {
-    case 'regex':
-      return sprintf('/%s/', $value);
-    case 'multicheckbox':
-      return explode(',', $value);
+  if (isset($metadata[0])) {
+
+    switch ($metadata[0]) {
+      case 'regex':
+        return sprintf('/%s/', $value);
+      case 'multicheckbox':
+        return explode(',', $value);
+    }
+
   }
 
   return $value;
@@ -1126,7 +1224,6 @@ function bootstrap3_youarehere() {
 
     echo '<li class="active"'. ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') .'>';
 
-    $link = html_wikilink($page);
     $link = str_replace(' class="curid"', '', html_wikilink($page));
 
     if ($semantic) $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
@@ -1140,6 +1237,12 @@ function bootstrap3_youarehere() {
 }
 
 
+/**
+ * Display the page title (and previous namespace page title) on browser titlebar
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_page_browser_title() {
 
   global $conf, $ACT, $ID;
@@ -1168,7 +1271,7 @@ function bootstrap3_page_browser_title() {
 
           $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
           $ns_page_title_page    = noNSorNS($ns_page);
-          $ns_page_title         = ($exists) ? $ns_page_title_heading : $ns_page_title_page;
+          $ns_page_title         = ($exists) ? $ns_page_title_heading : null;
 
           if ($ns_page_title !== $conf['start']) {
             $ns_titles[] = $ns_page_title;
@@ -1182,6 +1285,8 @@ function bootstrap3_page_browser_title() {
 
       if ($exists) {
         $ns_titles[] = tpl_pagetitle($ID, true);
+      } else {
+        $ns_titles[] = noNS($ID);
       }
 
       $ns_titles = array_filter(array_unique($ns_titles));
@@ -1207,6 +1312,12 @@ function bootstrap3_page_browser_title() {
 }
 
 
+/**
+ * Detect fluid container flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_container() {
 
   $fluid_container     = bootstrap3_conf('fluidContainer');
@@ -1220,6 +1331,12 @@ function bootstrap3_is_fluid_container() {
 
 }
 
+/**
+ * Detect the fluid navbar flag
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return boolean
+ */
 function bootstrap3_is_fluid_navbar() {
 
   $fluid_container  = bootstrap3_is_fluid_container();
@@ -1286,7 +1403,7 @@ function bootstrap3_toc($return = false) {
 
     $bootstrap3_sections = array(
       'theme', 'sidebar', 'navbar', 'semantic',
-      'layout', 'toc', 'discussion', 'cookie_law',
+      'layout', 'toc', 'discussion', 'avatar', 'cookie_law',
       'google_analytics', 'browser_title', 'page'
     );
 
@@ -1325,17 +1442,33 @@ function bootstrap3_html_toc($toc){
 
   global $lang;
 
+  $json_toc = array();
+
+  foreach ($toc as $item) {
+    $json_toc[] = array(
+      'link'   => (isset($item['link']) ? $item['link'] : '#' . $item['hid']),
+      'title'  => $item['title'],
+      'level'  => $item['level'],
+    );
+  }
+
   $out  = '';
-  $out .= '<!-- TOC START -->'.DOKU_LF;
-  $out .= '<nav id="dw__toc" role="navigation" class="panel panel-default small">'.DOKU_LF;
-  $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
-  $out .= '<span>'.$lang['toc'].'</span>';
-  $out .= ' <i class="caret"></i></h6>'.DOKU_LF;
-  $out .= '<div class="panel-body toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">'.DOKU_LF;
-  $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)).DOKU_LF;
-  $out .= '</div>'.DOKU_LF;
-  $out .= '</nav>'.DOKU_LF;
-  $out .= '<!-- TOC END -->'.DOKU_LF;
+  $out .= '<script>JSINFO.bootstrap3.toc = ' . json_encode($json_toc) . ';</script>' . DOKU_LF;
+
+  if (bootstrap3_conf('tocPosition') !== 'navbar') {
+
+    $out .= '<!-- TOC START -->' . DOKU_LF;
+    $out .= '<nav id="dw__toc" role="navigation" class="toc-panel panel panel-default small">' . DOKU_LF;
+    $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="'.$lang['toc'].'" class="panel-heading toc-title"><i class="fa fa-fw fa-th-list"></i> ';
+    $out .= '<span>'.$lang['toc'].'</span>';
+    $out .= ' <i class="caret"></i></h6>' . DOKU_LF;
+    $out .= '<div class="panel-body  toc-body collapse '.(! bootstrap3_conf('tocCollapsed') ? 'in': '').'">' . DOKU_LF;
+    $out .= bootstrap3_lists(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)) . DOKU_LF;
+    $out .= '</div>' . DOKU_LF;
+    $out .= '</nav>' . DOKU_LF;
+    $out .= '<!-- TOC END -->' . DOKU_LF;
+
+  }
 
   return $out;
 
@@ -1454,16 +1587,15 @@ function bootstrap3_pageinfo($ret = false) {
 
         $user = editorinfo($INFO['editor']);
 
-        if (bootstrap3_conf('useGravatar')) {
+        if (bootstrap3_conf('useAvatar')) {
 
           global $auth;
           $user_data = $auth->getUserData($INFO['editor']);
 
-          $gravatar_img = ml(get_gravatar($user_data['mail'], 16).'&.jpg', array('cache' => 'recache', 'w' => 16, 'h' => 16));
-
-          $user_img = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $gravatar_img);
-          $user     = str_replace(array('iw_user', 'interwiki'), '', $user);
-          $user     = $user_img . $user;
+          $avatar_img = get_avatar($INFO['editor'], $user_data['mail'], 16);
+          $user_img   = sprintf('<img src="%s" alt="" width="16" height="16" class="img-rounded" /> ', $avatar_img);
+          $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
+          $user       = $user_img . $user;
 
         }
 
@@ -1529,6 +1661,7 @@ function bootstrap3_bootswatch_theme() {
  * Load the template assets (Bootstrap, AnchorJS, etc)
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @todo    Move the specific-padding size of Bootswatch template in template.less
  *
  * @param  Doku_Event $event
  * @param  array $param
@@ -1539,62 +1672,70 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
   global $ACT;
 
   // Bootstrap Theme
-  $bootstrap_styles = array();
   $bootstrap_theme  = bootstrap3_conf('bootstrapTheme');
   $fixed_top_navbar = bootstrap3_conf('fixedTopNavbar');
+  $tpl_basedir      = tpl_basedir();
+
+  $stylesheets = array();
+  $scripts     = array();
 
   switch ($bootstrap_theme) {
 
     case 'optional':
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap-theme.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
       break;
 
     case 'custom':
-      $bootstrap_styles[] = bootstrap3_conf('customTheme');
+      $stylesheets[] = bootstrap3_conf('customTheme');
       break;
 
     case 'bootswatch':
 
       $bootswatch_theme = bootstrap3_bootswatch_theme();
       $bootswatch_url   = (bootstrap3_conf('useLocalBootswatch'))
-        ? tpl_basedir() . 'assets/bootstrap'
-        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.6';
+        ? $tpl_basedir . 'assets/bootstrap'
+        : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
-      if (file_exists(tpl_incdir() . "assets/fonts/$bootswatch_theme.fonts.css")) {
-        $bootstrap_styles[] = tpl_basedir() . "assets/fonts/$bootswatch_theme.fonts.css";
+      if (file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
+        $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
       }
 
-      $bootstrap_styles[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+      $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
       break;
 
     case 'default':
     default:
-      $bootstrap_styles[] = tpl_basedir() . 'assets/bootstrap/default/bootstrap.min.css';
+      $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
       break;
 
   }
 
-  foreach ($bootstrap_styles as $style) {
+  # FontAwesome
+  $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
+
+  # Bootstrap JavaScript
+  $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
+
+  # AnchorJS
+  $scripts[] = $tpl_basedir . 'assets/anchorjs/anchor.min.js';
+
+  # Typeahead (Bootstrap3)
+  $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
+
+  foreach ($stylesheets as $style) {
     array_unshift($event->data['link'], array(
       'type' => 'text/css',
       'rel'  => 'stylesheet',
       'href' => $style));
   }
 
-  $event->data['link'][] = array(
-    'type' => 'text/css',
-    'rel'  => 'stylesheet',
-    'href' => tpl_basedir() . 'assets/font-awesome/css/font-awesome.min.css');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/bootstrap/js/bootstrap.min.js');
-
-  $event->data['script'][] = array(
-    'type' => 'text/javascript',
-    'src'  => tpl_basedir() . 'assets/anchorjs/anchor.min.js');
-
+  foreach ($scripts as $script) {
+    $event->data['script'][] = array(
+      'type'  => 'text/javascript',
+      '_data' => '',
+      'src'   => $script);
+  }
 
   // Apply some FIX
   if ($ACT || defined('DOKU_MEDIADETAIL')) {
@@ -1622,6 +1763,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
           case 'lumen':
           case 'slate':
           case 'spacelab':
+          case 'solar':
           case 'united':
             $navbar_height = 50;
             break;
@@ -1649,40 +1791,18 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 
     }
 
-    $style  = '';
-    $style .= '@media screen {';
-    $style .= " body { margin-top: {$navbar_padding}px; }" ;
-    $style .= ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
+    $styles = array();
+
+    $styles[] = "body { margin-top: {$navbar_padding}px; }";
+    $styles[] = ' #dw__toc.affix { top: '.($navbar_padding -10).'px; position: fixed !important; }';
 
     if (bootstrap3_conf('tocCollapseSubSections')) {
-      $style .= ' #dw__toc .nav .nav .nav { display: none; }';
+      $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
     }
-
-    $style .= '}';
 
     $event->data['style'][] = array(
       'type'  => 'text/css',
-      '_data' => $style
-    );
-
-    $js  = '';
-    $js .= "jQuery('body').scrollspy({ target: '#dw__toc', offset: ". ($navbar_padding + 10) ." });";
-
-    if (bootstrap3_conf('tocAffix')) {
-      $js .= 'jQuery("#dw__toc").affix({ offset: { top: (jQuery("main").position().top), bottom: (jQuery(document).height() - jQuery("main").height()) } });';
-    }
-
-    if ($fixed_top_navbar) {
-      $js .= "var shiftWindow = function() { if(location.hash && location.hash.indexOf('#') == 0 && document.getElementById(location.hash.substr(1))) scrollBy(0, -$navbar_padding) }; shiftWindow(); window.addEventListener('hashchange', shiftWindow);";
-    }
-
-    if (bootstrap3_conf('useAnchorJS')) {
-      $js .= "jQuery(document).trigger('bootstrap3:anchorjs');";
-    }
-
-    $event->data['script'][] = array(
-      'type'  => 'text/javascript',
-      '_data' => "jQuery(document).ready(function() { $js });"
+      '_data' => '@media screen { ' . implode(' ', $styles) . ' }'
     );
 
   }
@@ -1690,114 +1810,735 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
 }
 
 /**
- * Add Bootstrap classes in DokuWiki Content
+ * Add Bootstrap classes in a DokuWiki content
  *
  * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  *
- * @param   string  $content from tpl_content()
- * @return  string
+ * @param   string  $content from tpl_content() or from tpl_include_page()
+ * @return  string  with Bootstrap styles
  * */
 function bootstrap3_content($content) {
 
   global $ACT;
   global $INPUT;
 
-  // Search Hit
-  $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+  # FIX :-\ smile
+  $content = str_replace(array('alt=":-\"', "alt=':-\'"), 'alt=":-&#92;"', $content);
 
-  // Tabs (Extension Manager)
-  $content = str_replace('<ul class="tabs">', '<ul class="nav nav-tabs">', $content);
+  # Import HTML string
+  $html = str_get_html($content);
 
-  // Page Heading (<h[1-2]>)
-  $content = preg_replace('/<h([1-2]) id="(.*)">/',              '<h$1 class="page-header" id="$2">',    $content);
-  $content = preg_replace('/<h([1-2]) class="(.*)" id="(.*)">/', '<h$1 class="$2 page-header" id="$3">', $content);
-  $content = preg_replace('/<h([1-2])>/',                        '<h$1 class="page-header">',            $content);
+  # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
+  if (! $html) return $content;
 
-  // Media Images
-  $content = preg_replace('/<img (.*) class="(media|medialeft|mediacenter|mediaright)"/', '<img $1 class="$2 img-responsive"', $content);
-
-  // Alerts
-  $content = str_replace('<div class="info">',    '<div class="alert alert-info"><i class="fa fa-fw fa-info-circle"></i>',     $content);
-  $content = str_replace('<div class="error">',   '<div class="alert alert-danger"><i class="fa fa-fw fa-times-circle"></i>',  $content);
-  $content = str_replace('<div class="success">', '<div class="alert alert-success"><i class="fa fa-fw fa-check-circle"></i>', $content);
-  $content = str_replace(array('<div class="notify">', '<div class="msg notify">'), '<div class="alert alert-warning"><i class="fa fa-fw fa-warning"></i>',      $content);
+  # Move Current Page ID to <a> element and create data-curid HTML5 attribute
+  foreach ($html->find('.curid') as $elm) {
+    foreach ($elm->find('a') as $link) {
+      $link->class .= ' curid';
+      $link->attr[' data-curid'] = 'true'; # FIX attribute
+    }
+  }
 
 
-  // Configuration Manager Template Sections
-  if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
+  # Unwrap span.curid elements
+  foreach ($html->find('span.curid') as $elm) {
+    $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
+  }
 
-    $admin_sections = array(
-    // Section                      Insert Before           Icon
-      'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
-      'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
-      'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
-      'semantic'          => array( 'semantic',             'fa-share-alt' ),
-      'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
-      'toc'               => array( 'tocAffix',             'fa-list'      ),
-      'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
-      'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
-      'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
-      'browser_title'     => array( 'browserTitle',         'fa-header'    ),
-      'page'              => array( 'showPageInfo',         'fa-file'      )
-    );
 
-    foreach ($admin_sections as $section => $items) {
+  # Unwrap <bdi> elements
+  foreach ($html->find('bdi') as $elm) {
+    $elm->outertext = str_replace(array('<bdi>', '</bdi>'), '', $elm->outertext);
+  }
 
-      $search = $items[0];
-      $icon   = $items[1];
 
-      $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
-                              '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table"><table class="inline"><tr$1><td$2><span$3>$4</span>', $content);
+  # Footnotes
+  foreach ($html->find('.footnotes') as $elm) {
+    $elm->outertext = '<hr/>' . $elm->outertext;
+  }
+
+
+  # Accessibility (a11y)
+  foreach ($html->find('.a11y') as $elm) {
+    if (preg_match('/picker/', $elm->class)) continue;
+    $elm->class .= ' sr-only';
+  }
+
+
+  # Fix list overlap in media images
+  foreach ($html->find('ul, ol') as $elm) {
+    if (preg_match('/(nav|dropdown-menu)/', $elm->class)) continue;
+    $elm->class .= ' fix-media-list-overlap';
+  }
+
+
+  # Buttons
+  foreach ($html->find('.button') as $elm) {
+    if ($elm->tag == 'form') continue;
+    $elm->class .= ' btn';
+  }
+
+  foreach ($html->find('[type=button], [type=submit], [type=reset]') as $elm) {
+    $elm->class .= ' btn btn-default';
+  }
+
+  foreach ($html->find('#dw__login, #subscribe__form, #media__manager') as $elm) {
+    foreach ($elm->find('[type=submit]') as $btn) {
+      $btn->class .= ' btn btn-success';
+    }
+  }
+
+
+  # Section Edit Button
+  foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
+    $elm->class .= ' btn btn-xs btn-default';
+  }
+
+
+  # Search Hit
+  foreach ($html->find('.search_hit') as $elm) {
+    $elm->class = 'mark';
+  }
+
+  # Tabs
+  foreach ($html->find('.tabs') as $elm) {
+    $elm->class = 'nav nav-tabs';
+  }
+
+  # Tabs (active)
+  foreach ($html->find('.nav-tabs strong') as $elm) {
+    $elm->outertext = '<a href="#">' . $elm->innertext . "</a>";
+    $parent = $elm->parent()->class .= ' active';
+  }
+
+
+  # Page Heading (h1-h2)
+  foreach ($html->find('h1,h2') as $elm) {
+    $elm->class .= ' page-header';
+  }
+
+
+  # Media Images
+  foreach ($html->find('img[class^=media]') as $elm) {
+    $elm->class .= ' img-responsive';
+  }
+
+
+  # Checkbox
+  foreach ($html->find('input[type=checkbox]') as $elm) {
+    $elm->class .= ' checkbox-inline';
+  }
+
+
+  # Radio button
+  foreach ($html->find('input[type=radio]') as $elm) {
+    $elm->class .= ' radio-inline';
+  }
+
+
+  # Label
+  foreach ($html->find('label') as $elm) {
+    $elm->class .= ' control-label';
+  }
+
+
+  # Form controls
+  foreach ($html->find('input, select, textarea') as $elm) {
+    if (in_array($elm->type, array('submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'))) continue;
+    $elm->class .= ' form-control';
+  }
+
+
+  # Forms
+  # TODO main form
+  foreach ($html->find('form') as $elm) {
+    if (preg_match('/form-horizontal/', $elm->class)) continue;
+    $elm->class .= ' form-inline';
+  }
+
+
+  # Alerts
+  foreach ($html->find('div.info, div.error, div.success, div.notify') as $elm) {
+
+    switch ($elm->class) {
+
+      case 'info' :
+        $elm->class     = 'alert alert-info';
+        $elm->innertext = '<i class="fa fa-fw fa-info-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'error' :
+        $elm->class     = 'alert alert-danger';
+        $elm->innertext = '<i class="fa fa-fw fa-times-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'success' :
+        $elm->class     = 'alert alert-success';
+        $elm->innertext = '<i class="fa fa-fw fa-check-circle"></i> ' . $elm->innertext;
+        break;
+
+      case 'notify':
+      case 'msg notify':
+        $elm->class     = 'alert alert-warning';
+        $elm->innertext = '<i class="fa fa-fw fa-warning"></i> ' . $elm->innertext;
+        break;
 
     }
 
   }
 
 
-  // Revisions & Recents
-  if ($ACT == 'revisions' || $ACT == 'recent') {
-    $search  = array('class="sizechange positive"', 'class="sizechange negative"', 'class="sizechange"', 'class="minor"');
-    $replace = array('class="sizechange positive label label-success"', 'class="sizechange negative label label-danger"', 'class="sizechange label label-default"', 'class="minor text-muted"');
-    $content = str_replace($search, $replace, $content);
-  }
+  # Tables
 
-
-  // Difference
-  if ($ACT == 'diff') {
-
-    $btn_default = 'btn btn-default fa';
-
-    $search  = array('class="diff-deletedline"', 'class="diff-addedline',
-                     'class="diffprevrev', 'class="diffnextrev', 'class="diffbothprevrev', 'class="minor"');
-
-    $replace = array('class="diff-deletedline bg-danger"', 'class="diff-addedline bg-success"',
-                     "class=\"diffprevrev $btn_default fa-angle-left\"", "class=\"diffnextrev $btn_default fa-angle-right\"", "class=\"diffbothprevrev $btn_default fa-angle-double-left\"", 'class="minor text-muted"');
-
-    $content = str_replace($search, $replace, $content);
-
-  }
-
-  // Tables
   $table_classes = 'table';
 
   foreach (bootstrap3_conf('tableStyle') as $class) {
+
     if ($class == 'responsive') {
-      $content = str_replace('<div class="table', '<div class="table table-responsive', $content);
+
+      foreach ($html->find('div.table') as $elm) {
+        $elm->class = 'table-responsive';
+      }
+
     } else {
       $table_classes .= " table-$class";
     }
+
   }
 
-  $content = preg_replace('/<table(.*)class="(inline|import_failures)"(.*)>/',
-                          sprintf('<table$1class="$2 %s"$3>', $table_classes), $content);
+  foreach ($html->find('table.inline,table.import_failures') as $elm) {
+    $elm->class .= " $table_classes";
+  }
 
-  $content = str_replace('<div class="table ', '<div class="', $content);
+  foreach ($html->find('div.table') as $elm) {
+    $elm->class = trim(str_replace('table', '', $eml->class));
+  }
+
+  $content = $html->save();
+
+  $html->clear();
+  unset($html);
+
+
+  # Search
+
+  if ($ACT == 'search') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    foreach ($html->find('.search_results dt') as $elm) {
+
+      $elm->outertext = str_replace(
+        array('</a>: ', '</dt>'),
+        array('</a>&nbsp;&nbsp;&nbsp;<span class="label label-primary">', '</span></dt>'),
+        $elm->outertext);
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Profile
+
+  if ($ACT == 'profile' || $ACT == 'register') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+
+    foreach ($html->find('#dw__register') as $elm) {
+
+      foreach ($elm->find('legend') as $title) {
+        $title->innertext = '<i class="fa fa-vcard-o"></i> ' . $title->innertext;
+      }
+
+      foreach ($elm->find('[type=submit]') as $btn) {
+        $btn->class .= ' btn btn-success';
+      }
+
+    }
+
+
+    foreach ($html->find('#dw__profiledelete') as $elm) {
+
+      foreach ($elm->find('legend') as $title) {
+        $title->innertext = '<i class="fa fa-user-times"></i> ' . $title->innertext;
+      }
+
+      foreach ($elm->find('[type=submit]') as $btn) {
+        $btn->class .= ' btn btn-danger';
+      }
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Index / Sitemap
+
+  if ($ACT == 'index') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    foreach ($html->find('.idx_dir') as $idx => $elm) {
+
+      $parent = $elm->parent()->parent();
+
+      if (preg_match('/open/', $parent->class)) {
+        $elm->innertext = '<i class="fa fa-folder-open text-primary"></i> ' . $elm->innertext;
+      }
+
+      if (preg_match('/closed/', $parent->class)) {
+        $elm->innertext = '<i class="fa fa-folder text-primary"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('.idx .wikilink1') as $elm) {
+      $elm->innertext = '<i class="fa fa-file-text-o text-muted"></i> ' . $elm->innertext;
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+  # Admin Pages
+
+  if ($ACT == 'admin') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    // Set specific icon in Admin Page
+    if ($INPUT->str('page')) {
+
+      if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
+        $admin_pagetitle->class .= ' ' . $INPUT->str('page');
+      }
+
+    }
+
+    # ACL
+
+    if ($INPUT->str('page') == 'acl') {
+
+      foreach($html->find('[name=cmd[update]]') as $elm) {
+        $elm->class .= ' btn-success';
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+        }
+      }
+
+    }
+
+
+    # Popularity
+
+    if ($INPUT->str('page') == 'popularity') {
+
+      foreach($html->find('[type=submit]') as $elm) {
+
+        $elm->class .= ' btn-primary';
+
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-arrow-right"></i> ' . $elm->innertext;
+        }
+
+      }
+
+    }
+
+
+    # Revert Manager
+
+    if ($INPUT->str('page') == 'revert') {
+
+      foreach($html->find('[type=submit]') as $idx => $elm) {
+
+        if ($idx == 0) {
+
+          $elm->class .= ' btn-primary';
+          if ($elm->tag == 'button') {
+            $elm->innertext = '<i class="fa fa-search"></i> ' . $elm->innertext;
+          }
+
+        }
+
+        if ($idx == 1) {
+
+          $elm->class .= ' btn-success';
+          if ($elm->tag == 'button') {
+            $elm->innertext = '<i class="fa fa-refresh"></i> ' . $elm->innertext;
+          }
+
+        }
+
+      }
+
+    }
+
+
+    # Config
+
+    if ($INPUT->str('page') == 'config') {
+
+      foreach($html->find('[type=submit]') as $elm) {
+        $elm->class .= ' btn-success';
+        if ($elm->tag == 'button') {
+          $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+        }
+      }
+
+      foreach($html->find('#config__manager') as $cm_elm) {
+
+        $save_button = '';
+
+        foreach ($cm_elm->find('p') as $elm) {
+          $save_button = '<div class="pull-right">'.$elm->outertext.'</div>';
+          $elm->outertext = '</div>' . $elm->outertext;
+        }
+
+        foreach($cm_elm->find('fieldset') as $elm) {  
+          $elm->innertext .= $save_button;
+        }
+
+
+      }
+
+    }
+
+
+    # User Manager
+
+    if ($INPUT->str('page') == 'usermanager') {
+
+      foreach ($html->find('.notes') as $elm) {
+        $elm->class = str_replace('notes', '', $eml->class);
+      }
+
+      foreach ($html->find('h2') as $idx => $elm) {
+
+        switch ($idx) {
+          case 0:
+            $elm->innertext = '<i class="fa fa-users"></i> ' . $elm->innertext;
+            break;
+          case 1:
+            $elm->innertext = '<i class="fa fa-plus text-success"></i> ' . $elm->innertext;
+            break;
+          case 2:
+            if ($elm->id !== 'bulk_user_import') {
+              $elm->innertext = '<i class="fa fa-user"></i> ' . $elm->innertext;
+            }
+            break;
+        }
+
+      }
+
+      foreach ($html->find('button[name=fn[delete]]') as $elm) {
+        $elm->class    .= ' btn btn-danger';
+        $elm->innertext = '<i class="fa fa-trash"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[add]]') as $elm) {
+        $elm->class    .= ' btn btn-success';
+        $elm->innertext = '<i class="fa fa-plus"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[modify]]') as $elm) {
+        $elm->class    .= ' btn btn-success';
+        $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[import]]') as $elm) {
+        $elm->class    .= ' btn btn-primary';
+        $elm->innertext = '<i class="fa fa-upload"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[export]]') as $elm) {
+        $elm->class    .= ' btn btn-primary';
+        $elm->innertext = '<i class="fa fa-download"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[start]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-double-left"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[prev]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-left"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[next]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-right"></i> ' . $elm->innertext;
+      }
+
+      foreach ($html->find('button[name=fn[last]]') as $elm) {
+        $elm->class    .= ' btn btn-default';
+        $elm->innertext = '<i class="fa fa-angle-double-right"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    # Extension Manager
+
+    if ($INPUT->str('page') == 'extension') {
+
+      foreach ($html->find('.actions') as $elm) {
+        $elm->class .= ' btn-group btn-group-xs';
+      }
+
+      foreach ($html->find('.actions .uninstall') as $elm) {
+        $elm->class .= ' btn-danger';
+      }
+
+      foreach ($html->find('.actions .enable') as $elm) {
+        $elm->class .= ' btn-success';
+      }
+
+      foreach ($html->find('.actions .disable') as $elm) {
+        $elm->class .= ' btn-warning';
+      }
+
+      foreach ($html->find('.actions .install, .actions .update, .actions .reinstall') as $elm) {
+        $elm->class .= ' btn-primary';
+      }
+
+      foreach ($html->find('form.install [type=submit]') as $elm) {
+        $elm->class .= ' btn btn-success';
+      }
+
+      foreach ($html->find('form.search [type=submit]') as $elm) {
+        $elm->class .= ' btn btn-primary';
+      }
+
+      foreach ($html->find('.permerror') as $elm) {
+        $elm->class .= ' pull-left';
+      }
+
+    }
+
+
+    # Admin page
+    if ($INPUT->str('page') == null) {
+
+      foreach ($html->find('ul.admin_tasks, ul.admin_plugins') as $admin_task) {
+
+        $admin_task->class .= ' list-group';
+
+        foreach ($admin_task->find('a') as $item) {
+          $item->class .= ' list-group-item';
+        }
+
+        foreach ($admin_task->find('.icon') as $item) {
+          if ($item->innertext) continue;
+          $item->innertext = '<i class="fa fa-fw fa-puzzle-piece text-success"></i>';
+        }
+
+      }
+
+      foreach ($html->find('ul.admin_plugins') as $admin_plugins) {
+
+        $admin_plugins->class .= ' col-sm-4';
+        foreach ($admin_plugins->find('li') as $idx => $item) {
+          if ($idx > 0 && $idx % 5 == 0) {
+            $item->outertext = '</ul><ul class="' . $admin_plugins->class . '">' . $item->outertext;
+          }
+        }
+
+
+      }
+
+      # DokuWiki logo
+      if ($admin_version = $html->getElementById('admin__version')) {
+        $admin_version->innertext = '<img src="'. DOKU_BASE .'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ' . $admin_version->innertext;
+      }
+
+    }
+
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+
+    # Configuration Manager Template Sections
+    if ($INPUT->str('page') == 'config') {
+
+      $admin_sections = array(
+      // Section                      Insert Before           Icon
+        'theme'             => array( 'bootstrapTheme',       'fa-tint'      ),
+        'sidebar'           => array( 'sidebarPosition',      'fa-columns'   ),
+        'navbar'            => array( 'inverseNavbar',        'fa-navicon'   ),
+        'semantic'          => array( 'semantic',             'fa-share-alt' ),
+        'layout'            => array( 'fluidContainer',       'fa-desktop'   ),
+        'toc'               => array( 'tocAffix',             'fa-list'      ),
+        'discussion'        => array( 'showDiscussion',       'fa-comments'  ),
+        'avatar'            => array( 'useAvatar',            'fa-user'      ),
+        'cookie_law'        => array( 'showCookieLawBanner',  'fa-legal'     ),
+        'google_analytics'  => array( 'useGoogleAnalytics',   'fa-google'    ),
+        'browser_title'     => array( 'browserTitle',         'fa-header'    ),
+        'page'              => array( 'showPageInfo',         'fa-file'      )
+      );
+
+      foreach ($admin_sections as $section => $items) {
+
+        $search = $items[0];
+        $icon   = $items[1];
+
+        $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»'.$search.')<\/span>/',
+                                '</table></div></fieldset><fieldset id="bootstrap3__'.$section.'"><legend><i class="fa '.$icon.'"></i> '.tpl_getLang("config_$section").'</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
+
+      }
+
+    }
+
+  }
+
+
+  # Edit / Preview / Draft
+
+  if ($ACT == 'edit' || $ACT == 'preview' || $ACT == 'draft') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    foreach ($html->find('[name=do[save]], [name=do[recover]]') as $elm) {
+
+      $elm->class .= ' btn btn-success';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-save"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('[name=do[preview]], [name=do[show]]') as $elm) {
+
+      $elm->class .= ' btn btn-default';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-file-text-o"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    foreach ($html->find('[name=do[draftdel]]') as $elm) {
+
+      $elm->class .= ' btn btn-danger';
+
+      if ($elm->tag == 'button') {
+        $elm->innertext = '<i class="fa fa-close"></i> ' . $elm->innertext;
+      }
+
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Revisions & Recents
+
+  if ($ACT == 'revisions' || $ACT == 'recent') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    foreach ($html->find('.sizechange') as $elm) {
+
+      if (strstr($elm->class, 'positive')) {
+        $elm->class .= ' label label-success';
+      }
+
+      if (strstr($elm->class, 'negative')) {
+        $elm->class .= ' label label-danger';
+      }
+
+    }
+
+    foreach ($html->find('.minor') as $elm) {
+      $elm->class .= ' text-muted';
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
+
+  # Difference
+
+  if ($ACT == 'diff') {
+
+    # Import HTML string
+    $html = str_get_html($content);
+
+    foreach ($html->find('.diff-deletedline') as $elm) {
+      $elm->class .= ' bg-danger';
+    }
+
+    foreach ($html->find('.diff-addedline') as $elm) {
+      $elm->class .= ' bg-success';
+    }
+
+    foreach ($html->find('.diffprevrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-left';
+    }
+
+    foreach ($html->find('.diffnextrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-right';
+    }
+
+    foreach ($html->find('.diffbothprevrev') as $elm) {
+      $elm->class .= ' btn btn-default fa fa-angle-double-left';
+    }
+
+    foreach ($html->find('.minor') as $elm) {
+      $elm->class .= ' text-muted';
+    }
+
+    $content = $html->save();
+
+    $html->clear();
+    unset($html);
+
+  }
+
 
   return $content;
 
 }
 
 
+/**
+ * Return the theme for current namespace
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @return string
+ */
 function bootstrap3_theme_by_namespace() {
 
   global $ID;
@@ -1854,5 +2595,55 @@ function bootstrap3_classes() {
   if (! bootstrap3_conf('tableFullWidth'))  $classes[] = 'dw-table-width';
 
   return implode(' ', $classes);
+
+}
+
+
+/**
+ * Get the license (link or image)
+ *
+ * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ *
+ * @param  string  $type ("link" or "image")
+ * @param  integer $size of image
+ * @param  bool    $return or print
+ * @return string
+ */
+function bootstrap3_license($type = 'link', $size = 24, $return = false) {
+
+  global $conf, $license, $lang;
+
+  $target = $conf['target']['extern'];
+  $lic    = $license[$conf['license']];
+  $output = '';
+
+  if (! $lic) return '';
+
+  if ($type == 'link') {
+    $output .= $lang['license'] . '<br/>';
+  }
+
+  $semantic     = (bootstrap3_conf('semantic') ? 'itemscope itemtype="http://schema.org/CreativeWork" itemprop="license"' : '');
+  $license_url  = $lic['url'];
+  $license_name = $lic['name'];
+
+  $output .= '<a href="'. $license_url .'" title="'. $license_name .'" target="'. $target .'" '. $semantic .' rel="license" class="license">';
+
+  if ($type == 'image') {
+
+    foreach (explode('-', $conf['license']) as $license_img) {
+      if ($license_img == 'publicdomain') $license_img = 'pd';
+      $output .= '<img src="'. tpl_basedir() .'images/license/'. $license_img .'.png" width="'. $size .'" height="'. $size .'" alt="'. $license_img .'" /> ';
+    }
+
+  } else {
+    $output .= $lic['name'];
+  }
+
+  $output .= '</a>';
+
+  if ($return) return $output;
+  echo $output;
+  return '';
 
 }

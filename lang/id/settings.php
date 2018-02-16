@@ -1,0 +1,110 @@
+<?php
+/**
+ * Indonesian Language file for config
+ *
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Arif Budiman
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+$lang['bootstrapTheme']               = 'Tema Bootstrap';
+$lang['bootstrapTheme_o_bootswatch']  = 'Tema Bootswatch.com';
+$lang['bootstrapTheme_o_custom']      = 'Tema Bootstrap Kustom';
+$lang['bootstrapTheme_o_default']     = 'Tema Bootstrap Asli';
+$lang['bootstrapTheme_o_optional']    = 'Tema Bootstrap Tambahan';
+$lang['bootswatchTheme']              = 'Pilih sebuah tema dari Bootswatch.com';
+$lang['browserTitle']                 = 'Judul peramban DokuWiki (standarnya adalah <code>@TITLE@ [@WIKI@]</code>, dimana placeholder <code>@TITLE@</code> menggantikan judul halaman saat ini dan <code>@WIKI@</code> menggantikan nama DokuWiki) - lihat <a class="interwiki iw_doku" href="#config___title">title</a> config';
+$lang['browserTitleCharSepNS']        = 'Karakter pemisah untuk setiap ruang nama pada judul peramban';
+$lang['browserTitleOrderNS']          = 'Mengatur urutan ruang nama';
+$lang['browserTitleShowNS']           = 'Tampilkan nama halaman sebelumnya dari halaman saat ini pada judul peramban';
+$lang['collapsibleSections']          = 'Perkecil tingkat bagian ke-2 (berguna di perangkat seluler)';
+$lang['cookieLawBannerPage']          = 'Nama halaman untuk spanduk Aturan Cookie';
+$lang['cookieLawPolicyPage']          = 'Nama halaman untuk kebijakan Aturan Cookie';
+$lang['customTheme']                  = 'Sisipkan URL dari tema kustom';
+$lang['discussionPage']               = 'Nama halaman diskusi (standarnya adalah <code>discussion:@ID@</code>, dimana placeholder <code>@ID@</code> menggantikan nama halaman saat ini), bidang kosong akan menonaktifkan tautan';
+$lang['fixedTopNavbar']               = 'Tetapkan bilah nav di atas';
+$lang['fluidContainer']               = 'Aktifkan fluid container (lebar-penuh halaman)';
+$lang['fluidContainerBtn']            = 'Tampilkan sebuah tombol di bilah nav untuk memperluas kontainer';
+$lang['googleAnalyticsAnonymizeIP']   = 'Anonimkan alamat IP dari pengunjung';
+$lang['googleAnalyticsNoTrackAdmin']  = 'Nonaktifkan pelacakan untuk pengguna Admin';
+$lang['googleAnalyticsNoTrackPages']  = 'Nonaktifkan pelacakan untuk halaman tertentu (sisipkan regex)';
+$lang['googleAnalyticsNoTrackUsers']  = 'Nonaktifkan pelacakan untuk pengguna yang sedang masuk log';
+$lang['googleAnalyticsTrackActions']  = 'Lacak aksi DokuWiki (penyuntingan, pencarian, dll)';
+$lang['googleAnalyticsTrackID']       = 'ID Pelacakan';
+$lang['hideInThemeSwitcher']          = 'Sembunyikan tema pada pemilih tema';
+$lang['hideLoginLink']                = 'Sembunyikan tombol masuk log pada bilah nav. Opsi ini berguna di pemasangan DokuWiki "hanya-baca" (misalnya situs blog dan pribadi)';
+$lang['individualTools']              = 'Pisahkan Perkakas di menu individu pada bilah nav';
+$lang['inverseNavbar']                = 'Balikkan bilah nav';
+$lang['landingPages']                 = 'Nama halaman arahan (masukkan regex)';
+$lang['leftSidebarGrid']              = 'Kelas grid pada bilah sisi kiri <code>col-{xs,sm,md,lg}-x</code> (lhat dokumentasi <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
+$lang['navbarLabels']                 = 'Tampilkan/Sembunyikan label individu';
+$lang['pageIcons']                    = 'Pilih ikon untuk tampilan';
+$lang['pageInfo']                     = 'Tampilkan/Sembunyikan halaman elemen info';
+$lang['pageInfoDateFormat']           = 'Format tanggal';
+$lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
+$lang['pageInfoDateFormat_o_human']   = 'Dapat dibaca manusia';
+$lang['pageOnPanel']                  = 'Aktifkan panel di sekitar halaman';
+$lang['pageToolsAnimation']           = 'Aktifkan animasi Perkakas Halaman';
+$lang['rightSidebar']                 = 'Nama halaman Bilah Sisi Kanan, bidang yang kosong akan menonaktifkan bilah sisi kanan. <br/>Bilah Sisi Kanan akan ditampilkan hanya ketika  <a class="interwiki iw_doku" href="#config___sidebar">bilah sisi</a> DokuWiki standar diaktifkan dan berada pada posisi <code>left</code> (lihat konfigurasi <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Jika Anda ingin hanya bilah sisi DokuWiki di posisi kanan, atur konfigurasi <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> dengan nilai <code>right</code>';
+$lang['rightSidebarGrid']             = 'Kelas grid pada bilah sisi kanan <code>col-{xs,sm,md,lg}-x</code> (lhat dokumentasi <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
+$lang['schemaOrgType']                = 'Tipe Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
+$lang['semantic']                     = 'Aktifkan data semantik';
+$lang['showAddNewPage']               = 'Aktifkan plugin Tambah Halaman Baru di bilah nav (memerlukan <em>Plugin Add New Page</em>)';
+$lang['showAddNewPage_o_always']      = 'Selalu';
+$lang['showAddNewPage_o_logged']      = 'Saat sedang masuk log';
+$lang['showAddNewPage_o_never']       = 'Jangan pernah';
+$lang['showAdminMenu']                = 'Tampilkan Menu Administrasi';
+$lang['showBadges']                   = 'Tampilkan tombol lencana (DokuWiki, Donasi, dll)';
+$lang['showCookieLawBanner']          = 'Tampilkan spanduk Aturan Cookie pada bilah kaki';
+$lang['showDiscussion']               = 'Tampilkan tautan diskusi di menu perkakas';
+$lang['showEditBtn']                  = 'Tampilkan tombol sunting di bilah nav';
+$lang['showEditBtn_o_always']         = 'Selalu';
+$lang['showEditBtn_o_logged']         = 'Saat sedang masuk log';
+$lang['showEditBtn_o_never']          = 'Jangan pernah';
+$lang['showHomePageLink']             = 'Tampilkan tautan Halaman-Utama di bilah nav';
+$lang['showIndividualTool']           = 'Aktifkan/Nonaktifkan alat individu di bilah nav';
+$lang['showLandingPage']              = 'Aktifkan halaman arahan (tanpa bilah sisi dan panel disekitar halaman)';
+$lang['showLoginOnFooter']            = 'Tampilkan tautan masuk log "kecil" di bilah kaki. Opsi ini berguna ketika <code>hideLoginLink</code> diaktifkan';
+$lang['showNavbar']                   = 'Tampilkan hook bilah nav';
+$lang['showNavbar_o_always']          = 'Selalu';
+$lang['showNavbar_o_logged']          = 'Saat sedang masuk log';
+$lang['showPageIcons']                = 'Tampilkan ikon berguna (cetak, bagikan tautan, kirim mail, dll.) pada halaman';
+$lang['showPageId']                   = 'Tampilkan nama halaman DokuWiki (pageid) di atas';
+$lang['showPageInfo']                 = 'Tampilkan info halaman (misal tanggal, penulis)';
+$lang['showPageTools']                = 'Aktifkan Perkakas Halaman gaya-DokuWiki';
+$lang['showPageTools_o_always']       = 'Selalu';
+$lang['showPageTools_o_logged']       = 'Saat sedang masuk log';
+$lang['showPageTools_o_never']        = 'Jangan pernah';
+$lang['showSearchButton']             = 'Tampilkan tombol pencarian di bilah nav';
+$lang['showSearchForm']               = 'Tampilkan bidang Pencarian di bilah nav';
+$lang['showSearchForm_o_always']      = 'Selalu';
+$lang['showSearchForm_o_logged']      = 'Saat sedang masuk log';
+$lang['showSearchForm_o_never']       = 'Jangan pernah';
+$lang['showSemanticPopup']            = 'Tampilkan munculan yang berisi ekstak halaman ketika pengguna meletakkan pointer pada wikilink (memerlukan <em>Plugin Semantic</em>)';
+$lang['showThemeSwitcher']            = 'Tampilkan pemilih tema Bootswatch.com di bilah nav';
+$lang['showTools']                    = 'Tampilkan Perkakas di bilah nav';
+$lang['showTools_o_always']           = 'Selalu';
+$lang['showTools_o_logged']           = 'Saat sedang masuk log';
+$lang['showTools_o_never']            = 'Jangan pernah';
+$lang['showTranslation']              = 'Tampilkan bilah alat penerjemahan (memerlukan <em>Plugin Translation</em>)';
+$lang['showUserHomeLink']             = 'Tampilkan Halaman-Rumah Pengguna di bilah nav';
+$lang['sidebarOnNavbar']              = 'Tampilkan konten bilah sisi didalam bilah nav';
+$lang['sidebarPosition']              = 'Posisi Bilah Sisi DokuWiki (<code>left</code> atau <code>right</code>)';
+$lang['sidebarShowPageTitle']         = 'Tampilkan judul halaman Bilah Sisi';
+$lang['socialShareProviders']         = 'Pilih tautan berbagi sosial untuk ditampilkan';
+$lang['tableFullWidth']               = 'Aktifkan lebar tabel 100% penuh (standar Bootstrap)';
+$lang['tableStyle']                   = 'Gaya tabel';
+$lang['tagsOnTop']                    = 'Pindahkan semua Tag pada atas halaman, disebelah page-id (memerlukan <em>Plugin Tag</em>)';
+$lang['themeByNamespace']             = 'Gunakan tema namespaced';
+$lang['tocAffix']                     = 'Bubuhkan daftar isi saat menggulir halaman';
+$lang['tocCollapseOnScroll']          = 'Ciutkan daftar isi saat menggulir halaman';
+$lang['tocCollapseSubSections']       = 'Ciutkan semua sub-seksi di daftar isi untuk menghemat spasi';
+$lang['tocCollapsed']                 = 'Ciutkan daftar isi pada setiap halaman';
+$lang['tocPosition']                  = 'Posisi daftar isi';
+$lang['useACL']                       = 'Gunakan ACL untuk bilah sisi (kiri dan kanan) dan untuk semua hook DokuWiki (misal <code>:footer</code>, <code>:navbar</code>, dll.) <br/> <strong>CATATAN:</strong> Tersedia sejak rilis "Elenor of Tsort"';
+$lang['useAnchorJS']                  = 'Gunakan AnchorJS';
+$lang['useGoogleAnalytics']           = 'Aktifkan Google Analytics';
+$lang['useGravatar']                  = 'Muat gambar Gravatar';
+$lang['useLegacyNavbar']              = 'Gunakan hook <code>navbar.html</code> lawas dan usang (pertimbangkan dimasa depan untuk menggunakan hook <code>:navbar</code>)';
+$lang['useLocalBootswatch']           = 'Gunakan direktori Bootswatch lokal. Opsi ini berguna untuk pemasangan DokuWiki "Intranet"';
+

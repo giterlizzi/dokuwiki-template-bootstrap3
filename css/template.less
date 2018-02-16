@@ -109,6 +109,47 @@ header {
       white-space: nowrap;
     }
 
+    #dw__search {
+
+      input[type=search] {
+        padding-left: 30px;
+        display: inline-block;
+      }
+
+      button[type=submit] {
+       position:absolute;
+       left: 5px;
+       padding: 5px;
+       background: transparent;
+       border: 0px solid;
+      }
+
+      button[type=submit]:hover,
+      button[type=submit]:focus {
+        outline: 0;
+      }
+
+      /* Typeahead plugin */
+      .typeahead {
+        max-height: 250px;
+        overflow-y: auto;
+
+        li.dropdown-header {
+          font-size: 80%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding-top: 0;
+        }
+
+        a.dropdown-item {
+          font-size: 85%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+        }
+      }
+
+    }
+
     &.navbar-fixed-top .dw__actions {
       margin: 0 15px 0 5px;
     }
@@ -145,9 +186,10 @@ header {
 
 
 /* Badges */
-#dw__badges {
-  margin-top: 50px;
+#dw__badges li {
+  padding-right: 0;
 }
+
 
 
 /* Configuration Manager */
@@ -223,12 +265,7 @@ header {
 /* User Menu */
 #dw__user_menu {
 
-  .page-header {
-    margin: 20px 0 10px;
-  }
-
   .nav > li > a {
-    padding: 5px;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden !important;
@@ -279,12 +316,6 @@ header {
     margin-right: 0;
   }
 
-}
-
-
-/* License */
-#dw__license {
-  margin: 15px 0;
 }
 
 
@@ -418,11 +449,28 @@ header {
 
 }
 
+.dokuwiki div.ui-admin {
 
-.admin_tasks {
-  width: 50% !important;
+  ul li {
+    font-weight: normal;
+  }
+
+  #admin__version {
+    clear: both;
+    float: none;
+  }
+
+  .admin_tasks {
+    width: 50% !important;
+    padding: 0 10px !important;
+  }
+
+  ul.admin_plugins {
+    padding: 5px;
+    margin-bottom: 0px;
+  }
+
 }
-
 
 /* Back to top button */
 .back-to-top {
@@ -577,6 +625,7 @@ ul.btn-group {
 
 
 /* Custom DropDown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
+
 .dropdown-large {
   position: static !important;
 }
@@ -585,6 +634,14 @@ ul.btn-group {
   margin-left: 16px;
   margin-right: 16px;
   padding: 20px 0px;
+}
+
+#dw__user_menu .dropdown-menu-large {
+  width: 400px;
+}
+
+#dw__admin .dropdown-menu-large {
+  width: 600px;
 }
 
 @media (max-width: 768px) {

@@ -1,0 +1,99 @@
+/*!
+ * DokuWiki Bootstrap3 Template: style.ini / Styling Plugin support 
+ *
+ * Home     http://dokuwiki.org/template:bootstrap3
+ * Author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ *
+ *
+ * For more information about style.ini and replacements see:
+ *
+ * - https://www.dokuwiki.org/devel:style.ini
+ * - https://www.dokuwiki.org/plugin:styling
+*/
+
+
+/* main text and background colors */
+.text(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+.background(@arg) when (iscolor(@arg)) {}
+
+/* alternative text and background colors */
+.textAlt(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+.backgroundAlt(@arg) when (iscolor(@arg)) {}
+
+/* neutral text and background colors */
+.textNeu(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+.backgroundNeu(@arg) when (iscolor(@arg)) {}
+
+/* border color */
+.border(@arg) when (iscolor(@arg)) {
+  border-color: @arg !important;
+}
+
+/* highlighted text (e.g. search snippets) */
+.highlight(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+
+.backgroundSite(@arg) when (iscolor(@arg)) {
+  background-color: @arg !important;
+}
+
+/* these are used for links */
+.link(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+.existing(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+.missing(@arg) when (iscolor(@arg)) {
+  color: @arg !important;
+}
+
+/**
+
+body {
+  .backgroundSite(@ini_background_site);
+  .text(@ini_text);
+}
+
+table, th, td, blockquote, pre, hr {
+  .border(@ini_border);
+}
+
+th {
+  .backgroundAlt(@ini_background_alt);
+}
+
+mark {
+  .highlight(@ini_highlight);
+}
+
+pre, code, samp, kbd {
+  .backgroundSite(@ini_background_site);
+  .text(@ini_text);
+}
+
+fieldset {
+  .textAlt(@ini_text_alt);
+}
+
+a:link, a:visited {
+  .link(@ini_link);
+}
+
+.dokuwiki a.wikilink1 {
+  .existing(@ini_existing);
+}
+
+.dokuwiki a.wikilink2 {
+  .missing(@ini_missing);
+}
+
+*/

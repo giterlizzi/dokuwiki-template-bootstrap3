@@ -6,12 +6,15 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-jQuery(document).on('bootstrap3:plugins', function(e) {
+jQuery(document).on('bootstrap3:plugins', function(event) {
+
+  //console.debug(event.type + ' event fired');
 
   setTimeout(function() {
 
     /* DOKUWIKI:include js/plugins/csv.js */
     /* DOKUWIKI:include js/plugins/data.js */
+    /* DOKUWIKI:include js/plugins/database2.js */
     /* DOKUWIKI:include js/plugins/datatables.js */
     /* DOKUWIKI:include js/plugins/davcal.js */
     /* DOKUWIKI:include js/plugins/discussion.js */

@@ -34,14 +34,18 @@ $page_on_panel = bootstrap3_conf('pageOnPanel');
 // Populate JSINFO object
 $JSINFO['bootstrap3'] = array(
   'mode'   => $ACT,
+  'toc'    => array(),
   'config' => array(
     'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
+    'fixedTopNavbar'      => (int) bootstrap3_conf('fixedTopNavbar'),
+    'showSemanticPopup'   => (int) bootstrap3_conf('showSemanticPopup'),
     'sidebarOnNavbar'     => (int) bootstrap3_conf('sidebarOnNavbar'),
     'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
     'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
     'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
     'tocCollapsed'        => (int) bootstrap3_conf('tocCollapsed'),
-    'showSemanticPopup'   => (int) bootstrap3_conf('showSemanticPopup'),
+    'tocLayout'           => bootstrap3_conf('tocLayout'),
+    'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
   ),
 );
 

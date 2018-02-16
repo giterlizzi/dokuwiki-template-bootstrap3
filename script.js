@@ -32,6 +32,56 @@ jQuery(document).ready(function() {
     jQuery(document).trigger('bootstrap3:toc-resize');
   });
 
+
+  // Add typeahead support for quick seach
+  jQuery("#qsearch").typeahead({
+
+    source: function(query, process) {
+
+      return jQuery.post(DOKU_BASE + 'lib/exe/ajax.php', {
+        call: 'qsearch',
+        q: encodeURI(query)
+      },
+
+      function(data) {
+
+        var results = [];
+
+        jQuery(data).find('a').each(function(){
+
+          var page = jQuery(this);
+
+          results.push({
+            name     : page.text(),
+            href     : page.attr('href'),
+            title    : page.attr('title'),
+            category : page.attr('title').replace(/:/g, ' » '),
+          });
+
+        });
+
+        return process(results);
+
+      });
+    },
+
+    itemLink: function (item) {
+      return item.href;
+    },
+
+    itemTitle: function (item) {
+      return item.title;
+    },
+
+    followLinkOnSelect : true,
+    autoSelect         : false,
+    items              : 50,
+    fitToElement       : true,
+    delay              : 500,
+
+  });
+
+
   // Replace ALL input[type=submit|reset|button] (with no events) to button[type=submit|reset|button] for CSS styling
   jQuery.fn.extend({
 
@@ -65,34 +115,6 @@ jQuery(document).ready(function() {
   });
 
 
-  jQuery('.fluid-container').on('click', function() {
-
-    var $button     = jQuery(this),
-        $containers = jQuery('body > div, header, header nav > div, article, footer > div');
-
-    if (jQuery('body > div.container').length) {
-
-      $containers
-        .removeClass('container')
-        .addClass('container-fluid');
-      $button.parent().addClass('active');
-
-      DokuCookie.setValue('fluidContainer', 1);
-
-    } else {
-
-      $containers
-        .removeClass('container-fluid')
-        .addClass('container');
-      $button.parent().removeClass('active');
-
-      DokuCookie.setValue('fluidContainer', 0);
-
-    }
-
-  });
-
-
   /* DOKUWIKI:include js/template.js */
 
 
@@ -111,38 +133,52 @@ jQuery(document).ready(function() {
   // Re-initialize some components in media-manager
   if (dw_mode('media') || jQuery('#media__manager')) {
 
-    jQuery(document).ajaxSuccess(function() {
-      jQuery(document).trigger('bootstrap3:init');
-      jQuery(document).trigger('bootstrap3:buttons');
-      jQuery(document).trigger('bootstrap3:tabs');
-      jQuery(document).trigger('bootstrap3:media-manager');
-      jQuery(document).trigger('bootstrap3:alerts')
+   jQuery(document).ajaxSuccess(function() {
+     jQuery(document).trigger('bootstrap3:init');
+     jQuery(document).trigger('bootstrap3:buttons');
+     jQuery(document).trigger('bootstrap3:tabs');
+     jQuery(document).trigger('bootstrap3:media-manager');
+     jQuery(document).trigger('bootstrap3:alerts')
+   });
+
+  }
+
+  // Init AnchorJS
+  if (JSINFO.bootstrap3.config.useAnchorJS) {
+    jQuery(document).trigger('bootstrap3:anchorjs');
+  }
+
+  // Hash change
+  if (JSINFO.bootstrap3.config.fixedTopNavbar) {
+
+    var scrollOnHashChange = function() {
+      scrollBy(0, - (parseInt(jQuery('body').css('marginTop')) || 0));
+    };
+
+    if (location.hash) {
+      setTimeout(function() {
+        scrollOnHashChange();
+      }, 1);
+    }
+
+    jQuery(window).on('hashchange', function() {
+      scrollOnHashChange();
     });
 
-  }
-
-  // Admin mode
-  if (dw_mode('admin')) {
-    jQuery(document).trigger('bootstrap3:mode-admin');
-  }
-
-  // Search mode
-  if (dw_mode('search')) {
-    jQuery(document).trigger('bootstrap3:mode-search');
   }
 
   // Index mode
   if (dw_mode('index')) {
 
-    jQuery(document).trigger('bootstrap3:mode-index');
+   jQuery(document).trigger('bootstrap3:mode-index');
 
-    jQuery(document).ajaxSuccess(function() {
-      jQuery(document).trigger('bootstrap3:mode-index');
-    });
+   jQuery(document).ajaxSuccess(function() {
+     jQuery(document).trigger('bootstrap3:mode-index');
+   });
 
-    jQuery('#index__tree').click(function(e) {
-      jQuery(document).trigger('bootstrap3:mode-index');
-    });
+   jQuery('#index__tree').click(function(e) {
+     jQuery(document).trigger('bootstrap3:mode-index');
+   });
 
   }
 
