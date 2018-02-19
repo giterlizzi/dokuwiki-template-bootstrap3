@@ -842,6 +842,7 @@ jQuery(document).on('bootstrap3:components', function(event) {
       'mobile-layout',
       'fluid-container',
       'toc',
+      'tabs',
       'toc-menu',
       'nav',
       'back-to-top',
