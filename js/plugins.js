@@ -28,6 +28,7 @@ jQuery(document).on('bootstrap3:plugins', function(event) {
     /* DOKUWIKI:include js/plugins/simplenavi.js */
     /* DOKUWIKI:include js/plugins/struct.js */
     /* DOKUWIKI:include js/plugins/tag.js */
+    /* DOKUWIKI:include js/plugins/tagalerts.js */
     /* DOKUWIKI:include js/plugins/tagging.js */
     /* DOKUWIKI:include js/plugins/translation.js */
     /* DOKUWIKI:include js/plugins/wrap.js */
