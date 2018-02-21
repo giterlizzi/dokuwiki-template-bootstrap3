@@ -505,8 +505,14 @@ function bootstrap3_sidebar($sidebar, $return = false) {
   $html = new simple_html_dom;
   $html->load($out);
 
+  # TODO 'page-header' will be removed in the next release of Bootstrap
   foreach ($html->find('h1, h2, h3, h4, h5, h6') as $elm) {
+
+    # Skip panel title on sidebar
+    if (preg_match('/panel-title/', $elm->class)) continue;
+
     $elm->class .= ' page-header';
+
   }
 
   $out = $html->save();
