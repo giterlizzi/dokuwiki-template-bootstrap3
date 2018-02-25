@@ -8,7 +8,7 @@
 ### Fixed
   * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
   * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
-  * #348, #350: Suppress warning for open_basedir
+  * #350, #352: Suppress warning for open_basedir
   * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
 
 
