@@ -1,5 +1,17 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+### Added
+  * #349: Added initegration of tagalerts plugin (thanks to @per-hed)
+
+### Fixed
+  * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
+  * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
+  * #348, #350: Suppress warning for open_basedir
+  * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
+
+
 ## [v2018-02-16]
 
 After a long development cycle a new release of Bootstrap3 template is issued. This release introduce a DOM Engine (in pure PHP) can speedup a rendering of the page (estimated in 0.3 ~ 0.8 seconds per page) on client-side, by removing most of JS Hack code. Improved the Avatar support with Gravatar, Libravatar, Office365 and local DokuWiki `:user` namespace media. Added new DokuWiki hooks (`:header` and `:topheader`), configuration options and new fresh layout for search bar, footer, user menu and admin page.
