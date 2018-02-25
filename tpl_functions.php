@@ -1703,7 +1703,7 @@ function bootstrap3_metaheaders(Doku_Event &$event, $param) {
         ? $tpl_basedir . 'assets/bootstrap'
         : '//maxcdn.bootstrapcdn.com/bootswatch/3.3.7';
 
-      if (file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
+      if (@file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
         $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
       }
 
