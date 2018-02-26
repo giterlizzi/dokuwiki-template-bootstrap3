@@ -3,7 +3,7 @@
 ## [Develop]
 
 ### Added
-  * #349: Added initegration of tagalerts plugin (thanks to @per-hed)
+  * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
 
 ### Fixed
   * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
