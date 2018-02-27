@@ -1831,6 +1831,9 @@ function bootstrap3_content($content) {
   # FIX :-\ smile
   $content = str_replace(array('alt=":-\"', "alt=':-\'"), 'alt=":-&#92;"', $content);
 
+  # Workaround for ToDo Plugin
+  $content = str_replace('checked="checked"', ' checked="checked"', $content);
+
   # Import HTML string
   $html = str_get_html($content);
 
