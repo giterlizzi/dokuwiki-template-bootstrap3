@@ -10,6 +10,7 @@
   * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
   * #350, #352: Suppress warning for open_basedir
   * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
+  * #354: Added workaround for ToDo Plugin for checked elements (thanks to @nurzu)
 
 
 ## [v2018-02-16]
