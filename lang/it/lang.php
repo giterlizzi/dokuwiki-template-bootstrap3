@@ -9,6 +9,7 @@
 $lang['discussion']              = 'Discussione';
 $lang['back_to_article']         = 'Ritorna all\'articolo';
 $lang['userpage']                = 'Pagina Utente';
+$lang['purge_cache_page']        = 'Purge page cache';
 $lang['themes']                  = 'Temi';
 $lang['expand_container']        = 'Espandi/Riduci';
 $lang['administrative_tasks']    = 'Operazioni di Amministrazione';
@@ -16,6 +17,7 @@ $lang['additional_plugins']      = 'Plugin Aggiuntivi';
 $lang['share_on']                = 'Condividi su';
 $lang['send_mail']               = 'Invia e-Mail';
 $lang['print']                   = 'Stampa';
+$lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Aggiungi una nuova pagina';
 
 // Configuration Manager Template Sections
@@ -26,6 +28,7 @@ $lang['config_semantic']         = 'Semantica';
 $lang['config_layout']           = 'Layout';
 $lang['config_toc']              = 'Indice';
 $lang['config_discussion']       = 'Discussione';
+$lang['config_avatar']           = 'Avatar';
 $lang['config_cookie_law']       = 'Cookie Law';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Titolo del browser';
