@@ -119,6 +119,7 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Slå på  Google Analytics';
 $lang['useLegacyNavbar']              = 'Bruk gammel og frarådet <code>navbar.html</code> hook (vurder for fremtiden å bruke <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Bruk lokal Bootswatch-mappe. Dette alternativet er nyttig DokuWiki-installasjon i "intranet".';

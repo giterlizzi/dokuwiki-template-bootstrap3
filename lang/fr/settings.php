@@ -126,6 +126,7 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Activer la fonctionnalité Google Analytics';
 $lang['useLegacyNavbar']              = 'Utiliser l\'attache <code>navbar.html</code> héritée de DokuWiki et malheureusement dépréciée (dans le futur, pensez à utiliser l\'attache <code>:navbar</code>)';
 $lang['useLocalBootswatch']           = 'Utiliser le répertoire local de Bootswatch. Cette option est utile pour une installation de Dokuwiki en intranet';

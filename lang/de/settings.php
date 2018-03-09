@@ -121,6 +121,7 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Aktiviere Google Analytics';
 $lang['useLegacyNavbar']              = 'Verwende die veraltete <code>navbar.html</code> Methode (Denke daran, in Zukunft die <code>:navbar</code> Methode zu verwenden).';
 $lang['useLocalBootswatch']           = 'Benutze das lokale Bootswatch Verzeichnis. Diese Option ist hilfreich bei Installationen im "Intranet".';
