@@ -75,7 +75,7 @@ $meta['showDiscussion']      = array('onoff');
 $meta['discussionPage']      = array('string');
 
 // Avatar
-$meta['useAvatar']           = array('multichoice', '_choices' => array('off', 'gravatar', 'libravatar', 'office365', 'local'));
+$meta['useAvatar']           = array('multichoice', '_choices' => array('off', 'gravatar', 'libravatar', 'office365', 'activedirectory', 'local'));
 $meta['gravatarURL']         = array('string');
 $meta['libravatarURL']       = array('string');
 $meta['office365URL']        = array('string');

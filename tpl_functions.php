@@ -893,6 +893,8 @@ function bootstrap3_toolbar() {
  */
 function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
 
+  global $INFO;
+
   $avatar_url      = '';
   $avatar_provider = bootstrap3_conf('useAvatar');
 
@@ -906,6 +908,12 @@ function get_avatar( $username, $email, $size = 80, $d = 'mm', $r = 'g' ) {
     $user_url   = str_replace('{NAME}', $username, $interwiki['user']);
     $logo_size  = array();
     $logo       = tpl_getMediaFile(array("$user_url.png", "$user_url.jpg", 'images/avatar.png'), false, $logo_size);
+
+    return $logo;
+  }
+
+  if ($avatar_provider == 'activedirectory') {
+    $logo       =  "data:image/jpeg;base64," . base64_encode($INFO['userinfo']['thumbnailphoto']);
 
     return $logo;
   }

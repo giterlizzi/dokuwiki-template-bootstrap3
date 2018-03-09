@@ -17,6 +17,7 @@
 $lang['discussion']              = 'Discussion';
 $lang['back_to_article']         = 'Retour à l\'article';
 $lang['userpage']                = 'Page utilisateur';
+$lang['purge_cache_page']        = 'Purge page cache';
 $lang['themes']                  = 'Thèmes';
 $lang['expand_container']        = 'Développer/Réduire';
 $lang['administrative_tasks']    = 'Tâches administratives';
@@ -24,6 +25,7 @@ $lang['additional_plugins']      = 'Greffons supplémentaires';
 $lang['share_on']                = 'Partager sur';
 $lang['send_mail']               = 'Envoyer courriel';
 $lang['print']                   = 'Imprimer';
+$lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Ajouter une nouvelle page';
 
 // Configuration Manager Template Sections
@@ -34,6 +36,7 @@ $lang['config_semantic']         = 'Sémantiques';
 $lang['config_layout']           = 'Disposition';
 $lang['config_toc']              = 'Table des matières';
 $lang['config_discussion']       = 'Discussion';
+$lang['config_avatar']           = 'Avatar';
 $lang['config_cookie_law']       = 'Loi sur les cookies';
 $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Titre du navigateur';
