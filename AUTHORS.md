@@ -14,13 +14,14 @@
   * ERTurner ([ERTurner](https://github.com/ERTurner))
   * Hideaki SAWADA ([sawachan](https://github.com/sawachan))
   * Lars Vierbergen ([vierbergenlars](https://github.com/vierbergenlars))
-  * MOEditor/ERTurner ([ERTurner](https://github.com/ERTurner))
   * Malte Dik ([mdik](https://github.com/mdik))
   * Matt ([mdjordan](https://github.com/mdjordan))
   * Maxime Buquet ([Ppjet6](https://github.com/Ppjet6))
   * Michael Wegener ([MWsatwareAG](https://github.com/MWsatwareAG))
+  * MOEditor/ERTurner ([ERTurner](https://github.com/ERTurner))
   * Nelson Martell ([nelson6e65](https://github.com/nelson6e65))
   * Phy ([phy25](https://github.com/phy25))
+  * swordfischer ([swordfischer](https://github.com/swordfischer))
   * Tyson Cecka ([tysoncecka](https://github.com/tysoncecka))
 
 *For a list of people who have contributed to the template, see [GitHub's list of contributors](https://github.com/LotarProject/dokuwiki-template-bootstrap3/contributors).*
