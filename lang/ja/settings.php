@@ -120,6 +120,7 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Google アナリティクスを有効にする';
 $lang['useLegacyNavbar']              = '旧式・非奨励の <code>navbar.html</code> フックを使用する　(<code>:navbar</code> フックの使用を再検討して下さい)';
 $lang['useLocalBootswatch']           = 'ローカルの Bootswatch ディレクトリを使用する。このオプションは "intranet" DokuWiki で役立ちます';

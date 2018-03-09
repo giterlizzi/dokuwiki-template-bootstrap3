@@ -119,6 +119,7 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Google 웹로그 분석 활성화';
 $lang['useLegacyNavbar']              = '레거시 및 사용되지 않는 <code>navbar.html</code> 후크 사용 (앞으로는 <code>:navbar</code> 후크를 사용하는 것을 고려하세요)';
 $lang['useLocalBootswatch']           = '로컬 Bootswatch 디렉터리 사용. 이 옵션은 "인트라넷" 도쿠위키 설치에 유용합니다';
