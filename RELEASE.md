@@ -4,6 +4,7 @@
 
 ### Added
   * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
+  * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
 
 ### Fixed
   * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
