@@ -106,6 +106,11 @@ if (in_array('help', $page_icons)) {
       <li>
         <a href="whatsapp://send?text=" class="share-whatsapp" title="<?php echo tpl_getLang('share_on') ?> Whatsapp" data-action="share/whatsapp/share"><i class="fa fa-fw fa-lg fa-whatsapp"></i> Whatsapp</a>
       </li>
+      <?php endif;
+            if (in_array('yammer', $social_share_providers)): ?>
+      <li>
+        <a href="#" class="share-yammer" title="<?php echo tpl_getLang('share_on') ?> Yammer"><i class="fa fa-fw fa-lg fa-yammer"></i> Yammer</a>
+      </li>
       <?php endif; ?>
     </ul>
   </div>
