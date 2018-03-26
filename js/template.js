@@ -695,7 +695,7 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
     'telegram'    : (function(){ return [ 'https://telegram.me/share/url?url=', url ].join(''); })(),
     'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
-    'yammer'      : (function(){ return [ 'https://www.yammer.com/ramboll.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
+    'yammer'      : (function(){ return [ 'https://www.yammer.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
   };
 
