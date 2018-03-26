@@ -109,7 +109,7 @@ if (in_array('help', $page_icons)) {
       <?php endif;
             if (in_array('yammer', $social_share_providers)): ?>
       <li>
-        <a href="#" class="share-yammer" title="<?php echo tpl_getLang('share_on') ?> Yammer"><i class="fa fa-fw fa-lg fa-yammer"></i> Yammer</a>
+        <a href="#" class="share-yammer" title="<?php echo tpl_getLang('share_on') ?> Yammer"><i class="fa fa-fw fa-lg fa-yahoo"></i> Yammer</a>
       </li>
       <?php endif; ?>
     </ul>
