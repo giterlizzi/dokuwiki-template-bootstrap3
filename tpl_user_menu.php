@@ -62,7 +62,6 @@ if ($use_avatar) {
               }
 
               echo '<span style="cursor:help" class="label label-' . $label_type . '" title="Groups: '. join(', ', $INFO['userinfo']['grps']) .'">' . $user_type . '</span>';
-
             ?>
           </p>
 
@@ -113,6 +112,7 @@ if ($use_avatar) {
 
       <?php echo bootstrap3_action_item('admin', 'fa fa-fw fa-cogs') ?>
       <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
+      <?php bootstrap3_toolsevent('usertools',array(), 'main'); ?>
 
       <li class="divider"></li>
 
