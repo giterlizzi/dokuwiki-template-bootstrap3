@@ -10,7 +10,7 @@
 $lang['discussion']              = 'Diskusjon';
 $lang['back_to_article']         = 'Tilbake til artikkelen';
 $lang['userpage']                = 'Brukerside';
-$lang['purge_cache_page']        = 'Purge page cache';
+$lang['purge_cache_page']        = 'Rens page cache';
 $lang['themes']                  = 'Temaer';
 $lang['expand_container']        = 'Utvid/Reduser';
 $lang['administrative_tasks']    = 'Administrative oppgaver';
@@ -18,7 +18,7 @@ $lang['additional_plugins']      = 'Ytterligere plugins';
 $lang['share_on']                = 'Del på';
 $lang['send_mail']               = 'Send e-post';
 $lang['print']                   = 'Skriv ut';
-$lang['permalink']               = 'Permalink';
+$lang['permalink']               = 'Permalenke';
 $lang['add_new_page']            = 'Legg til ny side';
 
 // Configuration Manager Template Sections
