@@ -11,13 +11,14 @@
  * @author   Maxime Buque <pep+code@bouah.net>
  * @author   Vincent Lecomte <vincent.lecomte@outlook.be>
  * @author   momo choko
+ * @author   Fabrice Dejaigher
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
 $lang['discussion']              = 'Discussion';
 $lang['back_to_article']         = 'Retour à l\'article';
 $lang['userpage']                = 'Page utilisateur';
-$lang['purge_cache_page']        = 'Purge page cache';
+$lang['purge_cache_page']        = 'Purger le cache de la page';
 $lang['themes']                  = 'Thèmes';
 $lang['expand_container']        = 'Développer/Réduire';
 $lang['administrative_tasks']    = 'Tâches administratives';
@@ -25,7 +26,7 @@ $lang['additional_plugins']      = 'Greffons supplémentaires';
 $lang['share_on']                = 'Partager sur';
 $lang['send_mail']               = 'Envoyer courriel';
 $lang['print']                   = 'Imprimer';
-$lang['permalink']               = 'Permalink';
+$lang['permalink']               = 'Permalien';
 $lang['add_new_page']            = 'Ajouter une nouvelle page';
 
 // Configuration Manager Template Sections
