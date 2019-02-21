@@ -12,7 +12,7 @@
 $lang['discussion']              = 'Diskussion';
 $lang['back_to_article']         = 'Zurück zum Artikel';
 $lang['userpage']                = 'Benutzerseite';
-$lang['purge_cache_page']        = 'Purge page cache';
+$lang['purge_cache_page']        = 'Cache bereinigen';
 $lang['themes']                  = 'Themes';
 $lang['expand_container']        = 'Erweitern/Reduzieren';
 $lang['administrative_tasks']    = 'Verwaltungsaufgaben';

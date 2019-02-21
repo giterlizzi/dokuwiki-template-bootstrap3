@@ -6,6 +6,7 @@
  * @author   Andrey Shpak
  * @author   Vadim Balabin
  * @author   Александр Бакунович
+ * @author   Дмитрий Якименко
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -19,12 +20,12 @@ $lang['browserTitle']                 = 'Заголовок страниц в б
 $lang['browserTitleCharSepNS']        = 'Разделитель для каждого пространства имен в заголовке';
 $lang['browserTitleOrderNS']          = 'Установить порядок пространства имен';
 $lang['browserTitleShowNS']           = 'Отображать предыдущее название страницы на текущей, в заголовке';
-$lang['collapsibleSections']          = 'Collapse 2nd section level (useful in mobile/tablet devices)';
+$lang['collapsibleSections']          = 'Сворачивать заголовки 2-го уровня (полезно для мобильных/планшетных устройств)';
 $lang['cookieLawBannerPage']          = 'Страница, которая содержит текст для баннера "закон о cookie файлах"';
 $lang['cookieLawPolicyPage']          = 'Страница, которая содержит политику "закон о cookie файлах"';
 $lang['customTheme']                  = 'Вставьте адрес графической темы по выбору';
 $lang['discussionPage']               = 'Ссылка на страницу обсуждения (по умолчанию<code>discussion:@ID@</code>, где <code>@ID@</code> автоматически заменяется именем текущей страницы), пустое поле выключает функционал';
-$lang['domParserMaxPageSize']         = 'Set the max size of the page content for DOM Parser. The optimal and default value is <code>600000</code> (600KB)';
+$lang['domParserMaxPageSize']         = 'Установите максимальный размер содержимого страницы для DOM Parser. Оптимальное значение по умолчанию составляет 600000 (600 КБ)';
 $lang['fixedTopNavbar']               = 'Зафиксировать панель навигации сверху';
 $lang['fluidContainer']               = 'Разрешить плавающий контейнер(страница во весь экран)';
 $lang['fluidContainerBtn']            = 'Отображать кнопку "расширить страницу" в панели навигации';
@@ -34,10 +35,10 @@ $lang['googleAnalyticsNoTrackPages']  = 'Отключить слежение д�
 $lang['googleAnalyticsNoTrackUsers']  = 'Отключить слежение для всех вошедших пользователей';
 $lang['googleAnalyticsTrackActions']  = 'Отслеживать действия DokuWiki (редактирование, поиск и т.д.)';
 $lang['googleAnalyticsTrackID']       = 'Код отслеживания';
-$lang['gravatarURL']                  = 'Set Gravatar URL <br/> <strong>NOTE:</strong> <br/> - <code>http://www.gravatar.com/avatar</code> (http) <br/> - <code>https://secure.gravatar.com/avatar</code> (https) <br/> - <code>https://www.gravatar.com/avatar</code> (alternative https)';
+$lang['gravatarURL']                  = 'Установите адрес Gravatar <br/><strong>ПРИМЕЧАНИЕ:</strong> <br/> - <code>http://www.gravatar.com/avatar</code> (http) <br/> - <code>https://secure.gravatar.com/avatar</code>(https) <br/> - <code>https://www.gravatar.com/avatar</code> (альтернативный https)';
 $lang['hideInThemeSwitcher']          = 'Спрятать темы в переключателе';
 $lang['hideLoginLink']                = 'Спрятать кнопку входа в панели навигации. Эта опция полезна для вики типа "только для чтения" (например: блог, персональный сайт)';
-$lang['homePageURL']                  = 'Use custom URL for home-page links';
+$lang['homePageURL']                  = 'Использовать собственный URL для главной страницы';
 $lang['individualTools']              = 'Разделить настройки на индивидуальные меню в панели навигации';
 $lang['inverseNavbar']                = 'Инверсия цвета меню навигации';
 $lang['landingPages']                 = 'Имена целевых страниц (используются регулярные выражения)';
@@ -82,10 +83,10 @@ $lang['showPageTools']                = 'Показывать DokuWiki инст�
 $lang['showPageTools_o_always']       = 'Всегда';
 $lang['showPageTools_o_logged']       = 'Когда авторизован';
 $lang['showPageTools_o_never']        = 'Никогда';
-$lang['showPurgePageCache']           = 'Display the "Purge Cache Page" button in Page Tools';
-$lang['showPurgePageCache_o_always']  = 'Always';
-$lang['showPurgePageCache_o_logged']  = 'When logged in';
-$lang['showPurgePageCache_o_never']   = 'Never';
+$lang['showPurgePageCache']           = 'Отображать кнопку "Очистить кеш страницы" в Инструментах страницы';
+$lang['showPurgePageCache_o_always']  = 'Всегда';
+$lang['showPurgePageCache_o_logged']  = 'Когда авторизован';
+$lang['showPurgePageCache_o_never']   = 'Никогда';
 $lang['showSearchForm']               = 'Отображать форму поиска в меню навигации';
 $lang['showSearchForm_o_always']      = 'Всегда';
 $lang['showSearchForm_o_logged']      = 'Когда авторизован';
@@ -98,8 +99,8 @@ $lang['showTools_o_logged']           = 'Для вошедших пользов�
 $lang['showTools_o_never']            = 'Никогда';
 $lang['showTranslation']              = 'Отображать языковую панель (требует установки <a href="https://www.dokuwiki.org/plugin:Translation">плагина</a>)';
 $lang['showUserHomeLink']             = 'Показывать кнопку "Домашняя страница пользователя" в панели навигации';
-$lang['showWikiInfo']                 = 'Display DokuWiki <a class="interwiki iw_doku" href="#config___title">name</a>, logo and <a class="interwiki iw_doku" href="#config___tagline">tagline</a> on footer';
-$lang['sidebarOnNavbar']              = 'Display the sidebar contents inside the navbar (useful on mobile/tablet devices)';
+$lang['showWikiInfo']                 = 'Отображать Dokuwiki <a class="interwiki iw_doku" href="#config___title">имя</a>, логотип и <a class="interwiki iw_doku" href="#config___tagline">подзаголовок</a> в подвале';
+$lang['sidebarOnNavbar']              = 'Отображение содержимого боковой панели внутри панели навигации (полезно на мобильных устройствах и планшетах)';
 $lang['sidebarPosition']              = 'Позиция боковой панели DokuWiki (<code>слева</code> или <code>справа</code>)';
 $lang['sidebarShowPageTitle']         = 'Отображать заголовок для навигационной панели';
 $lang['socialShareProviders']         = 'Выберите социальные ссылки для отображения';
@@ -112,16 +113,15 @@ $lang['tocCollapseOnScroll']          = 'Сворачивать оглавлен
 $lang['tocCollapseSubSections']       = 'Сворачивать все подсекции в оглавлении для сохранения места';
 $lang['tocCollapsed']                 = 'Сворачивать оглавление на каждой странице';
 $lang['tocPosition']                  = 'Позиция оглавления';
-$lang['tocLayout']                    = 'TOC layout';
+$lang['tocLayout']                    = 'Макет TOC';
 $lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
 $lang['useAnchorJS']                  = 'Использовать AnchorJS';
-$lang['useAvatar']                    = 'Load the avatar image from Gravatar, Libravatar, Microsoft Office365 or local DokuWiki <code>:user</code> namespace';
+$lang['useAvatar']                    = 'Загрузите изображение аватара из Gravatar, Libravatar, Microsoft Office365 или локального сервера DokuWiki <code>:user </code>namespace';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
 $lang['useAvatar_o_libravatar']       = 'Libravatar';
-$lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
-$lang['useAvatar_o_off']              = 'Off';
-$lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
-$lang['useAvatar_o_activedirectory']  = 'Active Directory';
+$lang['useAvatar_o_local']            = 'DokuWiki :user пространство имён';
+$lang['useAvatar_o_off']              = 'Выкл.';
+$lang['useAvatar_o_office365']        = 'Office365 (или EWS)';
 $lang['useGoogleAnalytics']           = 'Включить Google Analytics';
 $lang['useLegacyNavbar']              = 'Использовать устаревший хук <code>navbar.html</code> (вместо хука <code>:navbar</code>)';
 $lang['useLocalBootswatch']           = 'Использовать локальную директорию Bootswatch. Эта опция полезна для Dokuwiki используемая в интрасети';
