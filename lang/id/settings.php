@@ -119,7 +119,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
-$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Aktifkan Google Analytics';
 $lang['useLegacyNavbar']              = 'Gunakan hook <code>navbar.html</code> lawas dan usang (pertimbangkan dimasa depan untuk menggunakan hook <code>:navbar</code>)';
 $lang['useLocalBootswatch']           = 'Gunakan direktori Bootswatch lokal. Opsi ini berguna untuk pemasangan DokuWiki "Intranet"';
