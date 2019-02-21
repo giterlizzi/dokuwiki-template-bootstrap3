@@ -1,0 +1,126 @@
+<?php
+/**
+ * Arabic Language file for config
+ *
+ * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
+ * @author   Solaiman Karim
+ * @author   Abdulrahman Alamoudi
+ * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
+ */
+
+$lang['bootstrapTheme']               = 'Bootstrap theme';
+$lang['bootstrapTheme_o_bootswatch']  = 'Bootswatch.com theme';
+$lang['bootstrapTheme_o_custom']      = 'Customized Bootstrap theme';
+$lang['bootstrapTheme_o_default']     = 'Vanilla Bootstrap theme';
+$lang['bootstrapTheme_o_optional']    = 'Optional Bootstrap theme';
+$lang['bootswatchTheme']              = 'Select a theme from Bootswatch.com';
+$lang['browserTitle']                 = 'DokuWiki browser title (default is <code>@TITLE@ [@WIKI@]</code>, where <code>@TITLE@</code> placeholder replace the current page title and <code>@WIKI@</code> replace the DokuWiki name) - see <a class="interwiki iw_doku" href="#config___title">title</a> config';
+$lang['browserTitleCharSepNS']        = 'Character separator for every namespaces on browser title';
+$lang['browserTitleOrderNS']          = 'Set the order of namespaces';
+$lang['browserTitleShowNS']           = 'Display the previous page name of current page on the browser title';
+$lang['collapsibleSections']          = 'Collapse 2nd section level (useful in mobile/tablet devices)';
+$lang['cookieLawBannerPage']          = 'Cookie Law banner page name';
+$lang['cookieLawPolicyPage']          = 'Cookie Law policy page name';
+$lang['customTheme']                  = 'Insert URL of custom theme';
+$lang['discussionPage']               = 'Discussion page name (default is <code>discussion:@ID@</code>, where <code>@ID@</code> placeholder replace the current page name), empty field disable the link';
+$lang['domParserMaxPageSize']         = 'Set the max size of the page content for DOM Parser. The optimal and default value is <code>600000</code> (600KB)';
+$lang['fixedTopNavbar']               = 'Fix navbar to top';
+$lang['fluidContainer']               = 'Enable the fluid container (full-width of page)';
+$lang['fluidContainerBtn']            = 'Display a button in navbar to expand container';
+$lang['googleAnalyticsAnonymizeIP']   = 'Anonymize the IP address of visitors';
+$lang['googleAnalyticsNoTrackAdmin']  = 'تعطيل التتبع لمستخدمي الإدارة';
+$lang['googleAnalyticsNoTrackPages']  = 'تعطيل التتبع لصفحات معينة (أدخل تعبيرًا عاديًا)';
+$lang['googleAnalyticsNoTrackUsers']  = 'تعطيل التتبع لجميع المستخدمين المسجلين';
+$lang['googleAnalyticsTrackActions']  = 'تتبع إجراءات DokuWiki (تحرير ، بحث ، إلخ)';
+$lang['googleAnalyticsTrackID']       = 'Tracking ID';
+$lang['gravatarURL']                  = 'Set Gravatar URL <br/> <strong>NOTE:</strong> <br/> - <code>http://www.gravatar.com/avatar</code> (http) <br/> - <code>https://secure.gravatar.com/avatar</code> (https) <br/> - <code>https://www.gravatar.com/avatar</code> (alternative https)';
+$lang['hideInThemeSwitcher']          = 'Hide themes in theme switcher';
+$lang['hideLoginLink']                = 'إخفاء زر تسجيل الدخول في navbar. هذا الخيار مفيد في تثبيتات DokuWiki "للقراءة فقط" (على سبيل المثال ، مدونة ، موقع شخصي)';
+$lang['homePageURL']                  = 'استخدم عنوان URL مخصص لروابط الصفحة الرئيسية';
+$lang['individualTools']              = 'تقسيم الأدوات إلى قائمة فردية في navbar';
+$lang['inverseNavbar']                = 'عكس navbar';
+$lang['landingPages']                 = 'Landing page name (insert a regex)';
+$lang['leftSidebarGrid']              = 'Left sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
+$lang['libravatarURL']                = 'Set Libravatar (or compatible API) URL <br/> <strong>NOTE:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
+$lang['navbarLabels']                 = 'إظهار / إخفاء التصنيف فردي';
+$lang['office365URL']                 = 'Set Microsoft Office 365 (or EWS) URL <br/> <strong>NOTE:</strong> This service requires login, so this use case is most useful in a corporate installation, where all users have access to Office 365.';
+$lang['pageIcons']                    = 'حدد الرموز لعرضها';
+$lang['pageInfo']                     = 'عرض / إخفاء عناصر معلومات الصفحة';
+$lang['pageInfoDateFormat']           = 'صيغة التاريخ';
+$lang['pageInfoDateFormat_o_dformat'] = 'تصميم DokuWiki';
+$lang['pageInfoDateFormat_o_human']   = 'Human readable';
+$lang['pageOnPanel']                  = 'تمكين اللوحة حول الصفحة';
+$lang['pageToolsAnimation']           = 'تمكين الحركة لصفحة الأدوات';
+$lang['rightSidebar']                 = 'The Right Sidebar page name, empty field disables the right sidebar.<br/>The Right Sidebar is displayed only when the default DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">sidebar</a> is enabled and is on the <code>left</code> position (see the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration). If do you want only the DokuWiki sidebar on right position, set the <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> configuration with <code>right</code> value';
+$lang['rightSidebarGrid']             = 'Right sidebar grid classes <code>col-{xs,sm,md,lg}-x</code> (see <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a> documentation)';
+$lang['schemaOrgType']                = 'Schema.org type (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
+$lang['semantic']                     = 'تمكين البيانات الدلالية';
+$lang['showAddNewPage']               = 'Enable the Add New Page plugin in navbar  (require <em>Add New Page Plugin</em>)';
+$lang['showAddNewPage_o_always']      = 'دائما';
+$lang['showAddNewPage_o_logged']      = 'عند تسجيل الدخول';
+$lang['showAddNewPage_o_never']       = 'أبدا';
+$lang['showAdminMenu']                = 'عرض قائمة الإدارة';
+$lang['showBadges']                   = 'إظهار أزرار الشارات (DokuWiki ، تبرع ، إلخ)';
+$lang['showCookieLawBanner']          = 'Display the Cookie Law banner on footer';
+$lang['showDiscussion']               = 'عرض رابط المناقشة في قائمة الأدوات';
+$lang['showEditBtn']                  = 'زر تعديل العرض في navbar';
+$lang['showEditBtn_o_always']         = 'دائما';
+$lang['showEditBtn_o_logged']         = 'عند تسجيل الدخول';
+$lang['showEditBtn_o_never']          = 'أبدا';
+$lang['showHomePageLink']             = 'عرض رابط الصفحة الرئيسية في navbar';
+$lang['showIndividualTool']           = 'تمكين / تعطيل الأداة الفردية في navbar';
+$lang['showLandingPage']              = 'Enable the landing page (without a sidebar and the panel around the page)';
+$lang['showLoginOnFooter']            = 'Display a "little" login link on footer. This option is useful when <code>hideLoginLink</code> is on';
+$lang['showNavbar']                   = 'Display navbar hook';
+$lang['showNavbar_o_always']          = 'دائما';
+$lang['showNavbar_o_logged']          = 'عند تسجيل الدخول';
+$lang['showPageIcons']                = 'Display useful icons (print, share link, send mail, etc.) on page';
+$lang['showPageId']                   = 'Display the DokuWiki page name (pageId) on top';
+$lang['showPageInfo']                 = 'Show page info (e.g., date, author)';
+$lang['showPageTools']                = 'Enable the DokuWiki-style Page Tools';
+$lang['showPageTools_o_always']       = 'دائما';
+$lang['showPageTools_o_logged']       = 'عند تسجيل الدخول';
+$lang['showPageTools_o_never']        = 'أبدا';
+$lang['showPurgePageCache']           = 'Display the "Purge Cache Page" button in Page Tools';
+$lang['showPurgePageCache_o_always']  = 'دائما';
+$lang['showPurgePageCache_o_logged']  = 'عند تسجيل الدخول';
+$lang['showPurgePageCache_o_never']   = 'أبدا';
+$lang['showSearchForm']               = 'Display Search form in navbar';
+$lang['showSearchForm_o_always']      = 'دائما';
+$lang['showSearchForm_o_logged']      = 'عند تسجيل الدخول';
+$lang['showSearchForm_o_never']       = 'أبدا';
+$lang['showSemanticPopup']            = 'Display a popup with an extract of the page when the user hover on wikilink (require <em>Semantic Plugin</em>)';
+$lang['showThemeSwitcher']            = 'Show Bootswatch.com theme switcher in navbar';
+$lang['showTools']                    = 'Display Tools in navbar';
+$lang['showTools_o_always']           = 'دائما';
+$lang['showTools_o_logged']           = 'عند تسجيل الدخول';
+$lang['showTools_o_never']            = 'أبدا';
+$lang['showTranslation']              = 'Display translation toolbar (require <em>Translation Plugin</em>)';
+$lang['showUserHomeLink']             = 'Display User Home-Page link in navbar';
+$lang['showWikiInfo']                 = 'Display DokuWiki <a class="interwiki iw_doku" href="#config___title">name</a>, logo and <a class="interwiki iw_doku" href="#config___tagline">tagline</a> on footer';
+$lang['sidebarOnNavbar']              = 'Display the sidebar contents inside the navbar (useful on mobile/tablet devices)';
+$lang['sidebarPosition']              = 'DokuWiki Sidebar position (<code>left</code> or <code>right</code>)';
+$lang['sidebarShowPageTitle']         = 'Display Sidebar page title';
+$lang['socialShareProviders']         = 'حدد روابط المشاركة الاجتماعية لعرضها';
+$lang['tableFullWidth']               = 'Enable 100% full table width (Bootstrap default)';
+$lang['tableStyle']                   = 'نمط الجدول';
+$lang['tagsOnTop']                    = 'Move all Tags on top of the page, beside the page-id (require <em>Tag Plugin</em>)';
+$lang['themeByNamespace']             = 'Use a namespaced theme';
+$lang['tocAffix']                     = 'Affix the TOC during page scrolling';
+$lang['tocCollapseOnScroll']          = 'Collapse TOC during page scrolling';
+$lang['tocCollapseSubSections']       = 'Collapse all sub-sections in TOC to save space';
+$lang['tocCollapsed']                 = 'Collapse TOC on every pages';
+$lang['tocPosition']                  = 'TOC position';
+$lang['tocLayout']                    = 'TOC layout';
+$lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
+$lang['useAnchorJS']                  = 'Use AnchorJS';
+$lang['useAvatar']                    = 'Load the avatar image from Gravatar, Libravatar, Microsoft Office365 or local DokuWiki <code>:user</code> namespace';
+$lang['useAvatar_o_gravatar']         = 'Gravatar';
+$lang['useAvatar_o_libravatar']       = 'Libravatar';
+$lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
+$lang['useAvatar_o_off']              = 'إيقاف';
+$lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useGoogleAnalytics']           = 'تمكين Google Analytics';
+$lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
+$lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
+
