@@ -120,7 +120,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
-$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Habilitar Google Analytics';
 $lang['useLegacyNavbar']              = 'Usar el gancho <code>navbar.html</code> anterior y en desuso (considera usar el gancho <code>:navbar</code> en el futuro).';
 $lang['useLocalBootswatch']           = 'Usar el directorio Bootswatch local. Esta opción es útil en instalaciones locales de ';
