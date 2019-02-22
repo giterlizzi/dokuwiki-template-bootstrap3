@@ -13,6 +13,8 @@
   * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
   * #354: Added workaround for ToDo Plugin for checked elements (thanks to @nurzu)
   * #371 PR: Fixed incompatibility with SimpleNavi Plugin and Greebo DokuWiki release (thanks to @CornHead764)
+  * #397, #400, #404, #405: Fixed Regex syntax for PHP Simple HTML DOM (thanks to @Kyushin for patch and other issue reporters)
+  * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
 
 
 ## [v2018-02-16]
