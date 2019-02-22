@@ -44,14 +44,14 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       tpl_includeFile('topheader.html');
 
       // Top-Header DokuWiki page
-      if ($ACT == 'show') tpl_include_page('topheader', 1, 1, bootstrap3_conf('useACL'));
+      if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('topheader', 0, 1, bootstrap3_conf('useACL')));
 
       require_once('tpl_navbar.php');
 
       tpl_includeFile('header.html');
 
       // Header DokuWiki page
-      if ($ACT == 'show') tpl_include_page('header', 1, 1, bootstrap3_conf('useACL'));
+      if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('header', 0, 1, bootstrap3_conf('useACL')));
 
     ?>
   </header>

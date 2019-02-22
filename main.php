@@ -38,14 +38,14 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       tpl_includeFile('topheader.html');
 
       // Top-Header DokuWiki page
-      if ($ACT == 'show') tpl_include_page('topheader', 1, 1, bootstrap3_conf('useACL'));
+      if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('topheader', 0, 1, bootstrap3_conf('useACL')));
 
       require_once('tpl_navbar.php');
 
       tpl_includeFile('header.html');
 
       // Header DokuWiki page
-      if ($ACT == 'show') tpl_include_page('header', 1, 1, bootstrap3_conf('useACL'));
+      if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('header', 0, 1, bootstrap3_conf('useACL')));
 
     ?>
   </header>
@@ -90,7 +90,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               tpl_includeFile('pageheader.html');
 
               // Page-Header DokuWiki page
-              if ($ACT == 'show') tpl_include_page('pageheader', 1, 1, bootstrap3_conf('useACL'));
+              if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('pageheader', 0, 1, bootstrap3_conf('useACL')));
 
               // render the content into buffer for later use
               ob_start();
@@ -119,7 +119,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
               tpl_includeFile('pagefooter.html');
 
               // Page-Footer DokuWiki page
-              if ($ACT == 'show') tpl_include_page('pagefooter', 1, 1, bootstrap3_conf('useACL'));
+              if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('pagefooter', 0, 1, bootstrap3_conf('useACL')));
 
             ?>
 
