@@ -683,17 +683,18 @@ function bootstrap3_searchform() {
     global $lang;
     global $ACT;
     global $QUERY;
+    global $ID;
 
     // don't print the search form if search action has been disabled
     if (! actionOK('search')) return false;
 
     if (! bootstrap3_conf('showSearchForm')) return false;
 
-    print '<form action="'.wl().'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
+    print '<form action="'.wl($ID).'" accept-charset="utf-8" class="navbar-form navbar-left search" id="dw__search" method="get" role="search"><div class="no">';
 
     print '<input ';
     if ($ACT == 'search') print 'value="'.htmlspecialchars($QUERY).'" ';
-    print 'id="qsearch" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="id" class="form-control" title="[F]" />';
+    print 'id="qsearch" autocomplete="off" type="search" placeholder="'.$lang['btn_search'].'" accesskey="f" name="q" class="form-control" title="[F]" />';
 
     print '<button type="submit" title="'.$lang['btn_search'].'"><i class="fa fa-fw fa-search"></i></button>';
 
