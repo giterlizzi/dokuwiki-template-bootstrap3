@@ -3,7 +3,8 @@
 	font-style: normal;
 	font-weight: 400;
 	src:
-		local('Ubuntu'),
+		local('Ubuntu Regular'),
+		local('Ubuntu-Regular'),
 		url('Ubuntu_400.eot?#iefix') format('embedded-opentype'),
 		url('Ubuntu_400.woff') format('woff'),
 		url('Ubuntu_400.woff2') format('woff2'),
