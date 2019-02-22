@@ -3,8 +3,8 @@
 	font-style: normal;
 	font-weight: 400;
 	src:
-		local('Open Sans'),
-		local('OpenSans'),
+		local('Open Sans Regular'),
+		local('OpenSans-Regular'),
 		url('Open_Sans_400.eot?#iefix') format('embedded-opentype'),
 		url('Open_Sans_400.woff') format('woff'),
 		url('Open_Sans_400.woff2') format('woff2'),

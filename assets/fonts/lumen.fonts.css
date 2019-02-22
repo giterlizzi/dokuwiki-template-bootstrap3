@@ -14,7 +14,7 @@
 	font-style: normal;
 	font-weight: 400;
 	src:
-		local('Source Sans Pro'),
+		local('Source Sans Pro Regular'),
 		local('SourceSansPro-Regular'),
 		url('Source_Sans_Pro_400.eot?#iefix') format('embedded-opentype'),
 		url('Source_Sans_Pro_400.woff') format('woff'),
@@ -37,7 +37,7 @@
 	font-weight: 400;
 	src:
 		local('Source Sans Pro Italic'),
-		local('SourceSansPro-It'),
+		local('SourceSansPro-Italic'),
 		url('Source_Sans_Pro_400italic.eot?#iefix') format('embedded-opentype'),
 		url('Source_Sans_Pro_400italic.woff') format('woff'),
 		url('Source_Sans_Pro_400italic.woff2') format('woff2'),
