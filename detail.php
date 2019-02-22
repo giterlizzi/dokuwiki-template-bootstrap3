@@ -10,8 +10,8 @@
  */
 
 if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
-@require_once(dirname(__FILE__).'/tpl_functions.php');  // include hook for template functions
-include_once(dirname(__FILE__).'/tpl_global.php');      // Include template global variables
+@require_once(dirname(__FILE__).'/tpl/functions.php');  // include hook for template functions
+include_once(dirname(__FILE__).'/tpl/global.php');      // Include template global variables
 header('X-UA-Compatible: IE=edge,chrome=1');
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo $conf['lang']?>"
@@ -46,7 +46,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       // Top-Header DokuWiki page
       if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('topheader', 0, 1, bootstrap3_conf('useACL')));
 
-      require_once('tpl_navbar.php');
+      require_once('tpl/navbar.php');
 
       tpl_includeFile('header.html');
 
@@ -62,7 +62,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
       <?php tpl_includeFile('social.html') ?>
 
-      <?php require_once('tpl_breadcrumbs.php'); ?>
+      <?php require_once('tpl/breadcrumbs.php'); ?>
 
       <p class="pageId text-right small">
         <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
@@ -79,7 +79,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>">
         <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
 
-          <?php require_once('tpl_page_icons.php'); ?>
+          <?php require_once('tpl/page_icons.php'); ?>
 
           <?php if ($ERROR): print $ERROR; ?>
           <?php else: ?>
@@ -191,10 +191,10 @@ header('X-UA-Compatible: IE=edge,chrome=1');
       tpl_includeFile('footer.html');
 
       // Footer DokuWiki page
-      require_once('tpl_footer.php');
+      require_once('tpl/footer.php');
 
       // Cookie-Law banner
-      require_once('tpl_cookielaw.php');
+      require_once('tpl/cookielaw.php');
     ?>
 
     <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>

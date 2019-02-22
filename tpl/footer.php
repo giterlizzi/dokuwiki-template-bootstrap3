@@ -71,7 +71,7 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
 
         <div class="col-sm-6">
           <?php if ($badges_is_enabled): ?>
-          <?php require_once('tpl_badges.php'); ?>
+          <?php require_once('badges.php'); ?>
           <?php endif; ?>
         </div>
 

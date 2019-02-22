@@ -14,7 +14,7 @@ if ($pagesize = bootstrap3_conf('domParserMaxPageSize')) {
   define('MAX_FILE_SIZE', $pagesize);
 }
 
-include_once(dirname(__FILE__) . '/inc/simple_html_dom.php');
+include_once(dirname(__FILE__) . '/../inc/simple_html_dom.php');
 
 /**
  * copied from core (available since Detritus)
@@ -286,7 +286,7 @@ function bootstrap3_toolsevent($toolsname, $items, $view='main', $return = false
  */
 function bootstrap3_sidebar_wrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer) {
   global $lang;
-  @require('tpl_sidebar.php');
+  @require('sidebar.php');
 }
 
 
@@ -2385,7 +2385,7 @@ function bootstrap3_content($content) {
 
       # DokuWiki logo
       if ($admin_version = $html->getElementById('admin__version')) {
-        $admin_version->innertext = '<img src="'. DOKU_BASE .'lib/tpl/dokuwiki/images/logo.png" class="pull-left" /> ' . $admin_version->innertext;
+        $admin_version->innertext = '<img src="'. DOKU_BASE .'lib/dokuwiki/images/logo.png" class="pull-left" /> ' . $admin_version->innertext;
       }
 
     }

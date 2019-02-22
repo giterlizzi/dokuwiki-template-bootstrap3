@@ -68,7 +68,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
       <?php echo bootstrap3_navbar() // Include the navbar for different namespaces ?>
       <?php echo bootstrap3_dropdown_page('dropdownpage') ?>
 
-      <?php if(file_exists(dirname(__FILE__) . '/navbar.html') && bootstrap3_conf('useLegacyNavbar')): ?>
+      <?php if(file_exists(dirname(__FILE__) . '/../navbar.html') && bootstrap3_conf('useLegacyNavbar')): ?>
       <ul class="nav navbar-nav">
         <?php tpl_includeFile('navbar.html') ?>
       </ul>
@@ -80,19 +80,19 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
 
         <?php
           // Admin Menu
-          include_once(dirname(__FILE__).'/tpl_admin.php');
+          include_once(dirname(__FILE__).'/admin.php');
 
           // Tools Menu
-          include_once(dirname(__FILE__).'/tpl_tools_menu.php');
+          include_once(dirname(__FILE__).'/tools_menu.php');
 
           // Theme Switcher Menu
-          include_once(dirname(__FILE__).'/tpl_theme_switcher.php');
+          include_once(dirname(__FILE__).'/theme_switcher.php');
 
           // Translation Menu
-          include_once(dirname(__FILE__).'/tpl_translation.php');
+          include_once(dirname(__FILE__).'/translation.php');
 
           // Add New Page
-          include_once(dirname(__FILE__).'/tpl_new_page.php');
+          include_once(dirname(__FILE__).'/new_page.php');
         ?>
 
         <ul class="nav navbar-nav">
@@ -147,7 +147,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
         </ul>
         <?php endif; ?>
 
-        <?php include_once(dirname(__FILE__).'/tpl_user_menu.php'); ?>
+        <?php include_once(dirname(__FILE__).'/user_menu.php'); ?>
 
 
       </div>

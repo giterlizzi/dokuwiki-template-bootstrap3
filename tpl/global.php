@@ -18,7 +18,7 @@ global $EVENT_HANDLER;
 
 // Get the template info (useful for debug)
 if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
-  $template_info = confToHash(dirname(__FILE__).'/template.info.txt');
+  $template_info = confToHash(dirname(__FILE__).'/../template.info.txt');
   msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
 }
 
