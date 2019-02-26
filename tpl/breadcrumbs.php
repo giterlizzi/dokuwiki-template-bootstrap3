@@ -16,21 +16,21 @@ global $conf;
 <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
 <nav id="dw__breadcrumbs" class="small">
 
-  <hr/>
+    <hr/>
 
-  <?php if($conf['youarehere']): ?>
-  <div class="dw__youarehere">
-    <?php bootstrap3_youarehere()?>
-  </div>
-  <?php endif; ?>
+    <?php if($conf['youarehere']): ?>
+    <div class="dw__youarehere">
+        <?php bootstrap3_youarehere()?>
+    </div>
+    <?php endif; ?>
 
-  <?php if($conf['breadcrumbs']): ?>
-  <div class="dw__breadcrumbs hidden-print">
-    <?php bootstrap3_breadcrumbs() ?>
-  </div>
-  <?php endif; ?>
+    <?php if($conf['breadcrumbs']): ?>
+    <div class="dw__breadcrumbs hidden-print">
+        <?php bootstrap3_breadcrumbs() ?>
+    </div>
+    <?php endif; ?>
 
-  <hr/>
+    <hr/>
 
 </nav>
 <?php endif ?>
