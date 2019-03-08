@@ -503,7 +503,7 @@ function bootstrap3_sidebar($sidebar, $return = false) {
   $out = bootstrap3_content($out);
 
   $html = new simple_html_dom;
-  $html->load($out);
+  $html->load($out, true /* $lowercase */, false /* $stripRN */);
 
   # TODO 'page-header' will be removed in the next release of Bootstrap
   foreach ($html->find('h1, h2, h3, h4, h5, h6') as $elm) {
@@ -1844,7 +1844,8 @@ function bootstrap3_content($content) {
   $content = str_replace('checked="checked"', ' checked="checked"', $content);
 
   # Import HTML string
-  $html = str_get_html($content);
+  $html = new simple_html_dom;
+  $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
   # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
   if (! $html) return $content;
@@ -2043,7 +2044,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'search') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     foreach ($html->find('.search_results dt') as $elm) {
 
@@ -2067,7 +2069,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'profile' || $ACT == 'register') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
 
     foreach ($html->find('#dw__register') as $elm) {
@@ -2108,7 +2111,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'index') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     foreach ($html->find('.idx_dir') as $idx => $elm) {
 
@@ -2140,7 +2144,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'admin') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     // Set specific icon in Admin Page
     if ($INPUT->str('page')) {
@@ -2436,7 +2441,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'edit' || $ACT == 'preview' || $ACT == 'draft') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     foreach ($html->find('[name=do[save]], [name=do[recover]]') as $elm) {
 
@@ -2481,7 +2487,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'revisions' || $ACT == 'recent') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     foreach ($html->find('.sizechange') as $elm) {
 
@@ -2512,7 +2519,8 @@ function bootstrap3_content($content) {
   if ($ACT == 'diff') {
 
     # Import HTML string
-    $html = str_get_html($content);
+    $html = new simple_html_dom;
+    $html->load($content, true /* $lowercase */, false /* $stripRN */);
 
     foreach ($html->find('.diff-deletedline') as $elm) {
       $elm->class .= ' bg-danger';
