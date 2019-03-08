@@ -6,6 +6,13 @@
   * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
   * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
 
+### Changed
+  * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
+  * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
+
+### Removed
+  * Removed "Purge cache" button in Page Tools 
+
 ### Fixed
   * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
   * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
