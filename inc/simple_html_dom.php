@@ -1835,6 +1835,8 @@ class simple_html_dom
 		'tr' => array('td' => 1, 'th' => 1, 'tr' => 1),
 	);
 
+	protected $strip_rn = true;
+
 	function __construct(
 		$str = null,
 		$lowercase = true,
@@ -1901,6 +1903,8 @@ class simple_html_dom
 			// set the length of content since we have changed it.
 			$this->size = strlen($this->doc);
 		}
+
+		$this->strip_rn = $stripRN;
 
 		// strip out cdata
 		$this->remove_noise("'<!\[CDATA\[(.*?)\]\]>'is", true);
@@ -2507,8 +2511,11 @@ class simple_html_dom
 		}
 		// PaperG: Attributes should not have \r or \n in them, that counts as
 		// html whitespace.
-		$node->attr[$name] = str_replace("\r", '', $node->attr[$name]);
-		$node->attr[$name] = str_replace("\n", '', $node->attr[$name]);
+		// LotarProject: FIX for DokuWiki, preserve \r and \n for editor
+		if ($this->strip_rn) {
+			$node->attr[$name] = str_replace("\r", '', $node->attr[$name]);
+			$node->attr[$name] = str_replace("\n", '', $node->attr[$name]);
+		}
 		// PaperG: If this is a "class" selector, lets get rid of the preceeding
 		// and trailing space since some people leave it in the multi class case.
 		if ($name === 'class') {
