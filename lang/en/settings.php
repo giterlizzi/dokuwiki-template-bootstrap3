@@ -79,10 +79,6 @@ $lang['showPageTools']                = 'Enable the DokuWiki-style Page Tools';
 $lang['showPageTools_o_always']       = 'Always';
 $lang['showPageTools_o_logged']       = 'When logged in';
 $lang['showPageTools_o_never']        = 'Never';
-$lang['showPurgePageCache']           = 'Display the "Purge Cache Page" button in Page Tools';
-$lang['showPurgePageCache_o_always']  = 'Always';
-$lang['showPurgePageCache_o_logged']  = 'When logged in';
-$lang['showPurgePageCache_o_never']   = 'Never';
 $lang['showSearchForm']               = 'Display Search form in navbar';
 $lang['showSearchForm_o_always']      = 'Always';
 $lang['showSearchForm_o_logged']      = 'When logged in';
@@ -122,4 +118,3 @@ $lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
 $lang['useLocalBootswatch']           = 'Use the local Bootswatch directory. This option is useful in "intranet" DokuWiki installation';
-
