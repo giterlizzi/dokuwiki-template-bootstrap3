@@ -18,7 +18,7 @@ if (bootstrap3_conf('sidebarShowPageTitle')) {
 }
 
 ?>
-<!-- ********** ASIDE ********** -->
+<!-- sidebar -->
 <aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">
     <div class="dw-sidebar-content">
         <div class="dw-sidebar-title hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .dw-sidebar-body">
@@ -33,3 +33,4 @@ if (bootstrap3_conf('sidebarShowPageTitle')) {
         </div>
     </div>
 </aside>
+<!-- /sidebar -->

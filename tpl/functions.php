@@ -125,27 +125,12 @@ function bootstrap3_action($type, $icon = '', $wrapper = false, $return = false)
 
     $output = '';
 
-    $custom_actions = array('purge', 'discussion');
+    $custom_actions = array('discussion');
 
     if (in_array($type, $custom_actions)) {
 
         if ($wrapper) {
             $output .= "<$wrapper>";
-        }
-
-        if ($type == 'purge') {
-
-            $link  = wl($ID, array('purge' => 'true'));
-            $title = tpl_getLang('purge_cache_page');
-
-            $output .= sprintf('<a href="%s" class="action %s%s" title="%s">%s%s</a>',
-                $link,
-                $type,
-                (($ACT == $type) ? ' active' : ''),
-                $title,
-                (($icon) ? "<i class='$icon'></i> " : ''),
-                $title);
-
         }
 
         if ($type == 'discussion') {
@@ -377,16 +362,6 @@ function bootstrap3_action_item($action, $icon = null, $return = false)
 
     global $ACT;
     global $ID;
-
-    if ($action == 'purge') {
-
-        if (bootstrap3_conf('showPurgePageCache')) {
-            return bootstrap3_action('purge', $icon, 'li', true);
-        }
-
-        return '';
-
-    }
 
     if ($action == 'discussion') {
 
@@ -858,7 +833,6 @@ function bootstrap3_tools($add_icons = true)
         'icon'    => 'fa fa-fw fa-file',
         'actions' => array(
             'edit'       => array('icon' => 'fa fa-fw fa-' . (($ACT == 'edit') ? 'file-text-o' : 'pencil-square-o')),
-            'purge'      => array('icon' => 'fa fa-fw fa-eraser'),
             'discussion' => array('icon' => 'fa fa-fw fa-comments'),
             'revert'     => array('icon' => 'fa fa-fw fa-repeat'),
             'revisions'  => array('icon' => 'fa fa-fw fa-clock-o'),
@@ -1078,7 +1052,6 @@ function bootstrap3_conf($key, $default = false)
         case 'showPageTools':
         case 'showEditBtn':
         case 'showAddNewPage':
-        case 'showPurgePageCache':
             return $value !== 'never' && ($value == 'always' || !empty($_SERVER['REMOTE_USER']));
 
         case 'showAdminMenu':

@@ -19,6 +19,7 @@ $navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'n
 $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
 
 ?>
+<!-- navbar -->
 <nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
     <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid' : '') ?>">
@@ -160,3 +161,4 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
         </div>
     </div>
 </nav>
+<!-- navbar -->

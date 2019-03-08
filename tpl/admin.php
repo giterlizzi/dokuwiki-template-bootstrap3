@@ -24,6 +24,7 @@ $admin = array(
 );
 
 ?>
+<!-- admin -->
 <ul class="nav navbar-nav" id="dw__admin">
     <li class="dropdown dropdown-large">
 
@@ -69,4 +70,5 @@ $admin = array(
         </ul>
     </li>
 </ul>
+<!-- /admin -->
 <?php endif; ?>

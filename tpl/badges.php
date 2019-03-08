@@ -13,6 +13,7 @@ if (!defined('DOKU_INC')) die();
 global $conf;
 
 if (bootstrap3_conf('showBadges')): ?>
+<!-- badges -->
 <ul id="dw__badges" class="list-inline text-right hidden-print">
 
     <li>
@@ -46,4 +47,5 @@ if (bootstrap3_conf('showBadges')): ?>
     </li>
 
 </ul>
+<!-- /badges -->
 <?php endif; ?>

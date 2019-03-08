@@ -107,11 +107,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         if ($toc) echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
 
-                        echo '<!-- CONTENT -->';
+                        echo '<!-- content -->';
                         echo '<div class="dw-content">';
                         echo bootstrap3_content($content);
                         echo '</div>';
-                        echo '<!-- /CONTENT -->';
+                        echo '<!-- /content -->';
                         echo '</div>';
 
                         tpl_flush();

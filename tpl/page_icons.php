@@ -32,6 +32,7 @@ if (in_array('help', $page_icons)) {
 }
 
 ?>
+<!-- page-icons -->
 <div class="dw-page-icons pull-right hidden-print">
 
     <ul class="list-inline pull-right">
@@ -121,5 +122,6 @@ if (in_array('help', $page_icons)) {
     <?php endif; ?>
 
 </div>
+<!-- /page-icons -->
 <span class="clearfix"></span>
 <?php endif; ?>

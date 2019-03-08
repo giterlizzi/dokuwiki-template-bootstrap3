@@ -28,6 +28,7 @@ if ($use_avatar) {
 }
 
 ?>
+<!-- user-menu -->
 <ul class="nav navbar-nav" id="dw__user_menu">
     <li class="dropdown">
 
@@ -121,4 +122,5 @@ if ($use_avatar) {
         </ul>
     </li>
 </ul>
+<!-- /user-menu -->
 <?php endif; ?>

@@ -14,6 +14,7 @@ global $conf;
 
 ?>
 <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
+<!-- breadcrumbs -->
 <nav id="dw__breadcrumbs" class="small">
 
     <hr/>
@@ -33,4 +34,5 @@ global $conf;
     <hr/>
 
 </nav>
+<!-- /breadcrumbs -->
 <?php endif ?>

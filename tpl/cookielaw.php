@@ -18,7 +18,7 @@ $cookie_banner_page_id = bootstrap3_conf('cookieLawBannerPage');
 resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
 
 ?>
-<!-- COOKIE LAW -->
+<!-- cookie-law -->
 <div id="cookieNotice" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-text navbar-left">
@@ -43,5 +43,5 @@ resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
         jQuery(document).trigger('bootstrap3:cookie-law');
     });
 </script>
-<!-- /COOKIE LAW -->
+<!-- /cookie-law -->
 <?php endif; ?>
