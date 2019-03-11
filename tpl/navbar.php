@@ -22,7 +22,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
 <!-- navbar -->
 <nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
-    <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid' : '') ?>">
+    <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid mx-5' : '') ?>">
 
         <div class="navbar-header">
 

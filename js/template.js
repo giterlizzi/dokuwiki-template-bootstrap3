@@ -203,7 +203,7 @@ jQuery(document).on('bootstrap3:fluid-container', function(event) {
 
   jQuery('.btn-fluid-container').on('click', function() {
 
-    var selectors = 'body > div, header, header nav > div, article, footer > div';
+    var selectors = 'body > div, header, header nav > div, footer > div';
 
     if (! jQuery('.navbar-fixed-top').length) {
       selectors = 'body > div, header, article, footer > div';
@@ -216,7 +216,7 @@ jQuery(document).on('bootstrap3:fluid-container', function(event) {
 
       $containers
         .removeClass('container')
-        .addClass('container-fluid');
+        .addClass('container-fluid mx-5');
       $button.parent().addClass('active');
 
       DokuCookie.setValue('fluidContainer', 1);
@@ -224,7 +224,7 @@ jQuery(document).on('bootstrap3:fluid-container', function(event) {
     } else {
 
       $containers
-        .removeClass('container-fluid')
+        .removeClass('container-fluid mx-5')
         .addClass('container');
       $button.parent().removeClass('active');
 
