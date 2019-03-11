@@ -28,7 +28,7 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
 <?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <!-- footer -->
 <footer id="dw__footer" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
-    <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
 
         <div class="small navbar-text">
 

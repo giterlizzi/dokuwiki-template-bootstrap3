@@ -27,6 +27,19 @@ if ($use_avatar) {
     $avatar_img = tpl_getMediaFile(array('images/avatar.png'));
 }
 
+$label_type = 'info';
+$user_type  = 'User';
+
+if ($INFO['ismanager']) {
+    $label_type = 'warning';
+    $user_type  = 'Manager';
+}
+
+if ($INFO['isadmin']) {
+    $label_type = 'danger';
+    $user_type  = 'Admin';
+}
+
 ?>
 <!-- user-menu -->
 <ul class="nav navbar-nav" id="dw__user_menu">
@@ -47,24 +60,9 @@ if ($use_avatar) {
                 <div class="container-fluid">
 
                     <p class="text-right">
-                        <?php
-
-                        $label_type = 'info';
-                        $user_type  = 'User';
-
-                        if ($INFO['ismanager']) {
-                            $label_type = 'warning';
-                            $user_type  = 'Manager';
-                        }
-
-                        if ($INFO['isadmin']) {
-                            $label_type = 'danger';
-                            $user_type  = 'Admin';
-                        }
-
-                        echo '<span style="cursor:help" class="label label-' . $label_type . '" title="Groups: '. join(', ', $INFO['userinfo']['grps']) .'">' . $user_type . '</span>';
-
-                        ?>
+                        <span style="cursor:help" class="label label-<?php echo $label_type; ?>" title="Groups: <?php echo join(', ', $INFO['userinfo']['grps']); ?>">
+                            <?php echo $user_type; ?>
+                        </span>
                     </p>
 
                     <p class="text-center">
@@ -116,6 +114,51 @@ if ($use_avatar) {
             <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
 
             <li class="divider"></li>
+
+            <?php
+
+                // Add the user menu
+
+                $page = null;
+
+                $interwiki = getInterwiki();
+                $user_url  = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
+
+                foreach (array("$user_url:usermenu", 'usermenu') as $page_id) {
+                    $page = page_findnearest($page_id, bootstrap3_conf('useACL'));
+                    if ($page) break;
+                }
+
+                if ($page) {
+
+                    $html = new simple_html_dom;
+                    $html->load(bootstrap3_lists(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL'))), true, false);
+
+                    foreach ($html->find('h1,h2,h3,h4,h5,h6') as $elm) {
+                        $elm->outertext = '<li class="dropdown-header">' . $elm->innertext . '</li>';
+                    }
+                    foreach ($html->find('hr') as $elm) {
+                        $elm->outertext = '<li class="divider"></li>';
+                    }
+                    foreach ($html->find('ul') as $elm) {
+                        $elm->outertext = '' . $elm->innertext;
+                    }
+                    foreach ($html->find('div') as $elm) {
+                        $elm->outertext = $elm->innertext;
+                    }
+
+                    $content = $html->save();
+
+                    $html->clear();
+                    unset($html);
+
+                    $content = str_replace('urlextern', '', $content);
+
+                    echo $content;
+                    echo '<li class="divider"></li>';
+
+                }
+            ?>
 
             <?php echo bootstrap3_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
 

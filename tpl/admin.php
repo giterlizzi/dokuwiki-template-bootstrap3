@@ -55,10 +55,10 @@ $admin = array(
 
                             if (! $label) continue;
 
-                            echo sprintf('<li class="%s"><a href="%s" title="%s" class="admin %s">%s</a></li>',
-                                        (($INPUT->str('page') == $item) ? 'active' : ''),
-                                        wl($ID, array('do' => 'admin', 'page' => $item)),
-                                        $label, $item, $label);
+                            echo '<li class="' . (($INPUT->str('page') == $item) ? 'active' : '') . '">' .
+                                 '<a href="'. wl($ID, array('do' => 'admin', 'page' => $item)) .'" title="'. $label .'" class="admin '. $item .'">' .
+                                 $label .
+                                 '</a></li>';
 
                         }
 

@@ -33,7 +33,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <?php tpl_flush() ?>
 <body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
 
-    <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
     <?php
 
         tpl_includeFile('topheader.html');
@@ -51,7 +51,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     ?>
     </header>
 
-    <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid' : '' ?>">
+    <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
