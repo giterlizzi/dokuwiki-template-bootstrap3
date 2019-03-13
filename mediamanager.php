@@ -9,8 +9,8 @@
  */
 
 if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
-@require_once(dirname(__FILE__).'/tpl_functions.php');  // include hook for template functions
-include_once(dirname(__FILE__).'/tpl_global.php');      // Include template global variables
+@require_once(dirname(__FILE__).'/tpl/functions.php');  // include hook for template functions
+include_once(dirname(__FILE__).'/tpl/global.php');      // Include template global variables
 header('X-UA-Compatible: IE=edge,chrome=1');
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">
