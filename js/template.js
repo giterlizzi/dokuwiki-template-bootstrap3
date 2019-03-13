@@ -670,7 +670,7 @@ jQuery(document).on('bootstrap3:dropdown-page', function() {
 jQuery(document).on('bootstrap3:cookie-law', function() {
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
-    DokuCookie.setValue('cookieNoticeAccepted', true);
+    DokuCookie.setValue('cookieNoticeAccepted', 1);
   });
 });
 

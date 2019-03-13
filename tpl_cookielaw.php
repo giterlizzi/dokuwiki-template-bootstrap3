@@ -10,7 +10,7 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if ( bootstrap3_conf('showCookieLawBanner') && ! (get_doku_pref('cookieNoticeAccepted', null) || get_doku_pref('cookieNoticeAccepted', '')) ):
+if ( bootstrap3_conf('showCookieLawBanner') && !get_doku_pref('cookieNoticeAccepted', null) ):
 
 $cookie_policy_page_id = bootstrap3_conf('cookieLawPolicyPage');
 $cookie_banner_page_id = bootstrap3_conf('cookieLawBannerPage');
