@@ -7,23 +7,31 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
-@require_once(dirname(__FILE__).'/tpl/functions.php');  // include hook for template functions
-include_once(dirname(__FILE__).'/tpl/global.php');      // Include template global variables
+if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
+
+require_once(template('Template.php'));
+
+global $TEMPLATE;
+
+$TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
+
+require_once(template('tpl/global.php'));
+require_once(template('tpl/functions.php'));
+
 header('X-UA-Compatible: IE=edge,chrome=1');
+
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title><?php echo bootstrap3_page_browser_title() ?></title>
+    <title><?php echo $TEMPLATE->getBrowserPageTitle() ?></title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php
         echo tpl_favicon(array('favicon', 'mobile'));
         tpl_includeFile('meta.html');
         tpl_metaheaders();
-        bootstrap3_google_analytics();
     ?>
     <!--[if lt IE 9]>
     <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -31,59 +39,69 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo bootstrap3_classes() ?>" data-page-id="<?php echo $ID ?>">
+<body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>">
 
-    <header id="dokuwiki__header" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
+    <header id="dokuwiki__header" class="dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
     <?php
 
         tpl_includeFile('topheader.html');
 
         // Top-Header DokuWiki page
-        if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('topheader', 0, 1, bootstrap3_conf('useACL')));
+        if ($ACT == 'show') $TEMPLATE->includePage('topheader');
 
         require_once('tpl/navbar.php');
 
         tpl_includeFile('header.html');
 
         // Header DokuWiki page
-        if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('header', 0, 1, bootstrap3_conf('useACL')));
+        if ($ACT == 'show') $TEMPLATE->includePage('header');
 
     ?>
     </header>
 
-    <div id="dokuwiki__top" class="dokuwiki container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
+    <div id="dokuwiki__top" class="dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
             <?php tpl_includeFile('social.html') ?>
 
-            <?php require_once('tpl/breadcrumbs.php'); ?>
+            <?php require_once(template('tpl/breadcrumbs.php')); ?>
 
-            <p class="pageId text-right small">
-                <?php if(bootstrap3_conf('showPageId')): ?><span class="label label-primary"><?php echo hsc($ID) ?></span><?php endif; ?>
+            <p class="pageId text-right">
+                <?php
+
+                    if ($TEMPLATE->getConf('tagsOnTop') && $tag = $TEMPLATE->getPlugin('tag')) {
+                        echo implode('', array_map('trim', explode(',', $tag->td($ID))));
+                    }
+
+                    if ($TEMPLATE->getConf('showPageId')) {
+                        echo '<span class="ml-1 label label-primary">'. hsc($ID) .'</span>';
+                    }
+
+                ?>
             </p>
 
             <div id="dw__msgarea" class="small">
-                <?php bootstrap3_html_msgarea() ?>
+                <?php $TEMPLATE->getMessageArea() ?>
             </div>
 
         </div>
 
         <main class="main row" role="main">
 
-            <?php bootstrap3_sidebar_include('left'); // Left Sidebar ?>
+            <?php $TEMPLATE->includeSidebar('left'); // Left Sidebar ?>
 
-            <article id="dokuwiki__content" class="<?php echo bootstrap3_container_grid() ?>" <?php echo ((bootstrap3_conf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', bootstrap3_conf('schemaOrgType')) : '') ?>>
+            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', $TEMPLATE->getConf('schemaOrgType')) : '') ?>>
 
-                <?php require_once('tpl/page_tools.php'); // Page Tools ?>
+                <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($page_on_panel ? 'panel panel-default' : 'no-panel') ?>" <?php echo ((bootstrap3_conf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
-                    <div class="page <?php echo ($page_on_panel ? 'panel-body' : '') ?>">
+                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
+                    <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php
 
                         // Page icons (print, email, share link, etc.)
-                        require_once('tpl/page_icons.php');
+                        require_once(template('tpl/page-icons.php'));
 
                         tpl_flush(); /* flush the output buffer */
 
@@ -91,17 +109,17 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         tpl_includeFile('pageheader.html');
 
                         // Page-Header DokuWiki page
-                        if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('pageheader', 0, 1, bootstrap3_conf('useACL')));
+                        if ($ACT == 'show') $TEMPLATE->includePage('pageheader');
 
                         // render the content into buffer for later use
                         ob_start();
                         tpl_content(false);
 
                         $content         = ob_get_clean();
-                        $toc             = bootstrap3_toc(true);
+                        $toc             = $TEMPLATE->getTOC(true);
                         $content_classes = array();
 
-                        if (bootstrap3_conf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
+                        if ($TEMPLATE->getConf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
 
                         echo '<div class="dw-content-page '. implode(' ', $content_classes) .'">';
 
@@ -109,18 +127,22 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         echo '<!-- content -->';
                         echo '<div class="dw-content">';
-                        echo bootstrap3_content($content);
+                        echo $TEMPLATE->normalizeContent($content);
                         echo '</div>';
                         echo '<!-- /content -->';
                         echo '</div>';
 
                         tpl_flush();
 
+                        if (! $TEMPLATE->getConf('tagsOnTop') && $tag = $TEMPLATE->getPlugin('tag')) {
+                            echo implode('', array_map('trim', explode(',', $tag->td($ID))));
+                        }
+
                         // Page-Footer hook
                         tpl_includeFile('pagefooter.html');
 
                         // Page-Footer DokuWiki page
-                        if ($ACT == 'show') echo bootstrap3_content(tpl_include_page('pagefooter', 0, 1, bootstrap3_conf('useACL')));
+                        if ($ACT == 'show') $TEMPLATE->includePage('pagefooter');
 
                         ?>
 
@@ -129,13 +151,13 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                 <div class="small text-right">
 
-                    <?php if (bootstrap3_conf('showPageInfo')): ?>
+                    <?php if ($TEMPLATE->getConf('showPageInfo')): ?>
                     <span class="docInfo">
-                        <?php bootstrap3_pageinfo() /* 'Last modified' etc */ ?>
+                        <?php $TEMPLATE->getPageInfo() /* 'Last modified' etc */ ?>
                     </span>
                     <?php endif ?>
 
-                    <?php if (bootstrap3_conf('showLoginOnFooter')): ?>
+                    <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
                         <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
                     </span>
@@ -145,7 +167,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             </article>
 
-            <?php bootstrap3_sidebar_include('right'); // Right Sidebar ?>
+            <?php $TEMPLATE->includeSidebar('right'); // Right Sidebar ?>
 
         </main>
 
@@ -154,10 +176,10 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             tpl_includeFile('footer.html');
 
             // Footer DokuWiki page
-            require_once('tpl/footer.php');
+            require_once(template('tpl/footer.php'));
 
             // Cookie-Law banner
-            require_once('tpl/cookielaw.php');
+            require_once(template('tpl/cookielaw.php'));
 
             // Provide DokuWiki housekeeping, required in all templates
             tpl_indexerWebBug();

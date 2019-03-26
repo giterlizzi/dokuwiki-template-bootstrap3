@@ -10,10 +10,12 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+global $TEMPLATE;
+
 $sidebar_title = $lang['sidebar'];
 
-if (bootstrap3_conf('sidebarShowPageTitle')) {
-    $sidebar_title = p_get_first_heading(page_findnearest($sidebar_page, bootstrap3_conf('useACL')));
+if ($TEMPLATE->getConf('sidebarShowPageTitle')) {
+    $sidebar_title = p_get_first_heading(page_findnearest($sidebar_page, $TEMPLATE->getConf('useACL')));
     if (! $sidebar_title) $sidebar_title = $lang['sidebar'];
 }
 
@@ -27,7 +29,7 @@ if (bootstrap3_conf('sidebarShowPageTitle')) {
         <div class="dw-sidebar-body collapse in small">
             <?php
                 tpl_includeFile($sidebar_header);
-                bootstrap3_sidebar(tpl_include_page($sidebar_page, 0, 1, bootstrap3_conf('useACL'))); /* includes the nearest sidebar page */
+                $TEMPLATE->normalizeSidebar(tpl_include_page($sidebar_page, 0, 1, $TEMPLATE->getConf('useACL'))); /* includes the nearest sidebar page */
                 tpl_includeFile($sidebar_footer)
             ?>
         </div>

@@ -11,6 +11,7 @@
 if (!defined('DOKU_INC')) die();
 
 global $conf;
+global $TEMPLATE;
 
 ?>
 <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
@@ -21,13 +22,13 @@ global $conf;
 
     <?php if($conf['youarehere']): ?>
     <div class="dw__youarehere">
-        <?php bootstrap3_youarehere()?>
+        <?php $TEMPLATE->getYouAreHere()?>
     </div>
     <?php endif; ?>
 
     <?php if($conf['breadcrumbs']): ?>
     <div class="dw__breadcrumbs hidden-print">
-        <?php bootstrap3_breadcrumbs() ?>
+        <?php $TEMPLATE->getBreadcrumbs() ?>
     </div>
     <?php endif; ?>
 

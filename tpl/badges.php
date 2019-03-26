@@ -11,8 +11,9 @@
 if (!defined('DOKU_INC')) die();
 
 global $conf;
+global $TEMPLATE;
 
-if (bootstrap3_conf('showBadges')): ?>
+if ($TEMPLATE->getConf('showBadges')): ?>
 <!-- badges -->
 <ul id="dw__badges" class="list-inline text-right hidden-print">
 

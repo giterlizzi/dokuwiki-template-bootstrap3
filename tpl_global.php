@@ -2,4 +2,4 @@
 
 // Fallback script for compatibility with Bootstrap Wrapper and Icons plugins
 
-@include_once(dirname(__FILE__).'/tpl/global.php');      // Include template global variables
+include_once(template('/tpl/global.php'));

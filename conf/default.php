@@ -89,4 +89,4 @@ $conf['useAvatar']                   = 'off';
 $conf['useGoogleAnalytics']          = 0;
 $conf['useLegacyNavbar']             = 0;
 $conf['useLocalBootswatch']          = 1;
-
+$conf['notifyExtensionsUpdate']      = 0;

@@ -12,8 +12,9 @@ if (!defined('DOKU_INC')) die();
 
 global $ID;
 global $INFO;
+global $TEMPLATE;
 
-if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && bootstrap3_conf('showAddNewPage')):
+if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && $TEMPLATE->getConf('showAddNewPage')):
 
 ?>
 <ul class="nav navbar-nav" id="dw__addnewpage">

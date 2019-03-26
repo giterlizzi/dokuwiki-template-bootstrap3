@@ -10,19 +10,19 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-global $INFO;
-global $lang;
+global $INFO, $lang, $TEMPLATE;
 
 if (! empty($_SERVER['REMOTE_USER'])):
 
-$use_avatar = bootstrap3_conf('useAvatar');
+$use_avatar = $TEMPLATE->getConf('useAvatar');
 
+$extensions_update = array();
 $avatar_size       = 96;
 $avatar_size_small = 32;
 
 if ($use_avatar) {
-    $avatar_img_small = get_avatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size_small);
-    $avatar_img       = get_avatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size);
+    $avatar_img_small = $TEMPLATE->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size_small);
+    $avatar_img       = $TEMPLATE->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size);
 } else {
     $avatar_img = tpl_getMediaFile(array('images/avatar.png'));
 }
@@ -38,6 +38,25 @@ if ($INFO['ismanager']) {
 if ($INFO['isadmin']) {
     $label_type = 'danger';
     $user_type  = 'Admin';
+}
+
+if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
+
+    global $plugin_controller;
+
+    $extension = plugin_load('helper','extension_extension');
+
+    foreach ($plugin_controller->getList('', true) as $plugin) {
+        $extension->setExtension($plugin);
+        if ($extension->updateAvailable()) {
+            if ($extension->isEnabled()) {
+                $extensions_update[] = $extension->getDisplayName();
+            }
+        }
+    }
+
+  sort($extensions_update);
+
 }
 
 ?>
@@ -87,19 +106,19 @@ if ($INFO['isadmin']) {
 
             <li class="divider"></li>
 
-            <?php if (bootstrap3_conf('showUserHomeLink')): ?>
+            <?php if ($TEMPLATE->getConf('showUserHomeLink')): ?>
             <li class="dropdown-header">Home-Page</li>
             <?php
-                if ($userhomepage_helper = plugin_load('helper','userhomepage')):
+                if ($userhomepage = $TEMPLATE->getPlugin('userhomepage')):
                     echo '<li>' .
-                        $userhomepage_helper->getPublicLink('<i class="fa fa-fw fa-home"></i> ' . $userhomepage_helper->getLang('publicpage')) .
-                        $userhomepage_helper->getPrivateLink('<i class="fa fa-fw fa-user-secret"></i> ' . $userhomepage_helper->getLang('privatenamespace')) .
+                        $userhomepage->getPublicLink('<i class="fa fa-fw fa-home"></i> ' . $userhomepage->getLang('publicpage')) .
+                        $userhomepage->getPrivateLink('<i class="fa fa-fw fa-user-secret"></i> ' . $userhomepage->getLang('privatenamespace')) .
                         '</li>';
                 else:
             ?>
 
             <li>
-                <a href="<?php echo bootstrap3_user_homepage_link() ?>" title="Home-Page" rel="nofollow">
+                <a href="<?php echo $TEMPLATE->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
                 <i class="fa fa-fw fa-home"></i> Home-Page
                 </a>
             </li>
@@ -111,6 +130,15 @@ if ($INFO['isadmin']) {
             <li class="dropdown-header"><?php echo $lang['user_tools'] ?></li>
 
             <?php echo bootstrap3_action_item('admin', 'fa fa-fw fa-cogs') ?>
+
+            <?php if ($INFO['isadmin'] && count($extensions_update)): ?>
+            <li>
+                <a href="<?php echo wl($ID, array('do' => 'admin', 'page' => 'extension')); ?>" title=" - <?php echo implode('&#13; - ', $extensions_update) ?>">
+                    <i class="fa fa-fw fa-puzzle-piece text-success"></i> Extensions update <span class="badge"><?php echo count($extensions_update) ?></span>
+                </a>
+            </li>
+            <?php endif; ?>
+
             <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
 
             <li class="divider"></li>
@@ -119,20 +147,18 @@ if ($INFO['isadmin']) {
 
                 // Add the user menu
 
-                $page = null;
+                $usermenu_pageid = null;
+                $user_homepage_id = $TEMPLATE->getUserHomePageID();
 
-                $interwiki = getInterwiki();
-                $user_url  = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
-
-                foreach (array("$user_url:usermenu", 'usermenu') as $page_id) {
-                    $page = page_findnearest($page_id, bootstrap3_conf('useACL'));
-                    if ($page) break;
+                foreach (array("$user_homepage_id:usermenu", 'usermenu') as $id) {
+                    $usermenu_pageid = page_findnearest($id, $TEMPLATE->getConf('useACL'));
+                    if ($usermenu_pageid) break;
                 }
 
-                if ($page) {
+                if ($usermenu_pageid) {
 
                     $html = new simple_html_dom;
-                    $html->load(bootstrap3_lists(tpl_include_page($page, 0, 1, bootstrap3_conf('useACL'))), true, false);
+                    $html->load($TEMPLATE->includePage($usermenu_pageid, true), true, false);
 
                     foreach ($html->find('h1,h2,h3,h4,h5,h6') as $elm) {
                         $elm->outertext = '<li class="dropdown-header">' . $elm->innertext . '</li>';

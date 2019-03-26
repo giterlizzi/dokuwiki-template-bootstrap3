@@ -1,6 +1,6 @@
 <?php
 /**
- * DokuWiki Bootstrap3 Template: Global Configurations
+ * DokuWiki Bootstrap3 Template: Global include
  *
  * @link     http://dokuwiki.org/template:bootstrap3
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -10,45 +10,37 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-global $ID;
-global $JSINFO;
-global $INPUT;
-global $ACT;
-global $EVENT_HANDLER;
+// Load compatibility class for pre Greebo releases
+if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
 
-// Get the template info (useful for debug)
-if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
-    $template_info = confToHash(dirname(__FILE__) . '/../template.info.txt');
-    msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+    define('DOKU_INC_COMPAT', tpl_incdir() . 'compat/');
+
+    include(template('compat/inc/Menu/MenuInterface.php'));
+    include(template('compat/inc/Menu/AbstractMenu.php'));
+    include(template('compat/inc/Menu/Item/AbstractItem.php'));
+
+    include(template('compat/inc/Menu/UserMenu.php'));
+    include(template('compat/inc/Menu/MobileMenu.php'));
+    include(template('compat/inc/Menu/PageMenu.php'));
+    include(template('compat/inc/Menu/SiteMenu.php'));
+    include(template('compat/inc/Menu/DetailMenu.php'));
+
+    include(template('compat/inc/Menu/Item/ImgBackto.php'));
+    include(template('compat/inc/Menu/Item/Top.php'));
+    include(template('compat/inc/Menu/Item/Edit.php'));
+    include(template('compat/inc/Menu/Item/Profile.php'));
+    include(template('compat/inc/Menu/Item/Revisions.php'));
+    include(template('compat/inc/Menu/Item/Backlink.php'));
+    include(template('compat/inc/Menu/Item/Back.php'));
+    include(template('compat/inc/Menu/Item/Login.php'));
+    include(template('compat/inc/Menu/Item/Index.php'));
+    include(template('compat/inc/Menu/Item/Register.php'));
+    include(template('compat/inc/Menu/Item/MediaManager.php'));
+    include(template('compat/inc/Menu/Item/Subscribe.php'));
+    include(template('compat/inc/Menu/Item/Recent.php'));
+    include(template('compat/inc/Menu/Item/Media.php'));
+    include(template('compat/inc/Menu/Item/Resendpwd.php'));
+    include(template('compat/inc/Menu/Item/Admin.php'));
+    include(template('compat/inc/Menu/Item/Revert.php'));
+
 }
-
-if ($INPUT->str('bootswatch-theme')) {
-    set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
-}
-
-$EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT', 'BEFORE', null, 'bootstrap3_metaheaders');
-
-$page_on_panel = bootstrap3_conf('pageOnPanel');
-
-// Populate JSINFO object
-$JSINFO['bootstrap3'] = array(
-    'mode'   => $ACT,
-    'toc'    => array(),
-    'config' => array(
-        'collapsibleSections' => (int) bootstrap3_conf('collapsibleSections'),
-        'fixedTopNavbar'      => (int) bootstrap3_conf('fixedTopNavbar'),
-        'showSemanticPopup'   => (int) bootstrap3_conf('showSemanticPopup'),
-        'sidebarOnNavbar'     => (int) bootstrap3_conf('sidebarOnNavbar'),
-        'tagsOnTop'           => (int) bootstrap3_conf('tagsOnTop'),
-        'tocAffix'            => (int) bootstrap3_conf('tocAffix'),
-        'tocCollapseOnScroll' => (int) bootstrap3_conf('tocCollapseOnScroll'),
-        'tocCollapsed'        => (int) bootstrap3_conf('tocCollapsed'),
-        'tocLayout'           => bootstrap3_conf('tocLayout'),
-        'useAnchorJS'         => (int) bootstrap3_conf('useAnchorJS'),
-    ),
-);
-
-if ($ACT == 'admin') {
-    $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
-}
-

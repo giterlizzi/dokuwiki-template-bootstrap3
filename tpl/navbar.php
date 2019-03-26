@@ -11,18 +11,19 @@
 if (!defined('DOKU_INC')) die();
 
 global $lang;
+global $TEMPLATE;
 
-$navbar_labels    = bootstrap3_conf('navbarLabels');
+$navbar_labels    = $TEMPLATE->getConf('navbarLabels');
 $navbar_classes   = array();
-$navbar_classes[] = (bootstrap3_conf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
-$navbar_classes[] = (bootstrap3_conf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
-$home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
+$navbar_classes[] = ($TEMPLATE->getConf('fixedTopNavbar') ? 'navbar-fixed-top' : null);
+$navbar_classes[] = ($TEMPLATE->getConf('inverseNavbar')  ? 'navbar-inverse'   : 'navbar-default');
+$home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homePageURL') : wl());
 
 ?>
 <!-- navbar -->
 <nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
-    <div class="container<?php echo (bootstrap3_is_fluid_navbar() ? '-fluid mx-5' : '') ?>">
+    <div class="container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
         <div class="navbar-header">
 
@@ -58,7 +59,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
 
         <div class="collapse navbar-collapse">
 
-            <?php if (bootstrap3_conf('showHomePageLink')) :?>
+            <?php if ($TEMPLATE->getConf('showHomePageLink')) :?>
             <ul class="nav navbar-nav">
                 <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
                     <?php tpl_link($home_link, '<i class="fa fa-fw fa-home"></i> Home') ?>
@@ -67,11 +68,11 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
             <?php endif; ?>
 
             <?php
-                echo bootstrap3_navbar(); // Include the navbar for different namespaces
-                echo bootstrap3_dropdown_page('dropdownpage');
+                echo $TEMPLATE->getNavbar(); // Include the navbar for different namespaces
+                echo $TEMPLATE->getDropDownPage('dropdownpage');
             ?>
 
-            <?php if(file_exists(dirname(__FILE__) . '/../navbar.html') && bootstrap3_conf('useLegacyNavbar')): ?>
+            <?php if(file_exists(dirname(__FILE__) . '/../navbar.html') && $TEMPLATE->getConf('useLegacyNavbar')): ?>
             <ul class="nav navbar-nav">
                 <?php tpl_includeFile('navbar.html') ?>
             </ul>
@@ -81,36 +82,36 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
 
                 <?php
                     // Search form
-                    bootstrap3_searchform();
+                    include_once(template('tpl/navbar-searchform.php'));
 
                     // Admin Menu
-                    include_once(dirname(__FILE__).'/admin.php');
+                    include_once(template('tpl/admin.php'));
 
                     // Tools Menu
-                    include_once(dirname(__FILE__).'/tools_menu.php');
+                    include_once(template('tpl/tools-menu.php'));
 
                     // Theme Switcher Menu
-                    include_once(dirname(__FILE__).'/theme_switcher.php');
+                    include_once(template('tpl/theme-switcher.php'));
 
                     // Translation Menu
-                    include_once(dirname(__FILE__).'/translation.php');
+                    include_once(template('tpl/translation.php'));
 
                     // Add New Page
-                    include_once(dirname(__FILE__).'/new_page.php');
+                    include_once(template('tpl/new-page.php'));
                 ?>
 
                 <ul class="nav navbar-nav">
 
-                    <?php if (bootstrap3_conf('showEditBtn')): ?>
+                    <?php if ($TEMPLATE->getConf('showEditBtn')): ?>
                     <li class="dw-action-icon hidden-xs">
                         <?php tpl_actionlink('edit', '<span class="sr-only">', '</span>'); ?>
                     </li>
                     <?php endif; ?>
 
-                    <?php if (bootstrap3_conf('fluidContainerBtn')): ?>
-                    <li class="hidden-xs <?php echo (bootstrap3_fluid_container_button() ? 'active' : '')?>">
+                    <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
+                    <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">
                         <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>">
-                            <i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
+                            <i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -127,7 +128,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
                             $register_btn = str_replace('action', 'action btn btn-success navbar-btn', $register_btn);
                             echo $register_btn;
 
-                            if (! bootstrap3_conf('hideLoginLink')) {
+                            if (! $TEMPLATE->getConf('hideLoginLink')) {
                                 $login_btn = tpl_actionlink('login', null, null, $login_label, true);
                                 $login_btn = str_replace('action', 'action btn btn-default navbar-btn', $login_btn);
                                 echo $login_btn;
@@ -140,7 +141,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
 
                 </ul>
 
-                <?php if (bootstrap3_conf('tocLayout') == 'navbar'): ?>
+                <?php if ($TEMPLATE->getConf('tocLayout') == 'navbar'): ?>
                 <ul class="nav navbar-nav hide" id="dw__toc_menu">
                     <li class="dropdown">
                         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
@@ -153,7 +154,7 @@ $home_link        = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageU
                 </ul>
                 <?php endif; ?>
 
-                <?php include_once(dirname(__FILE__).'/user_menu.php'); ?>
+                <?php include_once(template('tpl/user-menu.php')); ?>
 
 
             </div>

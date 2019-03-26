@@ -1143,7 +1143,7 @@ class simple_html_dom_node
 		 *     Matches the selector list separator
 		 */
 		// phpcs:ignore Generic.Files.LineLength
-		$pattern = "/([\w:\*-]*)(?:\#([\w-]+))?(?:|\.([\w\.-]+))?((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?([\/, >+~]+)/is";
+		$pattern = "/([\w:\*-]*)(?:\#([\w\-]+))?(?:|\.([\w\.-]+))?((?:\[@?(?:!?[\w:-]+)(?:(?:[!*^$|~]?=)[\"']?(?:.*?)[\"']?)?(?:\s*?(?:[iIsS])?)?\])+)?([\/, >+~]+)/is";
 
 		preg_match_all(
 			$pattern,
@@ -1406,7 +1406,7 @@ class simple_html_dom_node
 			$attributes = array();
 
 			preg_match_all(
-				'/([\w-]+)\s*:\s*([^;]+)\s*;?/',
+				'/([\w\-]+)\s*:\s*([^;]+)\s*;?/',
 				$this->attr['style'],
 				$matches,
 				PREG_SET_ORDER

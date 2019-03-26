@@ -10,20 +10,22 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if ( bootstrap3_conf('showCookieLawBanner') && ! (get_doku_pref('cookieNoticeAccepted', null) || get_doku_pref('cookieNoticeAccepted', '')) ):
+global $TEMPLATE;
 
-$cookie_policy_page_id = bootstrap3_conf('cookieLawPolicyPage');
-$cookie_banner_page_id = bootstrap3_conf('cookieLawBannerPage');
+if ( $TEMPLATE->getConf('showCookieLawBanner') && ! (get_doku_pref('cookieNoticeAccepted', null) || get_doku_pref('cookieNoticeAccepted', '')) ):
+
+$cookie_policy_page_id = $TEMPLATE->getConf('cookieLawPolicyPage');
+$cookie_banner_page_id = $TEMPLATE->getConf('cookieLawBannerPage');
 
 resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
 
 ?>
 <!-- cookie-law -->
-<div id="cookieNotice" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
+<div id="cookieNotice" class="navbar <?php echo (($TEMPLATE->getConf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-text navbar-left">
             <?php
-                $cookie_banner_page = tpl_include_page($cookie_banner_page_id, 0, 1, bootstrap3_conf('useACL'));
+                $cookie_banner_page = tpl_include_page($cookie_banner_page_id, 0, 1, $TEMPLATE->getConf('useACL'));
                 $cookie_banner_page = preg_replace('/<p>\n(.*?)\n<\/p>/', '<i class="fa fa-info-circle text-primary"></i> $1', $cookie_banner_page);
                 echo $cookie_banner_page;
             ?>

@@ -10,15 +10,17 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && bootstrap3_conf('showPageIcons')):
+global $TEMPLATE;
+
+if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showPageIcons')):
 
 global $ID;
 global $INFO;
 global $conf;
 
-$page_icons   = bootstrap3_conf('pageIcons');
+$page_icons   = $TEMPLATE->getConf('pageIcons');
 $social_share = in_array('social-share', $page_icons);
-$social_share_providers = bootstrap3_conf('socialShareProviders');
+$social_share_providers = $TEMPLATE->getConf('socialShareProviders');
 $current_ns   = getNS($ID);
 
 $help_page  = false;
@@ -26,7 +28,7 @@ $help_title = null;
 $help_popup = null;
 
 if (in_array('help', $page_icons)) {
-  $help_page  = page_findnearest('help', bootstrap3_conf('useACL'));
+  $help_page  = page_findnearest('help', $TEMPLATE->getConf('useACL'));
   $help_title = hsc(p_get_first_heading($help_page));
   $help_popup = wl($help_page, array('do' => 'export_xhtmlbody'));
 }

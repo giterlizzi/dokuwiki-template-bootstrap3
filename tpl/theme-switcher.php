@@ -10,11 +10,11 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
-if (bootstrap3_conf('showThemeSwitcher')):
+global $TEMPLATE, $ID;
 
-global $ID;
+if ($TEMPLATE->getConf('showThemeSwitcher')):
 
-$bootswatch_theme = bootstrap3_bootswatch_theme();
+$bootswatch_theme = $TEMPLATE->getBootswatchTheme();
 
 ?>
 <!-- theme-switcher -->
@@ -22,7 +22,7 @@ $bootswatch_theme = bootstrap3_bootswatch_theme();
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-toggle="dropdown" data-target="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-tint"></i> <span class="<?php echo (in_array('themes', bootstrap3_conf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span>
+            <i class="fa fa-fw fa-tint"></i> <span class="<?php echo (in_array('themes', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="themes">
@@ -35,7 +35,7 @@ $bootswatch_theme = bootstrap3_bootswatch_theme();
             <li class="dropdown-header">
                 <i class="fa fa-fw fa-tint"></i> Bootswatch Themes
             </li>
-            <?php foreach (bootstrap3_bootswatch_themes_available() as $theme): ?>
+            <?php foreach ($TEMPLATE->getAvailableBootswatchThemes() as $theme): ?>
             <li<?php echo ($bootswatch_theme == $theme) ? ' class="active"' : '' ?>>
                 <a href="<?php echo wl($ID, array('bootswatch-theme' => hsc($theme))); ?>"><?php echo ucfirst($theme) ?></a>
             </li>

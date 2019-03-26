@@ -11,8 +11,9 @@
 if (!defined('DOKU_INC')) die();
 
 global $ID;
+global $TEMPLATE;
 
-if (bootstrap3_conf('showTranslation') && $translation = plugin_load('helper','translation')):
+if ($TEMPLATE->getConf('showTranslation') && $translation = $TEMPLATE->getPlugin('translation')):
 
 if (! $translation->istranslatable($ID)) return false;
 

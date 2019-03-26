@@ -11,24 +11,25 @@
 if (!defined('DOKU_INC')) die();
 
 global $conf;
+global $TEMPLATE;
 
-$footer_page_exist    = page_findnearest('footer', bootstrap3_conf('useACL'));
+$footer_page_exist    = page_findnearest('footer', $TEMPLATE->getConf('useACL'));
 $license_is_enabled   = $conf['license'];
-$badges_is_enabled    = bootstrap3_conf('showBadges');
-$wiki_info_is_enabled = bootstrap3_conf('showWikiInfo');
+$badges_is_enabled    = $TEMPLATE->getConf('showBadges');
+$wiki_info_is_enabled = $TEMPLATE->getConf('showWikiInfo');
 
 $logo_size      = array();
 $wiki_logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
 $wiki_title     = $conf['title'];
 $wiki_tagline   = ($conf['tagline']) ? '<span class="dw__tagline">'.$conf['tagline'].'</span>' : '';
 $wiki_logo_size = 'height="32"';
-$wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL') : wl());
+$wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homePageURL') : wl());
 
 ?>
 <?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <!-- footer -->
-<footer id="dw__footer" class="navbar <?php echo ((bootstrap3_conf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
-    <div class="container<?php echo (bootstrap3_is_fluid_container()) ? '-fluid mx-5' : '' ?>">
+<footer id="dw__footer" class="navbar <?php echo (($TEMPLATE->getConf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
+    <div class="container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
 
         <div class="small navbar-text">
 
@@ -51,7 +52,7 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
 
             <?php if ($footer_page_exist): ?>
             <div class="footer-dw-content">
-                <?php echo bootstrap3_content(tpl_include_page('footer', 0, 1, bootstrap3_conf('useACL'))); ?>
+                <?php echo $TEMPLATE->includePage('footer'); ?>
             </div>
 
             <p>&nbsp;</p>
@@ -62,10 +63,10 @@ $wiki_home_link = (bootstrap3_conf('homePageURL') ? bootstrap3_conf('homePageURL
                 <div class="col-sm-6">
                     <?php if ($license_is_enabled): ?>
                     <p>
-                        <?php bootstrap3_license('image') ?>
+                        <?php $TEMPLATE->getLicense('image') ?>
                     </p>
                     <p class="small">
-                        <?php bootstrap3_license('link') ?>
+                        <?php $TEMPLATE->getLicense('link') ?>
                     </p>
                     <?php endif; ?>
                 </div>
