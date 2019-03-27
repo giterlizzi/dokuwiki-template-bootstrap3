@@ -15,15 +15,7 @@ global $TEMPLATE, $ID;
 if ($TEMPLATE->getConf('showTools')):
 
 $navbar_labels = $TEMPLATE->getConf('navbarLabels');
-$tools_menus   = array(
-    'user'   => array('icon' => 'fa fa-fw fa-user',      'menu' => new dokuwiki\Menu\UserMenu),
-    'site'   => array('icon' => 'fa fa-fw fa-cubes',     'menu' => new dokuwiki\Menu\SiteMenu),
-    'page'   => array('icon' => 'fa fa-fw fa-file',      'menu' => new dokuwiki\Menu\PageMenu),
-);
-
-if (defined('DOKU_MEDIADETAIL')) {
-    $tools_menus['page'] = array('icon' => 'fa fa-fw fa-picture-o', 'menu' => new dokuwiki\Menu\DetailMenu);
-}
+$tools_menus   = $TEMPLATE->getToolsMenu();
 
 ?>
 <!-- tools-menu -->
@@ -44,24 +36,8 @@ if (defined('DOKU_MEDIADETAIL')) {
             </li>
             <?php
 
-                foreach ($data['menu']->getItems() as $item) {
-
-                    $attr = buildAttributes($item->getLinkAttributes());
-                    $active = '';
-
-                    if ($ACT == $item->getType() || ($ACT == 'revisions' && $item->getType() == 'revs')) {
-                        $active = 'active';
-                    }
-
-                    $html  = '<li class="' . $active . '">';
-                    $html .= "<a $attr>";
-                    $html .= inlineSVG($item->getSvg());
-                    $html .= '<span>' . hsc($item->getLabel()) . '</span>';
-                    $html .= "</a>";
-                    $html .= '</li>';
-
-                    echo $html;
-
+                foreach ($data['menu'] as $type => $item) {
+                    echo $item;
                 }
 
             ?>
@@ -86,24 +62,8 @@ if (defined('DOKU_MEDIADETAIL')) {
 
             <?php
 
-                foreach ($data['menu']->getItems() as $item) {
-
-                    $attr  = buildAttributes($item->getLinkAttributes());
-                    $class = 'action';
-
-                    if ($ACT == $item->getType() || ($ACT == 'revisions' && $item->getType() == 'revs')) {
-                        $class = 'action active';
-                    }
-
-                    $html  = '<li class="'.$class.'">';
-                    $html .= "<a $attr>";
-                    $html .= inlineSVG($item->getSvg());
-                    $html .= '<span>' . hsc($item->getLabel()) . '</span>';
-                    $html .= "</a>";
-                    $html .= '</li>';
-
-                    echo $html;
-
+                foreach ($data['menu'] as $type => $item) {
+                    echo $item;
                 }
 
             ?>
@@ -121,50 +81,3 @@ if (defined('DOKU_MEDIADETAIL')) {
 </ul>
 <!-- /tools-menu -->
 <?php endif; ?>
-
-
-<!-- TODO move into template.css -->
-<style>
-
-.action svg {
-  fill: #141414;
-  display: inline-block;
-  vertical-align: middle;
-  padding-right: 4px;
-  width: 20px;
-  height: 20px;
-}
-
-.action.active svg {
-  fill: #fff;
-}
-
-.cyborg .action svg ,
-.darkly .action svg ,
-.slate .action svg ,
-.superhero .action svg ,
-.solar .action svg {
-  fill: #fff;
-}
-
-.yeti .dropdown-menu .action svg {
-  fill: #fff;
-}
-
-.solar .dropdown-menu .action svg {
-  fill: #839496;
-}
-
-.sandstone .action svg {
-  fill: #98978b;
-}
-
-.lumen .action svg {
-  fill: #555555;
-}
-
-.flatly .action svg {
-  fill: #7b8a8b;
-}
-
-</style>

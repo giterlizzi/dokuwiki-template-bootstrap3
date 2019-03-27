@@ -58,7 +58,6 @@ $meta['tableStyle']             = array('multicheckbox', '_choices' => array('st
 $meta['showLandingPage']        = array('onoff');
 $meta['landingPages']           = array('regex');
 $meta['showPageTools']          = array('multichoice', '_choices' => array('never', 'logged', 'always'));
-$meta['pageToolsAnimation']     = array('onoff');
 $meta['showPageId']             = array('onoff');
 $meta['showBadges']             = array('onoff');
 $meta['showLoginOnFooter']      = array('onoff');

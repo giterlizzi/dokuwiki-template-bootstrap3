@@ -17,30 +17,14 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
 
 <!-- page-tools -->
 <nav id="dw__pagetools" class="hidden-print">
-    <div class="tools panel panel-default pull-right <?php echo (($TEMPLATE->getConf('pageToolsAnimation')) ? 'tools-animation' : '') ?>">
+    <div class="tools panel panel-default pull-right">
         <ul class="nav nav-stacked nav-pills">
             <?php
 
-                $menu = ((! defined('DOKU_MEDIADETAIL')) ? new dokuwiki\Menu\PageMenu : new dokuwiki\Menu\DetailMenu);
+                $page_menu = $TEMPLATE->getToolMenu('page', true);
 
-                foreach ($menu->getItems() as $item) {
-
-                    $attr  = buildAttributes($item->getLinkAttributes());
-                    $class = 'action';
-
-                    if ($ACT == $item->getType() || ($ACT == 'revisions' && $item->getType() == 'revs')) {
-                        $class = 'action active';
-                    }
-
-                    $html  = '<li class="' . $class . '">';
-                    $html .= "<a $attr>";
-                    $html .= '<span class="sr-only">' . hsc($item->getLabel()) . '</span>';
-                    $html .= inlineSVG($item->getSvg());
-                    $html .= "</a>";
-                    $html .= '</li>';
-
-                    echo $html;
-
+                foreach ($page_menu['menu'] as $type => $item) {
+                    echo $item;
                 }
 
             ?>

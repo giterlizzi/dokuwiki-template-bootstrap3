@@ -2,19 +2,27 @@
 
 ## [Develop]
 
+
 ### Added
+  * Added support for [new menu system](https://www.dokuwiki.org/devel:menus) for all DokuWiki menu and action items
+  * Added new option (`notifyExtentionsUpdate`) for display available update of DokuWiki plugins on user menu
   * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
   * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
+  * #411: Added Bootstrap v4 utilities
+  * #412: Added `:usermenu` hook for add new items in user menu using a standard DokuWiki page
 
 ### Changed
+  * Use SVG icons for all DokuWiki tools menu (User, Site and Page)
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
 
 ### Removed
-  * Removed "Purge cache" button in Page Tools 
+  * Removed "Purge cache" button in Page Tools
+  * Drop support for older DokuWiki release prior of PHP < 5.3.x
+  * Removed `pageToolsAnimation` option
 
 ### Fixed
-  * #348: Removed ".page-header" class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
+  * #348: Removed `.page-header` class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
   * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
   * #350, #352: Suppress warning for open_basedir
   * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)

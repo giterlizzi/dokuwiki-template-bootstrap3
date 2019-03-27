@@ -594,7 +594,7 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
 });
 
 
-// Page Tools (animaton)
+// Page Tools
 jQuery(document).on('bootstrap3:page-tools', function(event) {
 
   // console.debug(event.type + ' event fired');
@@ -610,21 +610,25 @@ jQuery(document).on('bootstrap3:page-tools', function(event) {
     }
   });
 
-  var $page_tools       = jQuery('#dw__pagetools'),
-      $page_tools_items = $page_tools.find('ul li a'),
-      $animation        = $page_tools.find('.tools-animation');
+  if (jQuery('#dw__pagetools').length) {
 
-  if (! ($page_tools_items.length && $animation.length)) return false;
+    var $pagetools = jQuery('#dw__pagetools');
 
-  $page_tools_items.on('mouseenter', function () {
-    var $icon = jQuery(this);
-    $icon.find('i').addClass('fa-2x', 250);
-  });
+    $pagetools.find('svg').hover(
 
-  $page_tools_items.on('mouseleave', function () {
-    var $icon = jQuery(this);
-    $icon.find('i').removeClass('fa-2x', 250);
-  });
+      function() {
+        var $node = jQuery(this);
+        $node.closest('li.active').removeClass('active');
+        $node.closest('li').addClass('active');
+      },
+
+      function() {
+        var $node = jQuery(this);
+        $node.closest('li.active').removeClass('active');
+      });
+
+  }
+
 
 });
 

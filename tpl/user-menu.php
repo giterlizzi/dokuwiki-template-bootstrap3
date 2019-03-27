@@ -59,6 +59,8 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
 }
 
+$user_menu = $TEMPLATE->getToolMenu('user');
+
 ?>
 <!-- user-menu -->
 <ul class="nav navbar-nav" id="dw__user_menu">
@@ -129,17 +131,23 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
             <li class="dropdown-header"><?php echo $lang['user_tools'] ?></li>
 
-            <?php echo bootstrap3_action_item('admin', 'fa fa-fw fa-cogs') ?>
+            <?php
+
+                echo $user_menu['menu']['profile'];
+
+                if ($INFO['isadmin']) {
+                    echo $user_menu['menu']['admin'];
+                }
+
+            ?>
 
             <?php if ($INFO['isadmin'] && count($extensions_update)): ?>
             <li>
                 <a href="<?php echo wl($ID, array('do' => 'admin', 'page' => 'extension')); ?>" title=" - <?php echo implode('&#13; - ', $extensions_update) ?>">
-                    <i class="fa fa-fw fa-puzzle-piece text-success"></i> Extensions update <span class="badge"><?php echo count($extensions_update) ?></span>
+                    <i class="fa fa-fw fa-puzzle-piece text-success"></i> <?php echo tpl_getLang('extensions_update'); ?> <span class="badge"><?php echo count($extensions_update) ?></span>
                 </a>
             </li>
             <?php endif; ?>
-
-            <?php echo bootstrap3_action_item('profile', 'fa fa-fw fa-refresh') ?>
 
             <li class="divider"></li>
 
@@ -186,7 +194,9 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                 }
             ?>
 
-            <?php echo bootstrap3_action_item('login', 'fa fa-fw fa-power-off text-danger'); ?>
+            <?php
+                echo $user_menu['menu']['logout'];
+            ?>
 
         </ul>
     </li>

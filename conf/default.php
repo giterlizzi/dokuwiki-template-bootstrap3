@@ -42,7 +42,6 @@ $conf['pageIcons']                   = 'social-share,feed,send-mail,permalink,pr
 $conf['pageInfo']                    = 'filename,extension,date,editor,locked';
 $conf['pageInfoDateFormat']          = 'dformat';
 $conf['pageOnPanel']                 = 1;
-$conf['pageToolsAnimation']          = 1;
 $conf['rightSidebar']                = 'rightsidebar';
 $conf['rightSidebarGrid']            = 'col-sm-3 col-md-2';
 $conf['schemaOrgType']               = 'Article';

@@ -19,6 +19,7 @@ $lang['send_mail']               = 'Send e-Mail';
 $lang['print']                   = 'Print';
 $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Add New Page';
+$lang['extensions_update']       = 'Extensions update';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';

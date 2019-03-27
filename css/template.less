@@ -722,23 +722,34 @@ body {
 
 }
 
+
+body.yeti #dw__user_menu dl {
+  color: white;
+}
+
 /* SVG icon for DokuWiki Actions */
 
 .action svg {
   fill: #141414;
   display: inline-block;
   vertical-align: middle;
-  padding-right: 4px;
   width: 20px;
   height: 20px;
+}
+
+.dropdown-menu .action svg {
+  padding-right: 4px;
 }
 
 .action.active svg {
   fill: #fff;
 }
 
-/* Fixes for Bootswatch theme and DokuWiki actions */
+#dw__pagetools .action span {
+  display: none;
+}
 
+/* Fixes for Bootswatch theme and DokuWiki actions */
 
 body {
 
@@ -752,23 +763,23 @@ body {
     }
   }
 
-  .yeti .dropdown-menu .action svg {
+  &.yeti .dropdown-menu .action svg {
     fill: #fff;
   }
 
-  .solar .dropdown-menu .action svg {
+  &.solar .dropdown-menu .action svg {
     fill: #839496;
   }
 
-  .sandstone .action svg {
+  &.sandstone .action svg {
     fill: #98978b;
   }
 
-  .lumen .action svg {
+  &.lumen .action svg {
     fill: #555555;
   }
 
-  .flatly .action svg {
+  &.flatly .action svg {
     fill: #7b8a8b;
   }
 
