@@ -23,6 +23,7 @@ class Template
         global $JSINFO;
         global $INPUT;
         global $ACT;
+        global $INFO;
 
         $this->registerHooks();
         $this->initPlugins();
@@ -2601,7 +2602,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $tools_menus = array(
             'user' => array('icon' => 'fa fa-fw fa-user',  'class' => new \dokuwiki\Menu\UserMenu),
             'site' => array('icon' => 'fa fa-fw fa-cubes', 'class' => new \dokuwiki\Menu\SiteMenu),
-            'page' => array('icon' => 'fa fa-fw fa-file',  'class' => new \dokuwiki\Menu\PageMenu),
+            'page' => array('icon' => 'fa fa-fw fa-file',  'class' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
@@ -2621,7 +2622,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 $html  = '<li class="' . $active . '">';
                 $html .= "<a $attr>";
-                $html .= inlineSVG($item->getSvg());
+                $html .= \inlineSVG($item->getSvg());
                 $html .= '<span>' . hsc($item->getLabel()) . '</span>';
                 $html .= "</a>";
                 $html .= '</li>';

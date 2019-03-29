@@ -8,10 +8,13 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-if (!defined('DOKU_INC')) die();                        // must be run from within DokuWiki
-@require_once(dirname(__FILE__).'/tpl/functions.php');  // include hook for template functions
-include_once(dirname(__FILE__).'/tpl/global.php');      // Include template global variables
+if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
+
+require_once(template('tpl/global.php'));
+require_once(template('tpl/functions.php'));
+
 header('X-UA-Compatible: IE=edge,chrome=1');
+
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">
 <head>
@@ -33,8 +36,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 </head>
 <body class="container">
 
-    <div id="dw__msgarea">
-        <?php bootstrap3_html_msgarea() ?>
+    <div id="dw__msgarea" class="small">
+        <?php $TEMPLATE->getMessageArea() ?>
     </div>
     <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
 

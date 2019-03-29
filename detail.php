@@ -11,12 +11,8 @@
 
 if (!defined('DOKU_INC')) die(); // must be run from within DokuWiki
 
-global $TEMPLATE;
-
-$TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
-
-require_once(template('/tpl/global.php'));
-require_once(template('/tpl/functions.php'));  // include hook for template functions
+require_once(template('tpl/global.php'));
+require_once(template('tpl/functions.php'));
 
 header('X-UA-Compatible: IE=edge,chrome=1');
 

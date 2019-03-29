@@ -9,12 +9,6 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once(template('Template.php'));
-
-global $TEMPLATE;
-
-$TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
-
 require_once(template('tpl/global.php'));
 require_once(template('tpl/functions.php'));
 

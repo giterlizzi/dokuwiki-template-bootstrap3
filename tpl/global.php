@@ -10,10 +10,12 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+define('DOKU_INC_COMPAT', tpl_incdir() . 'compat/');
+
+include(DOKU_INC_COMPAT . 'inc/functions.php');
+
 // Load compatibility class for pre Greebo releases
 if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
-
-    define('DOKU_INC_COMPAT', tpl_incdir() . 'compat/');
 
     include(template('compat/inc/Menu/MenuInterface.php'));
     include(template('compat/inc/Menu/AbstractMenu.php'));
@@ -43,4 +45,24 @@ if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
     include(template('compat/inc/Menu/Item/Admin.php'));
     include(template('compat/inc/Menu/Item/Revert.php'));
 
+}
+
+
+
+// Load PHP Simple HTML DOM class
+include_once template('inc/simple_html_dom.php');
+
+// Load template class
+include(template('inc/Template.php'));
+
+// Load custom menus
+include(template('inc/Menu/PageMenu.php'));
+include(template('inc/Menu/Item/Discussion.php'));
+
+global $TEMPLATE;
+
+$TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
+
+if ($pagesize = $TEMPLATE->getConf('domParserMaxPageSize')) {
+    define('MAX_FILE_SIZE', $pagesize);
 }
