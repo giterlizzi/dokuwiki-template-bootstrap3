@@ -61,7 +61,6 @@ $conf['showPageIcons']               = 0;
 $conf['showPageId']                  = 1;
 $conf['showPageInfo']                = 1;
 $conf['showPageTools']               = 'always';
-$conf['showPurgePageCache']          = 'never';
 $conf['showSearchForm']              = 'always';
 $conf['showSemanticPopup']           = 0;
 $conf['showThemeSwitcher']           = 0;

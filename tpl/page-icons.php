@@ -37,77 +37,77 @@ if (in_array('help', $page_icons)) {
 <!-- page-icons -->
 <div class="dw-page-icons pull-right hidden-print">
 
-    <ul class="list-inline pull-right">
+    <ul class="list-inline pull-right m-0">
+
+        <?php if ($social_share && count($social_share_providers)): ?>
+        <li class="dropdown">
+            <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ...">
+                <i class="fa fa-share-alt fa-fw"></i>
+            </a>
+            <ul class="dropdown-menu">
+                <li class="dropdown-header">
+                    <i class="fa fa-fw fa-share-alt"></i> <?php echo tpl_getLang('share_on') ?> ...
+                </li>
+                <?php if (in_array('google-plus', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-google-plus" title="<?php echo tpl_getLang('share_on') ?> Google+"><i class="fa fa-fw fa-lg fa-google-plus-square"></i> Google+</a>
+                </li>
+                <?php endif; if (in_array('twitter', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-twitter" title="<?php echo tpl_getLang('share_on') ?> Twitter"><i class="fa fa-fw fa-lg fa-twitter-square"></i> Twitter</a>
+                </li>
+                <?php endif; if (in_array('linkedin', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-linkedin" title="<?php echo tpl_getLang('share_on') ?> LinkedIn"><i class="fa fa-fw fa-lg fa-linkedin-square"></i> LinkedIn</a>
+                </li>
+                <?php endif; if (in_array('facebook', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-facebook" title="<?php echo tpl_getLang('share_on') ?> Facebook"><i class="fa fa-fw fa-lg fa-facebook-square"></i> Facebook</a>
+                </li>
+                <?php endif; if (in_array('pinterest', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-pinterest" title="<?php echo tpl_getLang('share_on') ?> Pinterest"><i class="fa fa-fw fa-lg fa-pinterest"></i> Pinterest</a>
+                </li>
+                <?php endif; if (in_array('telegram', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-telegram" title="<?php echo tpl_getLang('share_on') ?> Telegram"><i class="fa fa-fw fa-lg fa-telegram"></i> Telegram</a>
+                </li>
+                <?php endif; if (in_array('whatsapp', $social_share_providers) && $INFO['ismobile']): ?>
+                <li>
+                    <a href="whatsapp://send?text=" class="share-whatsapp" title="<?php echo tpl_getLang('share_on') ?> Whatsapp" data-action="share/whatsapp/share"><i class="fa fa-fw fa-lg fa-whatsapp"></i> Whatsapp</a>
+                </li>
+                <?php endif; if (in_array('yammer', $social_share_providers)): ?>
+                <li>
+                    <a href="#" class="share-yammer" title="<?php echo tpl_getLang('share_on') ?> Yammer"><i class="fa fa-fw fa-lg fa-yahoo"></i> Yammer</a>
+                </li>
+                <?php endif; ?>
+            </ul>
+        </li>
+        <?php endif; ?>
+
         <?php if (in_array('feed', $page_icons)): ?>
         <li>
-            <a href="<?php echo DOKU_URL . 'feed.php?ns=' . $current_ns ?>" title="<?php echo $lang['btn_recent'] ?>" class="feed" target="_blank"><i class="fa fa-fw fa-rss text-muted"></i></a>
+            <a href="<?php echo DOKU_URL . 'feed.php?ns=' . $current_ns ?>" title="<?php echo $lang['btn_recent'] ?>" class="feed" target="_blank"><i class="fa fa-fw fa-rss"></i></a>
         </li>
         <?php endif; if (in_array('send-mail', $page_icons)): ?>
         <li>
-            <a href="#" title="<?php echo tpl_getLang('send_mail') ?>" class="send-mail"><i class="fa fa-fw fa-envelope text-muted"></i></a>
+            <a href="#" title="<?php echo tpl_getLang('send_mail') ?>" class="send-mail"><i class="fa fa-fw fa-envelope"></i></a>
         </li>
         <?php endif; if (in_array('print', $page_icons)): ?>
         <li>
-            <a href="#" title="<?php echo tpl_getLang('print') ?>" onclick="window.print()"><i class="fa fa-fw fa-print text-muted"></i></a>
+            <a href="#" title="<?php echo tpl_getLang('print') ?>" onclick="window.print()"><i class="fa fa-fw fa-print"></i></a>
         </li>
         <?php endif; if (in_array('permalink', $page_icons) && $INFO['lastmod']): ?>
         <li>
-            <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>" target="_blank"><i class="fa fa-fw fa-link text-muted"></i></a>
+            <a href="<?php echo DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'] ?>" title="<?php echo tpl_getLang('permalink') ?>" target="_blank"><i class="fa fa-fw fa-link"></i></a>
         </li>
         <?php endif; if (in_array('help', $page_icons) && $help_page): ?>
         <li>
-            <a href="#" title="<?php echo $help_title ?>" data-toggle="modal" data-target=".dw-page-icons .modal.help" data-page="<?php echo $help_popup; ?>" onclick="return jQuery('.modal.help .modal-body').load(jQuery(this).data('page'));"><i class="fa fa-fw fa-question text-muted"></i></a>
+            <a href="#" title="<?php echo $help_title ?>" data-toggle="modal" data-target=".dw-page-icons .modal.help" data-page="<?php echo $help_popup; ?>" onclick="return jQuery('.modal.help .modal-body').load(jQuery(this).data('page'));"><i class="fa fa-fw fa-question"></i></a>
         </li>
         <?php endif; ?>
     </ul>
 
-    <?php if ($social_share && count($social_share_providers)): ?>
-
-    <div class="dropdown pull-right">
-        <a href="#" data-remote="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true" title="<?php echo tpl_getLang('share_on') ?> ...">
-            <i class="fa fa-share-alt fa-fw text-muted"></i>
-        </a>
-        <ul class="dropdown-menu">
-            <li class="dropdown-header">
-                <i class="fa fa-fw fa-share-alt"></i> <?php echo tpl_getLang('share_on') ?> ...
-            </li>
-            <?php if (in_array('google-plus', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-google-plus" title="<?php echo tpl_getLang('share_on') ?> Google+"><i class="fa fa-fw fa-lg fa-google-plus-square"></i> Google+</a>
-            </li>
-            <?php endif; if (in_array('twitter', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-twitter" title="<?php echo tpl_getLang('share_on') ?> Twitter"><i class="fa fa-fw fa-lg fa-twitter-square"></i> Twitter</a>
-            </li>
-            <?php endif; if (in_array('linkedin', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-linkedin" title="<?php echo tpl_getLang('share_on') ?> LinkedIn"><i class="fa fa-fw fa-lg fa-linkedin-square"></i> LinkedIn</a>
-            </li>
-            <?php endif; if (in_array('facebook', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-facebook" title="<?php echo tpl_getLang('share_on') ?> Facebook"><i class="fa fa-fw fa-lg fa-facebook-square"></i> Facebook</a>
-            </li>
-            <?php endif; if (in_array('pinterest', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-pinterest" title="<?php echo tpl_getLang('share_on') ?> Pinterest"><i class="fa fa-fw fa-lg fa-pinterest"></i> Pinterest</a>
-            </li>
-            <?php endif; if (in_array('telegram', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-telegram" title="<?php echo tpl_getLang('share_on') ?> Telegram"><i class="fa fa-fw fa-lg fa-telegram"></i> Telegram</a>
-            </li>
-            <?php endif; if (in_array('whatsapp', $social_share_providers) && $INFO['ismobile']): ?>
-            <li>
-                <a href="whatsapp://send?text=" class="share-whatsapp" title="<?php echo tpl_getLang('share_on') ?> Whatsapp" data-action="share/whatsapp/share"><i class="fa fa-fw fa-lg fa-whatsapp"></i> Whatsapp</a>
-            </li>
-            <?php endif; if (in_array('yammer', $social_share_providers)): ?>
-            <li>
-                <a href="#" class="share-yammer" title="<?php echo tpl_getLang('share_on') ?> Yammer"><i class="fa fa-fw fa-lg fa-yahoo"></i> Yammer</a>
-            </li>
-            <?php endif; ?>
-        </ul>
-    </div>
-
-    <?php endif; ?>
 
     <?php if (in_array('help', $page_icons) && $help_page): ?>
     <div class="help modal fade" tabindex="-1" role="dialog">
@@ -117,7 +117,7 @@ if (in_array('help', $page_icons)) {
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title"><?php echo $conf['title'] ?> - <?php echo $help_title ?></h4>
                 </div>
-                <div class="modal-body" style="padding:20px"></div>
+                <div class="modal-body px-5"></div>
             </div>
         </div>
     </div>

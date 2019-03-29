@@ -21,7 +21,7 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
         <ul class="nav nav-stacked nav-pills">
             <?php
 
-                $page_menu = $TEMPLATE->getToolMenu('page', true);
+                $page_menu = $TEMPLATE->getToolMenu('page');
 
                 foreach ($page_menu['menu'] as $type => $item) {
                     echo $item;
