@@ -26,7 +26,7 @@ resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
         <div class="navbar-text navbar-left">
             <?php
                 $cookie_banner_page = tpl_include_page($cookie_banner_page_id, 0, 1, $TEMPLATE->getConf('useACL'));
-                $cookie_banner_page = preg_replace('/<p>\n(.*?)\n<\/p>/', '<i class="fa fa-info-circle text-primary"></i> $1', $cookie_banner_page);
+                $cookie_banner_page = preg_replace('/<p>\n(.*?)\n<\/p>/', '<i class="mdi mdi-information text-primary"></i> $1', $cookie_banner_page);
                 echo $cookie_banner_page;
             ?>
         </div>

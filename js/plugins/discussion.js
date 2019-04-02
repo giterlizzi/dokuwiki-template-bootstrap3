@@ -14,7 +14,7 @@ if ($discussion.length) {
 
   $discussion.find('h2').addClass('page-header');
   $discussion.find('.comment_buttons').addClass('text-right');
-  $discussion.find('#discussion__section').prepend('<i class="fa fa-fw fa-comments"/> ');
+  $discussion.find('#discussion__section').prepend('<i class="mdi mdi-comment-text-multiple"/> ');
 
   $discussion.find('.hentry').addClass('panel panel-default');
   $discussion.find('.hentry .comment_head').addClass('panel-heading');

@@ -51,7 +51,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="fa fa-fw fa-user"/> ');
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="mdi mdi-account"/> ');
     }
 
     // Scrolling animation (on TOC and FootNotes)
@@ -430,25 +430,25 @@ jQuery(document).on('bootstrap3:alerts', function(event) {
     jQuery('div.info')
       .removeClass('info')
       .addClass('alert alert-info')
-      .prepend('<i class="fa fa-fw fa-info-circle"/> ');
+      .prepend('<i class="mdi mdi-18px mdi-information"/> ');
 
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="fa fa-fw fa-times-circle"/> ');
+      .prepend('<i class="mdi mdi-18px mdi-alert-octagon"/> ');
 
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
-      .prepend('<i class="fa fa-fw fa-check-circle"/> ');
+      .prepend('<i class="mdi mdi-18px mdi-check-circle"/> ');
 
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
       .addClass('alert alert-warning')
-      .prepend('<i class="fa fa-fw fa-warning"/> ');
+      .prepend('<i class="mdi mdi-18px mdi-alert"/> ');
 
   }, 0);
 
@@ -561,20 +561,20 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
           $closed    = $directory.parents('.closed'),
           $open      = $directory.parents('.open');
 
-      if (! $directory.find('.fa').length) {
-        $directory.prepend('<i class="fa text-primary"/> ');
+      if (! $directory.find('.mdi').length) {
+        $directory.prepend('<i class="mdi text-primary"/> ');
       }
 
       if ($open.length) {
         $directory.find('i')
-          .removeClass('fa-folder')
-          .addClass('fa-folder-open');
+          .removeClass('mdi-folder')
+          .addClass('mdi-folder-open');
       }
 
       if ($closed.length) {
         $directory.find('i')
-          .removeClass('fa-folder-open')
-          .addClass('fa-folder');
+          .removeClass('mdi-folder-open')
+          .addClass('mdi-folder');
       }
 
     });
@@ -584,7 +584,7 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
       var $page = jQuery(this);
 
       if (! $page.find('i').length) {
-        $page.prepend('<i class="fa fa-fw fa-file-text-o text-muted"/> ');
+        $page.prepend('<i class="mdi mdi-file-document text-muted"/> ');
       }
 
     });
@@ -689,7 +689,7 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
 
   var title = encodeURIComponent(document.title),
       url   = encodeURIComponent(location),
-      window_options = 'width=600,height=460,menubar=no,location=no,status=no';
+      window_options = 'width=800,height=600,menubar=no,location=no,status=no';
 
   var share_to = {
     'google-plus' : (function(){ return [ 'https://plus.google.com/share?ur\l=', url ].join(''); })(),
@@ -701,6 +701,7 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
     'yammer'      : (function(){ return [ 'https://www.yammer.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
     'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
+    'reddit'      : (function(){ return [ 'http://www.reddit.com/submit?url=', url, '&title=', title ].join(''); })(),
   };
 
   $dw_page_icons.find('.share-google-plus').on('click', function() {
@@ -726,9 +727,13 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
   $dw_page_icons.find('.share-telegram').on('click', function() {
     window.open(share_to.telegram, 'Share to Telegram', window_options);
   });
-  
+
   $dw_page_icons.find('.share-yammer').on('click', function() {
     window.open(share_to.yammer, 'Share to Yammer', window_options);
+  });
+
+  $dw_page_icons.find('.share-reddit').on('click', function() {
+    window.open(share_to.reddit, 'Share to Reddit', window_options);
   });
 
   $dw_page_icons.find('.send-mail').on('click', function(e) {
@@ -761,7 +766,7 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
       $headings
         .css('cursor', 'pointer')
-        .prepend(jQuery('<i class="fa fa-fw fa-chevron-down fa-pull-left" style="font-size:12px; padding:10px 0"/>'));
+        .prepend(jQuery('<i class="mdi mdi-chevron-down py-4 mdi-24px"/>'));
 
       $headings.on('click', function() {
 
@@ -772,9 +777,9 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
         $section.toggleClass('hide');
         $heading.css('cursor', 'pointer');
 
-        $icon.hasClass('fa-chevron-down')
-          ? $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up')
-          : $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $icon.hasClass('mdi-chevron-down')
+          ? $icon.removeClass('mdi-chevron-down').addClass('mdi-chevron-up')
+          : $icon.removeClass('mdi-chevron-up').addClass('mdi-chevron-down');
 
       });
 

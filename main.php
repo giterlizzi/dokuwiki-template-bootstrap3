@@ -121,7 +121,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         echo '<!-- content -->';
                         echo '<div class="dw-content">';
-                        echo $TEMPLATE->normalizeContent($content);
+                        echo $content;
                         echo '</div>';
                         echo '<!-- /content -->';
                         echo '</div>';
@@ -153,7 +153,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                     <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
-                        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+                        <?php echo tpl_action('login', 1, 0, 1, '<i class="mdi mdi-sign-in"></i> '); ?>
                     </span>
                     <?php endif; ?>
 
@@ -179,7 +179,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             tpl_indexerWebBug();
         ?>
 
-        <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
+        <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
 
         <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
             <span class="visible-xs-block"></span>

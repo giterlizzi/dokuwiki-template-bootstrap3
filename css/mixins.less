@@ -172,6 +172,21 @@
   font-size: inherit;
 }
 
+.mdi-wrapper() {
+  font: normal normal normal 24px/1 "Material Design Icons";
+  display: inline-block;
+  font-size: inherit;
+  text-rendering: auto;
+  line-height: inherit;
+  width: 1.28571429em;
+}
+
+
+.mdi-icon(@icon_name) {
+  content: '@{icon_name}';
+  .mdi-wrapper();
+}
+
 .icon(@icon_name) {
   content: '@{icon_name}';
 }

@@ -70,7 +70,7 @@ $user_menu = $TEMPLATE->getToolMenu('user');
             <?php if ($use_avatar): ?>
             <img src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="<?php echo $avatar_size_small ?>" height="<?php echo $avatar_size_small ?>" />
             <?php else: ?>
-            <i class="fa fa-fw fa-user"></i>
+            <i class="mdi mdi-account"></i>
             <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
         </a>
 
@@ -113,15 +113,15 @@ $user_menu = $TEMPLATE->getToolMenu('user');
             <?php
                 if ($userhomepage = $TEMPLATE->getPlugin('userhomepage')):
                     echo '<li>' .
-                        $userhomepage->getPublicLink('<i class="fa fa-fw fa-home"></i> ' . $userhomepage->getLang('publicpage')) .
-                        $userhomepage->getPrivateLink('<i class="fa fa-fw fa-user-secret"></i> ' . $userhomepage->getLang('privatenamespace')) .
+                        $userhomepage->getPublicLink('<i class="mdi mdi-home-account"></i> ' . $userhomepage->getLang('publicpage')) .
+                        $userhomepage->getPrivateLink('<i class="mdi mdi-shield-home"></i> ' . $userhomepage->getLang('privatenamespace')) .
                         '</li>';
                 else:
             ?>
 
             <li>
                 <a href="<?php echo $TEMPLATE->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
-                <i class="fa fa-fw fa-home"></i> Home-Page
+                <i class="mdi mdi-18px mdi-home-account"></i> Home-Page
                 </a>
             </li>
 
@@ -144,7 +144,7 @@ $user_menu = $TEMPLATE->getToolMenu('user');
             <?php if ($INFO['isadmin'] && count($extensions_update)): ?>
             <li>
                 <a href="<?php echo wl($ID, array('do' => 'admin', 'page' => 'extension')); ?>" title=" - <?php echo implode('&#13; - ', $extensions_update) ?>">
-                    <i class="fa fa-fw fa-puzzle-piece text-success"></i> <?php echo tpl_getLang('extensions_update'); ?> <span class="badge"><?php echo count($extensions_update) ?></span>
+                    <i class="mdi mdi-puzzle text-success"></i> <?php echo tpl_getLang('extensions_update'); ?> <span class="badge"><?php echo count($extensions_update) ?></span>
                 </a>
             </li>
             <?php endif; ?>

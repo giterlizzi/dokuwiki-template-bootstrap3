@@ -93,12 +93,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         <?php if ($REV) echo p_locale_xhtml('showrev'); ?>
 
                         <h1 class="page-header">
-                            <i class="fa fa-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+                            <i class="mdi mdi-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
                         </h1>
 
                         <p class="pull-right hidden-print list-inline">
-                            <button type="button" class="btn btn-primary btn-xs" title="Info" data-toggle="modal" data-target="#detail-dialog"><i class="fa fa-fw fa-info-circle"></i></button>
-                            <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" class="btn btn-default btn-xs" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="fa fa-fw fa-arrows-alt"></i></a>
+                            <button type="button" class="btn btn-primary btn-xs" title="Info" data-toggle="modal" data-target="#detail-dialog"><i class="mdi mdi-info-circle"></i></button>
+                            <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" class="btn btn-default btn-xs" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="mdi mdi-arrows-alt"></i></a>
                         </p>
 
                         <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
@@ -108,7 +108,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang['js']['mediaclose']; ?>"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title"><i class="fa fa-fw fa-info-circle text-primary"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></h4>
+                                        <h4 class="modal-title"><i class="mdi mdi-info-circle text-primary"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></h4>
                                     </div>
                                     <div class="modal-body">
 
@@ -136,7 +136,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                                     <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
                                     <div class="alert alert-warning">
-                                        <i class="fa fa-warning"></i> <?php echo $lang['media_acl_warning']; ?>
+                                        <i class="mdi mdi-warning"></i> <?php echo $lang['media_acl_warning']; ?>
                                     </div>
                                     <?php endif; ?>
 
@@ -163,7 +163,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                     <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
-                        <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+                        <?php echo tpl_action('login', 1, 0, 1, '<i class="mdi mdi-sign-in"></i> '); ?>
                     </span>
                     <?php endif; ?>
 
@@ -176,7 +176,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
             <span class="loginLink hidden-print">
-                <?php echo tpl_action('login', 1, 0, 1, '<i class="fa fa-sign-in"></i> '); ?>
+                <?php echo tpl_action('login', 1, 0, 1, '<i class="mdi mdi-sign-in"></i> '); ?>
             </span>
             <?php endif; ?>
 
@@ -193,7 +193,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             require_once(template('tpl/cookielaw.php'));
         ?>
 
-        <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="fa fa-chevron-up"></i></a>
+        <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
 
         <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
             <span class="visible-xs"></span>

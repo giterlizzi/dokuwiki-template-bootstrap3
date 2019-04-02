@@ -62,7 +62,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
             <?php if ($TEMPLATE->getConf('showHomePageLink')) :?>
             <ul class="nav navbar-nav">
                 <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
-                    <?php tpl_link($home_link, '<i class="fa fa-fw fa-home"></i> Home') ?>
+                    <?php tpl_link($home_link, '<i class="mdi mdi-home"></i> Home') ?>
                 </li>
             </ul>
             <?php endif; ?>
@@ -85,10 +85,10 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                     include_once(template('tpl/navbar-searchform.php'));
 
                     // Admin Menu
-                    include_once(template('tpl/admin.php'));
+                    include_once(template('tpl/menu-admin.php'));
 
                     // Tools Menu
-                    include_once(template('tpl/tools-menu.php'));
+                    include_once(template('tpl/menu-tools.php'));
 
                     // Theme Switcher Menu
                     include_once(template('tpl/theme-switcher.php'));
@@ -111,7 +111,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                     <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
                     <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">
                         <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>">
-                            <i class="fa fa-fw fa-arrows-alt"></i><span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
+                            <i class="mdi mdi-arrow-expand-all"></i><span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -145,16 +145,16 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 <ul class="nav navbar-nav hide" id="dw__toc_menu">
                     <li class="dropdown">
                         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-fw fa-th-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
+                            <i class="mdi mdi-th-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="max-height: 400px; overflow-y: auto">
-                            <li class="dropdown-header"><i class="fa fa-fw fa-th-list"></i> <?php echo $lang['toc'] ?></li>
+                            <li class="dropdown-header"><i class="mdi mdi-th-list"></i> <?php echo $lang['toc'] ?></li>
                         </ul>
                     </li>
                 </ul>
                 <?php endif; ?>
 
-                <?php include_once(template('tpl/user-menu.php')); ?>
+                <?php include_once(template('tpl/menu-user.php')); ?>
 
 
             </div>

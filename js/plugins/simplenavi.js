@@ -13,8 +13,8 @@ var $simplenavi = jQuery('.plugin__simplenavi');
 if ($simplenavi.length) {
 
   $simplenavi.find('li.open strong').contents().unwrap();
-  $simplenavi.find('li.closed a').prepend('<i class="fa fa-fw fa-folder"/> ');
-  $simplenavi.find('li.open > a').prepend('<i class="fa fa-fw fa-folder-open"/> ');
-  $simplenavi.find('li').not('.closed').not('.open').find('a').prepend('<i class="fa fa-fw fa-file-text-o text-muted"/> ');
+  $simplenavi.find('li.closed a').prepend('<i class="mdi mdi-folder"/> ');
+  $simplenavi.find('li.open > a').prepend('<i class="mdi mdi-folder-open"/> ');
+  $simplenavi.find('li').not('.closed').not('.open').find('a').prepend('<i class="mdi mdi-file-document text-muted"/> ');
 
 }

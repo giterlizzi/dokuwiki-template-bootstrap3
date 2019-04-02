@@ -51,7 +51,7 @@ if (    $wikilinks.length
         var title       = jsonld.headline;
         var image       = ('image' in jsonld) ? [ '<img src="', jsonld.image.url, '" alt="" class="img-responsive" /><br/>' ].join('') : '';
         var description = jQuery.trim(jsonld.description.replace(/\t\*$/, ''))
-                            .replace(/\*(.*)/g, '<i class="fa fa-circle small"></i> $1')
+                            .replace(/\*(.*)/g, '<i class="mdi mdi-circle small"></i> $1')
                             .replace(/\n/g, "<br/>\n")
                             .replace(/\t/g, '&nbsp;');
 

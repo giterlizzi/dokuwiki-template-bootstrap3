@@ -19,8 +19,16 @@ $administrative_tasks = array('usermanager', 'acl', 'extension', 'config', 'styl
 $additional_plugins   = array_diff($admin_plugins, $administrative_tasks);
 
 $admin = array(
-    'administrative_tasks' => array('label' => tpl_getLang('administrative_tasks'), 'plugins' => $administrative_tasks),
-    'additional_plugins'   => array('label' => tpl_getLang('additional_plugins'),   'plugins' => $additional_plugins),
+    'administrative_tasks' => array(
+        'label'   => tpl_getLang('administrative_tasks'),
+        'icon'    => 'mdi mdi-settings',
+        'plugins' => $administrative_tasks
+    ),
+    'additional_plugins' => array(
+        'label'   => tpl_getLang('additional_plugins'),
+        'icon'    => 'mdi mdi-puzzle',
+        'plugins' => $additional_plugins
+    ),
 );
 
 ?>
@@ -29,7 +37,7 @@ $admin = array(
     <li class="dropdown dropdown-large">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['btn_admin'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-cogs"></i> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
+            <i class="mdi mdi-settings"></i> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-large" role="menu">
@@ -40,7 +48,7 @@ $admin = array(
                 <ul class="dropdown-menu col-sm-<?php echo (count($additional_plugins) > 0) ? '6' : '12' ?>">
 
                     <li class="dropdown-header">
-                        <span class="<?php echo $key ?>"><?php echo ucfirst($items['label']) ?></span>
+                        <i class="<?php echo $items['icon'] ?>"></i> <?php echo ucfirst($items['label']) ?>
                     </li>
 
                     <?php
@@ -53,11 +61,20 @@ $admin = array(
 
                             $label = $plugin->getMenuText($conf['lang']);
 
+                            if (method_exists($plugin, 'getMenuIcon')) {
+                                $icon = $plugin->getMenuIcon();
+                                if (! file_exists($icon)) {
+                                    $icon = template('images/menu/puzzle.svg');
+                                }
+                            } else {
+                                $icon = template('images/menu/puzzle.svg');
+                            }
+
                             if (! $label) continue;
 
-                            echo '<li class="' . (($INPUT->str('page') == $item) ? 'active' : '') . '">' .
+                            echo '<li class="action ' . (($INPUT->str('page') == $item) ? 'active' : '') . '">' .
                                  '<a href="'. wl($ID, array('do' => 'admin', 'page' => $item)) .'" title="'. $label .'" class="admin '. $item .'">' .
-                                 $label .
+                                 inlineSVG($icon) . ' ' . $label .
                                  '</a></li>';
 
                         }

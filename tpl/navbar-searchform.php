@@ -24,7 +24,7 @@ if (actionOK('search') && $TEMPLATE->getConf('showSearchForm')): ?>
     <div class="no">
 
         <input id="qsearch" autocomplete="off" type="search" placeholder="<?php echo $lang['btn_search']; ?>" value="<?php echo ($ACT == 'search') ? htmlspecialchars($QUERY) : ''; ?>" accesskey="f" name="q" class="form-control" title="[F]" />
-        <button type="submit" title="<?php echo $lang['btn_search']; ?>"><i class="fa fa-fw fa-search"></i></button>
+        <button type="submit" title="<?php echo $lang['btn_search']; ?>"><i class="mdi mdi-search-web"></i></button>
         <input type="hidden" name="do" value="search" />
 
     </div>

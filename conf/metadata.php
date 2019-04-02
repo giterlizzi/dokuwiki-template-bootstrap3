@@ -13,7 +13,6 @@ $meta['bootswatchTheme']     = array('multichoice', '_choices' => array('cerulea
 $meta['customTheme']         = array('string');
 $meta['showThemeSwitcher']   = array('onoff');
 $meta['hideInThemeSwitcher'] = array('multicheckbox', '_choices' => $meta['bootswatchTheme']['_choices']);
-$meta['useLocalBootswatch']  = array('onoff');
 $meta['themeByNamespace']    = array('onoff');
 
 // Sidebar
