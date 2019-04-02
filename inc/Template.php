@@ -300,11 +300,11 @@ class Template
                             $svg_icon = $plugin->getMenuIcon();
 
                             if (! file_exists($svg_icon)) {
-                                $svg_icon = template('images/menu/puzzle.svg');
+                                $svg_icon = template('assets/mdi/svg/puzzle.svg');
                             }
 
                         } else {
-                            $svg_icon = template('images/menu/puzzle.svg');
+                            $svg_icon = template('assets/mdi/svg/puzzle.svg');
                         }
 
                     }
