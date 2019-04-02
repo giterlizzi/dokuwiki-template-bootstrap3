@@ -26,11 +26,11 @@ class Discussion extends AbstractItem {
         if ($is_discussPage) {
             $this->label = tpl_getLang('back_to_article');
             $this->id    = cleanID($back_id);
-            $this->svg   = template('images/menu/file-document-box-outline.svg');
+            $this->svg   = template('assets/mdi/svg/file-document-box-outline.svg');
         } else {
             $this->label = tpl_getLang('discussion');
             $this->id    = cleanID($discuss_page);
-            $this->svg   = template('images/menu/comment-text-multiple.svg');
+            $this->svg   = template('assets/mdi/svg/comment-text-multiple.svg');
         }
 
     }

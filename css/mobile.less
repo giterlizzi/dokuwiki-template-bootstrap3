@@ -50,7 +50,8 @@
       z-index: 9999;
 
       &::before {
-        .mdi-icon(@mdi-close);
+        .mdi-wrapper();
+        content: '\F156';
         right: 5px;
         position: absolute;
         top: 5px;
