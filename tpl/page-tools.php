@@ -18,13 +18,13 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
 <!-- page-tools -->
 <nav id="dw__pagetools" class="hidden-print">
     <div class="tools panel panel-default pull-right">
-        <ul class="nav nav-stacked nav-pills">
+        <ul class="nav nav-stacked nav-pills text-muted">
             <?php
 
                 $page_menu = $TEMPLATE->getToolMenu('page');
 
-                foreach ($page_menu['menu'] as $type => $item) {
-                    echo $item;
+                foreach ($data['menu'] as $type => $item) {
+                    echo $item['html'];
                 }
 
             ?>

@@ -72,7 +72,7 @@ $admin = array(
 
                             if (! $label) continue;
 
-                            echo '<li class="action ' . (($INPUT->str('page') == $item) ? 'active' : '') . '">' .
+                            echo '<li class="menuitem ' . (($INPUT->str('page') == $item) ? 'active' : '') . '">' .
                                  '<a href="'. wl($ID, array('do' => 'admin', 'page' => $item)) .'" title="'. $label .'" class="admin '. $item .'">' .
                                  inlineSVG($icon) . ' ' . $label .
                                  '</a></li>';

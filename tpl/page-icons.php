@@ -49,9 +49,11 @@ if (in_array('help', $page_icons)) {
                     <i class="mdi mdi-share-variant"></i> <?php echo tpl_getLang('share_on') ?> ...
                 </li>
                 <?php if (in_array('google-plus', $social_share_providers)): ?>
+                <!--
                 <li>
                     <a href="#" class="share-google-plus" title="<?php echo tpl_getLang('share_on') ?> Google+"><i class="mdi mdi-google-plus"></i> Google+</a>
                 </li>
+                -->
                 <?php endif; if (in_array('twitter', $social_share_providers)): ?>
                 <li>
                     <a href="#" class="share-twitter" title="<?php echo tpl_getLang('share_on') ?> Twitter"><i class="mdi mdi-twitter"></i> Twitter</a>

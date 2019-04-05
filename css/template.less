@@ -111,15 +111,15 @@ header {
 
     #dw__search {
 
-      input[type=search] {
+      /*input[type=search] {
         padding-left: 30px;
         display: inline-block;
       }
 
       button[type=submit] {
-       position:absolute;
-       left: 5px;
-       padding: 5px;
+       position:relative;
+       left: 30px;
+       padding: 0px;
        background: transparent;
        border: 0px solid;
       }
@@ -127,7 +127,7 @@ header {
       button[type=submit]:hover,
       button[type=submit]:focus {
         outline: 0;
-      }
+      }*/
 
       /* Typeahead plugin */
       .typeahead {
@@ -529,14 +529,6 @@ div#picker2 {
     color: inherit;
   }
 
-  /*ul.list-inline li {
-    padding: 0 0 0 2px;
-  }
-
-  .dropdown {
-    padding: 0 8px 0 0;
-  }*/
-
   .share-google-plus i { color: #DC4E41; }
   .share-twitter     i { color: #55ACEE; }
   .share-linkedin    i { color: #0077B5; }
@@ -638,20 +630,6 @@ ul.btn-group {
 
 /* Custom DropDown Menu Large (see http://bootsnipp.com/snippets/featured/large-dropdown-menu) */
 
-.dropdown-large {
-  position: static !important;
-}
-
-.dropdown-menu-large {
-  margin-left: 16px;
-  margin-right: 16px;
-  padding: 20px 0px;
-}
-
-#dw__user_menu .dropdown-menu-large {
-  width: 400px;
-}
-
 #dw__admin .dropdown-menu-large {
   width: 600px;
 }
@@ -734,58 +712,62 @@ body.yeti #dw__user_menu dl {
 
 /* SVG icon for DokuWiki Actions */
 
-.action svg {
-  fill: #141414;
+.menuitem svg {
+  fill: currentColor;
   display: inline-block;
   vertical-align: middle;
-  width: 20px;
-  height: 20px;
+  width: 1.4em;
+  height: 1.4em;
 }
 
-.dropdown-menu .action svg {
+#dw__pagetools .menuitem svg {
+  fill: initial !important;
+}
+
+.dropdown-menu .menuitem svg {
   padding-right: 4px;
 }
 
-.action.active svg {
+.active .menuitem svg {
   fill: #fff;
 }
 
-#dw__pagetools .action span {
+#dw__pagetools .menuitem span {
   display: none;
 }
 
 /* Fixes for Bootswatch theme and DokuWiki actions */
 
-body {
+/*body {
 
   &.cyborg,
   &.darkly,
   &.slate,
   &.superhero,
   &.solar {
-    .action svg {
+    .menuitem svg {
       fill: #fff;
     }
   }
 
-  &.yeti .dropdown-menu .action svg {
+  &.yeti .dropdown-menu .menuitem svg {
     fill: #fff;
   }
 
-  &.solar .dropdown-menu .action svg {
+  &.solar .dropdown-menu .menuitem svg {
     fill: #839496;
   }
 
-  &.sandstone .action svg {
+  &.sandstone .menuitem svg {
     fill: #98978b;
   }
 
-  &.lumen .action svg {
+  &.lumen .menuitem svg {
     fill: #555555;
   }
 
-  &.flatly .action svg {
+  &.flatly .menuitem svg {
     fill: #7b8a8b;
   }
 
-}
+}*/

@@ -93,12 +93,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         <?php if ($REV) echo p_locale_xhtml('showrev'); ?>
 
                         <h1 class="page-header">
-                            <i class="mdi mdi-picture-o text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
+                            <i class="mdi mdi-image text-muted"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline', $IMG))?>
                         </h1>
 
                         <p class="pull-right hidden-print list-inline">
-                            <button type="button" class="btn btn-primary btn-xs" title="Info" data-toggle="modal" data-target="#detail-dialog"><i class="mdi mdi-info-circle"></i></button>
-                            <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" class="btn btn-default btn-xs" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="mdi mdi-arrows-alt"></i></a>
+                            <button type="button" class="btn btn-primary btn-xs" title="Info" data-toggle="modal" data-target="#detail-dialog"><i class="mdi mdi-information"></i></button>
+                            <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" class="btn btn-default btn-xs" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="mdi mdi-arrow-expand-all"></i></a>
                         </p>
 
                         <?php tpl_img(900, 700); /* the image; parameters: maximum width, maximum height (and more) */ ?>
@@ -108,37 +108,37 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-label="<?php echo $lang['js']['mediaclose']; ?>"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title"><i class="mdi mdi-info-circle text-primary"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></h4>
+                                        <h4 class="modal-title"><i class="mdi mdi-information text-primary"></i> <?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></h4>
                                     </div>
                                     <div class="modal-body">
 
-                                    <?php
-                                        tpl_img_meta();
-                                        //Comment in for Debug
-                                        //dbg(tpl_img_getTag('Simple.Raw'));
-                                    ?>
-
-                                    <hr/>
-
-                                    <dl class="dl-horizontal">
                                         <?php
-                                            echo '<dt>'.$lang['reference'].':</dt>';
-                                            $media_usage = ft_mediause($IMG, true);
-                                            if (count($media_usage) > 0){
-                                                foreach($media_usage as $path){
-                                                    echo '<dd>'.html_wikilink($path).'</dd>';
-                                                }
-                                            } else {
-                                                echo '<dd>'.$lang['nothingfound'].'</dd>';
-                                            }
+                                            tpl_img_meta();
+                                            //Comment in for Debug
+                                            //dbg(tpl_img_getTag('Simple.Raw'));
                                         ?>
-                                    </dl>
 
-                                    <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
-                                    <div class="alert alert-warning">
-                                        <i class="mdi mdi-warning"></i> <?php echo $lang['media_acl_warning']; ?>
-                                    </div>
-                                    <?php endif; ?>
+                                        <hr/>
+
+                                        <dl class="dl-horizontal">
+                                            <?php
+                                                echo '<dt>'.$lang['reference'].':</dt>';
+                                                $media_usage = ft_mediause($IMG, true);
+                                                if (count($media_usage) > 0){
+                                                    foreach($media_usage as $path){
+                                                        echo '<dd>'.html_wikilink($path).'</dd>';
+                                                    }
+                                                } else {
+                                                    echo '<dd>'.$lang['nothingfound'].'</dd>';
+                                                }
+                                            ?>
+                                        </dl>
+
+                                        <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
+                                        <div class="alert alert-warning">
+                                            <i class="mdi mdi-warning"></i> <?php echo $lang['media_acl_warning']; ?>
+                                        </div>
+                                        <?php endif; ?>
 
                                     </div>
                                     <div class="modal-footer">

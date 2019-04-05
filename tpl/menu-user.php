@@ -59,8 +59,6 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
 }
 
-$user_menu = $TEMPLATE->getToolMenu('user');
-
 ?>
 <!-- user-menu -->
 <ul class="nav navbar-nav" id="dw__user_menu">
@@ -112,16 +110,17 @@ $user_menu = $TEMPLATE->getToolMenu('user');
             <li class="dropdown-header">Home-Page</li>
             <?php
                 if ($userhomepage = $TEMPLATE->getPlugin('userhomepage')):
-                    echo '<li>' .
-                        $userhomepage->getPublicLink('<i class="mdi mdi-home-account"></i> ' . $userhomepage->getLang('publicpage')) .
-                        $userhomepage->getPrivateLink('<i class="mdi mdi-shield-home"></i> ' . $userhomepage->getLang('privatenamespace')) .
-                        '</li>';
+                    echo '<li><a rel="nofollow" href="' . wl($userhomepage->getPublicID()) . '" title="'. $userhomepage->getLang('publicpage') .'">' .
+                         '<i class="mdi mdi-home"></i> '. $userhomepage->getLang('publicpage') .'</a></li>';
+
+                    echo '<li><a rel="nofollow" href="' . wl($userhomepage->getPrivateID()) . '" title="'. $userhomepage->getLang('privatenamespace') .'">' .
+                         '<i class="mdi mdi-home-account"></i> '. $userhomepage->getLang('privatenamespace') .'</a></li>';
                 else:
             ?>
 
             <li>
                 <a href="<?php echo $TEMPLATE->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
-                <i class="mdi mdi-18px mdi-home-account"></i> Home-Page
+                    <i class="mdi mdi-18px mdi-home-account"></i> Home-Page
                 </a>
             </li>
 
@@ -133,10 +132,10 @@ $user_menu = $TEMPLATE->getToolMenu('user');
 
             <?php
 
-                echo $user_menu['menu']['profile'];
+                echo $TEMPLATE->getToolMenuItemLink('user', 'profile');
 
                 if ($INFO['isadmin']) {
-                    echo $user_menu['menu']['admin'];
+                    echo $TEMPLATE->getToolMenuItemLink('user', 'admin');
                 }
 
             ?>
@@ -195,7 +194,7 @@ $user_menu = $TEMPLATE->getToolMenu('user');
             ?>
 
             <?php
-                echo $user_menu['menu']['logout'];
+                echo $TEMPLATE->getToolMenuItemLink('user', 'logout');
             ?>
 
         </ul>

@@ -102,17 +102,17 @@ class Template
     {
         #dbg(print_r($event, 1));
 
-        #if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
-        #    array_unshift($event->data['listItemContent'], '<i class="mdi mdi-file-document" title="'. hsc($event->data['page']) .'"></i>');
-        #}
+        if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
+            array_unshift($event->data['listItemContent'], '<i class="mdi mdi-file-document-outline" title="'. hsc($event->data['page']) .'"></i> ');
+        }
 
-        #if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
-        #    $event->data['resultBody']['meta'] = str_replace(
-        #        array('<span class="lastmod">', '<span class="hits">'),
-        #        array('<span class="lastmod"><i class="mdi mdi-calendar"></i> ', '<span class="hits"><i class="mdi mdi-tasks"></i> '),
-        #        '<small>' . $event->data['resultBody']['meta'] . '</small>'
-        #    );
-        #}
+        if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
+            $event->data['resultBody']['meta'] = str_replace(
+                array('<span class="lastmod">', '<span class="hits">'),
+                array('<span class="lastmod"><i class="mdi mdi-calendar"></i> ', '<span class="hits"><i class="mdi mdi-poll"></i> '),
+                '<small>' . $event->data['resultBody']['meta'] . '</small>'
+            );
+        }
 
     }
 
@@ -171,7 +171,7 @@ class Template
         }
 
         # FontAwesome
-        $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
+        #$stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
 
         # Material Design Icons
         $stylesheets[] = $tpl_basedir . 'assets/mdi/css/materialdesignicons.min.css';
@@ -270,71 +270,9 @@ class Template
                 $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
             }
 
-            $svg_icon = null;
-
-            if (! $INFO['exists']) {
-                $svg_icon = template('assets/mdi/svg/alert.svg');
-            }
-
-
-            if ($ACT == 'diff') {
-                $svg_icon = template('assets/mdi/svg/file-compare.svg');
-            }
-
-            $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
-
-
-            if (class_exists($menu_class, false)) {
-                $menu_item = new $menu_class;
-                $svg_icon = $menu_item->getSvg();
-            }
-
-            switch ($ACT) {
-
-                case 'admin':
-
-                    if (($plugin = plugin_load('admin', $INPUT->str('page'))) !== null) {
-
-                        if (method_exists($plugin, 'getMenuIcon')) {
-
-                            $svg_icon = $plugin->getMenuIcon();
-
-                            if (! file_exists($svg_icon)) {
-                                $svg_icon = template('assets/mdi/svg/puzzle.svg');
-                            }
-
-                        } else {
-                            $svg_icon = template('assets/mdi/svg/puzzle.svg');
-                        }
-
-                    }
-
-                    break;
-
-
-                case 'denied':
-                    $svg_icon = template('assets/mdi/svg/block-helper.svg');
-                    break;
-            }
-
-            if ($svg_icon && file_exists($svg_icon)) {
-
-                $xml = simplexml_load_file($svg_icon);
-
-                $xml['width']  = '90%';
-                $xml['height'] = '90%';
-                $xml['style']  = 'fill-opacity: 0.1';
-
-                $svg = $xml->asXML();
-
-                $styles[] = 'article h1:first-of-type { padding-left: 1.28571429em; background-repeat: no-repeat; background-image: url("data:image/svg+xml;base64,'. base64_encode($svg) .'"); }';
-
-            }
-
-
             $event->data['style'][] = array(
                 'type'  => 'text/css',
-                '_data' => '@media screen { ' . implode("\n", $styles) . ' }',
+                '_data' => '@media screen { '. implode(" ", $styles) .' }',
             );
 
         }
@@ -851,7 +789,7 @@ class Template
             $out = '<ul class="list-inline">';
 
             if (in_array('filename', $page_info)) {
-                $out .= '<li><i class="mdi mdi-file-document text-muted"></i> <span title="'. $fn_full .'">'. $fn .'</span></li>';
+                $out .= '<li><i class="mdi mdi-file-document-outline text-muted"></i> <span title="'. $fn_full .'">'. $fn .'</span></li>';
             }
 
             if (in_array('date', $page_info)) {
@@ -1700,6 +1638,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         global $ACT;
         global $INPUT;
+        global $INFO;
 
         # FIX :-\ smile
         $content = str_replace(array('alt=":-\"', "alt=':-\'"), 'alt=":-&#92;"', $content);
@@ -1779,6 +1718,15 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # Section Edit Button
         foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
             $elm->class .= ' btn btn-xs btn-default';
+        }
+
+        # Section Edit icons
+        foreach ($html->find('.secedit.editbutton_section button') as $elm) {
+            $elm->innertext = '<i class="mdi mdi-pencil"></i> ' . $elm->innertext;
+        }
+
+        foreach ($html->find('.secedit.editbutton_table button') as $elm) {
+            $elm->innertext = '<i class="mdi mdi-table"></i> ' . $elm->innertext;
         }
 
         # Search Hit
@@ -1993,7 +1941,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
             foreach ($html->find('.idx .wikilink1') as $elm) {
-                $elm->innertext = '<i class="mdi mdi-file-document text-muted"></i> ' . $elm->innertext;
+                $elm->innertext = '<i class="mdi mdi-file-document-outline text-muted"></i> ' . $elm->innertext;
             }
 
             $content = $html->save();
@@ -2273,6 +2221,50 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             # Configuration Manager Template Sections
             if ($INPUT->str('page') == 'config') {
 
+                # Import HTML string
+                $html = new \simple_html_dom;
+                $html->load($content, true, false);
+
+                foreach ($html->find('fieldset[id^="plugin__"]') as $elm) {
+
+                    preg_match('/plugin_+(\w+[^_])_+plugin_settings_name/', $elm->id, $matches);
+
+                    $plugin_name = $matches[1];
+
+                    $extension = plugin_load('helper', 'extension_extension');
+                    $extension->setExtension($plugin_name);
+
+                    foreach ($elm->find('legend') as $legend) {
+                        $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext .' <br/><h6>'. $extension->getDescription() .' <a class="urlextern" href="'. $extension->getURL() .'" target="_blank">Docs</a></h6>';
+                    }
+
+                }
+
+                $dokuwiki_configs = array(
+                    '#_basic'          => 'mdi mdi-settings',
+                    '#_display'        => 'mdi mdi-monitor',
+                    '#_authentication' => 'mdi mdi-shield-account',
+                    '#_anti_spam'      => 'mdi mdi-block-helper',
+                    '#_editing'        => 'mdi mdi-pencil',
+                    '#_links'          => 'mdi mdi-link-variant',
+                    '#_media'          => 'mdi mdi-folder-image',
+                    '#_notifications'  => 'mdi mdi-email',
+                    '#_syndication'    => 'mdi mdi-rss',
+                    '#_advanced'       => 'mdi mdi-palette-advanced',
+                    '#_network'        => 'mdi mdi-network'
+                );
+
+                foreach ($dokuwiki_configs as $selector => $icon) {
+                    foreach ($html->find("$selector legend") as $elm) {
+                        $elm->innertext = '<i class="'.$icon.'"></i> ' . $elm->innertext;
+                    }
+                }
+
+                $content = $html->save();
+
+                $html->clear();
+                unset($html);
+
                 $admin_sections = array(
                     // Section                  Insert Before           Icon
                     'theme'            => array('bootstrapTheme',       'mdi-palette'),
@@ -2326,7 +2318,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $elm->class .= ' btn btn-default';
 
                 if ($elm->tag == 'button') {
-                    $elm->innertext = '<i class="mdi mdi-file-document"></i> ' . $elm->innertext;
+                    $elm->innertext = '<i class="mdi mdi-file-document-outline"></i> ' . $elm->innertext;
                 }
 
             }
@@ -2435,6 +2427,107 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             unset($html);
 
         }
+
+
+        # Add icons for Extensions, Actions, etc.
+
+        $svg_icon = null;
+
+        if (! $INFO['exists']) {
+            $svg_icon = template('assets/mdi/svg/alert.svg');
+        }
+
+
+        if ($ACT == 'diff') {
+            $svg_icon = template('assets/mdi/svg/file-compare.svg');
+        }
+
+        $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
+
+
+        if (class_exists($menu_class, false)) {
+            $menu_item = new $menu_class;
+            $svg_icon = $menu_item->getSvg();
+        }
+
+        switch ($ACT) {
+
+            case 'admin':
+
+                if (($plugin = plugin_load('admin', $INPUT->str('page'))) !== null) {
+
+                    if (method_exists($plugin, 'getMenuIcon')) {
+
+                        $svg_icon = $plugin->getMenuIcon();
+
+                        if (! file_exists($svg_icon)) {
+                            $svg_icon = template('assets/mdi/svg/puzzle.svg');
+                        }
+
+                    } else {
+                        $svg_icon = template('assets/mdi/svg/puzzle.svg');
+                    }
+
+                }
+
+                break;
+
+
+            case 'denied':
+                $svg_icon = template('assets/mdi/svg/block-helper.svg');
+                break;
+
+            case 'search':
+                $svg_icon = template('assets/mdi/svg/search-web.svg');
+                break;
+        }
+
+        if ($svg_icon && file_exists($svg_icon)) {
+
+            $xml = simplexml_load_file($svg_icon);
+
+            $xml['width']  = '32';
+            $xml['height'] = '32';
+            $xml['style']  = 'fill-opacity: 0.2;';
+
+            if (! $INFO['exists'] && $ACT == 'show') {
+                $xml['style'] .= 'fill: orange;';
+            }
+
+            if ($ACT == 'denied') {
+                $xml['style'] .= 'fill: red;';
+            }
+
+            if ($ACT == 'admin' && $INPUT->str('page') == 'extension') {
+                $xml['style'] .= 'fill: green;';
+            }
+
+            $svg = $this->cleanSVG($xml->asXML());
+
+            # Import HTML string
+            $html = new \simple_html_dom;
+            $html->load($content, true, false);
+
+            foreach ($html->find('h1') as $elm) {
+                $elm->innertext = $svg . ' ' . $elm->innertext;
+                break;
+            }
+
+
+            $content = $html->save();
+
+            $html->clear();
+            unset($html);
+
+        }
+
+
+//         # Import HTML string
+//         $html = new \simple_html_dom;
+//         $html->load($content, true, false);
+// 
+//         $content = $html->save();
+
 
         return $content;
 
@@ -2700,18 +2793,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $ACT;
 
         $tools_menus = array(
-            'user' => array('icon' => 'mdi mdi-account',       'class' => new \dokuwiki\Menu\UserMenu),
-            'site' => array('icon' => 'mdi mdi-toolbox',       'class' => new \dokuwiki\Menu\SiteMenu),
-            'page' => array('icon' => 'mdi mdi-file-document', 'class' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
+            'user' => array('icon' => 'mdi mdi-account',               'object' => new \dokuwiki\Menu\UserMenu),
+            'site' => array('icon' => 'mdi mdi-toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
+            'page' => array('icon' => 'mdi mdi-file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
-            $tools_menus['page'] = array('icon' => 'mdi mdi-picture-o', 'class' => new \dokuwiki\Menu\DetailMenu);
+            $tools_menus['page'] = array('icon' => 'mdi mdi-image', 'object' => new \dokuwiki\Menu\DetailMenu);
         }
 
         foreach($tools_menus as $tool => $data) {
 
-            foreach ($data['class']->getItems() as $item) {
+            foreach ($data['object']->getItems() as $item) {
 
                 $attr = buildAttributes($item->getLinkAttributes());
                 $active = 'action';
@@ -2727,7 +2820,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $html .= "</a>";
                 $html .= '</li>';
 
-                $tools_menus[$tool]['menu'][$item->getType()] = $html;
+                $tools_menus[$tool]['menu'][$item->getType()]['object'] = $item;
+                $tools_menus[$tool]['menu'][$item->getType()]['html']   = $html;
 
             }
 
@@ -2747,6 +2841,31 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     public function getToolMenu($tool)
     {
         return $this->toolsMenu[$tool];
+    }
+
+    public function getToolMenuItem($tool, $item)
+    {
+        return $this->toolsMenu[$tool]['menu'][$item]['object'];
+    }
+
+    public function getToolMenuItemLink($tool, $item)
+    {
+        return $this->toolsMenu[$tool]['menu'][$item]['html'];
+    }
+
+    public function cleanSVG($content)
+    {
+
+        $content = preg_replace('/<!--.*?(-->)/s','', $content);    // comments
+        $content = preg_replace('/<\?xml .*?\?>/i', '', $content);  // xml header
+        $content = preg_replace('/<!DOCTYPE .*?>/i', '', $content); // doc type
+        $content = preg_replace('/>\s+</s', '><', $content);        // newlines between tags
+        $content = trim($content);
+
+        if(substr($content, 0, 5) !== '<svg ') return false;
+
+        return $content;
+
     }
 
 }

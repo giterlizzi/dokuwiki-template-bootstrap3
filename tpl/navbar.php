@@ -121,17 +121,31 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                         <span class="dw__actions dw-action-icon">
                         <?php
 
-                            $register_label = sprintf('<span class="%s">%s</span>', (in_array('register', $navbar_labels) ? null : 'sr-only'), $lang['btn_register']);
-                            $login_label    = sprintf('<span class="%s">%s</span>', (in_array('login', $navbar_labels) ? null : 'sr-only'), $lang['btn_login']);
+                            $register_action = $TEMPLATE->getToolMenuItem('user', 'register');
+                            $login_action    = $TEMPLATE->getToolMenuItem('user', 'login');
 
-                            $register_btn = tpl_actionlink('register', null, null, $register_label, true);
-                            $register_btn = str_replace('action', 'action btn btn-success navbar-btn', $register_btn);
-                            echo $register_btn;
+                            $register_attr = $register_action->getLinkAttributes();
+                            $register_attr['class'] .= ' btn btn-success navbar-btn';
+
+                            $register_html  = '<a '. buildAttributes($register_attr) . '>';
+                            $register_html .= \inlineSVG($register_action->getSvg());
+                            $register_html .= '<span class="'. (in_array('register', $navbar_labels) ? null : 'sr-only') .'"> ' . hsc($register_action->getLabel()) . '</span>';
+                            $register_html .= "</a>";
+
+                            echo $register_html;
 
                             if (! $TEMPLATE->getConf('hideLoginLink')) {
-                                $login_btn = tpl_actionlink('login', null, null, $login_label, true);
-                                $login_btn = str_replace('action', 'action btn btn-default navbar-btn', $login_btn);
-                                echo $login_btn;
+
+                                $login_attr = $login_action->getLinkAttributes();
+                                $login_attr['class'] .= ' btn btn-default navbar-btn';
+
+                                $login_html  = '<a '. buildAttributes($login_attr) . '>';
+                                $login_html .= \inlineSVG($login_action->getSvg());
+                                $login_html .= '<span class="'. (in_array('login', $navbar_labels) ? null : 'sr-only') .'"> ' . hsc($login_action->getLabel()) . '</span>';
+                                $login_html .= "</a>";
+
+                                echo $login_html;
+
                             }
 
                         ?>

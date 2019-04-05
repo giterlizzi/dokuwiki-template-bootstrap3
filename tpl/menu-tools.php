@@ -37,7 +37,7 @@ $tools_menus   = $TEMPLATE->getToolsMenu();
             <?php
 
                 foreach ($data['menu'] as $type => $item) {
-                    echo $item;
+                    echo $item['html'];
                 }
 
             ?>
@@ -63,7 +63,7 @@ $tools_menus   = $TEMPLATE->getToolsMenu();
             <?php
 
                 foreach ($data['menu'] as $type => $item) {
-                    echo $item;
+                    echo $item['html'];
                 }
 
             ?>
