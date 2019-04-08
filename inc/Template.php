@@ -2845,12 +2845,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     public function getToolMenuItem($tool, $item)
     {
-        return $this->toolsMenu[$tool]['menu'][$item]['object'];
+        if (isset($this->toolsMenu[$tool]) && isset($this->toolsMenu[$tool]['menu'][$item])) {
+            return $this->toolsMenu[$tool]['menu'][$item]['object'];
+        }
+        return null;
     }
 
     public function getToolMenuItemLink($tool, $item)
     {
-        return $this->toolsMenu[$tool]['menu'][$item]['html'];
+        if (isset($this->toolsMenu[$tool]) && isset($this->toolsMenu[$tool]['menu'][$item])) {
+            return $this->toolsMenu[$tool]['menu'][$item]['html'];
+        }
+        return null;
     }
 
     public function cleanSVG($content)

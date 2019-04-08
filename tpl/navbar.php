@@ -124,17 +124,21 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                             $register_action = $TEMPLATE->getToolMenuItem('user', 'register');
                             $login_action    = $TEMPLATE->getToolMenuItem('user', 'login');
 
-                            $register_attr = $register_action->getLinkAttributes();
-                            $register_attr['class'] .= ' btn btn-success navbar-btn';
+                            if ($register_action) {
 
-                            $register_html  = '<a '. buildAttributes($register_attr) . '>';
-                            $register_html .= \inlineSVG($register_action->getSvg());
-                            $register_html .= '<span class="'. (in_array('register', $navbar_labels) ? null : 'sr-only') .'"> ' . hsc($register_action->getLabel()) . '</span>';
-                            $register_html .= "</a>";
+                                $register_attr = $register_action->getLinkAttributes();
+                                $register_attr['class'] .= ' btn btn-success navbar-btn';
 
-                            echo $register_html;
+                                $register_html  = '<a '. buildAttributes($register_attr) . '>';
+                                $register_html .= \inlineSVG($register_action->getSvg());
+                                $register_html .= '<span class="'. (in_array('register', $navbar_labels) ? null : 'sr-only') .'"> ' . hsc($register_action->getLabel()) . '</span>';
+                                $register_html .= "</a>";
 
-                            if (! $TEMPLATE->getConf('hideLoginLink')) {
+                                echo $register_html;
+
+                            }
+
+                            if (! $TEMPLATE->getConf('hideLoginLink') && $login_action) {
 
                                 $login_attr = $login_action->getLinkAttributes();
                                 $login_attr['class'] .= ' btn btn-default navbar-btn';
