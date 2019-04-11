@@ -10,3 +10,11 @@
 // must be run from within DokuWiki
 if (!defined('DOKU_INC')) die();
 
+function bootstrap3_content($content) {
+
+  global $TEMPLATE;
+
+  return $TEMPLATE->normalizeContent($content);
+
+}
+
