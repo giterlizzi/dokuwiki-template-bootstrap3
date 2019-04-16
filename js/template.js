@@ -38,7 +38,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
     jQuery('main form:not(.form-horizontal)').addClass('form-inline');
 
     // Toolbar
-    jQuery('#tool__bar').addClass('btn-group btn-group-xs');
+    jQuery('#tool__bar').addClass('btn-group');
 
     // Picker
     // TODO ported
@@ -599,18 +599,18 @@ jQuery(document).on('bootstrap3:page-tools', function(event) {
 
   // console.debug(event.type + ' event fired');
 
-  // Page Tools Affix
-  jQuery('#dw__pagetools .tools').affix({
-    offset : {
-      top    : (jQuery('main').position().top),
-      bottom : ((   jQuery(document).height()
-                  - jQuery('article').height()
-                  - jQuery('#dokuwiki__pageheader').height()
-                  - jQuery('#dokuwiki__header').height() ))
-    }
-  });
-
   if (jQuery('#dw__pagetools').length) {
+
+    // Page Tools Affix
+    jQuery('#dw__pagetools .tools').affix({
+      offset : {
+        top    : (jQuery('main').position().top),
+        bottom : ((   jQuery(document).height()
+                    - jQuery('article').height()
+                    - jQuery('#dokuwiki__pageheader').height()
+                    - jQuery('#dokuwiki__header').height() ))
+      }
+    });
 
     var $pagetools = jQuery('#dw__pagetools');
 
