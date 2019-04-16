@@ -37,7 +37,7 @@ if (in_array('help', $page_icons)) {
 <!-- page-icons -->
 <div class="dw-page-icons pull-right hidden-print">
 
-    <ul class="list-inline pull-right m-0">
+    <ul class="list-inline pull-right m-0 mb-2">
 
         <?php if ($social_share && count($social_share_providers)): ?>
         <li class="dropdown">
