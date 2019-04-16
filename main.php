@@ -155,7 +155,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                     <span class="loginLink hidden-print">
                         <?php
                             if ($login_item = $TEMPLATE->getToolMenuItem('user', 'login')) {
-                                echo '<a href="'. buildAttributes($login_item->getLinkAttributes()) .'">'. inlineSVG($login_item->getSvg()) . ' ' . hsc($login_item->getLabel()) .'</a>';
+                                echo '<a '. buildAttributes($login_item->getLinkAttributes()) .'>'. inlineSVG($login_item->getSvg()) . ' ' . hsc($login_item->getLabel()) .'</a>';
                             }
                         ?>
                     </span>
