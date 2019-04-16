@@ -153,7 +153,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                     <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
-                        <?php echo tpl_action('login', 1, 0, 1, '<i class="mdi mdi-sign-in"></i> '); ?>
+                        <?php
+                            if ($login_item = $TEMPLATE->getToolMenuItem('user', 'login')) {
+                                echo '<a href="'. buildAttributes($login_item->getLinkAttributes()) .'">'. inlineSVG($login_item->getSvg()) . ' ' . hsc($login_item->getLabel()) .'</a>';
+                            }
+                        ?>
                     </span>
                     <?php endif; ?>
 
