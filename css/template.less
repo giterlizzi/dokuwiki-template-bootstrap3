@@ -728,8 +728,8 @@ body.yeti #dw__user_menu dl {
   padding-right: 4px;
 }
 
-.active .menuitem svg {
-  fill: #fff;
+#dw__pagetools .active .menuitem svg {
+  fill: #fff !important;
 }
 
 #dw__pagetools .menuitem span {
@@ -738,15 +738,15 @@ body.yeti #dw__user_menu dl {
 
 /* Fixes for Bootswatch theme and DokuWiki actions */
 
-/*body {
+body {
 
   &.cyborg,
   &.darkly,
   &.slate,
   &.superhero,
   &.solar {
-    .menuitem svg {
-      fill: #fff;
+    #dw__pagetools .menuitem svg {
+      fill: #fff !important;
     }
   }
 
@@ -770,4 +770,4 @@ body.yeti #dw__user_menu dl {
     fill: #7b8a8b;
   }
 
-}*/
+}
