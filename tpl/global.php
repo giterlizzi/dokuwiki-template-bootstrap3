@@ -47,13 +47,10 @@ if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
 
 }
 
-
+require_once template('Template.php');
 
 // Load PHP Simple HTML DOM class
 include_once template('inc/simple_html_dom.php');
-
-// Load template class
-include(template('inc/Template.php'));
 
 // Load custom menus
 include(template('inc/Menu/PageMenu.php'));

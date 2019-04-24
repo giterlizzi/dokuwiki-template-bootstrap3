@@ -307,11 +307,6 @@ div#picker2 {
 /* Footer Page */
 #dw__footer {
 
-  position: absolute;
-  left: 0;
-  right: 0;
-  border-radius: 0px;
-  border-width: 1px 0 0 0;
   margin: 50px 0 0 0;
   z-index: 995;
 
@@ -322,6 +317,16 @@ div#picker2 {
     margin-right: 0;
   }
 
+}
+
+.footer-fixed-bottom {
+  left: 0;
+  right: 0;
+  position: absolute;
+  margin-bottom: -50px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 0;
 }
 
 
@@ -770,4 +775,8 @@ body {
     fill: #7b8a8b;
   }
 
+}
+
+.alert {
+  overflow: hidden;
 }

@@ -25,11 +25,15 @@ $wiki_tagline   = ($conf['tagline']) ? '<span class="dw__tagline">'.$conf['tagli
 $wiki_logo_size = 'height="32"';
 $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homePageURL') : wl());
 
+$footer_classes = array();
+$footer_classes[] = (($TEMPLATE->getConf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default');
+$footer_classes[] = ($TEMPLATE->getConf('fixedTopNavbar') ? 'footer-fixed-bottom' : null);
+
 ?>
 <?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <!-- footer -->
-<footer id="dw__footer" class="navbar <?php echo (($TEMPLATE->getConf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?>">
-    <div class="container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+<footer id="dw__footer" class="navbar <?php echo trim(implode(' ', $footer_classes)) ?>">
+    <div class="container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
         <div class="small navbar-text">
 

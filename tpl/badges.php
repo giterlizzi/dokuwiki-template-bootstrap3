@@ -15,7 +15,7 @@ global $TEMPLATE;
 
 if ($TEMPLATE->getConf('showBadges')): ?>
 <!-- badges -->
-<ul id="dw__badges" class="list-inline text-right hidden-print">
+<ul id="dw__badges" class="list-inline pull-right hidden-print">
 
     <li>
         <a href="https://www.dokuwiki.org/template:bootstrap3" title="Bootstrap template for DokuWiki" target="<?php echo $conf['target']['extern'] ?>">
