@@ -82,6 +82,7 @@ $conf['tocCollapseSubSections']      = 1;
 $conf['tocCollapsed']                = 0;
 $conf['tocLayout']                   = 'default';
 $conf['useACL']                      = 0;
+$conf['useAlternativeToolbarIcons']  = 1;
 $conf['useAnchorJS']                 = 1;
 $conf['useAvatar']                   = 'off';
 $conf['useGoogleAnalytics']          = 0;

@@ -107,6 +107,7 @@ $lang['tocCollapsed']                 = 'Collapse TOC on every pages';
 $lang['tocPosition']                  = 'TOC position';
 $lang['tocLayout']                    = 'TOC layout';
 $lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
+$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
 $lang['useAnchorJS']                  = 'Use AnchorJS';
 $lang['useAvatar']                    = 'Load the avatar image from Gravatar, Libravatar, Microsoft Office365 or local DokuWiki <code>:user</code> namespace';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';

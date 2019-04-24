@@ -6,6 +6,62 @@
  * License  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+/**
+ * Replace all OOTB DokuWiki toolbar icon with Material Design Icons
+ */
+if (typeof window.toolbar !== 'undefined') {
+
+  if (JSINFO.bootstrap3.config.useAlternativeToolbarIcons) {
+
+    var original_toolbar = window.toolbar;
+    var new_toolbar = new Array();
+
+    var icons = {
+      'bold.png'       : 'format-bold.svg',
+      'chars.png'      : 'omega.svg',
+      'h.png'          : 'format-header-pound.svg',
+      'h1.png'         : 'format-header-1.svg',
+      'hequal.png'     : 'format-header-equal.svg',
+      'hminus.png'     : 'format-header-decrease.svg',
+      'hplus.png'      : 'format-header-increase.svg',
+      'hr.png'         : 'minus.svg', // ??
+      'image.png'      : 'image.svg',
+      'italic.png'     : 'format-italic.svg',
+      'link.png'       : 'link.svg',
+      'linkextern.png' : 'link-variant.svg', // ??
+      'mono.png'       : 'format-title.svg',
+      'ol.png'         : 'format-list-numbered.svg',
+      'sig.png'        : 'signature.svg',
+      'smiley.png'     : 'emoticon-outline.svg',
+      'strike.png'     : 'format-strikethrough.svg',
+      'ul.png'         : 'format-list-bulleted.svg',
+      'underline.png'  : 'format-underline.svg',
+
+    };
+
+    for (i in window.toolbar) {
+
+      // Replace all icons in "H(eaders)" picker
+      if (window.toolbar[i].icon == 'h.png') {
+        for (x in window.toolbar[i].list) {
+          var hn = parseInt(x) + 1;
+          window.toolbar[i].list[x].icon = '../../tpl/bootstrap3/assets/mdi/svg/format-header-' + hn + '.svg';
+        }
+      }
+
+      for (icon in icons) {
+        if (window.toolbar[i].icon == icon) {
+          window.toolbar[i].icon = '../../tpl/bootstrap3/assets/mdi/svg/' + icons[icon];
+        }
+      }
+
+    }
+
+  }
+
+}
+
+
 jQuery(document).ready(function() {
 
   //'use strict';

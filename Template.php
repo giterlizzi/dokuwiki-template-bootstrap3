@@ -47,16 +47,17 @@ class Template
             'mode'   => $ACT,
             'toc'    => array(),
             'config' => array(
-                'collapsibleSections' => (int) $this->getConf('collapsibleSections'),
-                'fixedTopNavbar'      => (int) $this->getConf('fixedTopNavbar'),
-                'showSemanticPopup'   => (int) $this->getConf('showSemanticPopup'),
-                'sidebarOnNavbar'     => (int) $this->getConf('sidebarOnNavbar'),
-                'tagsOnTop'           => (int) $this->getConf('tagsOnTop'),
-                'tocAffix'            => (int) $this->getConf('tocAffix'),
-                'tocCollapseOnScroll' => (int) $this->getConf('tocCollapseOnScroll'),
-                'tocCollapsed'        => (int) $this->getConf('tocCollapsed'),
-                'tocLayout'           =>       $this->getConf('tocLayout'),
-                'useAnchorJS'         => (int) $this->getConf('useAnchorJS'),
+                'collapsibleSections'        => (int) $this->getConf('collapsibleSections'),
+                'fixedTopNavbar'             => (int) $this->getConf('fixedTopNavbar'),
+                'showSemanticPopup'          => (int) $this->getConf('showSemanticPopup'),
+                'sidebarOnNavbar'            => (int) $this->getConf('sidebarOnNavbar'),
+                'tagsOnTop'                  => (int) $this->getConf('tagsOnTop'),
+                'tocAffix'                   => (int) $this->getConf('tocAffix'),
+                'tocCollapseOnScroll'        => (int) $this->getConf('tocCollapseOnScroll'),
+                'tocCollapsed'               => (int) $this->getConf('tocCollapsed'),
+                'tocLayout'                  =>       $this->getConf('tocLayout'),
+                'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
+                'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
             ),
         );
 
@@ -170,7 +171,7 @@ class Template
 
         }
 
-        # FontAwesome
+        # FontAwesome (TODO remove in future)
         $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
 
         # Material Design Icons

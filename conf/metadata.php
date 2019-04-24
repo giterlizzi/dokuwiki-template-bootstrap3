@@ -100,14 +100,15 @@ $meta['browserTitleCharSepNS'] = array('multichoice', '_choices' => array('-', '
 $meta['browserTitleOrderNS']   = array('multichoice', '_choices' => array('normal', 'reverse'));
 
 // Page
-$meta['showPageInfo']         = array('onoff');
-$meta['useACL']               = array('onoff', '_caution' => 'warning');
-$meta['pageInfo']             = array('multicheckbox', '_choices' => array('filename', 'extension', 'date', 'editor', 'locked'));
-$meta['pageInfoDateFormat']   = array('multichoice', '_choices'   => array('dformat', 'human'));
-$meta['showPageIcons']        = array('onoff');
-$meta['pageIcons']            = array('multicheckbox', '_choices' => array('social-share', 'feed', 'send-mail', 'permalink', 'print', 'help'));
-$meta['socialShareProviders'] = array('multicheckbox', '_choices' => array('facebook', 'google-plus', 'linkedin', 'pinterest', 'whatsapp', 'twitter', 'telegram', 'yammer'));
-$meta['tagsOnTop']            = array('onoff');
-$meta['useAnchorJS']          = array('onoff');
-$meta['collapsibleSections']  = array('onoff');
-$meta['domParserMaxPageSize'] = array('numeric', '_min' => 0);
+$meta['showPageInfo']               = array('onoff');
+$meta['useACL']                     = array('onoff', '_caution' => 'warning');
+$meta['pageInfo']                   = array('multicheckbox', '_choices' => array('filename', 'extension', 'date', 'editor', 'locked'));
+$meta['pageInfoDateFormat']         = array('multichoice', '_choices'   => array('dformat', 'human'));
+$meta['showPageIcons']              = array('onoff');
+$meta['pageIcons']                  = array('multicheckbox', '_choices' => array('social-share', 'feed', 'send-mail', 'permalink', 'print', 'help'));
+$meta['socialShareProviders']       = array('multicheckbox', '_choices' => array('facebook', 'linkedin', 'pinterest', 'whatsapp', 'reddit', 'twitter', 'telegram', 'yammer'));
+$meta['useAlternativeToolbarIcons'] = array('onoff');
+$meta['tagsOnTop']                  = array('onoff');
+$meta['useAnchorJS']                = array('onoff');
+$meta['collapsibleSections']        = array('onoff');
+$meta['domParserMaxPageSize']       = array('numeric', '_min' => 0);
