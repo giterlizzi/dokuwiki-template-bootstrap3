@@ -124,14 +124,12 @@ class Template
      * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      * @todo    Move the specific-padding size of Bootswatch template in template.less
      *
-     * @param  Doku_Event $event
+     * @param  \Doku_Event $event
      */
     public function metaheadersHandler(\Doku_Event $event)
     {
 
-        global $INPUT;
         global $ACT;
-        global $INFO;
 
         // Bootstrap Theme
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
@@ -352,7 +350,6 @@ class Template
      * prefix and postfix are only added when there actually is any content
      *
      * @param string $location
-     * @param return $return
      * @return string
      */
     public function includePage($location, $return = false) {
@@ -1199,6 +1196,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         // print current page, skipping start page, skipping for namespace index
+        $exists = false;
         resolve_pageid('', $page, $exists);
 
         if (isset($page) && $page == $part . $parts[$i]) {
@@ -1261,6 +1259,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                     foreach ($ns_pages as $ns_page) {
 
+                        $exists = false;
                         resolve_pageid(getNS($ns_page), $ns_page, $exists);
 
                         $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
@@ -1366,6 +1365,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function toBootstrapNav($html, $type = '', $stacked = false, $optional_class = '')
     {
+
+        $classes = array();
 
         $classes[] = 'nav';
         $classes[] = $optional_class;
@@ -2228,6 +2229,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 foreach ($html->find('fieldset[id^="plugin__"]') as $elm) {
 
+                    /** @var array $matches */
                     preg_match('/plugin_+(\w+[^_])_+plugin_settings_name/', $elm->id, $matches);
 
                     $plugin_name = $matches[1];
@@ -2609,9 +2611,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     public function getContainerGrid()
     {
 
-        global $ACT;
         global $ID;
-        global $conf;
 
         $result = '';
 

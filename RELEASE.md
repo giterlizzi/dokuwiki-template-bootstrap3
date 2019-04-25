@@ -6,6 +6,8 @@
 ### Added
   * Added support for [new menu system](https://www.dokuwiki.org/devel:menus) for all DokuWiki menu and action items
   * Added new option (`notifyExtentionsUpdate`) for display available update of DokuWiki plugins on user menu
+  * Added Material Design Icons assets (webfont and SVG)
+  * Added `useAlternativeToolbarIcons` option for enable Material Design Icons support on DokuWiki toolbar
   * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
   * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
   * #411: Added Bootstrap v4 utilities
@@ -18,8 +20,10 @@
 
 ### Removed
   * Removed "Purge cache" button in Page Tools
+  * Removed "Page Tools" animation
   * Drop support for older DokuWiki release prior of PHP < 5.3.x
-  * Removed `pageToolsAnimation` option
+  * Removed `pageToolsAnimation`, `showPurgePageCache` and `pageToolsAnimation` options
+  * Removed Google+ support on "Share on..." menu
 
 ### Fixed
   * #348: Removed `.page-header` class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
@@ -34,6 +38,8 @@
   * #397, #400, #404, #405: Fixed Regex syntax for PHP Simple HTML DOM (thanks to @Kyushin for patch and other issue reporters)
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
+  * #415: Fixed footer sticky behavior (thanks to @lifehome on #415)
+
 
 ## [v2018-02-16]
 
