@@ -79,7 +79,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                 <div class="container-fluid">
 
                     <p class="text-right">
-                        <span style="cursor:help" class="label label-<?php echo $label_type; ?>" title="Groups: <?php echo join(', ', $INFO['userinfo']['grps']); ?>">
+                        <span style="cursor:help" class="label label-<?php echo $label_type; ?>" title="<?php echo tpl_getLang('user_groups'); ?>: <?php echo join(', ', $INFO['userinfo']['grps']); ?>">
                             <?php echo $user_type; ?>
                         </span>
                     </p>
@@ -88,17 +88,17 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                         <img src="<?php echo $avatar_img ?>" class="img-circle" width="<?php echo $avatar_size ?>" height="<?php echo $avatar_size ?>" />
                     </p>
 
-                    <dl>
-                        <dt>
-                            <?php echo hsc($INFO['userinfo']['name']) ?>
-                        </dt>
-                        <dd class="small">
+                    <div class="mb-2">
+                        <div class="mb-2">
+                            <strong><?php echo hsc($INFO['userinfo']['name']) ?></strong>
+                        </div>
+                        <div class="small">
                             <?php echo hsc($_SERVER['REMOTE_USER']) ?>
-                        </dd>
-                        <dd class="small">
+                        </div>
+                        <div class="small">
                             <?php echo $INFO['userinfo']['mail'] ?>
-                        </dd>
-                    </dl>
+                        </div>
+                    </div>
 
                 </div>
 
