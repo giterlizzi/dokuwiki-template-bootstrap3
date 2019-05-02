@@ -322,7 +322,9 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
             <?php require_once('tpl/breadcrumbs.php'); ?>
 
             <p class="pageId text-right">
-                <?php if($TEMPLATE->getConf('showPageId')): ?><span class="label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span><?php endif; ?>
+                <?php if($TEMPLATE->getConf('showPageId')): ?>
+                    <span class="ml-1 label label-primary">{{<?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?>}}</span>
+                <?php endif; ?>
             </p>
 
             <div id="dw__msgarea" class="small">
