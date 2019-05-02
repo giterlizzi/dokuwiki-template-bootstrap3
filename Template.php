@@ -2444,15 +2444,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $svg_icon = template('assets/mdi/svg/alert.svg');
         }
 
-
-        if ($ACT == 'diff') {
-            $svg_icon = template('assets/mdi/svg/file-compare.svg');
-        }
-
-        if ($ACT == 'showtag') {
-            $svg_icon = template('assets/mdi/svg/tag-multiple.svg');
-        }
-
         $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
 
 
@@ -2491,6 +2482,19 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             case 'search':
                 $svg_icon = template('assets/mdi/svg/search-web.svg');
                 break;
+
+            case 'preview':
+                $svg_icon = template('assets/mdi/svg/file-eye.svg');
+                break;
+
+            case 'diff':
+                $svg_icon = template('assets/mdi/svg/file-compare.svg');
+                break;
+
+            case 'showtag':
+                $svg_icon = template('assets/mdi/svg/tag-multiple.svg');
+                break;
+
         }
 
         if ($svg_icon && file_exists($svg_icon)) {
