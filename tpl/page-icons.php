@@ -15,6 +15,7 @@ global $TEMPLATE;
 if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showPageIcons')):
 
 global $ID;
+global $IMG;
 global $INFO;
 global $conf;
 
@@ -38,6 +39,12 @@ if (in_array('help', $page_icons)) {
 <div class="dw-page-icons pull-right hidden-print">
 
     <ul class="list-inline pull-right m-0 mb-2">
+
+        <?php if ($IMG): ?>
+            <li>
+                <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev' => $REV), true, '&'); ?>" target="_blank" title="<?php echo $lang['js']['mediadirect']; ?>"><i class="mdi mdi-arrow-expand-all"></i></a>
+            </li>
+        <?php endif; ?>
 
         <?php if ($social_share && count($social_share_providers)): ?>
         <li class="dropdown">

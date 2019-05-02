@@ -23,7 +23,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
 <!-- navbar -->
 <nav id="dw__navbar" class="navbar <?php echo trim(implode(' ', $navbar_classes)) ?>" role="navigation">
 
-    <div class="container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
+    <div class="dw-container container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
         <div class="navbar-header">
 

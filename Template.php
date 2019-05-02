@@ -683,6 +683,10 @@ class Template
             $classes[] = 'dw-table-width';
         }
 
+        if ($this->isFluidNavbar()) {
+            $classes[] = 'dw-fluid-container';
+        }
+
         return implode(' ', $classes);
 
     }

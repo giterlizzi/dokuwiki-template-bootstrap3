@@ -17,6 +17,7 @@ if ( $TEMPLATE->getConf('showCookieLawBanner') && ! (get_doku_pref('cookieNotice
 $cookie_policy_page_id = $TEMPLATE->getConf('cookieLawPolicyPage');
 $cookie_banner_page_id = $TEMPLATE->getConf('cookieLawBannerPage');
 
+$cookie_policy_page_exists = false;
 resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
 
 ?>

@@ -212,20 +212,26 @@ jQuery(document).on('bootstrap3:fluid-container', function(event) {
     var $button     = jQuery(this),
         $containers = jQuery(selectors);
 
-    if (jQuery('body > div.container').length) {
+    if (! jQuery('body.dw-fluid-container').length) {
 
-      $containers
+      jQuery('body').addClass('dw-fluid-container');
+
+      jQuery('.dw-container')
         .removeClass('container')
         .addClass('container-fluid mx-5');
+
       $button.parent().addClass('active');
 
       DokuCookie.setValue('fluidContainer', 1);
 
     } else {
 
-      $containers
+      jQuery('body').removeClass('dw-fluid-container');
+
+      jQuery('.dw-container')
         .removeClass('container-fluid mx-5')
         .addClass('container');
+
       $button.parent().removeClass('active');
 
       DokuCookie.setValue('fluidContainer', 0);
@@ -267,7 +273,7 @@ jQuery(document).on('bootstrap3:toc-resize', function(event) {
   }
 
   jQuery('#dw__toc .toc-body > ul').css({
-    'max-height' : (jQuery(window).height() - 50 - jQuery('main').position().top) + 'px',
+    'max-height' : (jQuery(window).height() - 50 - jQuery('#dokuwiki__content').position().top) + 'px',
     'overflow-y' : 'scroll'
   });
 
@@ -347,8 +353,8 @@ jQuery(document).on('bootstrap3:toc', function(event) {
     if (JSINFO.bootstrap3.config.tocAffix) {
       $dw_toc.affix({
         offset : {
-          top    : (jQuery("main").position().top),
-          bottom : (jQuery(document).height() - jQuery("main").height()),
+          top    : (jQuery("#dokuwiki__content").position().top),
+          bottom : (jQuery(document).height() - jQuery("#dokuwiki__content").height()),
         }
       });
     }
@@ -606,7 +612,7 @@ jQuery(document).on('bootstrap3:page-tools', function(event) {
       offset : {
         top    : (jQuery('main').position().top),
         bottom : ((   jQuery(document).height()
-                    - jQuery('article').height()
+                    - jQuery('#dokuwiki__content').height()
                     - jQuery('#dokuwiki__pageheader').height()
                     - jQuery('#dokuwiki__header').height() ))
       }

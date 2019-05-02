@@ -32,8 +32,8 @@ $footer_classes[] = ($TEMPLATE->getConf('fixedTopNavbar') ? 'footer-fixed-bottom
 ?>
 <?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <!-- footer -->
-<footer id="dw__footer" class="navbar <?php echo trim(implode(' ', $footer_classes)) ?>">
-    <div class="container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
+<div class="navbar <?php echo trim(implode(' ', $footer_classes)) ?>">
+    <div class="dw-container container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
         <div class="small navbar-text">
 
@@ -88,6 +88,6 @@ $footer_classes[] = ($TEMPLATE->getConf('fixedTopNavbar') ? 'footer-fixed-bottom
         </div>
 
     </div>
-</footer>
+</div>
 <!-- /footer -->
 <?php endif; ?>

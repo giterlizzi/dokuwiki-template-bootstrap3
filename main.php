@@ -35,7 +35,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <?php tpl_flush() ?>
 <body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>">
 
-    <header id="dokuwiki__header" class="dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
     <?php
 
         tpl_includeFile('topheader.html');
@@ -53,7 +53,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     ?>
     </header>
 
-    <div id="dokuwiki__top" class="dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <main role="main" id="dokuwiki__top" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -69,7 +69,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                     }
 
                     if ($TEMPLATE->getConf('showPageId')) {
-                        echo '<span class="ml-1 label label-primary">'. hsc($ID) .'</span>';
+                        echo '<span class="ml-1 label label-primary">[['. hsc($ID) .']]</span>';
                     }
 
                 ?>
@@ -81,7 +81,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
         </div>
 
-        <main class="main row" role="main">
+        <div class="row">
 
             <?php $TEMPLATE->includeSidebar('left'); // Left Sidebar ?>
 
@@ -167,8 +167,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php $TEMPLATE->includeSidebar('right'); // Right Sidebar ?>
 
-        </main>
+        </div>
 
+    </main>
+
+    <footer id="dw__footer" class="dw-container pt-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');
@@ -178,21 +181,22 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             // Cookie-Law banner
             require_once(template('tpl/cookielaw.php'));
-
-            // Provide DokuWiki housekeeping, required in all templates
-            tpl_indexerWebBug();
         ?>
+    </footer>
 
-        <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
 
-        <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
-            <span class="visible-xs-block"></span>
-            <span class="visible-sm-block"></span>
-            <span class="visible-md-block"></span>
-            <span class="visible-lg-block"></span>
-        </div>
-
+    <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
+        <span class="visible-xs-block"></span>
+        <span class="visible-sm-block"></span>
+        <span class="visible-md-block"></span>
+        <span class="visible-lg-block"></span>
     </div>
+
+    <?php
+        // Provide DokuWiki housekeeping, required in all templates
+        tpl_indexerWebBug();
+    ?>
 
 </body>
 </html>

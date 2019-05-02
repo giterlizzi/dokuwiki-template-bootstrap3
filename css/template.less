@@ -19,6 +19,24 @@ body {
 
 }
 
+/**
+ * Sticky footer
+ */
+html, body {
+  height: 100%;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+main {
+  flex: 1 0 auto;
+}
+footer {
+  flex-shrink: 0;
+}
+
+
 aside,
 .dw__dropdown_page {
 
@@ -284,8 +302,8 @@ div#picker2 {
 #dw__pagetools {
 
   position: absolute;
-  right: 27px;
-  top: 50px;
+  right: 30px;
+  padding-top: 50px;
   z-index: 999;
   text-align: center;
 
@@ -307,7 +325,6 @@ div#picker2 {
 /* Footer Page */
 #dw__footer {
 
-  margin: 50px 0 0 0;
   z-index: 995;
 
   .navbar-text {

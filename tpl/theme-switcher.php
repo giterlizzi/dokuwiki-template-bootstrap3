@@ -27,13 +27,13 @@ $bootswatch_theme = $TEMPLATE->getBootswatchTheme();
 
         <ul class="dropdown-menu" aria-labelledby="themes">
             <li class="dropdown-header">
-                <i class="mdi mdi-palette-outline"></i> <?php echo tpl_getLang('themes') ?>
+                <i class="mdi mdi-palette"></i> <?php echo tpl_getLang('themes') ?>
             </li>
             <li<?php echo ($bootswatch_theme == 'default') ? ' class="active"' : '' ?>>
                 <a href="<?php echo wl($ID, array('bootswatch-theme' => hsc('default'))); ?>">Default</a>
             </li>
             <li class="dropdown-header">
-                <i class="mdi mdi-palette-outline"></i> Bootswatch Themes
+                <i class="mdi mdi-palette"></i> Bootswatch Themes
             </li>
             <?php foreach ($TEMPLATE->getAvailableBootswatchThemes() as $theme): ?>
             <li<?php echo ($bootswatch_theme == $theme) ? ' class="active"' : '' ?>>
