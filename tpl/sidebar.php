@@ -28,9 +28,15 @@ if ($TEMPLATE->getConf('sidebarShowPageTitle')) {
         </div>
         <div class="dw-sidebar-body collapse in small">
             <?php
-                tpl_includeFile($sidebar_header);
+
+                tpl_includeFile("$sidebar_header.html");
+                if ($ACT == 'show') $TEMPLATE->includePage($sidebar_header);
+
                 $TEMPLATE->normalizeSidebar(tpl_include_page($sidebar_page, 0, 1, $TEMPLATE->getConf('useACL'))); /* includes the nearest sidebar page */
-                tpl_includeFile($sidebar_footer)
+
+                tpl_includeFile("$sidebar_footer.html");
+                if ($ACT == 'show') $TEMPLATE->includePage($sidebar_footer)
+
             ?>
         </div>
     </div>

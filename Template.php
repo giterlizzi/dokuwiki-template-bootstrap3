@@ -81,7 +81,7 @@ class Template
             'FORM_QUICKSEARCH_OUTPUT', 'FORM_SEARCH_OUTPUT',
         );
 
-        $EVENT_HANDLER->register_hook('PLUGIN_TPLINC_LOCATIONS_SET', 'BEFORE', $this, 'tplPluginHandler');
+        $EVENT_HANDLER->register_hook('PLUGIN_TPLINC_LOCATIONS_SET', 'BEFORE', $this, 'tplIncPluginHandler');
         $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT',       'BEFORE', $this, 'metaheadersHandler');
         $EVENT_HANDLER->register_hook('PLUGIN_TAG_LINK',             'BEFORE', $this, 'tagPluginHandler');
         $EVENT_HANDLER->register_hook('TPL_CONTENT_DISPLAY',         'BEFORE', $this, 'contentHandler');
@@ -288,7 +288,7 @@ class Template
     }
 
 
-    private function tplPluginHandler(\Doku_Event $event)
+    public function tplIncPluginHandler(\Doku_Event $event)
     {
         $event->data['header']             = 'Header of page below the navbar (header)';
         $event->data['topheader']          = 'Top Header of page (topheader)';
@@ -303,7 +303,7 @@ class Template
 
     private function initPlugins()
     {
-        #$this->plugins['tplinc']       = plugin_load('helper', 'tplinc');
+        $this->plugins['tplinc']       = plugin_load('helper', 'tplinc');
         $this->plugins['tag']          = plugin_load('helper', 'tag');
         $this->plugins['userhomepage'] = plugin_load('helper', 'userhomepage');
         $this->plugins['translation']  = plugin_load('helper', 'translation');
@@ -1585,7 +1585,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 if ($this->getConf('sidebarPosition') == 'left') {
                     $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
-                        'sidebarheader.html', 'sidebarfooter.html');
+                        'sidebarheader', 'sidebarfooter');
                 }
 
                 return true;
@@ -1594,13 +1594,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 if ($this->getConf('sidebarPosition') == 'right') {
                     $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
-                        'sidebarheader.html', 'sidebarfooter.html');
+                        'sidebarheader', 'sidebarfooter');
                 }
 
                 if ($this->getConf('showRightSidebar')
                     && $this->getConf('sidebarPosition') == 'left') {
                     $this->sidebarWrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid,
-                        'rightsidebarheader.html', 'rightsidebarfooter.html');
+                        'rightsidebarheader', 'rightsidebarfooter');
                 }
 
                 return true;
