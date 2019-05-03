@@ -10,11 +10,15 @@
   * Added `useAlternativeToolbarIcons` option for enable Material Design Icons support on DokuWiki toolbar
   * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
   * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
+  * #364: Added link and media syntax for page and media id (thanks to @onkobu for idea)
   * #411: Added Bootstrap v4 utilities
   * #412: Added `:usermenu` hook for add new items in user menu using a standard DokuWiki page
+  * Added support of tplinc plugin (https://www.dokuwiki.org/plugin:tplinc)
+  * Added support of Material Design icons on DokuWiki edit page
 
 ### Changed
   * Use SVG icons for all DokuWiki tools menu (User, Site and Page)
+  * Improved Details Page
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
 
@@ -38,7 +42,7 @@
   * #397, #400, #404, #405: Fixed Regex syntax for PHP Simple HTML DOM (thanks to @Kyushin for patch and other issue reporters)
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
-  * #415: Fixed footer sticky behavior (thanks to @lifehome on #415)
+  * #415: Fixed footer sticky bug (thanks to @lifehome)
 
 
 ## [v2018-02-16]
@@ -63,10 +67,10 @@ Enjoy!
   * Added `active` class on link menu for current Admin page
   * Added Typeahead support for quick search using `qsearch` DokuWiki AJAX service and fixed action items functions
   * #295: Added solar theme from Bootswatch (thanks to @alaricljs) and updated all theme fonts
-  * #315: Added visibility of Admin menu for Manager users (thank to @FosseWay)
   * #286: Added "homePageURL" config option to add custom Home-Page link (thanks to @rgleason)
   * #238, #297: Added initial support of Styling Plugin and `style.ini` placeholders
   * #300: Re-Added `social.html` sample hook (thanks to @igittigitt)
+  * #315: Added visibility of Admin menu for Manager users (thank to @FosseWay)
   * Added new bugs to fix later!
 
 ### Changed
