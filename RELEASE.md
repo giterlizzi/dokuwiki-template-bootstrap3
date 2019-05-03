@@ -19,6 +19,7 @@
 ### Changed
   * Use SVG icons for all DokuWiki tools menu (User, Site and Page)
   * Improved Details Page
+  * Upgraded Bootstrap3 Typeahead
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
 
@@ -35,6 +36,7 @@
   * #350, #352: Suppress warning for open_basedir
   * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
   * #354: Added workaround for ToDo Plugin for checked elements (thanks to @nurzu)
+  * #356: Fixed keyboard access for new searchbar (@nurzu)
   * #368, #391: Fixed readability issue on Extension Manager for Dark themes (cyborg, darkly, slate, superhero and solar) (special thanks to @Miro-Collas for suggested patch)
   * #371 PR: Fixed incompatibility with SimpleNavi Plugin and Greebo DokuWiki release (thanks to @CornHead764)
   * #388: Render all DokuWiki hooks (pageheader, pagefooter, topheader and header) with Bootstrap's styles (thanks to @dranjor and @mP-wiki for idea)
