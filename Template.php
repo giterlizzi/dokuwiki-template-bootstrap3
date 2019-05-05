@@ -2136,7 +2136,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if ($INPUT->str('page') == 'extension') {
 
                 foreach ($html->find('.actions') as $elm) {
-                    $elm->class .= ' btn-group btn-group-xs';
+                    $elm->class .= ' pl-4 btn-group btn-group-xs';
                 }
 
                 foreach ($html->find('.actions .uninstall') as $elm) {

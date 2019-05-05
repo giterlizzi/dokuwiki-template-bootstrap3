@@ -21,6 +21,8 @@ $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Add New Page';
 $lang['extensions_update']       = 'Extensions update';
 $lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';

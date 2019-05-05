@@ -270,6 +270,8 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
     );
 }
 
+$show_metadata = false;
+
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
@@ -357,8 +359,8 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
                         </p>
 
                         <p class="small my-2">
-                            <i class="mdi mdi-image-size-select-large"></i> Size of this preview: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
-                            Other resolutions: <?php foreach ($other_sizes as $size): ?> <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $size['w'], 'h' => $size['h']), true, '&'); ?>" title="<?php echo floor($size['ratio'] * 100); ?>%"><?php echo $size['w']; ?> × <?php echo $size['h']; ?></a> pixels &nbsp; <?php endforeach; ?>
+                            <i class="mdi mdi-image-size-select-large"></i> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
+                            <?php echo tpl_getLang('other_resolutions') ?>: <?php foreach ($other_sizes as $size): ?> <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $size['w'], 'h' => $size['h']), true, '&'); ?>" title="<?php echo floor($size['ratio'] * 100); ?>%"><?php echo $size['w']; ?> × <?php echo $size['h']; ?></a> pixels &nbsp; <?php endforeach; ?>
                         </p>
 
                         <p class="image-info my-3">
@@ -428,7 +430,7 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
 
                         </div>
 
-                        <div class="image-metadata pt-5">
+                        <div class="image-metadata pt-5 hide">
 
                             <h3>
                                 <i class="mdi mdi-code-tags text-success"></i> Metadata
@@ -452,6 +454,7 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
 
                                                         if ($value !== '') {
                                                             echo "<tr><th title='$tag'>$name</th><td>$value</td></tr>";
+                                                            $show_metadata = true;
                                                         }
 
                                                     }
@@ -465,6 +468,14 @@ foreach (array(0.1, 0.25, 0.5, 0.75, 1) as $ratio) {
                                     <?php endforeach; ?>
                                 </div>
                             </div>
+
+                            <?php if ($show_metadata): ?>
+                            <script>
+                                jQuery(document).ready(function(){
+                                    jQuery('.image-metadata').removeClass('hide');
+                                });
+                            </script>
+                            <?php endif; ?>
 
                         </div>
 
