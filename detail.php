@@ -341,7 +341,7 @@ $show_metadata = false;
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default' : 'no-panel') ?>">
+                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>">
                     <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php require_once(template('tpl/page-icons.php')); ?>

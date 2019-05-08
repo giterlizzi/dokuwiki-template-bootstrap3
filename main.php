@@ -89,7 +89,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default' : 'no-panel') ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
+                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
                     <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php
