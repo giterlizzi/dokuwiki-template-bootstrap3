@@ -32,6 +32,7 @@ jQuery(document).on('bootstrap3:plugins', function(event) {
     /* DOKUWIKI:include js/plugins/tagging.js */
     /* DOKUWIKI:include js/plugins/translation.js */
     /* DOKUWIKI:include js/plugins/wrap.js */
+    /* DOKUWIKI:include js/plugins/watchcycle.js */
 
   }, 0);
 
