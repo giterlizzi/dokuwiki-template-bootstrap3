@@ -2637,10 +2637,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $show_left_sidebar = false;
         }
 
-        if (!$show_left_sidebar && !$show_right_sidebar) {
-            return 'container' . (($fluid_container) ? '-fluid' : '');
-        }
-
         if ($show_left_sidebar) {
             foreach (explode(' ', $this->getConf('leftSidebarGrid')) as $grid) {
                 list($col, $media, $size) = explode('-', $grid);

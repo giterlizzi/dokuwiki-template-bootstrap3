@@ -18,7 +18,7 @@
 
 ### Changed
   * Use SVG icons for all DokuWiki tools menu (User, Site and Page)
-  * Improved Details Page
+  * Improved Detail Page
   * Upgraded Bootstrap3 Typeahead
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
@@ -39,6 +39,7 @@
   * #356: Fixed keyboard access for new searchbar (@nurzu)
   * #368, #391: Fixed readability issue on Extension Manager for Dark themes (cyborg, darkly, slate, superhero and solar) (special thanks to @Miro-Collas for suggested patch)
   * #371 PR: Fixed incompatibility with SimpleNavi Plugin and Greebo DokuWiki release (thanks to @CornHead764)
+  * #375: Fixed Search matching pagenames overlap (thanks to @MKCPC)
   * #388: Render all DokuWiki hooks (pageheader, pagefooter, topheader and header) with Bootstrap's styles (thanks to @dranjor and @mP-wiki for idea)
   * #394, #395 PR: Send correct search URL, and keep current page (thanks to @schplurtz)
   * #397, #400, #404, #405: Fixed Regex syntax for PHP Simple HTML DOM (thanks to @Kyushin for patch and other issue reporters)
@@ -93,6 +94,7 @@ Enjoy!
   * #325: Fixed accesskey issue (thanks to @dedeibel)
   * #342: Fixed Purplenumbers renderer plugin issue (thanks to @molefunk)
   * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
+
 
 ### Removed
   * Removed `.map` file from bootstrap assets (thanks to Andrew Gent)
