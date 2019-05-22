@@ -16,7 +16,6 @@ header('X-UA-Compatible: IE=edge,chrome=1');
   lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title><?php echo bootstrap3_page_browser_title() ?></title>
   <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
