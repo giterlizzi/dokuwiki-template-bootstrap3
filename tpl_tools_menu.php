@@ -26,7 +26,7 @@ $navbar_labels = bootstrap3_conf('navbarLabels');
   <li class="dropdown">
 
     <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang[$id.'_tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-      <i class="<?php echo $menu['icon'] ?>"></i> <span class="<?php echo (in_array($id, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$id.'_tools'] ?></span> <span class="caret"></span>
+      <i class="<?php echo $menu['icon'] ?>"></i> <span class="<?php echo (in_array($id, $navbar_labels) ? '' : 'sr-only') ?>"><?php echo $lang[$id.'_tools'] ?></span> <span class="caret"></span>
     </a>
 
     <ul class="dropdown-menu tools" role="menu">
