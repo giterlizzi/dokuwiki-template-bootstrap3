@@ -1,6 +1,7 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [v2018-05-22]
+
+## [v2019-05-22]
 
 After a long development cycle a new release of Bootstrap3 template is issued. This release use the [new DokuWiki menu system](https://www.dokuwiki.org/devel:menus) introduced in *Greebo* release (included the compatibility classes for older DokuWiki releases). Switched all FontAwesome icons to Material Design Icon (added WebFont and SVG icons) and added option for enable the Material Design Icons for DokuWiki toolbar. Re-designed detail page for display EXIF and other useful photo metadata. Added new hook (`:usermenu`) for add a custom menu in User Menu. Upgraded Bootstrap and Bootswatch to v3.4.1 to prevent XSS vulnerability and `simple_html_dom` to v1.8.1 to increase the performance. This release now use a `Template` class for increase the performance during the rendering of page (1.2~1.5 second faster than the previous release).
 
@@ -50,52 +51,7 @@ Enjoy!
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
   * #415: Fixed footer sticky bug (thanks to @lifehome)
-
-
-
-### Added
-  * Added support for [new menu system](https://www.dokuwiki.org/devel:menus) for all DokuWiki menu and action items
-  * Added new option (`notifyExtentionsUpdate`) for display available update of DokuWiki plugins on user menu
-  * Added Material Design Icons assets (webfont and SVG)
-  * Added `useAlternativeToolbarIcons` option for enable Material Design Icons support on DokuWiki toolbar
-  * #349: Added integration of `tagalerts` plugin (thanks to @per-hed)
-  * #359: Lookup thumbnail photo from ActiveDirectory for Avatar support (thanks to @swordfischer). This integration require `authad` plugin and `$conf['plugin']['authad']['additional']` config with `thumbnailphoto` value.
-  * #364: Added link and media syntax for page and media id (thanks to @onkobu for idea)
-  * #411: Added Bootstrap v4 utilities
-  * #412: Added `:usermenu` hook for add new items in user menu using a standard DokuWiki page
-  * Added support of tplinc plugin (https://www.dokuwiki.org/plugin:tplinc)
-  * Added support of Material Design icons on DokuWiki edit page
-
-### Changed
-  * Use SVG icons for all DokuWiki tools menu (User, Site and Page)
-  * Improved Detail Page
-  * Upgraded Bootstrap3 Typeahead
-  * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
-  * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
-
-### Removed
-  * Removed "Purge cache" button in Page Tools
-  * Removed "Page Tools" animation
-  * Drop support for older DokuWiki release prior of PHP < 5.3.x
-  * Removed `pageToolsAnimation`, `showPurgePageCache` and `pageToolsAnimation` options
-  * Removed Google+ support on "Share on..." menu
-
-### Fixed
-  * #348: Removed `.page-header` class for Bootstrap Wrapper panel component in sidebar (thanks to @per-hed)
-  * #347: Re-added "bootstrap3:tabs" event for plugins that use DokuWiki tab styling (eg tabbox plugin) (special thanks to @martk70)
-  * #350, #352: Suppress warning for open_basedir
-  * #351: Removed TOC wrapper for NOTOC (thanks to @dralli72 and @trailjeep)
-  * #354: Added workaround for ToDo Plugin for checked elements (thanks to @nurzu)
-  * #356: Fixed keyboard access for new searchbar (@nurzu)
-  * #368, #391: Fixed readability issue on Extension Manager for Dark themes (cyborg, darkly, slate, superhero and solar) (special thanks to @Miro-Collas for suggested patch)
-  * #371 PR: Fixed incompatibility with SimpleNavi Plugin and Greebo DokuWiki release (thanks to @CornHead764)
-  * #375: Fixed Search matching pagenames overlap (thanks to @MKCPC)
-  * #388: Render all DokuWiki hooks (pageheader, pagefooter, topheader and header) with Bootstrap's styles (thanks to @dranjor and @mP-wiki for idea)
-  * #394, #395 PR: Send correct search URL, and keep current page (thanks to @schplurtz)
-  * #397, #400, #404, #405: Fixed Regex syntax for PHP Simple HTML DOM (thanks to @Kyushin for patch and other issue reporters)
-  * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
-  * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
-  * #415: Fixed footer sticky bug (thanks to @lifehome)
+  * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
 
 
 ## [v2018-02-16]
@@ -144,7 +100,6 @@ Enjoy!
   * #325: Fixed accesskey issue (thanks to @dedeibel)
   * #342: Fixed Purplenumbers renderer plugin issue (thanks to @molefunk)
   * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
-
 
 ### Removed
   * Removed `.map` file from bootstrap assets (thanks to Andrew Gent)

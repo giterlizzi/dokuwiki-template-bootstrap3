@@ -14,14 +14,22 @@ global $TEMPLATE, $ID;
 
 if ($TEMPLATE->getConf('showTools')):
 
-$navbar_labels = $TEMPLATE->getConf('navbarLabels');
-$tools_menus   = $TEMPLATE->getToolsMenu();
+    $navbar_labels = $TEMPLATE->getConf('navbarLabels');
+    $tools_menus   = $TEMPLATE->getToolsMenu();
 
 ?>
 <!-- tools-menu -->
 <ul class="nav navbar-nav dw-action-icon" id="dw__tools">
 
-    <?php if ($TEMPLATE->getConf('individualTools')): foreach($tools_menus as $tool => $data): ?>
+    <?php
+
+        if ($TEMPLATE->getConf('individualTools')):
+
+            foreach ($TEMPLATE->getConf('showIndividualTool') as $tool):
+
+                if (! isset($tools_menus[$tool])) continue;
+                $data = $tools_menus[$tool];
+    ?>
 
     <li class="dropdown">
 
