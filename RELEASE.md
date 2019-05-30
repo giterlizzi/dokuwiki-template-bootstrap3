@@ -1,7 +1,11 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
 
+## [v2019-05-22]
+
+After a long development cycle a new release of Bootstrap3 template is issued. This release use the [new DokuWiki menu system](https://www.dokuwiki.org/devel:menus) introduced in *Greebo* release (included the compatibility classes for older DokuWiki releases). Switched all FontAwesome icons to Material Design Icon (added WebFont and SVG icons) and added option for enable the Material Design Icons for DokuWiki toolbar. Re-designed detail page for display EXIF and other useful photo metadata. Added new hook (`:usermenu`) for add a custom menu in User Menu. Upgraded Bootstrap and Bootswatch to v3.4.1 to prevent XSS vulnerability and `simple_html_dom` to v1.8.1 to increase the performance. This release now use a `Template` class for increase the performance during the rendering of page (1.2~1.5 second faster than the previous release).
+
+Enjoy!
 
 ### Added
   * Added support for [new menu system](https://www.dokuwiki.org/devel:menus) for all DokuWiki menu and action items
@@ -13,7 +17,7 @@
   * #364: Added link and media syntax for page and media id (thanks to @onkobu for idea)
   * #411: Added Bootstrap v4 utilities
   * #412: Added `:usermenu` hook for add new items in user menu using a standard DokuWiki page
-  * Added support of tplinc plugin (https://www.dokuwiki.org/plugin:tplinc)
+  * Added support of `tplinc` plugin (https://www.dokuwiki.org/plugin:tplinc)
   * Added support of Material Design icons on DokuWiki edit page
 
 ### Changed
@@ -22,6 +26,7 @@
   * Upgraded Bootstrap3 Typeahead
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #410 PR: Upgrade `simple_html_dom` to v1.8.1 (thanks to @GergoLadi for PR)
+  * #418 PR: Remove `X-UA-Compatible` in meta HTTP tag, is already set via PHP header function (thanks to @AmritasyaPutra)
 
 ### Removed
   * Removed "Purge cache" button in Page Tools
@@ -46,6 +51,7 @@
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
   * #415: Fixed footer sticky bug (thanks to @lifehome)
+  * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
 
 
 ## [v2018-02-16]
@@ -94,7 +100,6 @@ Enjoy!
   * #325: Fixed accesskey issue (thanks to @dedeibel)
   * #342: Fixed Purplenumbers renderer plugin issue (thanks to @molefunk)
   * #343: Fixed unexpected behavior with fluid container button and navbar-right (thanks to @ggieling)
-
 
 ### Removed
   * Removed `.map` file from bootstrap assets (thanks to Andrew Gent)
@@ -456,6 +461,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/master...develop
+[v2019-05-22]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2018-02-16...v2019-05-22
 [v2018-02-16]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
 [v2016-12-12]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
 [v2016-07-05]: https://github.com/LotarProject/dokuwiki-template-bootstrap3/compare/v2016-04-13...v2016-05-07
