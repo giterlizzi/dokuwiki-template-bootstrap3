@@ -21,6 +21,10 @@ $lang['send_mail']               = 'メール送信';
 $lang['print']                   = '印刷';
 $lang['permalink']               = 'パーマリンク';
 $lang['add_new_page']            = '新規ページの追加';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'テーマ';
