@@ -52,7 +52,7 @@ Enjoy!
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
   * #415: Fixed footer sticky bug (thanks to @lifehome)
   * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
-  * #422: Fixed compatibility for Folded plugin (thanks to @virk)
+  * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
 
 
 ## [v2018-02-16]
