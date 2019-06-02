@@ -19,6 +19,7 @@ jQuery(document).on('bootstrap3:plugins', function(event) {
     /* DOKUWIKI:include js/plugins/davcal.js */
     /* DOKUWIKI:include js/plugins/discussion.js */
     /* DOKUWIKI:include js/plugins/explain.js */
+    /* DOKUWIKI:include js/plugins/folded.js */
     /* DOKUWIKI:include js/plugins/gallery.js */
     /* DOKUWIKI:include js/plugins/include.js */
     /* DOKUWIKI:include js/plugins/inlinetoc.js */
