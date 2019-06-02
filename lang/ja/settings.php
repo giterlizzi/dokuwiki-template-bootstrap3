@@ -43,6 +43,7 @@ $lang['landingPages']                 = 'ランディングページ名(正規�
 $lang['leftSidebarGrid']              = '左サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code> (<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照)';
 $lang['libravatarURL']                = 'Libravatar（あるいは互換性のあるAPI）のURLを指定<br/><strong>注：</strong><br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
 $lang['navbarLabels']                 = '個々のラベルの表示・非表示';
+$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
 $lang['office365URL']                 = 'Microsoft Office 365（もしくはEWS）のURLを指定<br/> <strong>注：</strong> このサービスを使うにはログインが必要なので、全てのユーザーがOffice 365へのアクセス権を有する会社内での利用に適しています。';
 $lang['pageIcons']                    = '表示するアイコンを選択する';
 $lang['pageInfo']                     = 'ページのメタデータの各要素の表示・非表示';
@@ -50,7 +51,6 @@ $lang['pageInfoDateFormat']           = '日付形式';
 $lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki 形式';
 $lang['pageInfoDateFormat_o_human']   = '人が読める形式';
 $lang['pageOnPanel']                  = 'ページ周囲のパネルを有効にする';
-$lang['pageToolsAnimation']           = 'ページツールのアニメーションを有効にする';
 $lang['rightSidebar']                 = '右サイドバーのページ名。空欄で右サイドバー無効。<br/>デフォルトの DokuWiki <a class="interwiki iw_doku" href="#config___sidebar">サイドバー</a>が有効で <code>left</code> に配置している場合 (<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">
 sidebarPosition</a> 設定を参照) のみ右サイドバーを表示します。DokuWiki サイドバーを右側に配置したい場合、<a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> 設定を <code>right</code> にしてください。';
 $lang['rightSidebarGrid']             = '右サイドバーの grid クラス <code>col-{xs,sm,md,lg}-x</code> (<a href="http://bootstrap3.cyberlab.info/css/gridSystem.html" target="_blank">Bootstrap3 日本語リファレンス グリッド・システム</a>を参照)';
@@ -82,10 +82,6 @@ $lang['showPageTools']                = 'DokuWiki 形式のページツールを
 $lang['showPageTools_o_always']       = '常に表示する';
 $lang['showPageTools_o_logged']       = 'ログイン時に表示する';
 $lang['showPageTools_o_never']        = '表示しない';
-$lang['showPurgePageCache']           = '「キャッシュページを消去」ボタンをページツールに表示する';
-$lang['showPurgePageCache_o_always']  = '常に表示する';
-$lang['showPurgePageCache_o_logged']  = 'ログイン中の場合表示する';
-$lang['showPurgePageCache_o_never']   = '表示しない';
 $lang['showSearchForm']               = 'ナビゲーション・バー内に検索フォームを表示する';
 $lang['showSearchForm_o_always']      = '常に表示する';
 $lang['showSearchForm_o_logged']      = 'ログイン時に表示する';
@@ -114,6 +110,7 @@ $lang['tocCollapsed']                 = '全てのページで目次を折り畳
 $lang['tocPosition']                  = '目次の配置';
 $lang['tocLayout']                    = '目次のレイアウト';
 $lang['useACL']                       = 'サイドバー（左右）と全てのDokuWikiのフック（<code>:footer</code>、<code>:navbar</code> など）にアクセスコントロールを適用<br/><strong>注： </strong>"Elenor of Tsort"リリース以降で有効です。';
+$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
 $lang['useAnchorJS']                  = 'AnchorJS を使用する';
 $lang['useAvatar']                    = 'アバター画像をGravatar、Libravatar、Microsoft Office365、このDokuWikiの名前空間<code>:user</code>のうちどこから読み込むか';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
@@ -121,7 +118,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWikiの名前空間 :user';
 $lang['useAvatar_o_off']              = 'アバターを使用しない';
 $lang['useAvatar_o_office365']        = 'Office365（もしくはEWS）';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Google アナリティクスを有効にする';
 $lang['useLegacyNavbar']              = '旧式・非奨励の <code>navbar.html</code> フックを使用する　(<code>:navbar</code> フックの使用を再検討して下さい)';
-$lang['useLocalBootswatch']           = 'ローカルの Bootswatch ディレクトリを使用する。このオプションは "intranet" DokuWiki で役立ちます';
-

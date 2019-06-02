@@ -23,6 +23,10 @@ $lang['send_mail']               = 'Отправить на эл. почту';
 $lang['print']                   = 'Печать';
 $lang['permalink']               = 'Постоянная ссылка';
 $lang['add_new_page']            = 'Добавить новую страницу';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Тема';

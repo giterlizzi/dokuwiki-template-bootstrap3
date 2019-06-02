@@ -20,6 +20,10 @@ $lang['send_mail']               = 'Send e-post';
 $lang['print']                   = 'Skriv ut';
 $lang['permalink']               = 'Permalenke';
 $lang['add_new_page']            = 'Legg til ny side';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Tema';
