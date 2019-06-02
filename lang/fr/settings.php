@@ -50,6 +50,7 @@ $lang['landingPages']                 = 'Nom de la page d\'accueil - format de p
 $lang['leftSidebarGrid']              = 'Les classes de grille pour la sidebar de gauche <code>col-{xs,sm,md,lg}-x</code> (voir la documentation <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['libravatarURL']                = 'Saisissez l\'URL Libravatar (ou une API compatible).<br/> <strong>REMARQUE : </strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http).';
 $lang['navbarLabels']                 = 'Afficher/Masquer l\'étiquette individuelle';
+$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
 $lang['office365URL']                 = 'Saisissez l\'URL Microsoft Office 365 (ou EWS)<br/> <strong>REMARQUE : </strong> Ce service requiert une authentification, son utilisation est donc plutôt réservée à une installation en entreprise, où tous les utilisateurs ont accès à Office 365.';
 $lang['pageIcons']                    = 'Sélectionnez les icônes à afficher';
 $lang['pageInfo']                     = 'Afficher/Cacher les éléments d\'information de la page';
@@ -57,7 +58,6 @@ $lang['pageInfoDateFormat']           = 'Format de la date';
 $lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
 $lang['pageInfoDateFormat_o_human']   = 'Lisible par un humain';
 $lang['pageOnPanel']                  = 'Activer le cadre autour de la page';
-$lang['pageToolsAnimation']           = 'Activer l\'animation des outils de page';
 $lang['rightSidebar']                 = 'Nom de la page pour la barre latérale droite. Un champ vide désactive la barre latérale de droite.<br/>Celle-ci est affichée uniquement quand la <a class="interwiki iw_doku" href="#config___sidebar">barre latérale</a> par défaut de DokuWiki est activée avec la position <code>left</code> (voir la page de configuration <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Si vous voulez uniquement la barre latérale DokuWiki à droite, définissez le paramètre <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> avec la valeur <code>right</code>';
 $lang['rightSidebarGrid']             = 'Les classes de grille pour la sidebar de droite  <code>col-{xs,sm,md,lg}-x</code> (voir la documentation <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['schemaOrgType']                = 'Type Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
@@ -88,10 +88,6 @@ $lang['showPageTools']                = 'Activer les outils de page dans le styl
 $lang['showPageTools_o_always']       = 'Toujours';
 $lang['showPageTools_o_logged']       = 'Une fois connecté';
 $lang['showPageTools_o_never']        = 'Jamais';
-$lang['showPurgePageCache']           = 'Afficher le bouton "Purger le cache de la page" dans les Outils de Page';
-$lang['showPurgePageCache_o_always']  = 'Toujours';
-$lang['showPurgePageCache_o_logged']  = 'Une fois connecté';
-$lang['showPurgePageCache_o_never']   = 'Jamais';
 $lang['showSearchForm']               = 'Afficher la barre de recherche dans la barre de navigation';
 $lang['showSearchForm_o_always']      = 'Toujours';
 $lang['showSearchForm_o_logged']      = 'Une fois connecté';
@@ -120,6 +116,7 @@ $lang['tocCollapsed']                 = 'Réduire la table des matières sur tou
 $lang['tocPosition']                  = 'Position de la table des matières';
 $lang['tocLayout']                    = 'Agencement de la table des matières';
 $lang['useACL']                       = 'Utiliser les ACL pour les barres latérales (gauche et droite) et pour tous les "hooks" de Dokuwiki (ex. : <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>REMARQUE : </strong> Disponible depuis la version "Elenor of Tsort" de DokuWiki';
+$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
 $lang['useAnchorJS']                  = 'Activer AnchorJS';
 $lang['useAvatar']                    = 'Charger l\'image d\'avatar depuis Gravatar, Libravatar, Microsoft Office 365 ou localement depuis l\'espace de nom <code>:user</code> de DokuWiki';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
@@ -127,7 +124,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'Espace de nom DokuWiki :user';
 $lang['useAvatar_o_off']              = 'Désactivé';
 $lang['useAvatar_o_office365']        = 'Office365 (ou EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Activer la fonctionnalité Google Analytics';
 $lang['useLegacyNavbar']              = 'Utiliser l\'attache <code>navbar.html</code> héritée de DokuWiki et malheureusement dépréciée (dans le futur, pensez à utiliser l\'attache <code>:navbar</code>)';
-$lang['useLocalBootswatch']           = 'Utiliser le répertoire local de Bootswatch. Cette option est utile pour une installation de Dokuwiki en intranet';
-

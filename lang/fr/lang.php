@@ -28,6 +28,10 @@ $lang['send_mail']               = 'Envoyer courriel';
 $lang['print']                   = 'Imprimer';
 $lang['permalink']               = 'Permalien';
 $lang['add_new_page']            = 'Ajouter une nouvelle page';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Thème';
