@@ -45,6 +45,7 @@ $lang['landingPages']                 = 'Имена целевых страни�
 $lang['leftSidebarGrid']              = 'Класс сеточной системы для левого бокового меню <code>col-{xs,sm,md,lg}-x</code> (см. <a href="http://getbootstrap.com/css/#grid" target="_blank">Сетки Bootstrap</a>)';
 $lang['libravatarURL']                = 'Set Libravatar (or compatible API) URL <br/> <strong>NOTE:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
 $lang['navbarLabels']                 = 'Показать/спрятать наименования для индивидуального меню';
+$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
 $lang['office365URL']                 = 'Set Microsoft Office 365 (or EWS) URL <br/> <strong>NOTE:</strong> This service requires login, so this use case is most useful in a corporate installation, where all users have access to Office 365.';
 $lang['pageIcons']                    = 'Выбрать иконку для отображения';
 $lang['pageInfo']                     = 'Показать/спрятать элементы информации о странице';
@@ -52,7 +53,6 @@ $lang['pageInfoDateFormat']           = 'Формат даты';
 $lang['pageInfoDateFormat_o_dformat'] = 'DokuWiki формат';
 $lang['pageInfoDateFormat_o_human']   = 'Человекочитаемый';
 $lang['pageOnPanel']                  = 'Включить рамку вокруг страницы';
-$lang['pageToolsAnimation']           = 'Включить анимацию иконок для DokuWiki инструментов страницы';
 $lang['rightSidebar']                 = 'Имя страницы правой боковой панели, пустое поле - отключить правую боковую панель.<br/>Правая боковая панель только тогда, когда стандартная <a class="interwiki iw_doku" href="#config___sidebar">боковая панель</a> DokuWiki включена и находится <code>слева</code> (см. опцию <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Если Вы только хотите переместить боковую панель DokuWiki на правую сторону, то измените  значение <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> на <code>right</code>';
 $lang['rightSidebarGrid']             = 'Класс сеточной системы для правого бокового меню <code>col-{xs,sm,md,lg}-x</code> (см. <a href="http://getbootstrap.com/css/#grid" target="_blank">Сетки Bootstrap</a>)';
 $lang['schemaOrgType']                = 'Тип Schema.org(<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
@@ -83,10 +83,6 @@ $lang['showPageTools']                = 'Показывать DokuWiki инст�
 $lang['showPageTools_o_always']       = 'Всегда';
 $lang['showPageTools_o_logged']       = 'Когда авторизован';
 $lang['showPageTools_o_never']        = 'Никогда';
-$lang['showPurgePageCache']           = 'Отображать кнопку "Очистить кеш страницы" в Инструментах страницы';
-$lang['showPurgePageCache_o_always']  = 'Всегда';
-$lang['showPurgePageCache_o_logged']  = 'Когда авторизован';
-$lang['showPurgePageCache_o_never']   = 'Никогда';
 $lang['showSearchForm']               = 'Отображать форму поиска в меню навигации';
 $lang['showSearchForm_o_always']      = 'Всегда';
 $lang['showSearchForm_o_logged']      = 'Когда авторизован';
@@ -115,6 +111,7 @@ $lang['tocCollapsed']                 = 'Сворачивать оглавлен
 $lang['tocPosition']                  = 'Позиция оглавления';
 $lang['tocLayout']                    = 'Макет TOC';
 $lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
+$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
 $lang['useAnchorJS']                  = 'Использовать AnchorJS';
 $lang['useAvatar']                    = 'Загрузите изображение аватара из Gravatar, Libravatar, Microsoft Office365 или локального сервера DokuWiki <code>:user </code>namespace';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
@@ -122,7 +119,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user пространство имён';
 $lang['useAvatar_o_off']              = 'Выкл.';
 $lang['useAvatar_o_office365']        = 'Office365 (или EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Включить Google Analytics';
 $lang['useLegacyNavbar']              = 'Использовать устаревший хук <code>navbar.html</code> (вместо хука <code>:navbar</code>)';
-$lang['useLocalBootswatch']           = 'Использовать локальную директорию Bootswatch. Эта опция полезна для Dokuwiki используемая в интрасети';
-

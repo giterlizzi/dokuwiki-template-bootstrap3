@@ -20,6 +20,10 @@ $lang['send_mail']               = '이메일 보내기';
 $lang['print']                   = '인쇄';
 $lang['permalink']               = '고유링크';
 $lang['add_new_page']            = '새 문서 추가';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = '테마';

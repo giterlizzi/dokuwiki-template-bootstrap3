@@ -42,6 +42,7 @@ $lang['landingPages']                 = 'Nazwa Strony produktowej (wstaw regex)'
 $lang['leftSidebarGrid']              = 'Klasy lewego paska bocznego <code>col-{xs,sm,md,lg}-x</code> (zobacz dokumentację <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['libravatarURL']                = 'Set Libravatar (or compatible API) URL <br/> <strong>NOTE:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
 $lang['navbarLabels']                 = 'Pokaż/Ukryj indywidualną etykietę';
+$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
 $lang['office365URL']                 = 'Set Microsoft Office 365 (or EWS) URL <br/> <strong>NOTE:</strong> This service requires login, so this use case is most useful in a corporate installation, where all users have access to Office 365.';
 $lang['pageIcons']                    = 'Wybierz ikony do wyświetlenia';
 $lang['pageInfo']                     = 'Pokaż/ukryj elementy informacji o stronie';
@@ -49,7 +50,6 @@ $lang['pageInfoDateFormat']           = 'Format daty';
 $lang['pageInfoDateFormat_o_dformat'] = 'Format DokuWiki';
 $lang['pageInfoDateFormat_o_human']   = 'Czytelny dla człowieka';
 $lang['pageOnPanel']                  = 'Włącz panel wokół strony';
-$lang['pageToolsAnimation']           = 'Włącz animację Narzędzi Strony';
 $lang['rightSidebar']                 = 'Nazwa Prawego Paska bocznego, puste pole wyłącza prawy pasek boczny.<br/>Prawy pasek boczny jest wyświetlany tylko wtedy gdy domyślny <a href="#config___sidebar">pasek boczny</a> DokuWiki jest włączony i jest ustawiony w pozycji <code>left</code> (zobacz: konfiguracja <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a>). Jeśli chcesz z prawej strony tylko pasek boczny DokuWiki, ustaw konfigurację <a class="interwiki iw_doku" href="#config___tpl____bootstrap3____sidebarPosition">sidebarPosition</a> na <code>right</code>';
 $lang['rightSidebarGrid']             = 'Klasy prawego paska bocznego <code>col-{xs,sm,md,lg}-x</code> (zobacz dokumentację <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['schemaOrgType']                = 'Typ Schema.org (<code>Article</code>, <code>NewsArticle</code>, <code>TechArticle</code>, <code>BlogPosting</code>, <code>Recipe</code>)';
@@ -80,10 +80,6 @@ $lang['showPageTools']                = 'Wyświetl Narzędzia Strony w stylu Dok
 $lang['showPageTools_o_always']       = 'Zawsze';
 $lang['showPageTools_o_logged']       = 'Gdy zalogowany';
 $lang['showPageTools_o_never']        = 'Nigdy';
-$lang['showPurgePageCache']           = 'Display the "Purge Cache Page" button in Page Tools';
-$lang['showPurgePageCache_o_always']  = 'Always';
-$lang['showPurgePageCache_o_logged']  = 'When logged in';
-$lang['showPurgePageCache_o_never']   = 'Never';
 $lang['showSearchForm']               = 'Wyświetl wyszukiwarkę w pasku nawigacyjnym';
 $lang['showSearchForm_o_always']      = 'Zawsze';
 $lang['showSearchForm_o_logged']      = 'Gdy zalogowany';
@@ -112,6 +108,7 @@ $lang['tocCollapsed']                 = 'Zwiń Spis treści na wszystkich strona
 $lang['tocPosition']                  = 'Pozycja Spisu treści';
 $lang['tocLayout']                    = 'TOC layout';
 $lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
+$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
 $lang['useAnchorJS']                  = 'Użyj AnchorJS';
 $lang['useAvatar']                    = 'Load the avatar image from Gravatar, Libravatar, Microsoft Office365 or local DokuWiki <code>:user</code> namespace';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
@@ -119,7 +116,6 @@ $lang['useAvatar_o_libravatar']       = 'Libravatar';
 $lang['useAvatar_o_local']            = 'DokuWiki :user namespace';
 $lang['useAvatar_o_off']              = 'Off';
 $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
+$lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Włącz Google Analytics';
 $lang['useLegacyNavbar']              = 'Użyj dziedziczonego i przestarzałego haka <code>navbar.html</code> (rozważ w przyszłości używanie haka <code>: navbar</code>)';
-$lang['useLocalBootswatch']           = 'Użyj lokalnego katalogu Bootswatch. Ta opcja jest przydatna w „intranetowych” instalacjach DokuWiki';
-

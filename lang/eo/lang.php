@@ -20,6 +20,10 @@ $lang['send_mail']               = 'Sendi retposxton';
 $lang['print']                   = 'Printi';
 $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Aldoni novan pagxon';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Temo';

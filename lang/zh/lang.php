@@ -24,6 +24,10 @@ $lang['send_mail']               = '发送 e-Mail';
 $lang['print']                   = '打印';
 $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = '添加新页面';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = '主题';
