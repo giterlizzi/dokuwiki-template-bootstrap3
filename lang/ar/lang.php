@@ -21,6 +21,10 @@ $lang['send_mail']               = 'ارسل بريد الكتروني';
 $lang['print']                   = 'طباعة';
 $lang['permalink']               = 'الرابط الثاب';
 $lang['add_new_page']            = 'أضف صفحة جديدة';
+$lang['extensions_update']       = 'Extensions update';
+$lang['user_groups']             = 'Groups';
+$lang['preview_size']            = 'Size of this preview';
+$lang['other_resolutions']       = 'Other resolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
