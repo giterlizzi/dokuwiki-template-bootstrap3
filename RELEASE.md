@@ -51,9 +51,11 @@ Enjoy!
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
   * #415: Fixed footer sticky bug (thanks to @lifehome)
+
+### Patches
   * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
   * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
-
+  * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
 
 ## [v2018-02-16]
 

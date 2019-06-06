@@ -23,7 +23,7 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
 
                 $page_menu = $TEMPLATE->getToolMenu('page');
 
-                foreach ($data['menu'] as $type => $item) {
+                foreach ($page_menu['menu'] as $type => $item) {
                     echo $item['html'];
                 }
 
