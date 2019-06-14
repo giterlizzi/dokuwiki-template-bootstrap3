@@ -38,10 +38,6 @@ class Template
             msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
         }
 
-        if ($INPUT->str('bootswatch-theme')) {
-            set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
-        }
-
         // Populate JSINFO object
         $JSINFO['bootstrap3'] = array(
             'mode'   => $ACT,
@@ -307,6 +303,7 @@ class Template
         $this->plugins['tag']          = plugin_load('helper', 'tag');
         $this->plugins['userhomepage'] = plugin_load('helper', 'userhomepage');
         $this->plugins['translation']  = plugin_load('helper', 'translation');
+        $this->plugins['pagelist']     = plugin_load('helper', 'pagelist');
     }
 
 
@@ -714,8 +711,14 @@ class Template
 
             if ($INPUT->str('bootswatch-theme')) {
                 $bootswatch_theme = $INPUT->str('bootswatch-theme');
+                set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
             }
 
+        }
+
+        if (! in_array($bootswatch_theme, $this->getBootswatchThemeList())) {
+            set_doku_pref('bootswatchTheme', 'default');
+            return 'default';
         }
 
         return $bootswatch_theme;
@@ -1855,6 +1858,22 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $html->clear();
         unset($html);
+
+        # Tag and Pagelist
+        if ($this->getPlugin('tag') || $this->getPlugin('pagelist')) {
+            $html = new \simple_html_dom;
+            $html->load($content, true, false);
+
+            foreach ($html->find('table.ul') as $elm) {
+                $elm->class .= " $table_classes";
+            }
+
+            $content = $html->save();
+
+            $html->clear();
+            unset($html);
+        }
+
 
         # Search
 
