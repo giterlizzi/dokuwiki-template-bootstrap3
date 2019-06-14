@@ -66,7 +66,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             <?php if ($use_avatar): ?>
-            <img src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="<?php echo $avatar_size_small ?>" height="<?php echo $avatar_size_small ?>" />
+            <img alt="<?php echo hsc($_SERVER['REMOTE_USER']) ?>" src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="<?php echo $avatar_size_small ?>" height="<?php echo $avatar_size_small ?>" />
             <?php else: ?>
             <i class="mdi mdi-account"></i>
             <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
@@ -85,7 +85,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                     </p>
 
                     <p class="text-center">
-                        <img src="<?php echo $avatar_img ?>" class="img-circle" width="<?php echo $avatar_size ?>" height="<?php echo $avatar_size ?>" />
+                        <img alt="<?php echo hsc($_SERVER['REMOTE_USER']) ?>" src="<?php echo $avatar_img ?>" class="img-circle" width="<?php echo $avatar_size ?>" height="<?php echo $avatar_size ?>" />
                     </p>
 
                     <div class="mb-2">

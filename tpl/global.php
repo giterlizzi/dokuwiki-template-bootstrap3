@@ -60,6 +60,11 @@ global $TEMPLATE;
 
 $TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
 
-if ($pagesize = $TEMPLATE->getConf('domParserMaxPageSize')) {
-    define('MAX_FILE_SIZE', $pagesize);
+if (! defined('MAX_FILE_SIZE')) {
+
+    if ($pagesize = $TEMPLATE->getConf('domParserMaxPageSize')) {
+        define('MAX_FILE_SIZE', $pagesize);
+    }
+
 }
+

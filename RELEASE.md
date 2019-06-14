@@ -53,9 +53,13 @@ Enjoy!
   * #415: Fixed footer sticky bug (thanks to @lifehome)
 
 ### Patches
+  * Fixed "PHP Notice" for `MAX_FILE_SIZE`
+  * Fixed Bootswatch Theme selection behavior
   * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
   * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
   * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
+  * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
+
 
 ## [v2018-02-16]
 
