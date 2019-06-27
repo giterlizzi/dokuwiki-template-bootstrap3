@@ -323,9 +323,9 @@ $show_metadata = false;
 
             <?php require_once('tpl/breadcrumbs.php'); ?>
 
-            <p class="pageId text-right">
+            <p class="text-right">
                 <?php if($TEMPLATE->getConf('showPageId')): ?>
-                    <span class="ml-1 label label-primary">{{<?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?>}}</span>
+                    <span class="pageId ml-1 label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span>
                 <?php endif; ?>
             </p>
 

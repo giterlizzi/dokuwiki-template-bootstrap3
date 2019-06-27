@@ -60,7 +60,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php require_once(template('tpl/breadcrumbs.php')); ?>
 
-            <p class="pageId text-right">
+            <p class="text-right">
                 <?php
 
                     if ($TEMPLATE->getConf('tagsOnTop') && $tag = $TEMPLATE->getPlugin('tag')) {
@@ -68,7 +68,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                     }
 
                     if ($TEMPLATE->getConf('showPageId')) {
-                        echo '<span class="ml-1 label label-primary">[['. hsc($ID) .']]</span>';
+                        echo '<span class="pageId ml-1 label label-primary">'. hsc($ID) .'</span>';
                     }
 
                 ?>
