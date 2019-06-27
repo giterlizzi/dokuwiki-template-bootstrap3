@@ -55,6 +55,7 @@ Enjoy!
 ### Patches
   * Fixed "PHP Notice" for `MAX_FILE_SIZE`
   * Fixed Bootswatch Theme selection behavior
+  * Fixed navbar "Edit button" behavior
   * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
   * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
   * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
