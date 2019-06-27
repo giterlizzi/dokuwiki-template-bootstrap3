@@ -102,11 +102,37 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
 
                 <ul class="nav navbar-nav">
 
-                    <?php if ($TEMPLATE->getConf('showEditBtn')): ?>
-                    <li class="dw-action-icon hidden-xs">
-                        <?php tpl_actionlink('edit', '<span class="sr-only">', '</span>'); ?>
-                    </li>
-                    <?php endif; ?>
+                    <?php
+
+                        if ($TEMPLATE->getConf('showEditBtn')) {
+
+                            $action = null;
+
+                            global $ACT;
+
+                            if ($ACT == 'edit') {
+                                $action = 'show';
+                            }
+                            if ($ACT == 'show') {
+                                $action = 'edit';
+                            }
+
+                            if ($action && $edit_action = $TEMPLATE->getToolMenuItem('page', $action)) {
+
+                                $edit_attr = $edit_action->getLinkAttributes();
+
+                                $edit_html  = '<li class="hidden-xs"><a '. buildAttributes($edit_attr) . '>';
+                                $edit_html .= \inlineSVG($edit_action->getSvg());
+                                #$edit_html .= hsc($edit_action->getLabel());
+                                $edit_html .= "</a></li>";
+
+                                echo $edit_html;
+
+                            }
+
+                        }
+
+                    ?>
 
                     <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
                     <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">

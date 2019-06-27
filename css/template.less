@@ -427,8 +427,33 @@ div#picker2 {
 }
 
 
-.pageId a.label {
+#dokuwiki__pageheader p a.label {
   white-space: initial;
+}
+
+/* Page ID */
+[data-img-id] .pageId {
+
+  &::after {
+    content: " }}";
+  }
+
+  &::before {
+    content: "{{ ";
+  }
+
+}
+
+[data-page-id] .pageId {
+
+  &::after {
+    content: " ]]";
+  }
+
+  &::before {
+    content: "[[ ";
+  }
+
 }
 
 
