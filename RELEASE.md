@@ -60,6 +60,7 @@ Enjoy!
   * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
   * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
   * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
+  * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
 
 
 ## [v2018-02-16]
