@@ -61,6 +61,7 @@ Enjoy!
   * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
   * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
   * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
+  * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
 
 
 ## [v2018-02-16]
