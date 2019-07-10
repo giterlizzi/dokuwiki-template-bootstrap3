@@ -2257,11 +2257,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                     $plugin_name = $matches[1];
 
-                    $extension = plugin_load('helper', 'extension_extension');
-                    $extension->setExtension($plugin_name);
+                    if ($extension = plugin_load('helper', 'extension_extension')) {
 
-                    foreach ($elm->find('legend') as $legend) {
-                        $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext .' <br/><h6>'. $extension->getDescription() .' <a class="urlextern" href="'. $extension->getURL() .'" target="_blank">Docs</a></h6>';
+                        if ($extension->setExtension($plugin_name)) {
+
+                            foreach ($elm->find('legend') as $legend) {
+                                $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext .' <br/><h6>'. $extension->getDescription() .' <a class="urlextern" href="'. $extension->getURL() .'" target="_blank">Docs</a></h6>';
+                            }
+
+                        }
+
+                    } else {
+                        foreach ($elm->find('legend') as $legend) {
+                            $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext;
+                        }
                     }
 
                 }
