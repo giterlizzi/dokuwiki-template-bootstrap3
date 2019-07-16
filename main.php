@@ -32,7 +32,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>">
+<body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
     <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
     <?php
@@ -52,7 +52,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     ?>
     </header>
 
-    <main role="main" id="dokuwiki__top" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -196,6 +198,8 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         // Provide DokuWiki housekeeping, required in all templates
         tpl_indexerWebBug();
     ?>
+
+</div>
 
 </body>
 </html>
