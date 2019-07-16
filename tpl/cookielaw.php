@@ -12,7 +12,7 @@ if (!defined('DOKU_INC')) die();
 
 global $TEMPLATE;
 
-if ( $TEMPLATE->getConf('showCookieLawBanner') && ! (get_doku_pref('cookieNoticeAccepted', null) || get_doku_pref('cookieNoticeAccepted', '')) ):
+if ( $TEMPLATE->getConf('showCookieLawBanner') && !get_doku_pref('cookieNoticeAccepted', null) ):
 
 $cookie_policy_page_id = $TEMPLATE->getConf('cookieLawPolicyPage');
 $cookie_banner_page_id = $TEMPLATE->getConf('cookieLawBannerPage');
@@ -23,7 +23,7 @@ resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
 ?>
 <!-- cookie-law -->
 <div id="cookieNotice" class="navbar <?php echo (($TEMPLATE->getConf('inverseNavbar')) ? 'navbar-inverse' : 'navbar-default') ?> navbar-fixed-bottom">
-    <div class="container">
+    <div class="dw-container container<?php echo ($TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
         <div class="navbar-text navbar-left">
             <?php
                 $cookie_banner_page = tpl_include_page($cookie_banner_page_id, 0, 1, $TEMPLATE->getConf('useACL'));
