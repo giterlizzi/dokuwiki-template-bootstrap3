@@ -295,7 +295,7 @@ $show_metadata = false;
 </script>
 </head>
 
-<body class="<?php echo $TEMPLATE->getClasses() ?>" data-img-id="<?php echo $IMG ?>">
+<body class="<?php echo $TEMPLATE->getClasses() ?>" data-img-id="<?php echo $IMG ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
     <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid' : '' ?>">
         <?php
@@ -315,7 +315,9 @@ $show_metadata = false;
         ?>
     </header>
 
-    <main role="main" id="dokuwiki__top" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <a name="dokuwiki__top" id="dokuwiki__top"></a>
+
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -341,7 +343,7 @@ $show_metadata = false;
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>">
+                <div class="dokuwiki <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>">
                     <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php require_once(template('tpl/page-icons.php')); ?>
@@ -530,6 +532,8 @@ $show_metadata = false;
         <span class="visible-md-block"></span>
         <span class="visible-lg-block"></span>
     </div>
+
+</div>
 
 </body>
 </html>
