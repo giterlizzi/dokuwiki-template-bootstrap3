@@ -10,6 +10,7 @@
 ### Chnged
   * Used DokuWiki hooks for customize login and profile page (regiter, edit and delete)
   * Upgraded `simple_html_dom` to v1.9
+  * Removed margin in mobile tamplate with `fluidContainer` enabled
 
 ### Fixed
   * Fixed "PHP Notice" for `MAX_FILE_SIZE`
