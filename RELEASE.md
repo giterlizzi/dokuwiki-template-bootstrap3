@@ -1,5 +1,27 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [Develop]
+
+### Added
+  * Added MDI class to embed Material Design SVG icons into HTML
+  * Added Events dispatch table
+
+### Chnged
+  * Used DokuWiki hooks for customize login and profile page (regiter, edit and delete)
+  * Upgraded `simple_html_dom` to v1.9
+
+### Fixed
+  * Fixed "PHP Notice" for `MAX_FILE_SIZE`
+  * Fixed Bootswatch Theme selection behavior
+  * Fixed navbar "Edit button" behavior
+  * Fixed issue with Plugins and userstyle.css (added `div.dokuwiki` tag and class in `main.php` and `detail.php`)
+  * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
+  * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
+  * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
+  * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
+  * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
+  * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
+
 
 ## [v2019-05-22]
 
@@ -51,18 +73,6 @@ Enjoy!
   * #402: Upgraded Bootstrap and Bootwarch to v3.4.1 to prevent XSS vulnerability (thanks to @gizmo21)
   * #403: Fixed Characters picker z-index (thanks to schplurtz for patch on DokuWiki forum and @hokkaidoperson for reporting the issue)
   * #415: Fixed footer sticky bug (thanks to @lifehome)
-
-### Patches
-  * Fixed "PHP Notice" for `MAX_FILE_SIZE`
-  * Fixed Bootswatch Theme selection behavior
-  * Fixed navbar "Edit button" behavior
-  * Fixed issue with Plugins and userstyle.css (added `div.dokuwiki` tag and class in `main.php` and `detail.php`)
-  * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
-  * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
-  * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
-  * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
-  * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
-  * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
 
 
 ## [v2018-02-16]

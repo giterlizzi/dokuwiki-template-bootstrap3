@@ -47,6 +47,14 @@ if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
 
 }
 
+// Load MDI class
+require_once template('Mdi.php');
+
+Mdi::$iconsPath         = template('assets/mdi/svg/');
+Mdi::$defaultAttributes = array(
+    'class' => 'icon',
+);
+
 require_once template('Template.php');
 
 // Load PHP Simple HTML DOM class
@@ -67,4 +75,7 @@ if (! defined('MAX_FILE_SIZE')) {
     }
 
 }
+
+// kate: space-indent on; indent-width 4; replace-tabs on;
+
 

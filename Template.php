@@ -17,7 +17,6 @@ class Template
     private $confMetadata = array();
     private $toolsMenu    = array();
 
-
     public function __construct()
     {
 
@@ -30,7 +29,6 @@ class Template
         $this->initPlugins();
         $this->initToolsMenu();
         $this->loadConfMetadata();
-
 
         // Get the template info (useful for debug)
         if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
@@ -51,7 +49,7 @@ class Template
                 'tocAffix'                   => (int) $this->getConf('tocAffix'),
                 'tocCollapseOnScroll'        => (int) $this->getConf('tocCollapseOnScroll'),
                 'tocCollapsed'               => (int) $this->getConf('tocCollapsed'),
-                'tocLayout'                  =>       $this->getConf('tocLayout'),
+                'tocLayout'                  => $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
             ),
@@ -61,9 +59,7 @@ class Template
             $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
         }
 
-
     }
-
 
     private function registerHooks()
     {
@@ -71,36 +67,160 @@ class Template
         /** @var \Doku_Event_Handler */
         global $EVENT_HANDLER;
 
-        $search_events = array(
-            'SEARCH_QUERY_PAGELOOKUP', 'SEARCH_QUERY_FULLPAGE',
-            'SEARCH_RESULT_PAGELOOKUP', 'SEARCH_RESULT_FULLPAGE',
-            'FORM_QUICKSEARCH_OUTPUT', 'FORM_SEARCH_OUTPUT',
+        $events_dispatcher = array(
+            'FORM_QUICKSEARCH_OUTPUT'       => 'searchHandler',
+            'FORM_SEARCH_OUTPUT'            => 'searchHandler',
+            'HTML_EDITFORM_OUTPUT'          => 'editFormHandler',
+            'HTML_LOGINFORM_OUTPUT'         => 'profileFormHandler',
+            'HTML_PROFILEDELETEFORM_OUTPUT' => 'profileFormHandler',
+            'HTML_RECENTFORM_OUTPUT'        => 'revisionsFormHandler',
+            'HTML_REGISTERFORM_OUTPUT'      => 'profileFormHandler',
+            'HTML_REVISIONSFORM_OUTPUT'     => 'revisionsFormHandler',
+            'HTML_UPDATEPROFILEFORM_OUTPUT' => 'profileFormHandler',
+            'PLUGIN_TAG_LINK'               => 'tagPluginHandler',
+            'PLUGIN_TPLINC_LOCATIONS_SET'   => 'tplIncPluginHandler',
+            'SEARCH_QUERY_FULLPAGE'         => 'searchHandler',
+            'SEARCH_QUERY_PAGELOOKUP'       => 'searchHandler',
+            'SEARCH_RESULT_FULLPAGE'        => 'searchHandler',
+            'SEARCH_RESULT_PAGELOOKUP'      => 'searchHandler',
+            'TPL_CONTENT_DISPLAY'           => 'contentHandler',
+            'TPL_METAHEADER_OUTPUT'         => 'metaheadersHandler',
         );
 
-        $EVENT_HANDLER->register_hook('PLUGIN_TPLINC_LOCATIONS_SET', 'BEFORE', $this, 'tplIncPluginHandler');
-        $EVENT_HANDLER->register_hook('TPL_METAHEADER_OUTPUT',       'BEFORE', $this, 'metaheadersHandler');
-        $EVENT_HANDLER->register_hook('PLUGIN_TAG_LINK',             'BEFORE', $this, 'tagPluginHandler');
-        $EVENT_HANDLER->register_hook('TPL_CONTENT_DISPLAY',         'BEFORE', $this, 'contentHandler');
-
-        foreach ($search_events as $event) {
-            $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, 'searchHandler');
+        foreach ($events_dispatcher as $event => $method) {
+            $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, $method);
         }
 
     }
 
+
+    public function profileFormHandler(\Doku_Event $event) {
+
+        foreach ($event->data->_content as $key => $item) {
+
+            if (is_array($item) && isset($item['_elem'])) {
+
+                $title_icon   = 'account';
+                $button_class = 'btn btn-success';
+                $button_icon  = 'arrow-right';
+
+                switch($event->name) {
+                    case 'HTML_LOGINFORM_OUTPUT':
+                        $title_icon   = 'account';
+                        $button_icon  = 'lock';
+                        break;
+                    case 'HTML_UPDATEPROFILEFORM_OUTPUT':
+                        $title_icon   = 'account-card-details-outline';
+                        break;
+                    case 'HTML_PROFILEDELETEFORM_OUTPUT':
+                        $title_icon   = 'account-remove';
+                        $button_class = 'btn btn-danger';
+                        break;
+                    case 'HTML_REGISTERFORM_OUTPUT':
+                        $title_icon   = 'account-plus';
+                        break;
+                }
+
+                // Legend
+                if ($item['_elem'] == 'openfieldset') {
+                    $event->data->_content[$key]['_legend'] = \Mdi::icon($title_icon) . ' ' . $event->data->_content[$key]['_legend'];
+                }
+
+                // Save button
+                if ($item['type'] == 'submit') {
+                    $event->data->_content[$key]['class'] = " $button_class";
+                    $event->data->_content[$key]['value'] = \Mdi::icon($button_icon) . ' ' . $event->data->_content[$key]['value'];
+                }
+
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Handle HTML_EDITFORM_OUTPUT event
+     *
+     * @param \Doku_Event $event Event handler
+     * 
+     * @return void
+     **/
+    public function editFormHandler(\Doku_Event $event) {
+
+        foreach ($event->data->_content as $key => $item) {
+
+            if (is_array($item) && isset($item['_elem'])) {
+
+                // Save button
+                if ($item['_action'] == 'save') {
+                    $event->data->_content[$key]['class'] = ' btn btn-success';
+                    $event->data->_content[$key]['value'] = \Mdi::icon('content-save') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+                // Preview and Show buttons
+                if ($item['_action'] == 'preview' || $item['_action'] == 'show') {
+                    $event->data->_content[$key]['value'] = \Mdi::icon('file-document-outline') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+                if ($item['_action'] == 'draftdel') {
+                    $event->data->_content[$key]['class'] = ' btn btn-danger';
+                    $event->data->_content[$key]['value'] = \Mdi::icon('close') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Handle HTML_REVISIONSFORM_OUTPUT and HTML_RECENTFORM_OUTPUT events
+     *
+     * @param \Doku_Event $event Event handler
+     * 
+     * @return void
+     **/
+    public function revisionsFormHandler(\Doku_Event $event)
+    {
+        foreach ($event->data->_content as $key => $item) {
+
+            // Revision form
+            if (is_array($item) && isset($item['_elem'])) {
+
+                if ($item['_elem'] == 'opentag' && $item['_tag'] == 'span' && strstr($item['class'], 'sizechange')) {
+
+                    if (strstr($item['class'], 'positive')) {
+                        $event->data->_content[$key]['class'] .= ' label label-success';
+                    }
+
+                    if (strstr($item['class'], 'negative')) {
+                        $event->data->_content[$key]['class'] .= ' label label-danger';
+                    }
+
+                }
+
+                // Recent form
+                if ($item['_elem'] == 'opentag' && $item['_tag'] == 'li' && strstr($item['class'], 'minor')) {
+                    $event->data->_content[$key]['class'] .= ' text-muted';
+                }
+
+            }
+        }
+    }
 
     public function contentHandler(\Doku_Event $event)
     {
         $event->data = $this->normalizeContent($event->data);
     }
 
-
     public function searchHandler(\Doku_Event $event)
     {
-        #dbg(print_r($event, 1));
+        //dbg(print_r($event, 1));
 
         if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
-            array_unshift($event->data['listItemContent'], '<i class="mdi mdi-file-document-outline" title="'. hsc($event->data['page']) .'"></i> ');
+            array_unshift($event->data['listItemContent'], '<i class="mdi mdi-file-document-outline" title="' . hsc($event->data['page']) . '"></i> ');
         }
 
         if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
@@ -112,7 +232,6 @@ class Template
         }
 
     }
-
 
     /**
      * Load the template assets (Bootstrap, AnchorJS, etc)
@@ -194,13 +313,11 @@ class Template
                 'src'   => $script);
         }
 
-
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
                 'type'  => 'text/javascript',
                 '_data' => $google_analitycs);
         }
-
 
         // Apply some FIX
         if ($ACT || defined('DOKU_MEDIADETAIL')) {
@@ -267,22 +384,20 @@ class Template
 
             $event->data['style'][] = array(
                 'type'  => 'text/css',
-                '_data' => '@media screen { '. implode(" ", $styles) .' }',
+                '_data' => '@media screen { ' . implode(" ", $styles) . ' }',
             );
 
         }
 
     }
 
-
     public function tagPluginHandler(\Doku_Event $event)
     {
 
         $event->data['class'] .= ' tag label label-default mx-1';
-        $event->data['title']  = '<i class="mdi mdi-tag-text-outline"></i> ' . $event->data['title'];
+        $event->data['title'] = '<i class="mdi mdi-tag-text-outline"></i> ' . $event->data['title'];
 
     }
-
 
     public function tplIncPluginHandler(\Doku_Event $event)
     {
@@ -306,7 +421,6 @@ class Template
         $this->plugins['pagelist']     = plugin_load('helper', 'pagelist');
     }
 
-
     public function getPlugin($plugin)
     {
 
@@ -314,13 +428,12 @@ class Template
             return false;
         }
 
-        if (! isset($this->plugins[$plugin])) {
+        if (!isset($this->plugins[$plugin])) {
             return false;
         }
 
         return $this->plugins[$plugin];
     }
-
 
     /**
      * Get the singleton instance
@@ -340,7 +453,6 @@ class Template
 
     }
 
-
     /**
      * Get the content to include from the tplinc plugin
      *
@@ -349,11 +461,12 @@ class Template
      * @param string $location
      * @return string
      */
-    public function includePage($location, $return = false) {
+    public function includePage($location, $return = false)
+    {
 
         $content = '';
 
-        if ( $plugin = $this->getPlugin('tplinc')) {
+        if ($plugin = $this->getPlugin('tplinc')) {
             $content = $plugin->renderIncludes($location);
         }
 
@@ -361,7 +474,9 @@ class Template
             $content = tpl_include_page($location, 0, 1, $this->getConf('useACL'));
         }
 
-        if ($content === '') return '';
+        if ($content === '') {
+            return '';
+        }
 
         $bs_content = $this->normalizeContent($content);
 
@@ -373,7 +488,6 @@ class Template
         return '';
 
     }
-
 
     /**
      * Get the template configuration metadata
@@ -392,18 +506,16 @@ class Template
         return null;
     }
 
-
     private function loadConfMetadata()
     {
 
         $meta = array();
         $file = template('conf/metadata.php');
 
-        include($file);
+        include $file;
 
         $this->confMetadata = $meta;
     }
-
 
     /**
      * Simple wrapper for tpl_getConf
@@ -557,7 +669,6 @@ class Template
 
     }
 
-
     /**
      * Return the Bootswatch.com theme lists defined in metadata.php
      *
@@ -572,7 +683,6 @@ class Template
         return $bootswatch_themes['_choices'];
 
     }
-
 
     /**
      * Get a Gravatar, Libravatar, Office365/EWS URL or local ":user" DokuWiki namespace
@@ -620,7 +730,7 @@ class Template
         if ($avatar_provider == 'office365') {
 
             $office365_url = rtrim($this->getConf('office365URL'), '/');
-            $avatar_url    = $office365_url . '/owa/service.svc/s/GetPersonaPhoto?email='. $email .'&size=HR'. $size .'x' . $size;
+            $avatar_url    = $office365_url . '/owa/service.svc/s/GetPersonaPhoto?email=' . $email . '&size=HR' . $size . 'x' . $size;
 
         }
 
@@ -651,7 +761,6 @@ class Template
         return false;
 
     }
-
 
     /**
      * Return template classes
@@ -688,7 +797,6 @@ class Template
 
     }
 
-
     /**
      * Return (and set via cookie) the current Bootswatch theme
      *
@@ -696,7 +804,7 @@ class Template
      *
      * @return  string
      */
-    function getBootswatchTheme()
+    public function getBootswatchTheme()
     {
 
         global $INPUT;
@@ -716,7 +824,7 @@ class Template
 
         }
 
-        if (! in_array($bootswatch_theme, $this->getBootswatchThemeList())) {
+        if (!in_array($bootswatch_theme, $this->getBootswatchThemeList())) {
             set_doku_pref('bootswatchTheme', 'default');
             return 'default';
         }
@@ -724,7 +832,6 @@ class Template
         return $bootswatch_theme;
 
     }
-
 
     /**
      * Return only the available Bootswatch.com themes
@@ -738,7 +845,6 @@ class Template
         return array_diff($this->getBootswatchThemeList(), $this->getConf('hideInThemeSwitcher'));
     }
 
-
     /**
      * Print some info about the current page
      *
@@ -748,7 +854,7 @@ class Template
      * @param   bool $ret return content instead of printing it
      * @return  bool|string
      */
-    function getPageInfo($ret = false)
+    public function getPageInfo($ret = false)
     {
 
         global $conf;
@@ -794,11 +900,11 @@ class Template
             $out = '<ul class="list-inline">';
 
             if (in_array('filename', $page_info)) {
-                $out .= '<li><i class="mdi mdi-file-document-outline text-muted"></i> <span title="'. $fn_full .'">'. $fn .'</span></li>';
+                $out .= '<li><i class="mdi mdi-file-document-outline text-muted"></i> <span title="' . $fn_full . '">' . $fn . '</span></li>';
             }
 
             if (in_array('date', $page_info)) {
-                $out .= '<li><i class="mdi mdi-calendar text-muted"></i> '. $lang['lastmod'] .' <span title="'. dformat($INFO['lastmod']) .'">'. $date .'</span></li>';
+                $out .= '<li><i class="mdi mdi-calendar text-muted"></i> ' . $lang['lastmod'] . ' <span title="' . dformat($INFO['lastmod']) . '">' . $date . '</span></li>';
             }
 
             if (in_array('editor', $page_info)) {
@@ -813,22 +919,22 @@ class Template
                         $user_data = $auth->getUserData($INFO['editor']);
 
                         $avatar_img = $this->getAvatar($INFO['editor'], $user_data['mail'], 16);
-                        $user_img   = '<img src="'. $avatar_img .'" alt="" width="16" height="16" class="img-rounded" /> ';
+                        $user_img   = '<img src="' . $avatar_img . '" alt="" width="16" height="16" class="img-rounded" /> ';
                         $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
                         $user       = $user_img . $user;
 
                     }
 
-                    $out .= '<li class="text-muted">'. $lang['by'] .' '. $user .'</li>';
+                    $out .= '<li class="text-muted">' . $lang['by'] . ' ' . $user . '</li>';
 
                 } else {
-                    $out .= '<li>('. $lang['external_edit'] .')</li>';
+                    $out .= '<li>(' . $lang['external_edit'] . ')</li>';
                 }
 
             }
 
             if ($INFO['locked'] && in_array('locked', $page_info)) {
-                $out .= '<li><i class="mdi mdi-lock text-muted"></i> '. $lang['lockedby'] .' '. editorinfo($INFO['locked']) .'</li>';
+                $out .= '<li><i class="mdi mdi-lock text-muted"></i> ' . $lang['lockedby'] . ' ' . editorinfo($INFO['locked']) . '</li>';
             }
 
             $out .= '</ul>';
@@ -846,7 +952,6 @@ class Template
 
     }
 
-
     /**
      * Prints the global message array in Bootstrap style
      *
@@ -855,7 +960,7 @@ class Template
      *
      * @see html_msgarea()
      */
-    function getMessageArea()
+    public function getMessageArea()
     {
 
         global $MSG, $MSG_shown;
@@ -930,7 +1035,6 @@ class Template
 
     }
 
-
     /**
      * Get the license (link or image)
      *
@@ -941,7 +1045,7 @@ class Template
      * @param  bool    $return or print
      * @return string
      */
-    function getLicense($type = 'link', $size = 24, $return = false)
+    public function getLicense($type = 'link', $size = 24, $return = false)
     {
 
         global $conf, $license, $lang;
@@ -971,7 +1075,7 @@ class Template
                     $license_img = 'pd';
                 }
 
-                $output .= '<img src="' . tpl_basedir() . "images/license/$license_img.png" .'" width="' . $size . '" height="' . $size . '" alt="' . $license_img . '" /> ';
+                $output .= '<img src="' . tpl_basedir() . "images/license/$license_img.png" . '" width="' . $size . '" height="' . $size . '" alt="' . $license_img . '" /> ';
             }
 
         } else {
@@ -988,7 +1092,6 @@ class Template
         return '';
 
     }
-
 
     /**
      * Add Google Analytics
@@ -1026,7 +1129,7 @@ class Template
 
         }
 
-        $out  = DOKU_LF;
+        $out = DOKU_LF;
         $out .= '// Google Analytics' . DOKU_LF;
         $out .= "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -1050,7 +1153,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Return the user home-page link
      *
@@ -1062,7 +1164,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     {
         return wl($this->getUserHomePageID());
     }
-
 
     /**
      * Return the user home-page ID
@@ -1080,7 +1181,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return cleanID($page_id);
 
     }
-
 
     /**
      * Print the breadcrumbs trace with Bootstrap style
@@ -1128,7 +1228,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Hierarchical breadcrumbs with Bootstrap style
      *
@@ -1144,7 +1243,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      *
      * @return bool
      */
-    function getYouAreHere()
+    public function getYouAreHere()
     {
 
         global $conf;
@@ -1234,20 +1333,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Display the page title (and previous namespace page title) on browser titlebar
      *
      * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      * @return string
      */
-    function getBrowserPageTitle()
+    public function getBrowserPageTitle()
     {
 
         global $conf, $ACT, $ID;
 
         if ($this->getConf('browserTitleShowNS') && $ACT == 'show') {
 
+            $ns_page      = '';
             $ns_parts     = explode(':', $ID);
             $ns_pages     = array();
             $ns_titles    = array();
@@ -1300,17 +1399,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
             $browser_title = implode($ns_separator, $ns_titles);
-
         } else {
             $browser_title = tpl_pagetitle($ID, true);
         }
 
-        return str_replace(array('@WIKI@', '@TITLE@'),
+        return str_replace(
+            array('@WIKI@', '@TITLE@'),
             array(strip_tags($conf['title']), $browser_title),
-            $this->getConf('browserTitle'));
+            $this->getConf('browserTitle')
+        );
 
     }
-
 
     /**
      * Return the theme for current namespace
@@ -1318,7 +1417,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      * @return string
      */
-    function getThemeForNamespace()
+    public function getThemeForNamespace()
     {
 
         global $ID;
@@ -1357,7 +1456,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return array();
 
     }
-
 
     /**
      * Make a Bootstrap3 Nav
@@ -1407,7 +1505,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Normalize the DokuWiki list items
      *
@@ -1442,7 +1539,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return $output;
 
     }
-
 
     /**
      * Return a Bootstrap NavBar and or drop-down menu
@@ -1482,7 +1578,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return $navbar;
 
     }
-
 
     /**
      * Manipulate Sidebar page to add Bootstrap3 styling
@@ -1526,7 +1621,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Return a drop-down page
      *
@@ -1535,7 +1629,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      * @param   string  $page name
      * @return  string
      */
-    function getDropDownPage($page)
+    public function getDropDownPage($page)
     {
 
         $page = page_findnearest($page, $this->getConf('useACL'));
@@ -1546,19 +1640,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $output   = $this->normalizeContent($this->toBootstrapNav(tpl_include_page($page, 0, 1, $this->getConf('useACL')), 'pills', true));
         $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
-                    '<li class="dropdown dropdown-large">' .
-                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-                    p_get_first_heading($page) .
-                    ' <span class="caret"></span></a>' .
-                    '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
-                    '<li><div class="container small">' .
-                    $output .
-                    '</div></li></ul></li></ul>';
+        '<li class="dropdown dropdown-large">' .
+        '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
+        p_get_first_heading($page) .
+            ' <span class="caret"></span></a>' .
+            '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
+            '<li><div class="container small">' .
+            $output .
+            '</div></li></ul></li></ul>';
 
         return $dropdown;
 
     }
-
 
     /**
      * Include left or right sidebar
@@ -1613,7 +1706,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     /**
      * Wrapper for left or right sidebar
      *
@@ -1623,7 +1715,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      * @param  string  $sidebar_id
      * @param  string  $sidebar_header
      * @param  string  $sidebar_footer
-    */
+     */
     private function sidebarWrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer)
     {
         global $lang;
@@ -1631,8 +1723,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         @require template('tpl/sidebar.php');
     }
-
-
 
     /**
      * Add Bootstrap classes in a DokuWiki content
@@ -1692,7 +1782,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if (preg_match('/picker/', $elm->class)) {
                 continue;
             }
-
             $elm->class .= ' sr-only';
         }
 
@@ -1701,7 +1790,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if (preg_match('/(nav|dropdown-menu)/', $elm->class)) {
                 continue;
             }
-
             $elm->class .= ' fix-media-list-overlap';
         }
 
@@ -1710,7 +1798,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if ($elm->tag == 'form') {
                 continue;
             }
-
             $elm->class .= ' btn';
         }
 
@@ -1784,7 +1871,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if (in_array($elm->type, array('submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'))) {
                 continue;
             }
-
             $elm->class .= ' form-control';
         }
 
@@ -1794,7 +1880,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if (preg_match('/form-horizontal/', $elm->class)) {
                 continue;
             }
-
             $elm->class .= ' form-inline';
         }
 
@@ -1873,7 +1958,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $html->clear();
             unset($html);
         }
-
+    
+        # ----- Actions -----
 
         # Search
 
@@ -1883,57 +1969,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $html = new \simple_html_dom;
             $html->load($content, true, false);
 
-            foreach ($html->find('.search_results dt') as $elm) {
-
-                $elm->outertext = str_replace(
-                    array('</a>: ', '</dt>'),
-                    array('</a>&nbsp;&nbsp;&nbsp;<span class="label label-primary">', '</span></dt>'),
-                    $elm->outertext);
-
-            }
-
             foreach ($html->find('fieldset.search-form button[type="submit"]') as $elm) {
                 $elm->class .= ' btn-primary';
                 $elm->innertext = '<i class="mdi mdi-magnify"></i> ' . $elm->innertext;
-            }
-
-            $content = $html->save();
-
-            $html->clear();
-            unset($html);
-
-        }
-
-        # Profile
-
-        if ($ACT == 'profile' || $ACT == 'register') {
-
-            # Import HTML string
-            $html = new \simple_html_dom;
-            $html->load($content, true, false);
-
-            foreach ($html->find('#dw__register') as $elm) {
-
-                foreach ($elm->find('legend') as $title) {
-                    $title->innertext = '<i class="mdi mdi-account-card-details-outline"></i> ' . $title->innertext;
-                }
-
-                foreach ($elm->find('[type=submit]') as $btn) {
-                    $btn->class .= ' btn btn-success';
-                }
-
-            }
-
-            foreach ($html->find('#dw__profiledelete') as $elm) {
-
-                foreach ($elm->find('legend') as $title) {
-                    $title->innertext = '<i class="mdi mdi-account-remove"></i> ' . $title->innertext;
-                }
-
-                foreach ($elm->find('[type=submit]') as $btn) {
-                    $btn->class .= ' btn btn-danger';
-                }
-
             }
 
             $content = $html->save();
@@ -2262,14 +2300,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                         if ($extension->setExtension($plugin_name)) {
 
                             foreach ($elm->find('legend') as $legend) {
-                                $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext .' <br/><h6>'. $extension->getDescription() .' <a class="urlextern" href="'. $extension->getURL() .'" target="_blank">Docs</a></h6>';
+                                $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
                             }
 
                         }
 
                     } else {
                         foreach ($elm->find('legend') as $legend) {
-                            $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> '. $legend->innertext;
+                            $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> ' . $legend->innertext;
                         }
                     }
 
@@ -2286,12 +2324,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     '#_notifications'  => 'mdi mdi-email',
                     '#_syndication'    => 'mdi mdi-rss',
                     '#_advanced'       => 'mdi mdi-palette-advanced',
-                    '#_network'        => 'mdi mdi-network'
+                    '#_network'        => 'mdi mdi-network',
                 );
 
                 foreach ($dokuwiki_configs as $selector => $icon) {
                     foreach ($html->find("$selector legend") as $elm) {
-                        $elm->innertext = '<i class="'.$icon.'"></i> ' . $elm->innertext;
+                        $elm->innertext = '<i class="' . $icon . '"></i> ' . $elm->innertext;
                     }
                 }
 
@@ -2330,81 +2368,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         }
 
-        # Edit / Preview / Draft
-
-        if ($ACT == 'edit' || $ACT == 'preview' || $ACT == 'draft') {
-
-            # Import HTML string
-            $html = new \simple_html_dom;
-            $html->load($content, true, false);
-
-            foreach ($html->find('[name*=do[save]], [name*=do[recover]]') as $elm) {
-
-                $elm->class .= ' btn btn-success';
-
-                if ($elm->tag == 'button') {
-                    $elm->innertext = '<i class="mdi mdi-content-save"></i> ' . $elm->innertext;
-                }
-
-            }
-
-            foreach ($html->find('[name*=do[preview]], [name*=do[show]]') as $elm) {
-
-                $elm->class .= ' btn btn-default';
-
-                if ($elm->tag == 'button') {
-                    $elm->innertext = '<i class="mdi mdi-file-document-outline"></i> ' . $elm->innertext;
-                }
-
-            }
-
-            foreach ($html->find('[name*=do[draftdel]]') as $elm) {
-
-                $elm->class .= ' btn btn-danger';
-
-                if ($elm->tag == 'button') {
-                    $elm->innertext = '<i class="mdi mdi-close"></i> ' . $elm->innertext;
-                }
-
-            }
-
-            $content = $html->save();
-
-            $html->clear();
-            unset($html);
-
-        }
-
-        # Revisions & Recents
-
-        if ($ACT == 'revisions' || $ACT == 'recent') {
-
-            # Import HTML string
-            $html = new \simple_html_dom;
-            $html->load($content, true, false);
-
-            foreach ($html->find('.sizechange') as $elm) {
-
-                if (strstr($elm->class, 'positive')) {
-                    $elm->class .= ' label label-success';
-                }
-
-                if (strstr($elm->class, 'negative')) {
-                    $elm->class .= ' label label-danger';
-                }
-
-            }
-
-            foreach ($html->find('.minor') as $elm) {
-                $elm->class .= ' text-muted';
-            }
-
-            $content = $html->save();
-
-            $html->clear();
-            unset($html);
-
-        }
 
         # Difference
 
@@ -2463,21 +2426,19 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         }
 
-
         # Add icons for Extensions, Actions, etc.
 
         $svg_icon = null;
 
-        if (! $INFO['exists']) {
+        if (!$INFO['exists']) {
             $svg_icon = template('assets/mdi/svg/alert.svg');
         }
 
         $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
 
-
         if (class_exists($menu_class, false)) {
             $menu_item = new $menu_class;
-            $svg_icon = $menu_item->getSvg();
+            $svg_icon  = $menu_item->getSvg();
         }
 
         switch ($ACT) {
@@ -2490,7 +2451,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                         $svg_icon = $plugin->getMenuIcon();
 
-                        if (! file_exists($svg_icon)) {
+                        if (!file_exists($svg_icon)) {
                             $svg_icon = template('assets/mdi/svg/puzzle.svg');
                         }
 
@@ -2501,7 +2462,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 }
 
                 break;
-
 
             case 'denied':
                 $svg_icon = template('assets/mdi/svg/block-helper.svg');
@@ -2533,7 +2493,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $xml['height'] = '32';
             $xml['style']  = 'fill-opacity: 0.2;';
 
-            if (! $INFO['exists'] && $ACT == 'show') {
+            if (!$INFO['exists'] && $ACT == 'show') {
                 $xml['style'] .= 'fill: orange;';
             }
 
@@ -2556,7 +2516,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 break;
             }
 
-
             $content = $html->save();
 
             $html->clear();
@@ -2564,18 +2523,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         }
 
-
-//         # Import HTML string
-//         $html = new \simple_html_dom;
-//         $html->load($content, true, false);
-// 
-//         $content = $html->save();
-
-
         return $content;
 
     }
-
 
     /**
      * Detect fluid container flag
@@ -2611,7 +2561,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return ($fluid_container || ($fluid_container && !$fixed_top_nabvar) || (!$fluid_container && !$fixed_top_nabvar));
     }
 
-
     /**
      * Check if the fluid container button is enabled (from the user cookie)
      *
@@ -2635,7 +2584,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return false;
 
     }
-
 
     /**
      * Calculate automatically the grid size for main container
@@ -2688,7 +2636,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return $result;
 
     }
-
 
     /**
      * Places the TOC where the function is called
@@ -2823,15 +2770,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     private function initToolsMenu()
     {
 
         global $ACT;
 
         $tools_menus = array(
-            'user' => array('icon' => 'mdi mdi-account',               'object' => new \dokuwiki\Menu\UserMenu),
-            'site' => array('icon' => 'mdi mdi-toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
+            'user' => array('icon' => 'mdi mdi-account', 'object' => new \dokuwiki\Menu\UserMenu),
+            'site' => array('icon' => 'mdi mdi-toolbox', 'object' => new \dokuwiki\Menu\SiteMenu),
             'page' => array('icon' => 'mdi mdi-file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
@@ -2839,18 +2785,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $tools_menus['page'] = array('icon' => 'mdi mdi-image', 'object' => new \dokuwiki\Menu\DetailMenu);
         }
 
-        foreach($tools_menus as $tool => $data) {
+        foreach ($tools_menus as $tool => $data) {
 
             foreach ($data['object']->getItems() as $item) {
 
-                $attr = buildAttributes($item->getLinkAttributes());
+                $attr   = buildAttributes($item->getLinkAttributes());
                 $active = 'action';
 
                 if ($ACT == $item->getType() || ($ACT == 'revisions' && $item->getType() == 'revs') || ($ACT == 'diff' && $item->getType() == 'revs')) {
                     $active .= ' active';
                 }
 
-                $html  = '<li class="' . $active . '">';
+                $html = '<li class="' . $active . '">';
                 $html .= "<a $attr>";
                 $html .= \inlineSVG($item->getSvg());
                 $html .= '<span>' . hsc($item->getLabel()) . '</span>';
@@ -2868,12 +2814,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     }
 
-
     public function getToolsMenu()
     {
         return $this->toolsMenu;
     }
-
 
     public function getToolMenu($tool)
     {
@@ -2899,16 +2843,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     public function cleanSVG($content)
     {
 
-        $content = preg_replace('/<!--.*?(-->)/s','', $content);    // comments
-        $content = preg_replace('/<\?xml .*?\?>/i', '', $content);  // xml header
+        $content = preg_replace('/<!--.*?(-->)/s', '', $content); // comments
+        $content = preg_replace('/<\?xml .*?\?>/i', '', $content); // xml header
         $content = preg_replace('/<!DOCTYPE .*?>/i', '', $content); // doc type
-        $content = preg_replace('/>\s+</s', '><', $content);        // newlines between tags
+        $content = preg_replace('/>\s+</s', '><', $content); // newlines between tags
         $content = trim($content);
 
-        if(substr($content, 0, 5) !== '<svg ') return false;
+        if (substr($content, 0, 5) !== '<svg ') {
+            return false;
+        }
 
         return $content;
 
     }
 
 }
+
+// kate: space-indent on; indent-width 4; replace-tabs on;
