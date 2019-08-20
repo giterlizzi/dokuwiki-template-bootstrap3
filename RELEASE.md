@@ -5,6 +5,7 @@
 ### Added
   * Added MDI class to embed Material Design SVG icons into HTML
   * Added Events dispatch table
+  * Re-Added after 4 years the `<bdi>` tag for better compatibility with RLT languages
 
 ### Chnged
   * Used DokuWiki hooks for customize login and profile page (regiter, edit and delete)

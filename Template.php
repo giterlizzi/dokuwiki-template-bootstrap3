@@ -921,11 +921,11 @@ class Template
                         $avatar_img = $this->getAvatar($INFO['editor'], $user_data['mail'], 16);
                         $user_img   = '<img src="' . $avatar_img . '" alt="" width="16" height="16" class="img-rounded" /> ';
                         $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
-                        $user       = $user_img . $user;
+                        $user       = $user_img . "<bdi>$user<bdi>";
 
                     }
 
-                    $out .= '<li class="text-muted">' . $lang['by'] . ' ' . $user . '</li>';
+                    $out .= '<li class="text-muted">' . $lang['by'] . ' <bdi>' . $user . '</bdi></li>';
 
                 } else {
                     $out .= '<li>(' . $lang['external_edit'] . ')</li>';
@@ -1640,9 +1640,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $output   = $this->normalizeContent($this->toBootstrapNav(tpl_include_page($page, 0, 1, $this->getConf('useACL')), 'pills', true));
         $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
-        '<li class="dropdown dropdown-large">' .
-        '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-        p_get_first_heading($page) .
+            '<li class="dropdown dropdown-large">' .
+            '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
+            p_get_first_heading($page) .
             ' <span class="caret"></span></a>' .
             '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
             '<li><div class="container small">' .
@@ -1758,18 +1758,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         foreach ($html->find('.curid') as $elm) {
             foreach ($elm->find('a') as $link) {
                 $link->class .= ' curid';
-                $link->attr[' data-curid'] = 'true'; # FIX attribute
+                $link->attr['data-curid'] = 'true'; # FIX attribute
             }
         }
 
         # Unwrap span.curid elements
         foreach ($html->find('span.curid') as $elm) {
             $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
-        }
-
-        # Unwrap <bdi> elements
-        foreach ($html->find('bdi') as $elm) {
-            $elm->outertext = str_replace(array('<bdi>', '</bdi>'), '', $elm->outertext);
         }
 
         # Footnotes
