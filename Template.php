@@ -1511,6 +1511,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      * @todo    use Simple DOM HTML library
      * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      * @todo    use Simple DOM HTML
+     * @todo    FIX SimpleNavi curid
      *
      * @param   string  $html
      * @return  string
@@ -1837,6 +1838,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         # Page Heading (h1-h2)
+        # TODO this class will be removed in Bootstrap >= 4.0 version
         foreach ($html->find('h1,h2,h3') as $elm) {
             $elm->class .= ' page-header';
         }
@@ -1934,26 +1936,22 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $elm->class = trim(str_replace('table', '', $eml->class));
         }
 
+        # Tag and Pagelist (table)
+        
+        if ($this->getPlugin('tag') || $this->getPlugin('pagelist')) {
+
+            foreach ($html->find('table.ul') as $elm) {
+                $elm->class .= " $table_classes";
+            }
+        
+        }
+
         $content = $html->save();
 
         $html->clear();
         unset($html);
 
-        # Tag and Pagelist
-        if ($this->getPlugin('tag') || $this->getPlugin('pagelist')) {
-            $html = new \simple_html_dom;
-            $html->load($content, true, false);
 
-            foreach ($html->find('table.ul') as $elm) {
-                $elm->class .= " $table_classes";
-            }
-
-            $content = $html->save();
-
-            $html->clear();
-            unset($html);
-        }
-    
         # ----- Actions -----
 
         # Search
@@ -2362,7 +2360,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
         }
-
 
         # Difference
 
