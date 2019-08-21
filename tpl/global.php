@@ -62,7 +62,19 @@ include_once template('inc/simple_html_dom.php');
 
 // Load custom menus
 include(template('inc/Menu/PageMenu.php'));
+include(template('inc/Menu/DetailMenu.php'));
+include(template('inc/Menu/PageIconsMenu.php'));
+
 include(template('inc/Menu/Item/Discussion.php'));
+include(template('inc/Menu/Item/PrintPage.php'));
+include(template('inc/Menu/Item/Feed.php'));
+include(template('inc/Menu/Item/Help.php'));
+include(template('inc/Menu/Item/SendMail.php'));
+include(template('inc/Menu/Item/ImgOriginalSize.php'));
+include(template('inc/Menu/Item/ShareOn.php'));
+include(template('inc/Menu/Item/Permalink.php'));
+
+
 
 global $TEMPLATE;
 

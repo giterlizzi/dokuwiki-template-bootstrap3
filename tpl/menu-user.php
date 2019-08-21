@@ -93,7 +93,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                             <strong><?php echo hsc($INFO['userinfo']['name']) ?></strong>
                         </div>
                         <div class="small">
-                            <?php echo hsc($_SERVER['REMOTE_USER']) ?>
+                            <bdi><?php echo hsc($_SERVER['REMOTE_USER']) ?></bdi>
                         </div>
                         <div class="small">
                             <?php echo $INFO['userinfo']['mail'] ?>

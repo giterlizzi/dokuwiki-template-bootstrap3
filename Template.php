@@ -1759,7 +1759,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         foreach ($html->find('.curid') as $elm) {
             foreach ($elm->find('a') as $link) {
                 $link->class .= ' curid';
-                $link->attr['data-curid'] = 'true'; # FIX attribute
+                $link->attr[' data-curid'] = 'true'; # FIX attribute
             }
         }
 
@@ -2768,9 +2768,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $ACT;
 
         $tools_menus = array(
-            'user' => array('icon' => 'mdi mdi-account', 'object' => new \dokuwiki\Menu\UserMenu),
-            'site' => array('icon' => 'mdi mdi-toolbox', 'object' => new \dokuwiki\Menu\SiteMenu),
-            'page' => array('icon' => 'mdi mdi-file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
+            'user'  => array('icon' => 'mdi mdi-account',               'object' => new \dokuwiki\Menu\UserMenu),
+            'site'  => array('icon' => 'mdi mdi-toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
+            'page'  => array('icon' => 'mdi mdi-file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
@@ -2788,11 +2788,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $active .= ' active';
                 }
 
+                if ($item->getType() == 'shareon') {
+                    $active .= ' dropdown';
+                }
+
                 $html = '<li class="' . $active . '">';
                 $html .= "<a $attr>";
                 $html .= \inlineSVG($item->getSvg());
                 $html .= '<span>' . hsc($item->getLabel()) . '</span>';
                 $html .= "</a>";
+
+                if ($item->getType() == 'shareon') {
+                    $html .= $item->getDropDownMenu();
+                }
+
                 $html .= '</li>';
 
                 $tools_menus[$tool]['menu'][$item->getType()]['object'] = $item;
