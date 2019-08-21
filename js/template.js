@@ -704,9 +704,9 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
     'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
     'telegram'    : (function(){ return [ 'https://telegram.me/share/url?url=', url ].join(''); })(),
-    'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
+    'whatsapp'    : (function(){ return [ 'https://wa.me/?text=', title, ': ', url ].join(''); })(),
     'yammer'      : (function(){ return [ 'https://www.yammer.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
-    'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
+    'sendmail'    : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
     'reddit'      : (function(){ return [ 'http://www.reddit.com/submit?url=', url, '&title=', title ].join(''); })(),
   };
 
@@ -742,12 +742,14 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     window.open(share_to.reddit, 'Share to Reddit', window_options);
   });
 
-  $dw_page_icons.find('.send-mail').on('click', function(e) {
+  $dw_page_icons.find('.sendmail').on('click', function(e) {
     e.preventDefault();
-    window.location = share_to['send-mail'];
+    window.location = share_to['sendmail'];
   });
 
-  $dw_page_icons.find('.share-whatsapp').attr('href', share_to.whatsapp);
+  $dw_page_icons.find('.share-whatsapp').on('click', function() {
+    window.open(share_to.whatsapp, 'Share to WhatsApp', window_options);
+  });
 
 });
 

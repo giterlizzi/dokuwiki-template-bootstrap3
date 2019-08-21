@@ -316,7 +316,7 @@ div#picker2 {
   }
 
   ul li:not(.active) a:hover {
-      background: transparent;
+    background: transparent;
   }
 
   .tools {
@@ -580,18 +580,26 @@ div#picker2 {
     color: inherit;
   }
 
-  .share-google-plus i { color: #DC4E41; }
-  .share-twitter     i { color: #55ACEE; }
-  .share-linkedin    i { color: #0077B5; }
-  .share-facebook    i { color: #3B5998; }
-  .share-whatsapp    i { color: #43D854; }
-  .share-pinterest   i { color: #BD081C; }
-  .share-telegram    i { color: #0088CC; }
-  .share-yammer      i { color: #5AA8BF; }
-  .share-reddit      i { color: #FF4500; }
+  span {
+    display: none;
+  }
+
+  svg {
+    width: 1.2em !important;
+    height: 1.2em !important;
+  }
+
+  .share-google-plus svg { color: #DC4E41; }
+  .share-twitter     svg { color: #55ACEE; }
+  .share-linkedin    svg { color: #0077B5; }
+  .share-facebook    svg { color: #3B5998; }
+  .share-whatsapp    svg { color: #43D854; }
+  .share-pinterest   svg { color: #BD081C; }
+  .share-telegram    svg { color: #0088CC; }
+  .share-yammer      svg { color: #5AA8BF; }
+  .share-reddit      svg { color: #FF4500; }
 
 }
-
 
 /* Override Bootstrap3 style */
 
@@ -775,8 +783,8 @@ svg.icon {
   fill: currentColor;
   display: inline-block;
   vertical-align: middle;
-  width: 1.4em;
-  height: 1.4em;
+  width: 1.3em;
+  height: 1.3em;
 }
 
 #dw__pagetools .menuitem svg {
