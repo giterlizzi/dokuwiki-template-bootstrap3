@@ -25,6 +25,9 @@ class Permalink extends AbstractItem {
 
     public function getLinkAttributes($classprefix = 'menuitem ') {
 
+        global $INFO;
+        global $ID;
+
         $attr = array(
             'href'   => DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'],
             'title'  => $this->getTitle(),
