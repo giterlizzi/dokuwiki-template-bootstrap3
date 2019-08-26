@@ -328,9 +328,6 @@ class Template
 
         }
 
-        # FontAwesome (TODO remove in future)
-        $stylesheets[] = $tpl_basedir . 'assets/font-awesome/css/font-awesome.min.css';
-
         # Material Design Icons
         $stylesheets[] = $tpl_basedir . 'assets/mdi/css/materialdesignicons.min.css';
 

@@ -7,6 +7,7 @@
   * Added events dispatch table
   * Re-Added after 4 years the `<bdi>` tag for better compatibility with RLT languages
   * Now the callout element of Bootstrap Wrapper Plugin follow the original Bootswatch contextual colors
+  * Added `PageIconsMenu` menu DokuWiki menu system and migrated all "page icons" items
 
 
 ### Changed
@@ -15,7 +16,7 @@
   * Used DokuWiki hooks for customize login and profile page (regiter, edit and delete)
   * Upgraded `simple_html_dom` to v1.9
   * Removed margin in mobile tamplate with `fluidContainer` enabled
-  * Added `PageIconsMenu` menu DokuWiki menu system and migrated all "page icons" items
+  * Changed WhatsApp API URL (`https://wa.me`)
 
 ### Fixed
   * Fixed "PHP Notice" for `MAX_FILE_SIZE`
