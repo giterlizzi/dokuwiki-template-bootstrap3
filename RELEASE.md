@@ -4,10 +4,14 @@
 
 ### Added
   * Added MDI class to embed Material Design SVG icons into HTML
-  * Added Events dispatch table
+  * Added events dispatch table
   * Re-Added after 4 years the `<bdi>` tag for better compatibility with RLT languages
+  * Now the callout element of Bootstrap Wrapper Plugin follow the original Bootswatch contextual colors
+
 
 ### Changed
+  * Removed parsing of some elements (using `simple_html_dom`) for increase the performance
+  * Used DokuWiki events for modify the appearance of the page
   * Used DokuWiki hooks for customize login and profile page (regiter, edit and delete)
   * Upgraded `simple_html_dom` to v1.9
   * Removed margin in mobile tamplate with `fluidContainer` enabled

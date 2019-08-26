@@ -43,7 +43,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 $logo_size = 'height="20"';
 
                 if ($tagline) {
-                $logo_size = 'height="32" style="margin-top:-5px"';
+                    $logo_size = 'height="32"  style="margin-top:-5px"';
                 }
 
                 // display logo and wiki title in a link to the home page
@@ -62,7 +62,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
             <?php if ($TEMPLATE->getConf('showHomePageLink')) :?>
             <ul class="nav navbar-nav">
                 <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
-                    <?php tpl_link($home_link, '<i class="mdi mdi-home"></i> Home') ?>
+                    <?php tpl_link($home_link, \Mdi::icon('home') . ' Home') ?>
                 </li>
             </ul>
             <?php endif; ?>
@@ -83,9 +83,6 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 <?php
                     // Search form
                     include_once(template('tpl/navbar-searchform.php'));
-
-                    // Admin Menu
-                    include_once(template('tpl/menu-admin.php'));
 
                     // Tools Menu
                     include_once(template('tpl/menu-tools.php'));
@@ -137,7 +134,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                     <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
                     <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">
                         <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>">
-                            <i class="mdi mdi-arrow-expand-all"></i><span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
+                            <?php echo \Mdi::icon('arrow-expand-all'); ?> <span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
                         </a>
                     </li>
                     <?php endif; ?>
@@ -198,7 +195,15 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 </ul>
                 <?php endif; ?>
 
-                <?php include_once(template('tpl/menu-user.php')); ?>
+                <?php
+                
+                    // Admin Menu
+                    include_once(template('tpl/menu-admin.php'));
+
+                    // User Menu
+                    include_once(template('tpl/menu-user.php'));
+
+                ?>
 
 
             </div>

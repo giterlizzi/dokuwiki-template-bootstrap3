@@ -477,6 +477,13 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
       jQuery('.qq-upload-button').addClass('btn btn-default');
       jQuery('.qq-upload-action').addClass('btn btn-success');
 
+      var $btn_delete = jQuery('#mediamanager__btn_delete [type=submit]');
+      var $btn_update = jQuery('#mediamanager__btn_update [type=submit]');
+
+      $btn_delete.addClass('btn btn-danger');
+      $btn_delete.prepend(jQuery('<i class="mdi mdi-delete"/>'));
+      $btn_update.prepend(jQuery('<i class="mdi mdi-image-plus"/>'));
+
     }
 
     // Media Manager (page)
@@ -486,7 +493,8 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
 
       var $sort_buttons = jQuery('.ui-buttonset');
 
-      $media_manager.find('.file dl').addClass('dl-horizontal');
+      //$media_manager.find('.file dl').addClass('dl-horizontal');
+      $media_manager.find('.file dd').addClass('pl-4');
       $media_manager.find('.panel').removeClass('panel').addClass('pull-left');
 
       $sort_buttons.addClass('btn-group');

@@ -20,7 +20,7 @@ class Mdi
     /**
      * Add icon
      * 
-     * @param string $icon  Icon name
+     * @param string $icon  Icon name or full path
      * @param string $class Icon Class
      * @param int    $size  Icon size
      * @param array  $attrs Icon attributes
@@ -45,19 +45,24 @@ class Mdi
         }
 
         // Find the icon, ensure it exists
-        $filePath = self::$iconsPath . $icon . '.svg';
+        if (file_exists($icon)) {
+            $file_path = $icon;
+        } else {
+            $file_path = self::$iconsPath . $icon . '.svg';
+        }
 
-        if (!is_file($filePath)) {
-            msg(sprintf('Unrecognized icon "%s" (svg file "%s" does not exist).', $icon, $filePath), -1);
+        if (!is_file($file_path)) {
+            msg(sprintf('Unrecognized icon "%s" (svg file "%s" does not exist).', $icon, $file_path), -1);
             return false;
         }
 
         // Read the file
-        $svg = file_get_contents($filePath);
+        $svg = file_get_contents($file_path);
 
         // Only keep the <path d="..." /> part
-        if (preg_match('/(<path d=".+" \/>)/', $svg, $matches) !== 1) {
-            msg(sprintf('"%s" could not be recognized as an icon file', $filePath), -1);
+        // Old REGEX: (<path d=".+" \/>)
+        if (preg_match('/(<path\b([\s\S]*?)\/>)/', $svg, $matches) !== 1) {
+            msg(sprintf('"%s" could not be recognized as an icon file', $file_path), -1);
             return false;
         }
 
@@ -107,4 +112,3 @@ class Mdi
 }
 
 // kate: space-indent on; indent-width 4; replace-tabs on;
-

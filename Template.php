@@ -49,7 +49,7 @@ class Template
                 'tocAffix'                   => (int) $this->getConf('tocAffix'),
                 'tocCollapseOnScroll'        => (int) $this->getConf('tocCollapseOnScroll'),
                 'tocCollapsed'               => (int) $this->getConf('tocCollapsed'),
-                'tocLayout'                  => $this->getConf('tocLayout'),
+                'tocLayout'                  =>       $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
             ),
@@ -63,20 +63,22 @@ class Template
 
     private function registerHooks()
     {
-
         /** @var \Doku_Event_Handler */
         global $EVENT_HANDLER;
 
         $events_dispatcher = array(
             'FORM_QUICKSEARCH_OUTPUT'       => 'searchHandler',
             'FORM_SEARCH_OUTPUT'            => 'searchHandler',
+            'HTML_DRAFTFORM_OUTPUT'         => 'draftFormHandler',
             'HTML_EDITFORM_OUTPUT'          => 'editFormHandler',
-            'HTML_LOGINFORM_OUTPUT'         => 'profileFormHandler',
-            'HTML_PROFILEDELETEFORM_OUTPUT' => 'profileFormHandler',
+            'HTML_LOGINFORM_OUTPUT'         => 'accountFormHandler',
+            'HTML_RESENDPWDFORM_OUTPUT'     => 'accountFormHandler',
+            'HTML_PROFILEDELETEFORM_OUTPUT' => 'accountFormHandler',
             'HTML_RECENTFORM_OUTPUT'        => 'revisionsFormHandler',
-            'HTML_REGISTERFORM_OUTPUT'      => 'profileFormHandler',
+            'HTML_REGISTERFORM_OUTPUT'      => 'accountFormHandler',
             'HTML_REVISIONSFORM_OUTPUT'     => 'revisionsFormHandler',
-            'HTML_UPDATEPROFILEFORM_OUTPUT' => 'profileFormHandler',
+            'HTML_SUBSCRIBEFORM_OUTPUT'     => 'accountFormHandler',
+            'HTML_UPDATEPROFILEFORM_OUTPUT' => 'accountFormHandler',
             'PLUGIN_TAG_LINK'               => 'tagPluginHandler',
             'PLUGIN_TPLINC_LOCATIONS_SET'   => 'tplIncPluginHandler',
             'SEARCH_QUERY_FULLPAGE'         => 'searchHandler',
@@ -93,8 +95,11 @@ class Template
 
     }
 
+    public function testHandler(\Doku_Event $event) {
+        var_dump($event->data->_content);
+    }
 
-    public function profileFormHandler(\Doku_Event $event) {
+    public function accountFormHandler(\Doku_Event $event) {
 
         foreach ($event->data->_content as $key => $item) {
 
@@ -119,17 +124,23 @@ class Template
                     case 'HTML_REGISTERFORM_OUTPUT':
                         $title_icon   = 'account-plus';
                         break;
+                    case 'HTML_SUBSCRIBEFORM_OUTPUT':
+                        $title_icon   = null;
+                        break;
+                    case 'HTML_RESENDPWDFORM_OUTPUT':
+                        $title_icon   = 'lock-reset';
+                        break;
                 }
 
                 // Legend
                 if ($item['_elem'] == 'openfieldset') {
-                    $event->data->_content[$key]['_legend'] = \Mdi::icon($title_icon) . ' ' . $event->data->_content[$key]['_legend'];
+                    $event->data->_content[$key]['_legend'] = (($title_icon) ? \Mdi::icon($title_icon) : '') . ' ' . $event->data->_content[$key]['_legend'];
                 }
 
                 // Save button
                 if ($item['type'] == 'submit') {
                     $event->data->_content[$key]['class'] = " $button_class";
-                    $event->data->_content[$key]['value'] = \Mdi::icon($button_icon) . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = (($button_icon) ? \Mdi::icon($button_icon) : '') . ' ' . $event->data->_content[$key]['value'];
                 }
 
             }
@@ -140,7 +151,40 @@ class Template
 
 
     /**
-     * Handle HTML_EDITFORM_OUTPUT event
+     * Handle HTML_DRAFTFORM_OUTPUT event
+     *
+     * @param \Doku_Event $event Event handler
+     * 
+     * @return void
+     **/
+    public function draftFormHandler(\Doku_Event $event) {
+
+        foreach ($event->data->_content as $key => $item) {
+
+            if (is_array($item) && isset($item['_elem'])) {
+
+                if ($item['_action'] == 'draftdel') {
+                    $event->data->_content[$key]['class'] = ' btn btn-danger';
+                    $event->data->_content[$key]['value'] = \Mdi::icon('close') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+                if ($item['_action'] == 'recover') {
+                    $event->data->_content[$key]['value'] = \Mdi::icon('refresh') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+                if ($item['_action'] == 'show') {
+                    $event->data->_content[$key]['value'] = \Mdi::icon('arrow-left') . ' ' . $event->data->_content[$key]['value'];
+                }
+
+            }
+
+        }
+
+    }
+
+
+    /**
+     * Handle HTML_EDITFORM_OUTPUT and HTML_DRAFTFORM_OUTPUT event
      *
      * @param \Doku_Event $event Event handler
      * 
@@ -163,9 +207,9 @@ class Template
                     $event->data->_content[$key]['value'] = \Mdi::icon('file-document-outline') . ' ' . $event->data->_content[$key]['value'];
                 }
 
-                if ($item['_action'] == 'draftdel') {
-                    $event->data->_content[$key]['class'] = ' btn btn-danger';
-                    $event->data->_content[$key]['value'] = \Mdi::icon('close') . ' ' . $event->data->_content[$key]['value'];
+                // Cancel button
+                if ($item['_action'] == 'cancel') {
+                    $event->data->_content[$key]['value'] = \Mdi::icon('arrow-left') . ' ' . $event->data->_content[$key]['value'];
                 }
 
             }
@@ -1801,11 +1845,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $elm->class .= ' btn btn-default';
         }
 
-        foreach ($html->find('#dw__login, #subscribe__form, #media__manager') as $elm) {
-            foreach ($elm->find('[type=submit]') as $btn) {
-                $btn->class .= ' btn btn-success';
-            }
-        }
 
         # Section Edit Button
         foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
@@ -2361,9 +2400,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         }
 
-        # Difference
+        # Difference and Draft
 
-        if ($ACT == 'diff') {
+        if ($ACT == 'diff' || $ACT == 'draft') {
 
             # Import HTML string
             $html = new \simple_html_dom;
@@ -2396,15 +2435,15 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
             foreach ($html->find('.diffprevrev') as $elm) {
-                $elm->class .= ' btn btn-xs btn-default mdi mdi-chevron-left';
+                $elm->class .= ' btn btn-default mdi mdi-chevron-left';
             }
 
             foreach ($html->find('.diffnextrev') as $elm) {
-                $elm->class .= ' btn btn-xs btn-default mdi mdi-chevron-right';
+                $elm->class .= ' btn btn-default mdi mdi-chevron-right';
             }
 
             foreach ($html->find('.diffbothprevrev') as $elm) {
-                $elm->class .= ' btn btn-xs btn-default mdi mdi-chevron-double-left';
+                $elm->class .= ' btn btn-default mdi mdi-chevron-double-left';
             }
 
             foreach ($html->find('.minor') as $elm) {
@@ -2423,7 +2462,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $svg_icon = null;
 
         if (!$INFO['exists']) {
-            $svg_icon = template('assets/mdi/svg/alert.svg');
+            $svg_icon = 'alert';
         }
 
         $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
@@ -2444,60 +2483,67 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                         $svg_icon = $plugin->getMenuIcon();
 
                         if (!file_exists($svg_icon)) {
-                            $svg_icon = template('assets/mdi/svg/puzzle.svg');
+                            $svg_icon = 'puzzle';
                         }
 
                     } else {
-                        $svg_icon = template('assets/mdi/svg/puzzle.svg');
+                        $svg_icon = 'puzzle';
                     }
 
                 }
 
                 break;
 
+            case 'resendpwd':
+                $svg_icon = 'lock-reset';
+                break;
+
             case 'denied':
-                $svg_icon = template('assets/mdi/svg/block-helper.svg');
+                $svg_icon = 'block-helper';
                 break;
 
             case 'search':
-                $svg_icon = template('assets/mdi/svg/search-web.svg');
+                $svg_icon = 'search-web';
                 break;
 
             case 'preview':
-                $svg_icon = template('assets/mdi/svg/file-eye.svg');
+                $svg_icon = 'file-eye';
                 break;
 
             case 'diff':
-                $svg_icon = template('assets/mdi/svg/file-compare.svg');
+                $svg_icon = 'file-compare';
                 break;
 
             case 'showtag':
-                $svg_icon = template('assets/mdi/svg/tag-multiple.svg');
+                $svg_icon = 'tag-multiple';
+                break;
+
+            case 'draft':
+                $svg_icon = 'android-studio';
                 break;
 
         }
 
-        if ($svg_icon && file_exists($svg_icon)) {
+        if ($svg_icon) {
 
-            $xml = simplexml_load_file($svg_icon);
+            $svg_attrs = array();
 
-            $xml['width']  = '32';
-            $xml['height'] = '32';
-            $xml['style']  = 'fill-opacity: 0.2;';
+            $svg_attrs['style'] = 'fill-opacity: 0.2;';
 
             if (!$INFO['exists'] && $ACT == 'show') {
-                $xml['style'] .= 'fill: orange;';
+                $svg_attrs['style'] .= 'fill: orange;';
             }
 
             if ($ACT == 'denied') {
-                $xml['style'] .= 'fill: red;';
+                $svg_attrs['style'] .= 'fill: red;';
             }
 
             if ($ACT == 'admin' && $INPUT->str('page') == 'extension') {
-                $xml['style'] .= 'fill: green;';
+                $svg_attrs['style'] .= 'fill: green;';
             }
 
-            $svg = $this->cleanSVG($xml->asXML());
+
+            $svg = \Mdi::icon($svg_icon, null, 32, $svg_attrs);
 
             # Import HTML string
             $html = new \simple_html_dom;

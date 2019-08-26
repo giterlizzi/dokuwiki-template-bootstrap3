@@ -185,7 +185,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         ?>
     </footer>
 
-    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-xs btn-default" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
+        <?php echo \Mdi::icon('chevron-up'); ?>
+    </a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
         <span class="visible-xs-block"></span>

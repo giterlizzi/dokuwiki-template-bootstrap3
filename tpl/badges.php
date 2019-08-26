@@ -11,9 +11,8 @@
 if (!defined('DOKU_INC')) die();
 
 global $conf;
-global $TEMPLATE;
 
-if ($TEMPLATE->getConf('showBadges')): ?>
+?>
 <!-- badges -->
 <ul id="dw__badges" class="list-inline pull-right hidden-print">
 
@@ -49,4 +48,4 @@ if ($TEMPLATE->getConf('showBadges')): ?>
 
 </ul>
 <!-- /badges -->
-<?php endif; ?>
+
