@@ -8,6 +8,7 @@
   * Re-Added after 4 years the `<bdi>` tag for better compatibility with RLT languages
   * Now the callout element of Bootstrap Wrapper Plugin follow the original Bootswatch contextual colors
   * Added `PageIconsMenu` menu DokuWiki menu system and migrated all "page icons" items
+  * Added support for `watchcycle`, `davcal`, `move` and `monthcal` plugins
 
 
 ### Changed

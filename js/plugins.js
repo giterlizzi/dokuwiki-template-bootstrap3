@@ -23,6 +23,8 @@ jQuery(document).on('bootstrap3:plugins', function(event) {
     /* DOKUWIKI:include js/plugins/gallery.js */
     /* DOKUWIKI:include js/plugins/include.js */
     /* DOKUWIKI:include js/plugins/inlinetoc.js */
+    /* DOKUWIKI:include js/plugins/monthcal.js */
+    /* DOKUWIKI:include js/plugins/move.js */
     /* DOKUWIKI:include js/plugins/overlay.js */
     /* DOKUWIKI:include js/plugins/publish.js */
     /* DOKUWIKI:include js/plugins/semantic.js */
