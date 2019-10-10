@@ -25,7 +25,7 @@ if (actionOK('search') && $TEMPLATE->getConf('showSearchForm')): ?>
         <input id="qsearch" autocomplete="off" type="search" placeholder="<?php echo $lang['btn_search']; ?>" value="<?php echo ($ACT == 'search') ? htmlspecialchars($QUERY) : ''; ?>" accesskey="f" name="q" class="form-control" title="[F]" />
         <div class="input-group-btn">
             <button  class="btn btn-default" type="submit" title="<?php echo $lang['btn_search']; ?>">
-                <i class="glyphicon glyphicon-search"></i>
+                <?php echo \Mdi::icon('magnify'); ?>
             </button>
         </div>
 

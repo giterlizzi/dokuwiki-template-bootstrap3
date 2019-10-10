@@ -22,18 +22,18 @@ $bootswatch_theme = $TEMPLATE->getBootswatchTheme();
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-toggle="dropdown" data-target="#" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-palette"></i> <span class="<?php echo (in_array('themes', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span>
+            <?php echo \Mdi::icon('palette'); ?> <span class="<?php echo (in_array('themes', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo tpl_getLang('themes') ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu" aria-labelledby="themes">
             <li class="dropdown-header">
-                <i class="mdi mdi-palette"></i> <?php echo tpl_getLang('themes') ?>
+                <?php echo \Mdi::icon('palette'); ?> <?php echo tpl_getLang('themes') ?>
             </li>
             <li<?php echo ($bootswatch_theme == 'default') ? ' class="active"' : '' ?>>
                 <a href="<?php echo wl($ID, array('bootswatch-theme' => hsc('default'))); ?>">Default</a>
             </li>
             <li class="dropdown-header">
-                <i class="mdi mdi-palette"></i> Bootswatch Themes
+                <?php echo \Mdi::icon('palette'); ?> Bootswatch Themes
             </li>
             <?php foreach ($TEMPLATE->getAvailableBootswatchThemes() as $theme): ?>
             <li<?php echo ($bootswatch_theme == $theme) ? ' class="active"' : '' ?>>

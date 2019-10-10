@@ -37,7 +37,7 @@ $admin = array(
     <li class="dropdown dropdown-large">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['btn_admin'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-settings"></i> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
+            <?php echo \Mdi::icon('settings'); ?> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-large" role="menu">

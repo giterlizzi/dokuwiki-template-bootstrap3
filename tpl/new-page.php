@@ -20,7 +20,7 @@ if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && $TEMPLATE->getConf('s
 <ul class="nav navbar-nav" id="dw__addnewpage">
     <li class="dropdown">
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo tpl_getLang('add_new_page') ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-file-plus"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('add_new_page') ?></span><span class="caret"></span>
+            <?php echo \Mdi::icon('file-plus'); ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo tpl_getLang('add_new_page') ?></span><span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
             <li class="dropdown-header hidden-xs hidden-sm"><i class="mdi mdi-file-plus"></i> <?php echo tpl_getLang('add_new_page') ?></li>

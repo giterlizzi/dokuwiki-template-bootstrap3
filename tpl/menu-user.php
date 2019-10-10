@@ -68,7 +68,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             <?php if ($use_avatar): ?>
             <img alt="<?php echo hsc($_SERVER['REMOTE_USER']) ?>" src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="<?php echo $avatar_size_small ?>" height="<?php echo $avatar_size_small ?>" />
             <?php else: ?>
-            <i class="mdi mdi-account"></i>
+            <?php echo \Mdi::icon('account'); ?>
             <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
         </a>
 

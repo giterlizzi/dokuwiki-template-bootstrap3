@@ -2811,13 +2811,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $ACT;
 
         $tools_menus = array(
-            'user'  => array('icon' => 'mdi mdi-account',               'object' => new \dokuwiki\Menu\UserMenu),
-            'site'  => array('icon' => 'mdi mdi-toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
-            'page'  => array('icon' => 'mdi mdi-file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
+            'user'  => array('icon' => 'account',               'object' => new \dokuwiki\Menu\UserMenu),
+            'site'  => array('icon' => 'toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
+            'page'  => array('icon' => 'file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
-            $tools_menus['page'] = array('icon' => 'mdi mdi-image', 'object' => new \dokuwiki\Menu\DetailMenu);
+            $tools_menus['page'] = array('icon' => 'image', 'object' => new \dokuwiki\Menu\DetailMenu);
         }
 
         foreach ($tools_menus as $tool => $data) {

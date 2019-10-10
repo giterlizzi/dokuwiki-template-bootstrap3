@@ -185,7 +185,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         ?>
     </footer>
 
-    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-xs btn-default" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
         <?php echo \Mdi::icon('chevron-up'); ?>
     </a>
 

@@ -13,8 +13,6 @@ if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 require_once(template('tpl/global.php'));
 require_once(template('tpl/functions.php'));
 
-header('X-UA-Compatible: IE=edge,chrome=1');
-
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">
 <head>
@@ -39,7 +37,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <div id="dw__msgarea" class="small">
         <?php $TEMPLATE->getMessageArea() ?>
     </div>
-    <div id="media__manager" class="<?php echo tpl_classes(); ?> row">
+    <div id="media__manager" class="<?php echo $TEMPLATE->getClasses() ?> row">
 
         <div id="mediamgr__aside" class="col-xs-4">
         <h1><?php echo hsc($lang['mediaselect'])?></h1>
