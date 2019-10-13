@@ -22,7 +22,6 @@ $logo_size      = array();
 $wiki_logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
 $wiki_title     = $conf['title'];
 $wiki_tagline   = ($conf['tagline']) ? '<span class="dw__tagline">'.$conf['tagline'].'</span>' : '';
-$wiki_logo_size = 'height="32"';
 $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homePageURL') : wl());
 
 $footer_classes = array();
@@ -41,7 +40,7 @@ $footer_classes[] = ($TEMPLATE->getConf('fixedTopNavbar') ? 'footer-fixed-bottom
             <div class="footer-dw-title">
                 <div class="media">
                     <div class="media-left">
-                        <img src="<?php echo $wiki_logo ?>" alt="<?php echo $wiki_title ?>" class="media-object" style="width:32px" />
+                        <img src="<?php echo $wiki_logo ?>" alt="<?php echo $wiki_title ?>" class="media-object" style="height:32px" />
                     </div>
                     <div class="media-body">
                         <h4 class="media-heading"><?php echo $wiki_title ?></h4>
