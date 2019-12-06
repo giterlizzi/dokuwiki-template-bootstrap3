@@ -28,26 +28,27 @@ if ($TEMPLATE->getConf('showTools')):
             foreach ($TEMPLATE->getConf('showIndividualTool') as $tool):
 
                 if (! isset($tools_menus[$tool])) continue;
+
                 $data = $tools_menus[$tool];
+
+                if (! isset($data['menu'])) continue;
     ?>
 
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang[$tool.'_tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="<?php echo $data['icon'] ?>"></i> <span class="<?php echo (in_array($tool, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$tool.'_tools'] ?></span> <span class="caret"></span>
+            <?php echo \Mdi::icon($data['icon']); ?> <span class="<?php echo (in_array($tool, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$tool.'_tools'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
 
             <li class="dropdown-header hidden-xs hidden-sm">
-                <i class="<?php echo $data['icon'] ?>"></i> <?php echo $lang[$tool.'_tools'] ?>
+                <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
             <?php
-
                 foreach ($data['menu'] as $type => $item) {
                     echo $item['html'];
                 }
-
             ?>
 
         </ul>
@@ -58,22 +59,28 @@ if ($TEMPLATE->getConf('showTools')):
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php $lang['tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-wrench"></i> <span class="<?php echo (in_array('tools', $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
+            <?php echo \Mdi::icon('wrench'); ?> <span class="<?php echo (in_array('tools', $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
-        <?php $i = 1; $max = count(array_keys($tools_menus)); foreach($tools_menus as $tool => $data): ?>
+        <?php
+
+            $i   = 1;
+            $max = count(array_keys($tools_menus));
+
+            foreach($tools_menus as $tool => $data):
+
+                if (! isset($data['menu'])) continue;
+        ?>
 
             <li class="dropdown-header">
-                <i class="<?php echo $data['icon'] ?>"></i> <?php echo $lang[$tool.'_tools'] ?>
+                <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
 
             <?php
-
                 foreach ($data['menu'] as $type => $item) {
                     echo $item['html'];
                 }
-
             ?>
 
             <?php if ($max > $i): ?>
