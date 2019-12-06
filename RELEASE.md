@@ -31,6 +31,7 @@
   * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
   * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
   * #440: Inconsistency between header and footer logo (thanks to @leemillerau)
+  * #444: Fix PHP invalid foreach in Menu Tools
 
 
 ## [v2019-05-22]
