@@ -28,7 +28,10 @@ if ($TEMPLATE->getConf('showTools')):
             foreach ($TEMPLATE->getConf('showIndividualTool') as $tool):
 
                 if (! isset($tools_menus[$tool])) continue;
+
                 $data = $tools_menus[$tool];
+
+                if (! isset($data['menu'])) continue;
     ?>
 
     <li class="dropdown">
@@ -43,11 +46,9 @@ if ($TEMPLATE->getConf('showTools')):
                 <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
             <?php
-
                 foreach ($data['menu'] as $type => $item) {
                     echo $item['html'];
                 }
-
             ?>
 
         </ul>
@@ -62,18 +63,24 @@ if ($TEMPLATE->getConf('showTools')):
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
-        <?php $i = 1; $max = count(array_keys($tools_menus)); foreach($tools_menus as $tool => $data): ?>
+        <?php
+
+            $i   = 1;
+            $max = count(array_keys($tools_menus));
+
+            foreach($tools_menus as $tool => $data):
+
+                if (! isset($data['menu'])) continue;
+        ?>
 
             <li class="dropdown-header">
                 <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
 
             <?php
-
                 foreach ($data['menu'] as $type => $item) {
                     echo $item['html'];
                 }
-
             ?>
 
             <?php if ($max > $i): ?>
