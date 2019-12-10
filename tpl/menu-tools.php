@@ -74,7 +74,7 @@ if ($TEMPLATE->getConf('showTools')):
         ?>
 
             <li class="dropdown-header">
-                <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
+                <i class="<?php echo $data['icon'] ?>"></i> <?php echo $lang[$tool.'_tools'] ?>
             </li>
 
             <?php
