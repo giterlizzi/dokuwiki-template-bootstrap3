@@ -32,8 +32,7 @@ class Template
 
         // Get the template info (useful for debug)
         if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
-            $template_info = confToHash(template('template.info.txt'));
-            msg('bootstrap3 template version: v' . $template_info['date'], 1, '', '', MSG_ADMINS_ONLY);
+            msg('Template version ' . $this->getVersion(), 1, '', '', MSG_ADMINS_ONLY);
         }
 
         // Populate JSINFO object
@@ -58,6 +57,21 @@ class Template
         if ($ACT == 'admin') {
             $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
         }
+
+    }
+
+
+    public function getVersion()
+    {
+
+        $template_info    = confToHash(template('template.info.txt'));
+        $template_version = 'v' . $template_info['date'];
+
+        if (isset($template_info['build'])) {
+            $template_version .= ' ('. $template_info['build'] . ')';
+        }
+
+        return $template_version;
 
     }
 
@@ -2300,7 +2314,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 # DokuWiki logo
                 if ($admin_version = $html->getElementById('admin__version')) {
-                    $admin_version->innertext = '<img src="' . DOKU_BASE . 'lib/tpl/dokuwiki/images/logo.png" class="p-2" width=32 height=32 /> ' . $admin_version->innertext;
+
+                    $admin_version->innertext = '<div class="dokuwiki__version"><img src="' . DOKU_BASE . 'lib/tpl/dokuwiki/images/logo.png" class="p-2" alt="" width="32" height="32" /> ' . $admin_version->innertext . '</div>';
+
+                    $template_version = $this->getVersion();
+
+                    $admin_version->innertext .= '<div class="template__version"><img src="'. tpl_basedir() .'images/bootstrap.png" class="p-2" height="32" width="32" alt="" />Template ' . $template_version . '</div>';
+
                 }
 
             }
