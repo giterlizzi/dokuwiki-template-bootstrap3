@@ -10,6 +10,7 @@
   * Added `PageIconsMenu` menu DokuWiki menu system and migrated all "page icons" items
   * Added support for `watchcycle`, `davcal`, `move` and `monthcal` plugins
   * Added build version in `template.info.txt`. You can see the build version in Administration and *do=check* pages
+  * Added support for PlantUML plugin
 
 
 ### Changed
