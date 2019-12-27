@@ -21,12 +21,12 @@ if ($publish.length) {
   if ($publish.hasClass('approved_no')) {
     $publish.removeClass('approved_no')
       .addClass('alert-warning')
-      .prepend('<i class="mdi mdi-18px mdi-information"/> ');
+      .prepend('<span class="iconify mr-2" data-icon="mdi:information"/>');
   }
   if ($publish.hasClass('approved_yes')) {
     $publish.removeClass('approved_yes')
       .addClass('alert-success')
-      .prepend('<i class="mdi mdi-18px mdi-check-circle"/> ');
+      .prepend('<span class="iconify mr-2" data-icon="mdi:check-circle"/>');
   }
 
 }

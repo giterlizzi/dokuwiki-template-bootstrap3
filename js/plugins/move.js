@@ -25,21 +25,19 @@ jQuery(document).on('bootstrap3:plugin-move', function(event) {
                 $closed    = $directory.parents('.closed'),
                 $open      = $directory.parents('.open');
 
-            if (! $directory.find('.mdi').length) {
-                $directory.prepend('<i class="mdi text-primary"/> ');
+            if (! $directory.find('svg').length) {
+                $directory.prepend(Iconify.getSVG('mdi:folder'));
             }
 
             if ($open.length) {
-                $directory.find('i')
-                .removeClass('mdi-folder')
-                .addClass('mdi-folder-open');
+                $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder-open'));
             }
 
             if ($closed.length) {
-                $directory.find('i')
-                .removeClass('mdi-folder-open')
-                .addClass('mdi-folder');
+                $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder'));
             }
+
+            $directory.find('svg').addClass('iconify text-primary mr-2');
 
         });
 
@@ -47,9 +45,10 @@ jQuery(document).on('bootstrap3:plugin-move', function(event) {
 
             var $page = jQuery(this);
 
-            if (! $page.find('i').length) {
-                $page.prepend('<i class="mdi mdi-file-document text-muted"/> ');
+            if (! $page.find('svg').length) {
+                $page.prepend(Iconify.getSVG('mdi:file-document-outline'));
             }
+            $page.find('svg').addClass('text-muted mr-2');
 
         });
 

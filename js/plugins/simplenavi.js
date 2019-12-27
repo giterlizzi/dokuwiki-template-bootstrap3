@@ -13,8 +13,8 @@ var $simplenavi = jQuery('.plugin__simplenavi');
 if ($simplenavi.length) {
 
   $simplenavi.find('li.open strong').contents().unwrap();
-  $simplenavi.find('li.closed a').prepend('<i class="mdi mdi-folder"/> ');
-  $simplenavi.find('li.open > a').prepend('<i class="mdi mdi-folder-open"/> ');
-  $simplenavi.find('li').not('.closed').not('.open').find('a').prepend('<i class="mdi mdi-file-document-outline"/> ');
+  $simplenavi.find('li.closed a').prepend('<span class="iconify mr-2" data-icon="mdi:folder"/>');
+  $simplenavi.find('li.open > a').prepend('<span class="iconify mr-2" data-icon="mdi:folder-open"/>');
+  $simplenavi.find('li').not('.closed').not('.open').find('a').prepend('<span class="iconify mr-2" data-icon="mdi:file-document-outline"/>');
 
 }

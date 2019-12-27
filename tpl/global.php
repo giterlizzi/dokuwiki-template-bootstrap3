@@ -47,14 +47,8 @@ if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
 
 }
 
-// Load MDI class
-require_once template('Mdi.php');
-
-Mdi::$iconsPath         = template('assets/mdi/svg/');
-Mdi::$defaultAttributes = array(
-    'class' => 'icon',
-);
-
+// Load SVG class
+require_once template('SVG.php');
 require_once template('Template.php');
 
 // Load PHP Simple HTML DOM class

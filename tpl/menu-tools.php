@@ -37,13 +37,13 @@ if ($TEMPLATE->getConf('showTools')):
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang[$tool.'_tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <?php echo \Mdi::icon($data['icon']); ?> <span class="<?php echo (in_array($tool, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$tool.'_tools'] ?></span> <span class="caret"></span>
+            <?php echo iconify($data['icon']); ?> <span class="<?php echo (in_array($tool, $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang[$tool.'_tools'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
 
             <li class="dropdown-header hidden-xs hidden-sm">
-                <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
+                <?php echo iconify($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
             <?php
                 foreach ($data['menu'] as $type => $item) {
@@ -59,7 +59,7 @@ if ($TEMPLATE->getConf('showTools')):
     <li class="dropdown">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php $lang['tools'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <?php echo \Mdi::icon('wrench'); ?> <span class="<?php echo (in_array('tools', $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
+            <?php echo iconify('mdi:wrench'); ?> <span class="<?php echo (in_array('tools', $navbar_labels) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"><?php echo $lang['tools'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
@@ -74,7 +74,7 @@ if ($TEMPLATE->getConf('showTools')):
         ?>
 
             <li class="dropdown-header">
-                <?php echo \Mdi::icon($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
+                <?php echo iconify($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
             </li>
 
             <?php
