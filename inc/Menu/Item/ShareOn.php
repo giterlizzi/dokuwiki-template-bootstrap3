@@ -19,7 +19,7 @@ class ShareOn extends AbstractItem {
         unset($this->params['do']);
 
         $this->label    = tpl_getLang('share_on');
-        $this->svg      = template('assets/mdi/svg/share-variant.svg');
+        $this->svg      = template('images/menu/share-variant.svg');
         $this->id       = '#';
 
     }
@@ -66,7 +66,7 @@ class ShareOn extends AbstractItem {
 
         $html .= '<ul class="dropdown-menu">';
         $html .= '<li class="dropdown-header">';
-        $html .= '<i class="mdi mdi-share-variant"></i> '. tpl_getLang('share_on') .'...';
+        $html .= iconify('mdi:share-variant') . ' '. tpl_getLang('share_on') .'...';
         $html .= '</li>';
 
         foreach ($share_providers as $provider => $data) {
@@ -75,7 +75,7 @@ class ShareOn extends AbstractItem {
                 continue;
             }
 
-            $html .= '<li><a href="#" class="share share-'. $provider .'" title="'. tpl_getLang('share_on') .' '. $data['label'] .'">'. \Mdi::icon($provider) .' '. $data['label'] .'</a></li>';
+            $html .= '<li><a href="#" class="share share-'. $provider .'" title="'. tpl_getLang('share_on') .' '. $data['label'] .'">'. iconify("mdi:$provider") .' '. $data['label'] .'</a></li>';
 
         }
 

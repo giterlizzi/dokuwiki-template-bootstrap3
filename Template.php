@@ -148,13 +148,13 @@ class Template
 
                 // Legend
                 if ($item['_elem'] == 'openfieldset') {
-                    $event->data->_content[$key]['_legend'] = (($title_icon) ? \Mdi::icon($title_icon) : '') . ' ' . $event->data->_content[$key]['_legend'];
+                    $event->data->_content[$key]['_legend'] = (($title_icon) ? iconify("mdi:$title_icon") : '') . ' ' . $event->data->_content[$key]['_legend'];
                 }
 
                 // Save button
                 if ($item['type'] == 'submit') {
                     $event->data->_content[$key]['class'] = " $button_class";
-                    $event->data->_content[$key]['value'] = (($button_icon) ? \Mdi::icon($button_icon) : '') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = (($button_icon) ? iconify("mdi:$button_icon") : '') . ' ' . $event->data->_content[$key]['value'];
                 }
 
             }
@@ -179,15 +179,15 @@ class Template
 
                 if ($item['_action'] == 'draftdel') {
                     $event->data->_content[$key]['class'] = ' btn btn-danger';
-                    $event->data->_content[$key]['value'] = \Mdi::icon('close') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:close') . ' ' . $event->data->_content[$key]['value'];
                 }
 
                 if ($item['_action'] == 'recover') {
-                    $event->data->_content[$key]['value'] = \Mdi::icon('refresh') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:refresh') . ' ' . $event->data->_content[$key]['value'];
                 }
 
                 if ($item['_action'] == 'show') {
-                    $event->data->_content[$key]['value'] = \Mdi::icon('arrow-left') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
                 }
 
             }
@@ -213,17 +213,17 @@ class Template
                 // Save button
                 if ($item['_action'] == 'save') {
                     $event->data->_content[$key]['class'] = ' btn btn-success';
-                    $event->data->_content[$key]['value'] = \Mdi::icon('content-save') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:content-save') . ' ' . $event->data->_content[$key]['value'];
                 }
 
                 // Preview and Show buttons
                 if ($item['_action'] == 'preview' || $item['_action'] == 'show') {
-                    $event->data->_content[$key]['value'] = \Mdi::icon('file-document-outline') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:file-document-outline') . ' ' . $event->data->_content[$key]['value'];
                 }
 
                 // Cancel button
                 if ($item['_action'] == 'cancel') {
-                    $event->data->_content[$key]['value'] = \Mdi::icon('arrow-left') . ' ' . $event->data->_content[$key]['value'];
+                    $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
                 }
 
             }
@@ -278,13 +278,13 @@ class Template
         //dbg(print_r($event, 1));
 
         if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
-            array_unshift($event->data['listItemContent'], '<i class="mdi mdi-file-document-outline" title="' . hsc($event->data['page']) . '"></i> ');
+            array_unshift($event->data['listItemContent'], iconify('mdi:file-document-outline', array('title' => hsc($event->data['page']))) . ' ');
         }
 
         if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
             $event->data['resultBody']['meta'] = str_replace(
                 array('<span class="lastmod">', '<span class="hits">'),
-                array('<span class="lastmod"><i class="mdi mdi-calendar"></i> ', '<span class="hits"><i class="mdi mdi-poll"></i> '),
+                array('<span class="lastmod">' . iconify('mdi:calendar') . ' ', '<span class="hits"' . iconify('mdi:poll') . ' '),
                 '<small>' . $event->data['resultBody']['meta'] . '</small>'
             );
         }
@@ -343,7 +343,7 @@ class Template
         }
 
         # Material Design Icons
-        $stylesheets[] = $tpl_basedir . 'assets/mdi/css/materialdesignicons.min.css';
+        #$stylesheets[] = $tpl_basedir . 'assets/mdi/css/materialdesignicons.min.css';
 
         # Bootstrap JavaScript
         $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
@@ -353,6 +353,8 @@ class Template
 
         # Typeahead (Bootstrap3)
         $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
+    
+        $scripts[] = $tpl_basedir . 'assets/iconify/iconify.min.js';
 
         foreach ($stylesheets as $style) {
             array_unshift($event->data['link'], array(
@@ -367,6 +369,11 @@ class Template
                 '_data' => '',
                 'src'   => $script);
         }
+
+        $event->data['script'][] = array(
+            'type'  => 'text/javascript',
+            '_data' => "Iconify.setConfig('defaultAPI', '$tpl_basedir/iconify.php?prefix={prefix}&icons={icons}');"
+        );
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
@@ -450,7 +457,7 @@ class Template
     {
 
         $event->data['class'] .= ' tag label label-default mx-1';
-        $event->data['title'] = '<i class="mdi mdi-tag-text-outline"></i> ' . $event->data['title'];
+        $event->data['title'] = iconify('mdi:tag-text-outline') . ' ' . $event->data['title'];
 
     }
 
@@ -955,11 +962,11 @@ class Template
             $out = '<ul class="list-inline">';
 
             if (in_array('filename', $page_info)) {
-                $out .= '<li><i class="mdi mdi-file-document-outline text-muted"></i> <span title="' . $fn_full . '">' . $fn . '</span></li>';
+                $out .= '<li>'. iconify('mdi:file-document-outline', array('class' => 'text-muted')) . ' <span title="' . $fn_full . '">' . $fn . '</span></li>';
             }
 
             if (in_array('date', $page_info)) {
-                $out .= '<li><i class="mdi mdi-calendar text-muted"></i> ' . $lang['lastmod'] . ' <span title="' . dformat($INFO['lastmod']) . '">' . $date . '</span></li>';
+                $out .= '<li>' . iconify('mdi:calendar', array('class' => 'text-muted')) . ' ' . $lang['lastmod'] . ' <span title="' . dformat($INFO['lastmod']) . '">' . $date . '</span></li>';
             }
 
             if (in_array('editor', $page_info)) {
@@ -989,7 +996,7 @@ class Template
             }
 
             if ($INFO['locked'] && in_array('locked', $page_info)) {
-                $out .= '<li><i class="mdi mdi-lock text-muted"></i> ' . $lang['lockedby'] . ' ' . editorinfo($INFO['locked']) . '</li>';
+                $out .= '<li>' . iconify('mdi:lock', array('class' => 'text-muted')) . ' ' . $lang['lockedby'] . ' ' . editorinfo($INFO['locked']) . '</li>';
             }
 
             $out .= '</ul>';
@@ -1055,28 +1062,28 @@ class Template
 
                     case 'info':
                         $level = 'info';
-                        $icon  = 'mdi-information';
+                        $icon  = 'mdi:information';
                         break;
 
                     case 'error':
                         $level = 'danger';
-                        $icon  = 'mdi-alert-octagon';
+                        $icon  = 'mdi:alert-octagon';
                         break;
 
                     case 'notify':
                         $level = 'warning';
-                        $icon  = 'mdi-alert';
+                        $icon  = 'mdi:alert';
                         break;
 
                     case 'success':
                         $level = 'success';
-                        $icon  = 'mdi-check-circle';
+                        $icon  = 'mdi:check-circle';
                         break;
 
                 }
 
                 print '<div class="alert alert-' . $level . '">';
-                print '<i class="mdi mdi-18px ' . $icon . '"></i> ';
+                print iconify($icon, array('class' => 'mr-2'));
                 print $msg['msg'];
                 print '</div>';
 
@@ -1322,7 +1329,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         echo '<li' . ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') . '>';
 
         tpl_link(wl($conf['start']),
-            ($semantic ? '<span itemprop="name">' : '') . '<i class="mdi mdi-home"></i>' . ($semantic ? '</span>' : ''),
+            ($semantic ? '<span itemprop="name">' : '') . iconify('mdi:home') . ($semantic ? '</span>' : ''),
             ($semantic ? ' itemprop="item" ' : '') . 'title="' . $conf['start'] . '"'
         );
 
@@ -1864,11 +1871,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Section Edit icons
         foreach ($html->find('.secedit.editbutton_section button') as $elm) {
-            $elm->innertext = '<i class="mdi mdi-pencil"></i> ' . $elm->innertext;
+            $elm->innertext = iconify('mdi:pencil') . ' ' . $elm->innertext;
         }
 
         foreach ($html->find('.secedit.editbutton_table button') as $elm) {
-            $elm->innertext = '<i class="mdi mdi-table"></i> ' . $elm->innertext;
+            $elm->innertext = iconify('mdi:table') . ' ' . $elm->innertext;
         }
 
         # Search Hit
@@ -1937,23 +1944,23 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 case 'info':
                     $elm->class     = 'alert alert-info';
-                    $elm->innertext = '<i class="mdi mdi-18px mdi-information"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:information') . ' ' . $elm->innertext;
                     break;
 
                 case 'error':
                     $elm->class     = 'alert alert-danger';
-                    $elm->innertext = '<i class="mdi mdi-18px mdi-alert-octagon"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:alert-octagon') . ' ' . $elm->innertext;
                     break;
 
                 case 'success':
                     $elm->class     = 'alert alert-success';
-                    $elm->innertext = '<i class="mdi mdi-18px mdi-check-circle"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:check-circle') . ' ' . $elm->innertext;
                     break;
 
                 case 'notify':
                 case 'msg notify':
                     $elm->class     = 'alert alert-warning';
-                    $elm->innertext = '<i class="mdi mdi-18px mdi-alert"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:alert') . ' ' . $elm->innertext;
                     break;
 
             }
@@ -2014,7 +2021,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             foreach ($html->find('fieldset.search-form button[type="submit"]') as $elm) {
                 $elm->class .= ' btn-primary';
-                $elm->innertext = '<i class="mdi mdi-magnify"></i> ' . $elm->innertext;
+                $elm->innertext = iconify('mdi:magnify', array('class' => 'mr-2')) . $elm->innertext;
             }
 
             $content = $html->save();
@@ -2037,17 +2044,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $parent = $elm->parent()->parent();
 
                 if (preg_match('/open/', $parent->class)) {
-                    $elm->innertext = '<i class="mdi mdi-folder-open text-primary"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:folder-open', array('class' => 'text-primary mr-2')) . $elm->innertext;
                 }
 
                 if (preg_match('/closed/', $parent->class)) {
-                    $elm->innertext = '<i class="mdi mdi-folder text-primary"></i> ' . $elm->innertext;
+                    $elm->innertext =  iconify('mdi:folder', array('class' => 'text-primary mr-2')) . $elm->innertext;
                 }
 
             }
 
             foreach ($html->find('.idx .wikilink1') as $elm) {
-                $elm->innertext = '<i class="mdi mdi-file-document-outline text-muted"></i> ' . $elm->innertext;
+                $elm->innertext =  iconify('mdi:file-document-outline', array('class' => 'text-muted mr-2')) . $elm->innertext;
             }
 
             $content = $html->save();
@@ -2081,7 +2088,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 foreach ($html->find('[name*=cmd[update]]') as $elm) {
                     $elm->class .= ' btn-success';
                     if ($elm->tag == 'button') {
-                        $elm->innertext = '<i class="mdi mdi-content-save"></i> ' . $elm->innertext;
+                        $elm->innertext = iconify('mdi:content-save') . ' ' . $elm->innertext;
                     }
                 }
 
@@ -2096,7 +2103,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $elm->class .= ' btn-primary';
 
                     if ($elm->tag == 'button') {
-                        $elm->innertext = '<i class="mdi mdi-arrow-right"></i> ' . $elm->innertext;
+                        $elm->innertext = iconify('mdi:arrow-right') . ' ' . $elm->innertext;
                     }
 
                 }
@@ -2113,7 +2120,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                         $elm->class .= ' btn-primary';
                         if ($elm->tag == 'button') {
-                            $elm->innertext = '<i class="mdi mdi-magnify"></i> ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:magnify'). ' ' . $elm->innertext;
                         }
 
                     }
@@ -2122,7 +2129,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                         $elm->class .= ' btn-success';
                         if ($elm->tag == 'button') {
-                            $elm->innertext = '<i class="mdi mdi-refresh"></i> ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:refresh'). ' ' . $elm->innertext;
                         }
 
                     }
@@ -2138,7 +2145,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 foreach ($html->find('[type=submit]') as $elm) {
                     $elm->class .= ' btn-success';
                     if ($elm->tag == 'button') {
-                        $elm->innertext = '<i class="mdi mdi-content-save"></i> ' . $elm->innertext;
+                        $elm->innertext = iconify('mdi:content-save') . ' ' . $elm->innertext;
                     }
                 }
 
@@ -2171,62 +2178,62 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                     switch ($idx) {
                         case 0:
-                            $elm->innertext = '<i class="mdi mdi-account-multiple"></i> ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:account-multiple') . ' ' . $elm->innertext;
                             break;
                         case 1:
-                            $elm->innertext = '<i class="mdi mdi-account-plus"></i> ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:account-plus') . ' ' . $elm->innertext;
                             break;
                     }
 
                 }
 
                 foreach ($html->find('.import_users h2') as $elm) {
-                    $elm->innertext = '<i class="mdi mdi-account-multiple-plus"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:account-multiple-plus') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[delete]]') as $elm) {
                     $elm->class .= ' btn btn-danger';
-                    $elm->innertext = '<i class="mdi mdi-account-minus"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:account-minus') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[add]]') as $elm) {
                     $elm->class .= ' btn btn-success';
-                    $elm->innertext = '<i class="mdi mdi-plus"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:plus') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[modify]]') as $elm) {
                     $elm->class .= ' btn btn-success';
-                    $elm->innertext = '<i class="mdi mdi-content-save"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:content-save') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[import]]') as $elm) {
                     $elm->class .= ' btn btn-primary';
-                    $elm->innertext = '<i class="mdi mdi-upload"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:upload') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[export]]') as $elm) {
                     $elm->class .= ' btn btn-primary';
-                    $elm->innertext = '<i class="mdi mdi-download"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:download') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[start]]') as $elm) {
                     $elm->class .= ' btn btn-default';
-                    $elm->innertext = '<i class="mdi mdi-chevron-double-left"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:chevron-double-left') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[prev]]') as $elm) {
                     $elm->class .= ' btn btn-default';
-                    $elm->innertext = '<i class="mdi mdi-chevron-left"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:chevron-left') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[next]]') as $elm) {
                     $elm->class .= ' btn btn-default';
-                    $elm->innertext = '<i class="mdi mdi-chevron-right"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:chevron-right') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('button[name*=fn[last]]') as $elm) {
                     $elm->class .= ' btn btn-default';
-                    $elm->innertext = '<i class="mdi mdi-chevron-double-right"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:chevron-double-right') . ' ' . $elm->innertext;
                 }
 
             }
@@ -2241,32 +2248,32 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 foreach ($html->find('.actions .uninstall') as $elm) {
                     $elm->class .= ' btn-danger';
-                    $elm->innertext = '<i class="mdi mdi-delete"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:delete') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('.actions .enable') as $elm) {
                     $elm->class .= ' btn-success';
-                    $elm->innertext = '<i class="mdi mdi-check"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:check') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('.actions .disable') as $elm) {
                     $elm->class .= ' btn-warning';
-                    $elm->innertext = '<i class="mdi mdi-block-helper"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:block-helper') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('.actions .install, .actions .update, .actions .reinstall') as $elm) {
                     $elm->class .= ' btn-primary';
-                    $elm->innertext = '<i class="mdi mdi-download"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:download') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('form.install [type=submit]') as $elm) {
                     $elm->class .= ' btn btn-success';
-                    $elm->innertext = '<i class="mdi mdi-download"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:download') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('form.search [type=submit]') as $elm) {
                     $elm->class .= ' btn btn-primary';
-                    $elm->innertext = '<i class="mdi mdi-cloud-search"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:cloud-search') . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('.permerror') as $elm) {
@@ -2292,13 +2299,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                             continue;
                         }
 
-                        $item->innertext = '<i class="mdi mdi-18px mdi-puzzle text-success"></i>';
+                        $item->innertext = iconify('mdi:puzzle', array('class' => 'text-success'));
                     }
 
                 }
 
                 foreach ($html->find('h2') as $elm) {
-                    $elm->innertext = '<i class="mdi mdi-puzzle text-success" style="opacity: 0.5"></i> ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('ul.admin_plugins') as $admin_plugins) {
@@ -2349,36 +2356,36 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                         if ($extension->setExtension($plugin_name)) {
 
                             foreach ($elm->find('legend') as $legend) {
-                                $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
+                                $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
                             }
 
                         }
 
                     } else {
                         foreach ($elm->find('legend') as $legend) {
-                            $legend->innertext = '<i class="mdi mdi-puzzle text-success"></i> ' . $legend->innertext;
+                            $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext;
                         }
                     }
 
                 }
 
                 $dokuwiki_configs = array(
-                    '#_basic'          => 'mdi mdi-settings',
-                    '#_display'        => 'mdi mdi-monitor',
-                    '#_authentication' => 'mdi mdi-shield-account',
-                    '#_anti_spam'      => 'mdi mdi-block-helper',
-                    '#_editing'        => 'mdi mdi-pencil',
-                    '#_links'          => 'mdi mdi-link-variant',
-                    '#_media'          => 'mdi mdi-folder-image',
-                    '#_notifications'  => 'mdi mdi-email',
-                    '#_syndication'    => 'mdi mdi-rss',
-                    '#_advanced'       => 'mdi mdi-palette-advanced',
-                    '#_network'        => 'mdi mdi-network',
+                    '#_basic'          => 'mdi:settings',
+                    '#_display'        => 'mdi:monitor',
+                    '#_authentication' => 'mdi:shield-account',
+                    '#_anti_spam'      => 'mdi:block-helper',
+                    '#_editing'        => 'mdi:pencil',
+                    '#_links'          => 'mdi:link-variant',
+                    '#_media'          => 'mdi:folder-image',
+                    '#_notifications'  => 'mdi:email',
+                    '#_syndication'    => 'mdi:rss',
+                    '#_advanced'       => 'mdi:palette-advanced',
+                    '#_network'        => 'mdi:network',
                 );
 
                 foreach ($dokuwiki_configs as $selector => $icon) {
                     foreach ($html->find("$selector legend") as $elm) {
-                        $elm->innertext = '<i class="' . $icon . '"></i> ' . $elm->innertext;
+                        $elm->innertext = iconify($icon) . ' ' . $elm->innertext;
                     }
                 }
 
@@ -2389,18 +2396,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 $admin_sections = array(
                     // Section                  Insert Before           Icon
-                    'theme'            => array('bootstrapTheme',       'mdi-palette'),
-                    'sidebar'          => array('sidebarPosition',      'mdi-page-layout-sidebar-left'),
-                    'navbar'           => array('inverseNavbar',        'mdi-page-layout-header'),
-                    'semantic'         => array('semantic',             'mdi-share-variant'),
-                    'layout'           => array('fluidContainer',       'mdi-monitor'),
-                    'toc'              => array('tocAffix',             'mdi-view-list'),
-                    'discussion'       => array('showDiscussion',       'mdi-comment-text-multiple'),
-                    'avatar'           => array('useAvatar',            'mdi-account'),
-                    'cookie_law'       => array('showCookieLawBanner',  'mdi-scale-balance'),
-                    'google_analytics' => array('useGoogleAnalytics',   'mdi-google'),
-                    'browser_title'    => array('browserTitle',         'mdi-format-title'),
-                    'page'             => array('showPageInfo',         'mdi-file'),
+                    'theme'            => array('bootstrapTheme',       'mdi:palette'),
+                    'sidebar'          => array('sidebarPosition',      'mdi:page-layout-sidebar-left'),
+                    'navbar'           => array('inverseNavbar',        'mdi:page-layout-header'),
+                    'semantic'         => array('semantic',             'mdi:share-variant'),
+                    'layout'           => array('fluidContainer',       'mdi:monitor'),
+                    'toc'              => array('tocAffix',             'mdi:view-list'),
+                    'discussion'       => array('showDiscussion',       'mdi:comment-text-multiple'),
+                    'avatar'           => array('useAvatar',            'mdi:account'),
+                    'cookie_law'       => array('showCookieLawBanner',  'mdi:scale-balance'),
+                    'google_analytics' => array('useGoogleAnalytics',   'mdi:google'),
+                    'browser_title'    => array('browserTitle',         'mdi:format-title'),
+                    'page'             => array('showPageInfo',         'mdi:file'),
                 );
 
                 foreach ($admin_sections as $section => $items) {
@@ -2409,7 +2416,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $icon   = $items[1];
 
                     $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»' . $search . ')<\/span>/',
-                        '</table></div></fieldset><fieldset id="bootstrap3__' . $section . '"><legend><i class="mdi mdi-24px ' . $icon . '"></i> ' . tpl_getLang("config_$section") . '</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
+                        '</table></div></fieldset><fieldset id="bootstrap3__' . $section . '"><legend>' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
 
                 }
 
@@ -2452,15 +2459,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
             foreach ($html->find('.diffprevrev') as $elm) {
-                $elm->class .= ' btn btn-default mdi mdi-chevron-left';
+                $elm->class .= ' btn btn-default';
+                $elm->innertext = iconify('mdi:chevron-left') . ' ' . $elm->innertext;
             }
 
             foreach ($html->find('.diffnextrev') as $elm) {
-                $elm->class .= ' btn btn-default mdi mdi-chevron-right';
+                $elm->class .= ' btn btn-default';
+                $elm->innertext = iconify('mdi:chevron-right') . ' ' . $elm->innertext;
             }
 
             foreach ($html->find('.diffbothprevrev') as $elm) {
-                $elm->class .= ' btn btn-default mdi mdi-chevron-double-left';
+                $elm->class .= ' btn btn-default';
+                $elm->innertext = iconify('mdi:chevron-double-left') . ' ' . $elm->innertext;
             }
 
             foreach ($html->find('.minor') as $elm) {
@@ -2476,10 +2486,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Add icons for Extensions, Actions, etc.
 
-        $svg_icon = null;
+        $svg_icon      = null;
+        $iconify_icon  = null;
+        $iconify_attrs = array('class' => 'mr-2');
 
-        if (!$INFO['exists']) {
-            $svg_icon = 'alert';
+        if (!$INFO['exists'] && $ACT == 'show') {
+            $iconify_icon = 'mdi:alert';
+            $iconify_attrs['style'] = 'color:orange';
         }
 
         $menu_class = "\\dokuwiki\\Menu\\Item\\$ACT";
@@ -2500,11 +2513,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                         $svg_icon = $plugin->getMenuIcon();
 
                         if (!file_exists($svg_icon)) {
-                            $svg_icon = 'puzzle';
+                            $iconify_icon = 'mdi:puzzle';
+                            $svg_icon = null;
                         }
 
                     } else {
-                        $svg_icon = 'puzzle';
+                        $iconify_icon = 'mdi:puzzle';
+                        $svg_icon = null;
                     }
 
                 }
@@ -2512,55 +2527,46 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 break;
 
             case 'resendpwd':
-                $svg_icon = 'lock-reset';
+                $iconify_icon = 'mdi:lock-reset';
                 break;
 
             case 'denied':
-                $svg_icon = 'block-helper';
+                $iconify_icon = 'mdi:block-helper';
+                $iconify_attrs['style'] = 'color:red';
                 break;
 
             case 'search':
-                $svg_icon = 'search-web';
+                $iconify_icon = 'mdi:search-web';
                 break;
 
             case 'preview':
-                $svg_icon = 'file-eye';
+                $iconify_icon = 'mdi:file-eye';
                 break;
 
             case 'diff':
-                $svg_icon = 'file-compare';
+                $iconify_icon = 'mdi:file-compare';
                 break;
 
             case 'showtag':
-                $svg_icon = 'tag-multiple';
+                $iconify_icon = 'mdi:tag-multiple';
                 break;
 
             case 'draft':
-                $svg_icon = 'android-studio';
+                $iconify_icon = 'mdi:android-studio';
                 break;
 
         }
 
         if ($svg_icon) {
 
-            $svg_attrs = array();
-
-            $svg_attrs['style'] = 'fill-opacity: 0.2;';
-
-            if (!$INFO['exists'] && $ACT == 'show') {
-                $svg_attrs['style'] .= 'fill: orange;';
-            }
-
-            if ($ACT == 'denied') {
-                $svg_attrs['style'] .= 'fill: red;';
-            }
+            $svg_attrs = array('class' => 'iconify mr-2');
 
             if ($ACT == 'admin' && $INPUT->str('page') == 'extension') {
-                $svg_attrs['style'] .= 'fill: green;';
+                $svg_attrs['style'] = 'fill: green;';
             }
 
 
-            $svg = \Mdi::icon($svg_icon, null, 32, $svg_attrs);
+            $svg = \SVG::icon($svg_icon, null, '1em', $svg_attrs);
 
             # Import HTML string
             $html = new \simple_html_dom;
@@ -2568,6 +2574,24 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             foreach ($html->find('h1') as $elm) {
                 $elm->innertext = $svg . ' ' . $elm->innertext;
+                break;
+            }
+
+            $content = $html->save();
+
+            $html->clear();
+            unset($html);
+
+        }
+
+        if ($iconify_icon) {
+
+            # Import HTML string
+            $html = new \simple_html_dom;
+            $html->load($content, true, false);
+
+            foreach ($html->find('h1') as $elm) {
+                $elm->innertext = iconify($iconify_icon, $iconify_attrs) . $elm->innertext;
                 break;
             }
 
@@ -2810,7 +2834,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             $out .= '<!-- TOC START -->' . DOKU_LF;
             $out .= '<nav id="dw__toc" role="navigation" class="toc-panel panel panel-default small">' . DOKU_LF;
-            $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="' . $lang['toc'] . '" class="panel-heading toc-title"><i class="mdi mdi-view-list"></i> ';
+            $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="' . $lang['toc'] . '" class="panel-heading toc-title">' . iconify('mdi:view-list') . ' ';
             $out .= '<span>' . $lang['toc'] . '</span>';
             $out .= ' <i class="caret"></i></h6>' . DOKU_LF;
             $out .= '<div class="panel-body  toc-body collapse ' . (!$this->getConf('tocCollapsed') ? 'in' : '') . '">' . DOKU_LF;
@@ -2831,13 +2855,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $ACT;
 
         $tools_menus = array(
-            'user'  => array('icon' => 'account',               'object' => new \dokuwiki\Menu\UserMenu),
-            'site'  => array('icon' => 'toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
-            'page'  => array('icon' => 'file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
+            'user'  => array('icon' => 'mdi:account',               'object' => new \dokuwiki\Menu\UserMenu),
+            'site'  => array('icon' => 'mdi:toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
+            'page'  => array('icon' => 'mdi:file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
-            $tools_menus['page'] = array('icon' => 'image', 'object' => new \dokuwiki\Menu\DetailMenu);
+            $tools_menus['page'] = array('icon' => 'mdi:image', 'object' => new \dokuwiki\Menu\DetailMenu);
         }
 
         foreach ($tools_menus as $tool => $data) {

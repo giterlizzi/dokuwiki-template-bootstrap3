@@ -24,7 +24,7 @@ class ImgOriginalSize extends AbstractItem {
         unset($this->params['do']);
 
         $this->label    = $lang['js']['mediadirect'];
-        $this->svg      = template('assets/mdi/svg/image-size-select-large.svg');
+        $this->svg      = template('images/menu/image-size-select-large.svg');
         $this->id       = '#';
         $this->img_link = ml($IMG, array('cache'=> $INPUT->str('cache'),'rev' => $REV), true, '&');
 

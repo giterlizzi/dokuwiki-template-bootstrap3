@@ -18,3 +18,22 @@ function bootstrap3_content($content) {
 
 }
 
+function iconify($icon, $attrs = array()) {
+
+    $class = 'iconify';
+
+    if (isset($attrs['class'])) {
+      $class .= ' ' . $attrs['class'];
+      unset($attrs['class']);
+    }
+
+    $attrs['data-icon'] = $icon;
+
+    $attributes = '';
+
+    foreach ($attrs as $key => $value) {
+      $attributes .= ' '. $key .'="'. hsc($value) .'"';
+    }
+
+    return '<span class="'. $class .'" '. $attributes .'></span>';
+}

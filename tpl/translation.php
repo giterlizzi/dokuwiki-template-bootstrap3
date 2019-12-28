@@ -41,11 +41,11 @@ if ($show_translation):
 <ul class="nav navbar-nav" id="dw__translation">
     <li class="dropdown">
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $translation_label ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-flag"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $translation_label ?></span><span class="caret"></span>
+            <?php echo iconify('mdi:flag'); ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo $translation_label ?></span><span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
             <li class="dropdown-header hidden-xs hidden-sm">
-                <i class="mdi mdi-flag"></i> <?php echo $translation_label ?>
+            <?php echo iconify('mdi:flag'); ?> <?php echo $translation_label ?>
             </li>
             <?php echo $translation_items ?>
         </ul>

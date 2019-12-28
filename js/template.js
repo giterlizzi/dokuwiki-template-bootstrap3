@@ -51,7 +51,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="mdi mdi-account"/> ');
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<span class="iconify mr-2" data-icon="mdi:account"/> ');
     }
 
     // Scrolling animation (on TOC and FootNotes)
@@ -436,25 +436,25 @@ jQuery(document).on('bootstrap3:alerts', function(event) {
     jQuery('div.info')
       .removeClass('info')
       .addClass('alert alert-info')
-      .prepend('<i class="mdi mdi-18px mdi-information"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:information"/>');
 
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="mdi mdi-18px mdi-alert-octagon"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:alert-octagon"/>');
 
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
-      .prepend('<i class="mdi mdi-18px mdi-check-circle"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:check-circle"/>');
 
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
       .addClass('alert alert-warning')
-      .prepend('<i class="mdi mdi-18px mdi-alert"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:alert"/>');
 
   }, 0);
 
@@ -481,8 +481,8 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
       var $btn_update = jQuery('#mediamanager__btn_update [type=submit]');
 
       $btn_delete.addClass('btn btn-danger');
-      $btn_delete.prepend(jQuery('<i class="mdi mdi-delete"/>'));
-      $btn_update.prepend(jQuery('<i class="mdi mdi-image-plus"/>'));
+      $btn_delete.prepend(jQuery('<span class="iconify mr-2" data-icon="mdi:delete"/>'));
+      $btn_update.prepend(jQuery('<span class="iconify mr-2" data-icon="mdi:image-plus"/>'));
 
     }
 
@@ -575,21 +575,19 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
           $closed    = $directory.parents('.closed'),
           $open      = $directory.parents('.open');
 
-      if (! $directory.find('.mdi').length) {
-        $directory.prepend('<i class="mdi text-primary"/> ');
+      if (! $directory.find('svg').length) {
+        $directory.prepend(Iconify.getSVG('mdi:folder'));
       }
 
       if ($open.length) {
-        $directory.find('i')
-          .removeClass('mdi-folder')
-          .addClass('mdi-folder-open');
+        $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder-open'));
       }
 
       if ($closed.length) {
-        $directory.find('i')
-          .removeClass('mdi-folder-open')
-          .addClass('mdi-folder');
+        $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder'));
       }
+
+      $directory.find('svg').addClass('iconify text-primary mr-2');
 
     });
 
@@ -597,9 +595,10 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
 
       var $page = jQuery(this);
 
-      if (! $page.find('i').length) {
-        $page.prepend('<i class="mdi mdi-file-document text-muted"/> ');
+      if (! $page.find('svg').length) {
+        $page.prepend(Iconify.getSVG('mdi:file-document-outline'));
       }
+      $page.find('svg').addClass('text-muted mr-2');
 
     });
 
@@ -778,24 +777,26 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
     $sections.addClass('hide');
 
-    if (! $headings.find('i').length) {
+    Iconify.preloadImages(['mdi-chevron-up', 'mdi-chevron-down']);
+
+    if (! $headings.find('svg').length) {
 
       $headings
         .css('cursor', 'pointer')
-        .prepend(jQuery('<i class="mdi mdi-chevron-down py-4 mdi-24px"/>'));
+        .prepend(Iconify.getSVG('mdi:chevron-down'));
 
       $headings.on('click', function() {
 
         var $heading = jQuery(this),
-            $icon    = $heading.find('i'),
+            $icon    = $heading.find('svg'),
             $section = $heading.nextUntil('h2');
 
         $section.toggleClass('hide');
         $heading.css('cursor', 'pointer');
 
-        $icon.hasClass('mdi-chevron-down')
-          ? $icon.removeClass('mdi-chevron-down').addClass('mdi-chevron-up')
-          : $icon.removeClass('mdi-chevron-up').addClass('mdi-chevron-down');
+        $section.hasClass('hide')
+          ? $icon.replaceWith(Iconify.getSVG('mdi:chevron-down'))
+          : $icon.replaceWith(Iconify.getSVG('mdi:chevron-up'));
 
       });
 
@@ -882,6 +883,7 @@ jQuery(document).on('bootstrap3:components', function(event) {
       'footnotes',
       'media-manager',
       'collapse-sections',
+      'alerts'
     ];
 
     for (var i in events) {

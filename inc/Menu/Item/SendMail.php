@@ -19,7 +19,7 @@ class SendMail extends AbstractItem {
         unset($this->params['do']);
 
         $this->label = tpl_getLang('send_mail');
-        $this->svg   = template('assets/mdi/svg/email-plus.svg');
+        $this->svg   = template('images/menu/email-plus.svg');
         $this->id    = '#';
 
     }

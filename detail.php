@@ -348,12 +348,12 @@ $show_metadata = false;
 
                         <?php require_once(template('tpl/page-icons.php')); ?>
 
-                        <?php if ($ERROR): print '<h1><i class="mdi mdi-alert text-warning"></i> ' . $ERROR . '</h1>'; ?>
+                        <?php if ($ERROR): print '<h1>' . iconify('mdi:alert', array('class' => 'mr-2', 'style' => 'color:orange')) . $ERROR . '</h1>'; ?>
                         <?php else: ?>
                         <?php if ($REV) echo p_locale_xhtml('showrev'); ?>
 
                         <h1 class="page-header">
-                            <i class="mdi mdi-image text-muted"></i> <?php echo nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+                            <?php echo iconify('mdi:image', array('class' => 'text-muted')) ?> <?php echo nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
                         </h1>
 
                         <p>
@@ -361,18 +361,18 @@ $show_metadata = false;
                         </p>
 
                         <p class="small my-2">
-                            <i class="mdi mdi-image-size-select-large"></i> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
+                            <?php echo iconify('mdi:image-size-select-large'); ?> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
                             <?php echo tpl_getLang('other_resolutions') ?>: <?php foreach ($other_sizes as $size): ?> <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $size['w'], 'h' => $size['h']), true, '&'); ?>" title="<?php echo floor($size['ratio'] * 100); ?>%"><?php echo $size['w']; ?> × <?php echo $size['h']; ?></a> pixels &nbsp; <?php endforeach; ?>
                         </p>
 
                         <p class="image-info my-3">
-                            <i class="mdi mdi-image mdi-18px"></i> <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" title="<?php echo $lang['js']['mediadirect']; ?>"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></a> ( <?php echo tpl_img_getTag('File.Width'); ?> × <?php echo tpl_img_getTag('File.Height'); ?> pixels )
+                            <?php echo iconify('mdi:image'); ?> <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" title="<?php echo $lang['js']['mediadirect']; ?>"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></a> ( <?php echo tpl_img_getTag('File.Width'); ?> × <?php echo tpl_img_getTag('File.Height'); ?> pixels )
                         </p>
 
                         <div class="image-information pt-5">
 
                             <h3>
-                                <i class="mdi mdi-information text-primary"></i> Informations
+                                <?php echo iconify('mdi:information', array('class' => 'text-primary')) ?> Informations
                             </h3>
 
                             <div class="table-responsive">
@@ -409,7 +409,7 @@ $show_metadata = false;
                         <div class="image-reference pt-5">
 
                             <h3>
-                                <i class="mdi mdi-link-variant"></i> <?php echo $lang['reference']; ?>
+                                <?php echo iconify('mdi:link-variant'); ?> <?php echo $lang['reference']; ?>
                             </h3>
                             <?php
                                 $media_usage = ft_mediause($IMG, true);
@@ -426,7 +426,7 @@ $show_metadata = false;
 
                             <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
                             <div class="alert alert-warning">
-                                <i class="mdi mdi-alert"></i> <?php echo $lang['media_acl_warning']; ?>
+                                <?php echo iconify('mdi:alert'); ?> <?php echo $lang['media_acl_warning']; ?>
                             </div>
                             <?php endif; ?>
 
@@ -435,7 +435,7 @@ $show_metadata = false;
                         <div class="image-metadata pt-5 hide">
 
                             <h3>
-                                <i class="mdi mdi-code-tags text-success"></i> Metadata
+                                <?php echo iconify('mdi:code-tags', array('class' => 'text-success')); ?> Metadata
                             </h3>
 
                             <div class="metadata">
@@ -524,7 +524,9 @@ $show_metadata = false;
         ?>
     </footer>
 
-    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
+        <?php echo iconify('mdi:chevron-up'); ?>
+    </a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
         <span class="visible-xs-block"></span>

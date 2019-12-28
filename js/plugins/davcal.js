@@ -23,6 +23,6 @@ if ($davcard_table.length) {
 var $davcard_add_btn = jQuery('a.davcardAddressbookAddNew');
 
 if ($davcard_add_btn.length) {
-    $davcard_add_btn.prepend(jQuery('<i class="mdi mdi-account-plus"></i>&nbsp;'));
+    $davcard_add_btn.prepend(jQuery('<span class="iconify mr-2" data-icon="mdi:account-plus"/>'));
     $davcard_add_btn.addClass('btn btn-xs btn-primary');
 }

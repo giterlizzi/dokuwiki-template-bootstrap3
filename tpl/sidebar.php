@@ -24,7 +24,7 @@ if ($TEMPLATE->getConf('sidebarShowPageTitle')) {
 <aside id="<?php echo $sidebar_id ?>" class="dw__sidebar <?php echo $sidebar_class ?> hidden-print">
     <div class="dw-sidebar-content">
         <div class="dw-sidebar-title hidden-lg hidden-md hidden-sm" data-toggle="collapse" data-target="#<?php echo $sidebar_id ?> .dw-sidebar-body">
-            <i class="mdi mdi-view-list"></i> <?php echo $sidebar_title ?>
+            <?php echo iconify('mdi:view-list'); ?> <?php echo $sidebar_title ?>
         </div>
         <div class="dw-sidebar-body collapse in small">
             <?php
