@@ -64,10 +64,10 @@ $admin = array(
                             if (method_exists($plugin, 'getMenuIcon')) {
                                 $icon = $plugin->getMenuIcon();
                                 if (! file_exists($icon)) {
-                                    $icon = template('assets/mdi/svg/puzzle.svg');
+                                    $icon = template('images/menu/puzzle.svg');
                                 }
                             } else {
-                                $icon = template('assets/mdi/svg/puzzle.svg');
+                                $icon = template('images/menu/puzzle.svg');
                             }
 
                             if (! $label) continue;

@@ -2514,10 +2514,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                         if (!file_exists($svg_icon)) {
                             $iconify_icon = 'mdi:puzzle';
+                            $svg_icon = null;
                         }
 
                     } else {
                         $iconify_icon = 'mdi:puzzle';
+                        $svg_icon = null;
                     }
 
                 }

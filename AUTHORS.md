@@ -59,7 +59,7 @@
   * Arif Budiman
 
 #### Italian
-  * Giuseppe Di Terlizzi ([LotarProject](https://github.com/LotarProject)) <giuseppe.diterlizzi@gmail.com>
+  * Giuseppe Di Terlizzi ([giterlizzi](https://github.com/giterlizzi)) <giuseppe.diterlizzi@gmail.com>
   * Gilberto Bertarelli
 
 #### Japanese
