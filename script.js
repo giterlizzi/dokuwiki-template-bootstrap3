@@ -82,6 +82,9 @@ jQuery(document).ready(function() {
     return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
 
+  // Preload icons
+  Iconify.preloadImages(['mdi:folder-open', 'mdi:folder', 'mdi:file-document-outline', 'mdi:chevron-up', 'mdi:chevron-down']);
+
   jQuery(window).resize(function() {
     jQuery(document).trigger('bootstrap3:mobile-layout');
     jQuery(document).trigger('bootstrap3:collapse-sections');

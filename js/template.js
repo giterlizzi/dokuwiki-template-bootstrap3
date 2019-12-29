@@ -777,8 +777,6 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
     $sections.addClass('hide');
 
-    Iconify.preloadImages(['mdi-chevron-up', 'mdi-chevron-down']);
-
     if (! $headings.find('svg').length) {
 
       $headings
