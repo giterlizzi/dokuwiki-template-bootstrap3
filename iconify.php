@@ -41,80 +41,109 @@ $params = array(
     'icon'     => $INPUT->str('icon'),
 );
 
-$iconify_dir = dirname(__FILE__) . '/assets/iconify';
-
-header('Content-Type: application/javascript; charset=utf-8');
-
-$cache_key = md5(serialize($params) . $conf['template'] . filemtime(__FILE__));
-
+$iconify_dir   = dirname(__FILE__) . '/assets/iconify';
+$cache_key     = md5(serialize($params) . $conf['template'] . filemtime(__FILE__));
 $cache         = new cache($cache_key, '.js');
 $cache->_event = 'ICONIFY_CACHE';
 $cache_files   = $params;
 $cache_files[] = __FILE__;
 $cache_ok      = $cache->useCache(array('files' => $cache_files));
+$content_type  = 'application/javascript; charset=utf-8';
 
 if ($params['icon']) {
+    $content_type                             = 'image/svg+xml; charset=utf-8';
     list($params['prefix'], $params['icons']) = explode('-', str_replace('.svg', '', $params['icon']), 2);
-    header('Content-Type: image/svg+xml; charset=utf-8', true);
 }
+
+header("Content-Type: $content_type");
 
 http_cached($cache->cache, $cache_ok);
 
-$data = array(
-    'prefix' => $params['prefix'],
-    'icons'  => array(),
-);
-
-$collection_file = "$iconify_dir/". $params['prefix'] .".json";
+$collection_file = "$iconify_dir/" . $params['prefix'] . ".json";
 
 if (!file_exists($collection_file)) {
+    header('Content-Type: text/plain; charset=utf-8', true);
     http_status(404);
+    print "Not Found";
     exit;
 }
 
 $collection_data = json_decode(file_get_contents($collection_file), true);
 
+$iconify_data = array(
+    'prefix'  => $params['prefix'],
+    'icons'   => array(),
+    'aliases' => array(),
+);
 
 foreach (explode(',', $params['icons']) as $icon) {
 
-    $requested_icon = $icon;
-
     if (isset($collection_data['aliases'][$icon])) {
-        $icon = $collection_data['aliases'][$icon]['parent'];
+        $iconify_data['aliases'][$icon] = $collection_data['aliases'][$icon];
+        $icon                           = $collection_data['aliases'][$icon]['parent'];
     }
 
-    if (!$body = $collection_data['icons'][$icon]) {
+    if (!$icon_data = $collection_data['icons'][$icon]) {
         continue;
     }
 
-    $data['icons'][$requested_icon] = $body;
-
-    if (!isset($data['icons'][$requested_icon]['width'])) {
-        $data['icons'][$requested_icon]['width']  = 24;
-        $data['icons'][$requested_icon]['height'] = 24;
-    }
+    $iconify_data['icons'][$icon] = $icon_data;
 
     if ($params['width']) {
-        $data['icons'][$requested_icon]['width']  = $params['width'];
+        $iconify_data['icons'][$icon]['width'] = $params['width'];
     }
     if ($params['height']) {
-        $data['icons'][$requested_icon]['height'] = $params['height'];
+        $iconify_data['icons'][$icon]['height'] = $params['height'];
     }
 
 }
 
+foreach (array('width', 'height', 'top', 'left', 'inlineHeight', 'inlineTop', 'verticalAlign') as $property) {
+    if (isset($collection_data[$property])) {
+        $iconify_data[$property] = $collection_data[$property];
+    }
+}
+
 if ($params['callback']) {
-    
-    $content = $params['callback'] . "(" . json_encode($data) . ");";
+
+    $content = $params['callback'] . "(" . json_encode($iconify_data) . ");";
 
 } elseif ($params['icon']) {
 
-    $svg = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="%s" height="%s" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);">%s</svg>';
-    $content = sprintf($svg, $data['icons'][$params['icons']]['width'], $data['icons'][$params['icons']]['height'], $data['icons'][$params['icons']]['body']);
+    $icon   = $params['icons'];
+    $width  = '1em';
+    $height = '1em';
+
+    if (isset($iconify_data['aliases'][$icon])) {
+        $icon = $iconify_data['aliases'][$icon]['parent'];
+    }
+
+    if (!isset($iconify_data['icons'][$icon])) {
+        header('Content-Type: text/plain; charset=utf-8', true);
+        http_status(404);
+        print "Not Found";
+        exit;
+    }
+
+    if ($params['width']) {
+        $width  = $params['width'];
+        $height = $params['width'];
+    }
+
+    if ($params['height']) {
+        $width  = $params['height'];
+        $height = $params['height'];
+    }
+
+    # TODO add "rotate" support
+
+    $body    = $iconify_data['icons'][$icon]['body'];
+    $svg     = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="%s" height="%s" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);">%s</svg>';
+    $content = sprintf($svg, $width, $height, $body);
 
 } else {
-    
-    $content = "SimpleSVG._loaderCallback(" . json_encode($data) . ");";
+
+    $content = "SimpleSVG._loaderCallback(" . json_encode($iconify_data) . ");";
 
 }
 
