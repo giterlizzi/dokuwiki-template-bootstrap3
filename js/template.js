@@ -109,7 +109,7 @@ jQuery(document).on('bootstrap3:nav', function(event) {
       .contents().unwrap();
 
     // Move the font-icons inside a link
-    var $links = jQuery('.nav li i + a');
+    var $links = jQuery('.nav li .dw-icons + a');
     if ($links.length) {
       jQuery.each($links, function() {
         var $link = jQuery(this),

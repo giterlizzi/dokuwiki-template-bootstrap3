@@ -342,9 +342,6 @@ class Template
 
         }
 
-        # Material Design Icons
-        #$stylesheets[] = $tpl_basedir . 'assets/mdi/css/materialdesignicons.min.css';
-
         # Bootstrap JavaScript
         $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
 
@@ -354,6 +351,7 @@ class Template
         # Typeahead (Bootstrap3)
         $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
     
+        # Iconify
         $scripts[] = $tpl_basedir . 'assets/iconify/iconify.min.js';
 
         foreach ($stylesheets as $style) {
@@ -363,17 +361,18 @@ class Template
                 'href' => $style));
         }
 
+        # Set Iconify default API URL
+        $event->data['script'][] = array(
+            'type'  => 'text/javascript',
+            '_data' => "if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '{$tpl_basedir}iconify.php?prefix={prefix}&icons={icons}' } }"
+        );
+
         foreach ($scripts as $script) {
             $event->data['script'][] = array(
                 'type'  => 'text/javascript',
                 '_data' => '',
                 'src'   => $script);
         }
-
-        $event->data['script'][] = array(
-            'type'  => 'text/javascript',
-            '_data' => "Iconify.setConfig('defaultAPI', '$tpl_basedir/iconify.php?prefix={prefix}&icons={icons}');"
-        );
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
@@ -1990,7 +1989,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         foreach ($html->find('div.table') as $elm) {
-            $elm->class = trim(str_replace('table', '', $eml->class));
+            $elm->class = trim(str_replace('table', '', $elm->class));
         }
 
         # Tag and Pagelist (table)
@@ -2171,7 +2170,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if ($INPUT->str('page') == 'usermanager') {
 
                 foreach ($html->find('.notes') as $elm) {
-                    $elm->class = str_replace('notes', '', $eml->class);
+                    $elm->class = str_replace('notes', '', $elm->class);
                 }
 
                 foreach ($html->find('h2') as $idx => $elm) {
@@ -2182,6 +2181,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                             break;
                         case 1:
                             $elm->innertext = iconify('mdi:account-plus') . ' ' . $elm->innertext;
+                            break;
+                        case 2:
+                            $elm->innertext = iconify('mdi:account-edit') . ' ' . $elm->innertext;
                             break;
                     }
 
