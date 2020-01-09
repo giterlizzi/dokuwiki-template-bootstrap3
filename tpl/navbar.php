@@ -189,10 +189,10 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 <ul class="nav navbar-nav hide" id="dw__toc_menu">
                     <li class="dropdown">
                         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-th-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
+                            <i class="mdi mdi-view-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="max-height: 400px; overflow-y: auto">
-                            <li class="dropdown-header"><i class="mdi mdi-th-list"></i> <?php echo $lang['toc'] ?></li>
+                            <li class="dropdown-header"><i class="mdi mdi-view-list"></i> <?php echo $lang['toc'] ?></li>
                         </ul>
                     </li>
                 </ul>
