@@ -63,6 +63,7 @@ Enjoy!
   * #424: Fixed Pagelist tables are missing some formatting (thanks to @Hitch42)
   * #427: Fixed only the first page is printed out (thanks to @Juergen-aus-Koeln)
   * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
+  * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
 
 
 ## [v2018-02-16]
