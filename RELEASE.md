@@ -10,8 +10,9 @@
   * Added `PageIconsMenu` menu DokuWiki menu system and migrated all "page icons" items
   * Added support for `watchcycle`, `davcal`, `move` and `monthcal` plugins
   * Added build version in `template.info.txt`. You can see the build version in Administration and *do=check* pages
-  * Added support for PlantUML plugin
-  * #428: Added Iconify support
+  * Added support for PlantUML plugin (thanks to @giper45)
+  * Improved integration with **Struct** and **Bureaucracy** plugins
+  * #428: Added Iconify support for increase the rendering performance and reduce the page size
   * #296: Added support for Move plugin in tree-based move manager (@Digitalin)
 
 ### Changed
@@ -35,6 +36,7 @@
   * #430: Fixed PHP Fatal and Warnings for "farm" environment (thanks to @cultcom)
   * #440: Inconsistency between header and footer logo (thanks to @leemillerau)
   * #444: Fix PHP invalid foreach in Menu Tools
+  * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
 
 
 ## [v2019-05-22]

@@ -16,7 +16,7 @@ if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showP
 
 ?>
 <!-- page-icons -->
-<div class="dw-page-icons pull-right hidden-print">
+<div class="dw-page-icons hidden-print">
     <ul class="list-inline pull-right m-0 mb-2">
     <?php
 
@@ -64,6 +64,5 @@ if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showP
     </div>
 </div>
 
-<span class="clearfix"></span>
 <?php endif; ?>
 

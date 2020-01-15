@@ -17,7 +17,7 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
 
 <!-- page-tools -->
 <nav id="dw__pagetools" class="hidden-print">
-    <div class="tools panel panel-default pull-right">
+    <div class="tools panel panel-default text-right">
         <ul class="nav nav-stacked nav-pills text-muted">
             <?php
 
