@@ -39,6 +39,7 @@ $params = array(
     'width'    => $INPUT->str('width'),
     'height'   => $INPUT->str('height'),
     'icon'     => $INPUT->str('icon'),
+    'color'    => $INPUT->str('color'),
 );
 
 $iconify_dir   = dirname(__FILE__) . '/assets/iconify';
@@ -113,6 +114,7 @@ if ($params['callback']) {
     $icon   = $params['icons'];
     $width  = '1em';
     $height = '1em';
+    $fill   = '';
 
     if (isset($iconify_data['aliases'][$icon])) {
         $icon = $iconify_data['aliases'][$icon]['parent'];
@@ -135,9 +137,18 @@ if ($params['callback']) {
         $height = $params['height'];
     }
 
+    if ($params['color']) {
+        $fill = $params['color'];
+    }
+
     # TODO add "rotate" support
 
-    $body    = $iconify_data['icons'][$icon]['body'];
+    $body = $iconify_data['icons'][$icon]['body'];
+
+    if ($fill) {
+        $body = str_replace('currentColor', $fill, $body);
+    }
+
     $svg     = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="%s" height="%s" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24" style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);">%s</svg>';
     $content = sprintf($svg, $width, $height, $body);
 
