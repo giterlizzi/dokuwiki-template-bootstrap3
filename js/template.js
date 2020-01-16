@@ -318,7 +318,7 @@ jQuery(document).on('bootstrap3:toc-menu', function(event) {
 
   // console.debug(event.type + ' event fired');
 
-  if (jQuery(JSINFO.bootstrap3.toc.length)) {
+  if (jQuery(JSINFO.bootstrap3.toc).length) {
     jQuery("#dw__toc_menu").removeClass("hide");
   }
 
