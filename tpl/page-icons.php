@@ -16,8 +16,8 @@ if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showP
 
 ?>
 <!-- page-icons -->
-<div class="dw-page-icons hidden-print">
-    <ul class="list-inline pull-right m-0 mb-2">
+<div class="dw-page-icons pull-right hidden-print">
+    <ul class="list-inline">
     <?php
 
         $menu = new \dokuwiki\template\bootstrap3\Menu\PageIconsMenu;
@@ -50,6 +50,9 @@ if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showP
     ?>
     </ul>
 </div>
+
+<span class="clearfix"></span>
+
 <!-- /page-icons -->
 
 <div class="help modal fade" tabindex="-1" role="dialog">

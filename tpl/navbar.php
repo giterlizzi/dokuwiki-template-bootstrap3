@@ -131,14 +131,6 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
 
                     ?>
 
-                    <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
-                    <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">
-                        <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>">
-                            <?php echo iconify('mdi:arrow-expand-all'); ?> <span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
-                        </a>
-                    </li>
-                    <?php endif; ?>
-
                     <?php if (empty($_SERVER['REMOTE_USER'])): ?>
                     <li>
                         <span class="dw__actions dw-action-icon">
