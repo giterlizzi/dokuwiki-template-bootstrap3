@@ -110,7 +110,6 @@ class Template
     }
 
     public function testHandler(\Doku_Event $event) {
-        var_dump($event->data->_content);
     }
 
     public function accountFormHandler(\Doku_Event $event) {
@@ -2609,26 +2608,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     }
 
     /**
-     * Detect fluid container flag
-     *
-     * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
-     * @return boolean
-     */
-    public function isFluidContainer()
-    {
-
-        $fluid_container     = $this->getConf('fluidContainer');
-        $fluid_container_btn = $this->getFluidContainerStatus();
-
-        if ($fluid_container_btn) {
-            $fluid_container = true;
-        }
-
-        return $fluid_container;
-
-    }
-
-    /**
      * Detect the fluid navbar flag
      *
      * @author Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -2636,34 +2615,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function isFluidNavbar()
     {
-        $fluid_container  = $this->isFluidContainer();
+        $fluid_container  = $this->getConf('fluidContainer');
         $fixed_top_nabvar = $this->getConf('fixedTopNavbar');
 
         return ($fluid_container || ($fluid_container && !$fixed_top_nabvar) || (!$fluid_container && !$fixed_top_nabvar));
-    }
-
-    /**
-     * Check if the fluid container button is enabled (from the user cookie)
-     *
-     * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
-     *
-     * @return  boolean
-     */
-    public function getFluidContainerStatus()
-    {
-
-        if (!$this->getConf('fluidContainerBtn')) {
-            return false;
-        }
-
-        if (get_doku_pref('fluidContainer', null) !== null
-            && get_doku_pref('fluidContainer', null) !== ''
-            && get_doku_pref('fluidContainer', null) !== '0') {
-            return true;
-        }
-
-        return false;
-
     }
 
     /**
@@ -2687,7 +2642,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $show_right_sidebar = $this->getConf('showRightSidebar');
         $show_left_sidebar  = $this->getConf('showSidebar');
-        $fluid_container    = $this->isFluidContainer();
+        $fluid_container    = $this->getConf('fluidContainer');
 
         if ($this->getConf('showLandingPage')
             && (bool) preg_match($this->getConf('landingPages'), $ID)) {

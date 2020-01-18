@@ -297,7 +297,7 @@ $show_metadata = false;
 
 <body class="<?php echo $TEMPLATE->getClasses() ?>" data-img-id="<?php echo $IMG ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
-    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
 
             tpl_includeFile('topheader.html');
@@ -317,7 +317,7 @@ $show_metadata = false;
 
     <a name="dokuwiki__top" id="dokuwiki__top"></a>
 
-    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -511,7 +511,7 @@ $show_metadata = false;
 
     </main>
 
-    <footer id="dw__footer" class="dw-container pt-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');

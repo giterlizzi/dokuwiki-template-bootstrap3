@@ -196,53 +196,6 @@ jQuery(document).on('bootstrap3:back-to-top', function(event) {
 });
 
 
-// Container Fluid
-jQuery(document).on('bootstrap3:fluid-container', function(event) {
-
-  // console.debug(event.type + ' event fired');
-
-  jQuery('.btn-fluid-container').on('click', function() {
-
-    var selectors = 'body > div, header, header nav > div, footer > div';
-
-    if (! jQuery('.navbar-fixed-top').length) {
-      selectors = 'body > div, header, article, footer > div';
-    }
-
-    var $button     = jQuery(this),
-        $containers = jQuery(selectors);
-
-    if (! jQuery('body.dw-fluid-container').length) {
-
-      jQuery('body').addClass('dw-fluid-container');
-
-      jQuery('.dw-container')
-        .removeClass('container')
-        .addClass('container-fluid mx-5');
-
-      $button.parent().addClass('active');
-
-      DokuCookie.setValue('fluidContainer', 1);
-
-    } else {
-
-      jQuery('body').removeClass('dw-fluid-container');
-
-      jQuery('.dw-container')
-        .removeClass('container-fluid mx-5')
-        .addClass('container');
-
-      $button.parent().removeClass('active');
-
-      DokuCookie.setValue('fluidContainer', 0);
-
-    }
-
-  });
-
-});
-
-
 // Footnote
 jQuery(document).on('bootstrap3:footnotes', function(event) {
 

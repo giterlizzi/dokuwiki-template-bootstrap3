@@ -67,24 +67,6 @@ a.iw_paypal {
 }
 
 
-/**
- * Sticky footer
- */
-html, body {
-  height: 100%;
-}
-body {
-  display: flex;
-  flex-direction: column;
-}
-main {
-  flex: 1 0 auto;
-}
-footer {
-  flex-shrink: 0;
-}
-
-
 aside,
 .dw__dropdown_page {
 
@@ -228,6 +210,9 @@ header {
 
 }
 
+article .page-header:first-child {
+  margin-top: 0;
+}
 
 /* Characters picker */
 div#picker2 {
@@ -383,25 +368,13 @@ div#picker2 {
 
   z-index: 995;
 
-  .navbar-text {
-    float: initial;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+  &.container-fluid {
+    margin: 0;
+    margin-bottom: -50px;
+    padding: 0;
   }
 
 }
-
-.footer-fixed-bottom {
-  left: 0;
-  right: 0;
-  position: absolute;
-  margin-bottom: -50px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: 0;
-}
-
 
 /* Extension Manager */
 #extension__manager {
