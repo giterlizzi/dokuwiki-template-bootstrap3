@@ -511,7 +511,7 @@ $show_metadata = false;
 
     </main>
 
-    <footer id="dw__footer" class="dw-container pt-4 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');
