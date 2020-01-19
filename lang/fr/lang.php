@@ -28,10 +28,10 @@ $lang['send_mail']               = 'Envoyer courriel';
 $lang['print']                   = 'Imprimer';
 $lang['permalink']               = 'Permalien';
 $lang['add_new_page']            = 'Ajouter une nouvelle page';
-$lang['extensions_update']       = 'Extensions update';
-$lang['user_groups']             = 'Groups';
-$lang['preview_size']            = 'Size of this preview';
-$lang['other_resolutions']       = 'Other resolutions';
+$lang['extensions_update']       = 'Mise à jour des extensions';
+$lang['user_groups']             = 'Groupes';
+$lang['preview_size']            = 'Taille de cette prévisualisation';
+$lang['other_resolutions']       = 'Autres résolutions';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Thème';
