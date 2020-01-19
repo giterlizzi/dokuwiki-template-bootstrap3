@@ -50,7 +50,7 @@ $lang['landingPages']                 = 'Nom de la page d\'accueil - format de p
 $lang['leftSidebarGrid']              = 'Les classes de grille pour la sidebar de gauche <code>col-{xs,sm,md,lg}-x</code> (voir la documentation <a href="http://getbootstrap.com/css/#grid" target="_blank">Bootstrap Grids</a>)';
 $lang['libravatarURL']                = 'Saisissez l\'URL Libravatar (ou une API compatible).<br/> <strong>REMARQUE : </strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http).';
 $lang['navbarLabels']                 = 'Afficher/Masquer l\'étiquette individuelle';
-$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
+$lang['notifyExtensionsUpdate']       = 'Notifier les mises à jour d\'extensions (pour  les utilisateurs Admin)';
 $lang['office365URL']                 = 'Saisissez l\'URL Microsoft Office 365 (ou EWS)<br/> <strong>REMARQUE : </strong> Ce service requiert une authentification, son utilisation est donc plutôt réservée à une installation en entreprise, où tous les utilisateurs ont accès à Office 365.';
 $lang['pageIcons']                    = 'Sélectionnez les icônes à afficher';
 $lang['pageInfo']                     = 'Afficher/Cacher les éléments d\'information de la page';
