@@ -19,7 +19,7 @@ class Permalink extends AbstractItem {
         unset($this->params['do']); 
 
         $this->label = tpl_getLang('permalink');
-        $this->svg   = template('images/menu/link.svg');
+        $this->svg   = tpl_incdir() . 'images/menu/link.svg';
         $this->id    = '#';
     }
 

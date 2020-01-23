@@ -16,12 +16,15 @@
   * #296: Added support for Move plugin in tree-based move manager (@Digitalin)
 
 ### Changed
+  * #445: Support large logo (*width > 32px*) in navbar and footer (thanks to @trinh)
   * Removed parsing of some elements (using `simple_html_dom`) for increase the performance
   * Used DokuWiki events for modify the appearance of the page
   * Used DokuWiki hooks for customize login and profile page (register, edit and delete)
   * Upgraded `simple_html_dom` to v1.9
   * Removed margin in mobile tamplate with `fluidContainer` enabled
   * Changed WhatsApp API URL (`https://wa.me`)
+  * Changed the "footer" style
+  * Changed the layout of "detail" page
 
 ### Fixed
   * Fixed "PHP Notice" for `MAX_FILE_SIZE`

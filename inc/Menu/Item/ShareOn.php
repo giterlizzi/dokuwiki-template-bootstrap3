@@ -19,7 +19,7 @@ class ShareOn extends AbstractItem {
         unset($this->params['do']);
 
         $this->label    = tpl_getLang('share_on');
-        $this->svg      = template('images/menu/share-variant.svg');
+        $this->svg      = tpl_incdir() . 'images/menu/share-variant.svg';
         $this->id       = '#';
 
     }

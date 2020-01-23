@@ -21,7 +21,7 @@ class Feed extends AbstractItem {
         unset($this->params['do']); 
 
         $this->label    = $lang['btn_recent'];
-        $this->svg      = template('images/menu/rss.svg');
+        $this->svg      = tpl_incdir() . 'images/menu/rss.svg';
         $this->id       = '';
         $this->nofollow = true;
     }

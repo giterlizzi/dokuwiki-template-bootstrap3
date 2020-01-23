@@ -17,6 +17,9 @@ class Template
     private $confMetadata = array();
     private $toolsMenu    = array();
 
+    public $tplDir  = '';
+    public $baseDir = '';
+
     public function __construct()
     {
 
@@ -24,6 +27,9 @@ class Template
         global $INPUT;
         global $ACT;
         global $INFO;
+
+        $this->tplDir  = tpl_incdir();
+        $this->baseDir = tpl_basedir();
 
         $this->registerHooks();
         $this->initPlugins();
@@ -64,7 +70,7 @@ class Template
     public function getVersion()
     {
 
-        $template_info    = confToHash(template('template.info.txt'));
+        $template_info    = confToHash($this->tplDir . 'template.info.txt');
         $template_version = 'v' . $template_info['date'];
 
         if (isset($template_info['build'])) {
@@ -306,7 +312,7 @@ class Template
         // Bootstrap Theme
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
-        $tpl_basedir      = tpl_basedir();
+        $tpl_basedir      = $this->baseDir;
 
         $stylesheets = array();
         $scripts     = array();
@@ -570,7 +576,7 @@ class Template
     {
 
         $meta = array();
-        $file = template('conf/metadata.php');
+        $file = $this->tplDir . 'conf/metadata.php';
 
         include $file;
 
@@ -1782,7 +1788,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $lang;
         global $TEMPLATE;
 
-        @require template('tpl/sidebar.php');
+        @require $this->tplDir . 'tpl/sidebar.php';
     }
 
     /**

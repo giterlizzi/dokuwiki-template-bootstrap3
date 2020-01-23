@@ -82,19 +82,19 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
 
                 <?php
                     // Search form
-                    include_once(template('tpl/navbar-searchform.php'));
+                    include_once('navbar-searchform.php');
 
                     // Tools Menu
-                    include_once(template('tpl/menu-tools.php'));
+                    include_once('menu-tools.php');
 
                     // Theme Switcher Menu
-                    include_once(template('tpl/theme-switcher.php'));
+                    include_once('theme-switcher.php');
 
                     // Translation Menu
-                    include_once(template('tpl/translation.php'));
+                    include_once('translation.php');
 
                     // Add New Page
-                    include_once(template('tpl/new-page.php'));
+                    include_once('new-page.php');
                 ?>
 
                 <ul class="nav navbar-nav">
@@ -190,10 +190,10 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 <?php
                 
                     // Admin Menu
-                    include_once(template('tpl/menu-admin.php'));
+                    include_once('menu-admin.php');
 
                     // User Menu
-                    include_once(template('tpl/menu-user.php'));
+                    include_once('menu-user.php');
 
                 ?>
 

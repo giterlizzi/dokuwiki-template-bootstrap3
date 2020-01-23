@@ -10,8 +10,8 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once(template('tpl/global.php'));
-require_once(template('tpl/functions.php'));
+require_once('tpl/global.php');
+require_once('tpl/functions.php');
 
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">

@@ -25,7 +25,7 @@ class Help extends AbstractItem {
         }
 
         $this->label = hsc(p_get_first_heading($help_page));
-        $this->svg   = template('images/menu/help.svg');
+        $this->svg   = tpl_incdir() . 'images/menu/help.svg';
         $this->id    = '#';
         $this->help  = wl($help_page, array('do' => 'export_xhtmlbody'));
 

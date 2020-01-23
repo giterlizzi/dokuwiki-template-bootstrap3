@@ -19,7 +19,7 @@ class PrintPage extends AbstractItem {
         unset($this->params['do']); 
 
         $this->label = tpl_getLang('print');
-        $this->svg   = template('images/menu/printer.svg');
+        $this->svg   = tpl_incdir() . 'images/menu/printer.svg';
         $this->id    = '#';
     }
 

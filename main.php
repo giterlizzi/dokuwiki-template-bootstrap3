@@ -9,8 +9,8 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once(template('tpl/global.php'));
-require_once(template('tpl/functions.php'));
+require_once('tpl/global.php');
+require_once('tpl/functions.php');
 
 header('X-UA-Compatible: IE=edge,chrome=1');
 
@@ -60,7 +60,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php tpl_includeFile('social.html') ?>
 
-            <?php require_once(template('tpl/breadcrumbs.php')); ?>
+            <?php require_once('tpl/breadcrumbs.php'); ?>
 
             <p class="text-right">
                 <?php
@@ -96,7 +96,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         <?php
 
                         // Page icons (print, email, share link, etc.)
-                        require_once(template('tpl/page-icons.php'));
+                        require_once('tpl/page-icons.php');
 
                         // Page-Header DokuWiki page
                         tpl_includeFile('pageheader.html');
@@ -178,10 +178,10 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             tpl_includeFile('footer.html');
 
             // Footer DokuWiki page
-            require_once(template('tpl/footer.php'));
+            require_once('tpl/footer.php');
 
             // Cookie-Law banner
-            require_once(template('tpl/cookielaw.php'));
+            require_once('tpl/cookielaw.php');
         ?>
     </footer>
 
