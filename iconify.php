@@ -42,7 +42,7 @@ $params = array(
     'color'    => $INPUT->str('color'),
 );
 
-$iconify_dir   = dirname(__FILE__) . '/assets/iconify';
+$iconify_dir   = dirname(__FILE__) . '/assets/iconify/json';
 $cache_key     = md5(serialize($params) . $conf['template'] . filemtime(__FILE__));
 $cache         = new cache($cache_key, '.js');
 $cache->_event = 'ICONIFY_CACHE';

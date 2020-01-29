@@ -358,6 +358,7 @@ class Template
     
         # Iconify
         $scripts[] = $tpl_basedir . 'assets/iconify/iconify.min.js';
+        $scripts[] = $tpl_basedir . 'assets/iconify/plugins/fa.js'; // Font-Awesome Plugin
 
         foreach ($stylesheets as $style) {
             array_unshift($event->data['link'], array(

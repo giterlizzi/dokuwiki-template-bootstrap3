@@ -12,7 +12,8 @@
   * Added build version in `template.info.txt`. You can see the build version in Administration and *do=check* pages
   * Added support for PlantUML plugin (thanks to @giper45)
   * Improved integration with **Struct** and **Bureaucracy** plugins
-  * #428: Added Iconify support for increase the rendering performance and reduce the page size
+  * #428: Added Iconify support for increase the rendering performance and reduce the page size and download bandwidth
+  * #442: Added FontAwesome Plugin for Iconify
   * #296: Added support for Move plugin in tree-based move manager (@Digitalin)
 
 ### Changed
