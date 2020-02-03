@@ -44,9 +44,9 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 $logo_height   = $logo_size[1];
                 $nabvar_height = $TEMPLATE->getNavbarHeight();
 
-                echo '<a class="navbar-brand d-flex" href="'. $home_link .'" accesskey="h" title="'. $title .'">';
-                echo '<img class="pull-left h-100 mr-4" alt="'. $title .'" src="'. $logo .'" />';
-                echo '<div class="pull-right'. (($tagline) ? ' dw-title-with-tagline' : '') .'"><div id="dw__title">'. $title . '</div>' . $tagline .'</div>';
+                echo '<a class="navbar-brand d-flex align-items-center" href="'. $home_link .'" accesskey="h" title="'. $title .'">';
+                echo '<img id="dw__logo" class="pull-left h-100 mr-4" alt="'. $title .'" src="'. $logo .'" />';
+                echo '<div class="pull-right"><div id="dw__title">'. $title . '</div>' . $tagline .'</div>';
                 echo '</a>';
 
             ?>
