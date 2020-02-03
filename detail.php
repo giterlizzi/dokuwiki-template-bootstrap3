@@ -361,7 +361,10 @@ $show_metadata = false;
 
                         <div class="row">
                             <div class="col-sm-8">
-                                <?php tpl_img($maxwidth, $maxheight); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+
+                                <p class="px-2">
+                                    <?php tpl_img($maxwidth, $maxheight); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+                                </p>
 
                                 <p class="small my-2">
                                     <?php echo iconify('mdi:image-size-select-large'); ?> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
