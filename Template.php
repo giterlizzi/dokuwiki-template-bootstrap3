@@ -394,48 +394,7 @@ class Template
 
             if ($fixed_top_navbar) {
 
-                if ($bootstrap_theme == 'bootswatch') {
-
-                    // Set the navbar height for all Bootswatch Themes (values from @navbar-height in bootswatch/*/variables.less)
-                    switch ($this->getBootswatchTheme()) {
-                        case 'simplex':
-                        case 'superhero':
-                            $navbar_height = 40;
-                            break;
-                        case 'yeti':
-                            $navbar_height = 45;
-                            break;
-                        case 'cerulean':
-                        case 'cosmo':
-                        case 'custom':
-                        case 'cyborg':
-                        case 'lumen':
-                        case 'slate':
-                        case 'spacelab':
-                        case 'solar':
-                        case 'united':
-                            $navbar_height = 50;
-                            break;
-                        case 'darkly':
-                        case 'flatly':
-                        case 'journal':
-                        case 'sandstone':
-                            $navbar_height = 60;
-                            break;
-                        case 'paper':
-                            $navbar_height = 64;
-                            break;
-                        case 'readable':
-                            $navbar_height = 65;
-                            break;
-                        default:
-                            $navbar_height = 50;
-                    }
-
-                } else {
-                    $navbar_height = 50;
-                }
-
+                $navbar_height = $this->getNavbarHeight();
                 $navbar_padding += $navbar_height;
 
             }
@@ -2906,6 +2865,47 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         return $content;
+
+    }
+
+    public function getNavbarHeight()
+    {
+
+        switch ($this->getBootswatchTheme()) {
+            
+            case 'simplex':
+            case 'superhero':
+                return 40;
+
+            case 'yeti':
+                return 45;
+
+            case 'cerulean':
+            case 'cosmo':
+            case 'custom':
+            case 'cyborg':
+            case 'lumen':
+            case 'slate':
+            case 'spacelab':
+            case 'solar':
+            case 'united':
+                return 50;
+
+            case 'darkly':
+            case 'flatly':
+            case 'journal':
+            case 'sandstone':
+                return 60;
+
+            case 'paper':
+                return 64;
+
+            case 'readable':
+                return 65;
+
+            default:
+                return 50;
+        }
 
     }
 

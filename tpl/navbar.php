@@ -36,22 +36,18 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
             <?php
 
                 // get logo either out of the template images folder or data/media folder
-                $logoSize  = array();
-                $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
+                $logo_size = array();
+                $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
                 $title     = $conf['title'];
-                $tagline   = ($conf['tagline']) ? '<span id="dw__tagline">'.$conf['tagline'].'</span>' : '';
-                $logo_size = 'height="20"';
+                $tagline   = (($conf['tagline']) ? '<div id="dw__tagline">'. $conf['tagline'] .'</div>' : '');
 
-                if ($tagline) {
-                    $logo_size = 'height="32"  style="margin-top:-5px"';
-                }
+                $logo_height   = $logo_size[1];
+                $nabvar_height = $TEMPLATE->getNavbarHeight();
 
-                // display logo and wiki title in a link to the home page
-                tpl_link(
-                    $home_link,
-                    '<img src="'.$logo.'" alt="'.$title.'" class="pull-left'.(($tagline) ? ' dw-logo-tagline' : '').'" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
-                    'accesskey="h" title="[H]" class="navbar-brand"'
-                );
+                echo '<a class="navbar-brand d-flex" href="'. $home_link .'" accesskey="h" title="'. $title .'">';
+                echo '<img class="pull-left h-100 mr-4" alt="'. $title .'" src="'. $logo .'" />';
+                echo '<div class="pull-right'. (($tagline) ? ' dw-title-with-tagline' : '') .'"><div id="dw__title">'. $title . '</div>' . $tagline .'</div>';
+                echo '</a>';
 
             ?>
 
