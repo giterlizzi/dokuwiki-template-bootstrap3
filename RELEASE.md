@@ -26,12 +26,14 @@
   * Changed WhatsApp API URL (`https://wa.me`)
   * Changed the "footer" style
   * Changed the layout of "detail" page
+  * Disable default TOC when use `tocLayout=navbar`
 
 ### Fixed
   * Fixed "PHP Notice" for `MAX_FILE_SIZE`
   * Fixed Bootswatch Theme selection behavior
   * Fixed navbar "Edit button" behavior
   * Fixed issue with Plugins and userstyle.css (added `div.dokuwiki` tag and class in `main.php` and `detail.php`)
+  * #389: Fixex Translation plugin issue when use `translation»dropdown` option (@tmo26 and @dominiquesamson)
   * #421: Fixed "showIndividualTool" issue (thanks to @AmritasyaPutra)
   * #422: Fixed graphic incompatibility for Folded plugin (thanks to @virk)
   * #423: Fixed PHP warnings for Page Tools (thanks to @fschmittlein)
