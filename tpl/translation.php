@@ -19,6 +19,9 @@ $translation_label = '';
 
 if ($TEMPLATE->getConf('showTranslation') && $translation = $TEMPLATE->getPlugin('translation')) {
 
+    global $conf;
+    $conf['plugin']['translation']['dropdown'] = 0;
+
     if ($translation->istranslatable($ID)) {
 
         $show_translation = true;

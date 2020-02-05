@@ -20,7 +20,7 @@ if ($translation.length) {
  $translation.find('.wikilink2').removeClass('wikilink2').css('opacity', '0.5');
 
  if ($flag.length) {
-   $translation.find('.dropdown-toggle i').hide();
+   $translation.find('.dropdown-toggle .iconify').hide();
    $translation.find('.dropdown-toggle').prepend(
      jQuery('<img/>').attr({
        'src'   : $flag.attr('src'),
