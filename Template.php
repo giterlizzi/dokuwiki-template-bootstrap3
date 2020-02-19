@@ -1772,6 +1772,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # Workaround for ToDo Plugin
         $content = str_replace('checked="checked"', ' checked="checked"', $content);
 
+        # Search Hit
+        $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+
+        # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
+        if (strlen($content) > MAX_FILE_SIZE) {
+            return $content;
+        }
+
         # Import HTML string
         $html = new \simple_html_dom;
         $html->load($content, true, false);
@@ -1840,11 +1848,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         foreach ($html->find('.secedit.editbutton_table button') as $elm) {
             $elm->innertext = iconify('mdi:table') . ' ' . $elm->innertext;
-        }
-
-        # Search Hit
-        foreach ($html->find('.search_hit') as $elm) {
-            $elm->class = 'mark';
         }
 
         # Tabs
