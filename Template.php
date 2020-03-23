@@ -131,6 +131,7 @@ class Template
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
         $tpl_basedir      = tpl_basedir();
+        $tpl_incdir       = tpl_incdir();
 
         $stylesheets = array();
         $scripts     = array();
@@ -151,7 +152,7 @@ class Template
                 $bootswatch_theme = $this->getBootswatchTheme();
                 $bootswatch_url   = $tpl_basedir . 'assets/bootstrap';
 
-                if (file_exists($tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css")) {
+                if (file_exists($tpl_incdir . "assets/fonts/$bootswatch_theme.fonts.css")) {
                     $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
                 }
 
