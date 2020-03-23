@@ -8,7 +8,8 @@
 		url('Open_Sans_400italic.eot?#iefix') format('embedded-opentype'),
 		url('Open_Sans_400italic.woff') format('woff'),
 		url('Open_Sans_400italic.woff2') format('woff2'),
-		url('Open_Sans_400italic.svg#OpenSans') format('svg'),
+		url('Open_Sans_400italic.svg#OpenSans') format('svg');
+}
 @font-face {
 	font-family: 'Open Sans';
 	font-style: italic;
@@ -19,7 +20,8 @@
 		url('Open_Sans_700italic.eot?#iefix') format('embedded-opentype'),
 		url('Open_Sans_700italic.woff') format('woff'),
 		url('Open_Sans_700italic.woff2') format('woff2'),
-		url('Open_Sans_700italic.svg#OpenSans') format('svg'),
+		url('Open_Sans_700italic.svg#OpenSans') format('svg');
+}
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
@@ -30,7 +32,8 @@
 		url('Open_Sans_400.eot?#iefix') format('embedded-opentype'),
 		url('Open_Sans_400.woff') format('woff'),
 		url('Open_Sans_400.woff2') format('woff2'),
-		url('Open_Sans_400.svg#OpenSans') format('svg'),
+		url('Open_Sans_400.svg#OpenSans') format('svg');
+}
 @font-face {
 	font-family: 'Open Sans';
 	font-style: normal;
@@ -41,4 +44,5 @@
 		url('Open_Sans_700.eot?#iefix') format('embedded-opentype'),
 		url('Open_Sans_700.woff') format('woff'),
 		url('Open_Sans_700.woff2') format('woff2'),
-		url('Open_Sans_700.svg#OpenSans') format('svg'),
+		url('Open_Sans_700.svg#OpenSans') format('svg');
+}

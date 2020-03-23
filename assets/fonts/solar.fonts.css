@@ -8,7 +8,8 @@
 		url('Source_Sans_Pro_300.eot?#iefix') format('embedded-opentype'),
 		url('Source_Sans_Pro_300.woff') format('woff'),
 		url('Source_Sans_Pro_300.woff2') format('woff2'),
-		url('Source_Sans_Pro_300.svg#SourceSansPro') format('svg'),
+		url('Source_Sans_Pro_300.svg#SourceSansPro') format('svg');
+}
 @font-face {
 	font-family: 'Source Sans Pro';
 	font-style: normal;
@@ -19,7 +20,8 @@
 		url('Source_Sans_Pro_400.eot?#iefix') format('embedded-opentype'),
 		url('Source_Sans_Pro_400.woff') format('woff'),
 		url('Source_Sans_Pro_400.woff2') format('woff2'),
-		url('Source_Sans_Pro_400.svg#SourceSansPro') format('svg'),
+		url('Source_Sans_Pro_400.svg#SourceSansPro') format('svg');
+}
 @font-face {
 	font-family: 'Source Sans Pro';
 	font-style: normal;
@@ -30,4 +32,5 @@
 		url('Source_Sans_Pro_700.eot?#iefix') format('embedded-opentype'),
 		url('Source_Sans_Pro_700.woff') format('woff'),
 		url('Source_Sans_Pro_700.woff2') format('woff2'),
-		url('Source_Sans_Pro_700.svg#SourceSansPro') format('svg'),
+		url('Source_Sans_Pro_700.svg#SourceSansPro') format('svg');
+}
