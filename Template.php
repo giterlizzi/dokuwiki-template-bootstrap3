@@ -430,7 +430,7 @@ class Template
         $event->data['header']             = 'Header of page below the navbar (header)';
         $event->data['topheader']          = 'Top Header of page (topheader)';
         $event->data['pagefooter']         = 'Footer below the page content (pagefooter)';
-        $event->data['pagefooter']         = 'Header above the page content (pageheader)';
+        $event->data['pageheader']         = 'Header above the page content (pageheader)';
         $event->data['sidebarfooter']      = 'Footer below the sidebar (sidebarfooter)';
         $event->data['sidebarheader']      = 'Header above the sidebar (sidebarheader)';
         $event->data['rightsidebarfooter'] = 'Footer below the right-sidebar (rightsidebarfooter)';
