@@ -69,6 +69,8 @@ If you install this template manually, make sure it is installed in
 `lib/tpl/bootstrap3/` - if the folder is called different it
 will not work!
 
+Ensure that the following PHP modules are installed: `php-xml`.
+
 Please refer to https://www.dokuwiki.org/template for additional info
 on how to install templates in DokuWiki.
 
