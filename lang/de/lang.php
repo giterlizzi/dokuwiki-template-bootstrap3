@@ -22,10 +22,10 @@ $lang['send_mail']               = 'eMail versenden';
 $lang['print']                   = 'Drucken';
 $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Neue Seite hinzufügen';
-$lang['extensions_update']       = 'Extensions update';
-$lang['user_groups']             = 'Groups';
-$lang['preview_size']            = 'Size of this preview';
-$lang['other_resolutions']       = 'Other resolutions';
+$lang['extensions_update']       = 'Erweiterungen aktualisieren';
+$lang['user_groups']             = 'Gruppen';
+$lang['preview_size']            = 'Größe dieser Vorschau';
+$lang['other_resolutions']       = 'Andere Auflösungen';
 
 // Configuration Manager Template Sections
 $lang['config_theme']            = 'Theme';
