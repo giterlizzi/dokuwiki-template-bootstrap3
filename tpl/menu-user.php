@@ -68,7 +68,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             <?php if ($use_avatar): ?>
             <img alt="<?php echo hsc($_SERVER['REMOTE_USER']) ?>" src="<?php echo $avatar_img_small ?>" class="img-circle profile-image" width="<?php echo $avatar_size_small ?>" height="<?php echo $avatar_size_small ?>" />
             <?php else: ?>
-            <i class="mdi mdi-account"></i>
+            <?php echo iconify('mdi:account'); ?>
             <?php endif; ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo hsc($_SERVER['REMOTE_USER']) ?></span> <span class="caret"></span>
         </a>
 
@@ -93,7 +93,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                             <strong><?php echo hsc($INFO['userinfo']['name']) ?></strong>
                         </div>
                         <div class="small">
-                            <?php echo hsc($_SERVER['REMOTE_USER']) ?>
+                            <bdi><?php echo hsc($_SERVER['REMOTE_USER']) ?></bdi>
                         </div>
                         <div class="small">
                             <?php echo $INFO['userinfo']['mail'] ?>
@@ -111,16 +111,16 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             <?php
                 if ($userhomepage = $TEMPLATE->getPlugin('userhomepage')):
                     echo '<li><a rel="nofollow" href="' . wl($userhomepage->getPublicID()) . '" title="'. $userhomepage->getLang('publicpage') .'">' .
-                         '<i class="mdi mdi-home"></i> '. $userhomepage->getLang('publicpage') .'</a></li>';
+                         iconify('mdi:home') . ' ' . $userhomepage->getLang('publicpage') .'</a></li>';
 
                     echo '<li><a rel="nofollow" href="' . wl($userhomepage->getPrivateID()) . '" title="'. $userhomepage->getLang('privatenamespace') .'">' .
-                         '<i class="mdi mdi-home-account"></i> '. $userhomepage->getLang('privatenamespace') .'</a></li>';
+                         iconify('mdi:home-account') . ' ' . $userhomepage->getLang('privatenamespace') .'</a></li>';
                 else:
             ?>
 
             <li>
                 <a href="<?php echo $TEMPLATE->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
-                    <i class="mdi mdi-18px mdi-home-account"></i> Home-Page
+                    <?php echo iconify('mdi:home-account'); ?> Home-Page
                 </a>
             </li>
 
@@ -143,7 +143,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             <?php if ($INFO['isadmin'] && count($extensions_update)): ?>
             <li>
                 <a href="<?php echo wl($ID, array('do' => 'admin', 'page' => 'extension')); ?>" title=" - <?php echo implode('&#13; - ', $extensions_update) ?>">
-                    <i class="mdi mdi-puzzle text-success"></i> <?php echo tpl_getLang('extensions_update'); ?> <span class="badge"><?php echo count($extensions_update) ?></span>
+                    <?php echo iconify('mdi:puzzle', array('class' => 'text-success')) ?> <?php echo tpl_getLang('extensions_update'); ?> <span class="badge"><?php echo count($extensions_update) ?></span>
                 </a>
             </li>
             <?php endif; ?>

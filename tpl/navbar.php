@@ -36,22 +36,18 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
             <?php
 
                 // get logo either out of the template images folder or data/media folder
-                $logoSize  = array();
-                $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logoSize);
+                $logo_size = array();
+                $logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
                 $title     = $conf['title'];
-                $tagline   = ($conf['tagline']) ? '<span id="dw__tagline">'.$conf['tagline'].'</span>' : '';
-                $logo_size = 'height="20"';
+                $tagline   = (($conf['tagline']) ? '<div id="dw__tagline">'. $conf['tagline'] .'</div>' : '');
 
-                if ($tagline) {
-                $logo_size = 'height="32" style="margin-top:-5px"';
-                }
+                $logo_height   = $logo_size[1];
+                $nabvar_height = $TEMPLATE->getNavbarHeight();
 
-                // display logo and wiki title in a link to the home page
-                tpl_link(
-                    $home_link,
-                    '<img src="'.$logo.'" alt="'.$title.'" class="pull-left'.(($tagline) ? ' dw-logo-tagline' : '').'" id="dw__logo" '.$logo_size.' /> <span id="dw__title" '.($tagline ? 'style="margin-top:-5px"': '').'>'. $title . $tagline .'</span>',
-                    'accesskey="h" title="[H]" class="navbar-brand"'
-                );
+                echo '<a class="navbar-brand d-flex align-items-center" href="'. $home_link .'" accesskey="h" title="'. $title .'">';
+                echo '<img id="dw__logo" class="pull-left h-100 mr-4" alt="'. $title .'" src="'. $logo .'" />';
+                echo '<div class="pull-right"><div id="dw__title">'. $title . '</div>' . $tagline .'</div>';
+                echo '</a>';
 
             ?>
 
@@ -62,7 +58,7 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
             <?php if ($TEMPLATE->getConf('showHomePageLink')) :?>
             <ul class="nav navbar-nav">
                 <li<?php echo ((wl($ID) == $home_link) ? ' class="active"' : ''); ?>>
-                    <?php tpl_link($home_link, '<i class="mdi mdi-home"></i> Home') ?>
+                    <?php tpl_link($home_link, iconify('mdi:home') . ' Home') ?>
                 </li>
             </ul>
             <?php endif; ?>
@@ -82,22 +78,19 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
 
                 <?php
                     // Search form
-                    include_once(template('tpl/navbar-searchform.php'));
-
-                    // Admin Menu
-                    include_once(template('tpl/menu-admin.php'));
+                    include_once('navbar-searchform.php');
 
                     // Tools Menu
-                    include_once(template('tpl/menu-tools.php'));
+                    include_once('menu-tools.php');
 
                     // Theme Switcher Menu
-                    include_once(template('tpl/theme-switcher.php'));
+                    include_once('theme-switcher.php');
 
                     // Translation Menu
-                    include_once(template('tpl/translation.php'));
+                    include_once('translation.php');
 
                     // Add New Page
-                    include_once(template('tpl/new-page.php'));
+                    include_once('new-page.php');
                 ?>
 
                 <ul class="nav navbar-nav">
@@ -133,14 +126,6 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                         }
 
                     ?>
-
-                    <?php if ($TEMPLATE->getConf('fluidContainerBtn')): ?>
-                    <li class="hidden-xs <?php echo ($TEMPLATE->getFluidContainerStatus() ? 'active' : '')?>">
-                        <a href="#" class="btn-fluid-container" title="<?php echo tpl_getLang('expand_container') ?>">
-                            <i class="mdi mdi-arrow-expand-all"></i><span class="<?php echo (in_array('expand', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo tpl_getLang('expand_container') ?></span>
-                        </a>
-                    </li>
-                    <?php endif; ?>
 
                     <?php if (empty($_SERVER['REMOTE_USER'])): ?>
                     <li>
@@ -189,16 +174,24 @@ $home_link        = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('hom
                 <ul class="nav navbar-nav hide" id="dw__toc_menu">
                     <li class="dropdown">
                         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['toc'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-                            <i class="mdi mdi-view-list"></i> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
+                        <?php echo iconify('mdi:view-list'); ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo $lang['toc'] ?></span><span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu" style="max-height: 400px; overflow-y: auto">
-                            <li class="dropdown-header"><i class="mdi mdi-view-list"></i> <?php echo $lang['toc'] ?></li>
+                            <li class="dropdown-header"><?php echo iconify('mdi:view-list'); ?> <?php echo $lang['toc'] ?></li>
                         </ul>
                     </li>
                 </ul>
                 <?php endif; ?>
 
-                <?php include_once(template('tpl/menu-user.php')); ?>
+                <?php
+                
+                    // Admin Menu
+                    include_once('menu-admin.php');
+
+                    // User Menu
+                    include_once('menu-user.php');
+
+                ?>
 
 
             </div>

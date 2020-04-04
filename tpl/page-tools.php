@@ -11,13 +11,12 @@
 if (!defined('DOKU_INC')) die();
 
 global $TEMPLATE;
-global $ACT;
 
 if ($TEMPLATE->getConf('showPageTools')): ?>
 
 <!-- page-tools -->
 <nav id="dw__pagetools" class="hidden-print">
-    <div class="tools panel panel-default pull-right">
+    <div class="tools panel panel-default">
         <ul class="nav nav-stacked nav-pills text-muted">
             <?php
 

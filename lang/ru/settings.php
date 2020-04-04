@@ -6,6 +6,7 @@
  * @author   Andrey Shpak
  * @author   Vadim Balabin
  * @author   Александр Бакунович
+ * @author   Alexander Ponomarenko
  * @author   Дмитрий Якименко
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
@@ -45,7 +46,7 @@ $lang['landingPages']                 = 'Имена целевых страни�
 $lang['leftSidebarGrid']              = 'Класс сеточной системы для левого бокового меню <code>col-{xs,sm,md,lg}-x</code> (см. <a href="http://getbootstrap.com/css/#grid" target="_blank">Сетки Bootstrap</a>)';
 $lang['libravatarURL']                = 'Set Libravatar (or compatible API) URL <br/> <strong>NOTE:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
 $lang['navbarLabels']                 = 'Показать/спрятать наименования для индивидуального меню';
-$lang['notifyExtensionsUpdate']       = 'Notify extensions update (for Admin users)';
+$lang['notifyExtensionsUpdate']       = 'Оповещать об обновлениях расширений (для администраторов)';
 $lang['office365URL']                 = 'Set Microsoft Office 365 (or EWS) URL <br/> <strong>NOTE:</strong> This service requires login, so this use case is most useful in a corporate installation, where all users have access to Office 365.';
 $lang['pageIcons']                    = 'Выбрать иконку для отображения';
 $lang['pageInfo']                     = 'Показать/спрятать элементы информации о странице';

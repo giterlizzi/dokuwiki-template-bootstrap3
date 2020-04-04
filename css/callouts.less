@@ -63,3 +63,79 @@
 .bs-callout-info h4 {
   color: #5bc0de;
 }
+
+
+.bootswatch-callout(@theme, @primary, @success, @info, @warning, @danger) {
+
+  .@{theme} .bs-callout-primary {
+
+    border-left-color: @primary;
+
+    h4, .bs-callout-icon {
+      color: @primary;
+    }
+
+  }
+
+  .@{theme} .bs-callout-success {
+
+    border-left-color: @success;
+
+    h4, .bs-callout-icon {
+      color: @success;
+    }
+
+  }
+
+  .@{theme} .bs-callout-info {
+
+    border-left-color: @info;
+
+    h4, .bs-callout-icon {
+      color: @info;
+    }
+
+  }
+
+  .@{theme} .bs-callout-warning {
+
+    border-left-color: @warning;
+
+    h4, .bs-callout-icon {
+      color: @warning;
+    }
+
+  }
+
+  .@{theme} .bs-callout-danger {
+
+    border-left-color: @danger;
+
+    h4, .bs-callout-icon {
+      color: @danger;
+    }
+
+  }
+
+}
+
+/**
+ * Callauts for Bootswatch themes
+ */
+.bootswatch-callout(cerulean,  #2FA4E7, #73A839, #033C73, #DD5600, #C71C22);
+.bootswatch-callout(cosmo,     #2780E3, #3FB618, #9954BB, #FF7518, #FF0039);
+.bootswatch-callout(cyborg,    #2A9FD6, #77B300, #9933CC, #FF8800, #CC0000);
+.bootswatch-callout(darkly,    #375A7F, #00BC8C, #3498DB, #F39C12, #E74C3C);
+.bootswatch-callout(flatly,    #2C3E50, #18BC9C, #3498DB, #F39C12, #E74C3C);
+.bootswatch-callout(journal,   #EB6864, #22B24C, #336699, #F5E625, #F57A00);
+.bootswatch-callout(lumen,     #158CBA, #28B62C, #75CAEB, #FF851B, #FF4136);
+.bootswatch-callout(paper,     #2196F3, #4CAF50, #9C27B0, #FF9800, #E51C23);
+.bootswatch-callout(readable,  #4582EC, #3FAD46, #5BC0DE, #F0AD4E, #D9534F);
+.bootswatch-callout(sandstone, #325D88, #93C54B, #29ABE0, #F47C3C, #D9534F);
+.bootswatch-callout(simplex,   #D9230F, #469408, #029ACF, #9B479F, #D9831F);
+.bootswatch-callout(slate,     #7A8288, #62C462, #5BC0DE, #F89406, #EE5F5B);
+.bootswatch-callout(solar,     #425358, #2AA198, #268BD2, #CB4B16, #D33682);
+.bootswatch-callout(spacelab,  #446E9B, #3CB521, #3399F3, #D47500, #CD0200);
+.bootswatch-callout(superhero, #DF691A, #5CB85C, #5BC0DE, #F0AD4E, #D9534F);
+.bootswatch-callout(united,    #E95420, #38B44A, #772953, #EFB73E, #DF382C);
+.bootswatch-callout(yeti,      #008CBA, #43AC6A, #5BC0DE, #E99002, #F04124);

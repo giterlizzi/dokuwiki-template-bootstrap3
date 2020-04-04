@@ -45,13 +45,13 @@ if (typeof window.toolbar !== 'undefined') {
       if (window.toolbar[i].icon == 'h.png') {
         for (x in window.toolbar[i].list) {
           var hn = parseInt(x) + 1;
-          window.toolbar[i].list[x].icon = '../../tpl/bootstrap3/assets/mdi/svg/format-header-' + hn + '.svg';
+          window.toolbar[i].list[x].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-format-header-' + hn + '.svg';
         }
       }
 
       for (icon in icons) {
         if (window.toolbar[i].icon == icon) {
-          window.toolbar[i].icon = '../../tpl/bootstrap3/assets/mdi/svg/' + icons[icon];
+          window.toolbar[i].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-' + icons[icon];
         }
       }
 
@@ -81,6 +81,9 @@ jQuery(document).ready(function() {
   function mediaSize(media) {
     return jQuery(['#screen__mode .visible-', media, '-block'].join('')).is(':visible');
   }
+
+  // Preload icons
+  Iconify.preloadImages(['mdi:folder-open', 'mdi:folder', 'mdi:file-document-outline', 'mdi:chevron-up', 'mdi:chevron-down']);
 
   jQuery(window).resize(function() {
     jQuery(document).trigger('bootstrap3:mobile-layout');

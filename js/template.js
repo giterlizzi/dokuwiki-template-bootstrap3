@@ -51,7 +51,7 @@ jQuery(document).on('bootstrap3:init', function(event) {
 
     // Personal Home-Page icon
     if (NS == 'user' && dw_mode('show') && ! jQuery('.notFound').length) {
-      jQuery('.mode_show #dokuwiki__content h1').prepend('<i class="mdi mdi-account"/> ');
+      jQuery('.mode_show #dokuwiki__content h1').prepend('<span class="iconify mr-2" data-icon="mdi:account"/> ');
     }
 
     // Scrolling animation (on TOC and FootNotes)
@@ -109,7 +109,7 @@ jQuery(document).on('bootstrap3:nav', function(event) {
       .contents().unwrap();
 
     // Move the font-icons inside a link
-    var $links = jQuery('.nav li i + a');
+    var $links = jQuery('.nav li .dw-icons + a');
     if ($links.length) {
       jQuery.each($links, function() {
         var $link = jQuery(this),
@@ -196,53 +196,6 @@ jQuery(document).on('bootstrap3:back-to-top', function(event) {
 });
 
 
-// Container Fluid
-jQuery(document).on('bootstrap3:fluid-container', function(event) {
-
-  // console.debug(event.type + ' event fired');
-
-  jQuery('.btn-fluid-container').on('click', function() {
-
-    var selectors = 'body > div, header, header nav > div, footer > div';
-
-    if (! jQuery('.navbar-fixed-top').length) {
-      selectors = 'body > div, header, article, footer > div';
-    }
-
-    var $button     = jQuery(this),
-        $containers = jQuery(selectors);
-
-    if (! jQuery('body.dw-fluid-container').length) {
-
-      jQuery('body').addClass('dw-fluid-container');
-
-      jQuery('.dw-container')
-        .removeClass('container')
-        .addClass('container-fluid mx-5');
-
-      $button.parent().addClass('active');
-
-      DokuCookie.setValue('fluidContainer', 1);
-
-    } else {
-
-      jQuery('body').removeClass('dw-fluid-container');
-
-      jQuery('.dw-container')
-        .removeClass('container-fluid mx-5')
-        .addClass('container');
-
-      $button.parent().removeClass('active');
-
-      DokuCookie.setValue('fluidContainer', 0);
-
-    }
-
-  });
-
-});
-
-
 // Footnote
 jQuery(document).on('bootstrap3:footnotes', function(event) {
 
@@ -318,7 +271,7 @@ jQuery(document).on('bootstrap3:toc-menu', function(event) {
 
   // console.debug(event.type + ' event fired');
 
-  if (jQuery(JSINFO.bootstrap3.toc.length)) {
+  if (jQuery(JSINFO.bootstrap3.toc).length) {
     jQuery("#dw__toc_menu").removeClass("hide");
   }
 
@@ -436,25 +389,25 @@ jQuery(document).on('bootstrap3:alerts', function(event) {
     jQuery('div.info')
       .removeClass('info')
       .addClass('alert alert-info')
-      .prepend('<i class="mdi mdi-18px mdi-information"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:information"/>');
 
     // Error
     jQuery('div.error')
       .removeClass('error')
       .addClass('alert alert-danger')
-      .prepend('<i class="mdi mdi-18px mdi-alert-octagon"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:alert-octagon"/>');
 
     // Success
     jQuery('div.success')
       .removeClass('success')
       .addClass('alert alert-success')
-      .prepend('<i class="mdi mdi-18px mdi-check-circle"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:check-circle"/>');
 
     // Notify
     jQuery('div.notify')
       .removeClass('notify')
       .addClass('alert alert-warning')
-      .prepend('<i class="mdi mdi-18px mdi-alert"/> ');
+      .prepend('<span class="iconify mr-2" data-height="18" data-icon="mdi:alert"/>');
 
   }, 0);
 
@@ -477,6 +430,13 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
       jQuery('.qq-upload-button').addClass('btn btn-default');
       jQuery('.qq-upload-action').addClass('btn btn-success');
 
+      var $btn_delete = jQuery('#mediamanager__btn_delete [type=submit]');
+      var $btn_update = jQuery('#mediamanager__btn_update [type=submit]');
+
+      $btn_delete.addClass('btn btn-danger');
+      $btn_delete.prepend(jQuery('<span class="iconify mr-2" data-icon="mdi:delete"/>'));
+      $btn_update.prepend(jQuery('<span class="iconify mr-2" data-icon="mdi:image-plus"/>'));
+
     }
 
     // Media Manager (page)
@@ -486,7 +446,8 @@ jQuery(document).on('bootstrap3:media-manager', function(event) {
 
       var $sort_buttons = jQuery('.ui-buttonset');
 
-      $media_manager.find('.file dl').addClass('dl-horizontal');
+      //$media_manager.find('.file dl').addClass('dl-horizontal');
+      $media_manager.find('.file dd').addClass('pl-4');
       $media_manager.find('.panel').removeClass('panel').addClass('pull-left');
 
       $sort_buttons.addClass('btn-group');
@@ -567,21 +528,19 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
           $closed    = $directory.parents('.closed'),
           $open      = $directory.parents('.open');
 
-      if (! $directory.find('.mdi').length) {
-        $directory.prepend('<i class="mdi text-primary"/> ');
+      if (! $directory.find('svg').length) {
+        $directory.prepend(Iconify.getSVG('mdi:folder'));
       }
 
       if ($open.length) {
-        $directory.find('i')
-          .removeClass('mdi-folder')
-          .addClass('mdi-folder-open');
+        $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder-open'));
       }
 
       if ($closed.length) {
-        $directory.find('i')
-          .removeClass('mdi-folder-open')
-          .addClass('mdi-folder');
+        $directory.find('svg').replaceWith(Iconify.getSVG('mdi:folder'));
       }
+
+      $directory.find('svg').addClass('iconify text-primary mr-2');
 
     });
 
@@ -589,9 +548,10 @@ jQuery(document).on('bootstrap3:mode-index', function(event) {
 
       var $page = jQuery(this);
 
-      if (! $page.find('i').length) {
-        $page.prepend('<i class="mdi mdi-file-document text-muted"/> ');
+      if (! $page.find('svg').length) {
+        $page.prepend(Iconify.getSVG('mdi:file-document-outline'));
       }
+      $page.find('svg').addClass('text-muted mr-2');
 
     });
 
@@ -665,7 +625,7 @@ jQuery(document).on('bootstrap3:cookie-law', function(event) {
 
   jQuery('#cookieDismiss').click(function(){
     jQuery('#cookieNotice').hide();
-    DokuCookie.setValue('cookieNoticeAccepted', true);
+    DokuCookie.setValue('cookieNoticeAccepted', 1);
   });
 
 });
@@ -704,9 +664,9 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     'facebook'    : (function(){ return [ 'https://www.facebook.com/sharer/sharer.php?u=', url, '&t=', title ].join(''); })(),
     'pinterest'   : (function(){ return [ 'https://pinterest.com/pin/create/button/?url=', url, '&description=', title ].join(''); })(),
     'telegram'    : (function(){ return [ 'https://telegram.me/share/url?url=', url ].join(''); })(),
-    'whatsapp'    : (function(){ return [ 'whatsapp://send?text=', title, ': ', url ].join(''); })(),
+    'whatsapp'    : (function(){ return [ 'https://wa.me/?text=', title, ': ', url ].join(''); })(),
     'yammer'      : (function(){ return [ 'https://www.yammer.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
-    'send-mail'   : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
+    'sendmail'    : (function(){ return [ 'mailto:?subject=', document.title, '&body=', document.URL ].join(''); })(),
     'reddit'      : (function(){ return [ 'http://www.reddit.com/submit?url=', url, '&title=', title ].join(''); })(),
   };
 
@@ -742,12 +702,14 @@ jQuery(document).on('bootstrap3:page-icons', function(event) {
     window.open(share_to.reddit, 'Share to Reddit', window_options);
   });
 
-  $dw_page_icons.find('.send-mail').on('click', function(e) {
+  $dw_page_icons.find('.sendmail').on('click', function(e) {
     e.preventDefault();
-    window.location = share_to['send-mail'];
+    window.location = share_to['sendmail'];
   });
 
-  $dw_page_icons.find('.share-whatsapp').attr('href', share_to.whatsapp);
+  $dw_page_icons.find('.share-whatsapp').on('click', function() {
+    window.open(share_to.whatsapp, 'Share to WhatsApp', window_options);
+  });
 
 });
 
@@ -768,24 +730,24 @@ jQuery(document).on('bootstrap3:collapse-sections', function(event) {
 
     $sections.addClass('hide');
 
-    if (! $headings.find('i').length) {
+    if (! $headings.find('svg').length) {
 
       $headings
         .css('cursor', 'pointer')
-        .prepend(jQuery('<i class="mdi mdi-chevron-down py-4 mdi-24px"/>'));
+        .prepend(Iconify.getSVG('mdi:chevron-down'));
 
       $headings.on('click', function() {
 
         var $heading = jQuery(this),
-            $icon    = $heading.find('i'),
+            $icon    = $heading.find('svg'),
             $section = $heading.nextUntil('h2');
 
         $section.toggleClass('hide');
         $heading.css('cursor', 'pointer');
 
-        $icon.hasClass('mdi-chevron-down')
-          ? $icon.removeClass('mdi-chevron-down').addClass('mdi-chevron-up')
-          : $icon.removeClass('mdi-chevron-up').addClass('mdi-chevron-down');
+        $section.hasClass('hide')
+          ? $icon.replaceWith(Iconify.getSVG('mdi:chevron-down'))
+          : $icon.replaceWith(Iconify.getSVG('mdi:chevron-up'));
 
       });
 
@@ -872,6 +834,7 @@ jQuery(document).on('bootstrap3:components', function(event) {
       'footnotes',
       'media-manager',
       'collapse-sections',
+      'alerts'
     ];
 
     for (var i in events) {

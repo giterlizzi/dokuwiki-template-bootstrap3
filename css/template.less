@@ -20,20 +20,50 @@ body {
 }
 
 /**
- * Sticky footer
+ * Links and Interwiki icons
  */
-html, body {
-  height: 100%;
+a.urlextern {
+  background-image: url('iconify.php?icon=mdi-earth-arrow-right.svg&color=%23666666') !important;
 }
-body {
-  display: flex;
-  flex-direction: column;
+
+a.mail {
+  background-image: url('iconify.php?icon=mdi-email.svg&color=%23666666') !important;
 }
-main {
-  flex: 1 0 auto;
+
+a.iw_user {
+  background-image: url('iconify.php?icon=mdi-account.svg');
 }
-footer {
-  flex-shrink: 0;
+
+a.iw_wp, a.iw_wpde, a.iw_wpes, a.iw_wpfr, a.iw_wpjp, a.iw_wpmeta, a.iw_wppl {
+  background-image: url('iconify.php?icon=mdi-wikipedia.svg');
+}
+
+a.iw_go {
+  background-image: url('iconify.php?icon=mdi-google.svg&color=%234285f4');
+}
+
+a.iw_skype {
+  background-image: url('iconify.php?icon=mdi-skype.svg&color=%2300aff0');
+}
+
+a.iw_phpfn {
+  background-image: url('iconify.php?icon=mdi-elephant.svg&color=%23858eb8');
+}
+
+a.iw_callto, a.iw_tel {
+  background-image: url('iconify.php?icon=mdi-phone.svg');
+}
+
+a.iw_amazon, a.iw_amazon_de, a.iw_amazon_uk {
+  background-image: url('iconify.php?icon=mdi-amazon.svg');
+}
+
+a.iw_man {
+  background-image: url('iconify.php?icon=mdi-book.svg');
+}
+
+a.iw_paypal {
+  background-image: url('iconify.php?icon=mdi-paypal.svg&color=%2324397c');
 }
 
 
@@ -112,40 +142,18 @@ header {
 
   nav {
 
-    #dw__logo {
-      margin-right: 10px;
-    }
-
-    #dw__title {
-      display: inline-block;
+    .navbar-brand {
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     #dw__tagline {
-      font-size: .6em;
-      display: block;
-      line-height: 1em;
+      font-size: 0.6em;
+      line-height: 0.6em;
       white-space: nowrap;
     }
 
     #dw__search {
-
-      /*input[type=search] {
-        padding-left: 30px;
-        display: inline-block;
-      }
-
-      button[type=submit] {
-       position:relative;
-       left: 30px;
-       padding: 0px;
-       background: transparent;
-       border: 0px solid;
-      }
-
-      button[type=submit]:hover,
-      button[type=submit]:focus {
-        outline: 0;
-      }*/
 
       /* Typeahead plugin */
       .typeahead {
@@ -180,6 +188,9 @@ header {
 
 }
 
+article .page-header:first-child {
+  margin-top: 10px;
+}
 
 /* Characters picker */
 div#picker2 {
@@ -228,6 +239,10 @@ div#picker2 {
 
   td {
     padding: 5px;
+  }
+
+  legend {
+    font-size: 1.8em;
   }
 
   fieldset {
@@ -316,7 +331,7 @@ div#picker2 {
   }
 
   ul li:not(.active) a:hover {
-      background: transparent;
+    background: transparent;
   }
 
   .tools {
@@ -331,25 +346,13 @@ div#picker2 {
 
   z-index: 995;
 
-  .navbar-text {
-    float: initial;
-    width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+  &.container-fluid {
+    margin: 0;
+    margin-bottom: -50px;
+    padding: 0;
   }
 
 }
-
-.footer-fixed-bottom {
-  left: 0;
-  right: 0;
-  position: absolute;
-  margin-bottom: -50px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: 0;
-}
-
 
 /* Extension Manager */
 #extension__manager {
@@ -568,11 +571,6 @@ div#picker2 {
 }
 
 
-.dw-content h1.page-header {
-  margin-top: 20px;
-}
-
-
 /* Page icons (email, print, social share, etc.) */
 .dw-page-icons {
 
@@ -580,18 +578,26 @@ div#picker2 {
     color: inherit;
   }
 
-  .share-google-plus i { color: #DC4E41; }
-  .share-twitter     i { color: #55ACEE; }
-  .share-linkedin    i { color: #0077B5; }
-  .share-facebook    i { color: #3B5998; }
-  .share-whatsapp    i { color: #43D854; }
-  .share-pinterest   i { color: #BD081C; }
-  .share-telegram    i { color: #0088CC; }
-  .share-yammer      i { color: #5AA8BF; }
-  .share-reddit      i { color: #FF4500; }
+  span {
+    display: none;
+  }
+
+  svg {
+    width: 1.2em !important;
+    height: 1.2em !important;
+  }
+
+  .share-google-plus svg { color: #DC4E41; }
+  .share-twitter     svg { color: #55ACEE; }
+  .share-linkedin    svg { color: #0077B5; }
+  .share-facebook    svg { color: #3B5998; }
+  .share-whatsapp    svg { color: #43D854; }
+  .share-pinterest   svg { color: #BD081C; }
+  .share-telegram    svg { color: #0088CC; }
+  .share-yammer      svg { color: #5AA8BF; }
+  .share-reddit      svg { color: #FF4500; }
 
 }
-
 
 /* Override Bootstrap3 style */
 
@@ -657,6 +663,26 @@ ul.btn-group {
 
   .curid {
     font-weight: bold;
+  }
+
+  .diff.diff_sidebyside {
+
+    margin-top: 25px;
+    margin-bottom: 25px;
+
+    td.diff-context {
+      width: 50%;
+    }
+
+  }
+
+  table.diff {
+    select {
+      font-size: 1em !important;
+    }
+    td {
+      font-size: 1em !important; 
+    }
   }
 
 }
@@ -761,14 +787,22 @@ body.yeti #dw__user_menu dl {
   color: white;
 }
 
-/* SVG icon for DokuWiki Actions */
+/* SVG icon for DokuWiki */
+
+svg.icon {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  display: inline-block;
+}
 
 .menuitem svg {
   fill: currentColor;
   display: inline-block;
   vertical-align: middle;
-  width: 1.4em;
-  height: 1.4em;
+  width: 1.3em;
+  height: 1.3em;
 }
 
 #dw__pagetools .menuitem svg {
@@ -798,6 +832,30 @@ body {
   &.solar {
     #dw__pagetools .menuitem svg {
       fill: #fff !important;
+    }
+    .iw_user {
+      background-image: url('iconify.php?icon=mdi-account.svg&color=%23ffffff');
+    }
+    a.urlextern {
+      background-image: url('iconify.php?icon=mdi-earth-arrow-right.svg&color=%23ffffff') !important;
+    }
+
+    a.mail {
+      background-image: url('iconify.php?icon=mdi-email.svg&color=%23ffffff') !important;
+    }
+    a.iw_callto, a.iw_tel {
+      background-image: url('iconify.php?icon=mdi-phone.svg&color=%23ffffff');
+    }
+
+    a.iw_amazon, a.iw_amazon_de, a.iw_amazon_uk {
+      background-image: url('iconify.php?icon=mdi-amazon.svg&color=%23ffffff');
+    }
+
+    a.iw_man {
+      background-image: url('iconify.php?icon=mdi-book.svg&color=%23ffffff');
+    }
+    a.iw_wp, a.iw_wpde, a.iw_wpes, a.iw_wpfr, a.iw_wpjp, a.iw_wpmeta, a.iw_wppl {
+      background-image: url('iconify.php?icon=mdi-wikipedia.svg&color=%23ffffff');
     }
   }
 

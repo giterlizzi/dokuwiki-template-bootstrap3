@@ -21,12 +21,12 @@ $additional_plugins   = array_diff($admin_plugins, $administrative_tasks);
 $admin = array(
     'administrative_tasks' => array(
         'label'   => tpl_getLang('administrative_tasks'),
-        'icon'    => 'mdi mdi-settings',
+        'icon'    => 'mdi:settings',
         'plugins' => $administrative_tasks
     ),
     'additional_plugins' => array(
         'label'   => tpl_getLang('additional_plugins'),
-        'icon'    => 'mdi mdi-puzzle',
+        'icon'    => 'mdi:puzzle',
         'plugins' => $additional_plugins
     ),
 );
@@ -37,7 +37,7 @@ $admin = array(
     <li class="dropdown dropdown-large">
 
         <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $lang['btn_admin'] ?>" role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="mdi mdi-settings"></i> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
+            <?php echo iconify('mdi:settings'); ?> <span class="<?php echo (in_array('admin', $TEMPLATE->getConf('navbarLabels')) ? '' : 'hidden-lg hidden-md hidden-sm') ?>"> <?php echo $lang['btn_admin'] ?></span> <span class="caret"></span>
         </a>
 
         <ul class="dropdown-menu dropdown-menu-large" role="menu">
@@ -48,7 +48,7 @@ $admin = array(
                 <ul class="dropdown-menu col-sm-<?php echo (count($additional_plugins) > 0) ? '6' : '12' ?>">
 
                     <li class="dropdown-header">
-                        <i class="<?php echo $items['icon'] ?>"></i> <?php echo ucfirst($items['label']) ?>
+                        <?php echo iconify($items['icon']) ?> <?php echo ucfirst($items['label']) ?>
                     </li>
 
                     <?php
@@ -64,10 +64,10 @@ $admin = array(
                             if (method_exists($plugin, 'getMenuIcon')) {
                                 $icon = $plugin->getMenuIcon();
                                 if (! file_exists($icon)) {
-                                    $icon = template('assets/mdi/svg/puzzle.svg');
+                                    $icon = tpl_incdir() . 'images/menu/puzzle.svg';
                                 }
                             } else {
-                                $icon = template('assets/mdi/svg/puzzle.svg');
+                                $icon = tpl_incdir() . 'images/menu/puzzle.svg';
                             }
 
                             if (! $label) continue;

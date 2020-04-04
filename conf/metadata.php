@@ -50,7 +50,6 @@ $meta['showSemanticPopup']   = array('onoff');
 
 // Layout
 $meta['fluidContainer']         = array('onoff');
-$meta['fluidContainerBtn']      = array('onoff');
 $meta['pageOnPanel']            = array('onoff');
 $meta['tableFullWidth']         = array('onoff');
 $meta['tableStyle']             = array('multicheckbox', '_choices' => array('striped', 'bordered', 'hover', 'condensed', 'responsive'));

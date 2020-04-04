@@ -11,8 +11,8 @@
 
 if (!defined('DOKU_INC')) die(); // must be run from within DokuWiki
 
-require_once(template('tpl/global.php'));
-require_once(template('tpl/functions.php'));
+require_once('tpl/global.php');
+require_once('tpl/functions.php');
 
 global $ACT;
 global $conf;
@@ -297,7 +297,7 @@ $show_metadata = false;
 
 <body class="<?php echo $TEMPLATE->getClasses() ?>" data-img-id="<?php echo $IMG ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
-    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
 
             tpl_includeFile('topheader.html');
@@ -305,7 +305,7 @@ $show_metadata = false;
             // Top-Header DokuWiki page
             if ($ACT == 'show') echo $TEMPLATE->includePage('topheader');
 
-            require_once(template('tpl/navbar.php'));
+            require_once('tpl/navbar.php');
 
             tpl_includeFile('header.html');
 
@@ -317,7 +317,7 @@ $show_metadata = false;
 
     <a name="dokuwiki__top" id="dokuwiki__top"></a>
 
-    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -343,142 +343,153 @@ $show_metadata = false;
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="dokuwiki <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>">
-                    <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
+                <div class="dokuwiki panel panel-default">
 
-                        <?php require_once(template('tpl/page-icons.php')); ?>
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            <?php echo iconify('mdi:image', array('class' => 'text-muted')) ?> <?php echo nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
+                        </h3>
+                    </div>
 
-                        <?php if ($ERROR): print '<h1><i class="mdi mdi-alert text-warning"></i> ' . $ERROR . '</h1>'; ?>
+                    <div class="page panel-body">
+
+                        <?php require_once('tpl/page-icons.php'); ?>
+
+                        <?php if ($ERROR): print '<h1>' . iconify('mdi:alert', array('class' => 'mr-2', 'style' => 'color:orange')) . $ERROR . '</h1>'; ?>
                         <?php else: ?>
                         <?php if ($REV) echo p_locale_xhtml('showrev'); ?>
 
-                        <h1 class="page-header">
-                            <i class="mdi mdi-image text-muted"></i> <?php echo nl2br(hsc(tpl_img_getTag('simple.title'))); ?>
-                        </h1>
+                        <div class="row">
+                            <div class="col-sm-8">
 
-                        <p>
-                            <?php tpl_img($maxwidth, $maxheight); /* the image; parameters: maximum width, maximum height (and more) */ ?>
-                        </p>
+                                <p class="px-2">
+                                    <?php tpl_img($maxwidth, $maxheight); /* the image; parameters: maximum width, maximum height (and more) */ ?>
+                                </p>
 
-                        <p class="small my-2">
-                            <i class="mdi mdi-image-size-select-large"></i> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
-                            <?php echo tpl_getLang('other_resolutions') ?>: <?php foreach ($other_sizes as $size): ?> <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $size['w'], 'h' => $size['h']), true, '&'); ?>" title="<?php echo floor($size['ratio'] * 100); ?>%"><?php echo $size['w']; ?> × <?php echo $size['h']; ?></a> pixels &nbsp; <?php endforeach; ?>
-                        </p>
+                                <p class="small my-2">
+                                    <?php echo iconify('mdi:image-size-select-large'); ?> <?php echo tpl_getLang('preview_size') ?>: <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $w, 'h' => $h), true, '&'); ?>"><?php echo $w; ?> × <?php echo $h; ?></a> pixels.
+                                    <?php echo tpl_getLang('other_resolutions') ?>: <?php foreach ($other_sizes as $size): ?> <a href="<?php echo ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV, 'w' => $size['w'], 'h' => $size['h']), true, '&'); ?>" title="<?php echo floor($size['ratio'] * 100); ?>%"><?php echo $size['w']; ?> × <?php echo $size['h']; ?></a> pixels &nbsp; <?php endforeach; ?>
+                                </p>
 
-                        <p class="image-info my-3">
-                            <i class="mdi mdi-image mdi-18px"></i> <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" title="<?php echo $lang['js']['mediadirect']; ?>"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></a> ( <?php echo tpl_img_getTag('File.Width'); ?> × <?php echo tpl_img_getTag('File.Height'); ?> pixels )
-                        </p>
-
-                        <div class="image-information pt-5">
-
-                            <h3>
-                                <i class="mdi mdi-information text-primary"></i> Informations
-                            </h3>
-
-                            <div class="table-responsive">
-                                <table class="table table-condensed table-striped">
-                                    <tbody>
-                                        <?php
-                                            $tags = tpl_get_img_meta();
-
-                                            foreach($tags as $tag) {
-
-                                                $label = $lang[$tag['langkey']];
-                                                if(!$label) $label = $tag['langkey'] . ':';
-
-                                                echo '<tr><th>'.$label.'</th><td>';
-                                                if ($tag['type'] == 'date') {
-                                                    echo dformat($tag['value']);
-                                                } else {
-                                                    echo hsc($tag['value']);
-                                                }
-                                                echo '</td></tr>';
-                                            }
-                                        ?>
-                                    </tbody>
-                                </table>
+                                <p class="image-info my-3">
+                                    <?php echo iconify('mdi:image'); ?> <a href="<?php echo ml($IMG, array('cache'=> $INPUT->str('cache'),'rev'=>$REV), true, '&'); ?>" target="_blank" title="<?php echo $lang['js']['mediadirect']; ?>"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></a> ( <?php echo tpl_img_getTag('File.Width'); ?> × <?php echo tpl_img_getTag('File.Height'); ?> pixels )
+                                </p>
                             </div>
+                            <div class="col-sm-4">
 
-                            <?php
-                                //Comment in for Debug
-                                //dbg(tpl_img_getTag('Simple.Raw'));
-                            ?>
+                                <div class="image-information">
 
-                        </div>
+                                    <h3 class="pb-4">
+                                        <?php echo iconify('mdi:information', array('class' => 'text-primary')) ?> Informations
+                                    </h3>
 
-                        <div class="image-reference pt-5">
-
-                            <h3>
-                                <i class="mdi mdi-link-variant"></i> <?php echo $lang['reference']; ?>
-                            </h3>
-                            <?php
-                                $media_usage = ft_mediause($IMG, true);
-                                if (count($media_usage) > 0) {
-                                    echo '<ul>';
-                                    foreach($media_usage as $path){
-                                        echo '<li>'.html_wikilink($path).'</li>';
-                                    }
-                                    echo '</ul>';
-                                } else {
-                                    echo '<p>'.$lang['nothingfound'].'</p>';
-                                }
-                            ?>
-
-                            <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
-                            <div class="alert alert-warning">
-                                <i class="mdi mdi-alert"></i> <?php echo $lang['media_acl_warning']; ?>
-                            </div>
-                            <?php endif; ?>
-
-                        </div>
-
-                        <div class="image-metadata pt-5 hide">
-
-                            <h3>
-                                <i class="mdi mdi-code-tags text-success"></i> Metadata
-                            </h3>
-
-                            <div class="metadata">
-                                <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#exif">Exif</a></li>
-                                    <li><a data-toggle="tab" href="#iptc">IPTC</a></li>
-                                </ul>
-                                <div class="tab-content">
-                                    <?php $active = 'active in'; foreach ($metadata as $section => $items): ?>
-                                    <div id="<?php echo $section; ?>" class="tab-pane fade <?php echo $active; ?>">
-                                        <div class="table-responsive">
-                                            <table class="table table-condensed table-striped">
+                                    <div class="table-responsive">
+                                        <table class="table table-condensed table-striped">
+                                            <tbody>
                                                 <?php
-                                                    foreach ($items as $tag) {
+                                                    $tags = tpl_get_img_meta();
 
-                                                        $value = tpl_img_getTag($tag);
-                                                        $name  = str_ireplace("$section.", '', $tag);
+                                                    foreach($tags as $tag) {
 
-                                                        if ($value !== '') {
-                                                            echo "<tr><th title='$tag'>$name</th><td>$value</td></tr>";
-                                                            $show_metadata = true;
+                                                        $label = $lang[$tag['langkey']];
+                                                        if(!$label) $label = $tag['langkey'] . ':';
+
+                                                        echo '<tr><th>'.$label.'</th><td>';
+                                                        if ($tag['type'] == 'date') {
+                                                            echo dformat($tag['value']);
+                                                        } else {
+                                                            echo hsc($tag['value']);
                                                         }
-
+                                                        echo '</td></tr>';
                                                     }
-
-                                                    $active = '';
-
                                                 ?>
-                                            </table>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <?php
+                                        //Comment in for Debug
+                                        //dbg(tpl_img_getTag('Simple.Raw'));
+                                    ?>
+
+                                </div>
+
+                                <div class="image-reference pt-4">
+
+                                    <h3 class="pb-4">
+                                        <?php echo iconify('mdi:link-variant'); ?> <?php echo $lang['reference']; ?>
+                                    </h3>
+                                    <?php
+                                        $media_usage = ft_mediause($IMG, true);
+                                        if (count($media_usage) > 0) {
+                                            echo '<ul>';
+                                            foreach($media_usage as $path){
+                                                echo '<li>'.html_wikilink($path).'</li>';
+                                            }
+                                            echo '</ul>';
+                                        } else {
+                                            echo '<p>'.$lang['nothingfound'].'</p>';
+                                        }
+                                    ?>
+
+                                    <?php if (isset($lang['media_acl_warning'])): // This message is available from release 2015-08-10 "Detritus" ?>
+                                    <div class="alert alert-warning">
+                                        <?php echo iconify('mdi:alert'); ?> <?php echo $lang['media_acl_warning']; ?>
+                                    </div>
+                                    <?php endif; ?>
+
+                                </div>
+
+                                <div class="image-metadata pt-4 hide">
+
+                                    <h3 class="pb-4">
+                                        <?php echo iconify('mdi:code-tags', array('class' => 'text-success')); ?> Metadata
+                                    </h3>
+
+                                    <div class="metadata">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a data-toggle="tab" href="#exif">Exif</a></li>
+                                            <li><a data-toggle="tab" href="#iptc">IPTC</a></li>
+                                        </ul>
+                                        <div class="tab-content">
+                                            <?php $active = 'active in'; foreach ($metadata as $section => $items): ?>
+                                            <div id="<?php echo $section; ?>" class="tab-pane fade <?php echo $active; ?>">
+                                                <div class="table-responsive">
+                                                    <table class="table table-condensed table-striped">
+                                                        <?php
+                                                            foreach ($items as $tag) {
+
+                                                                $value = tpl_img_getTag($tag);
+                                                                $name  = str_ireplace("$section.", '', $tag);
+
+                                                                if ($value !== '') {
+                                                                    echo "<tr><th title='$tag'>$name</th><td>$value</td></tr>";
+                                                                    $show_metadata = true;
+                                                                }
+
+                                                            }
+
+                                                            $active = '';
+
+                                                        ?>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <?php endforeach; ?>
                                         </div>
                                     </div>
-                                    <?php endforeach; ?>
+
+                                    <?php if ($show_metadata): ?>
+                                    <script>
+                                        jQuery(document).ready(function(){
+                                            jQuery('.image-metadata').removeClass('hide');
+                                        });
+                                    </script>
+                                    <?php endif; ?>
+
                                 </div>
+
                             </div>
-
-                            <?php if ($show_metadata): ?>
-                            <script>
-                                jQuery(document).ready(function(){
-                                    jQuery('.image-metadata').removeClass('hide');
-                                });
-                            </script>
-                            <?php endif; ?>
-
                         </div>
 
                         <?php endif; ?>
@@ -511,20 +522,22 @@ $show_metadata = false;
 
     </main>
 
-    <footer id="dw__footer" class="dw-container pt-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');
 
             // Footer DokuWiki page
-            require_once(template('tpl/footer.php'));
+            require_once('tpl/footer.php');
 
             // Cookie-Law banner
-            require_once(template('tpl/cookielaw.php'));
+            require_once('tpl/cookielaw.php');
         ?>
     </footer>
 
-    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
+        <?php echo iconify('mdi:chevron-up'); ?>
+    </a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
         <span class="visible-xs-block"></span>

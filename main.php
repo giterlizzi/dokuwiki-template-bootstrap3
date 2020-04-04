@@ -9,8 +9,8 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once(template('tpl/global.php'));
-require_once(template('tpl/functions.php'));
+require_once('tpl/global.php');
+require_once('tpl/functions.php');
 
 header('X-UA-Compatible: IE=edge,chrome=1');
 
@@ -34,7 +34,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <?php tpl_flush() ?>
 <body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
-    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
     <?php
 
         tpl_includeFile('topheader.html');
@@ -54,13 +54,13 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
     <a name="dokuwiki__top" id="dokuwiki__top"></a>
 
-    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
             <?php tpl_includeFile('social.html') ?>
 
-            <?php require_once(template('tpl/breadcrumbs.php')); ?>
+            <?php require_once('tpl/breadcrumbs.php'); ?>
 
             <p class="text-right">
                 <?php
@@ -96,15 +96,15 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         <?php
 
                         // Page icons (print, email, share link, etc.)
-                        require_once(template('tpl/page-icons.php'));
-
-                        tpl_flush(); /* flush the output buffer */
+                        require_once('tpl/page-icons.php');
 
                         // Page-Header DokuWiki page
                         tpl_includeFile('pageheader.html');
 
                         // Page-Header DokuWiki page
                         if ($ACT == 'show') $TEMPLATE->includePage('pageheader');
+
+                        tpl_flush(); /* flush the output buffer */
 
                         // render the content into buffer for later use
                         ob_start();
@@ -118,7 +118,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         echo '<div class="dw-content-page '. implode(' ', $content_classes) .'">';
 
-                        if ($toc) echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
+                        if ($toc && $TEMPLATE->getConf('tocLayout') == 'default') echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
 
                         echo '<!-- content -->';
                         echo '<div class="dw-content">';
@@ -172,20 +172,22 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
     </main>
 
-    <footer id="dw__footer" class="dw-container pt-5 dokuwiki container<?php echo ($TEMPLATE->isFluidContainer()) ? '-fluid mx-5' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');
 
             // Footer DokuWiki page
-            require_once(template('tpl/footer.php'));
+            require_once('tpl/footer.php');
 
             // Cookie-Law banner
-            require_once(template('tpl/cookielaw.php'));
+            require_once('tpl/cookielaw.php');
         ?>
     </footer>
 
-    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default btn-sm" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t"><i class="mdi mdi-chevron-up"></i></a>
+    <a href="#dokuwiki__top" class="back-to-top hidden-print btn btn-default" title="<?php echo $lang['skip_to_content'] ?>" accesskey="t">
+        <?php echo iconify('mdi:chevron-up'); ?>
+    </a>
 
     <div id="screen__mode"><?php /* helper to detect CSS media query in script.js */ ?>
         <span class="visible-xs-block"></span>
