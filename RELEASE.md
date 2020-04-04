@@ -1,6 +1,10 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [Develop]
+## [v2020-04-04]
+
+After log development cycle a new release of Bootstrap Template is issued with Iconify support, new Detail page and Footer layout, stability and new plugins support (**Struct**, **Bureaucracy** and other popular DokuWiki plugins). Now Bootswatch Wrapper ``callout`` syntax follow the original Bootswatch contextual colors.
+
+Enjoy!
 
 ### Added
   * Added SVG class to embed SVG icons into HTML
@@ -43,6 +47,7 @@
   * #440: Inconsistency between header and footer logo (thanks to @leemillerau)
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
+  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thank to @cgalo5758)
 
 
 ## [v2019-05-22]
@@ -504,6 +509,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04
 [v2019-05-22]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2018-02-16...v2019-05-22
 [v2018-02-16]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
 [v2016-12-12]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2016-05-07...v2016-12-12
