@@ -47,7 +47,8 @@ Enjoy!
   * #440: Inconsistency between header and footer logo (thanks to @leemillerau)
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
-  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thank to @cgalo5758)
+  * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
+  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
 
 
 ## [v2019-05-22]
