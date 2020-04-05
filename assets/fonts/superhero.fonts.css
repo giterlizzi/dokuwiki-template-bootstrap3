@@ -8,7 +8,8 @@
 		url('Lato_300.eot?#iefix') format('embedded-opentype'),
 		url('Lato_300.woff') format('woff'),
 		url('Lato_300.woff2') format('woff2'),
-		url('Lato_300.svg#Lato') format('svg'),
+		url('Lato_300.svg#Lato') format('svg');
+}
 @font-face {
 	font-family: 'Lato';
 	font-style: normal;
@@ -19,7 +20,8 @@
 		url('Lato_400.eot?#iefix') format('embedded-opentype'),
 		url('Lato_400.woff') format('woff'),
 		url('Lato_400.woff2') format('woff2'),
-		url('Lato_400.svg#Lato') format('svg'),
+		url('Lato_400.svg#Lato') format('svg');
+}
 @font-face {
 	font-family: 'Lato';
 	font-style: normal;
@@ -30,4 +32,5 @@
 		url('Lato_700.eot?#iefix') format('embedded-opentype'),
 		url('Lato_700.woff') format('woff'),
 		url('Lato_700.woff2') format('woff2'),
-		url('Lato_700.svg#Lato') format('svg'),
+		url('Lato_700.svg#Lato') format('svg');
+}
