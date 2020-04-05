@@ -8,7 +8,8 @@
 		url('Raleway_400.eot?#iefix') format('embedded-opentype'),
 		url('Raleway_400.woff') format('woff'),
 		url('Raleway_400.woff2') format('woff2'),
-		url('Raleway_400.svg#Raleway') format('svg'),
+		url('Raleway_400.svg#Raleway') format('svg');
+}
 @font-face {
 	font-family: 'Raleway';
 	font-style: normal;
@@ -19,4 +20,5 @@
 		url('Raleway_700.eot?#iefix') format('embedded-opentype'),
 		url('Raleway_700.woff') format('woff'),
 		url('Raleway_700.woff2') format('woff2'),
-		url('Raleway_700.svg#Raleway') format('svg'),
+		url('Raleway_700.svg#Raleway') format('svg');
+}
