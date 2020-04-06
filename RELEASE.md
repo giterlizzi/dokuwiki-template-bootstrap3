@@ -48,7 +48,11 @@ Enjoy!
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
   * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
+
+### Hotfix
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
+  * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
+
 
 
 ## [v2019-05-22]

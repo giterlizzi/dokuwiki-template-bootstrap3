@@ -1790,6 +1790,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             return $content;
         }
 
+
+
         # Move Current Page ID to <a> element and create data-curid HTML5 attribute
         foreach ($html->find('.curid') as $elm) {
             foreach ($elm->find('a') as $link) {
@@ -1865,7 +1867,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # Page Heading (h1-h2)
         # TODO this class will be removed in Bootstrap >= 4.0 version
         foreach ($html->find('h1,h2,h3') as $elm) {
-            $elm->class .= ' page-header';
+            $elm->class .= ' page-header pb-3 mb-4 mt-5'; # TODO replace page-header with border-bottom in BS4
         }
 
         # Media Images
