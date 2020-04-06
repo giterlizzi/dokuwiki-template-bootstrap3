@@ -51,11 +51,9 @@ Enjoy!
 
 ### Hotfix
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
+  * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
   * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
 
-
-### Hotfix
-  * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
 
 
 ## [v2019-05-22]
