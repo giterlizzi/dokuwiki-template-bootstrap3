@@ -50,6 +50,9 @@ Enjoy!
   * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
 
+### Hotfix
+  * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
+
 
 ## [v2019-05-22]
 
