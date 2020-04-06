@@ -8,6 +8,12 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+# Detect Bitnami DokuWiki Docker image and apply the correct DOKU_INC path
+#   see: https://github.com/bitnami/bitnami-docker-dokuwiki/issues/37
+if (getenv('BITNAMI_APP_NAME')) {
+   define('DOKU_INC', '/opt/bitnami/dokuwiki/');
+}
+
 if (!defined('DOKU_INC')) {
     define('DOKU_INC', dirname(__FILE__) . '/../../../');
 }
