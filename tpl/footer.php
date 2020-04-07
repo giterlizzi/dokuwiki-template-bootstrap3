@@ -58,7 +58,7 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
 
     <div class="footer-license row">
         <hr/>
-        <div class="col-sm-6">
+        <div id="dw__license" class="col-sm-6">
             <?php if ($license_is_enabled): ?>
             <p>
                 <?php $TEMPLATE->getLicense('image') ?>
