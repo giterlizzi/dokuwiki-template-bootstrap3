@@ -55,8 +55,8 @@ $fonts       = array();
 switch ($bootstrap_theme) {
 
     case 'optional':
-        $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
-        $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
+        $stylesheets[] = 'assets/bootstrap/default/bootstrap.min.css';
+        $stylesheets[] = 'assets/bootstrap/default/bootstrap-theme.min.css';
         break;
 
     case 'custom':
@@ -65,10 +65,10 @@ switch ($bootstrap_theme) {
 
     case 'bootswatch':
 
-        $bootswatch_url   = $tpl_basedir . 'assets/bootstrap';
+        $bootswatch_url   = 'assets/bootstrap';
 
         if (file_exists($tpl_incdir . "assets/fonts/$bootswatch_theme.fonts.css")) {
-            $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
+            $stylesheets[] = "assets/fonts/$bootswatch_theme.fonts.css";
         }
 
         $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
@@ -76,11 +76,12 @@ switch ($bootstrap_theme) {
 
     case 'default':
     default:
-        $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
+        $stylesheets[] = 'assets/bootstrap/default/bootstrap.min.css';
         break;
 
 }
 
+// TODO remove this cache-control in future
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
