@@ -309,51 +309,7 @@ class Template
 
         global $ACT;
 
-        // Bootstrap Theme
-        $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
-        $tpl_basedir      = $this->baseDir;
-        $tpl_incdir       = $this->tplDir;
-
-        $stylesheets = array();
-        $scripts     = array();
-
-        switch ($bootstrap_theme) {
-
-            case 'optional':
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
-                break;
-
-            case 'custom':
-                $stylesheets[] = $this->getConf('customTheme');
-                break;
-
-            case 'bootswatch':
-
-                $bootswatch_theme = $this->getBootswatchTheme();
-                $bootswatch_url   = $tpl_basedir . 'assets/bootstrap';
-
-                if (file_exists($tpl_incdir . "assets/fonts/$bootswatch_theme.fonts.css")) {
-                    $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
-                }
-
-                $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
-                break;
-
-            case 'default':
-            default:
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
-                break;
-
-        }
-
-        foreach ($stylesheets as $style) {
-            array_unshift($event->data['link'], array(
-                'type' => 'text/css',
-                'rel'  => 'stylesheet',
-                'href' => $style));
-        }
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
