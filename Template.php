@@ -348,37 +348,11 @@ class Template
 
         }
 
-        # Bootstrap JavaScript
-        $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
-
-        # AnchorJS
-        $scripts[] = $tpl_basedir . 'assets/anchorjs/anchor.min.js';
-
-        # Typeahead (Bootstrap3)
-        $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
-    
-        # Iconify
-        $scripts[] = $tpl_basedir . 'assets/iconify/iconify.min.js';
-        $scripts[] = $tpl_basedir . 'assets/iconify/plugins/fa.js'; // Font-Awesome Plugin
-
         foreach ($stylesheets as $style) {
             array_unshift($event->data['link'], array(
                 'type' => 'text/css',
                 'rel'  => 'stylesheet',
                 'href' => $style));
-        }
-
-        # Set Iconify default API URL
-        $event->data['script'][] = array(
-            'type'  => 'text/javascript',
-            '_data' => "if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '{$tpl_basedir}iconify.php?prefix={prefix}&icons={icons}' } }"
-        );
-
-        foreach ($scripts as $script) {
-            $event->data['script'][] = array(
-                'type'  => 'text/javascript',
-                '_data' => '',
-                'src'   => $script);
         }
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
