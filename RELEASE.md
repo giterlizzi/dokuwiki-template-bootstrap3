@@ -55,6 +55,7 @@ Enjoy!
   * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
   * #465: Added "itemref" meta (thanks to @sioc-de-narf)
   * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
+  * #469: No TOC in Navbar (thanks to @Ohkami)
 
 
 ## [v2019-05-22]
