@@ -2759,9 +2759,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $out = '';
         $out .= '<script>JSINFO.bootstrap3.toc = ' . json_encode($json_toc) . ';</script>' . DOKU_LF;
 
-        if ($this->getConf('tocPosition') !== 'navbar') {
+        if ($this->getConf('tocLayout') !== 'navbar') {
 
             $out .= '<!-- TOC START -->' . DOKU_LF;
+            $out .= '<div class="dw-toc hidden-print">' . DOKU_LF;
             $out .= '<nav id="dw__toc" role="navigation" class="toc-panel panel panel-default small">' . DOKU_LF;
             $out .= '<h6 data-toggle="collapse" data-target="#dw__toc .toc-body" title="' . $lang['toc'] . '" class="panel-heading toc-title">' . iconify('mdi:view-list') . ' ';
             $out .= '<span>' . $lang['toc'] . '</span>';
@@ -2770,6 +2771,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $out .= $this->normalizeList(html_buildlist($toc, 'nav toc', 'html_list_toc', 'html_li_default', true)) . DOKU_LF;
             $out .= '</div>' . DOKU_LF;
             $out .= '</nav>' . DOKU_LF;
+            $out .= '</div>' . DOKU_LF;
             $out .= '<!-- TOC END -->' . DOKU_LF;
 
         }
