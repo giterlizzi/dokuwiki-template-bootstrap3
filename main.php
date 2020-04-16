@@ -118,7 +118,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         echo '<div class="dw-content-page '. implode(' ', $content_classes) .'">';
 
-                        if ($toc && $TEMPLATE->getConf('tocLayout') == 'default') echo '<div class="dw-toc hidden-print">' . $toc . '</div>';
+                        if ($toc) echo $toc;
 
                         echo '<!-- content -->';
                         echo '<div class="dw-content">';
