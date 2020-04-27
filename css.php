@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DokuWiki Bootstrap3 Template: Asset Dispatcher 
+ * DokuWiki Bootstrap3 Template: CSS Asset Dispatcher 
  *
  * @link     http://dokuwiki.org/template:bootstrap3
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -39,6 +39,9 @@ require_once dirname(__FILE__) . '/tpl/global.php';
 
 global $INPUT;
 global $conf;
+global $ID;
+
+$ID = cleanID($INPUT->str('id'));
 
 $tpl = new \dokuwiki\template\bootstrap3\Template;
 
