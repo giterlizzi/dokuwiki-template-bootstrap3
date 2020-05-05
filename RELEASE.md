@@ -56,6 +56,7 @@ Enjoy!
   * #465: Added "itemref" meta (thanks to @sioc-de-narf)
   * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
   * #469: No TOC in Navbar (thanks to @Ohkami)
+  * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
 
 
 ## [v2019-05-22]
