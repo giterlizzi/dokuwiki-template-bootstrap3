@@ -37,7 +37,7 @@ class Template
         $this->loadConfMetadata();
 
         // Get the template info (useful for debug)
-        if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
+        if (isset($INFO['isadmin']) && $INPUT->str('do') && $INPUT->str('do') == 'check') {
             msg('Template version ' . $this->getVersion(), 1, '', '', MSG_ADMINS_ONLY);
         }
 
@@ -157,7 +157,7 @@ class Template
                 }
 
                 // Save button
-                if ($item['type'] == 'submit') {
+                if (isset($item['type']) && $item['type'] == 'submit') {
                     $event->data->_content[$key]['class'] = " $button_class";
                     $event->data->_content[$key]['value'] = (($button_icon) ? iconify("mdi:$button_icon") : '') . ' ' . $event->data->_content[$key]['value'];
                 }
@@ -308,83 +308,15 @@ class Template
     {
 
         global $ACT;
+        global $INPUT;
 
-        // Bootstrap Theme
-        $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
-        $tpl_basedir      = $this->baseDir;
-        $tpl_incdir       = $this->tplDir;
-
-        $stylesheets = array();
-        $scripts     = array();
-
-        switch ($bootstrap_theme) {
-
-            case 'optional':
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap-theme.min.css';
-                break;
-
-            case 'custom':
-                $stylesheets[] = $this->getConf('customTheme');
-                break;
-
-            case 'bootswatch':
-
-                $bootswatch_theme = $this->getBootswatchTheme();
-                $bootswatch_url   = $tpl_basedir . 'assets/bootstrap';
-
-                if (file_exists($tpl_incdir . "assets/fonts/$bootswatch_theme.fonts.css")) {
-                    $stylesheets[] = $tpl_basedir . "assets/fonts/$bootswatch_theme.fonts.css";
-                }
-
-                $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
-                break;
-
-            case 'default':
-            default:
-                $stylesheets[] = $tpl_basedir . 'assets/bootstrap/default/bootstrap.min.css';
-                break;
-
-        }
-
-        # Bootstrap JavaScript
-        $scripts[] = $tpl_basedir . 'assets/bootstrap/js/bootstrap.min.js';
-
-        # AnchorJS
-        $scripts[] = $tpl_basedir . 'assets/anchorjs/anchor.min.js';
-
-        # Typeahead (Bootstrap3)
-        $scripts[] = $tpl_basedir . 'assets/typeahead/bootstrap3-typeahead.min.js';
-    
-        # Iconify
-        $scripts[] = $tpl_basedir . 'assets/iconify/iconify.min.js';
-        $scripts[] = $tpl_basedir . 'assets/iconify/plugins/fa.js'; // Font-Awesome Plugin
-
-        foreach ($stylesheets as $style) {
-            array_unshift($event->data['link'], array(
-                'type' => 'text/css',
-                'rel'  => 'stylesheet',
-                'href' => $style));
-        }
-
-        # Set Iconify default API URL
-        $event->data['script'][] = array(
-            'type'  => 'text/javascript',
-            '_data' => "if (typeof IconifyConfig == 'undefined') { var IconifyConfig = { 'defaultAPI' : '{$tpl_basedir}iconify.php?prefix={prefix}&icons={icons}' } }"
-        );
-
-        foreach ($scripts as $script) {
-            $event->data['script'][] = array(
-                'type'  => 'text/javascript',
-                '_data' => '',
-                'src'   => $script);
-        }
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
                 'type'  => 'text/javascript',
-                '_data' => $google_analitycs);
+                '_data' => $google_analitycs
+            );
         }
 
         // Apply some FIX
@@ -603,7 +535,7 @@ class Template
             case 'hideLoginLink':
             case 'showLoginOnFooter':
 
-                return ($value && !$_SERVER['REMOTE_USER']);
+                return ($value && ! isset($_SERVER['REMOTE_USER']));
 
             case 'showCookieLawBanner':
 
@@ -825,7 +757,7 @@ class Template
     }
 
     /**
-     * Return (and set via cookie) the current Bootswatch theme
+     * Return the current Bootswatch theme
      *
      * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      *
@@ -839,21 +771,9 @@ class Template
         $bootswatch_theme = $this->getConf('bootswatchTheme');
 
         if ($this->getConf('showThemeSwitcher')) {
-
             if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
                 $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
             }
-
-            if ($INPUT->str('bootswatch-theme')) {
-                $bootswatch_theme = $INPUT->str('bootswatch-theme');
-                set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
-            }
-
-        }
-
-        if (!in_array($bootswatch_theme, $this->getBootswatchThemeList())) {
-            set_doku_pref('bootswatchTheme', 'default');
-            return 'default';
         }
 
         return $bootswatch_theme;
