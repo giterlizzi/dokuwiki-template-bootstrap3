@@ -29,8 +29,9 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
 <!-- footer -->
 <div class="dw-container small container<?php echo ($TEMPLATE->getConf('fixedTopNavbar') || $TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
-    <?php if ($wiki_info_is_enabled): ?>
+    
     <div class="footer-dw-title">
+        <?php if ($wiki_info_is_enabled): ?>
         <div class="media">
             <div class="media-left">
                 <img src="<?php echo $wiki_logo ?>" alt="<?php echo $wiki_title ?>" class="media-object" style="height:32px" />
@@ -53,8 +54,13 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
                 </div>
             </div>
         </div>
+        <?php endif; ?>
+        <?php
+            if (! $wiki_info_is_enabled && $footer_page_exist) {
+                echo $TEMPLATE->includePage('footer');
+            }
+        ?>
     </div>
-    <?php endif; ?>
 
     <div class="footer-license row">
         <hr/>
