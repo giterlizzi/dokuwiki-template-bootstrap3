@@ -37,7 +37,7 @@ class Template
         $this->loadConfMetadata();
 
         // Get the template info (useful for debug)
-        if ($INFO['isadmin'] && $INPUT->str('do') && $INPUT->str('do') == 'check') {
+        if (isset($INFO['isadmin']) && $INPUT->str('do') && $INPUT->str('do') == 'check') {
             msg('Template version ' . $this->getVersion(), 1, '', '', MSG_ADMINS_ONLY);
         }
 
@@ -157,7 +157,7 @@ class Template
                 }
 
                 // Save button
-                if ($item['type'] == 'submit') {
+                if (isset($item['type']) && $item['type'] == 'submit') {
                     $event->data->_content[$key]['class'] = " $button_class";
                     $event->data->_content[$key]['value'] = (($button_icon) ? iconify("mdi:$button_icon") : '') . ' ' . $event->data->_content[$key]['value'];
                 }
@@ -308,13 +308,15 @@ class Template
     {
 
         global $ACT;
+        global $INPUT;
 
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
                 'type'  => 'text/javascript',
-                '_data' => $google_analitycs);
+                '_data' => $google_analitycs
+            );
         }
 
         // Apply some FIX
@@ -533,7 +535,7 @@ class Template
             case 'hideLoginLink':
             case 'showLoginOnFooter':
 
-                return ($value && !$_SERVER['REMOTE_USER']);
+                return ($value && ! isset($_SERVER['REMOTE_USER']));
 
             case 'showCookieLawBanner':
 
@@ -755,7 +757,7 @@ class Template
     }
 
     /**
-     * Return (and set via cookie) the current Bootswatch theme
+     * Return the current Bootswatch theme
      *
      * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
      *
@@ -769,21 +771,9 @@ class Template
         $bootswatch_theme = $this->getConf('bootswatchTheme');
 
         if ($this->getConf('showThemeSwitcher')) {
-
             if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
                 $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
             }
-
-            if ($INPUT->str('bootswatch-theme')) {
-                $bootswatch_theme = $INPUT->str('bootswatch-theme');
-                set_doku_pref('bootswatchTheme', $INPUT->str('bootswatch-theme'));
-            }
-
-        }
-
-        if (!in_array($bootswatch_theme, $this->getBootswatchThemeList())) {
-            set_doku_pref('bootswatchTheme', 'default');
-            return 'default';
         }
 
         return $bootswatch_theme;

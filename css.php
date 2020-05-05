@@ -35,7 +35,6 @@ if (!defined('DOKU_DISABLE_GZIP_OUTPUT')) {
 }
 
 require_once DOKU_INC . 'inc/init.php';
-require_once dirname(__FILE__) . '/tpl/global.php';
 
 global $INPUT;
 global $conf;
@@ -43,17 +42,28 @@ global $ID;
 
 $ID = cleanID($INPUT->str('id'));
 
-$tpl = new \dokuwiki\template\bootstrap3\Template;
-
 // Bootstrap Theme
-$bootstrap_theme  = $tpl->getConf('bootstrapTheme');
-$bootswatch_theme = $tpl->getBootswatchTheme();
-$custom_theme     = $tpl->getConf('customTheme');
-$tpl_basedir      = $tpl->baseDir;
-$tpl_incdir       = $tpl->tplDir;
+$bootstrap_theme  = tpl_getConf('bootstrapTheme');
+$bootswatch_theme = tpl_getConf('bootswatchTheme');
+$custom_theme     = tpl_getConf('customTheme');
+$tpl_basedir      = tpl_basedir();
+$tpl_incdir       = tpl_incdir();
+
+$bootswatch_themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'solar', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
+
+if (tpl_getConf('showThemeSwitcher')) {
+
+    if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
+        $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
+    }
+
+    if (!in_array($bootswatch_theme, $bootswatch_themes)) {
+        $bootswatch_theme = 'default';
+    }
+
+}
 
 $stylesheets = array();
-$fonts       = array();
 
 switch ($bootstrap_theme) {
 
