@@ -69,7 +69,7 @@ global $INPUT;
 global $conf;
 global $ID;
 
-$ID = cleanID($INPUT->str('id'));
+$ID = cleanID($INPUT->str('id', null));
 
 $bootstrap_theme    = tpl_getConf('bootstrapTheme');
 $bootswatch_theme   = tpl_getConf('bootswatchTheme');
@@ -128,7 +128,7 @@ if ($theme_by_namespace && file_exists($themes_filename)) {
 }
 
 # Check $ID and unload the template
-if ($theme_by_namespace && file_exists($themes_filename) && $ID !== '') {
+if ($theme_by_namespace && file_exists($themes_filename) && ! $ID) {
     $bootstrap_theme = 'none';
 }
 
