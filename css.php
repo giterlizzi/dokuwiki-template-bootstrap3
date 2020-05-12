@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DokuWiki Bootstrap3 Template: CSS Asset Dispatcher 
+ * DokuWiki Bootstrap3 Template: CSS Asset Dispatcher
  *
  * @link     http://dokuwiki.org/template:bootstrap3
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -21,7 +21,6 @@
 #           <?php define('DOKU_INC', '/path/dokuwiki/');
 #
 #      (!) This file will be deleted on every upgrade of template
-
 
 # Detect Bitnami DokuWiki Docker image and apply the correct DOKU_INC path
 #   see: https://github.com/bitnami/bitnami-docker-dokuwiki/issues/37
@@ -48,7 +47,6 @@ if (!defined('DOKU_INC')) {
     define('DOKU_INC', realpath(dirname(__FILE__) . '/../../../') . '/');
 }
 
-
 // we do not use a session or authentication here (better caching)
 
 if (!defined('NOSESSION')) {
@@ -73,15 +71,17 @@ global $ID;
 
 $ID = cleanID($INPUT->str('id'));
 
-// Bootstrap Theme
-$bootstrap_theme  = tpl_getConf('bootstrapTheme');
-$bootswatch_theme = tpl_getConf('bootswatchTheme');
-$custom_theme     = tpl_getConf('customTheme');
-$tpl_basedir      = tpl_basedir();
-$tpl_incdir       = tpl_incdir();
+$bootstrap_theme    = tpl_getConf('bootstrapTheme');
+$bootswatch_theme   = tpl_getConf('bootswatchTheme');
+$custom_theme       = tpl_getConf('customTheme');
+$theme_by_namespace = tpl_getConf('themeByNamespace');
+$tpl_basedir        = tpl_basedir();
+$tpl_incdir         = tpl_incdir();
+$themes_filename    = DOKU_CONF . 'bootstrap3.themes.conf';
+$stylesheets        = array();
+$bootswatch_themes  = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'solar', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
 
-$bootswatch_themes = array('cerulean', 'cosmo', 'cyborg', 'darkly', 'flatly', 'journal', 'lumen', 'paper', 'readable', 'sandstone', 'simplex', 'solar', 'slate', 'spacelab', 'superhero', 'united', 'yeti');
-
+# Check Theme Switcher
 if (tpl_getConf('showThemeSwitcher')) {
 
     if (get_doku_pref('bootswatchTheme', null) !== null && get_doku_pref('bootswatchTheme', null) !== '') {
@@ -94,7 +94,43 @@ if (tpl_getConf('showThemeSwitcher')) {
 
 }
 
-$stylesheets = array();
+# Check Theme by Namespace
+if ($theme_by_namespace && file_exists($themes_filename)) {
+
+    $config = confToHash($themes_filename);
+    krsort($config);
+    $theme_found = false;
+
+    foreach ($config as $page => $theme) {
+
+        if (preg_match("/^$page/", "$ID")) {
+
+            list($bootstrap_theme, $bootswatch_theme) = explode('/', $theme);
+
+            if ($bootstrap_theme && in_array($bootstrap_theme, array('default', 'optional', 'custom'))) {
+                $theme_found = true;
+                break;
+            }
+
+            if ($bootstrap_theme == 'bootswatch' && in_array($bootswatch_theme, $bootswatch_themes)) {
+                $theme_found = true;
+                break;
+            }
+
+        }
+
+    }
+
+    if (!$theme_found) {
+        $bootswatch_theme = 'default';
+    }
+
+}
+
+# Check $ID and unload the template
+if ($theme_by_namespace && file_exists($themes_filename) && $ID !== '') {
+    $bootstrap_theme = 'none';
+}
 
 switch ($bootstrap_theme) {
 
@@ -109,13 +145,16 @@ switch ($bootstrap_theme) {
 
     case 'bootswatch':
 
-        $bootswatch_url   = 'assets/bootstrap';
+        $bootswatch_url = 'assets/bootstrap';
 
         if (file_exists($tpl_incdir . "assets/fonts/$bootswatch_theme.fonts.css")) {
             $stylesheets[] = "assets/fonts/$bootswatch_theme.fonts.css";
         }
 
         $stylesheets[] = "$bootswatch_url/$bootswatch_theme/bootstrap.min.css";
+        break;
+
+    case 'none':
         break;
 
     case 'default':
@@ -134,7 +173,7 @@ header('Content-Type: text/css; charset=utf-8');
 $content = '';
 
 foreach ($stylesheets as $style) {
-  $content .= "@import url($style);\n";
+    $content .= "@import url($style);" . NL;
 }
 
 print $content;
