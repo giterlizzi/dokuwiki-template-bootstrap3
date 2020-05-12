@@ -121,10 +121,6 @@ if ($theme_by_namespace && file_exists($themes_filename)) {
 
     }
 
-    if (!$theme_found) {
-        $bootswatch_theme = 'default';
-    }
-
 }
 
 # Check $ID and unload the template
