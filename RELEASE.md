@@ -48,6 +48,7 @@ Enjoy!
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
   * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
+  * #470: Added LinuxServer.io Docker image support for Iconify and CSS.php (thanks to @Ryonez)
 
 ### Hotfix
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)

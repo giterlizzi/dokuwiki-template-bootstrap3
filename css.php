@@ -38,6 +38,11 @@ if (file_exists('/usr/share/dokuwiki')) {
     define('DOKU_INC', '/usr/share/dokuwiki/');
 }
 
+# Detect LinuxServer.io DokuWiki Docker image
+if (file_exists('/app/dokuwiki')) {
+    define('DOKU_INC', '/app/dokuwiki/');
+}
+
 # Load doku_inc.php file
 if (file_exists(dirname(__FILE__) . '/doku_inc.php')) {
     require_once dirname(__FILE__) . '/doku_inc.php';
@@ -61,6 +66,32 @@ if (!defined('NL')) {
 
 if (!defined('DOKU_DISABLE_GZIP_OUTPUT')) {
     define('DOKU_DISABLE_GZIP_OUTPUT', 1);
+}
+
+
+function css_error($error) {
+    echo "html:before {
+        content: '$error';
+        background-color: red;
+        display: block;
+        background-color: #fcc;
+        border-color: #ebb;
+        color: #000;
+        padding: 0.5em;
+    }";
+}
+
+
+// TODO remove this cache-control in future
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+header('Content-Type: text/css; charset=utf-8');
+
+if (! file_exists(DOKU_INC)) {
+    $error = 'Problem with DOKU_INC directory. Please check your DokuWiki installation directory!';
+    css_error($error);
+    die;
 }
 
 require_once DOKU_INC . 'inc/init.php';
@@ -159,12 +190,6 @@ switch ($bootstrap_theme) {
         break;
 
 }
-
-// TODO remove this cache-control in future
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
-header('Content-Type: text/css; charset=utf-8');
 
 $content = '';
 

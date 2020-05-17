@@ -39,6 +39,11 @@ if (file_exists('/usr/share/dokuwiki')) {
     define('DOKU_INC', '/usr/share/dokuwiki/');
 }
 
+# Detect LinuxServer.io DokuWiki Docker image
+if (file_exists('/app/dokuwiki')) {
+    define('DOKU_INC', '/app/dokuwiki/');
+}
+
 # Load doku_inc.php file
 if (file_exists(dirname(__FILE__) . '/doku_inc.php')) {
     require_once dirname(__FILE__) . '/doku_inc.php';
