@@ -10,9 +10,10 @@
 
 # NOTE Some Linux distributon change the location of DokuWiki core libraries (DOKU_INC)
 #
-#      Bitnami (Docker)    /opt/bitnami/dokuwiki
-#      Debian/Ubuntu       /usr/share/webapps/dokuwiki
-#      Debian/Ubuntu       /usr/share/dokuwiki
+#      Bitnami (Docker)         /opt/bitnami/dokuwiki
+#      LinuxServer.io (Docker)  /app/dokuwiki
+#      Arch Linux               /usr/share/webapps/dokuwiki
+#      Debian/Ubuntu            /usr/share/dokuwiki
 #
 # NOTE If DokuWiki core libraries (DOKU_INC) is in another location you can
 #      create a PHP file in bootstrap3 root directory called "doku_inc.php" with
