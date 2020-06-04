@@ -69,8 +69,8 @@ if (!defined('DOKU_DISABLE_GZIP_OUTPUT')) {
     define('DOKU_DISABLE_GZIP_OUTPUT', 1);
 }
 
-
-function css_error($error) {
+function css_error($error)
+{
     echo "html:before {
         content: '$error';
         background-color: red;
@@ -82,14 +82,13 @@ function css_error($error) {
     }";
 }
 
-
 // TODO remove this cache-control in future
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 header('Content-Type: text/css; charset=utf-8');
 
-if (! file_exists(DOKU_INC)) {
+if (!file_exists(DOKU_INC)) {
     $error = 'Problem with DOKU_INC directory. Please check your DokuWiki installation directory!';
     css_error($error);
     die;
@@ -156,7 +155,7 @@ if ($theme_by_namespace && file_exists($themes_filename)) {
 }
 
 # Check $ID and unload the template
-if ($theme_by_namespace && file_exists($themes_filename) && ! $ID) {
+if ($theme_by_namespace && file_exists($themes_filename) && !$ID) {
     $bootstrap_theme = 'none';
 }
 

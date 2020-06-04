@@ -54,7 +54,7 @@ class Template
                 'tocAffix'                   => (int) $this->getConf('tocAffix'),
                 'tocCollapseOnScroll'        => (int) $this->getConf('tocCollapseOnScroll'),
                 'tocCollapsed'               => (int) $this->getConf('tocCollapsed'),
-                'tocLayout'                  =>       $this->getConf('tocLayout'),
+                'tocLayout'                  => $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
             ),
@@ -63,22 +63,18 @@ class Template
         if ($ACT == 'admin') {
             $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
         }
-
     }
-
 
     public function getVersion()
     {
-
         $template_info    = confToHash($this->tplDir . 'template.info.txt');
         $template_version = 'v' . $template_info['date'];
 
         if (isset($template_info['build'])) {
-            $template_version .= ' ('. $template_info['build'] . ')';
+            $template_version .= ' (' . $template_info['build'] . ')';
         }
 
         return $template_version;
-
     }
 
     private function registerHooks()
@@ -112,42 +108,40 @@ class Template
         foreach ($events_dispatcher as $event => $method) {
             $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, $method);
         }
-
     }
 
-    public function testHandler(\Doku_Event $event) {
+    public function testHandler(\Doku_Event $event)
+    {
     }
 
-    public function accountFormHandler(\Doku_Event $event) {
-
+    public function accountFormHandler(\Doku_Event $event)
+    {
         foreach ($event->data->_content as $key => $item) {
-
             if (is_array($item) && isset($item['_elem'])) {
-
                 $title_icon   = 'account';
                 $button_class = 'btn btn-success';
                 $button_icon  = 'arrow-right';
 
-                switch($event->name) {
+                switch ($event->name) {
                     case 'HTML_LOGINFORM_OUTPUT':
-                        $title_icon   = 'account';
-                        $button_icon  = 'lock';
+                        $title_icon  = 'account';
+                        $button_icon = 'lock';
                         break;
                     case 'HTML_UPDATEPROFILEFORM_OUTPUT':
-                        $title_icon   = 'account-card-details-outline';
+                        $title_icon = 'account-card-details-outline';
                         break;
                     case 'HTML_PROFILEDELETEFORM_OUTPUT':
                         $title_icon   = 'account-remove';
                         $button_class = 'btn btn-danger';
                         break;
                     case 'HTML_REGISTERFORM_OUTPUT':
-                        $title_icon   = 'account-plus';
+                        $title_icon = 'account-plus';
                         break;
                     case 'HTML_SUBSCRIBEFORM_OUTPUT':
-                        $title_icon   = null;
+                        $title_icon = null;
                         break;
                     case 'HTML_RESENDPWDFORM_OUTPUT':
-                        $title_icon   = 'lock-reset';
+                        $title_icon = 'lock-reset';
                         break;
                 }
 
@@ -161,27 +155,21 @@ class Template
                     $event->data->_content[$key]['class'] = " $button_class";
                     $event->data->_content[$key]['value'] = (($button_icon) ? iconify("mdi:$button_icon") : '') . ' ' . $event->data->_content[$key]['value'];
                 }
-
             }
-
         }
-
     }
-
 
     /**
      * Handle HTML_DRAFTFORM_OUTPUT event
      *
      * @param \Doku_Event $event Event handler
-     * 
+     *
      * @return void
      **/
-    public function draftFormHandler(\Doku_Event $event) {
-
+    public function draftFormHandler(\Doku_Event $event)
+    {
         foreach ($event->data->_content as $key => $item) {
-
             if (is_array($item) && isset($item['_elem'])) {
-
                 if ($item['_action'] == 'draftdel') {
                     $event->data->_content[$key]['class'] = ' btn btn-danger';
                     $event->data->_content[$key]['value'] = iconify('mdi:close') . ' ' . $event->data->_content[$key]['value'];
@@ -194,27 +182,21 @@ class Template
                 if ($item['_action'] == 'show') {
                     $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
                 }
-
             }
-
         }
-
     }
-
 
     /**
      * Handle HTML_EDITFORM_OUTPUT and HTML_DRAFTFORM_OUTPUT event
      *
      * @param \Doku_Event $event Event handler
-     * 
+     *
      * @return void
      **/
-    public function editFormHandler(\Doku_Event $event) {
-
+    public function editFormHandler(\Doku_Event $event)
+    {
         foreach ($event->data->_content as $key => $item) {
-
             if (is_array($item) && isset($item['_elem'])) {
-
                 // Save button
                 if ($item['_action'] == 'save') {
                     $event->data->_content[$key]['class'] = ' btn btn-success';
@@ -230,30 +212,23 @@ class Template
                 if ($item['_action'] == 'cancel') {
                     $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
                 }
-
             }
-
         }
-
     }
-
 
     /**
      * Handle HTML_REVISIONSFORM_OUTPUT and HTML_RECENTFORM_OUTPUT events
      *
      * @param \Doku_Event $event Event handler
-     * 
+     *
      * @return void
      **/
     public function revisionsFormHandler(\Doku_Event $event)
     {
         foreach ($event->data->_content as $key => $item) {
-
             // Revision form
             if (is_array($item) && isset($item['_elem'])) {
-
                 if ($item['_elem'] == 'opentag' && $item['_tag'] == 'span' && strstr($item['class'], 'sizechange')) {
-
                     if (strstr($item['class'], 'positive')) {
                         $event->data->_content[$key]['class'] .= ' label label-success';
                     }
@@ -261,14 +236,12 @@ class Template
                     if (strstr($item['class'], 'negative')) {
                         $event->data->_content[$key]['class'] .= ' label label-danger';
                     }
-
                 }
 
                 // Recent form
                 if ($item['_elem'] == 'opentag' && $item['_tag'] == 'li' && strstr($item['class'], 'minor')) {
                     $event->data->_content[$key]['class'] .= ' text-muted';
                 }
-
             }
         }
     }
@@ -293,7 +266,6 @@ class Template
                 '<small>' . $event->data['resultBody']['meta'] . '</small>'
             );
         }
-
     }
 
     /**
@@ -315,21 +287,18 @@ class Template
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
             $event->data['script'][] = array(
                 'type'  => 'text/javascript',
-                '_data' => $google_analitycs
+                '_data' => $google_analitycs,
             );
         }
 
         // Apply some FIX
         if ($ACT || defined('DOKU_MEDIADETAIL')) {
-
             // Default Padding
             $navbar_padding = 20;
 
             if ($fixed_top_navbar) {
-
                 $navbar_height = $this->getNavbarHeight();
                 $navbar_padding += $navbar_height;
-
             }
 
             $styles = array();
@@ -345,17 +314,13 @@ class Template
                 'type'  => 'text/css',
                 '_data' => '@media screen { ' . implode(" ", $styles) . ' }',
             );
-
         }
-
     }
 
     public function tagPluginHandler(\Doku_Event $event)
     {
-
         $event->data['class'] .= ' tag label label-default mx-1';
         $event->data['title'] = iconify('mdi:tag-text-outline') . ' ' . $event->data['title'];
-
     }
 
     public function tplIncPluginHandler(\Doku_Event $event)
@@ -368,7 +333,6 @@ class Template
         $event->data['sidebarheader']      = 'Header above the sidebar (sidebarheader)';
         $event->data['rightsidebarfooter'] = 'Footer below the right-sidebar (rightsidebarfooter)';
         $event->data['rightsidebarheader'] = 'Header above the right-sidebar (rightsidebarheader)';
-
     }
 
     private function initPlugins()
@@ -382,7 +346,6 @@ class Template
 
     public function getPlugin($plugin)
     {
-
         if (plugin_isdisabled($plugin)) {
             return false;
         }
@@ -401,7 +364,6 @@ class Template
      */
     public static function getInstance()
     {
-
         static $instance = null;
 
         if ($instance === null) {
@@ -409,7 +371,6 @@ class Template
         }
 
         return $instance;
-
     }
 
     /**
@@ -445,7 +406,6 @@ class Template
 
         echo $bs_content;
         return '';
-
     }
 
     /**
@@ -467,7 +427,6 @@ class Template
 
     private function loadConfMetadata()
     {
-
         $meta = array();
         $file = $this->tplDir . 'conf/metadata.php';
 
@@ -487,13 +446,11 @@ class Template
      */
     public function getConf($key, $default = false)
     {
-
         global $ACT, $INFO, $ID, $conf;
 
         $value = tpl_getConf($key, $default);
 
         switch ($key) {
-
             case 'useAvatar':
 
                 if ($value == 'off') {
@@ -535,7 +492,7 @@ class Template
             case 'hideLoginLink':
             case 'showLoginOnFooter':
 
-                return ($value && ! isset($_SERVER['REMOTE_USER']));
+                return ($value && !isset($_SERVER['REMOTE_USER']));
 
             case 'showCookieLawBanner':
 
@@ -606,26 +563,20 @@ class Template
                 }
 
                 return $value;
-
         }
 
         $metadata = $this->getConfMetadata($key);
 
         if (isset($metadata[0])) {
-
             switch ($metadata[0]) {
-
                 case 'regex':
                     return '/' . $value . '/';
-
                 case 'multicheckbox':
                     return explode(',', $value);
             }
-
         }
 
         return $value;
-
     }
 
     /**
@@ -637,10 +588,8 @@ class Template
      */
     public function getBootswatchThemeList()
     {
-
         $bootswatch_themes = $this->getConfMetadata('bootswatchTheme');
         return $bootswatch_themes['_choices'];
-
     }
 
     /**
@@ -658,7 +607,6 @@ class Template
      */
     public function getAvatar($username, $email, $size = 80, $d = 'mm', $r = 'g')
     {
-
         global $INFO;
 
         $avatar_url      = '';
@@ -687,14 +635,11 @@ class Template
         $email = strtolower(trim($email));
 
         if ($avatar_provider == 'office365') {
-
             $office365_url = rtrim($this->getConf('office365URL'), '/');
             $avatar_url    = $office365_url . '/owa/service.svc/s/GetPersonaPhoto?email=' . $email . '&size=HR' . $size . 'x' . $size;
-
         }
 
         if ($avatar_provider == 'gravatar' || $avatar_provider == 'libavatar') {
-
             $gravatar_url  = rtrim($this->getConf('gravatarURL'), '/') . '/';
             $libavatar_url = rtrim($this->getConf('libavatarURL'), '/') . '/';
 
@@ -709,7 +654,6 @@ class Template
 
             $avatar_url .= md5($email);
             $avatar_url .= "?s=$size&d=$d&r=$r";
-
         }
 
         if ($avatar_url) {
@@ -718,7 +662,6 @@ class Template
         }
 
         return false;
-
     }
 
     /**
@@ -731,7 +674,6 @@ class Template
      **/
     public function getClasses()
     {
-
         $page_on_panel    = $this->getConf('pageOnPanel');
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $bootswatch_theme = $this->getBootswatchTheme();
@@ -753,7 +695,6 @@ class Template
         }
 
         return implode(' ', $classes);
-
     }
 
     /**
@@ -765,7 +706,6 @@ class Template
      */
     public function getBootswatchTheme()
     {
-
         global $INPUT;
 
         $bootswatch_theme = $this->getConf('bootswatchTheme');
@@ -775,9 +715,7 @@ class Template
                 $bootswatch_theme = get_doku_pref('bootswatchTheme', null);
             }
         }
-
         return $bootswatch_theme;
-
     }
 
     /**
@@ -803,7 +741,6 @@ class Template
      */
     public function getPageInfo($ret = false)
     {
-
         global $conf;
         global $lang;
         global $INFO;
@@ -818,13 +755,11 @@ class Template
         $fn = $INFO['filepath'];
 
         if (!$conf['fullpath']) {
-
             if ($INFO['rev']) {
                 $fn = str_replace(fullpath($conf['olddir']) . '/', '', $fn);
             } else {
                 $fn = str_replace(fullpath($conf['datadir']) . '/', '', $fn);
             }
-
         }
 
         $date_format = $this->getConf('pageInfoDateFormat');
@@ -837,7 +772,6 @@ class Template
 
         // print it
         if ($INFO['exists']) {
-
             $fn_full = $fn;
 
             if (!in_array('extension', $page_info)) {
@@ -847,7 +781,7 @@ class Template
             $out = '<ul class="list-inline">';
 
             if (in_array('filename', $page_info)) {
-                $out .= '<li>'. iconify('mdi:file-document-outline', array('class' => 'text-muted')) . ' <span title="' . $fn_full . '">' . $fn . '</span></li>';
+                $out .= '<li>' . iconify('mdi:file-document-outline', array('class' => 'text-muted')) . ' <span title="' . $fn_full . '">' . $fn . '</span></li>';
             }
 
             if (in_array('date', $page_info)) {
@@ -855,13 +789,10 @@ class Template
             }
 
             if (in_array('editor', $page_info)) {
-
                 if (isset($INFO['editor'])) {
-
                     $user = editorinfo($INFO['editor']);
 
                     if ($this->getConf('useAvatar')) {
-
                         global $auth;
                         $user_data = $auth->getUserData($INFO['editor']);
 
@@ -869,15 +800,12 @@ class Template
                         $user_img   = '<img src="' . $avatar_img . '" alt="" width="16" height="16" class="img-rounded" /> ';
                         $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
                         $user       = $user_img . "<bdi>$user<bdi>";
-
                     }
 
                     $out .= '<li class="text-muted">' . $lang['by'] . ' <bdi>' . $user . '</bdi></li>';
-
                 } else {
                     $out .= '<li>(' . $lang['external_edit'] . ')</li>';
                 }
-
             }
 
             if ($INFO['locked'] && in_array('locked', $page_info)) {
@@ -892,11 +820,9 @@ class Template
                 echo $out;
                 return true;
             }
-
         }
 
         return false;
-
     }
 
     /**
@@ -918,13 +844,11 @@ class Template
 
         // Check if translation is outdate
         if ($this->getConf('showTranslation') && $translation = $this->getPlugin('translation')) {
-
             global $ID;
 
             if ($translation->istranslatable($ID)) {
                 $translation->checkage();
             }
-
         }
 
         if (!isset($MSG)) {
@@ -934,7 +858,6 @@ class Template
         $shown = array();
 
         foreach ($MSG as $msg) {
-
             $hash = md5($msg['msg']);
             if (isset($shown[$hash])) {
                 continue;
@@ -942,9 +865,7 @@ class Template
             // skip double messages
 
             if (info_msg_allowed($msg)) {
-
                 switch ($msg['lvl']) {
-
                     case 'info':
                         $level = 'info';
                         $icon  = 'mdi:information';
@@ -964,22 +885,18 @@ class Template
                         $level = 'success';
                         $icon  = 'mdi:check-circle';
                         break;
-
                 }
 
                 print '<div class="alert alert-' . $level . '">';
                 print iconify($icon, array('class' => 'mr-2'));
                 print $msg['msg'];
                 print '</div>';
-
             }
 
             $shown[$hash] = 1;
-
         }
 
         unset($GLOBALS['MSG']);
-
     }
 
     /**
@@ -1016,7 +933,6 @@ class Template
         $output .= '<a href="' . $license_url . '" title="' . $license_name . '" target="' . $target . '" ' . $semantic . ' rel="license" class="license">';
 
         if ($type == 'image') {
-
             foreach (explode('-', $conf['license']) as $license_img) {
                 if ($license_img == 'publicdomain') {
                     $license_img = 'pd';
@@ -1024,7 +940,6 @@ class Template
 
                 $output .= '<img src="' . tpl_basedir() . "images/license/$license_img.png" . '" width="' . $size . '" height="' . $size . '" alt="' . $license_img . '" /> ';
             }
-
         } else {
             $output .= $lic['name'];
         }
@@ -1037,7 +952,6 @@ class Template
 
         echo $output;
         return '';
-
     }
 
     /**
@@ -1049,7 +963,6 @@ class Template
      */
     public function getGoogleAnalitycs()
     {
-
         global $INFO;
         global $ID;
 
@@ -1073,7 +986,6 @@ class Template
             if (preg_match_all($this->getConf('googleAnalyticsNoTrackPages'), $ID)) {
                 return false;
             }
-
         }
 
         $out = DOKU_LF;
@@ -1097,7 +1009,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $out .= '// End Google Analytics' . DOKU_LF;
 
         return $out;
-
     }
 
     /**
@@ -1121,12 +1032,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getUserHomePageID()
     {
-
         $interwiki = getInterwiki();
         $page_id   = str_replace('{NAME}', $_SERVER['REMOTE_USER'], $interwiki['user']);
 
         return cleanID($page_id);
-
     }
 
     /**
@@ -1139,7 +1048,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getBreadcrumbs()
     {
-
         global $lang;
         global $conf;
 
@@ -1158,7 +1066,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $i    = 0;
 
         foreach ($crumbs as $id => $name) {
-
             $i++;
 
             print($i == $last) ? '<li class="active">' : '<li>';
@@ -1168,11 +1075,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if ($i == $last) {
                 print '</ol>';
             }
-
         }
 
         return true;
-
     }
 
     /**
@@ -1192,7 +1097,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getYouAreHere()
     {
-
         global $conf;
         global $ID;
         global $lang;
@@ -1224,7 +1128,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $part = '';
 
         for ($i = 0; $i < $count - 1; $i++) {
-
             $part .= $parts[$i] . ':';
             $page = $part;
 
@@ -1237,7 +1140,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             echo '<li' . ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') . '>';
 
             $link = html_wikilink($page);
-            $link = str_replace(' class="curid"', '', html_wikilink($page));
+            $link = str_replace(' class="curid"', '', $link);
 
             if ($semantic) {
                 $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
@@ -1245,7 +1148,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             echo $link;
             echo '</li>';
-
         }
 
         // print current page, skipping start page, skipping for namespace index
@@ -1277,7 +1179,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         echo '</ol>';
 
         return true;
-
     }
 
     /**
@@ -1288,11 +1189,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getBrowserPageTitle()
     {
-
         global $conf, $ACT, $ID;
 
         if ($this->getConf('browserTitleShowNS') && $ACT == 'show') {
-
             $ns_page      = '';
             $ns_parts     = explode(':', $ID);
             $ns_pages     = array();
@@ -1300,9 +1199,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $ns_separator = sprintf(' %s ', $this->getConf('browserTitleCharSepNS'));
 
             if (useHeading('navigation')) {
-
                 if (count($ns_parts) > 1) {
-
                     foreach ($ns_parts as $ns_part) {
                         $ns_page .= "$ns_part:";
                         $ns_pages[] = $ns_page;
@@ -1311,7 +1208,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $ns_pages = array_unique($ns_pages);
 
                     foreach ($ns_pages as $ns_page) {
-
                         $exists = false;
                         resolve_pageid(getNS($ns_page), $ns_page, $exists);
 
@@ -1322,9 +1218,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                         if ($ns_page_title !== $conf['start']) {
                             $ns_titles[] = $ns_page_title;
                         }
-
                     }
-
                 }
 
                 resolve_pageid(getNS($ID), $ID, $exists);
@@ -1336,7 +1230,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 }
 
                 $ns_titles = array_filter(array_unique($ns_titles));
-
             } else {
                 $ns_titles = $ns_parts;
             }
@@ -1355,7 +1248,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             array(strip_tags($conf['title']), $browser_title),
             $this->getConf('browserTitle')
         );
-
     }
 
     /**
@@ -1366,7 +1258,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getThemeForNamespace()
     {
-
         global $ID;
 
         $themes_filename = DOKU_CONF . 'bootstrap3.themes.conf';
@@ -1383,9 +1274,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         krsort($config);
 
         foreach ($config as $page => $theme) {
-
             if (preg_match("/^$page/", "$ID")) {
-
                 list($bootstrap, $bootswatch) = explode('/', $theme);
 
                 if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
@@ -1395,13 +1284,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 if ($bootstrap == 'bootswatch' && in_array($bootswatch, $this->getBootswatchThemeList())) {
                     return array($bootstrap, $bootswatch);
                 }
-
             }
-
         }
 
         return array();
-
     }
 
     /**
@@ -1417,7 +1303,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function toBootstrapNav($html, $type = '', $stacked = false, $optional_class = '')
     {
-
         $classes = array();
 
         $classes[] = 'nav';
@@ -1449,7 +1334,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $output = $this->normalizeList($output);
 
         return $output;
-
     }
 
     /**
@@ -1485,7 +1369,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $output = preg_replace('/<li class="level([0-9]) node"> <a data-curid="true" /', '<li class="level$1 node active"> <a ', $output);
 
         return $output;
-
     }
 
     /**
@@ -1498,7 +1381,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getNavbar()
     {
-
         if ($this->getConf('showNavbar') === 'logged' && !$_SERVER['REMOTE_USER']) {
             return false;
         }
@@ -1524,7 +1406,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             '<ul class="dropdown-menu" role="menu">' . PHP_EOL . '<li class="level2$2">', $navbar);
 
         return $navbar;
-
     }
 
     /**
@@ -1538,7 +1419,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function normalizeSidebar($sidebar, $return = false)
     {
-
         $out = $this->toBootstrapNav($sidebar, 'pills', true);
         $out = $this->normalizeContent($out);
 
@@ -1554,7 +1434,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
 
             $elm->class .= ' page-header';
-
         }
 
         $out = $html->save();
@@ -1566,7 +1445,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         echo $out;
-
     }
 
     /**
@@ -1588,9 +1466,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $output   = $this->normalizeContent($this->toBootstrapNav(tpl_include_page($page, 0, 1, $this->getConf('useACL')), 'pills', true));
         $dropdown = '<ul class="nav navbar-nav dw__dropdown_page">' .
-            '<li class="dropdown dropdown-large">' .
-            '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
-            p_get_first_heading($page) .
+        '<li class="dropdown dropdown-large">' .
+        '<a href="#" class="dropdown-toggle" data-toggle="dropdown" title="">' .
+        p_get_first_heading($page) .
             ' <span class="caret"></span></a>' .
             '<ul class="dropdown-menu dropdown-menu-large" role="menu">' .
             '<li><div class="container small">' .
@@ -1598,7 +1476,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             '</div></li></ul></li></ul>';
 
         return $dropdown;
-
     }
 
     /**
@@ -1611,7 +1488,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function includeSidebar($type)
     {
-
         global $conf;
 
         $left_sidebar       = $conf['sidebar'];
@@ -1624,12 +1500,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         switch ($type) {
-
             case 'left':
 
                 if ($this->getConf('sidebarPosition') == 'left') {
-                    $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
-                        'sidebarheader', 'sidebarfooter');
+                    $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid, 'sidebarheader', 'sidebarfooter');
                 }
 
                 return true;
@@ -1637,21 +1511,18 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             case 'right':
 
                 if ($this->getConf('sidebarPosition') == 'right') {
-                    $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid,
-                        'sidebarheader', 'sidebarfooter');
+                    $this->sidebarWrapper($left_sidebar, 'dokuwiki__aside', $left_sidebar_grid, 'sidebarheader', 'sidebarfooter');
                 }
 
                 if ($this->getConf('showRightSidebar')
                     && $this->getConf('sidebarPosition') == 'left') {
-                    $this->sidebarWrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid,
-                        'rightsidebarheader', 'rightsidebarfooter');
+                    $this->sidebarWrapper($right_sidebar, 'dokuwiki__rightaside', $right_sidebar_grid, 'rightsidebarheader', 'rightsidebarfooter');
                 }
 
                 return true;
         }
 
         return false;
-
     }
 
     /**
@@ -1682,7 +1553,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function normalizeContent($content)
     {
-
         global $ACT;
         global $INPUT;
         global $INFO;
@@ -1709,8 +1579,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         if (!$html) {
             return $content;
         }
-
-
 
         # Move Current Page ID to <a> element and create data-curid HTML5 attribute
         foreach ($html->find('.curid') as $elm) {
@@ -1757,7 +1625,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         foreach ($html->find('[type=button], [type=submit], [type=reset]') as $elm) {
             $elm->class .= ' btn btn-default';
         }
-
 
         # Section Edit Button
         foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
@@ -1829,9 +1696,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Alerts
         foreach ($html->find('div.info, div.error, div.success, div.notify') as $elm) {
-
             switch ($elm->class) {
-
                 case 'info':
                     $elm->class     = 'alert alert-info';
                     $elm->innertext = iconify('mdi:information') . ' ' . $elm->innertext;
@@ -1852,9 +1717,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $elm->class     = 'alert alert-warning';
                     $elm->innertext = iconify('mdi:alert') . ' ' . $elm->innertext;
                     break;
-
             }
-
         }
 
         # Tables
@@ -1862,17 +1725,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $table_classes = 'table';
 
         foreach ($this->getConf('tableStyle') as $class) {
-
             if ($class == 'responsive') {
-
                 foreach ($html->find('div.table') as $elm) {
                     $elm->class = 'table-responsive';
                 }
-
             } else {
                 $table_classes .= " table-$class";
             }
-
         }
 
         foreach ($html->find('table.inline,table.import_failures') as $elm) {
@@ -1884,13 +1743,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         # Tag and Pagelist (table)
-        
-        if ($this->getPlugin('tag') || $this->getPlugin('pagelist')) {
 
+        if ($this->getPlugin('tag') || $this->getPlugin('pagelist')) {
             foreach ($html->find('table.ul') as $elm) {
                 $elm->class .= " $table_classes";
             }
-        
         }
 
         $content = $html->save();
@@ -1898,13 +1755,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $html->clear();
         unset($html);
 
-
         # ----- Actions -----
 
         # Search
 
         if ($ACT == 'search') {
-
             # Import HTML string
             $html = new \simple_html_dom;
             $html->load($content, true, false);
@@ -1918,19 +1773,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             $html->clear();
             unset($html);
-
         }
 
         # Index / Sitemap
 
         if ($ACT == 'index') {
-
             # Import HTML string
             $html = new \simple_html_dom;
             $html->load($content, true, false);
 
             foreach ($html->find('.idx_dir') as $idx => $elm) {
-
                 $parent = $elm->parent()->parent();
 
                 if (preg_match('/open/', $parent->class)) {
@@ -1938,100 +1790,80 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 }
 
                 if (preg_match('/closed/', $parent->class)) {
-                    $elm->innertext =  iconify('mdi:folder', array('class' => 'text-primary mr-2')) . $elm->innertext;
+                    $elm->innertext = iconify('mdi:folder', array('class' => 'text-primary mr-2')) . $elm->innertext;
                 }
-
             }
 
             foreach ($html->find('.idx .wikilink1') as $elm) {
-                $elm->innertext =  iconify('mdi:file-document-outline', array('class' => 'text-muted mr-2')) . $elm->innertext;
+                $elm->innertext = iconify('mdi:file-document-outline', array('class' => 'text-muted mr-2')) . $elm->innertext;
             }
 
             $content = $html->save();
 
             $html->clear();
             unset($html);
-
         }
 
         # Admin Pages
 
         if ($ACT == 'admin') {
-
             # Import HTML string
             $html = new \simple_html_dom;
             $html->load($content, true, false);
 
             // Set specific icon in Admin Page
             if ($INPUT->str('page')) {
-
                 if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
                     $admin_pagetitle->class .= ' ' . $INPUT->str('page');
                 }
-
             }
 
             # ACL
 
             if ($INPUT->str('page') == 'acl') {
-
                 foreach ($html->find('[name*=cmd[update]]') as $elm) {
                     $elm->class .= ' btn-success';
                     if ($elm->tag == 'button') {
                         $elm->innertext = iconify('mdi:content-save') . ' ' . $elm->innertext;
                     }
                 }
-
             }
 
             # Popularity
 
             if ($INPUT->str('page') == 'popularity') {
-
                 foreach ($html->find('[type=submit]') as $elm) {
-
                     $elm->class .= ' btn-primary';
 
                     if ($elm->tag == 'button') {
                         $elm->innertext = iconify('mdi:arrow-right') . ' ' . $elm->innertext;
                     }
-
                 }
-
             }
 
             # Revert Manager
 
             if ($INPUT->str('page') == 'revert') {
-
                 foreach ($html->find('[type=submit]') as $idx => $elm) {
-
                     if ($idx == 0) {
-
                         $elm->class .= ' btn-primary';
                         if ($elm->tag == 'button') {
-                            $elm->innertext = iconify('mdi:magnify'). ' ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:magnify') . ' ' . $elm->innertext;
                         }
-
                     }
 
                     if ($idx == 1) {
-
                         $elm->class .= ' btn-success';
                         if ($elm->tag == 'button') {
-                            $elm->innertext = iconify('mdi:refresh'). ' ' . $elm->innertext;
+                            $elm->innertext = iconify('mdi:refresh') . ' ' . $elm->innertext;
                         }
-
                     }
-
                 }
-
             }
 
             # Config
 
             if ($INPUT->str('page') == 'config') {
-
                 foreach ($html->find('[type=submit]') as $elm) {
                     $elm->class .= ' btn-success';
                     if ($elm->tag == 'button') {
@@ -2040,7 +1872,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 }
 
                 foreach ($html->find('#config__manager') as $cm_elm) {
-
                     $save_button = '';
 
                     foreach ($cm_elm->find('p') as $elm) {
@@ -2051,21 +1882,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     foreach ($cm_elm->find('fieldset') as $elm) {
                         $elm->innertext .= $save_button;
                     }
-
                 }
-
             }
 
             # User Manager
 
             if ($INPUT->str('page') == 'usermanager') {
-
                 foreach ($html->find('.notes') as $elm) {
                     $elm->class = str_replace('notes', '', $elm->class);
                 }
 
                 foreach ($html->find('h2') as $idx => $elm) {
-
                     switch ($idx) {
                         case 0:
                             $elm->innertext = iconify('mdi:account-multiple') . ' ' . $elm->innertext;
@@ -2077,7 +1904,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                             $elm->innertext = iconify('mdi:account-edit') . ' ' . $elm->innertext;
                             break;
                     }
-
                 }
 
                 foreach ($html->find('.import_users h2') as $elm) {
@@ -2128,13 +1954,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $elm->class .= ' btn btn-default';
                     $elm->innertext = iconify('mdi:chevron-double-right') . ' ' . $elm->innertext;
                 }
-
             }
 
             # Extension Manager
 
             if ($INPUT->str('page') == 'extension') {
-
                 foreach ($html->find('.actions') as $elm) {
                     $elm->class .= ' pl-4 btn-group btn-group-xs';
                 }
@@ -2172,14 +1996,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 foreach ($html->find('.permerror') as $elm) {
                     $elm->class .= ' pull-left';
                 }
-
             }
 
             # Admin page
             if ($INPUT->str('page') == null) {
-
                 foreach ($html->find('ul.admin_tasks, ul.admin_plugins') as $admin_task) {
-
                     $admin_task->class .= ' list-group';
 
                     foreach ($admin_task->find('a') as $item) {
@@ -2194,7 +2015,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                         $item->innertext = iconify('mdi:puzzle', array('class' => 'text-success'));
                     }
-
                 }
 
                 foreach ($html->find('h2') as $elm) {
@@ -2202,27 +2022,22 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 }
 
                 foreach ($html->find('ul.admin_plugins') as $admin_plugins) {
-
                     $admin_plugins->class .= ' col-sm-4';
                     foreach ($admin_plugins->find('li') as $idx => $item) {
                         if ($idx > 0 && $idx % 5 == 0) {
                             $item->outertext = '</ul><ul class="' . $admin_plugins->class . '">' . $item->outertext;
                         }
                     }
-
                 }
 
                 # DokuWiki logo
                 if ($admin_version = $html->getElementById('admin__version')) {
-
                     $admin_version->innertext = '<div class="dokuwiki__version"><img src="' . DOKU_BASE . 'lib/tpl/dokuwiki/images/logo.png" class="p-2" alt="" width="32" height="32" /> ' . $admin_version->innertext . '</div>';
 
                     $template_version = $this->getVersion();
 
-                    $admin_version->innertext .= '<div class="template__version"><img src="'. tpl_basedir() .'images/bootstrap.png" class="p-2" height="32" width="32" alt="" />Template ' . $template_version . '</div>';
-
+                    $admin_version->innertext .= '<div class="template__version"><img src="' . tpl_basedir() . 'images/bootstrap.png" class="p-2" height="32" width="32" alt="" />Template ' . $template_version . '</div>';
                 }
-
             }
 
             $content = $html->save();
@@ -2232,7 +2047,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             # Configuration Manager Template Sections
             if ($INPUT->str('page') == 'config') {
-
                 # Import HTML string
                 $html = new \simple_html_dom;
                 $html->load($content, true, false);
@@ -2245,21 +2059,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $plugin_name = $matches[1];
 
                     if ($extension = plugin_load('helper', 'extension_extension')) {
-
                         if ($extension->setExtension($plugin_name)) {
-
                             foreach ($elm->find('legend') as $legend) {
                                 $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
                             }
-
                         }
-
                     } else {
                         foreach ($elm->find('legend') as $legend) {
                             $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext;
                         }
                     }
-
                 }
 
                 $dokuwiki_configs = array(
@@ -2289,44 +2098,38 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 $admin_sections = array(
                     // Section                  Insert Before           Icon
-                    'theme'            => array('bootstrapTheme',       'mdi:palette'),
-                    'sidebar'          => array('sidebarPosition',      'mdi:page-layout-sidebar-left'),
-                    'navbar'           => array('inverseNavbar',        'mdi:page-layout-header'),
-                    'semantic'         => array('semantic',             'mdi:share-variant'),
-                    'layout'           => array('fluidContainer',       'mdi:monitor'),
-                    'toc'              => array('tocAffix',             'mdi:view-list'),
-                    'discussion'       => array('showDiscussion',       'mdi:comment-text-multiple'),
-                    'avatar'           => array('useAvatar',            'mdi:account'),
-                    'cookie_law'       => array('showCookieLawBanner',  'mdi:scale-balance'),
-                    'google_analytics' => array('useGoogleAnalytics',   'mdi:google'),
-                    'browser_title'    => array('browserTitle',         'mdi:format-title'),
-                    'page'             => array('showPageInfo',         'mdi:file'),
+                    'theme'            => array('bootstrapTheme', 'mdi:palette'),
+                    'sidebar'          => array('sidebarPosition', 'mdi:page-layout-sidebar-left'),
+                    'navbar'           => array('inverseNavbar', 'mdi:page-layout-header'),
+                    'semantic'         => array('semantic', 'mdi:share-variant'),
+                    'layout'           => array('fluidContainer', 'mdi:monitor'),
+                    'toc'              => array('tocAffix', 'mdi:view-list'),
+                    'discussion'       => array('showDiscussion', 'mdi:comment-text-multiple'),
+                    'avatar'           => array('useAvatar', 'mdi:account'),
+                    'cookie_law'       => array('showCookieLawBanner', 'mdi:scale-balance'),
+                    'google_analytics' => array('useGoogleAnalytics', 'mdi:google'),
+                    'browser_title'    => array('browserTitle', 'mdi:format-title'),
+                    'page'             => array('showPageInfo', 'mdi:file'),
                 );
 
                 foreach ($admin_sections as $section => $items) {
-
                     $search = $items[0];
                     $icon   = $items[1];
 
                     $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»' . $search . ')<\/span>/',
                         '</table></div></fieldset><fieldset id="bootstrap3__' . $section . '"><legend>' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
-
                 }
-
             }
-
         }
 
         # Difference and Draft
 
         if ($ACT == 'diff' || $ACT == 'draft') {
-
             # Import HTML string
             $html = new \simple_html_dom;
             $html->load($content, true, false);
 
             foreach ($html->find('.diff-lineheader') as $elm) {
-
                 $elm->style = 'opacity: 0.5';
                 $elm->class .= ' text-center px-3';
 
@@ -2336,7 +2139,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 if ($elm->innertext == '-') {
                     $elm->class .= ' bg-danger';
                 }
-
             }
 
             foreach ($html->find('.diff_sidebyside .diff-deletedline, .diff_sidebyside .diff-addedline') as $elm) {
@@ -2374,7 +2176,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             $html->clear();
             unset($html);
-
         }
 
         # Add icons for Extensions, Actions, etc.
@@ -2384,7 +2185,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $iconify_attrs = array('class' => 'mr-2');
 
         if (!$INFO['exists'] && $ACT == 'show') {
-            $iconify_icon = 'mdi:alert';
+            $iconify_icon           = 'mdi:alert';
             $iconify_attrs['style'] = 'color:orange';
         }
 
@@ -2396,25 +2197,20 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         switch ($ACT) {
-
             case 'admin':
 
                 if (($plugin = plugin_load('admin', $INPUT->str('page'))) !== null) {
-
                     if (method_exists($plugin, 'getMenuIcon')) {
-
                         $svg_icon = $plugin->getMenuIcon();
 
                         if (!file_exists($svg_icon)) {
                             $iconify_icon = 'mdi:puzzle';
-                            $svg_icon = null;
+                            $svg_icon     = null;
                         }
-
                     } else {
                         $iconify_icon = 'mdi:puzzle';
-                        $svg_icon = null;
+                        $svg_icon     = null;
                     }
-
                 }
 
                 break;
@@ -2424,7 +2220,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 break;
 
             case 'denied':
-                $iconify_icon = 'mdi:block-helper';
+                $iconify_icon           = 'mdi:block-helper';
                 $iconify_attrs['style'] = 'color:red';
                 break;
 
@@ -2451,15 +2247,13 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         if ($svg_icon) {
-
             $svg_attrs = array('class' => 'iconify mr-2');
 
             if ($ACT == 'admin' && $INPUT->str('page') == 'extension') {
                 $svg_attrs['style'] = 'fill: green;';
             }
 
-
-            $svg = \SVG::icon($svg_icon, null, '1em', $svg_attrs);
+            $svg = SVG::icon($svg_icon, null, '1em', $svg_attrs);
 
             # Import HTML string
             $html = new \simple_html_dom;
@@ -2474,11 +2268,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             $html->clear();
             unset($html);
-
         }
 
         if ($iconify_icon) {
-
             # Import HTML string
             $html = new \simple_html_dom;
             $html->load($content, true, false);
@@ -2492,11 +2284,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             $html->clear();
             unset($html);
-
         }
 
         return $content;
-
     }
 
     /**
@@ -2522,7 +2312,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getContainerGrid()
     {
-
         global $ID;
 
         $result = '';
@@ -2536,8 +2325,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $show_left_sidebar  = $this->getConf('showSidebar');
         $fluid_container    = $this->getConf('fluidContainer');
 
-        if ($this->getConf('showLandingPage')
-            && (bool) preg_match($this->getConf('landingPages'), $ID)) {
+        if ($this->getConf('showLandingPage') && (bool) preg_match($this->getConf('landingPages'), $ID)) {
             $show_left_sidebar = false;
         }
 
@@ -2562,7 +2350,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         return $result;
-
     }
 
     /**
@@ -2579,7 +2366,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getTOC($return = false)
     {
-
         global $TOC;
         global $ACT;
         global $ID;
@@ -2606,20 +2392,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $toc = array();
             }
         } elseif ($ACT == 'admin') {
-
             // try to load admin plugin TOC
             /** @var $plugin DokuWiki_Admin_Plugin */
             if ($plugin = plugin_getRequestAdminPlugin()) {
                 $toc = $plugin->getTOC();
                 $TOC = $toc; // avoid later rebuild
             }
-
         }
 
         trigger_event('TPL_TOC_RENDER', $toc, null, false);
 
         if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
-
             $bootstrap3_sections = array(
                 'theme', 'sidebar', 'navbar', 'semantic', 'layout', 'toc',
                 'discussion', 'avatar', 'cookie_law', 'google_analytics',
@@ -2634,7 +2417,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     'level' => 3,
                 );
             }
-
         }
 
         $html = $this->renderTOC($toc);
@@ -2645,7 +2427,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         echo $html;
         return '';
-
     }
 
     /**
@@ -2659,7 +2440,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     private function renderTOC($toc)
     {
-
         if (!count($toc)) {
             return '';
         }
@@ -2680,7 +2460,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $out .= '<script>JSINFO.bootstrap3.toc = ' . json_encode($json_toc) . ';</script>' . DOKU_LF;
 
         if ($this->getConf('tocLayout') !== 'navbar') {
-
             $out .= '<!-- TOC START -->' . DOKU_LF;
             $out .= '<div class="dw-toc hidden-print">' . DOKU_LF;
             $out .= '<nav id="dw__toc" role="navigation" class="toc-panel panel panel-default small">' . DOKU_LF;
@@ -2693,22 +2472,19 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $out .= '</nav>' . DOKU_LF;
             $out .= '</div>' . DOKU_LF;
             $out .= '<!-- TOC END -->' . DOKU_LF;
-
         }
 
         return $out;
-
     }
 
     private function initToolsMenu()
     {
-
         global $ACT;
 
         $tools_menus = array(
-            'user'  => array('icon' => 'mdi:account',               'object' => new \dokuwiki\Menu\UserMenu),
-            'site'  => array('icon' => 'mdi:toolbox',               'object' => new \dokuwiki\Menu\SiteMenu),
-            'page'  => array('icon' => 'mdi:file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
+            'user' => array('icon' => 'mdi:account', 'object' => new \dokuwiki\Menu\UserMenu),
+            'site' => array('icon' => 'mdi:toolbox', 'object' => new \dokuwiki\Menu\SiteMenu),
+            'page' => array('icon' => 'mdi:file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
@@ -2716,9 +2492,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         foreach ($tools_menus as $tool => $data) {
-
             foreach ($data['object']->getItems() as $item) {
-
                 $attr   = buildAttributes($item->getLinkAttributes());
                 $active = 'action';
 
@@ -2744,13 +2518,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                 $tools_menus[$tool]['menu'][$item->getType()]['object'] = $item;
                 $tools_menus[$tool]['menu'][$item->getType()]['html']   = $html;
-
             }
-
         }
 
         $this->toolsMenu = $tools_menus;
-
     }
 
     public function getToolsMenu()
@@ -2779,28 +2550,9 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return null;
     }
 
-    public function cleanSVG($content)
-    {
-
-        $content = preg_replace('/<!--.*?(-->)/s', '', $content); // comments
-        $content = preg_replace('/<\?xml .*?\?>/i', '', $content); // xml header
-        $content = preg_replace('/<!DOCTYPE .*?>/i', '', $content); // doc type
-        $content = preg_replace('/>\s+</s', '><', $content); // newlines between tags
-        $content = trim($content);
-
-        if (substr($content, 0, 5) !== '<svg ') {
-            return false;
-        }
-
-        return $content;
-
-    }
-
     public function getNavbarHeight()
     {
-
         switch ($this->getBootswatchTheme()) {
-            
             case 'simplex':
             case 'superhero':
                 return 40;
@@ -2834,9 +2586,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             default:
                 return 50;
         }
-
     }
-
 }
 
 // kate: space-indent on; indent-width 4; replace-tabs on;
