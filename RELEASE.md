@@ -1,5 +1,29 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [develop]
+
+### Added
+  * Added  ``css.php`` dispatcher for Bootstrap themes
+  * Added support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux
+      * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
+      * #470: Added LinuxServer.io Docker image support for Iconify and CSS.php (thanks to @Ryonez)
+  * Added ``doku_inc.php`` support for specify the corrected ``DOKU_INC`` path (added in ``css.php`` and ``iconify.php``)
+
+### Changed
+  * Moved CSS and JS asset into standard DokuWiki CSS/JS dispatcher (``/lib/exe/{js,css}.php``) for better plugin compatibility
+  * Updated Iconify to v1.0.6
+
+### Fixed
+  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
+  * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
+  * #465: Added "itemref" meta (thanks to @sioc-de-narf)
+  * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
+  * #467: Section-editing mouse flickering, when trying to click on "edit" button (thanks to @virk)
+  * #469: No TOC in Navbar (thanks to @Ohkami)
+  * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
+
+
+
 ## [v2020-04-04]
 
 After log development cycle a new release of Bootstrap Template is issued with Iconify support, new Detail page and Footer layout, stability and new plugins support (**Struct**, **Bureaucracy** and other popular DokuWiki plugins). Now Bootswatch Wrapper ``callout`` syntax follow the original Bootswatch contextual colors.
@@ -48,17 +72,6 @@ Enjoy!
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
   * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
-  * #470: Added LinuxServer.io Docker image support for Iconify and CSS.php (thanks to @Ryonez)
-
-### Hotfix
-  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
-  * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
-  * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
-  * #465: Added "itemref" meta (thanks to @sioc-de-narf)
-  * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
-  * #467: Section-editing mouse flickering, when trying to click on "edit" button (thanks to @virk)
-  * #469: No TOC in Navbar (thanks to @Ohkami)
-  * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
 
 
 ## [v2019-05-22]
