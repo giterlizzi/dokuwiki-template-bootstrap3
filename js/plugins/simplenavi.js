@@ -12,6 +12,8 @@ var $simplenavi = jQuery('.plugin__simplenavi');
 
 if ($simplenavi.length) {
 
+  $simplenavi.find('li').addClass('mt-1');
+  $simplenavi.find('a.wikilink2').removeClass('wikilink2');
   $simplenavi.find('li.open strong').contents().unwrap();
   $simplenavi.find('li.closed a').prepend('<span class="iconify mr-2" data-icon="mdi:folder"/>');
   $simplenavi.find('li.open > a').prepend('<span class="iconify mr-2" data-icon="mdi:folder-open"/>');
