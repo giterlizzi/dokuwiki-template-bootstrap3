@@ -21,6 +21,7 @@
   * #467: Section-editing mouse flickering, when trying to click on "edit" button (thanks to @virk)
   * #469: No TOC in Navbar (thanks to @Ohkami)
   * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
+  * #481: Navbar Items Improperly Formatted on Hogfather (thanks to @TheZachh and @phy25)
 
 
 

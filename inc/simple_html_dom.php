@@ -2108,7 +2108,7 @@ class simple_html_dom
 		// PaperG: Attributes should not have \r or \n in them, that counts as
 		// html whitespace.
 
-		// LotarProject: Fix for Bootstrap3 Template for DokuWiki
+		// giterlizzi: Fix for DokuWiki Bootstrap Template 
 		if ($this->strip_rn) {
 			$value = str_replace("\r", '', $value);
 			$value = str_replace("\n", '', $value);

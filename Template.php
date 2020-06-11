@@ -1347,28 +1347,58 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      * @param   string  $html
      * @return  string
      */
-    public function normalizeList($html)
+    public function normalizeList($list)
     {
 
-        $output = $html;
+        global $ID;
 
-        // Save the "curid" inside the anchor with HTML5 data "data-curid"
-        $output = str_replace('<span class="curid"><a ', '<span class="curid"><a data-curid="true" ', $output);
+        $list = preg_replace_callback('/data-wiki-id="(.+?)"/', array($this, '_replaceWikiCurrentIdCallback'), $list);
 
-        // Remove all <div class="li"/> tags
-        $output = preg_replace('/<div class="li">(.*?)<\/div>/', '$1', $output);
+        $html = new \simple_html_dom;
+        $html->load($list, true, false);
 
-        // Remove all <span class="curid"/> tags
-        $output = preg_replace('/<span class="curid">(.*?)<\/span>/', '$1', $output);
+        # Create data-curid HTML5 attribute and unwrap span.curid for pre-Hogfather release
+        foreach ($html->find('span.curid') as $elm) {
+            $elm->firstChild()->setAttribute('data-wiki-curid', 'true');
+            $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
+        }
 
-        // Move the Font-Icon inside the anchor
-        $output = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $output);
+        # Unwrap div.li element
+        foreach ($html->find('div.li') as $elm) {
+            $elm->outertext = str_replace(array('<div class="li">', '</div>'), '', $elm->outertext);
+        }
 
-        // Add the "active" class for the list-item <li/> and remove the HTML5 data "data-curid"
-        $output = preg_replace('/<li class="level([0-9])"> <a data-curid="true" /', '<li class="level$1 active"> <a ', $output);
-        $output = preg_replace('/<li class="level([0-9]) node"> <a data-curid="true" /', '<li class="level$1 node active"> <a ', $output);
+        $list = $html->save();
+        $html->clear();
+        unset($html);
 
-        return $output;
+        $html = new \simple_html_dom;
+        $html->load($list, true, false);
+
+        foreach ($html->find('li') as $elm) {
+            if ($elm->find('a[data-wiki-curid]')) {
+                $elm->class .= ' active';
+            }
+        }
+
+        $list = $html->save();
+        $html->clear();
+        unset($html);
+
+        return $list;
+    }
+
+    private function _replaceWikiCurrentIdCallback($matches)
+    {
+        
+        global $ID;
+
+        if ($ID == $matches[1]) {
+            return 'data-wiki-curid="true"';
+        }
+
+        return '';
+
     }
 
     /**
@@ -1393,13 +1423,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $navbar = str_replace('urlextern', '', $navbar);
 
         $navbar = preg_replace('/<li class="level([0-9]) node"> (.*)/',
-            '<li class="level$1 node dropdown"><a href="' . wl($ID) . '" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+            '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+
+        $navbar = preg_replace('/<li class="level([0-9]) node active"> (.*)/',
+        '<li class="level$1 node active dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
         # FIX for Purplenumbers renderer plugin
         # TODO use Simple DOM HTML or improve the regex!
         if ($conf['renderer_xhtml'] == 'purplenumbers') {
             $navbar = preg_replace('/<li class="level1"> (.*)/',
-                '<li class="level1 dropdown"><a href="' . wl($ID) . '" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
+                '<li class="level1 dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$1 <span class="caret"></span></a>', $navbar);
         }
 
         $navbar = preg_replace('/<ul class="(.*)">\n<li class="level2(.*)">/',
