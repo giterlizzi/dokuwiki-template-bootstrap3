@@ -24,36 +24,27 @@
 #      (!) This file will be deleted on every upgrade of template
 
 
-# Detect Bitnami DokuWiki Docker image and apply the correct DOKU_INC path
-#   see: https://github.com/bitnami/bitnami-docker-dokuwiki/issues/37
-if (getenv('BITNAMI_APP_NAME')) {
-    define('DOKU_INC', '/opt/bitnami/dokuwiki/');
-}
-
-# Detect Arch Linux DokuWiki package
-if (file_exists('/usr/share/webapps/dokuwiki')) {
-    define('DOKU_INC', '/usr/share/webapps/dokuwiki/');
-}
-
-# Detect Debian/Ubuntu DokuWiki package
-if (file_exists('/usr/share/dokuwiki')) {
-    define('DOKU_INC', '/usr/share/dokuwiki/');
-}
-
-# Detect LinuxServer.io DokuWiki Docker image
-if (file_exists('/app/dokuwiki')) {
-    define('DOKU_INC', '/app/dokuwiki/');
-}
+$doku_inc_dirs = array(
+    '/opt/bitnami/dokuwiki',                      # Bitnami (Docker)
+    '/usr/share/webapps/dokuwiki',                # Arch Linux
+    '/usr/share/dokuwiki',                        # Debian/Ubuntu
+    '/app/dokuwiki',                              # LinuxServer.io (Docker),
+    realpath(dirname(__FILE__) . '/../../../'),   # Default DokuWiki path
+);
 
 # Load doku_inc.php file
+#
 if (file_exists(dirname(__FILE__) . '/doku_inc.php')) {
     require_once dirname(__FILE__) . '/doku_inc.php';
 }
 
-if (!defined('DOKU_INC')) {
-    define('DOKU_INC', realpath(dirname(__FILE__) . '/../../../') . '/');
+if (! defined('DOKU_INC')) {
+    foreach ($doku_inc_dirs as $dir) {
+        if (! defined('DOKU_INC') && @file_exists("$dir/inc/init.php")) {
+            define('DOKU_INC', "$dir/");
+        }
+    }
 }
-
 
 // we do not use a session or authentication here (better caching)
 
