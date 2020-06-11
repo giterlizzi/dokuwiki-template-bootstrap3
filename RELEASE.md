@@ -3,6 +3,7 @@
 ## [develop]
 
 ### Added
+  * Added support for Hogfather release
   * Added  ``css.php`` dispatcher for Bootstrap themes
   * Added support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux
       * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
@@ -12,6 +13,10 @@
 ### Changed
   * Moved CSS and JS asset into standard DokuWiki CSS/JS dispatcher (``/lib/exe/{js,css}.php``) for better plugin compatibility
   * Updated Iconify to v1.0.6
+  * Enabled semantic metadata
+
+### Removed
+  * Removed ``semantic`` option (is always enabled)
 
 ### Fixed
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
