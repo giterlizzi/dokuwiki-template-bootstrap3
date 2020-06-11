@@ -89,11 +89,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php $TEMPLATE->includeSidebar('left'); // Left Sidebar ?>
 
-            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', $TEMPLATE->getConf('schemaOrgType')) : '') ?>>
+            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" itemscope itemtype="http://schema.org/<?php echo $TEMPLATE->getConf('schemaOrgType'); ?>" itemref="dw__license">
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
+                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" itemprop="articleBody">
                     <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php

@@ -44,7 +44,6 @@ $meta['showAddNewPage']         = array('multichoice', '_choices' => array('neve
 $meta['notifyExtensionsUpdate'] = array('onoff');
 
 // Semantic
-$meta['semantic']            = array('onoff');
 $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
 $meta['showSemanticPopup']   = array('onoff');
 

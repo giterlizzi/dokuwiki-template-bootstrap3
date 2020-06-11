@@ -926,11 +926,10 @@ class Template
             $output .= $lang['license'] . '<br/>';
         }
 
-        $semantic     = ($this->getConf('semantic') ? 'itemscope itemtype="http://schema.org/CreativeWork" itemprop="license"' : '');
         $license_url  = $lic['url'];
         $license_name = $lic['name'];
 
-        $output .= '<a href="' . $license_url . '" title="' . $license_name . '" target="' . $target . '" ' . $semantic . ' rel="license" class="license">';
+        $output .= '<a href="' . $license_url . '" title="' . $license_name . '" target="' . $target . '" itemscope itemtype="http://schema.org/CreativeWork" itemprop="license" rel="license" class="license">';
 
         if ($type == 'image') {
             foreach (explode('-', $conf['license']) as $license_img) {
@@ -1109,17 +1108,15 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $parts = explode(':', $ID);
         $count = count($parts);
 
-        $semantic = $this->getConf('semantic');
-
-        echo '<ol class="breadcrumb"' . ($semantic ? ' itemscope itemtype="http://schema.org/BreadcrumbList"' : '') . '>';
+        echo '<ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">';
         echo '<li>' . rtrim($lang['youarehere'], ':') . '</li>';
 
         // always print the startpage
-        echo '<li' . ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') . '>';
+        echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
         tpl_link(wl($conf['start']),
-            ($semantic ? '<span itemprop="name">' : '') . iconify('mdi:home') . ($semantic ? '</span>' : ''),
-            ($semantic ? ' itemprop="item" ' : '') . 'title="' . $conf['start'] . '"'
+            '<span itemprop="name">' . iconify('mdi:home') . '</span>',
+            ' itemprop="item"  title="' . $conf['start'] . '"'
         );
 
         echo '</li>';
@@ -1137,14 +1134,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             // Skip startpage
 
             // output
-            echo '<li' . ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') . '>';
+            echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
             $link = html_wikilink($page);
-            $link = str_replace(' class="curid"', '', $link);
-
-            if ($semantic) {
-                $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
-            }
+            $link = str_replace(array('<span class="curid">', '</span>'), '', $link);
+            $link = str_replace('<a', '<a itemprop="item" ', $link);
+            $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
 
             echo $link;
             echo '</li>';
@@ -1166,13 +1161,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             return true;
         }
 
-        echo '<li class="active"' . ($semantic ? ' itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem"' : '') . '>';
+        echo '<li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
-        $link = str_replace(' class="curid"', '', html_wikilink($page));
-
-        if ($semantic) {
-            $link = str_replace(array('<a', '<span'), array('<a itemprop="item" ', '<span itemprop="name" '), $link);
-        }
+        $link = str_replace(array('<span class="curid">', '</span>'), '', html_wikilink($page));
+        $link = str_replace('<a ', '<a itemprop="item" ', $link);
+        $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
 
         echo $link;
         echo '</li>';
@@ -1388,6 +1381,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         return $list;
     }
 
+    /**
+     * Remove data-wiki-id HTML5 attribute
+     * 
+     * @todo Remove this in future
+     * @since Hogfather
+     * 
+     * @param array $matches
+     * 
+     * @return string
+     */
     private function _replaceWikiCurrentIdCallback($matches)
     {
         
