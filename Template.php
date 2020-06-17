@@ -1378,6 +1378,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $html->clear();
         unset($html);
 
+        # TODO optimize
+        $list = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $list);
+        $list = preg_replace('/<span (.+?)><\/span> <a (.+?)>(.+?)<\/a>/', '<a $2><span $1></span> $3</a>', $list);
+        $list = str_replace('wikilink2', '', $list); # Remove wikilink2 class
+
         return $list;
     }
 
