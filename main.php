@@ -26,6 +26,9 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         tpl_includeFile('meta.html');
         tpl_metaheaders();
     ?>
+    <?php if ($TEMPLATE->getConf('themeByNamespace')): ?>
+    <link href="<?php echo tpl_basedir() ;?>css.php?id=<?php echo $ID; ?>" rel="stylesheet" />
+    <?php endif; ?>
     <!--[if lt IE 9]>
     <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -86,11 +89,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             <?php $TEMPLATE->includeSidebar('left'); // Left Sidebar ?>
 
-            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? sprintf('itemscope itemtype="http://schema.org/%s" itemref="dw__license"', $TEMPLATE->getConf('schemaOrgType')) : '') ?>>
+            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" itemscope itemtype="http://schema.org/<?php echo $TEMPLATE->getConf('schemaOrgType'); ?>" itemref="dw__license">
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" <?php echo (($TEMPLATE->getConf('semantic')) ? 'itemprop="articleBody"' : '') ?>>
+                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" itemprop="articleBody">
                     <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php

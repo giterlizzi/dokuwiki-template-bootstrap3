@@ -1,5 +1,40 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [v2020-07-29]
+
+This release introduce a support for Hogfather DokuWiki release and the support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux. Changed the JS and CSS loading for increase the performance.
+
+Enjoy!
+
+### Added
+  * Added support for Hogfather release
+  * Added  ``css.php`` dispatcher for Bootstrap themes
+  * Added support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux
+      * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
+      * #470: Added LinuxServer.io Docker image support for Iconify and CSS.php (thanks to @Ryonez)
+  * Added ``doku_inc.php`` support for specify the corrected ``DOKU_INC`` path (added in ``css.php`` and ``iconify.php``)
+
+### Changed
+  * Moved CSS and JS asset into standard DokuWiki CSS/JS dispatcher (``/lib/exe/{js,css}.php``) for better plugin compatibility
+  * Updated Iconify to v1.0.6
+  * Enabled semantic metadata (schema.org)
+
+### Removed
+  * Removed ``semantic`` option (now is always enabled)
+  * Removed ``.wikilink2`` class in navbar & list and in SimpleNavi plugin
+
+### Fixed
+  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
+  * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
+  * #465: Added "itemref" meta (thanks to @sioc-de-narf)
+  * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
+  * #467: Section-editing mouse flickering, when trying to click on "edit" button (thanks to @virk)
+  * #469: No TOC in Navbar (thanks to @Ohkami)
+  * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
+  * #481: Navbar Items Improperly Formatted on Hogfather (thanks to @TheZachh and @phy25)
+
+
+
 ## [v2020-04-04]
 
 After log development cycle a new release of Bootstrap Template is issued with Iconify support, new Detail page and Footer layout, stability and new plugins support (**Struct**, **Bureaucracy** and other popular DokuWiki plugins). Now Bootswatch Wrapper ``callout`` syntax follow the original Bootswatch contextual colors.
@@ -48,15 +83,6 @@ Enjoy!
   * #444: Fix PHP invalid foreach in Menu Tools
   * #449: Fixed TOC Navbar icon (thanks to @borgendorf)
   * #460 PR: Bootswatch fonts / CSS file fixes (thanks to @takuy)
-
-### Hotfix
-  * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
-  * #463: Missing Header icons on Bitnami's DokuWiki Docker image (thanks to @PixiBixi)
-  * #464: Section Edit jumping bug (thanks to @lizat and @kaapyth0n)
-  * #465: Added "itemref" meta (thanks to @sioc-de-narf)
-  * #466: Regression with Callout syntax and SVG icon (thanks to @geraldraaf)
-  * #469: No TOC in Navbar (thanks to @Ohkami)
-  * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
 
 
 ## [v2019-05-22]
@@ -518,6 +544,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
 [v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04
 [v2019-05-22]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2018-02-16...v2019-05-22
 [v2018-02-16]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
@@ -529,4 +556,3 @@ In this release improved the user experience with new icons for Configuration Ma
 [v2015-11-23]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-10-27...v2015-11-23
 [v2015-10-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-10-08...v2015-10-27
 [v2015-10-08]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-09-18...v2015-10-08
->>>>>>> release

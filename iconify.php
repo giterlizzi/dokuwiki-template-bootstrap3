@@ -8,14 +8,42 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-# Detect Bitnami DokuWiki Docker image and apply the correct DOKU_INC path
-#   see: https://github.com/bitnami/bitnami-docker-dokuwiki/issues/37
-if (getenv('BITNAMI_APP_NAME')) {
-   define('DOKU_INC', '/opt/bitnami/dokuwiki/');
+# NOTE Some Linux distributon change the location of DokuWiki core libraries (DOKU_INC)
+#
+#      Bitnami (Docker)         /opt/bitnami/dokuwiki
+#      LinuxServer.io (Docker)  /app/dokuwiki
+#      Arch Linux               /usr/share/webapps/dokuwiki
+#      Debian/Ubuntu            /usr/share/dokuwiki
+#
+# NOTE If DokuWiki core libraries (DOKU_INC) is in another location you can
+#      create a PHP file in bootstrap3 root directory called "doku_inc.php" with
+#      this content:
+#
+#           <?php define('DOKU_INC', '/path/dokuwiki/');
+#
+#      (!) This file will be deleted on every upgrade of template
+
+
+$doku_inc_dirs = array(
+    '/opt/bitnami/dokuwiki',                      # Bitnami (Docker)
+    '/usr/share/webapps/dokuwiki',                # Arch Linux
+    '/usr/share/dokuwiki',                        # Debian/Ubuntu
+    '/app/dokuwiki',                              # LinuxServer.io (Docker),
+    realpath(dirname(__FILE__) . '/../../../'),   # Default DokuWiki path
+);
+
+# Load doku_inc.php file
+#
+if (file_exists(dirname(__FILE__) . '/doku_inc.php')) {
+    require_once dirname(__FILE__) . '/doku_inc.php';
 }
 
-if (!defined('DOKU_INC')) {
-    define('DOKU_INC', dirname(__FILE__) . '/../../../');
+if (! defined('DOKU_INC')) {
+    foreach ($doku_inc_dirs as $dir) {
+        if (! defined('DOKU_INC') && @file_exists("$dir/inc/init.php")) {
+            define('DOKU_INC', "$dir/");
+        }
+    }
 }
 
 // we do not use a session or authentication here (better caching)

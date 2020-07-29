@@ -9,6 +9,7 @@
  * @license MIT, GPLv2
  */
 
+namespace dokuwiki\template\bootstrap3;
 
 class SVG
 {
