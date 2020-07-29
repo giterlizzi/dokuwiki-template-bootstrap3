@@ -49,7 +49,7 @@ if (! file_exists(DOKU_INC . '/inc/Menu/PageMenu.php')) {
 
 }
 
-// Load SVG class
+// Load template class for pre-Greebo releases
 require_once "$template_dir/SVG.php";
 require_once "$template_dir/Template.php";
 
@@ -76,13 +76,7 @@ global $TEMPLATE;
 $TEMPLATE = \dokuwiki\template\bootstrap3\Template::getInstance();
 
 if (! defined('MAX_FILE_SIZE')) {
-
     if ($pagesize = $TEMPLATE->getConf('domParserMaxPageSize')) {
         define('MAX_FILE_SIZE', $pagesize);
     }
-
 }
-
-// kate: space-indent on; indent-width 4; replace-tabs on;
-
-

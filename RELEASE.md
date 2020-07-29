@@ -17,6 +17,7 @@
 
 ### Removed
   * Removed ``semantic`` option (is always enabled)
+  * Removed ``.wikilink2`` class in navbar & list and in SimpleNavi plugin
 
 ### Fixed
   * #461 PR: "pagefooter" duplicate where "pageheader" intended (thanks to @cgalo5758)
