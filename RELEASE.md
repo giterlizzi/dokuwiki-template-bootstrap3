@@ -1,6 +1,10 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [develop]
+## [v2020-07-29]
+
+This release introduce a support for Hogfather DokuWiki release and the support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux. Changed the JS and CSS loading for increase the performance.
+
+Enjoy!
 
 ### Added
   * Added support for Hogfather release
@@ -13,10 +17,10 @@
 ### Changed
   * Moved CSS and JS asset into standard DokuWiki CSS/JS dispatcher (``/lib/exe/{js,css}.php``) for better plugin compatibility
   * Updated Iconify to v1.0.6
-  * Enabled semantic metadata
+  * Enabled semantic metadata (schema.org)
 
 ### Removed
-  * Removed ``semantic`` option (is always enabled)
+  * Removed ``semantic`` option (now is always enabled)
   * Removed ``.wikilink2`` class in navbar & list and in SimpleNavi plugin
 
 ### Fixed
@@ -540,6 +544,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
 [v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04
 [v2019-05-22]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2018-02-16...v2019-05-22
 [v2018-02-16]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2016-12-12...v2018-02-16
@@ -551,4 +556,3 @@ In this release improved the user experience with new icons for Configuration Ma
 [v2015-11-23]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-10-27...v2015-11-23
 [v2015-10-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-10-08...v2015-10-27
 [v2015-10-08]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2015-09-18...v2015-10-08
->>>>>>> release
