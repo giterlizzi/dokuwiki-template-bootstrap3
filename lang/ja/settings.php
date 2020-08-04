@@ -5,6 +5,7 @@
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Hideaki SAWADA <chuno@live.jp>
  * @author   Sato Shun
+ * @author   Je Feng
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 

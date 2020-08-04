@@ -8,6 +8,7 @@
  * @author   Александр Бакунович
  * @author   Alexander Ponomarenko
  * @author   Дмитрий Якименко
+ * @author   Evgeny Cheremnykh
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -19,8 +20,8 @@ $lang['themes']                  = 'Темы';
 $lang['expand_container']        = 'Развернуть/Свернуть';
 $lang['administrative_tasks']    = 'Административные задачи';
 $lang['additional_plugins']      = 'Дополнительные плагины';
-$lang['share_on']                = 'Поделиться';
-$lang['send_mail']               = 'Отправить на эл. почту';
+$lang['share_on']                = 'Поделиться через';
+$lang['send_mail']               = 'Отправить по эл.почте';
 $lang['print']                   = 'Печать';
 $lang['permalink']               = 'Постоянная ссылка';
 $lang['add_new_page']            = 'Добавить новую страницу';

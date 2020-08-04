@@ -5,6 +5,7 @@
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
  * @author   Hideaki SAWADA <chuno@live.jp>
  * @author   Sato Shun
+ * @author   Je Feng
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -16,8 +17,8 @@ $lang['themes']                  = 'テーマ';
 $lang['expand_container']        = '拡大・縮小';
 $lang['administrative_tasks']    = '管理タスク';
 $lang['additional_plugins']      = '追加プラグイン';
-$lang['share_on']                = '共有';
-$lang['send_mail']               = 'メール送信';
+$lang['share_on']                = 'Share via';
+$lang['send_mail']               = 'Send via e-Mail';
 $lang['print']                   = '印刷';
 $lang['permalink']               = 'パーマリンク';
 $lang['add_new_page']            = '新規ページの追加';
