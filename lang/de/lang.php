@@ -6,6 +6,8 @@
  * @author   Dominik Soeldner <soeldner@yteam.de>
  * @author   Marko Šeremet
  * @author   Torsten Widmann
+ * @author   Dino Trappenberg
+ * @author   kaktux
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -17,8 +19,8 @@ $lang['themes']                  = 'Themes';
 $lang['expand_container']        = 'Erweitern/Reduzieren';
 $lang['administrative_tasks']    = 'Verwaltungsaufgaben';
 $lang['additional_plugins']      = 'Weitere Plugins';
-$lang['share_on']                = 'Teilen auf';
-$lang['send_mail']               = 'eMail versenden';
+$lang['share_on']                = 'Teilen per';
+$lang['send_mail']               = 'Per E-Mail senden';
 $lang['print']                   = 'Drucken';
 $lang['permalink']               = 'Permalink';
 $lang['add_new_page']            = 'Neue Seite hinzufügen';

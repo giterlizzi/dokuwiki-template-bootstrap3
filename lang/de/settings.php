@@ -6,6 +6,8 @@
  * @author   Dominik Soeldner <soeldner@yteam.de>
  * @author   Marko Šeremet
  * @author   Torsten Widmann
+ * @author   Dino Trappenberg
+ * @author   kaktux
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
