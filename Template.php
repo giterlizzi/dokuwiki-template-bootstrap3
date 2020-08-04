@@ -1115,11 +1115,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
         tpl_link(wl($conf['start']),
-            '<span itemprop="name">' . iconify('mdi:home') . '</span>',
+            '<span itemprop="name">' . iconify('mdi:home') . '<span class="sr-only">Home</span></span>',
             ' itemprop="item"  title="' . $conf['start'] . '"'
         );
 
+        echo '<meta itemprop="position" content="1" />';
         echo '</li>';
+
+        $position = 1;
 
         // print intermediate namespace links
         $part = '';
@@ -1133,6 +1136,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
             // Skip startpage
 
+            $position++;
+
             // output
             echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
@@ -1140,8 +1145,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $link = str_replace(array('<span class="curid">', '</span>'), '', $link);
             $link = str_replace('<a', '<a itemprop="item" ', $link);
             $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
+            $link = str_replace('<a', '<span itemprop="name"><a', $link);
+            $link = str_replace('</a>', '</a></span>', $link);
 
             echo $link;
+            echo '<meta itemprop="position" content="'. $position .'" />';
             echo '</li>';
         }
 
@@ -1165,9 +1173,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $link = str_replace(array('<span class="curid">', '</span>'), '', html_wikilink($page));
         $link = str_replace('<a ', '<a itemprop="item" ', $link);
+        $link = str_replace('<a', '<span itemprop="name"><a', $link);
+        $link = str_replace('</a>', '</a></span>', $link);
         $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
 
         echo $link;
+        echo '<meta itemprop="position" content="'. ++$position .'" />';
         echo '</li>';
         echo '</ol>';
 

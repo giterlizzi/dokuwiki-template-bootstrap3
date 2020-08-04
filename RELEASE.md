@@ -1,5 +1,11 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [develop]
+
+### Fixed
+  * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
+  * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+
 ## [v2020-07-29]
 
 This release introduce a support for Hogfather DokuWiki release and the support for Bitnami DokuWiki image (Docker), LinuxServer.io DokuWiki image (Docker), Debian/Ubuntu and Arch Linux. Changed the JS and CSS loading for increase the performance.

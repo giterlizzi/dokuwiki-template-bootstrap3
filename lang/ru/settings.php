@@ -8,6 +8,7 @@
  * @author   Александр Бакунович
  * @author   Alexander Ponomarenko
  * @author   Дмитрий Якименко
+ * @author   Evgeny Cheremnykh
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
@@ -44,10 +45,10 @@ $lang['individualTools']              = 'Разделить настройки �
 $lang['inverseNavbar']                = 'Инверсия цвета меню навигации';
 $lang['landingPages']                 = 'Имена целевых страниц (используются регулярные выражения)';
 $lang['leftSidebarGrid']              = 'Класс сеточной системы для левого бокового меню <code>col-{xs,sm,md,lg}-x</code> (см. <a href="http://getbootstrap.com/css/#grid" target="_blank">Сетки Bootstrap</a>)';
-$lang['libravatarURL']                = 'Set Libravatar (or compatible API) URL <br/> <strong>NOTE:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https) <br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
+$lang['libravatarURL']                = 'Установить Libravatar (или совместимый API) URL <br/> <strong>ПРИМЕЧАНИЕ:</strong> <br/> - <code>https://seccdn.libravatar.org/avatar</code> (https)<br/> - <code>http://cdn.libravatar.org/avatar</code> (http)';
 $lang['navbarLabels']                 = 'Показать/спрятать наименования для индивидуального меню';
 $lang['notifyExtensionsUpdate']       = 'Оповещать об обновлениях расширений (для администраторов)';
-$lang['office365URL']                 = 'Set Microsoft Office 365 (or EWS) URL <br/> <strong>NOTE:</strong> This service requires login, so this use case is most useful in a corporate installation, where all users have access to Office 365.';
+$lang['office365URL']                 = 'Назначить Microsoft Office 365 (or EWS) URL <br/> <strong>ПРИМЕЧАНИЕ:</strong> Данный сервис требует авторизации, поэтому используйте эту возможность в корпоративных инсталляциях, где все пользователи имеют доступ к Office 365.';
 $lang['pageIcons']                    = 'Выбрать иконку для отображения';
 $lang['pageInfo']                     = 'Показать/спрятать элементы информации о странице';
 $lang['pageInfoDateFormat']           = 'Формат даты';
@@ -111,8 +112,8 @@ $lang['tocCollapseSubSections']       = 'Сворачивать все подс�
 $lang['tocCollapsed']                 = 'Сворачивать оглавление на каждой странице';
 $lang['tocPosition']                  = 'Позиция оглавления';
 $lang['tocLayout']                    = 'Макет TOC';
-$lang['useACL']                       = 'Use ACL for sidebars (left and right) and for all DokuWiki hooks (eg. <code>:footer</code>, <code>:navbar</code>, etc.) <br/> <strong>NOTE:</strong> Available since "Elenor of Tsort" DokuWiki release';
-$lang['useAlternativeToolbarIcons']   = 'Use alternative Material Design Icons for DokuWiki toolbar';
+$lang['useACL']                       = 'Используйте ACL для сайдбаров (левого и правого) и для всех хуков DokuWiki (например <code>:footer</code>, <code>:navbar</code>, и т.д.) <br/> <strong>ПРИМЕЧАНИЕ:</strong>Доступно начиная с релиза "Elenor of Tsort" DokuWiki';
+$lang['useAlternativeToolbarIcons']   = 'Используйте альтернативные иконки Material Design для панели инструментов DokuWiki';
 $lang['useAnchorJS']                  = 'Использовать AnchorJS';
 $lang['useAvatar']                    = 'Загрузите изображение аватара из Gravatar, Libravatar, Microsoft Office365 или локального сервера DokuWiki <code>:user </code>namespace';
 $lang['useAvatar_o_gravatar']         = 'Gravatar';
