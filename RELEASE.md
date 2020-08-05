@@ -9,7 +9,7 @@
 
 ### Fixed
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
-  * #500: Fixed the preview image size in detail page (@IanGoo)
+  * #500: Fixed regression in the preview image size in detail page (@IanGoo)
 
 ## [v2020-07-29]
 
