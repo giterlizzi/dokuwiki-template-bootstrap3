@@ -21,9 +21,17 @@ require_once('tpl/functions.php');
     <title><?php echo hsc($lang['mediaselect'])?> [<?php echo strip_tags($conf['title'])?>]</title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <?php echo tpl_favicon(array('favicon', 'mobile')) ?>
-    <?php tpl_includeFile('meta.html') ?>
-    <?php tpl_metaheaders() ?>
+    <?php
+
+        if ($TEMPLATE->getConf('themeByNamespace')) {
+            echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
+        }
+      
+        echo tpl_favicon(array('favicon', 'mobile'));
+        tpl_includeFile('meta.html');
+        tpl_metaheaders();
+
+    ?>
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>

@@ -232,8 +232,8 @@ $metadata = array(
 );
 
 
-$maxwidth  = 900;
-$maxheight = 700;
+$maxwidth  = 800;
+$maxheight = 600;
 
 $originalwidth  = $w = (int) tpl_img_getTag('File.Width');
 $originalheight = $h = (int) tpl_img_getTag('File.Height');
@@ -294,10 +294,6 @@ $show_metadata = false;
     <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery(document).trigger('bootstrap3:detail');
-    });
 </script>
 </head>
 
@@ -487,7 +483,7 @@ $show_metadata = false;
 
                                     <?php if ($show_metadata): ?>
                                     <script>
-                                        jQuery(document).ready(function(){
+                                        window.addEventListener('DOMContentLoaded', function() {
                                             jQuery('.image-metadata').removeClass('hide');
                                         });
                                     </script>

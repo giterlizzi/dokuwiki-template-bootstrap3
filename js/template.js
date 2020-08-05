@@ -834,7 +834,8 @@ jQuery(document).on('bootstrap3:components', function(event) {
       'footnotes',
       'media-manager',
       'collapse-sections',
-      'alerts'
+      'alerts',
+      'detail',
     ];
 
     for (var i in events) {

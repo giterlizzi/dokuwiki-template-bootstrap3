@@ -2,9 +2,14 @@
 
 ## [develop]
 
+### Changed
+  * Updated all translations from Transifex
+  * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+
+
 ### Fixed
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
-  * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+  * #500: Fixed the preview image size in detail page (@IanGoo)
 
 ## [v2020-07-29]
 
