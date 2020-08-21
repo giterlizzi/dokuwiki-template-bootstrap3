@@ -9,12 +9,14 @@
 ### Changed
   * Updated all translations from Transifex
   * Refactoring all JS scripts
+  * Changed column size of matching pagenames in search results
   * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
 
 ### Fixed
   * Fixed very old bug for media manager
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
+  * #501: Search matching pagenames overlapping (#rogerjames1994)
   * #503: Fixed edit toolbar icons regression for Hogfather release (@FloMiLe)
 
 ## [v2020-07-29]
