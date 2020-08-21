@@ -2,14 +2,20 @@
 
 ## [develop]
 
+### Added
+  * Added support for upcoming release of Icons plugin with Iconify
+  * Added ``confirm`` dialog for revert action
+
 ### Changed
   * Updated all translations from Transifex
+  * Refactoring all JS scripts
   * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
 
-
 ### Fixed
+  * Fixed very old bug for media manager
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
+  * #503: Fixed edit toolbar icons regression for Hogfather release (@FloMiLe)
 
 ## [v2020-07-29]
 

@@ -8,24 +8,24 @@
 
 // Move Plugin
 
-jQuery(document).on('bootstrap3:plugin-move', function(event) {
+jQuery(document).on('bootstrap3:plugin-move', function (event) {
 
-    if (! jQuery('#plugin_move__tree').length) return false;
+    if (!jQuery('#plugin_move__tree').length) return false;
 
     // console.debug(event.type + ' event fired');
 
-    setTimeout(function() {
+    setTimeout(function () {
 
         var $directories = jQuery('li.type-d a.idx_dir'),
-            $pages       = jQuery('li.type-f a.wikilink1');
+            $pages = jQuery('li.type-f a.wikilink1');
 
-        jQuery.each($directories, function() {
+        jQuery.each($directories, function () {
 
             var $directory = jQuery(this),
-                $closed    = $directory.parents('.closed'),
-                $open      = $directory.parents('.open');
+                $closed = $directory.parents('.closed'),
+                $open = $directory.parents('.open');
 
-            if (! $directory.find('svg').length) {
+            if (!$directory.find('svg').length) {
                 $directory.prepend(Iconify.getSVG('mdi:folder'));
             }
 
@@ -41,11 +41,11 @@ jQuery(document).on('bootstrap3:plugin-move', function(event) {
 
         });
 
-        jQuery.each($pages, function() {
+        jQuery.each($pages, function () {
 
             var $page = jQuery(this);
 
-            if (! $page.find('svg').length) {
+            if (!$page.find('svg').length) {
                 $page.prepend(Iconify.getSVG('mdi:file-document-outline'));
             }
             $page.find('svg').addClass('text-muted mr-2');
@@ -56,12 +56,12 @@ jQuery(document).on('bootstrap3:plugin-move', function(event) {
 
 });
 
-jQuery('#plugin_move__tree a').click(function(e) {
-    jQuery(document).trigger('bootstrap3:mode-index');
+jQuery('#plugin_move__tree a').click(function (e) {
+    dw_template.modeIndex();
 });
 
 jQuery(document).trigger('bootstrap3:plugin-move');
 
-jQuery(document).ajaxSuccess(function(e) {
+jQuery(document).ajaxSuccess(function (e) {
     jQuery(document).trigger('bootstrap3:plugin-move');
 });
