@@ -42,7 +42,7 @@ var dw_template = {
 
     init: function () {
 
-        console.time("dw_template");
+        console.time("dw_template"); // TODO remove
 
         dw_template.common();
         dw_template.mobileLayout();
@@ -77,7 +77,6 @@ var dw_template = {
         if (dw_mode('media') || jQuery('#media__manager').length) {
 
             jQuery(document).ajaxSuccess(function () {
-                console.log('1111');
                 dw_template.common();
                 dw_template.buttons();
                 dw_template.tabs();
@@ -117,7 +116,7 @@ var dw_template = {
             });
         }
 
-        console.timeEnd("dw_template");
+        console.timeEnd("dw_template"); // TODO remove
 
     },
 
