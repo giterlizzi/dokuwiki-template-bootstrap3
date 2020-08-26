@@ -1,0 +1,13 @@
+language: php
+php:
+  - "7.3"
+  - "7.2"
+  - "7.1"
+  - "7.0"
+  - "5.6"
+env:
+  - DOKUWIKI=master
+  - DOKUWIKI=stable
+before_install: wget https://raw.github.com/splitbrain/dokuwiki-travis/master/travis.sh
+install: sh travis.sh
+script: cd _test && ./phpunit.phar --stderr --group tpl_bootstrap3
