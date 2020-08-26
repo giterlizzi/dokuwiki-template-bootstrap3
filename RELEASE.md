@@ -36,6 +36,8 @@ Enjoy!
 ### Hotfix
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)
+
 
 ## [v2020-04-04]
 
