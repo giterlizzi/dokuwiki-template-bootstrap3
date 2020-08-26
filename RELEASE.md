@@ -1,5 +1,6 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+
 ## [develop]
 
 ### Added
@@ -18,6 +19,8 @@
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
   * #501: Search matching pagenames overlapping (#rogerjames1994)
   * #503: Fixed edit toolbar icons regression for Hogfather release (@FloMiLe)
+  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)
+
 
 ## [v2020-07-29]
 
@@ -51,7 +54,6 @@ Enjoy!
   * #469: No TOC in Navbar (thanks to @Ohkami)
   * #476: Fixed missing footer hook with particular configurations (thanks to @darren-henderson)
   * #481: Navbar Items Improperly Formatted on Hogfather (thanks to @TheZachh and @phy25)
-
 
 
 ## [v2020-04-04]

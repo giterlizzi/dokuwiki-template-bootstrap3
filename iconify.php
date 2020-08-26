@@ -67,13 +67,13 @@ require_once DOKU_INC . 'inc/init.php';
 global $INPUT;
 
 $params = array(
-    'prefix'   => $INPUT->str('prefix'),
-    'icons'    => $INPUT->str('icons'),
-    'callback' => $INPUT->str('callback'),
-    'width'    => $INPUT->str('width'),
-    'height'   => $INPUT->str('height'),
-    'icon'     => $INPUT->str('icon'),
-    'color'    => $INPUT->str('color'),
+    'prefix'   => hsc($INPUT->str('prefix')),
+    'icons'    => hsc($INPUT->str('icons')),
+    'callback' => hsc($INPUT->str('callback')),
+    'width'    => hsc($INPUT->str('width')),
+    'height'   => hsc($INPUT->str('height')),
+    'icon'     => hsc($INPUT->str('icon')),
+    'color'    => hsc($INPUT->str('color')),
 );
 
 $iconify_dir   = dirname(__FILE__) . '/assets/iconify/json';
