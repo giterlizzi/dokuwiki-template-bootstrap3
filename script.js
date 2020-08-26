@@ -61,6 +61,7 @@ var dw_template = {
         dw_template.alerts();
         dw_template.detail();
         dw_template.typeahead();
+        dw_template.menuitem();
         dw_template.plugins();
 
         // Preload icons
@@ -127,6 +128,9 @@ var dw_template = {
 
         // Abbr tooltips
         jQuery('abbr').tooltip();
+
+        // Search Hit
+        //jQuery('.search_hit').removeClass('search_hit').addClass('mark');
 
         // Fix accesskey issue on dropdown menu
         if (jQuery('#dw__pagetools').length) {
@@ -258,11 +262,15 @@ var dw_template = {
     },
 
     footnotes: function () {
-        if (!jQuery('.footnotes').length) return false;
 
-        jQuery(document).bind('DOMNodeInserted', function () {
-            jQuery('#insitu__fn').addClass('panel panel-body panel-default');
-        });
+        var orig_insituPopup = dw_page.insituPopup;
+
+        dw_page.insituPopup = function (target, popup_id) {
+            var $fndiv = orig_insituPopup(target, popup_id);
+            $fndiv.addClass('panel panel-body panel-default');
+            return $fndiv;
+        }
+
     },
 
     alerts: function () {
@@ -879,6 +887,18 @@ var dw_template = {
             }
         );
     },
+
+    menuitem: function () {
+        jQuery('.menuitem.help').on('click', function () {
+            var $self = jQuery(this);
+            jQuery('.modal.help .modal-title').html($self.attr('title'));
+            jQuery('.modal.help .modal-body').load($self.data('link'));
+        });
+        jQuery('.menuitem.printpage').on('click', function() {
+            window.print();
+        });
+    },
+
 
     plugins: function () {
         /* DOKUWIKI:include js/plugins/csv.js */

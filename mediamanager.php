@@ -23,7 +23,7 @@ require_once('tpl/functions.php');
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php
 
-        if ($TEMPLATE->getConf('themeByNamespace')) {
+        if ($TPL->getConf('themeByNamespace')) {
             echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
         }
       
@@ -43,9 +43,9 @@ require_once('tpl/functions.php');
 <body class="container">
 
     <div id="dw__msgarea" class="small">
-        <?php $TEMPLATE->getMessageArea() ?>
+        <?php $TPL->getMessageArea() ?>
     </div>
-    <div id="media__manager" class="<?php echo $TEMPLATE->getClasses() ?> row">
+    <div id="media__manager" class="<?php echo $TPL->getClasses() ?> row">
 
         <div id="mediamgr__aside" class="col-xs-4">
         <h1><?php echo hsc($lang['mediaselect'])?></h1>

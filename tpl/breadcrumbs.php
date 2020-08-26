@@ -7,11 +7,8 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
-
 global $conf;
-global $TEMPLATE;
+global $TPL;
 
 ?>
 <?php if ($conf['youarehere'] || $conf['breadcrumbs']): ?>
@@ -22,13 +19,13 @@ global $TEMPLATE;
 
     <?php if($conf['youarehere']): ?>
     <div class="dw__youarehere">
-        <?php $TEMPLATE->getYouAreHere()?>
+        <?php $TPL->getYouAreHere()?>
     </div>
     <?php endif; ?>
 
     <?php if($conf['breadcrumbs']): ?>
     <div class="dw__breadcrumbs hidden-print">
-        <?php $TEMPLATE->getBreadcrumbs() ?>
+        <?php $TPL->getBreadcrumbs() ?>
     </div>
     <?php endif; ?>
 

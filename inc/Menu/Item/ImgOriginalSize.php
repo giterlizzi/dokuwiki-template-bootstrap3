@@ -5,44 +5,42 @@ namespace dokuwiki\Menu\Item;
 /**
  * Class ImgOriginalSize
  */
-class ImgOriginalSize extends AbstractItem {
+class ImgOriginalSize extends AbstractItem
+{
 
     /** @inheritdoc */
-    public function __construct() {
-
+    public function __construct()
+    {
         parent::__construct();
 
-        global $IMG;
-        global $REV;
-        global $INPUT;
         global $lang;
+        global $IMG;
 
-        if (! $IMG) {
+        if (!$IMG) {
             throw new \RuntimeException("image is not available");
         }
 
         unset($this->params['do']);
 
-        $this->label    = $lang['js']['mediadirect'];
-        $this->svg      = tpl_incdir() . 'images/menu/image-size-select-large.svg';
-        $this->id       = '#';
-        $this->img_link = ml($IMG, array('cache'=> $INPUT->str('cache'),'rev' => $REV), true, '&');
-
+        $this->label = $lang['js']['mediadirect'];
+        $this->svg   = tpl_incdir() . 'images/menu/image-size-select-large.svg';
+        $this->id    = $IMG;
     }
 
-    public function getLinkAttributes($classprefix = 'menuitem ') {
+    public function getLink()
+    {
+        global $IMG;
+        global $REV;
+        global $INPUT;
 
-        $attr = array(
-            'href'    => $this->img_link,
-            'title'   => $this->getTitle(),
-            'rel'     => 'nofollow',
-            'target'  => '_blank',
-        );
+        return ml($IMG, array('cache' => $INPUT->str('cache'), 'rev' => $REV), true, '&');
+    }
 
-        if ($classprefix !== false) $attr['class'] = $classprefix . $this->getType();
+    public function getLinkAttributes($classprefix = 'menuitem ')
+    {
+        $attr           = parent::getLinkAttributes($classprefix);
+        $attr['target'] = '_blank';
 
         return $attr;
-
     }
-
 }

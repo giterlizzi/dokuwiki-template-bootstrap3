@@ -7,12 +7,9 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
+global $TPL;
 
-global $TEMPLATE;
-
-if ($TEMPLATE->getConf('showPageTools')): ?>
+if ($TPL->getConf('showPageTools')): ?>
 
 <!-- page-tools -->
 <nav id="dw__pagetools" class="hidden-print">
@@ -20,7 +17,7 @@ if ($TEMPLATE->getConf('showPageTools')): ?>
         <ul class="nav nav-stacked nav-pills text-muted">
             <?php
 
-                $page_menu = $TEMPLATE->getToolMenu('page');
+                $page_menu = $TPL->getToolMenu('page');
 
                 if (isset($page_menu['menu'])) {
                     foreach ($page_menu['menu'] as $type => $item) {

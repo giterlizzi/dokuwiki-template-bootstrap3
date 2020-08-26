@@ -1,6 +1,6 @@
 <?php
 
-namespace dokuwiki\Menu;
+namespace dokuwiki\template\bootstrap3\Menu;
 
 /**
  * Class DetailMenu
@@ -8,8 +8,8 @@ namespace dokuwiki\Menu;
  * This menu offers options on an image detail view. It usually displayed similar to
  * the PageMenu.
  */
-class DetailMenu extends AbstractMenu {
-
+class DetailMenu extends \dokuwiki\Menu\AbstractMenu
+{
     protected $view = 'detail';
 
     protected $types = array(
@@ -18,5 +18,4 @@ class DetailMenu extends AbstractMenu {
         'ImgBackto',
         'Top',
     );
-
 }

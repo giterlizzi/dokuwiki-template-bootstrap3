@@ -7,8 +7,8 @@ namespace dokuwiki\template\bootstrap3\Menu;
  *
  * Actions manipulating the current page. Shown as a floating menu in the dokuwiki template
  */
-class PageMenu extends \dokuwiki\Menu\AbstractMenu {
-
+class PageMenu extends \dokuwiki\Menu\AbstractMenu
+{
     protected $view = 'page';
 
     protected $types = array(
@@ -20,5 +20,4 @@ class PageMenu extends \dokuwiki\Menu\AbstractMenu {
         'Subscribe',
         'Top',
     );
-
 }

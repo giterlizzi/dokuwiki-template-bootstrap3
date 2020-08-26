@@ -20,12 +20,12 @@ class SVG
 
     /**
      * Add icon
-     * 
+     *
      * @param string $icon  Icon name or full path
      * @param string $class Icon Class
      * @param int    $size  Icon size
      * @param array  $attrs Icon attributes
-     * 
+     *
      * @return string
      */
     public static function icon($icon, $class = null, $size = 24, $attrs = array())
@@ -94,7 +94,4 @@ class SVG
             array_keys($attrs)
         ));
     }
-
 }
-
-// kate: space-indent on; indent-width 4; replace-tabs on;
