@@ -1,7 +1,7 @@
 <?php
 
 /**
- * DokuWiki Bootstrap3 Template: Iconify compatible API 
+ * DokuWiki Bootstrap3 Template: Iconify compatible API
  *
  * @link     http://dokuwiki.org/template:bootstrap3
  * @author   Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
@@ -103,7 +103,7 @@ if (!file_exists($collection_file)) {
     exit;
 }
 
-$collection_data = json_decode(file_get_contents($collection_file), true);
+$collection_data = json_decode(io_readFile($collection_file), true);
 
 $iconify_data = array(
     'prefix'  => $params['prefix'],
