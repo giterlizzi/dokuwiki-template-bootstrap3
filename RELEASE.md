@@ -15,6 +15,7 @@
 
 ### Fixed
   * Fixed very old bug for media manager
+  * Fixed regression for Cookie Law for Hogfather release
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
   * #501: Search matching pagenames overlapping (#rogerjames1994)
