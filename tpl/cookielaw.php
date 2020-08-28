@@ -38,10 +38,5 @@ resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery(document).trigger('bootstrap3:cookie-law');
-    });
-</script>
 <!-- /cookie-law -->
 <?php endif; ?>

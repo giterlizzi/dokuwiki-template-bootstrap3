@@ -61,7 +61,7 @@ class Template
         );
 
         if ($ACT == 'admin') {
-            $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
+            $JSINFO['bootstrap3']['admin'] = hsc($INPUT->str('page'));
         }
 
         if (! defined('MAX_FILE_SIZE')) {
@@ -1405,17 +1405,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     /**
      * Remove data-wiki-id HTML5 attribute
-     * 
+     *
      * @todo Remove this in future
      * @since Hogfather
-     * 
+     *
      * @param array $matches
-     * 
+     *
      * @return string
      */
     private function _replaceWikiCurrentIdCallback($matches)
     {
-        
+
         global $ID;
 
         if ($ID == $matches[1]) {
@@ -1872,7 +1872,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             // Set specific icon in Admin Page
             if ($INPUT->str('page')) {
                 if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
-                    $admin_pagetitle->class .= ' ' . $INPUT->str('page');
+                    $admin_pagetitle->class .= ' ' . hsc($INPUT->str('page'));
                 }
             }
 

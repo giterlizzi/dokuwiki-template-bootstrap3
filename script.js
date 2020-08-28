@@ -62,6 +62,7 @@ var dw_template = {
         dw_template.detail();
         dw_template.typeahead();
         dw_template.menuitem();
+        dw_template.cookieLaw();
         dw_template.plugins();
 
         // Preload icons
@@ -154,7 +155,6 @@ var dw_template = {
         jQuery('#tool__bar').addClass('btn-group');
 
         // Picker
-        // TODO ported
         //     if (dw_mode('edit')) {
         //       jQuery('.picker').addClass('btn-group');
         //     }
