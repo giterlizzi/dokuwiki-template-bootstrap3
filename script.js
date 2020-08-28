@@ -42,8 +42,6 @@ var dw_template = {
 
     init: function () {
 
-        console.time("dw_template"); // TODO remove
-
         dw_template.common();
         dw_template.mobileLayout();
         dw_template.toc();
@@ -117,8 +115,6 @@ var dw_template = {
                 scrollOnHashChange();
             });
         }
-
-        console.timeEnd("dw_template"); // TODO remove
 
     },
 
