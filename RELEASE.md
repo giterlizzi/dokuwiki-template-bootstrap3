@@ -1,7 +1,11 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
 
-## [develop]
+## [v2020-08-28]
+
+This release increase the compatibility with Hogfather and fix regressions, old bugs and a security vulnerability with Iconify (thanks to @issmirnov). Optimized all JS "hack" scripts, dropped support for very old DokuWiki releases and added support for upcoming [Icons](https://www.dokuwiki.org/plugin:icons) plugin release with Iconify.
+
+Enjoy!
 
 ### Added
   * Added support for upcoming release of Icons plugin with Iconify
@@ -566,6 +570,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2020-08-28]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-07-29...v2020-08-28
 [v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
 [v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04
 [v2019-05-22]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2018-02-16...v2019-05-22
