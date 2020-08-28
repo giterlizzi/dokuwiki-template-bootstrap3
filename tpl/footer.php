@@ -7,27 +7,24 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
-
 global $conf;
-global $TEMPLATE;
+global $TPL;
 
-$footer_page_exist    = page_findnearest('footer', $TEMPLATE->getConf('useACL'));
+$footer_page_exist    = page_findnearest('footer', $TPL->getConf('useACL'));
 $license_is_enabled   = $conf['license'];
-$badges_is_enabled    = $TEMPLATE->getConf('showBadges');
-$wiki_info_is_enabled = $TEMPLATE->getConf('showWikiInfo');
+$badges_is_enabled    = $TPL->getConf('showBadges');
+$wiki_info_is_enabled = $TPL->getConf('showWikiInfo');
 
 $logo_size      = array();
 $wiki_logo      = tpl_getMediaFile(array(':wiki:logo.png', ':logo.png', 'images/logo.png'), false, $logo_size);
 $wiki_title     = $conf['title'];
 $wiki_tagline   = ($conf['tagline']) ? '<span class="dw__tagline">'.$conf['tagline'].'</span>' : '';
-$wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homePageURL') : wl());
+$wiki_home_link = ($TPL->getConf('homePageURL') ? $TPL->getConf('homePageURL') : wl());
 
 ?>
 <?php if ($wiki_info_is_enabled || $footer_page_exist || $license_is_enabled || $badges_is_enabled): ?>
 <!-- footer -->
-<div class="dw-container small container<?php echo ($TEMPLATE->getConf('fixedTopNavbar') || $TEMPLATE->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
+<div class="dw-container small container<?php echo ($TPL->getConf('fixedTopNavbar') || $TPL->isFluidNavbar() ? '-fluid mx-5' : '') ?>">
 
     
     <div class="footer-dw-title">
@@ -47,7 +44,7 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
                     <div class="col-sm-10">
                         <?php
                             if ($footer_page_exist) {
-                                echo $TEMPLATE->includePage('footer');
+                                echo $TPL->includePage('footer');
                             }
                         ?>
                     </div>
@@ -57,7 +54,7 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
         <?php endif; ?>
         <?php
             if (! $wiki_info_is_enabled && $footer_page_exist) {
-                echo $TEMPLATE->includePage('footer');
+                echo $TPL->includePage('footer');
             }
         ?>
     </div>
@@ -67,10 +64,10 @@ $wiki_home_link = ($TEMPLATE->getConf('homePageURL') ? $TEMPLATE->getConf('homeP
         <div id="dw__license" class="col-sm-6">
             <?php if ($license_is_enabled): ?>
             <p>
-                <?php $TEMPLATE->getLicense('image') ?>
+                <?php $TPL->getLicense('image') ?>
             </p>
             <p class="small">
-                <?php $TEMPLATE->getLicense('link') ?>
+                <?php $TPL->getLicense('link') ?>
             </p>
             <?php endif; ?>
         </div>

@@ -7,22 +7,19 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
-
-global $INFO, $lang, $TEMPLATE;
+global $INFO, $lang, $TPL;
 
 if (! empty($_SERVER['REMOTE_USER'])):
 
-$use_avatar = $TEMPLATE->getConf('useAvatar');
+$use_avatar = $TPL->getConf('useAvatar');
 
 $extensions_update = array();
 $avatar_size       = 96;
 $avatar_size_small = 32;
 
 if ($use_avatar) {
-    $avatar_img_small = $TEMPLATE->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size_small);
-    $avatar_img       = $TEMPLATE->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size);
+    $avatar_img_small = $TPL->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size_small);
+    $avatar_img       = $TPL->getAvatar($_SERVER['REMOTE_USER'], $INFO['userinfo']['mail'], $avatar_size);
 } else {
     $avatar_img = tpl_getMediaFile(array('images/avatar.png'));
 }
@@ -40,7 +37,7 @@ if ($INFO['isadmin']) {
     $user_type  = 'Admin';
 }
 
-if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
+if ($INFO['isadmin'] && $TPL->getConf('notifyExtensionsUpdate')) {
 
     global $plugin_controller;
 
@@ -106,10 +103,10 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
             <li class="divider"></li>
 
-            <?php if ($TEMPLATE->getConf('showUserHomeLink')): ?>
+            <?php if ($TPL->getConf('showUserHomeLink')): ?>
             <li class="dropdown-header">Home-Page</li>
             <?php
-                if ($userhomepage = $TEMPLATE->getPlugin('userhomepage')):
+                if ($userhomepage = $TPL->getPlugin('userhomepage')):
                     echo '<li><a rel="nofollow" href="' . wl($userhomepage->getPublicID()) . '" title="'. $userhomepage->getLang('publicpage') .'">' .
                          iconify('mdi:home') . ' ' . $userhomepage->getLang('publicpage') .'</a></li>';
 
@@ -119,7 +116,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             ?>
 
             <li>
-                <a href="<?php echo $TEMPLATE->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
+                <a href="<?php echo $TPL->getUserHomePageLink() ?>" title="Home-Page" rel="nofollow">
                     <?php echo iconify('mdi:home-account'); ?> Home-Page
                 </a>
             </li>
@@ -132,10 +129,10 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
 
             <?php
 
-                echo $TEMPLATE->getToolMenuItemLink('user', 'profile');
+                echo $TPL->getToolMenuItemLink('user', 'profile');
 
                 if ($INFO['isadmin']) {
-                    echo $TEMPLATE->getToolMenuItemLink('user', 'admin');
+                    echo $TPL->getToolMenuItemLink('user', 'admin');
                 }
 
             ?>
@@ -155,17 +152,17 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
                 // Add the user menu
 
                 $usermenu_pageid = null;
-                $user_homepage_id = $TEMPLATE->getUserHomePageID();
+                $user_homepage_id = $TPL->getUserHomePageID();
 
                 foreach (array("$user_homepage_id:usermenu", 'usermenu') as $id) {
-                    $usermenu_pageid = page_findnearest($id, $TEMPLATE->getConf('useACL'));
+                    $usermenu_pageid = page_findnearest($id, $TPL->getConf('useACL'));
                     if ($usermenu_pageid) break;
                 }
 
                 if ($usermenu_pageid) {
 
                     $html = new simple_html_dom;
-                    $html->load($TEMPLATE->includePage($usermenu_pageid, true), true, false);
+                    $html->load($TPL->includePage($usermenu_pageid, true), true, false);
 
                     foreach ($html->find('h1,h2,h3,h4,h5,h6') as $elm) {
                         $elm->outertext = '<li class="dropdown-header">' . $elm->innertext . '</li>';
@@ -194,7 +191,7 @@ if ($INFO['isadmin'] && $TEMPLATE->getConf('notifyExtensionsUpdate')) {
             ?>
 
             <?php
-                echo $TEMPLATE->getToolMenuItemLink('user', 'logout');
+                echo $TPL->getToolMenuItemLink('user', 'logout');
             ?>
 
         </ul>

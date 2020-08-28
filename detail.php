@@ -20,7 +20,7 @@ global $ERROR;
 global $IMG;
 global $INPUT;
 global $lang;
-global $TEMPLATE;
+global $TPL;
 global $REV;
 
 header('X-UA-Compatible: IE=edge,chrome=1');
@@ -232,8 +232,8 @@ $metadata = array(
 );
 
 
-$maxwidth  = 900;
-$maxheight = 700;
+$maxwidth  = 800;
+$maxheight = 600;
 
 $originalwidth  = $w = (int) tpl_img_getTag('File.Width');
 $originalheight = $h = (int) tpl_img_getTag('File.Height');
@@ -281,10 +281,10 @@ $show_metadata = false;
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php
 
-        if ($TEMPLATE->getConf('themeByNamespace')) {
+        if ($TPL->getConf('themeByNamespace')) {
             echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
         }
-      
+
         echo tpl_favicon(array('favicon', 'mobile'));
         tpl_includeFile('meta.html');
         tpl_metaheaders();
@@ -294,36 +294,32 @@ $show_metadata = false;
     <script type="text/javascript" src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script type="text/javascript" src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-    jQuery(document).ready(function(){
-        jQuery(document).trigger('bootstrap3:detail');
-    });
 </script>
 </head>
 
-<body class="<?php echo $TEMPLATE->getClasses() ?>" data-img-id="<?php echo $IMG ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
+<body class="<?php echo $TPL->getClasses() ?>" data-img-id="<?php echo $IMG ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
-    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
 
             tpl_includeFile('topheader.html');
 
             // Top-Header DokuWiki page
-            if ($ACT == 'show') echo $TEMPLATE->includePage('topheader');
+            if ($ACT == 'show') echo $TPL->includePage('topheader');
 
             require_once('tpl/navbar.php');
 
             tpl_includeFile('header.html');
 
             // Header DokuWiki page
-            if ($ACT == 'show') echo $TEMPLATE->includePage('header');
+            if ($ACT == 'show') echo $TPL->includePage('header');
 
         ?>
     </header>
 
     <a name="dokuwiki__top" id="dokuwiki__top"></a>
 
-    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -332,13 +328,13 @@ $show_metadata = false;
             <?php require_once('tpl/breadcrumbs.php'); ?>
 
             <p class="text-right">
-                <?php if($TEMPLATE->getConf('showPageId')): ?>
+                <?php if($TPL->getConf('showPageId')): ?>
                     <span class="pageId ml-1 label label-primary"><?php echo hsc(tpl_img_getTag('IPTC.Headline',$IMG)); ?></span>
                 <?php endif; ?>
             </p>
 
             <div id="dw__msgarea" class="small">
-                <?php $TEMPLATE->getMessageArea() ?>
+                <?php $TPL->getMessageArea() ?>
             </div>
 
         </div>
@@ -487,7 +483,7 @@ $show_metadata = false;
 
                                     <?php if ($show_metadata): ?>
                                     <script>
-                                        jQuery(document).ready(function(){
+                                        window.addEventListener('DOMContentLoaded', function() {
                                             jQuery('.image-metadata').removeClass('hide');
                                         });
                                     </script>
@@ -505,16 +501,16 @@ $show_metadata = false;
 
                 <div class="small text-right">
 
-                    <?php if ($TEMPLATE->getConf('showPageInfo')): ?>
+                    <?php if ($TPL->getConf('showPageInfo')): ?>
                     <span class="docInfo">
-                        <?php $TEMPLATE->getPageInfo() /* 'Last modified' etc */ ?>
+                        <?php $TPL->getPageInfo() /* 'Last modified' etc */ ?>
                     </span>
                     <?php endif ?>
 
-                    <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
+                    <?php if ($TPL->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
                         <?php
-                            if ($login_item = $TEMPLATE->getToolMenuItem('user', 'login')) {
+                            if ($login_item = $TPL->getToolMenuItem('user', 'login')) {
                                 echo '<a '. buildAttributes($login_item->getLinkAttributes()) .'>'. inlineSVG($login_item->getSvg()) . ' ' . hsc($login_item->getLabel()) .'</a>';
                             }
                         ?>
@@ -528,7 +524,7 @@ $show_metadata = false;
 
     </main>
 
-    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');

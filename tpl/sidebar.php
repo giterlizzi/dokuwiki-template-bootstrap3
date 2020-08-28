@@ -7,15 +7,12 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
-
-global $TEMPLATE;
+global $TPL;
 
 $sidebar_title = $lang['sidebar'];
 
-if ($TEMPLATE->getConf('sidebarShowPageTitle')) {
-    $sidebar_title = p_get_first_heading(page_findnearest($sidebar_page, $TEMPLATE->getConf('useACL')));
+if ($TPL->getConf('sidebarShowPageTitle')) {
+    $sidebar_title = p_get_first_heading(page_findnearest($sidebar_page, $TPL->getConf('useACL')));
     if (! $sidebar_title) $sidebar_title = $lang['sidebar'];
 }
 
@@ -30,12 +27,12 @@ if ($TEMPLATE->getConf('sidebarShowPageTitle')) {
             <?php
 
                 tpl_includeFile("$sidebar_header.html");
-                if ($ACT == 'show') $TEMPLATE->includePage($sidebar_header);
+                if ($ACT == 'show') $TPL->includePage($sidebar_header);
 
-                $TEMPLATE->normalizeSidebar(tpl_include_page($sidebar_page, 0, 1, $TEMPLATE->getConf('useACL'))); /* includes the nearest sidebar page */
+                $TPL->normalizeSidebar(tpl_include_page($sidebar_page, 0, 1, $TPL->getConf('useACL'))); /* includes the nearest sidebar page */
 
                 tpl_includeFile("$sidebar_footer.html");
-                if ($ACT == 'show') $TEMPLATE->includePage($sidebar_footer)
+                if ($ACT == 'show') $TPL->includePage($sidebar_footer)
 
             ?>
         </div>

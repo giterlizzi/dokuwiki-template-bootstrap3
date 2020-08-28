@@ -18,12 +18,12 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
     <meta charset="UTF-8" />
-    <title><?php echo $TEMPLATE->getBrowserPageTitle() ?></title>
+    <title><?php echo $TPL->getBrowserPageTitle() ?></title>
     <script>(function(H){H.className=H.className.replace(/\bno-js\b/,'js')})(document.documentElement)</script>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php
 
-        if ($TEMPLATE->getConf('themeByNamespace')) {
+        if ($TPL->getConf('themeByNamespace')) {
             echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
         }
       
@@ -38,29 +38,29 @@ header('X-UA-Compatible: IE=edge,chrome=1');
     <![endif]-->
 </head>
 <?php tpl_flush() ?>
-<body class="<?php echo $TEMPLATE->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
+<body class="<?php echo $TPL->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
-    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
+    <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
     <?php
 
         tpl_includeFile('topheader.html');
 
         // Top-Header DokuWiki page
-        if ($ACT == 'show') $TEMPLATE->includePage('topheader');
+        if ($ACT == 'show') $TPL->includePage('topheader');
 
         require_once('tpl/navbar.php');
 
         tpl_includeFile('header.html');
 
         // Header DokuWiki page
-        if ($ACT == 'show') $TEMPLATE->includePage('header');
+        if ($ACT == 'show') $TPL->includePage('header');
 
     ?>
     </header>
 
     <a name="dokuwiki__top" id="dokuwiki__top"></a>
 
-    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
+    <main role="main" class="dw-container pb-5 dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
 
         <div id="dokuwiki__pageheader">
 
@@ -71,11 +71,11 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             <p class="text-right">
                 <?php
 
-                    if ($TEMPLATE->getConf('tagsOnTop') && $tag = $TEMPLATE->getPlugin('tag')) {
+                    if ($TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
                         echo implode('', array_map('trim', explode(',', $tag->td($ID))));
                     }
 
-                    if ($TEMPLATE->getConf('showPageId')) {
+                    if ($TPL->getConf('showPageId')) {
                         echo '<span class="pageId ml-1 label label-primary">'. hsc($ID) .'</span>';
                     }
 
@@ -83,21 +83,21 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             </p>
 
             <div id="dw__msgarea" class="small">
-                <?php $TEMPLATE->getMessageArea() ?>
+                <?php $TPL->getMessageArea() ?>
             </div>
 
         </div>
 
         <div class="row">
 
-            <?php $TEMPLATE->includeSidebar('left'); // Left Sidebar ?>
+            <?php $TPL->includeSidebar('left'); // Left Sidebar ?>
 
-            <article id="dokuwiki__content" class="<?php echo $TEMPLATE->getContainerGrid() ?>" itemscope itemtype="http://schema.org/<?php echo $TEMPLATE->getConf('schemaOrgType'); ?>" itemref="dw__license">
+            <article id="dokuwiki__content" class="<?php echo $TPL->getContainerGrid() ?>" itemscope itemtype="http://schema.org/<?php echo $TPL->getConf('schemaOrgType'); ?>" itemref="dw__license">
 
                 <?php require_once('tpl/page-tools.php'); // Page Tools ?>
 
-                <div class="<?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" itemprop="articleBody">
-                    <div class="page <?php echo ($TEMPLATE->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
+                <div class="<?php echo ($TPL->getConf('pageOnPanel') ? 'panel panel-default px-3 py-2' : 'no-panel') ?>" itemprop="articleBody">
+                    <div class="page <?php echo ($TPL->getConf('pageOnPanel') ? 'panel-body' : '') ?>">
 
                         <?php
 
@@ -108,7 +108,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         tpl_includeFile('pageheader.html');
 
                         // Page-Header DokuWiki page
-                        if ($ACT == 'show') $TEMPLATE->includePage('pageheader');
+                        if ($ACT == 'show') $TPL->includePage('pageheader');
 
                         tpl_flush(); /* flush the output buffer */
 
@@ -117,10 +117,10 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         tpl_content(false);
 
                         $content         = ob_get_clean();
-                        $toc             = $TEMPLATE->getTOC(true);
+                        $toc             = $TPL->getTOC(true);
                         $content_classes = array();
 
-                        if ($TEMPLATE->getConf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
+                        if ($TPL->getConf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
 
                         echo '<div class="dw-content-page '. implode(' ', $content_classes) .'">';
 
@@ -135,7 +135,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         tpl_flush();
 
-                        if (! $TEMPLATE->getConf('tagsOnTop') && $tag = $TEMPLATE->getPlugin('tag')) {
+                        if (! $TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
                             echo implode('', array_map('trim', explode(',', $tag->td($ID))));
                         }
 
@@ -143,7 +143,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
                         tpl_includeFile('pagefooter.html');
 
                         // Page-Footer DokuWiki page
-                        if ($ACT == 'show') $TEMPLATE->includePage('pagefooter');
+                        if ($ACT == 'show') $TPL->includePage('pagefooter');
 
                         ?>
 
@@ -152,16 +152,16 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                 <div class="small text-right">
 
-                    <?php if ($TEMPLATE->getConf('showPageInfo')): ?>
+                    <?php if ($TPL->getConf('showPageInfo')): ?>
                     <span class="docInfo">
-                        <?php $TEMPLATE->getPageInfo() /* 'Last modified' etc */ ?>
+                        <?php $TPL->getPageInfo() /* 'Last modified' etc */ ?>
                     </span>
                     <?php endif ?>
 
-                    <?php if ($TEMPLATE->getConf('showLoginOnFooter')): ?>
+                    <?php if ($TPL->getConf('showLoginOnFooter')): ?>
                     <span class="loginLink hidden-print">
                         <?php
-                            if ($login_item = $TEMPLATE->getToolMenuItem('user', 'login')) {
+                            if ($login_item = $TPL->getToolMenuItem('user', 'login')) {
                                 echo '<a '. buildAttributes($login_item->getLinkAttributes()) .'>'. inlineSVG($login_item->getSvg()) . ' ' . hsc($login_item->getLabel()) .'</a>';
                             }
                         ?>
@@ -172,13 +172,13 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
             </article>
 
-            <?php $TEMPLATE->includeSidebar('right'); // Right Sidebar ?>
+            <?php $TPL->includeSidebar('right'); // Right Sidebar ?>
 
         </div>
 
     </main>
 
-    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TEMPLATE->getConf('fluidContainer')) ? '-fluid' : '' ?>">
+    <footer id="dw__footer" class="dw-container py-5 dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid' : '' ?>">
         <?php
             // Footer hook
             tpl_includeFile('footer.html');

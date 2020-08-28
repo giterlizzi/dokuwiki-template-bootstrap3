@@ -7,12 +7,9 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
+global $TPL;
 
-global $TEMPLATE;
-
-if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TEMPLATE->getConf('showPageIcons')):
+if (($ACT == 'show' || defined('DOKU_MEDIADETAIL')) && $TPL->getConf('showPageIcons')):
 
 ?>
 <!-- page-icons -->

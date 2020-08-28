@@ -7,17 +7,14 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
-// must be run from within DokuWiki
-if (!defined('DOKU_INC')) die();
-
 global $ID;
-global $TEMPLATE;
+global $TPL;
 
 $show_translation  = false;
 $translation_items = '';
 $translation_label = '';
 
-if ($TEMPLATE->getConf('showTranslation') && $translation = $TEMPLATE->getPlugin('translation')) {
+if ($TPL->getConf('showTranslation') && $translation = $TPL->getPlugin('translation')) {
 
     global $conf;
     $conf['plugin']['translation']['dropdown'] = 0;

@@ -61,7 +61,13 @@ class Template
         );
 
         if ($ACT == 'admin') {
-            $JSINFO['bootstrap3']['admin'] = $INPUT->str('page');
+            $JSINFO['bootstrap3']['admin'] = hsc($INPUT->str('page'));
+        }
+
+        if (! defined('MAX_FILE_SIZE')) {
+            if ($pagesize = $this->getConf('domParserMaxPageSize')) {
+                define('MAX_FILE_SIZE', $pagesize);
+            }
         }
     }
 
@@ -367,7 +373,7 @@ class Template
         static $instance = null;
 
         if ($instance === null) {
-            $instance = new Template();
+            $instance = new self;
         }
 
         return $instance;
@@ -1399,17 +1405,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
     /**
      * Remove data-wiki-id HTML5 attribute
-     * 
+     *
      * @todo Remove this in future
      * @since Hogfather
-     * 
+     *
      * @param array $matches
-     * 
+     *
      * @return string
      */
     private function _replaceWikiCurrentIdCallback($matches)
     {
-        
+
         global $ID;
 
         if ($ID == $matches[1]) {
@@ -1590,7 +1596,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     private function sidebarWrapper($sidebar_page, $sidebar_id, $sidebar_class, $sidebar_header, $sidebar_footer)
     {
         global $lang;
-        global $TEMPLATE;
+        global $TPL;
 
         @require $this->tplDir . 'tpl/sidebar.php';
     }
@@ -1616,7 +1622,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $content = str_replace('checked="checked"', ' checked="checked"', $content);
 
         # Search Hit
-        $content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
+        #$content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
 
         # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
         if (strlen($content) > MAX_FILE_SIZE) {
@@ -1632,7 +1638,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             return $content;
         }
 
-        # Move Current Page ID to <a> element and create data-curid HTML5 attribute
+        # Move Current Page ID to <a> element and create data-curid HTML5 attribute (pre-Hogfather release)
         foreach ($html->find('.curid') as $elm) {
             foreach ($elm->find('a') as $link) {
                 $link->class .= ' curid';
@@ -1866,7 +1872,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             // Set specific icon in Admin Page
             if ($INPUT->str('page')) {
                 if ($admin_pagetitle = $html->find('h1.page-header', 0)) {
-                    $admin_pagetitle->class .= ' ' . $INPUT->str('page');
+                    $admin_pagetitle->class .= ' ' . hsc($INPUT->str('page'));
                 }
             }
 
@@ -2168,8 +2174,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     $search = $items[0];
                     $icon   = $items[1];
 
-                    $content = preg_replace('/<tr(.*)>\s+<td(.*)>\s+<span(.*)>(tpl»bootstrap3»' . $search . ')<\/span>/',
-                        '</table></div></fieldset><fieldset id="bootstrap3__' . $section . '"><legend>' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</legend><div class="table-responsive"><table class="table table-hover table-condensed inline"><tr$1><td$2><span$3>$4</span>', $content);
+                    $content = preg_replace(
+                        '/<span class="outkey">(tpl»bootstrap3»' . $search . ')<\/span>/',
+                        '<h3 id="bootstrap3__' . $section . '">' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</h3> <span class="outkey">$1</span>',
+                        $content
+                    );
                 }
             }
         }
@@ -2540,7 +2549,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         );
 
         if (defined('DOKU_MEDIADETAIL')) {
-            $tools_menus['page'] = array('icon' => 'mdi:image', 'object' => new \dokuwiki\Menu\DetailMenu);
+            $tools_menus['page'] = array('icon' => 'mdi:image', 'object' => new \dokuwiki\template\bootstrap3\Menu\DetailMenu);
         }
 
         foreach ($tools_menus as $tool => $data) {
@@ -2640,5 +2649,3 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
     }
 }
-
-// kate: space-indent on; indent-width 4; replace-tabs on;
