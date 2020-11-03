@@ -41,6 +41,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo $TPL->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
     <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
+    <a href="#dokuwiki__content" class="sr-only sr-only-focusable"><?php echo $lang["a11y_skiplink"]; ?></a>
     <?php
 
         tpl_includeFile('topheader.html');
