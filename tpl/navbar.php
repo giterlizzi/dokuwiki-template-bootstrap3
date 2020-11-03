@@ -24,7 +24,7 @@ $home_link        = ($TPL->getConf('homePageURL') ? $TPL->getConf('homePageURL')
 
         <div class="navbar-header">
 
-            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-label="<?php echo $lang["a11y_navbartoggle"]; ?>">
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
