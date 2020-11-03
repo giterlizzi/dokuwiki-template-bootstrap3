@@ -40,6 +40,5 @@ $lang['config_page']             = 'Page';
 
 // Accessibility labels
 // These are hidden from normal users, but are visible to screenreaders and other software interacting with the site
-$lang['a11y_skiplink']           = 'Skip to content'; 
 $lang['a11y_navbartoggle']       = 'Show navigation';
 

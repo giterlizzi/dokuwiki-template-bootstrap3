@@ -14,6 +14,8 @@ require_once('tpl/functions.php');
 
 header('X-UA-Compatible: IE=edge,chrome=1');
 
+global $lang;
+
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang'] ?>" dir="<?php echo $lang['direction'] ?>" class="no-js">
 <head>
@@ -41,7 +43,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 <body class="<?php echo $TPL->getClasses() ?>" data-page-id="<?php echo $ID ?>"><div class="dokuwiki"><?php /* CSS class for Plugins and user styles */ ?>
 
     <header id="dokuwiki__header" class="dw-container dokuwiki container<?php echo ($TPL->getConf('fluidContainer')) ? '-fluid mx-5' : '' ?>">
-    <a href="#dokuwiki__content" class="sr-only sr-only-focusable"><?php echo $lang["a11y_skiplink"]; ?></a>
+    <a href="#dokuwiki__content" class="sr-only sr-only-focusable"><?php echo $lang["skip_to_content"]; ?></a>
     <?php
 
         tpl_includeFile('topheader.html');
