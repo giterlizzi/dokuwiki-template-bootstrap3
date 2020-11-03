@@ -104,7 +104,7 @@ $meta['pageInfo']                   = array('multicheckbox', '_choices' => array
 $meta['pageInfoDateFormat']         = array('multichoice', '_choices'   => array('dformat', 'human'));
 $meta['showPageIcons']              = array('onoff');
 $meta['pageIcons']                  = array('multicheckbox', '_choices' => array('social-share', 'feed', 'send-mail', 'permalink', 'print', 'help'));
-$meta['socialShareProviders']       = array('multicheckbox', '_choices' => array('facebook', 'linkedin', 'pinterest', 'whatsapp', 'reddit', 'twitter', 'telegram', 'yammer'));
+$meta['socialShareProviders']       = array('multicheckbox', '_choices' => array('facebook', 'linkedin', 'microsoft-teams', 'pinterest', 'whatsapp', 'reddit', 'twitter', 'telegram', 'yammer'));
 $meta['useAlternativeToolbarIcons'] = array('onoff');
 $meta['tagsOnTop']                  = array('onoff');
 $meta['useAnchorJS']                = array('onoff');

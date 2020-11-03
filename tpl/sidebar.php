@@ -8,6 +8,7 @@
  */
 
 global $TPL;
+global $ACT;
 
 $sidebar_title = $lang['sidebar'];
 

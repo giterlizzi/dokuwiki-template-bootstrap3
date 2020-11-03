@@ -64,7 +64,7 @@ class Template
             $JSINFO['bootstrap3']['admin'] = hsc($INPUT->str('page'));
         }
 
-        if (! defined('MAX_FILE_SIZE')) {
+        if (!defined('MAX_FILE_SIZE')) {
             if ($pagesize = $this->getConf('domParserMaxPageSize')) {
                 define('MAX_FILE_SIZE', $pagesize);
             }
@@ -109,15 +109,12 @@ class Template
             'SEARCH_RESULT_PAGELOOKUP'      => 'searchHandler',
             'TPL_CONTENT_DISPLAY'           => 'contentHandler',
             'TPL_METAHEADER_OUTPUT'         => 'metaheadersHandler',
+
         );
 
         foreach ($events_dispatcher as $event => $method) {
             $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, $method);
         }
-    }
-
-    public function testHandler(\Doku_Event $event)
-    {
     }
 
     public function accountFormHandler(\Doku_Event $event)
@@ -404,13 +401,13 @@ class Template
             return '';
         }
 
-        $bs_content = $this->normalizeContent($content);
+        $content = $this->normalizeContent($content);
 
         if ($return) {
-            return $bs_content;
+            return $content;
         }
 
-        echo $bs_content;
+        echo $content;
         return '';
     }
 
@@ -1155,7 +1152,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $link = str_replace('</a>', '</a></span>', $link);
 
             echo $link;
-            echo '<meta itemprop="position" content="'. $position .'" />';
+            echo '<meta itemprop="position" content="' . $position . '" />';
             echo '</li>';
         }
 
@@ -1184,7 +1181,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
 
         echo $link;
-        echo '<meta itemprop="position" content="'. ++$position .'" />';
+        echo '<meta itemprop="position" content="' . ++$position . '" />';
         echo '</li>';
         echo '</ol>';
 
@@ -1451,7 +1448,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             '<li class="level$1 node dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
         $navbar = preg_replace('/<li class="level([0-9]) node active"> (.*)/',
-        '<li class="level$1 node active dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
+            '<li class="level$1 node active dropdown"><a href="#" class="dropdown-toggle" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">$2 <span class="caret"></span></a>', $navbar);
 
         # FIX for Purplenumbers renderer plugin
         # TODO use Simple DOM HTML or improve the regex!
@@ -1620,9 +1617,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Workaround for ToDo Plugin
         $content = str_replace('checked="checked"', ' checked="checked"', $content);
-
-        # Search Hit
-        #$content = str_replace('<span class="search_hit">', '<span class="mark">', $content);
 
         # Return original content if Simple HTML DOM fail or exceeded page size (default MAX_FILE_SIZE => 600KB)
         if (strlen($content) > MAX_FILE_SIZE) {
@@ -2176,7 +2170,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
                     $content = preg_replace(
                         '/<span class="outkey">(tpl»bootstrap3»' . $search . ')<\/span>/',
-                        '<h3 id="bootstrap3__' . $section . '">' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</h3> <span class="outkey">$1</span>',
+                        '<h3 id="bootstrap3__' . $section . '" class="mt-5">' . iconify($icon) . ' ' . tpl_getLang("config_$section") . '</h3></td><td></td></tr><tr><td class="label"><span class="outkey">$1</span>',
                         $content
                     );
                 }

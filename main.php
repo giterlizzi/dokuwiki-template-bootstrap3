@@ -26,7 +26,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
         if ($TPL->getConf('themeByNamespace')) {
             echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
         }
-      
+
         echo tpl_favicon(array('favicon', 'mobile'));
         tpl_includeFile('meta.html');
         tpl_metaheaders();
