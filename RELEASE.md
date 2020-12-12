@@ -1,5 +1,23 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [develop]
+
+### Added
+  * Added support for Microsoft Teams share
+  * Added BS3 styles in jQueryUI components
+
+### Changed
+  * #520: Revert .wikilink2 class in list context (@takuy)
+
+### Removed
+  * #517: Removed `!important` in navbar height to prevent issue with `userall.css` style (@nurzu)
+
+### Fixed
+  * Fixed regression for Cookie Law for Hogfather release
+  * Fixed regression in AnchorJS and Sidebar
+  * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
+  * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+
 
 ## [v2020-08-28]
 
@@ -19,12 +37,10 @@ Enjoy!
 
 ### Fixed
   * Fixed very old bug for media manager
-  * Fixed regression for Cookie Law for Hogfather release
-  * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
   * #501: Search matching pagenames overlapping (#rogerjames1994)
   * #503: Fixed edit toolbar icons regression for Hogfather release (@FloMiLe)
-  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)
+  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)z
 
 
 ## [v2020-07-29]

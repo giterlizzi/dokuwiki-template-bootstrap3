@@ -308,7 +308,7 @@ class Template
 
             // TODO implement in css.php dispatcher
 
-            $styles[] = "body { margin-top: {$navbar_padding}px !important; }";
+            $styles[] = "body { margin-top: {$navbar_padding}px; }";
             $styles[] = ' #dw__toc.affix { top: ' . ($navbar_padding - 10) . 'px; position: fixed !important; }';
 
             if ($this->getConf('tocCollapseSubSections')) {
