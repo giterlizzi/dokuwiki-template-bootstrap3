@@ -306,6 +306,8 @@ class Template
 
             $styles = array();
 
+            // TODO implement in css.php dispatcher
+
             $styles[] = "body { margin-top: {$navbar_padding}px !important; }";
             $styles[] = ' #dw__toc.affix { top: ' . ($navbar_padding - 10) . 'px; position: fixed !important; }';
 
@@ -1395,7 +1397,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # TODO optimize
         $list = preg_replace('/<i (.+?)><\/i> <a (.+?)>(.+?)<\/a>/', '<a $2><i $1></i> $3</a>', $list);
         $list = preg_replace('/<span (.+?)><\/span> <a (.+?)>(.+?)<\/a>/', '<a $2><span $1></span> $3</a>', $list);
-        $list = str_replace('wikilink2', '', $list); # Remove wikilink2 class
 
         return $list;
     }
