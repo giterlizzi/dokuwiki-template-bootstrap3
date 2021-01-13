@@ -5,4 +5,4 @@ date     2020-08-28
 name     Bootstrap3 Template
 desc     Bootstrap-based template for Dokuwiki
 url      https://www.dokuwiki.org/template:bootstrap3
-build    develop/20201103
+build    develop/20210113

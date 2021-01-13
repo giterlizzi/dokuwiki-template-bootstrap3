@@ -17,6 +17,7 @@
   * Fixed regression in AnchorJS and Sidebar
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+  * #529: Fixed tags extend beyond page limits (@tmo26)
 
 
 ## [v2020-08-28]
