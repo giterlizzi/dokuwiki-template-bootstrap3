@@ -2456,6 +2456,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
         }
 
+        $toc_check = end($toc);
+        $toc_undefined = null;
+
+        if (!preg_match('/bootstrap/', $toc_check['link'])) {
+            $toc_undefined = array_pop($toc);
+        }
+
+
         trigger_event('TPL_TOC_RENDER', $toc, null, false);
 
         if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
@@ -2473,6 +2481,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     'level' => 3,
                 );
             }
+        }
+
+        if ($toc_undefined) {
+            $toc[] = $toc_undefined;
         }
 
         $html = $this->renderTOC($toc);
