@@ -16,6 +16,7 @@
   * Fixed regression for Cookie Law for Hogfather release
   * Fixed regression in AnchorJS and Sidebar
   * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
+  * #492: Fix "set_time_limit" warning with safe mode:ON (@DrakMrak)
   * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
   * #525: Fixed Configuration Settings TOC for Undefined Settings (@Skyridr)
   * #529: Fixed tags extend beyond page limits (@tmo26)
