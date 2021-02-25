@@ -21,7 +21,9 @@
  * Version Rev. 1.9 (290)
  */
  
-set_time_limit(0);
+if (strpos(@ini_get('disable_functions'), 'set_time_limit') === false) {
+    @set_time_limit(0);
+}
 ini_set('max_execution_time', 0);
 
 define('HDOM_TYPE_ELEMENT', 1);
