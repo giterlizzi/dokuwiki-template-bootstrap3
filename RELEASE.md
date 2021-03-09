@@ -10,6 +10,7 @@
   * #520: Revert .wikilink2 class in list context (@takuy)
 
 ### Removed
+  * Removed deprecated `useLegacyNavbar` option
   * #517: Removed `!important` in navbar height to prevent issue with `userall.css` style (@nurzu)
 
 ### Fixed
