@@ -456,10 +456,10 @@ var dw_template = {
         jQuery('#dw__pagetools .tools').affix({
             offset: {
                 top: (jQuery('main').position().top),
-                bottom: ((jQuery(document).height()
+                bottom: (jQuery(document).height()
                     - jQuery('#dokuwiki__content').height()
                     - jQuery('#dokuwiki__pageheader').height()
-                    - jQuery('#dokuwiki__header').height()))
+                    - jQuery('#dokuwiki__header').height())
             }
         });
 
@@ -914,17 +914,17 @@ var dw_template = {
 
         };
 
-        for (i in window.toolbar) {
+        for (var i in window.toolbar) {
 
             // Replace all icons in "H(eaders)" picker
             if (window.toolbar[i].icon == 'h.png') {
-                for (x in window.toolbar[i].list) {
+                for (var x in window.toolbar[i].list) {
                     var hn = parseInt(x) + 1;
                     window.toolbar[i].list[x].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-format-header-' + hn + '.svg';
                 }
             }
 
-            for (icon in icons) {
+            for (var icon in icons) {
                 if (window.toolbar[i].icon == icon) {
                     window.toolbar[i].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-' + icons[icon];
                 }

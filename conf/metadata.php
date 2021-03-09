@@ -37,7 +37,6 @@ $meta['individualTools']        = array('onoff');
 $meta['showIndividualTool']     = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showAdminMenu']          = array('onoff');
-$meta['useLegacyNavbar']        = array('onoff');
 $meta['showNavbar']             = array('multichoice', '_choices' => array('logged', 'always'));
 $meta['navbarLabels']           = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
 $meta['showAddNewPage']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));

@@ -12,21 +12,21 @@ var $discussion = jQuery('.comment_wrapper');
 
 if ($discussion.length) {
 
-  $discussion.find('h2').addClass('page-header');
-  $discussion.find('.comment_buttons').addClass('text-right');
-  $discussion.find('#discussion__section').prepend('<span class="iconify mr-2" data-icon="mdi:comment-text-multiple"/>');
+    $discussion.find('h2').addClass('page-header');
+    $discussion.find('.comment_buttons').addClass('text-right');
+    $discussion.find('#discussion__section').prepend('<span class="iconify mr-2" data-icon="mdi:comment-text-multiple"/>');
 
-  $discussion.find('.hentry').addClass('panel panel-default');
-  $discussion.find('.hentry .comment_head').addClass('panel-heading');
-  $discussion.find('.hentry .comment_body').addClass('panel-body');
-  $discussion.find('.toolbar').addClass('btn-group');
-  $discussion.find('.comment_buttons [type=submit]').addClass('btn-xs');
-  $discussion.find('.comment_buttons .discussion__delete .btn').addClass('btn-danger');
-  $discussion.find('.comment_buttons .discussion__reply .btn').addClass('btn-success');
-  $discussion.find('#discussion__btn_submit').addClass('btn-success');
+    $discussion.find('.hentry').addClass('panel panel-default');
+    $discussion.find('.hentry .comment_head').addClass('panel-heading');
+    $discussion.find('.hentry .comment_body').addClass('panel-body');
+    $discussion.find('.toolbar').addClass('btn-group');
+    $discussion.find('.comment_buttons [type=submit]').addClass('btn-xs');
+    $discussion.find('.comment_buttons .discussion__delete .btn').addClass('btn-danger');
+    $discussion.find('.comment_buttons .discussion__reply .btn').addClass('btn-success');
+    $discussion.find('#discussion__btn_submit').addClass('btn-success');
 
-  jQuery(document).bind('DOMNodeInserted', function(){
-    $discussion.find('.toolbutton').addClass('btn btn-xs');
-  });
+    jQuery(document).bind('DOMNodeInserted', function () {
+        $discussion.find('.toolbutton').addClass('btn btn-xs');
+    });
 
 }

@@ -11,7 +11,5 @@
 var $folded = jQuery('.fold_unfold_all_new');
 
 if ($folded.length) {
-
-  $folded.addClass('menuitem');
-
+    $folded.addClass('menuitem');
 }

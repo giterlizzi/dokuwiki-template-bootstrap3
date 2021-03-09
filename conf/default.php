@@ -84,5 +84,4 @@ $conf['useAlternativeToolbarIcons']  = 1;
 $conf['useAnchorJS']                 = 1;
 $conf['useAvatar']                   = 'off';
 $conf['useGoogleAnalytics']          = 0;
-$conf['useLegacyNavbar']             = 0;
 $conf['notifyExtensionsUpdate']      = 0;

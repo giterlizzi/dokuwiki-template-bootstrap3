@@ -8,11 +8,11 @@
 
 // InlineTOC Plugin
 
-var $toc  = jQuery('#dw__toc, #dokuwiki__toc'),  // DokuWiki TOC
+var $toc = jQuery('#dw__toc, #dokuwiki__toc'),  // DokuWiki TOC
     $toc2 = jQuery('div.inlinetoc2');            // InlineTOC Plugin
 
 // InlineTOC Plugin
 if ($toc2.length && $toc.length) {
-  $toc.css('display', 'none');
-  $toc2.addClass('panel panel-default');
+    $toc.css('display', 'none');
+    $toc2.addClass('panel panel-default');
 }

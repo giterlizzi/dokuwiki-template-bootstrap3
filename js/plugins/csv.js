@@ -12,13 +12,13 @@ var $csv = jQuery('table tbody tr.row0 th.col0');
 
 if ($csv.length) {
 
-  $csv.each(function() {
-    var $table = jQuery(this).parents('table');
-    if ($table.find('tr.row1 th').length == 0) {
-      $table.prepend('<thead/>');
-      $header = $table.find('tr.row0');
-      $table.find('thead').append($header);
-    }
-  });
+    $csv.each(function () {
+        var $table = jQuery(this).parents('table');
+        if ($table.find('tr.row1 th').length == 0) {
+            $table.prepend('<thead/>');
+            var $header = $table.find('tr.row0');
+            $table.find('thead').append($header);
+        }
+    });
 
 }

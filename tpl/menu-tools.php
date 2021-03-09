@@ -9,10 +9,8 @@
 
 global $TPL, $ID;
 
-if ($TPL->getConf('showTools')):
-
-    $navbar_labels = $TPL->getConf('navbarLabels');
-    $tools_menus   = $TPL->getToolsMenu();
+$navbar_labels = $TPL->getConf('navbarLabels');
+$tools_menus   = $TPL->getToolsMenu();
 
 ?>
 <!-- tools-menu -->
@@ -60,15 +58,15 @@ if ($TPL->getConf('showTools')):
         </a>
 
         <ul class="dropdown-menu tools" role="menu">
-        <?php
+            <?php
 
-            $i   = 1;
-            $max = count(array_keys($tools_menus));
+                $i   = 1;
+                $max = count(array_keys($tools_menus));
 
-            foreach($tools_menus as $tool => $data):
+                foreach($tools_menus as $tool => $data):
 
-                if (! isset($data['menu'])) continue;
-        ?>
+                    if (! isset($data['menu'])) continue;
+            ?>
 
             <li class="dropdown-header">
                 <?php echo iconify($data['icon']); ?> <?php echo $lang[$tool.'_tools'] ?>
@@ -92,4 +90,3 @@ if ($TPL->getConf('showTools')):
 
 </ul>
 <!-- /tools-menu -->
-<?php endif; ?>

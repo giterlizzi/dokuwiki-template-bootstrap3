@@ -11,5 +11,5 @@
 var $datatables = jQuery('.dt-wrapper');
 
 if ($datatables.length) {
-  $datatables.find('.table-responsive').removeClass('table-responsive');
+    $datatables.find('.table-responsive').removeClass('table-responsive');
 }

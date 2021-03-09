@@ -1,4 +1,5 @@
 <?php
+
 /**
  * DokuWiki Bootstrap3 Template: User Menu
  *
@@ -8,8 +9,6 @@
  */
 
 global $INFO, $lang, $TPL;
-
-if (! empty($_SERVER['REMOTE_USER'])):
 
 $use_avatar = $TPL->getConf('useAvatar');
 
@@ -39,16 +38,15 @@ if ($INFO['isadmin']) {
 
 if ($INFO['isadmin'] && $TPL->getConf('notifyExtensionsUpdate')) {
 
+    /** @var $plugin_controller PluginController */
     global $plugin_controller;
 
     $extension = plugin_load('helper','extension_extension');
 
     foreach ($plugin_controller->getList('', true) as $plugin) {
         $extension->setExtension($plugin);
-        if ($extension->updateAvailable()) {
-            if ($extension->isEnabled()) {
-                $extensions_update[] = $extension->getDisplayName();
-            }
+        if ($extension->updateAvailable() && $extension->isEnabled()) {
+            $extensions_update[] = $extension->getDisplayName();
         }
     }
 
@@ -198,4 +196,3 @@ if ($INFO['isadmin'] && $TPL->getConf('notifyExtensionsUpdate')) {
     </li>
 </ul>
 <!-- /user-menu -->
-<?php endif; ?>

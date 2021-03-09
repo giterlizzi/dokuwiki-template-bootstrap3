@@ -12,11 +12,11 @@ var $wrap = jQuery('.plugin_wrap');
 
 if ($wrap.length) {
 
-  if ($wrap.hasClass('tabs')) {
-    var $tabs = jQuery('.plugin_wrap.tabs');
-    $tabs.find('div.li').contents().unwrap();
-    $tabs.find('.curid').parent().addClass('active');
-    $tabs.find('ul').addClass('nav nav-tabs');
-  }
+    if ($wrap.hasClass('tabs')) {
+        var $tabs = jQuery('.plugin_wrap.tabs');
+        $tabs.find('div.li').contents().unwrap();
+        $tabs.find('.curid').parent().addClass('active');
+        $tabs.find('ul').addClass('nav nav-tabs');
+    }
 
 }

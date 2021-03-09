@@ -13,9 +13,9 @@ namespace dokuwiki\template\bootstrap3;
 class Template
 {
 
-    private $plugins      = array();
-    private $confMetadata = array();
-    private $toolsMenu    = array();
+    private $plugins      = [];
+    private $confMetadata = [];
+    private $toolsMenu    = [];
 
     public $tplDir  = '';
     public $baseDir = '';
@@ -42,10 +42,10 @@ class Template
         }
 
         // Populate JSINFO object
-        $JSINFO['bootstrap3'] = array(
+        $JSINFO['bootstrap3'] = [
             'mode'   => $ACT,
-            'toc'    => array(),
-            'config' => array(
+            'toc'    => [],
+            'config' => [
                 'collapsibleSections'        => (int) $this->getConf('collapsibleSections'),
                 'fixedTopNavbar'             => (int) $this->getConf('fixedTopNavbar'),
                 'showSemanticPopup'          => (int) $this->getConf('showSemanticPopup'),
@@ -57,17 +57,15 @@ class Template
                 'tocLayout'                  => $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
-            ),
-        );
+            ],
+        ];
 
         if ($ACT == 'admin') {
             $JSINFO['bootstrap3']['admin'] = hsc($INPUT->str('page'));
         }
 
-        if (!defined('MAX_FILE_SIZE')) {
-            if ($pagesize = $this->getConf('domParserMaxPageSize')) {
-                define('MAX_FILE_SIZE', $pagesize);
-            }
+        if (!defined('MAX_FILE_SIZE') && $pagesize = $this->getConf('domParserMaxPageSize')) {
+            define('MAX_FILE_SIZE', $pagesize);
         }
     }
 
@@ -88,7 +86,7 @@ class Template
         /** @var \Doku_Event_Handler */
         global $EVENT_HANDLER;
 
-        $events_dispatcher = array(
+        $events_dispatcher = [
             'FORM_QUICKSEARCH_OUTPUT'       => 'searchHandler',
             'FORM_SEARCH_OUTPUT'            => 'searchHandler',
             'HTML_DRAFTFORM_OUTPUT'         => 'draftFormHandler',
@@ -110,7 +108,7 @@ class Template
             'TPL_CONTENT_DISPLAY'           => 'contentHandler',
             'TPL_METAHEADER_OUTPUT'         => 'metaheadersHandler',
 
-        );
+        ];
 
         foreach ($events_dispatcher as $event => $method) {
             $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, $method);
@@ -256,16 +254,14 @@ class Template
 
     public function searchHandler(\Doku_Event $event)
     {
-        //dbg(print_r($event, 1));
-
         if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
-            array_unshift($event->data['listItemContent'], iconify('mdi:file-document-outline', array('title' => hsc($event->data['page']))) . ' ');
+            array_unshift($event->data['listItemContent'], iconify('mdi:file-document-outline', ['title' => hsc($event->data['page'])]) . ' ');
         }
 
         if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
             $event->data['resultBody']['meta'] = str_replace(
-                array('<span class="lastmod">', '<span class="hits">'),
-                array('<span class="lastmod">' . iconify('mdi:calendar') . ' ', '<span class="hits"' . iconify('mdi:poll') . ' '),
+                ['<span class="lastmod">', '<span class="hits">'],
+                ['<span class="lastmod">' . iconify('mdi:calendar') . ' ', '<span class="hits"' . iconify('mdi:poll') . ' '],
                 '<small>' . $event->data['resultBody']['meta'] . '</small>'
             );
         }
@@ -288,10 +284,10 @@ class Template
         $fixed_top_navbar = $this->getConf('fixedTopNavbar');
 
         if ($google_analitycs = $this->getGoogleAnalitycs()) {
-            $event->data['script'][] = array(
+            $event->data['script'][] = [
                 'type'  => 'text/javascript',
                 '_data' => $google_analitycs,
-            );
+            ];
         }
 
         // Apply some FIX
@@ -304,7 +300,7 @@ class Template
                 $navbar_padding += $navbar_height;
             }
 
-            $styles = array();
+            $styles = [];
 
             // TODO implement in css.php dispatcher
 
@@ -315,10 +311,10 @@ class Template
                 $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
             }
 
-            $event->data['style'][] = array(
+            $event->data['style'][] = [
                 'type'  => 'text/css',
                 '_data' => '@media screen { ' . implode(" ", $styles) . ' }',
-            );
+            ];
         }
     }
 
@@ -432,7 +428,7 @@ class Template
 
     private function loadConfMetadata()
     {
-        $meta = array();
+        $meta = [];
         $file = $this->tplDir . 'conf/metadata.php';
 
         include $file;
@@ -625,8 +621,8 @@ class Template
 
             $interwiki = getInterwiki();
             $user_url  = str_replace('{NAME}', $username, $interwiki['user']);
-            $logo_size = array();
-            $logo      = tpl_getMediaFile(array("$user_url.png", "$user_url.jpg", 'images/avatar.png'), false, $logo_size);
+            $logo_size = [];
+            $logo      = tpl_getMediaFile(["$user_url.png", "$user_url.jpg", 'images/avatar.png'], false, $logo_size);
 
             return $logo;
         }
@@ -662,7 +658,7 @@ class Template
         }
 
         if ($avatar_url) {
-            $media_link = ml("$avatar_url&.jpg", array('cache' => 'recache', 'w' => $size, 'h' => $size));
+            $media_link = ml("$avatar_url&.jpg", ['cache' => 'recache', 'w' => $size, 'h' => $size]);
             return $media_link;
         }
 
@@ -683,7 +679,7 @@ class Template
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $bootswatch_theme = $this->getBootswatchTheme();
 
-        $classes   = array();
+        $classes   = [];
         $classes[] = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
         $classes[] = trim(tpl_classes());
 
@@ -780,17 +776,17 @@ class Template
             $fn_full = $fn;
 
             if (!in_array('extension', $page_info)) {
-                $fn = str_replace(array('.txt.gz', '.txt'), '', $fn);
+                $fn = str_replace(['.txt.gz', '.txt'], '', $fn);
             }
 
             $out = '<ul class="list-inline">';
 
             if (in_array('filename', $page_info)) {
-                $out .= '<li>' . iconify('mdi:file-document-outline', array('class' => 'text-muted')) . ' <span title="' . $fn_full . '">' . $fn . '</span></li>';
+                $out .= '<li>' . iconify('mdi:file-document-outline', ['class' => 'text-muted']) . ' <span title="' . $fn_full . '">' . $fn . '</span></li>';
             }
 
             if (in_array('date', $page_info)) {
-                $out .= '<li>' . iconify('mdi:calendar', array('class' => 'text-muted')) . ' ' . $lang['lastmod'] . ' <span title="' . dformat($INFO['lastmod']) . '">' . $date . '</span></li>';
+                $out .= '<li>' . iconify('mdi:calendar', ['class' => 'text-muted']) . ' ' . $lang['lastmod'] . ' <span title="' . dformat($INFO['lastmod']) . '">' . $date . '</span></li>';
             }
 
             if (in_array('editor', $page_info)) {
@@ -803,7 +799,7 @@ class Template
 
                         $avatar_img = $this->getAvatar($INFO['editor'], $user_data['mail'], 16);
                         $user_img   = '<img src="' . $avatar_img . '" alt="" width="16" height="16" class="img-rounded" /> ';
-                        $user       = str_replace(array('iw_user', 'interwiki'), '', $user);
+                        $user       = str_replace(['iw_user', 'interwiki'], '', $user);
                         $user       = $user_img . "<bdi>$user<bdi>";
                     }
 
@@ -814,7 +810,7 @@ class Template
             }
 
             if ($INFO['locked'] && in_array('locked', $page_info)) {
-                $out .= '<li>' . iconify('mdi:lock', array('class' => 'text-muted')) . ' ' . $lang['lockedby'] . ' ' . editorinfo($INFO['locked']) . '</li>';
+                $out .= '<li>' . iconify('mdi:lock', ['class' => 'text-muted']) . ' ' . $lang['lockedby'] . ' ' . editorinfo($INFO['locked']) . '</li>';
             }
 
             $out .= '</ul>';
@@ -860,7 +856,7 @@ class Template
             return;
         }
 
-        $shown = array();
+        $shown = [];
 
         foreach ($MSG as $msg) {
             $hash = md5($msg['msg']);
@@ -893,7 +889,7 @@ class Template
                 }
 
                 print '<div class="alert alert-' . $level . '">';
-                print iconify($icon, array('class' => 'mr-2'));
+                print iconify($icon, ['class' => 'mr-2']);
                 print $msg['msg'];
                 print '</div>';
             }
@@ -1147,7 +1143,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             echo '<li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
             $link = html_wikilink($page);
-            $link = str_replace(array('<span class="curid">', '</span>'), '', $link);
+            $link = str_replace(['<span class="curid">', '</span>'], '', $link);
             $link = str_replace('<a', '<a itemprop="item" ', $link);
             $link = preg_replace('/data-wiki-id="(.+?)"/', '', $link);
             $link = str_replace('<a', '<span itemprop="name"><a', $link);
@@ -1176,7 +1172,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         echo '<li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
 
-        $link = str_replace(array('<span class="curid">', '</span>'), '', html_wikilink($page));
+        $link = str_replace(['<span class="curid">', '</span>'], '', html_wikilink($page));
         $link = str_replace('<a ', '<a itemprop="item" ', $link);
         $link = str_replace('<a', '<span itemprop="name"><a', $link);
         $link = str_replace('</a>', '</a></span>', $link);
@@ -1203,8 +1199,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         if ($this->getConf('browserTitleShowNS') && $ACT == 'show') {
             $ns_page      = '';
             $ns_parts     = explode(':', $ID);
-            $ns_pages     = array();
-            $ns_titles    = array();
+            $ns_pages     = [];
+            $ns_titles    = [];
             $ns_separator = sprintf(' %s ', $this->getConf('browserTitleCharSepNS'));
 
             if (useHeading('navigation')) {
@@ -1253,8 +1249,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         return str_replace(
-            array('@WIKI@', '@TITLE@'),
-            array(strip_tags($conf['title']), $browser_title),
+            ['@WIKI@', '@TITLE@'],
+            [strip_tags($conf['title']), $browser_title],
             $this->getConf('browserTitle')
         );
     }
@@ -1272,11 +1268,11 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $themes_filename = DOKU_CONF . 'bootstrap3.themes.conf';
 
         if (!$this->getConf('themeByNamespace')) {
-            return array();
+            return [];
         }
 
         if (!file_exists($themes_filename)) {
-            return array();
+            return [];
         }
 
         $config = confToHash($themes_filename);
@@ -1286,17 +1282,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             if (preg_match("/^$page/", "$ID")) {
                 list($bootstrap, $bootswatch) = explode('/', $theme);
 
-                if ($bootstrap && in_array($bootstrap, array('default', 'optional', 'custom'))) {
-                    return array($bootstrap, $bootswatch);
+                if ($bootstrap && in_array($bootstrap, ['default', 'optional', 'custom'])) {
+                    return [$bootstrap, $bootswatch];
                 }
 
                 if ($bootstrap == 'bootswatch' && in_array($bootswatch, $this->getBootswatchThemeList())) {
-                    return array($bootstrap, $bootswatch);
+                    return [$bootstrap, $bootswatch];
                 }
             }
         }
 
-        return array();
+        return [];
     }
 
     /**
@@ -1312,7 +1308,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function toBootstrapNav($html, $type = '', $stacked = false, $optional_class = '')
     {
-        $classes = array();
+        $classes = [];
 
         $classes[] = 'nav';
         $classes[] = $optional_class;
@@ -1335,8 +1331,8 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         $class = implode(' ', $classes);
 
         $output = str_replace(
-            array('<ul class="', '<ul>'),
-            array("<ul class=\"$class ", "<ul class=\"$class\">"),
+            ['<ul class="', '<ul>'],
+            ["<ul class=\"$class ", "<ul class=\"$class\">"],
             $html
         );
 
@@ -1361,7 +1357,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         global $ID;
 
-        $list = preg_replace_callback('/data-wiki-id="(.+?)"/', array($this, '_replaceWikiCurrentIdCallback'), $list);
+        $list = preg_replace_callback('/data-wiki-id="(.+?)"/', [$this, '_replaceWikiCurrentIdCallback'], $list);
 
         $html = new \simple_html_dom;
         $html->load($list, true, false);
@@ -1369,12 +1365,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # Create data-curid HTML5 attribute and unwrap span.curid for pre-Hogfather release
         foreach ($html->find('span.curid') as $elm) {
             $elm->firstChild()->setAttribute('data-wiki-curid', 'true');
-            $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
+            $elm->outertext = str_replace(['<span class="curid">', '</span>'], '', $elm->outertext);
         }
 
         # Unwrap div.li element
         foreach ($html->find('div.li') as $elm) {
-            $elm->outertext = str_replace(array('<div class="li">', '</div>'), '', $elm->outertext);
+            $elm->outertext = str_replace(['<div class="li">', '</div>'], '', $elm->outertext);
         }
 
         $list = $html->save();
@@ -1614,7 +1610,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $INFO;
 
         # FIX :-\ smile
-        $content = str_replace(array('alt=":-\"', "alt=':-\'"), 'alt=":-&#92;"', $content);
+        $content = str_replace(['alt=":-\"', "alt=':-\'"], 'alt=":-&#92;"', $content);
 
         # Workaround for ToDo Plugin
         $content = str_replace('checked="checked"', ' checked="checked"', $content);
@@ -1643,7 +1639,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Unwrap span.curid elements
         foreach ($html->find('span.curid') as $elm) {
-            $elm->outertext = str_replace(array('<span class="curid">', '</span>'), '', $elm->outertext);
+            $elm->outertext = str_replace(['<span class="curid">', '</span>'], '', $elm->outertext);
         }
 
         # Footnotes
@@ -1732,7 +1728,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Form controls
         foreach ($html->find('input, select, textarea') as $elm) {
-            if (in_array($elm->type, array('submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'))) {
+            if (in_array($elm->type, ['submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'])) {
                 continue;
             }
             $elm->class .= ' form-control';
@@ -1819,7 +1815,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
             foreach ($html->find('fieldset.search-form button[type="submit"]') as $elm) {
                 $elm->class .= ' btn-primary';
-                $elm->innertext = iconify('mdi:magnify', array('class' => 'mr-2')) . $elm->innertext;
+                $elm->innertext = iconify('mdi:magnify', ['class' => 'mr-2']) . $elm->innertext;
             }
 
             $content = $html->save();
@@ -1839,16 +1835,16 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $parent = $elm->parent()->parent();
 
                 if (preg_match('/open/', $parent->class)) {
-                    $elm->innertext = iconify('mdi:folder-open', array('class' => 'text-primary mr-2')) . $elm->innertext;
+                    $elm->innertext = iconify('mdi:folder-open', ['class' => 'text-primary mr-2']) . $elm->innertext;
                 }
 
                 if (preg_match('/closed/', $parent->class)) {
-                    $elm->innertext = iconify('mdi:folder', array('class' => 'text-primary mr-2')) . $elm->innertext;
+                    $elm->innertext = iconify('mdi:folder', ['class' => 'text-primary mr-2']) . $elm->innertext;
                 }
             }
 
             foreach ($html->find('.idx .wikilink1') as $elm) {
-                $elm->innertext = iconify('mdi:file-document-outline', array('class' => 'text-muted mr-2')) . $elm->innertext;
+                $elm->innertext = iconify('mdi:file-document-outline', ['class' => 'text-muted mr-2']) . $elm->innertext;
             }
 
             $content = $html->save();
@@ -2066,12 +2062,12 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                             continue;
                         }
 
-                        $item->innertext = iconify('mdi:puzzle', array('class' => 'text-success'));
+                        $item->innertext = iconify('mdi:puzzle', ['class' => 'text-success']);
                     }
                 }
 
                 foreach ($html->find('h2') as $elm) {
-                    $elm->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $elm->innertext;
+                    $elm->innertext = iconify('mdi:puzzle', ['class' => 'text-success']) . ' ' . $elm->innertext;
                 }
 
                 foreach ($html->find('ul.admin_plugins') as $admin_plugins) {
@@ -2114,17 +2110,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     if ($extension = plugin_load('helper', 'extension_extension')) {
                         if ($extension->setExtension($plugin_name)) {
                             foreach ($elm->find('legend') as $legend) {
-                                $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
+                                $legend->innertext = iconify('mdi:puzzle', ['class' => 'text-success']) . ' ' . $legend->innertext . ' <br/><h6>' . $extension->getDescription() . ' <a class="urlextern" href="' . $extension->getURL() . '" target="_blank">Docs</a></h6>';
                             }
                         }
                     } else {
                         foreach ($elm->find('legend') as $legend) {
-                            $legend->innertext = iconify('mdi:puzzle', array('class' => 'text-success')) . ' ' . $legend->innertext;
+                            $legend->innertext = iconify('mdi:puzzle', ['class' => 'text-success']) . ' ' . $legend->innertext;
                         }
                     }
                 }
 
-                $dokuwiki_configs = array(
+                $dokuwiki_configs = [
                     '#_basic'          => 'mdi:settings',
                     '#_display'        => 'mdi:monitor',
                     '#_authentication' => 'mdi:shield-account',
@@ -2136,7 +2132,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                     '#_syndication'    => 'mdi:rss',
                     '#_advanced'       => 'mdi:palette-advanced',
                     '#_network'        => 'mdi:network',
-                );
+                ];
 
                 foreach ($dokuwiki_configs as $selector => $icon) {
                     foreach ($html->find("$selector legend") as $elm) {
@@ -2149,21 +2145,21 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 $html->clear();
                 unset($html);
 
-                $admin_sections = array(
-                    // Section                  Insert Before           Icon
-                    'theme'            => array('bootstrapTheme', 'mdi:palette'),
-                    'sidebar'          => array('sidebarPosition', 'mdi:page-layout-sidebar-left'),
-                    'navbar'           => array('inverseNavbar', 'mdi:page-layout-header'),
-                    'semantic'         => array('semantic', 'mdi:share-variant'),
-                    'layout'           => array('fluidContainer', 'mdi:monitor'),
-                    'toc'              => array('tocAffix', 'mdi:view-list'),
-                    'discussion'       => array('showDiscussion', 'mdi:comment-text-multiple'),
-                    'avatar'           => array('useAvatar', 'mdi:account'),
-                    'cookie_law'       => array('showCookieLawBanner', 'mdi:scale-balance'),
-                    'google_analytics' => array('useGoogleAnalytics', 'mdi:google'),
-                    'browser_title'    => array('browserTitle', 'mdi:format-title'),
-                    'page'             => array('showPageInfo', 'mdi:file'),
-                );
+                $admin_sections = [
+                    // Section => [ Insert Before, Icon ]
+                    'theme'            => ['bootstrapTheme', 'mdi:palette'],
+                    'sidebar'          => ['sidebarPosition', 'mdi:page-layout-sidebar-left'],
+                    'navbar'           => ['inverseNavbar', 'mdi:page-layout-header'],
+                    'semantic'         => ['semantic', 'mdi:share-variant'],
+                    'layout'           => ['fluidContainer', 'mdi:monitor'],
+                    'toc'              => ['tocAffix', 'mdi:view-list'],
+                    'discussion'       => ['showDiscussion', 'mdi:comment-text-multiple'],
+                    'avatar'           => ['useAvatar', 'mdi:account'],
+                    'cookie_law'       => ['showCookieLawBanner', 'mdi:scale-balance'],
+                    'google_analytics' => ['useGoogleAnalytics', 'mdi:google'],
+                    'browser_title'    => ['browserTitle', 'mdi:format-title'],
+                    'page'             => ['showPageInfo', 'mdi:file'],
+                ];
 
                 foreach ($admin_sections as $section => $items) {
                     $search = $items[0];
@@ -2238,7 +2234,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $svg_icon      = null;
         $iconify_icon  = null;
-        $iconify_attrs = array('class' => 'mr-2');
+        $iconify_attrs = ['class' => 'mr-2'];
 
         if (!$INFO['exists'] && $ACT == 'show') {
             $iconify_icon           = 'mdi:alert';
@@ -2303,7 +2299,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         }
 
         if ($svg_icon) {
-            $svg_attrs = array('class' => 'iconify mr-2');
+            $svg_attrs = ['class' => 'iconify mr-2'];
 
             if ($ACT == 'admin' && $INPUT->str('page') == 'extension') {
                 $svg_attrs['style'] = 'fill: green;';
@@ -2372,10 +2368,10 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         $result = '';
 
-        $grids = array(
-            'sm' => array('left' => 0, 'right' => 0),
-            'md' => array('left' => 0, 'right' => 0),
-        );
+        $grids = [
+            'sm' => ['left' => 0, 'right' => 0],
+            'md' => ['left' => 0, 'right' => 0],
+        ];
 
         $show_right_sidebar = $this->getConf('showRightSidebar');
         $show_left_sidebar  = $this->getConf('showSidebar');
@@ -2430,7 +2426,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         global $conf;
         global $INPUT;
 
-        $toc = array();
+        $toc = [];
 
         if (is_array($TOC)) {
             // if a TOC was prepared in global scope, always use it
@@ -2445,7 +2441,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
             $toc = isset($meta['description']['tableofcontents']) ? $meta['description']['tableofcontents'] : null;
             if (!$tocok || !is_array($toc) || !$conf['tocminheads'] || count($toc) < $conf['tocminheads']) {
-                $toc = array();
+                $toc = [];
             }
         } elseif ($ACT == 'admin') {
             // try to load admin plugin TOC
@@ -2456,30 +2452,29 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             }
         }
 
-        $toc_check = end($toc);
+        $toc_check     = end($toc);
         $toc_undefined = null;
 
-        if (!preg_match('/bootstrap/', $toc_check['link'])) {
+        if (isset($toc_check['link']) && !preg_match('/bootstrap/', $toc_check['link'])) {
             $toc_undefined = array_pop($toc);
         }
-
 
         trigger_event('TPL_TOC_RENDER', $toc, null, false);
 
         if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
-            $bootstrap3_sections = array(
+            $bootstrap3_sections = [
                 'theme', 'sidebar', 'navbar', 'semantic', 'layout', 'toc',
                 'discussion', 'avatar', 'cookie_law', 'google_analytics',
                 'browser_title', 'page',
-            );
+            ];
 
             foreach ($bootstrap3_sections as $id) {
-                $toc[] = array(
+                $toc[] = [
                     'link'  => "#bootstrap3__$id",
                     'title' => tpl_getLang("config_$id"),
                     'type'  => 'ul',
                     'level' => 3,
-                );
+                ];
             }
         }
 
@@ -2514,14 +2509,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         global $lang;
 
-        $json_toc = array();
+        $json_toc = [];
 
         foreach ($toc as $item) {
-            $json_toc[] = array(
+            $json_toc[] = [
                 'link'  => (isset($item['link']) ? $item['link'] : '#' . $item['hid']),
                 'title' => $item['title'],
                 'level' => $item['level'],
-            );
+            ];
         }
 
         $out = '';
@@ -2549,14 +2544,14 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     {
         global $ACT;
 
-        $tools_menus = array(
-            'user' => array('icon' => 'mdi:account', 'object' => new \dokuwiki\Menu\UserMenu),
-            'site' => array('icon' => 'mdi:toolbox', 'object' => new \dokuwiki\Menu\SiteMenu),
-            'page' => array('icon' => 'mdi:file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu),
-        );
+        $tools_menus = [
+            'user' => ['icon' => 'mdi:account', 'object' => new \dokuwiki\Menu\UserMenu],
+            'site' => ['icon' => 'mdi:toolbox', 'object' => new \dokuwiki\Menu\SiteMenu],
+            'page' => ['icon' => 'mdi:file-document-outline', 'object' => new \dokuwiki\template\bootstrap3\Menu\PageMenu],
+        ];
 
         if (defined('DOKU_MEDIADETAIL')) {
-            $tools_menus['page'] = array('icon' => 'mdi:image', 'object' => new \dokuwiki\template\bootstrap3\Menu\DetailMenu);
+            $tools_menus['page'] = ['icon' => 'mdi:image', 'object' => new \dokuwiki\template\bootstrap3\Menu\DetailMenu];
         }
 
         foreach ($tools_menus as $tool => $data) {

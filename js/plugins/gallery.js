@@ -8,8 +8,8 @@
 
 // Gallery Plugin (Media Manager)
 
- if (dw_mode('media')) {
-   jQuery(document).ajaxSuccess(function() {
-     jQuery('.mode_media .meta .row').removeClass('row');
-   });
- }
+if (dw_mode('media')) {
+    jQuery(document).ajaxSuccess(function () {
+        jQuery('.mode_media .meta .row').removeClass('row');
+    });
+}
