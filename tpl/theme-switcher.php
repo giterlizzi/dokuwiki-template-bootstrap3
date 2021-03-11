@@ -9,8 +9,6 @@
 
 global $TPL, $ID;
 
-if ($TPL->getConf('showThemeSwitcher')):
-
 $bootswatch_theme = $TPL->getBootswatchTheme();
 
 ?>
@@ -42,4 +40,3 @@ $bootswatch_theme = $TPL->getBootswatchTheme();
     </li>
 </ul>
 <!-- /theme-switcher -->
-<?php endif; ?>

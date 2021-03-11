@@ -12,21 +12,21 @@ var $publish = jQuery('.approval');
 
 if ($publish.length) {
 
-  $publish.prependTo('.page');
+    $publish.prependTo('.page');
 
-  $publish.removeClass('approval').addClass('alert');
+    $publish.removeClass('approval').addClass('alert');
 
-  jQuery('.apr_table').removeClass('table-striped');
+    jQuery('.apr_table').removeClass('table-striped');
 
-  if ($publish.hasClass('approved_no')) {
-    $publish.removeClass('approved_no')
-      .addClass('alert-warning')
-      .prepend('<span class="iconify mr-2" data-icon="mdi:information"/>');
-  }
-  if ($publish.hasClass('approved_yes')) {
-    $publish.removeClass('approved_yes')
-      .addClass('alert-success')
-      .prepend('<span class="iconify mr-2" data-icon="mdi:check-circle"/>');
-  }
+    if ($publish.hasClass('approved_no')) {
+        $publish.removeClass('approved_no')
+            .addClass('alert-warning')
+            .prepend('<span class="iconify mr-2" data-icon="mdi:information"/>');
+    }
+    if ($publish.hasClass('approved_yes')) {
+        $publish.removeClass('approved_yes')
+            .addClass('alert-success')
+            .prepend('<span class="iconify mr-2" data-icon="mdi:check-circle"/>');
+    }
 
 }

@@ -9,9 +9,6 @@
 
 global $ID;
 global $INFO;
-global $TPL;
-
-if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && $TPL->getConf('showAddNewPage')):
 
 ?>
 <ul class="nav navbar-nav" id="dw__addnewpage">
@@ -40,4 +37,3 @@ if (! plugin_isdisabled('addnewpage') && $ACT == 'show' && $TPL->getConf('showAd
         </ul>
     </li>
 </ul>
-<?php endif; ?>

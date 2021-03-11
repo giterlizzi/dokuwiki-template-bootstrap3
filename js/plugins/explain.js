@@ -12,21 +12,21 @@ var $explain = jQuery('.explain');
 
 if ($explain.length) {
 
-  $explain.each(function(){
+    $explain.each(function () {
 
-   var $self    = jQuery(this),
-       $tooltip = $self.find('.tooltip');
+        var $self = jQuery(this),
+            $tooltip = $self.find('.tooltip');
 
-   $self.attr({
-     'data-toggle'    : 'tooltip',
-     'data-placement' : 'bottom',
-     'title'          : $tooltip.html(),
-   }).addClass('wikilink1').removeClass('explain');
+        $self.attr({
+            'data-toggle': 'tooltip',
+            'data-placement': 'bottom',
+            'title': $tooltip.html(),
+        }).addClass('wikilink1').removeClass('explain');
 
-   $tooltip.remove();
+        $tooltip.remove();
 
-  });
+    });
 
-  jQuery('[data-toggle="tooltip"]').tooltip();
+    jQuery('[data-toggle="tooltip"]').tooltip();
 
 }

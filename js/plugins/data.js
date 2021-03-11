@@ -13,27 +13,27 @@ var $dataplugin_entry = jQuery('.dataplugin_entry'),
 
 // Data Plugin: Entry
 if ($dataplugin_entry.length) {
-  $dataplugin_entry.find('dl').addClass('panel panel-default');
+    $dataplugin_entry.find('dl').addClass('panel panel-default');
 }
 
 
 // Data Plugin: Table
 if ($dataplugin_table.length) {
 
-  $dataplugin_table.find('input').addClass('input-sm');
+    $dataplugin_table.find('input').addClass('input-sm');
 
-  var $header = $dataplugin_table.find('th[style]'),
-      $inputs = $dataplugin_table.find('th input'),
-      header_width = [],
-      i = 0;
+    var $header = $dataplugin_table.find('th[style]'),
+        $inputs = $dataplugin_table.find('th input'),
+        header_width = [],
+        i = 0;
 
-  $header.each(function() {
-    header_width.push(this.style.width);
-  });
+    $header.each(function () {
+        header_width.push(this.style.width);
+    });
 
-  $inputs.each(function() {
-    this.style.width = header_width[i];
-    i++;
-  });
+    $inputs.each(function () {
+        this.style.width = header_width[i];
+        i++;
+    });
 
 }

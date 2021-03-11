@@ -11,6 +11,6 @@
 var $database2 = jQuery('table.database2, table.database2-single-editor');
 
 if ($database2.length) {
-  $database2.find('.label').removeClass('label').addClass('database2-label');
-  $database2.find('input[type="submit"]:first').addClass('btn-success');
+    $database2.find('.label').removeClass('label').addClass('database2-label');
+    $database2.find('input[type="submit"]:first').addClass('btn-success');
 }

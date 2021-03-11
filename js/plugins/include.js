@@ -12,5 +12,5 @@ var $include_readmore = jQuery('.include_readmore');
 
 // Include Plugin (Read More)
 if ($include_readmore.length) {
-  $include_readmore.find('a').addClass('btn btn-default btn-xs');
+    $include_readmore.find('a').addClass('btn btn-default btn-xs');
 }

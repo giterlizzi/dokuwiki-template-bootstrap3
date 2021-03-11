@@ -10,8 +10,8 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once('tpl/global.php');
-require_once('tpl/functions.php');
+require_once 'tpl/global.php';
+require_once 'tpl/functions.php';
 
 ?><!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="<?php echo $conf['lang']?>" dir="<?php echo $lang['direction'] ?>" class="popup no-js">
@@ -23,13 +23,13 @@ require_once('tpl/functions.php');
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <?php
 
-        if ($TPL->getConf('themeByNamespace')) {
-            echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
-        }
-      
-        echo tpl_favicon(array('favicon', 'mobile'));
-        tpl_includeFile('meta.html');
-        tpl_metaheaders();
+    if ($TPL->getConf('themeByNamespace')) {
+        echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
+    }
+
+    echo tpl_favicon(array('favicon', 'mobile'));
+    tpl_includeFile('meta.html');
+    tpl_metaheaders();
 
     ?>
     <!--[if lt IE 9]>

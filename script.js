@@ -12,6 +12,7 @@
 /* DOKUWIKI:include assets/iconify/iconify.min.js */
 /* DOKUWIKI:include assets/iconify/plugins/fa.js */
 
+// Detect Icoonify support with Icon Plugin
 if (!Iconify.getConfig('defaultAPI').match('lib/plugins/icons')) {
     Iconify.setConfig('defaultAPI', DOKU_TPL + 'iconify.php?prefix={prefix}&icons={icons}');
 }
@@ -49,6 +50,7 @@ var dw_template = {
         dw_template.tocMenu();
         dw_template.nav();
         dw_template.backToTop();
+        dw_template.anchorJS();
         dw_template.pageTools();
         dw_template.pageIcons();
         dw_template.dropdownPage();
@@ -127,7 +129,7 @@ var dw_template = {
         jQuery('abbr').tooltip();
 
         // Search Hit
-        //jQuery('.search_hit').removeClass('search_hit').addClass('mark');
+        jQuery('.search_hit').removeClass('search_hit').addClass('mark');
 
         // Fix accesskey issue on dropdown menu
         if (jQuery('#dw__pagetools').length) {
@@ -203,6 +205,60 @@ var dw_template = {
 
     },
 
+    /**
+     * Customize jQuery UI with Bootstrap v3 classes
+     */
+    jQueryUI: function () {
+
+        if (typeof jQuery.ui === 'undefined') return false;
+
+        // accordion
+        jQuery.ui.accordion.prototype.options.classes["ui-accordion"] = "panel panel-default";
+        jQuery.ui.accordion.prototype.options.classes["ui-accordion-content"] = "panel-collapse collapse";
+        jQuery.ui.accordion.prototype.options.classes["ui-accordion-content-active"] = "in";
+        jQuery.ui.accordion.prototype.options.classes["ui-accordion-header"] = "panel-heading";
+
+        // button
+        jQuery.ui.button.prototype.options.classes["ui-button"] = "btn btn-default";
+        jQuery.ui.button.prototype.options.classes["ui-button-icon"] = "glyphicon";
+
+        // dialog
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog"] = "modal-content";
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog-titlebar"] = "modal-header";
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog-title"] = "modal-title";
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog-titlebar-close"] = "btn btn-default";
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog-content"] = "modal-body";
+        jQuery.ui.dialog.prototype.options.classes["ui-dialog-buttonpane"] = "modal-footer";
+
+        // menu
+        jQuery.ui.menu.prototype.options.classes["ui-menu"] = "list-group";
+        jQuery.ui.menu.prototype.options.classes["ui-menu-icons"] = "";
+        jQuery.ui.menu.prototype.options.classes["ui-menu-icon"] = "glyphicon glyphicon-chevron-right";
+        jQuery.ui.menu.prototype.options.classes["ui-menu-item"] = "list-group-item";
+        jQuery.ui.menu.prototype.options.classes["ui-menu-divider"] = "";
+        jQuery.ui.menu.prototype.options.classes["ui-menu-item-wrapper"] = "";
+
+        // progressbar
+        jQuery.ui.progressbar.prototype.options.classes["ui-progressbar"] = "progress";
+        jQuery.ui.progressbar.prototype.options.classes["ui-progressbar-value"] = "progress-bar";
+
+        // selectmenu
+        jQuery.ui.selectmenu.prototype.options.classes["ui-selectmenu-button"] = "btn btn-default dropdown-toggle";
+        jQuery.ui.selectmenu.prototype.options.classes["ui-selectmenu-open"] = "open";
+        jQuery.ui.selectmenu.prototype.options.icons.button = "caret";
+        jQuery.ui.selectmenu.prototype.options.width = "auto";
+
+        // tabs
+        jQuery.ui.tabs.prototype.options.classes["ui-tabs-nav"] = "nav nav-tabs";
+        jQuery.ui.tabs.prototype.options.classes["ui-tabs-panel"] = "tab-pane";
+        jQuery.ui.tabs.prototype.options.classes["ui-tabs-active"] = "active";
+
+        // tooltip
+        jQuery.ui.tooltip.prototype.options.classes["ui-tooltip"] = "tooltip top fade in";
+        jQuery.ui.tooltip.prototype.options.classes["ui-tooltip-content"] = "tooltip-inner";
+
+    },
+
     nav: function () {
         // Unwrap unnecessary tags inside list items for Bootstrap nav component
         jQuery('.nav div.li').contents().unwrap();
@@ -237,7 +293,6 @@ var dw_template = {
 
         // Section Button edit
         // TODO ported
-        //jQuery('.btn_secedit .btn').input2button(); // removed support
         jQuery('.btn_secedit .btn').addClass('btn-xs');
     },
 
@@ -346,7 +401,8 @@ var dw_template = {
             'whatsapp': (function () { return ['https://wa.me/?text=', title, ': ', url].join(''); })(),
             'yammer': (function () { return ['https://www.yammer.com/messages/new?login=true&trk_event=yammer_share&status=', url, '#/Messages/bookmarklet'].join(''); })(),
             'sendmail': (function () { return ['mailto:?subject=', document.title, '&body=', document.URL].join(''); })(),
-            'reddit': (function () { return ['http://www.reddit.com/submit?url=', url, '&title=', title].join(''); })(),
+            'reddit': (function () { return ['https://www.reddit.com/submit?url=', url, '&title=', title].join(''); })(),
+            'msteams': (function () { return ['https://teams.microsoft.com/share?href=', url, '&referrer=', location.host].join(''); })(),
         };
 
         $dw_page_icons.find('.share-twitter').on('click', function () {
@@ -386,6 +442,10 @@ var dw_template = {
             window.open(share_to.whatsapp, 'Share to WhatsApp', window_options);
         });
 
+        $dw_page_icons.find('.share-microsoft-teams').on('click', function () {
+            window.open(share_to.msteams, 'Share to Microsoft Teams', window_options);
+        });
+
     },
 
     pageTools: function () {
@@ -396,10 +456,10 @@ var dw_template = {
         jQuery('#dw__pagetools .tools').affix({
             offset: {
                 top: (jQuery('main').position().top),
-                bottom: ((jQuery(document).height()
+                bottom: (jQuery(document).height()
                     - jQuery('#dokuwiki__content').height()
                     - jQuery('#dokuwiki__pageheader').height()
-                    - jQuery('#dokuwiki__header').height()))
+                    - jQuery('#dokuwiki__header').height())
             }
         });
 
@@ -547,10 +607,9 @@ var dw_template = {
 
     },
 
-    // TODO chiamato troppe volte!!!
     mediaManager: function () {
 
-        var $media_popup = jQuery('#media__content'),     // Media Manager (pop-up)
+        var $media_popup = jQuery('#media__content'),       // Media Manager (pop-up)
             $media_manager = jQuery('#mediamanager__page'); // Media Manager (page)
 
         // Media Manager (pop-up)
@@ -855,17 +914,17 @@ var dw_template = {
 
         };
 
-        for (i in window.toolbar) {
+        for (var i in window.toolbar) {
 
             // Replace all icons in "H(eaders)" picker
             if (window.toolbar[i].icon == 'h.png') {
-                for (x in window.toolbar[i].list) {
+                for (var x in window.toolbar[i].list) {
                     var hn = parseInt(x) + 1;
                     window.toolbar[i].list[x].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-format-header-' + hn + '.svg';
                 }
             }
 
-            for (icon in icons) {
+            for (var icon in icons) {
                 if (window.toolbar[i].icon == icon) {
                     window.toolbar[i].icon = '../../tpl/bootstrap3/iconify.php?icon=mdi-' + icons[icon];
                 }
@@ -890,7 +949,7 @@ var dw_template = {
             jQuery('.modal.help .modal-title').html($self.attr('title'));
             jQuery('.modal.help .modal-body').load($self.data('link'));
         });
-        jQuery('.menuitem.printpage').on('click', function() {
+        jQuery('.menuitem.printpage').on('click', function () {
             window.print();
         });
     },
@@ -925,5 +984,6 @@ var dw_template = {
 };
 
 dw_template.toolbarIcons();
+dw_template.jQueryUI();
 
 jQuery(dw_template.init);

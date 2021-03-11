@@ -11,7 +11,5 @@
 var $monthcal = jQuery('table.monthcal');
 
 if ($monthcal.length) {
-
-  $monthcal.addClass('table');
-
+    $monthcal.addClass('table');
 }

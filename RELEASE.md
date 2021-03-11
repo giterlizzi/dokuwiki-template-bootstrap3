@@ -1,5 +1,38 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+<<<<<<< HEAD
+=======
+## [v2021-03-11]
+
+This release increase the compatibilty with Hogfather and fix some regression. Added support for Microsoft Teams and BS3 styles in jQueryUI.
+
+Dropped support for PHP < 5.4 and removed very old legacy stuff.
+
+Enjoy!
+
+### Added
+  * Added support for Microsoft Teams share
+  * Added BS3 styles in jQueryUI components
+
+### Changed
+  * #520: Revert .wikilink2 class in list context (@takuy)
+
+### Removed
+  * Dropped support for PHP < 5.4
+  * Removed deprecated `useLegacyNavbar` option
+  * #517: Removed `!important` in navbar height to prevent issue with `userall.css` style (@nurzu)
+
+### Fixed
+  * Fixed regression for Cookie Law for Hogfather release
+  * Fixed regression in AnchorJS and Sidebar
+  * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
+  * #492: Fix "set_time_limit" warning with safe mode:ON (@DrakMrak)
+  * #499: Changed CSS load order for Bootstrap and DokuWiki styles when using `themeByNamespace` option (@Digitalin)
+  * #525: Fixed Configuration Settings TOC for Undefined Settings (@Skyridr)
+  * #529: Fixed tags extend beyond page limits (@tmo26)
+
+
+>>>>>>> release
 ## [v2020-08-28]
 
 This release increase the compatibility with Hogfather and fix regressions, old bugs and a security vulnerability with Iconify (thanks to @issmirnov). Optimized all JS "hack" scripts, dropped support for very old DokuWiki releases and added support for upcoming [Icons](https://www.dokuwiki.org/plugin:icons) plugin release with Iconify.
@@ -18,12 +51,10 @@ Enjoy!
 
 ### Fixed
   * Fixed very old bug for media manager
-  * Fixed regression for Cookie Law for Hogfather release
-  * #480: Fixed Google Search Errors: BreadcrumbList + ListItem (@willmcknight)
   * #500: Fixed regression in the preview image size in detail page (@IanGoo)
   * #501: Search matching pagenames overlapping (#rogerjames1994)
   * #503: Fixed edit toolbar icons regression for Hogfather release (@FloMiLe)
-  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)
+  * #506: Fixed XSS vulnerability in Iconify API (thanks to @issmirnov for reporting this security issue)z
 
 
 ## [v2020-07-29]
@@ -569,6 +600,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2021-03-11]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-08-28...v2021-03-11
 [v2020-08-28]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-07-29...v2020-08-28
 [v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
 [v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04

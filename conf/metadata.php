@@ -37,7 +37,6 @@ $meta['individualTools']        = array('onoff');
 $meta['showIndividualTool']     = array('multicheckbox', '_choices' => array('user', 'site', 'page'));
 $meta['showSearchForm']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['showAdminMenu']          = array('onoff');
-$meta['useLegacyNavbar']        = array('onoff');
 $meta['showNavbar']             = array('multichoice', '_choices' => array('logged', 'always'));
 $meta['navbarLabels']           = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
 $meta['showAddNewPage']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
@@ -104,7 +103,7 @@ $meta['pageInfo']                   = array('multicheckbox', '_choices' => array
 $meta['pageInfoDateFormat']         = array('multichoice', '_choices'   => array('dformat', 'human'));
 $meta['showPageIcons']              = array('onoff');
 $meta['pageIcons']                  = array('multicheckbox', '_choices' => array('social-share', 'feed', 'send-mail', 'permalink', 'print', 'help'));
-$meta['socialShareProviders']       = array('multicheckbox', '_choices' => array('facebook', 'linkedin', 'pinterest', 'whatsapp', 'reddit', 'twitter', 'telegram', 'yammer'));
+$meta['socialShareProviders']       = array('multicheckbox', '_choices' => array('facebook', 'linkedin', 'microsoft-teams', 'pinterest', 'whatsapp', 'reddit', 'twitter', 'telegram', 'yammer'));
 $meta['useAlternativeToolbarIcons'] = array('onoff');
 $meta['tagsOnTop']                  = array('onoff');
 $meta['useAnchorJS']                = array('onoff');

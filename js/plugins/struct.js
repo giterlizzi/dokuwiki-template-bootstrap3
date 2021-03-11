@@ -9,6 +9,6 @@
 // Struct Plugin
 
 if (dw_admin('struct_schemas') || dw_admin('struct_assignments')) {
-  // Display all elements in TOC
-  jQuery('.toc-body .toc').addClass('show');
+    // Display all elements in TOC
+    jQuery('.toc-body .toc').addClass('show');
 }

@@ -8,91 +8,86 @@
 
 .dokuwiki {
 
-  div.pagenav {
-    text-align: center;
-    margin: 1.5em 0;
-  }
-  div.pagenav-prev,
-  div.pagenav-next {
-    display: inline;
-    margin: 0 0.5em;
-  }
-
-}
-
-.dokuwiki table.diff {
-
-  width: 100%;
-  border-width: 0;
-  overflow: hidden;
-
-  form, label {
-    display: inline;
-  }
-
-  select {
-    font-size: small;
-    width: 60%;
-
-    option[selected] {
-     font-weight: bold;
+    div.pagenav {
+        text-align: center;
+        margin: 1.5em 0;
     }
-  }
 
-  th, td {
-    vertical-align: top;
-    padding: 0;
-    border-width: 0;
-  }
-
-  td {
-    font-family: monospace;
-    font-size: small;
-
-    &.diff-context {
-      background-color: #fafafa;
+    div.pagenav-prev,
+    div.pagenav-next {
+        display: inline;
+        margin: 0 0.5em;
     }
-  }
 
-  .diff_sidebyside th {
-    width: 50%;
-  }
+    .diffoptions,
+    .diffnav {
+        padding: 0.5em 0 !important;
+    }
 
-  .diff-lineheader {
-    width: 0;
-  }
+    .diff-blockheader {
+        padding: 0.5em 0 !important;
+    }
 
-}
+    .diff_inline td, th {
+        vertical-align: middle;
+    }
 
-.dokuwiki .diffnav {
+    .dokuwiki .diffoptions.group p {
+        float: right;
+    }
 
-  span {
-    display: none;
-  }
+    .diffnav {
+        span {
+            display: none;
+        }
 
-  a {
-    display: inline-block;
-  }
+        a {
+            display: inline-block;
+        }
+    }
 
-}
+    table.diff {
 
-.dokuwiki {
+        width: 100%;
+        border-width: 0;
+        overflow: hidden;
 
-  .diffoptions,
-  .diffnav {
-    padding: 0.5em 0 !important;
-  }
+        form, label {
+            display: inline;
+        }
 
-  .diff-blockheader {
-    padding: 0.5em 0 !important;
-  }
+        select {
+            font-size: small;
+            width: 60%;
 
-  .diff_inline td, th {
-    vertical-align: middle;
-  }
+            option[selected] {
+            font-weight: bold;
+            }
+        }
 
-  .dokuwiki .diffoptions.group p {
-    float: right;
-  }
+        th, td {
+            vertical-align: top;
+            padding: 0;
+            border-width: 0;
+        }
+
+        td {
+            font-family: monospace;
+            font-size: small;
+
+            &.diff-context {
+                background-color: #fafafa;
+            }
+        }
+
+        .diff_sidebyside th {
+            width: 50%;
+        }
+
+        .diff-lineheader {
+            width: 0;
+        }
+
+    }
 
 }
