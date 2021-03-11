@@ -2,7 +2,7 @@
 
 ## [v2021-03-11]
 
-This release increase the compatibilty with Hogfather and fix some regression. Added support for Microsoft Teams and BS3 styles in jQueryUI.
+This release increase the compatibility with Hogfather and fix some regression. Added support for Microsoft Teams and BS3 styles in jQueryUI.
 
 Dropped support for PHP < 5.4 and removed very old legacy stuff.
 
