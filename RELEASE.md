@@ -1,6 +1,12 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [develop]
+## [v2021-03-11]
+
+This release increase the compatibilty with Hogfather and fix some regression. Added support for Microsoft Teams and BS3 styles in jQueryUI.
+
+Dropped support for PHP < 5.4 and removed very old legacy stuff.
+
+Enjoy!
 
 ### Added
   * Added support for Microsoft Teams share
@@ -10,6 +16,7 @@
   * #520: Revert .wikilink2 class in list context (@takuy)
 
 ### Removed
+  * Dropped support for PHP < 5.4
   * Removed deprecated `useLegacyNavbar` option
   * #517: Removed `!important` in navbar height to prevent issue with `userall.css` style (@nurzu)
 
@@ -590,6 +597,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2021-03-11]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-08-28...v2021-03-11
 [v2020-08-28]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-07-29...v2020-08-28
 [v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
 [v2020-04-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2019-05-22...v2020-04-04
