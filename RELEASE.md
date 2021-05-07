@@ -1,6 +1,5 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-<<<<<<< HEAD
 =======
 ## [v2021-03-11]
 
@@ -32,7 +31,6 @@ Enjoy!
   * #529: Fixed tags extend beyond page limits (@tmo26)
 
 
->>>>>>> release
 ## [v2020-08-28]
 
 This release increase the compatibility with Hogfather and fix regressions, old bugs and a security vulnerability with Iconify (thanks to @issmirnov). Optimized all JS "hack" scripts, dropped support for very old DokuWiki releases and added support for upcoming [Icons](https://www.dokuwiki.org/plugin:icons) plugin release with Iconify.
