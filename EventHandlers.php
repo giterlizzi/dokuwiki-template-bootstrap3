@@ -24,37 +24,53 @@ class EventHandlers
 
         # Event => [ ADVISDE, METHOD ]
         $events_dispatcher = [
-            'FORM_EDIT_OUTPUT'              => ['BEFORE', 'formEditOutput'], # DokuWiki next (2020-10-13)
-            'FORM_QUICKSEARCH_OUTPUT'       => ['BEFORE', 'search'],
-            'FORM_SEARCH_OUTPUT'            => ['BEFORE', 'search'],
+            'FORM_QUICKSEARCH_OUTPUT'       => ['BEFORE', ['search']],
+            'FORM_SEARCH_OUTPUT'            => ['BEFORE', ['search']],
 
-            'HTML_DRAFTFORM_OUTPUT'         => ['BEFORE', 'htmlDraftForm'], # Deprecated (2018-07-29)
-            'HTML_EDITFORM_OUTPUT'          => ['BEFORE', 'htmlEditForm'], # use FORM_EDIT_OUTPUT in DokuWiki next
-            'HTML_LOGINFORM_OUTPUT'         => ['BEFORE', 'htmlAccountFormOutput'],
-            'HTML_RESENDPWDFORM_OUTPUT'     => ['BEFORE', 'htmlAccountFormOutput'],
-            'HTML_PROFILEDELETEFORM_OUTPUT' => ['BEFORE', 'htmlAccountFormOutput'],
-            'HTML_RECENTFORM_OUTPUT'        => ['BEFORE', 'htmlRevisionsFormOutput'],
-            'HTML_REGISTERFORM_OUTPUT'      => ['BEFORE', 'htmlAccountFormOutput'],
-            'HTML_REVISIONSFORM_OUTPUT'     => ['BEFORE', 'htmlRevisionsFormOutput'],
-            'HTML_SECEDIT_BUTTON'           => ['AFTER', 'htmlSecEditButton'],
-            'HTML_SUBSCRIBEFORM_OUTPUT'     => ['BEFORE', 'htmlAccountFormOutput'],
-            'HTML_UPDATEPROFILEFORM_OUTPUT' => ['BEFORE', 'htmlAccountFormOutput'],
+            'HTML_DRAFTFORM_OUTPUT'         => ['BEFORE', ['htmlDraftForm']], # Deprecated (2018-07-29)
+            'HTML_EDITFORM_OUTPUT'          => ['BEFORE', ['htmlEditForm']], # use FORM_EDIT_OUTPUT in DokuWiki next
+            'HTML_LOGINFORM_OUTPUT'         => ['BEFORE', ['htmlAccountFormOutput']],
+            'HTML_RESENDPWDFORM_OUTPUT'     => ['BEFORE', ['htmlAccountFormOutput']],
+            'HTML_PROFILEDELETEFORM_OUTPUT' => ['BEFORE', ['htmlAccountFormOutput']],
+            'HTML_RECENTFORM_OUTPUT'        => ['BEFORE', ['htmlRevisionsFormOutput']],
+            'HTML_REGISTERFORM_OUTPUT'      => ['BEFORE', ['htmlAccountFormOutput']],
+            'HTML_REVISIONSFORM_OUTPUT'     => ['BEFORE', ['htmlRevisionsFormOutput']],
+            'HTML_SECEDIT_BUTTON'           => ['AFTER', ['htmlSecEditButton']],
+            'HTML_SUBSCRIBEFORM_OUTPUT'     => ['BEFORE', ['htmlAccountFormOutput']],
+            'HTML_UPDATEPROFILEFORM_OUTPUT' => ['BEFORE', ['htmlAccountFormOutput']],
 
-            'PLUGIN_TAG_LINK'               => ['BEFORE', 'pluginTagLink'],
-            'PLUGIN_TPLINC_LOCATIONS_SET'   => ['BEFORE', 'tplIncPlugin'],
+            'PLUGIN_TAG_LINK'               => ['BEFORE', ['pluginTagLink']],
+            'PLUGIN_TPLINC_LOCATIONS_SET'   => ['BEFORE', ['tplIncPlugin']],
 
-            'SEARCH_QUERY_FULLPAGE'         => ['BEFORE', 'search'],
-            'SEARCH_QUERY_PAGELOOKUP'       => ['BEFORE', 'search'],
-            'SEARCH_RESULT_FULLPAGE'        => ['BEFORE', 'search'],
-            'SEARCH_RESULT_PAGELOOKUP'      => ['BEFORE', 'search'],
+            'SEARCH_QUERY_FULLPAGE'         => ['BEFORE', ['search']],
+            'SEARCH_QUERY_PAGELOOKUP'       => ['BEFORE', ['search']],
+            'SEARCH_RESULT_FULLPAGE'        => ['BEFORE', ['search']],
+            'SEARCH_RESULT_PAGELOOKUP'      => ['BEFORE', ['search']],
 
-            'TPL_CONTENT_DISPLAY'           => ['BEFORE', 'tplContent'],
-            'TPL_METAHEADER_OUTPUT'         => ['BEFORE', 'tplMetaHeaderOutput'],
+            'TPL_CONTENT_DISPLAY'           => ['BEFORE', ['tplContent']],
+            'TPL_METAHEADER_OUTPUT'         => ['BEFORE', ['tplMetaHeaderOutput']],
+
+            'FORM_CONFLICT_OUTPUT'          => ['BEFORE', ['commonStyles']],
+            'FORM_DRAFT_OUTPUT'             => ['BEFORE', ['commonStyles']],
+            'FORM_EDIT_OUTPUT'              => ['BEFORE', ['commonStyles', 'formEditOutput']],
+            'FORM_LOGIN_OUTPUT'             => ['BEFORE', ['commonStyles', 'formLoginOutput']],
+            'FORM_PROFILEDELETE_OUTPUT'     => ['BEFORE', ['commonStyles', 'formProfileDeleteOutput']],
+            'FORM_RECENT_OUTPUT'            => ['BEFORE', ['commonStyles', 'formRevisionsOutput']],
+            'FORM_REGISTER_OUTPUT'          => ['BEFORE', ['commonStyles', 'formRegisterOutput']],
+            'FORM_RESENDPWD_OUTPUT'         => ['BEFORE', ['commonStyles', 'formResendPwdOutput']],
+            'FORM_REVISIONS_OUTPUT'         => ['BEFORE', ['commonStyles', 'formRevisionsOutput']],
+            'FORM_SEARCHMEDIA_OUTPUT'       => ['BEFORE', ['commonStyles']],
+            'FORM_SUBSCRIBE_OUTPUT'         => ['BEFORE', ['commonStyles']],
+            'FORM_UPDATEPROFILE_OUTPUT'     => ['BEFORE', ['commonStyles', 'formUpdateProfileOutput']],
+            'FORM_UPLOAD_OUTPUT'            => ['BEFORE', ['commonStyles']],
+
         ];
 
         foreach ($events_dispatcher as $event => $data) {
-            list($advise, $method) = $data;
-            $EVENT_HANDLER->register_hook($event, $advise, $this, $method);
+            list($advise, $methods) = $data;
+            foreach ($methods as $method) {
+                $EVENT_HANDLER->register_hook($event, $advise, $this, $method);
+            }
         }
     }
 
@@ -63,21 +79,119 @@ class EventHandlers
         msg('<pre>' . hsc(print_r($event, 1)) . '</pre>');
     }
 
+    public function formLoginOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        $form->getElementAt($form->findPositionByType('fieldsetopen'))
+            ->attrs(['data-dw-icon' => 'mdi:account', 'data-dw-icon-target' => 'legend']);
+
+        $form->getElementAt($form->findPositionByAttribute('type', 'submit'))
+            ->addClass('btn-success')->attr('data-dw-icon', 'mdi:lock');
+    }
+
+    public function formResendPwdOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        $form->getElementAt($form->findPositionByType('fieldsetopen'))
+            ->attrs(['data-dw-icon' => 'mdi:lock-reset', 'data-dw-icon-target' => 'legend']);
+
+        $form->getElementAt($form->findPositionByAttribute('type', 'submit'))
+            ->addClass('btn-success')->attr('data-dw-icon', 'mdi:arrow-right');
+    }
+
+
+    public function formRegisterOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        $form->getElementAt($form->findPositionByType('fieldsetopen'))
+            ->attrs(['data-dw-icon' => 'mdi:account-plus', 'data-dw-icon-target' => 'legend']);
+
+        $form->getElementAt($form->findPositionByAttribute('type', 'submit'))
+            ->addClass('btn-success')->attr('data-dw-icon', 'mdi:arrow-right');
+    }
+
+    public function formRevisionsOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        for ($pos = 0; $pos < $form->elementCount(); $pos++) {
+
+            $element = $form->getElementAt($pos);
+            $type    = $element->getType();
+
+            if ($type == 'html') {
+                $value = $element->val();
+                $value = str_replace(['positive', 'negative'], ['positive label label-success', 'negative label label-danger'], $value);
+                $element->val($value);
+            }
+
+        }
+    }
+
+    public function commonStyles(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        for ($pos = 0; $pos < $form->elementCount(); $pos++) {
+
+            $element = $form->getElementAt($pos);
+            $type    = $element->getType();
+
+            if ($type == 'button') {
+                $element->addClass('btn btn-default mr-2');
+            }
+
+        }
+    }
+
+    public function formUpdateProfileOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        $form->getElementAt($form->findPositionByAttribute('type', 'submit'))
+            ->addClass('btn-success')->attr('data-dw-icon', 'mdi:arrow-right');
+
+        $form->getElementAt($form->findPositionByType('fieldsetopen'))
+            ->attrs(['data-dw-icon' => 'mdi:account-card-details-outline', 'data-dw-icon-target' => 'legend']);
+    }
+
+    public function formProfileDeleteOutput(\Doku_Event $event)
+    {
+        /** @var dokuwiki\Form\Form $form */
+        $form = $event->data;
+
+        $form->getElementAt($form->findPositionByAttribute('type', 'submit'))
+            ->addClass('btn-danger')->attr('data-dw-icon', 'mdi:arrow-right');
+
+        $form->getElementAt($form->findPositionByType('fieldsetopen'))
+            ->attrs(['data-dw-icon' => 'mdi:account-remove', 'data-dw-icon-target' => 'legend']);
+    }
+
     public function formEditOutput(\Doku_Event $event)
     {
         global $lang;
-        #msg('<pre>' . hsc(print_r($event->data, 1)) . '</pre>');
 
         /** @var dokuwiki\Form\Form $form */
         $form = $event->data;
 
-        $btn_save    = $form->getElementAt($form->findPositionByAttribute('name', 'do[save]'))->addClass('btn btn-success mr-2');
-        $btn_preview = $form->getElementAt($form->findPositionByAttribute('name', 'do[preview]'))->addClass('btn btn-default mr-2');
-        $btn_cancel  = $form->getElementAt($form->findPositionByAttribute('name', 'do[cancel]'))->addClass('btn btn-default mr-2');
+        $form->getElementAt($form->findPositionByAttribute('name', 'do[save]'))
+            ->addClass('btn btn-success mr-2')->attr('data-dw-icon', 'mdi:content-save');
 
-        set_property($btn_save, 'content', iconify('mdi:content-save') . ' ' . $lang['btn_save']);
-        set_property($btn_preview, 'content', iconify('mdi:file-document-outline') . ' ' . $lang['btn_preview']);
-        set_property($btn_cancel, 'content', iconify('mdi:arrow-left') . ' ' . $lang['btn_cancel']);
+        $form->getElementAt($form->findPositionByAttribute('name', 'do[preview]'))
+            ->addClass('btn btn-default mr-2')->attr('data-dw-icon', 'mdi:file-document-outline');
+
+        $form->getElementAt($form->findPositionByAttribute('name', 'do[cancel]'))
+            ->addClass('btn btn-default mr-2')->attr('data-dw-icon', 'mdi:arrow-left');
+
     }
 
     public function htmlSecEditButton(\Doku_Event $event)
