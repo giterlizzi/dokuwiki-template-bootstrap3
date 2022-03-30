@@ -20,7 +20,7 @@ define('DOKU_VERSION_DETRITUS',           47); // 2015-08-10 (PHP >= 5.3.3)
 
 
 // Load compatibility Menu classes for pre-Greebo releases
-if (DOKU_VERSION < DOKU_VERSION_GREEBO) {
+if (DOKU_VERSION > 0 && DOKU_VERSION < DOKU_VERSION_GREEBO) {
 
     define('DOKU_INC_COMPAT', realpath(dirname(__FILE__) . '/../') . '/');
 
