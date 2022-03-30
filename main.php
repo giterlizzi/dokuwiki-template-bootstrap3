@@ -71,7 +71,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             <p class="text-right">
                 <?php
 
-                    if ($TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
+                    if (($ACT == 'show') && $TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
                         echo implode('', array_map('trim', explode(',', $tag->td($ID))));
                     }
 
