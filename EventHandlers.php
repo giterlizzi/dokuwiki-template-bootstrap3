@@ -39,7 +39,7 @@ class EventHandlers
             'HTML_SUBSCRIBEFORM_OUTPUT'     => ['BEFORE', ['htmlAccountFormOutput']],
             'HTML_UPDATEPROFILEFORM_OUTPUT' => ['BEFORE', ['htmlAccountFormOutput']],
 
-            'PLUGIN_TAG_LINK'               => ['BEFORE', ['pluginTagLink']],
+            'PLUGIN_TAG_LINK'               => ['AFTER', ['pluginTagLink']],
             'PLUGIN_TPLINC_LOCATIONS_SET'   => ['BEFORE', ['tplIncPlugin']],
 
             'SEARCH_QUERY_FULLPAGE'         => ['BEFORE', ['search']],
