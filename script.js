@@ -988,6 +988,7 @@ var dw_template = {
         /* DOKUWIKI:include js/plugins/semantic.js */
         /* DOKUWIKI:include js/plugins/simplenavi.js */
         /* DOKUWIKI:include js/plugins/struct.js */
+        /* DOKUWIKI:include js/plugins/tabbox.js */
         /* DOKUWIKI:include js/plugins/tagalerts.js */
         /* DOKUWIKI:include js/plugins/tagging.js */
         /* DOKUWIKI:include js/plugins/translation.js */
