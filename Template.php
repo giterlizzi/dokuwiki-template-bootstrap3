@@ -16,6 +16,7 @@ class Template
     private $plugins      = [];
     private $confMetadata = [];
     private $toolsMenu    = [];
+    private $handlers;
 
     public $tplDir  = '';
     public $baseDir = '';
@@ -31,7 +32,6 @@ class Template
         $this->tplDir  = tpl_incdir();
         $this->baseDir = tpl_basedir();
 
-        $this->registerHooks();
         $this->initPlugins();
         $this->initToolsMenu();
         $this->loadConfMetadata();
@@ -67,6 +67,10 @@ class Template
         if (!defined('MAX_FILE_SIZE') && $pagesize = $this->getConf('domParserMaxPageSize')) {
             define('MAX_FILE_SIZE', $pagesize);
         }
+
+        # Start Event Handlers
+        $this->handlers = new EventHandlers($this);
+
     }
 
     public function getVersion()
@@ -81,268 +85,13 @@ class Template
         return $template_version;
     }
 
-    private function registerHooks()
-    {
-        /** @var \Doku_Event_Handler */
-        global $EVENT_HANDLER;
-
-        $events_dispatcher = [
-            'FORM_QUICKSEARCH_OUTPUT'       => 'searchHandler',
-            'FORM_SEARCH_OUTPUT'            => 'searchHandler',
-            'HTML_DRAFTFORM_OUTPUT'         => 'draftFormHandler',
-            'HTML_EDITFORM_OUTPUT'          => 'editFormHandler',
-            'HTML_LOGINFORM_OUTPUT'         => 'accountFormHandler',
-            'HTML_RESENDPWDFORM_OUTPUT'     => 'accountFormHandler',
-            'HTML_PROFILEDELETEFORM_OUTPUT' => 'accountFormHandler',
-            'HTML_RECENTFORM_OUTPUT'        => 'revisionsFormHandler',
-            'HTML_REGISTERFORM_OUTPUT'      => 'accountFormHandler',
-            'HTML_REVISIONSFORM_OUTPUT'     => 'revisionsFormHandler',
-            'HTML_SUBSCRIBEFORM_OUTPUT'     => 'accountFormHandler',
-            'HTML_UPDATEPROFILEFORM_OUTPUT' => 'accountFormHandler',
-            'PLUGIN_TAG_LINK'               => 'tagPluginHandler',
-            'PLUGIN_TPLINC_LOCATIONS_SET'   => 'tplIncPluginHandler',
-            'SEARCH_QUERY_FULLPAGE'         => 'searchHandler',
-            'SEARCH_QUERY_PAGELOOKUP'       => 'searchHandler',
-            'SEARCH_RESULT_FULLPAGE'        => 'searchHandler',
-            'SEARCH_RESULT_PAGELOOKUP'      => 'searchHandler',
-            'TPL_CONTENT_DISPLAY'           => 'contentHandler',
-            'TPL_METAHEADER_OUTPUT'         => 'metaheadersHandler',
-
-        ];
-
-        foreach ($events_dispatcher as $event => $method) {
-            $EVENT_HANDLER->register_hook($event, 'BEFORE', $this, $method);
-        }
-    }
-
-    public function accountFormHandler(\Doku_Event $event)
-    {
-        foreach ($event->data->_content as $key => $item) {
-            if (is_array($item) && isset($item['_elem'])) {
-                $title_icon   = 'account';
-                $button_class = 'btn btn-success';
-                $button_icon  = 'arrow-right';
-
-                switch ($event->name) {
-                    case 'HTML_LOGINFORM_OUTPUT':
-                        $title_icon  = 'account';
-                        $button_icon = 'lock';
-                        break;
-                    case 'HTML_UPDATEPROFILEFORM_OUTPUT':
-                        $title_icon = 'account-card-details-outline';
-                        break;
-                    case 'HTML_PROFILEDELETEFORM_OUTPUT':
-                        $title_icon   = 'account-remove';
-                        $button_class = 'btn btn-danger';
-                        break;
-                    case 'HTML_REGISTERFORM_OUTPUT':
-                        $title_icon = 'account-plus';
-                        break;
-                    case 'HTML_SUBSCRIBEFORM_OUTPUT':
-                        $title_icon = null;
-                        break;
-                    case 'HTML_RESENDPWDFORM_OUTPUT':
-                        $title_icon = 'lock-reset';
-                        break;
-                }
-
-                // Legend
-                if ($item['_elem'] == 'openfieldset') {
-                    $event->data->_content[$key]['_legend'] = (($title_icon) ? iconify("mdi:$title_icon") : '') . ' ' . $event->data->_content[$key]['_legend'];
-                }
-
-                // Save button
-                if (isset($item['type']) && $item['type'] == 'submit') {
-                    $event->data->_content[$key]['class'] = " $button_class";
-                    $event->data->_content[$key]['value'] = (($button_icon) ? iconify("mdi:$button_icon") : '') . ' ' . $event->data->_content[$key]['value'];
-                }
-            }
-        }
-    }
-
-    /**
-     * Handle HTML_DRAFTFORM_OUTPUT event
-     *
-     * @param \Doku_Event $event Event handler
-     *
-     * @return void
-     **/
-    public function draftFormHandler(\Doku_Event $event)
-    {
-        foreach ($event->data->_content as $key => $item) {
-            if (is_array($item) && isset($item['_elem'])) {
-                if ($item['_action'] == 'draftdel') {
-                    $event->data->_content[$key]['class'] = ' btn btn-danger';
-                    $event->data->_content[$key]['value'] = iconify('mdi:close') . ' ' . $event->data->_content[$key]['value'];
-                }
-
-                if ($item['_action'] == 'recover') {
-                    $event->data->_content[$key]['value'] = iconify('mdi:refresh') . ' ' . $event->data->_content[$key]['value'];
-                }
-
-                if ($item['_action'] == 'show') {
-                    $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
-                }
-            }
-        }
-    }
-
-    /**
-     * Handle HTML_EDITFORM_OUTPUT and HTML_DRAFTFORM_OUTPUT event
-     *
-     * @param \Doku_Event $event Event handler
-     *
-     * @return void
-     **/
-    public function editFormHandler(\Doku_Event $event)
-    {
-        foreach ($event->data->_content as $key => $item) {
-            if (is_array($item) && isset($item['_elem'])) {
-                // Save button
-                if ($item['_action'] == 'save') {
-                    $event->data->_content[$key]['class'] = ' btn btn-success';
-                    $event->data->_content[$key]['value'] = iconify('mdi:content-save') . ' ' . $event->data->_content[$key]['value'];
-                }
-
-                // Preview and Show buttons
-                if ($item['_action'] == 'preview' || $item['_action'] == 'show') {
-                    $event->data->_content[$key]['value'] = iconify('mdi:file-document-outline') . ' ' . $event->data->_content[$key]['value'];
-                }
-
-                // Cancel button
-                if ($item['_action'] == 'cancel') {
-                    $event->data->_content[$key]['value'] = iconify('mdi:arrow-left') . ' ' . $event->data->_content[$key]['value'];
-                }
-            }
-        }
-    }
-
-    /**
-     * Handle HTML_REVISIONSFORM_OUTPUT and HTML_RECENTFORM_OUTPUT events
-     *
-     * @param \Doku_Event $event Event handler
-     *
-     * @return void
-     **/
-    public function revisionsFormHandler(\Doku_Event $event)
-    {
-        foreach ($event->data->_content as $key => $item) {
-            // Revision form
-            if (is_array($item) && isset($item['_elem'])) {
-                if ($item['_elem'] == 'opentag' && $item['_tag'] == 'span' && strstr($item['class'], 'sizechange')) {
-                    if (strstr($item['class'], 'positive')) {
-                        $event->data->_content[$key]['class'] .= ' label label-success';
-                    }
-
-                    if (strstr($item['class'], 'negative')) {
-                        $event->data->_content[$key]['class'] .= ' label label-danger';
-                    }
-                }
-
-                // Recent form
-                if ($item['_elem'] == 'opentag' && $item['_tag'] == 'li' && strstr($item['class'], 'minor')) {
-                    $event->data->_content[$key]['class'] .= ' text-muted';
-                }
-            }
-        }
-    }
-
-    public function contentHandler(\Doku_Event $event)
-    {
-        $event->data = $this->normalizeContent($event->data);
-    }
-
-    public function searchHandler(\Doku_Event $event)
-    {
-        if ($event->name == 'SEARCH_RESULT_PAGELOOKUP') {
-            array_unshift($event->data['listItemContent'], iconify('mdi:file-document-outline', ['title' => hsc($event->data['page'])]) . ' ');
-        }
-
-        if ($event->name == 'SEARCH_RESULT_FULLPAGE') {
-            $event->data['resultBody']['meta'] = str_replace(
-                ['<span class="lastmod">', '<span class="hits">'],
-                ['<span class="lastmod">' . iconify('mdi:calendar') . ' ', '<span class="hits"' . iconify('mdi:poll') . ' '],
-                '<small>' . $event->data['resultBody']['meta'] . '</small>'
-            );
-        }
-    }
-
-    /**
-     * Load the template assets (Bootstrap, AnchorJS, etc)
-     *
-     * @author  Giuseppe Di Terlizzi <giuseppe.diterlizzi@gmail.com>
-     * @todo    Move the specific-padding size of Bootswatch template in template.less
-     *
-     * @param  \Doku_Event $event
-     */
-    public function metaheadersHandler(\Doku_Event $event)
-    {
-
-        global $ACT;
-        global $INPUT;
-
-        $fixed_top_navbar = $this->getConf('fixedTopNavbar');
-
-        if ($google_analitycs = $this->getGoogleAnalitycs()) {
-            $event->data['script'][] = [
-                'type'  => 'text/javascript',
-                '_data' => $google_analitycs,
-            ];
-        }
-
-        // Apply some FIX
-        if ($ACT || defined('DOKU_MEDIADETAIL')) {
-            // Default Padding
-            $navbar_padding = 20;
-
-            if ($fixed_top_navbar) {
-                $navbar_height = $this->getNavbarHeight();
-                $navbar_padding += $navbar_height;
-            }
-
-            $styles = [];
-
-            // TODO implement in css.php dispatcher
-
-            $styles[] = "body { margin-top: {$navbar_padding}px; }";
-            $styles[] = ' #dw__toc.affix { top: ' . ($navbar_padding - 10) . 'px; position: fixed !important; }';
-
-            if ($this->getConf('tocCollapseSubSections')) {
-                $styles[] = ' #dw__toc .nav .nav .nav { display: none; }';
-            }
-
-            $event->data['style'][] = [
-                'type'  => 'text/css',
-                '_data' => '@media screen { ' . implode(" ", $styles) . ' }',
-            ];
-        }
-    }
-
-    public function tagPluginHandler(\Doku_Event $event)
-    {
-        $event->data['class'] .= ' tag label label-default mx-1';
-        $event->data['title'] = iconify('mdi:tag-text-outline') . ' ' . $event->data['title'];
-    }
-
-    public function tplIncPluginHandler(\Doku_Event $event)
-    {
-        $event->data['header']             = 'Header of page below the navbar (header)';
-        $event->data['topheader']          = 'Top Header of page (topheader)';
-        $event->data['pagefooter']         = 'Footer below the page content (pagefooter)';
-        $event->data['pageheader']         = 'Header above the page content (pageheader)';
-        $event->data['sidebarfooter']      = 'Footer below the sidebar (sidebarfooter)';
-        $event->data['sidebarheader']      = 'Header above the sidebar (sidebarheader)';
-        $event->data['rightsidebarfooter'] = 'Footer below the right-sidebar (rightsidebarfooter)';
-        $event->data['rightsidebarheader'] = 'Header above the right-sidebar (rightsidebarheader)';
-    }
-
     private function initPlugins()
     {
-        $this->plugins['tplinc']       = plugin_load('helper', 'tplinc');
-        $this->plugins['tag']          = plugin_load('helper', 'tag');
-        $this->plugins['userhomepage'] = plugin_load('helper', 'userhomepage');
-        $this->plugins['translation']  = plugin_load('helper', 'translation');
-        $this->plugins['pagelist']     = plugin_load('helper', 'pagelist');
+        $plugins = ['tplinc', 'tag', 'userhomepage', 'translation', 'pagelist'];
+
+        foreach ($plugins as $plugin) {
+            $this->plugins[$plugin] = plugin_load('helper', $plugin);
+        }
     }
 
     public function getPlugin($plugin)
@@ -675,6 +424,8 @@ class Template
      **/
     public function getClasses()
     {
+        global $ACT;
+
         $page_on_panel    = $this->getConf('pageOnPanel');
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $bootswatch_theme = $this->getBootswatchTheme();
@@ -729,6 +480,43 @@ class Template
     public function getAvailableBootswatchThemes()
     {
         return array_diff($this->getBootswatchThemeList(), $this->getConf('hideInThemeSwitcher'));
+    }
+
+    /**
+     * Return the active theme
+     *
+     * @return string
+     */
+    public function getTheme()
+    {
+        $bootstrap_theme  = $this->getConf('bootstrapTheme');
+        $bootswatch_theme = $this->getBootswatchTheme();
+        $theme            = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
+        return $theme;
+    }
+
+    /**
+     * Return the active theme
+     *
+     * @return string
+     */
+    public function getThemeFeatures()
+    {
+        $features = [];
+
+        if ($this->isFluidNavbar()) {
+            $features[] = 'fluid-container';
+        }
+
+        if ($this->getConf('fixedTopNavbar')) {
+            $features[] = 'fixed-top-navbar';
+        }
+
+        if ($this->getConf('tocCollapseSubSections')) {
+            $features[] = 'toc-cullapse-sub-sections';
+        }
+
+        return implode(' ', $features);
     }
 
     /**
@@ -1649,44 +1437,27 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Accessibility (a11y)
         foreach ($html->find('.a11y') as $elm) {
-            if (preg_match('/picker/', $elm->class)) {
-                continue;
+            if (!preg_match('/picker/', $elm->class)) {
+                $elm->class .= ' sr-only';
             }
-            $elm->class .= ' sr-only';
         }
 
         # Fix list overlap in media images
         foreach ($html->find('ul, ol') as $elm) {
-            if (preg_match('/(nav|dropdown-menu)/', $elm->class)) {
-                continue;
+            if (!preg_match('/(nav|dropdown-menu)/', $elm->class)) {
+                $elm->class .= ' fix-media-list-overlap';
             }
-            $elm->class .= ' fix-media-list-overlap';
         }
 
         # Buttons
         foreach ($html->find('.button') as $elm) {
-            if ($elm->tag == 'form') {
-                continue;
+            if ($elm->tag !== 'form') {
+                $elm->class .= ' btn';
             }
-            $elm->class .= ' btn';
         }
 
         foreach ($html->find('[type=button], [type=submit], [type=reset]') as $elm) {
             $elm->class .= ' btn btn-default';
-        }
-
-        # Section Edit Button
-        foreach ($html->find('.btn_secedit [type=submit]') as $elm) {
-            $elm->class .= ' btn btn-xs btn-default';
-        }
-
-        # Section Edit icons
-        foreach ($html->find('.secedit.editbutton_section button') as $elm) {
-            $elm->innertext = iconify('mdi:pencil') . ' ' . $elm->innertext;
-        }
-
-        foreach ($html->find('.secedit.editbutton_table button') as $elm) {
-            $elm->innertext = iconify('mdi:table') . ' ' . $elm->innertext;
         }
 
         # Tabs
@@ -1728,19 +1499,17 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 
         # Form controls
         foreach ($html->find('input, select, textarea') as $elm) {
-            if (in_array($elm->type, ['submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'])) {
-                continue;
+            if (!in_array($elm->type, ['submit', 'reset', 'button', 'hidden', 'image', 'checkbox', 'radio'])) {
+                $elm->class .= ' form-control';
             }
-            $elm->class .= ' form-control';
         }
 
         # Forms
         # TODO main form
         foreach ($html->find('form') as $elm) {
-            if (preg_match('/form-horizontal/', $elm->class)) {
-                continue;
+            if (!preg_match('/form-horizontal/', $elm->class)) {
+                $elm->class .= ' form-inline';
             }
-            $elm->class .= ' form-inline';
         }
 
         # Alerts
