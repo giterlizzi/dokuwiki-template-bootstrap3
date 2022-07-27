@@ -1,6 +1,5 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-
 ## [v2022-07-27]
 
 This release increase the compatibility with Hogfather and the upcoming Igor release and fix some regression.
@@ -615,6 +614,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2022-07-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2021-03-11...v2022-07-27
 [v2021-03-11]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-08-28...v2021-03-11
 [v2020-08-28]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-07-29...v2020-08-28
 [v2020-07-29]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-04-04...v2020-07-29
