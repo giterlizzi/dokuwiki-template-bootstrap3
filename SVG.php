@@ -47,7 +47,7 @@ class SVG
 
         // Only keep the <path d="..." /> part
         // Old REGEX: (<path d=".+" \/>)
-        if (preg_match('/(<path\b([\s\S]*?)\/>)/', $svg, $matches) !== 1) {
+        if (preg_match('/((<path\b([\s\S]*?)\/>)|(<path\b([\s\S]*?)><\/path>))/', $svg, $matches) !== 1) {
             msg(sprintf('"%s" could not be recognized as an icon file', $file_path), -1);
             return false;
         }

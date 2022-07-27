@@ -9,8 +9,8 @@
 
 if (!defined('DOKU_INC')) die();     // must be run from within DokuWiki
 
-require_once('tpl/global.php');
-require_once('tpl/functions.php');
+require_once 'tpl/global.php';
+require_once 'tpl/functions.php';
 
 header('X-UA-Compatible: IE=edge,chrome=1');
 
@@ -27,7 +27,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             echo '<link href="' . tpl_basedir() . 'css.php?id='. $ID .'" rel="stylesheet" />';
         }
 
-        echo tpl_favicon(array('favicon', 'mobile'));
+        echo tpl_favicon(['favicon', 'mobile']);
         tpl_includeFile('meta.html');
         tpl_metaheaders();
 
@@ -71,7 +71,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
             <p class="text-right">
                 <?php
 
-                    if ($TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
+                    if (($ACT == 'show') && $TPL->getConf('tagsOnTop') && $tag = $TPL->getPlugin('tag')) {
                         echo implode('', array_map('trim', explode(',', $tag->td($ID))));
                     }
 
@@ -118,7 +118,7 @@ header('X-UA-Compatible: IE=edge,chrome=1');
 
                         $content         = ob_get_clean();
                         $toc             = $TPL->getTOC(true);
-                        $content_classes = array();
+                        $content_classes = [];
 
                         if ($TPL->getConf('tocCollapsed')) $content_classes[] = 'dw-toc-closed';
 

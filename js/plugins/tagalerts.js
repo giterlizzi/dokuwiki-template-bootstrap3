@@ -12,14 +12,7 @@ jQuery('.tagerror, .taginfo, .tagsuccess, .tagnotify').each(function () {
 
     var $node = jQuery(this);
 
-    if ($node.find('i').length) {
-
-        if ($node.hasClass('tagerror')) $node.removeClass('tagerror').addClass('label-danger');
-        if ($node.hasClass('taginfo')) $node.removeClass('taginfo').addClass('label-info');
-        if ($node.hasClass('tagsuccess')) $node.removeClass('tagsuccess').addClass('label-success');
-        if ($node.hasClass('tagnotify')) $node.removeClass('tagnotify').addClass('label-warning');
-
-    } else {
+    if ($node.prop('nodeName').toLowerCase() == 'div') {
 
         $node.removeClass('label label-default').addClass('alert');
         $node.prependTo('#dw__msgarea');
@@ -28,6 +21,13 @@ jQuery('.tagerror, .taginfo, .tagsuccess, .tagnotify').each(function () {
         if ($node.hasClass('taginfo')) $node.removeClass('taginfo').addClass('alert-info');
         if ($node.hasClass('tagsuccess')) $node.removeClass('tagsuccess').addClass('alert-success');
         if ($node.hasClass('tagnotify')) $node.removeClass('tagnotify').addClass('alert-warning');
+
+    } else {
+
+        if ($node.hasClass('tagerror')) $node.removeClass('tagerror').addClass('label-danger');
+        if ($node.hasClass('taginfo')) $node.removeClass('taginfo').addClass('label-info');
+        if ($node.hasClass('tagsuccess')) $node.removeClass('tagsuccess').addClass('label-success');
+        if ($node.hasClass('tagnotify')) $node.removeClass('tagnotify').addClass('label-warning');
 
     }
 
