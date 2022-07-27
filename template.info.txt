@@ -1,8 +1,8 @@
 base     bootstrap3
 author   Giuseppe Di Terlizzi
 email    giuseppe.diterlizzi@gmail.com
-date     2021-03-11
+date     2022-07-27
 name     Bootstrap3 Template
 desc     Bootstrap-based template for Dokuwiki
 url      https://www.dokuwiki.org/template:bootstrap3
-build    stable/20210311
+build    stable/20220727
