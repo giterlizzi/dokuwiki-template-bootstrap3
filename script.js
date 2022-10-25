@@ -994,6 +994,7 @@ var dw_template = {
         /* DOKUWIKI:include js/plugins/translation.js */
         /* DOKUWIKI:include js/plugins/wrap.js */
         /* DOKUWIKI:include js/plugins/watchcycle.js */
+        /* DOKUWIKI:include js/plugins/exttab3.js */
     },
 };
 
