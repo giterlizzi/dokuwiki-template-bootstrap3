@@ -1218,7 +1218,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
      */
     public function getNavbar()
     {
-        if ($this->getConf('showNavbar') === 'logged' && !$_SERVER['REMOTE_USER']) {
+        if ($this->getConf('showNavbar') === 'logged' && !array_key_exists('REMOTE_USER', $_SERVER) || !$_SERVER['REMOTE_USER']) {
             return false;
         }
 
