@@ -57,6 +57,7 @@ class Template
                 'tocLayout'                  => $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
+                'disableSearchSuggest'       => (int) $this->getConf('disableSearchSuggest'),
             ],
         ];
 
@@ -492,6 +493,7 @@ class Template
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $bootswatch_theme = $this->getBootswatchTheme();
         $theme            = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
+
         return $theme;
     }
 

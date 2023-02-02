@@ -60,10 +60,15 @@ var dw_template = {
         dw_template.pageRestoreConfirm();
         dw_template.alerts();
         dw_template.detail();
-        dw_template.typeahead();
+
         dw_template.menuitem();
         dw_template.cookieLaw();
         dw_template.plugins();
+
+        // Enable Typeahead
+        if (! JSINFO.bootstrap3.config.disableSearchSuggest) {
+            dw_template.typeahead();
+        }
 
         // Preload icons
         Iconify.preloadImages(['mdi:folder-open', 'mdi:folder', 'mdi:file-document-outline', 'mdi:chevron-up', 'mdi:chevron-down']);

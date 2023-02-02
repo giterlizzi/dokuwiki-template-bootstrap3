@@ -118,3 +118,4 @@ $lang['useAvatar_o_office365']        = 'Office365 (or EWS)';
 $lang['useAvatar_o_activedirectory']  = 'Active Directory';
 $lang['useGoogleAnalytics']           = 'Enable Google Analytics';
 $lang['useLegacyNavbar']              = 'Use legacy and deprecated <code>navbar.html</code> hook (consider in the future to use the <code>:navbar</code> hook)';
+$lang['disableSearchSuggest']         = 'Disable the search suggest';
