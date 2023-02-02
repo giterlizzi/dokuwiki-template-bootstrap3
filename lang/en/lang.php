@@ -38,3 +38,7 @@ $lang['config_google_analytics'] = 'Google Analytics';
 $lang['config_browser_title']    = 'Browser Title';
 $lang['config_page']             = 'Page';
 
+// Accessibility labels
+// These are hidden from normal users, but are visible to screenreaders and other software interacting with the site
+$lang['a11y_navbartoggle']       = 'Show navigation';
+
