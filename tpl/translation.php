@@ -12,7 +12,7 @@ global $TPL;
 global $conf;
 
 $show_translation  = false;
-$translation_items = '';
+$translation_items = [];
 $translation_label = '';
 
 $translation = $TPL->getPlugin('translation');
@@ -28,7 +28,40 @@ if ($translation->istranslatable($ID)) {
     $translation_label = $translation->getLang('translations');
 
     foreach ($translation->translations as $t) {
-        $translation_items .= str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($t, $idpart));
+
+        // Old version of Translation plugin
+        if (method_exists($translation, 'getTransItem')) {
+            $translation_items[] = str_replace(array('<div class="li">', '</div>'), '', $translation->getTransItem($t, $idpart));
+        } else {
+
+            list($target, $language) = $translation->buildTransID($t, $idpart);
+
+            $target = cleanID($target);
+            $exists = page_exists($target, '', false);
+            $link   = wl($target);
+
+            $text  = '';
+            $title = hsc($translation->getLocalName($language));
+
+            if (isset($translation->opts['flag'])) {
+                $text .= '<i>' . inlineSVG(DOKU_PLUGIN . 'translation/flags/' . $language . '.svg', 1024 * 12) . '</i>';
+            }
+
+            if (isset($translation->opts['name'])) {
+
+                $text .= hsc($translation->getLocalName($language));
+
+                if (isset($translation->opts['langcode'])) {
+                    $text .= ' (' . hsc($language) . ')';
+                }
+
+            } elseif (isset($translation->opts['langcode'])) {
+                $text .= hsc($language);
+            }
+
+            $translation_items[] = '<li class="menuitem"><a href="' . $link . '" class="' . ($exists ? 'wikilink1' : 'wikilink2') . '" title="' . $title . '">' . $text . '</a></li>';
+
+        }
     }
 
 }
@@ -38,16 +71,33 @@ if ($show_translation):
 <!-- translation -->
 <ul class="nav navbar-nav" id="dw__translation">
     <li class="dropdown">
-        <a href="<?php wl($ID) ?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $translation_label ?>" role="button" aria-haspopup="true" aria-expanded="false">
+        <a href="<?php wl($ID)?>" class="dropdown-toggle" data-target="#" data-toggle="dropdown" title="<?php echo $translation_label ?>" role="button" aria-haspopup="true" aria-expanded="false">
             <?php echo iconify('mdi:flag'); ?> <span class="hidden-lg hidden-md hidden-sm"><?php echo $translation_label ?></span><span class="caret"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
+
+            <?php if ($translation->getConf('about') || $translation->getConf('title')): ?>
             <li class="dropdown-header hidden-xs hidden-sm">
-            <?php echo iconify('mdi:flag'); ?> <?php echo $translation_label ?>
+                <?php
+
+                    echo iconify('mdi:flag');
+                    echo $translation->getLang('translations');
+
+                    if ($translation->getConf('about')) {
+                        echo ' ' . $translation->showAbout();
+                    }
+                ?>
+            <?php endif;?>
             </li>
-            <?php echo $translation_items ?>
+
+            <?php
+                foreach ($translation_items as $item) {
+                    echo $item;
+                }
+            ?>
+
         </ul>
     </li>
 </ul>
 <!-- /translation -->
-<?php endif; ?>
+<?php endif;?>
