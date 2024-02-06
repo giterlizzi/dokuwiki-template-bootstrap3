@@ -25,14 +25,14 @@ $bootswatch_theme = $TPL->getBootswatchTheme();
                 <?php echo iconify('mdi:palette'); ?> <?php echo tpl_getLang('themes') ?>
             </li>
             <li<?php echo ($bootswatch_theme == 'default') ? ' class="active"' : '' ?>>
-                <a onclick="DokuCookie.setValue('bootswatchTheme', '<?php echo hsc('default'); ?>');" href="<?php echo wl($ID, array('bootswatch-theme' => hsc('default'))); ?>">Default</a>
+                <a onclick="DokuCookie.setValue('bootswatchTheme', '<?php echo hsc('default'); ?>'); document.location.reload(true)" href="#">Default</a>
             </li>
             <li class="dropdown-header">
                 <?php echo iconify('mdi:palette'); ?> Bootswatch Themes
             </li>
             <?php foreach ($TPL->getAvailableBootswatchThemes() as $theme): ?>
             <li<?php echo ($bootswatch_theme == $theme) ? ' class="active"' : '' ?>>
-                <a onclick="DokuCookie.setValue('bootswatchTheme', '<?php echo hsc($theme); ?>');" href="<?php echo wl($ID, array('bootswatch-theme' => hsc($theme))); ?>"><?php echo ucfirst($theme) ?></a>
+                <a onclick="DokuCookie.setValue('bootswatchTheme', '<?php echo hsc($theme); ?>'); document.location.reload(true)" href="#"><?php echo ucfirst($theme) ?></a>
             </li>
             <?php endforeach; ?>
         </ul>

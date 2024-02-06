@@ -57,6 +57,7 @@ class Template
                 'tocLayout'                  => $this->getConf('tocLayout'),
                 'useAnchorJS'                => (int) $this->getConf('useAnchorJS'),
                 'useAlternativeToolbarIcons' => (int) $this->getConf('useAlternativeToolbarIcons'),
+                'disableSearchSuggest'       => (int) $this->getConf('disableSearchSuggest'),
             ],
         ];
 
@@ -492,6 +493,7 @@ class Template
         $bootstrap_theme  = $this->getConf('bootstrapTheme');
         $bootswatch_theme = $this->getBootswatchTheme();
         $theme            = (($bootstrap_theme == 'bootswatch') ? $bootswatch_theme : $bootstrap_theme);
+
         return $theme;
     }
 
@@ -1474,7 +1476,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         # Page Heading (h1-h2)
         # TODO this class will be removed in Bootstrap >= 4.0 version
         foreach ($html->find('h1,h2,h3') as $elm) {
-            $elm->class .= ' page-header pb-3 mb-4 mt-5'; # TODO replace page-header with border-bottom in BS4
+            $elm->class .= ' page-header pb-3 mb-4 mt-0'; # TODO replace page-header with border-bottom in BS4
         }
 
         # Media Images
@@ -2228,7 +2230,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $toc_undefined = array_pop($toc);
         }
 
-        trigger_event('TPL_TOC_RENDER', $toc, null, false);
+        \dokuwiki\Extension\Event::createAndTrigger('TPL_TOC_RENDER', $toc, null, false);
 
         if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
             $bootstrap3_sections = [

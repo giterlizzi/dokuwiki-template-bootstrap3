@@ -1,5 +1,18 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [develop]
+
+This release increase the compatibility with the latest DokuWiki and PHP releases.
+
+### Changes
+    * #589: Missing Wikipedia logo in interwiki links to Russian language
+    * #584, #604: Improved compatibility with new Translation Plugin
+    * #582: Theme changing doesn't work in Firefox/Gecko
+    * #573: Typeahead blocks global search if match is found
+    * #596, #597: Warnings after upgrade to 2023-04-04a "Jack Jackrum"
+    * #605: detail.php plural of "information"
+
+
 ## [v2022-07-27]
 
 This release increase the compatibility with Hogfather and the upcoming Igor release and fix some regression.

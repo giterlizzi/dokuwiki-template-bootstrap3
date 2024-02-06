@@ -85,3 +85,4 @@ $conf['useAnchorJS']                 = 1;
 $conf['useAvatar']                   = 'off';
 $conf['useGoogleAnalytics']          = 0;
 $conf['notifyExtensionsUpdate']      = 0;
+$conf['disableSearchSuggest']        = 0;

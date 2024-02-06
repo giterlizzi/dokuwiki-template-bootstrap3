@@ -41,6 +41,7 @@ $meta['showNavbar']             = array('multichoice', '_choices' => array('logg
 $meta['navbarLabels']           = array('multicheckbox', '_choices' => array('login', 'register', 'admin', 'tools', 'user', 'site', 'page', 'themes', 'expand', 'profile'));
 $meta['showAddNewPage']         = array('multichoice', '_choices' => array('never', 'logged', 'always'));
 $meta['notifyExtensionsUpdate'] = array('onoff');
+$meta['disableSearchSuggest']   = array('onoff');
 
 // Semantic
 $meta['schemaOrgType']       = array('multichoice', '_choices' => array('Article', 'NewsArticle', 'TechArticle', 'BlogPosting', 'Recipe'));
