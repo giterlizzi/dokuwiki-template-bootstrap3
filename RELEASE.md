@@ -1,6 +1,6 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [develop]
+## [v2024-02-06]
 
 This release increase the compatibility with the latest DokuWiki and PHP releases.
 
@@ -627,6 +627,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2024-02-06]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2022-07-27...v2024-02-06
 [v2022-07-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2021-03-11...v2022-07-27
 [v2021-03-11]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-08-28...v2021-03-11
 [v2020-08-28]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-07-29...v2020-08-28
