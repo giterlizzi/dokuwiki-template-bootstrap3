@@ -78,12 +78,14 @@ $params = array(
 
 $iconify_dir   = dirname(__FILE__) . '/assets/iconify/json';
 $cache_key     = md5(serialize($params) . $conf['template'] . filemtime(__FILE__));
-$cache         = new cache($cache_key, '.js');
-$cache->_event = 'ICONIFY_CACHE';
 $cache_files   = $params;
 $cache_files[] = __FILE__;
-$cache_ok      = $cache->useCache(array('files' => $cache_files));
 $content_type  = 'application/javascript; charset=utf-8';
+
+$cache = new dokuwiki\Cache\Cache($cache_key, '.js');
+$cache->setEvent('ICONIFY_CACHE');
+$cache_ok = $cache->useCache(array('files' => $cache_files));
+
 
 if ($params['icon']) {
     $content_type                             = 'image/svg+xml; charset=utf-8';

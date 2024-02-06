@@ -2230,7 +2230,7 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
             $toc_undefined = array_pop($toc);
         }
 
-        trigger_event('TPL_TOC_RENDER', $toc, null, false);
+        \dokuwiki\Extension\Event::createAndTrigger('TPL_TOC_RENDER', $toc, null, false);
 
         if ($ACT == 'admin' && $INPUT->str('page') == 'config') {
             $bootstrap3_sections = [
