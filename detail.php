@@ -381,7 +381,7 @@ $show_metadata = false;
                                 <div class="image-information">
 
                                     <h3 class="pb-4">
-                                        <?php echo iconify('mdi:information', array('class' => 'text-primary')) ?> Informations
+                                        <?php echo iconify('mdi:information', array('class' => 'text-primary')) ?> Information
                                     </h3>
 
                                     <div class="table-responsive">
