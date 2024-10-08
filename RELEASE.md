@@ -1,5 +1,14 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [develop]
+
+### Fixes
+    * #611: Edit mode when not logged in, shows textarea field with source text "as button"
+    * #577: Extra check on login page for PHP>=8.0 (PR)
+
+### Changes
+    * #607: Revert top heading paddind
+
 ## [v2024-02-06]
 
 This release increase the compatibility with the latest DokuWiki and PHP releases.
