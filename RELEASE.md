@@ -3,9 +3,10 @@
 ## [develop]
 
 ### Fixes
-    * #611: Edit mode when not logged in, shows textarea field with source text "as button"
+    * #562: Image resize (include plugin)
     * #577: Extra check on login page for PHP>=8.0 (PR)
     * #583: Template style settings: colour boxes extremely narrow and php warnings
+    * #611: Edit mode when not logged in, shows textarea field with source text "as button"
 
 ### Changes
     * #607: Revert top heading paddind
