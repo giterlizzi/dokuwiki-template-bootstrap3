@@ -9,6 +9,7 @@
     * #611: Edit mode when not logged in, shows textarea field with source text "as button"
 
 ### Changes
+    * #542: Add support for Google Analytics 4
     * #607: Revert top heading paddind
 
 ## [v2024-02-06]

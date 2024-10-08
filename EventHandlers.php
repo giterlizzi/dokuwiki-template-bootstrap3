@@ -393,6 +393,12 @@ class EventHandlers
         $fixed_top_navbar = $this->template->getConf('fixedTopNavbar');
 
         if ($google_analitycs = $this->template->getGoogleAnalitycs()) {
+            $tag_id = $this->template->getConf('googleAnalyticsTrackID');
+            $event->data['script'][] = [
+                'type'  => 'text/javascript',
+                'async' => 1,
+                'src'   => "https://www.googletagmanager.com/gtag/js?id=$tag_id",
+            ];
             $event->data['script'][] = [
                 'type'  => 'text/javascript',
                 '_data' => $google_analitycs,
