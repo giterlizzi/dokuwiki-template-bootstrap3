@@ -147,7 +147,7 @@ var dw_template = {
         // TODO ported
         $dw_content.find(':submit, :button, :reset').addClass('btn btn-default');
         jQuery('input, select, textarea')
-            .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio]')
+            .not('[type=submit], [type=reset], [type=button], [type=hidden], [type=image], [type=checkbox], [type=radio], [type=color]')
             .addClass('form-control');
         jQuery('input[type=checkbox]').addClass('checkbox-inline');
         jQuery('input[type=radio]').addClass('radio-inline');
