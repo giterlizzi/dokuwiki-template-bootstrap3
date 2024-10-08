@@ -183,14 +183,20 @@ class EventHandlers
         /** @var dokuwiki\Form\Form $form */
         $form = $event->data;
 
-        $form->getElementAt($form->findPositionByAttribute('name', 'do[save]'))
-            ->addClass('btn btn-success mr-2')->attr('data-dw-icon', 'mdi:content-save');
+        if ($position = $form->findPositionByAttribute('name', 'do[save]')) {
+            $form->getElementAt($position)->addClass('btn btn-success mr-2')
+                ->attr('data-dw-icon', 'mdi:content-save');
+        }
 
-        $form->getElementAt($form->findPositionByAttribute('name', 'do[preview]'))
-            ->addClass('btn btn-default mr-2')->attr('data-dw-icon', 'mdi:file-document-outline');
+        if ($position = $form->findPositionByAttribute('name', 'do[preview]')) {
+            $form->getElementAt($position)->addClass('btn btn-default mr-2')
+                ->attr('data-dw-icon', 'mdi:file-document-outline');
+        }
 
-        $form->getElementAt($form->findPositionByAttribute('name', 'do[cancel]'))
-            ->addClass('btn btn-default mr-2')->attr('data-dw-icon', 'mdi:arrow-left');
+        if ($position = $form->findPositionByAttribute('name', 'do[cancel]')) {
+            $form->getElementAt($position)->addClass('btn btn-default mr-2')
+                ->attr('data-dw-icon', 'mdi:arrow-left');
+        }
 
     }
 
