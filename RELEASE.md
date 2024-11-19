@@ -7,6 +7,7 @@
     * #577: Extra check on login page for PHP>=8.0 (PR)
     * #583: Template style settings: colour boxes extremely narrow and php warnings
     * #611: Edit mode when not logged in, shows textarea field with source text "as button"
+    * #614: Navbar appears only when the user is logged (even when configured as "always")
 
 ### Changes
     * #542: Add support for Google Analytics 4
