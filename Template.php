@@ -1218,7 +1218,9 @@ class Template
      */
     public function getNavbar()
     {
-        if ($this->getConf('showNavbar') === 'logged' && !array_key_exists('REMOTE_USER', $_SERVER) || !$_SERVER['REMOTE_USER']) {
+        global $INPUT;
+
+        if ($this->getConf('showNavbar') === 'logged' && !$INPUT->server->has('REMOTE_USER')) {
             return false;
         }
 
