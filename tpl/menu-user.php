@@ -41,16 +41,18 @@ if ($INFO['isadmin'] && $TPL->getConf('notifyExtensionsUpdate')) {
     /** @var $plugin_controller PluginController */
     global $plugin_controller;
 
-    $extension = plugin_load('helper','extension_extension');
+    if ($extension = plugin_load('helper','extension_extension')) {
 
-    foreach ($plugin_controller->getList('', true) as $plugin) {
-        $extension->setExtension($plugin);
-        if ($extension->updateAvailable() && $extension->isEnabled()) {
-            $extensions_update[] = $extension->getDisplayName();
+        foreach ($plugin_controller->getList('', true) as $plugin) {
+            $extension->setExtension($plugin);
+            if ($extension->updateAvailable() && $extension->isEnabled()) {
+                $extensions_update[] = $extension->getDisplayName();
+            }
         }
-    }
 
-  sort($extensions_update);
+        sort($extensions_update);
+
+    }
 
 }
 
