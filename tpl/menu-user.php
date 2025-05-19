@@ -8,6 +8,11 @@
  * @license  GPL 2 (http://www.gnu.org/licenses/gpl.html)
  */
 
+
+use dokuwiki\plugin\extension\Exception as ExtensionException;
+use dokuwiki\plugin\extension\Local;
+use dokuwiki\plugin\extension\Repository;
+
 global $INFO, $lang, $TPL;
 
 $use_avatar = $TPL->getConf('useAvatar');
@@ -37,23 +42,35 @@ if ($INFO['isadmin']) {
 }
 
 if ($INFO['isadmin'] && $TPL->getConf('notifyExtensionsUpdate')) {
+    if (class_exists(Local::class)) {
+        // new extension manager since Librarian
+        try {
+            $extensions = (new Local())->getExtensions();
+            Repository::getInstance()->initExtensions(array_keys($extensions));
+            foreach ($extensions as $extension) {
+                if ($extension->isEnabled() && $extension->isUpdateAvailable()) {
+                    $extensions_update[] = $extension->getDisplayName();
+                }
+            }
+        } catch (ExtensionException $ignore) {
+            // Ignore the exception
+        }
+    } else {
+        // old extension manager until Kaos
+        /** @var $plugin_controller PluginController */
+        global $plugin_controller;
+        if ($extension = plugin_load('helper', 'extension_extension')) {
 
-    /** @var $plugin_controller PluginController */
-    global $plugin_controller;
-
-    if ($extension = plugin_load('helper','extension_extension')) {
-
-        foreach ($plugin_controller->getList('', true) as $plugin) {
-            $extension->setExtension($plugin);
-            if ($extension->updateAvailable() && $extension->isEnabled()) {
-                $extensions_update[] = $extension->getDisplayName();
+            foreach ($plugin_controller->getList('', true) as $plugin) {
+                $extension->setExtension($plugin);
+                if ($extension->updateAvailable() && $extension->isEnabled()) {
+                    $extensions_update[] = $extension->getDisplayName();
+                }
             }
         }
-
-        sort($extensions_update);
-
     }
 
+    sort($extensions_update);
 }
 
 ?>
