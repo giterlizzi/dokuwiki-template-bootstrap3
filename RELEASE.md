@@ -1,13 +1,17 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
-## [develop]
+## [v2025-06-13]
+
+This release increase the compatibility with the latest DokuWiki (Librarian) and PHP releases.
 
 ### Fixes
     * #562: Image resize (include plugin)
     * #577: Extra check on login page for PHP>=8.0 (PR)
     * #583: Template style settings: colour boxes extremely narrow and php warnings
     * #611: Edit mode when not logged in, shows textarea field with source text "as button"
+    * #613: Dokuwiki farm : "Error: Call to a member function setExtension() on null"
     * #614: Navbar appears only when the user is logged (even when configured as "always")
+    * #617: Fix extension notification for Librarian release (@splitbrain)
 
 ### Changes
     * #542: Add support for Google Analytics 4
@@ -640,6 +644,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2025-06-13]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2024-02-06...v2025-06-13
 [v2024-02-06]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2022-07-27...v2024-02-06
 [v2022-07-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2021-03-11...v2022-07-27
 [v2021-03-11]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2020-08-28...v2021-03-11
