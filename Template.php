@@ -943,13 +943,6 @@ class Template
         }
 
         // print current page, skipping start page, skipping for namespace index
-        $exists = false;
-        resolve_pageid('', $page, $exists);
-
-        if (isset($page) && $page == $part . $parts[$i]) {
-            echo '</ol>';
-            return true;
-        }
 
         $page = $part . $parts[$i];
 
@@ -1001,8 +994,18 @@ class Template
                     $ns_pages = array_unique($ns_pages);
 
                     foreach ($ns_pages as $ns_page) {
+
                         $exists = false;
-                        resolve_pageid(getNS($ns_page), $ns_page, $exists);
+
+                        // Igor and later
+                        if (class_exists('dokuwiki\File\PageResolver')) {
+                            $resolver = new \dokuwiki\File\PageResolver($ns_page);
+                            $ns_page = $resolver->resolveId($ns_page);
+                            $exists = page_exists($ns_page);
+                        } else {
+                            // Compatibility with older releases
+                            resolve_pageid(getNS($ns_page), $ns_page, $exists);
+                        }
 
                         $ns_page_title_heading = hsc(p_get_first_heading($ns_page));
                         $ns_page_title_page    = noNSorNS($ns_page);
@@ -1014,7 +1017,17 @@ class Template
                     }
                 }
 
-                resolve_pageid(getNS($ID), $ID, $exists);
+                $exists = false;
+
+                // Igor and later
+                if (class_exists('dokuwiki\File\PageResolver')) {
+                    $resolver = new \dokuwiki\File\PageResolver($ID);
+                    $id = $resolver->resolveId($ID);
+                    $exists = page_exists($id);
+                } else {
+                    // Compatibility with older releases
+                    resolve_pageid(getNS($ID), $ID, $exists);
+                }
 
                 if ($exists) {
                     $ns_titles[] = tpl_pagetitle($ID, true);
@@ -1547,7 +1560,8 @@ class Template
         foreach ($this->getConf('tableStyle') as $class) {
             if ($class == 'responsive') {
                 foreach ($html->find('div.table') as $elm) {
-                    $elm->class = 'table-responsive';
+                    $elm->class = str_replace($elm->class, 'table', '');
+                    $elm->class .= ' table-responsive';
                 }
             } else {
                 $table_classes .= " table-$class";

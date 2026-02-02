@@ -8,6 +8,7 @@
  */
 
 global $TPL;
+global $ID;
 
 if ( $TPL->getConf('showCookieLawBanner') && !get_doku_pref('cookieNoticeAccepted', null) ):
 
@@ -15,7 +16,17 @@ $cookie_policy_page_id = $TPL->getConf('cookieLawPolicyPage');
 $cookie_banner_page_id = $TPL->getConf('cookieLawBannerPage');
 
 $cookie_policy_page_exists = false;
-resolve_pageid('', $cookie_policy_page_id, $cookie_policy_page_exists);
+
+// Igor and later
+if (class_exists('dokuwiki\File\PageResolver')) {
+    $resolver = new \dokuwiki\File\PageResolver($ID);
+    $cookie_policy_page_id = $resolver->resolveId($cookie_policy_page_id);
+    $cookie_policy_page_exists = page_exists($cookie_policy_page_id);
+} else {
+    // Compatibility with older releases
+    resolve_pageid(getNS($ID), $id, $cookie_policy_page_exists);
+}
+
 
 ?>
 <!-- cookie-law -->
