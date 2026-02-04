@@ -1,5 +1,17 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [v2026-02-04]
+
+This release fixes CVE-2024-6484, CVE-2024-6485 and CVE-2025-1647 for Bootstrap 3.4.1
+and drops support for `resolve_pageid`.
+
+### Fixes
+    * Apply backported patches from the Debian Project for CVE-2024-6484, CVE-2024-6485 and CVE-2025-1647
+
+### Deprecated
+    * #624: Dropped support for "resolve_pageid" in >= Igor releases
+
+
 ## [v2025-06-13]
 
 This release increase the compatibility with the latest DokuWiki (Librarian) and PHP releases.
@@ -644,6 +656,7 @@ In this release improved the user experience with new icons for Configuration Ma
 
 
 [Develop]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/master...develop
+[v2026-02-04]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2025-06-13...v2026-02-04
 [v2025-06-13]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2024-02-06...v2025-06-13
 [v2024-02-06]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2022-07-27...v2024-02-06
 [v2022-07-27]: https://github.com/giterlizzi/dokuwiki-template-bootstrap3/compare/v2021-03-11...v2022-07-27
