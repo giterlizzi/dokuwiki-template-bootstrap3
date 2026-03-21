@@ -586,8 +586,8 @@ class Template
                     if ($this->getConf('useAvatar')) {
                         global $auth;
                         $user_data = $auth->getUserData($INFO['editor']);
-
-                        $avatar_img = $this->getAvatar($INFO['editor'], $user_data['mail'], 16);
+                        $user_mail = $user_data ? $user_data['mail'] : '';
+                        $avatar_img = $this->getAvatar($INFO['editor'], $user_mail, 16);
                         $user_img   = '<img src="' . $avatar_img . '" alt="" width="16" height="16" class="img-rounded" /> ';
                         $user       = str_replace(['iw_user', 'interwiki'], '', $user);
                         $user       = $user_img . "<bdi>$user<bdi>";
