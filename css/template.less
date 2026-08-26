@@ -122,6 +122,22 @@ pre.code {
   white-space: pre-wrap;
 }
 
+/* Copy-to-clipboard button on code/file blocks: script.js blindly adds
+   `btn btn-default` to every <button>, which blows this up to full button
+   size. Shrink it back down to a small icon-sized control in the corner. */
+.dokuwiki .code-copy-btn {
+  padding: 1px 6px;
+  font-size: 12px;
+  line-height: 1.5;
+  border-radius: 3px;
+  opacity: .65;
+
+  &:hover,
+  &:focus {
+    opacity: 1;
+  }
+}
+
 input,
 textarea,
 select {
