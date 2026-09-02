@@ -122,6 +122,16 @@ pre.code {
   white-space: pre-wrap;
 }
 
+/* Core briefly sets the `hidden` property on this button before reading the
+   code block's innerText, so the button's own label isn't copied to the
+   clipboard along with the code. That relies on the browser's default
+   `[hidden] { display: none }` UA rule, which Bootstrap's `.btn { display:
+   inline-block }` (added by script.js above) silently overrides, since any
+   author rule beats a UA one regardless of specificity. Force it back. */
+.dokuwiki .code-copy-btn[hidden] {
+  display: none !important;
+}
+
 /* Copy-to-clipboard button on code/file blocks: script.js blindly adds
    `btn btn-default` to every <button>, which blows this up to full button
    size. Shrink it back down to a small icon in the corner. */
