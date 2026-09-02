@@ -124,6 +124,12 @@ div.picker button.toolbutton {
 .dokuwiki .secedit {
     float: right;
     margin-top: -1.4em;
+    /* Without this, a section-edit button floating over the end of a
+       preceding code/file block gets painted underneath it: DokuWiki core
+       gives `.code`/`.file` `position: relative` (for the copy-to-clipboard
+       button), which promotes it above plain floats in paint order. */
+    position: relative;
+    z-index: 1;
 }
 [dir=rtl] .dokuwiki .secedit {
     float: left;
