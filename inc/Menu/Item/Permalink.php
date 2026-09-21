@@ -29,7 +29,7 @@ class Permalink extends AbstractItem
         global $ID;
         global $INFO;
 
-        return DOKU_URL . DOKU_SCRIPT . '?id=' . $ID . '&rev=' . $INFO['lastmod'];
+        return wl($ID, 'rev=' . $INFO['lastmod'], true, '&');
     }
 
     public function getLinkAttributes($classprefix = 'menuitem ')
