@@ -372,7 +372,7 @@ class Template
             $interwiki = getInterwiki();
             $user_url  = str_replace('{NAME}', $username, $interwiki['user']);
             $logo_size = [];
-            $logo      = tpl_getMediaFile(["$user_url.png", "$user_url.jpg", 'images/avatar.png'], false, $logo_size);
+            $logo      = tpl_getMediaFile(["$user_url.png", "$user_url.webp", "$user_url.gif", "$user_url.jpg", 'images/avatar.png'], false, $logo_size);
 
             return $logo;
         }
