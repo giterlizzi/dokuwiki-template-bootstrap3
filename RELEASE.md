@@ -1,5 +1,19 @@
 # Bootstrap3 DokuWiki Template ChangeLog
 
+## [v2026-10-26]
+
+## Fixes
+   * #625: "Trying to access array offset on false" when editing any page
+   * #636: E_WARNING: Undefined array key "meta"
+   * #628: Deprecation warning for ft_mediause()
+   * #631: Prevent copy-to-clipboard button label from being copied
+   * #629: Since "Mort", Section-edit button hidden behind code blocks and the new copy-to-clipboard button is oversized (#632 and #631 PR)
+   * #634: fix(forms): align password reset, profile and extension install forms layouts
+
+# Changes
+    * #626: Add support for WebP and Gif avatars
+    *
+
 ## [v2026-02-04]
 
 This release fixes CVE-2024-6484, CVE-2024-6485 and CVE-2025-1647 for Bootstrap 3.4.1
