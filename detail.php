@@ -421,7 +421,7 @@ $show_metadata = false;
                                         <?php echo iconify('mdi:link-variant'); ?> <?php echo $lang['reference']; ?>
                                     </h3>
                                     <?php
-                                        $media_usage = ft_mediause($IMG, true);
+                                        $media_usage = (new \dokuwiki\Search\MetadataSearch())->mediause($IMG, true);
                                         if (count($media_usage) > 0) {
                                             echo '<ul>';
                                             foreach($media_usage as $path){
