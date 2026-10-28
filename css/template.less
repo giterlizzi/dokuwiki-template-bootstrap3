@@ -408,6 +408,62 @@ div#picker2 {
     border-bottom-color: white;
   }
 
+  /* "Manual Install" form. Core DokuWiki right aligns the bold labels and halves
+     the width of every input, which looks broken next to the rest of the admin
+     UI. Use the login form's arrangement instead: label text on its own line,
+     left aligned, with the input filling the row. The overwrite checkbox and the
+     Install button stay on the right. */
+  form.install {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    margin: 1em auto !important; /* centre the form block in the admin page */
+    text-align: right; /* keeps the submit button on the right */
+
+    /* every field is a block now, so the separators are just blank lines */
+    br {
+      display: none;
+    }
+
+    label.block {
+      display: block;
+      width: 100%;
+      text-align: left;
+      font-weight: normal;
+      white-space: normal;
+      margin-bottom: 1em;
+    }
+
+    /* The form API gives these inputs no class beyond "block", so they have to be
+       matched by element. Each input fills the row and pushes its label text onto
+       its own line, which also makes the URL and the file field the same width. */
+    label.block input {
+      display: block;
+      width: 100% !important;
+      margin: 0;
+      text-align: left;
+    }
+
+    /* the overwrite checkbox is the last field: text and box share a right aligned row */
+    label.block:last-of-type {
+      text-align: right;
+      margin-bottom: 0.5em;
+    }
+
+    label.block input[type="checkbox"] {
+      display: inline-block;
+      width: auto !important;
+      margin: 0 0 0 0.5em;
+      vertical-align: middle;
+    }
+
+    [type="submit"] {
+      display: inline-block;
+      margin: 0.5em 0 0 !important;
+      float: none !important;
+    }
+  }
+
 }
 
 
@@ -933,3 +989,178 @@ body {
 .alert {
   overflow: hidden;
 }
+
+
+/* Register / password reset forms: fully centred box, fields and submit button.
+   Core DokuWiki sets form { display: inline } and fieldset { margin: auto },
+   which fights with Bootstrap. Force a block-level centred card and centre
+   every control inside it. */
+#dw__register,
+#dw__resendpwd {
+  display: block !important;
+  width: 100%;
+  max-width: 420px;
+  margin: 2em auto !important;
+  text-align: center;
+
+  fieldset {
+    display: block;
+    width: 100% !important;
+    max-width: 420px;
+    margin: 0 auto !important;
+    text-align: center;
+    padding: 1em 1.25em 1.25em;
+  }
+
+  legend {
+    text-align: center;
+    width: auto;
+    margin: 0 auto 0.75em;
+  }
+
+  /* Labels + inputs: stack them, label text on the left, input on the line
+     below (overrides the core's right aligned, bold label.block) */
+  label.block {
+    display: block;
+    width: 100%;
+    text-align: left !important;
+    white-space: normal;
+    margin-bottom: 0.75em;
+  }
+
+  label.block span {
+    display: block;
+    margin-bottom: 0.25em;
+  }
+
+  /* Inputs fill the row so that every field shares the same left and right
+     edge. Matched by element rather than by .edit on purpose: the core Form
+     API only guarantees the classes the core code itself adds, and these
+     fields carry size="50", so a missing .edit used to blow the card open. */
+  label.block input,
+  label.block select {
+    display: block;
+    width: 100% !important;
+    margin: 0 auto !important;
+    text-align: left; /* typed text still left-aligned inside the input */
+  }
+
+  /* checkboxes/radios keep their natural size, should a field ever be added */
+  label.block input[type="checkbox"],
+  label.block input[type="radio"] {
+    display: inline-block;
+    width: auto !important;
+    margin: 0 0 0 0.5em;
+    vertical-align: middle;
+  }
+
+  /* the core markup sprinkles <br> between the fields; now that every label
+     and input is a block they only produce blank lines */
+  br {
+    display: none;
+  }
+
+  /* "Remember me" on its own full-width row */
+  label[for="remember__me"] {
+    display: block;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 1em;
+    text-align: center !important;
+  }
+
+  /* Buttons: one centred row, one symmetric gap, identical boxes.
+     The reset button has to be in the selector list as well: the core only
+     marks the submit one, so the reset kept the .mr-2 the template puts on
+     every button, which pushed the pair off centre and made it look squeezed. */
+  [type="submit"],
+  [type="reset"] {
+    display: inline-block;
+    margin: 0.5em 0 0 !important;
+    float: none !important;
+  }
+
+  [type="submit"] + [type="reset"] {
+    margin-left: 0.75em !important;
+  }
+
+  /* Only a submit button that is followed by another button loses its icon,
+     i.e. the "save" of the profile form. The single button forms (register,
+     resendpwd) keep theirs, where there is nothing to line up against. */
+  [type="submit"]:not(:last-child) svg,
+  [type="submit"]:not(:last-child) .iconify {
+    display: none;
+  }
+}
+
+
+/* Login form: label text above the input, left aligned, full width
+   inputs. The box starts at 300px and grows with the viewport width. */
+#dw__login {
+  display: block !important;
+  width: 100%;
+  min-width: 300px; /* login box width, also the floor on small screens */
+  max-width: 22vw;  /* widens with the viewport */
+  margin: 2em auto !important;
+  text-align: left;
+
+  /* stop growing on very wide screens */
+  @media screen and (min-width: 1910px) {
+    max-width: 420px;
+  }
+
+  fieldset {
+    display: block;
+    width: 100% !important;
+    max-width: none;
+    margin: 0 auto !important;
+    text-align: right; /* "remember me" and the submit button line up on the right */
+    padding: 1em 1.25em 1.25em;
+  }
+
+  /* Bootstrap underlines the legend: keep the title centred and the underline full width */
+  legend {
+    text-align: center;
+    width: 100%;
+    margin: 0 0 0.75em;
+  }
+
+  /* label text on its own line above the input, left aligned */
+  label.block {
+    display: block;
+    width: 100%;
+    text-align: left;
+    margin-bottom: 0.75em;
+  }
+
+  label.block span {
+    display: block;
+    margin-bottom: 0.25em;
+  }
+
+  /* the input fills the box */
+  label.block input.edit {
+    display: block;
+    width: 100%;
+    margin: 0;
+    text-align: left;
+  }
+
+  /* "Remember me" on its own row, right aligned */
+  label[for="remember__me"] {
+    display: block;
+    width: 100%;
+    margin-left: 0 !important;
+    margin-bottom: 1em;
+    text-align: right;
+  }
+
+  /* submit button on its own row, right aligned */
+  [type="submit"],
+  button[type="submit"] {
+    display: inline-block;
+    margin: 0.5em 0 0 !important;
+    float: none !important;
+  }
+}
+
