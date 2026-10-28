@@ -5,4 +5,4 @@ date     2026-02-04
 name     Bootstrap Template
 desc     Bootstrap-based template for Dokuwiki
 url      https://www.dokuwiki.org/template:bootstrap3
-build    stable/20260204
+build    stable/20261028

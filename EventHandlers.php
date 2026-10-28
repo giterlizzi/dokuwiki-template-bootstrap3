@@ -371,7 +371,7 @@ class EventHandlers
             $event->data['resultBody']['meta'] = str_replace(
                 ['<span class="lastmod">', '<span class="hits">'],
                 ['<span class="lastmod">' . iconify('mdi:calendar') . ' ', '<span class="hits"' . iconify('mdi:poll') . ' '],
-                '<small>' . $event->data['resultBody']['meta'] . '</small>'
+                '<small>' . ($event->data['resultBody']['meta'] ?? '') . '</small>'
             );
         }
     }
