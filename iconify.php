@@ -14,6 +14,7 @@
 #      LinuxServer.io (Docker)  /app/dokuwiki
 #      Arch Linux               /usr/share/webapps/dokuwiki
 #      Debian/Ubuntu            /usr/share/dokuwiki
+#      CrazyMax (Docker)        /var/www
 #
 # NOTE If DokuWiki core libraries (DOKU_INC) is in another location you can
 #      create a PHP file in bootstrap3 root directory called "doku_inc.php" with
@@ -23,12 +24,12 @@
 #
 #      (!) This file will be deleted on every upgrade of template
 
-
 $doku_inc_dirs = array(
     '/opt/bitnami/dokuwiki',                      # Bitnami (Docker)
     '/usr/share/webapps/dokuwiki',                # Arch Linux
     '/usr/share/dokuwiki',                        # Debian/Ubuntu
-    '/app/dokuwiki',                              # LinuxServer.io (Docker),
+    '/app/dokuwiki',                              # LinuxServer.io (Docker)
+    '/var/www',                                   # CrazyMax (Docker)
     realpath(dirname(__FILE__) . '/../../../'),   # Default DokuWiki path
 );
 
